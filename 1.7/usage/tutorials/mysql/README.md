@@ -14,17 +14,11 @@ hide_from_related: false
 
 **Time Estimate**:
 
-It will take around 10 minutes to complete this tutorial?
+It will take around 10 minutes to complete this tutorial.
 
 **Target Audience**:
 
 This document is for developers who would like to test theirs software which requires MySQL in DCOS environment.
-
-**Scope**:
-
-This is an optional section, allowing you to define and explain concepts used in XXX, useful especially for people who are not that familiar with XXX.
-This tutorial will allow you to install MySQL on DCOS using Local Persistence Volumes feature of DCOS and expose it to other applications running in DCOS cluster using DCOS Service Discovery. 
-
 
 # Prerequisites
 
