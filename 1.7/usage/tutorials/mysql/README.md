@@ -102,7 +102,7 @@ Run the following dcos command:
 <pre>
 dcos marathon app add mysql.marathon.json 
 </pre>
-This command will install MySQL server on your DCOS cluster. 
+This command will install MySQL server on your DCOS cluster and make it available on VIP 3.3.0.6 and standard MySQL port 3306. 
 
 # Cleanup
 
