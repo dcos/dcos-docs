@@ -1,0 +1,62 @@
+{
+  "id": "/mysql",
+  "cpus": 1,
+  "mem": 1024,
+  "disk": 0,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [
+      {
+        "containerPath": "/var/lib/mysql",
+        "hostPath": "mysqldata",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "mysqldata",
+        "mode": "RW",
+        "persistent": {
+          "size": 1000
+        }
+      }
+    ],
+    "docker": {
+      "image": "mysql:5.6",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 3306,
+          "hostPort": 0,
+          "protocol": "tcp",
+          "labels": {
+            "VIP_0": "3.3.0.6:3306"
+          }
+        }
+      ],
+      "privileged": false,
+      "parameters": [],
+      "forcePullImage": false
+    }
+  },
+  "env": {
+    "MYSQL_ROOT_PASSWORD": "MESOSPHERE_DC/OS_ROCKS",
+    "MYSQL_USER": "user",
+    "MYSQL_PASSWORD": "DC/OS_ROCKS",
+    "MYSQL_DATABASE": "mysqltutorial"
+  },
+  "healthChecks": [
+    {
+      "protocol": "TCP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3,
+      "ignoreHttp1xx": false
+    }
+  ],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 0,
+    "maximumOverCapacity": 0
+  }
+}

@@ -26,7 +26,7 @@ This document is for developers who would like to test theirs software which req
 *	[Check Cluster Size](../getting-started/cluster-size) at least one agent node with 1 CPU, 1GB of RAM and 1000MB of disk space available.
 
 # Install MySQL from official Docker image
-Create a file named mysql.marathon.json with the following Marathon application descriptor:
+Create a file named [mysql.marathon.json](mysql.marathon.json) with the following Marathon application descriptor:
 <pre>
 {
   "id": "/mysql",
