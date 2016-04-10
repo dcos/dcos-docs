@@ -30,7 +30,7 @@ This document is for developers who would like to test theirs software which req
 Create file named mysql.marathon.json with the following Marathon application descriptor:
 <pre>
 {
-  "id": "/blog/mysql",
+  "id": "/mysql",
   "cpus": 1,
   "mem": 1024,
   "disk": 0,
@@ -102,5 +102,5 @@ This command will install MySQL server on your DCOS cluster and make it availabl
 
 To remove MySQL launch the following command:
 <pre>
-dcos marathon app remove blog/mysql
+dcos marathon app remove mysql
 </pre>
