@@ -52,7 +52,7 @@ Create file named mysql.marathon.json with the following Marathon application de
       }
     ],
     "docker": {
-      "image": "mysql",
+      "image": "mysql:5.6",
       "network": "BRIDGE",
       "portMappings": [
         {
