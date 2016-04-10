@@ -70,10 +70,10 @@ Create file named mysql.marathon.json with the following Marathon application de
     }
   },
   "env": {
-    "MYSQL_USER": "wordpress",
-    "MYSQL_PASSWORD": "secret",
-    "MYSQL_ROOT_PASSWORD": "supersecret",
-    "MYSQL_DATABASE": "wordpress"
+    "MYSQL_ROOT_PASSWORD": "MESOSPHERE_DC/OS_ROCKS",
+    "MYSQL_USER": "user",
+    "MYSQL_PASSWORD": "DC/OS_ROCKS",
+    "MYSQL_DATABASE": "mysqltutorial"
   },
   "healthChecks": [
     {
