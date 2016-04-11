@@ -32,7 +32,6 @@ Create a file named [mysql.marathon.json](mysql.marathon.json) with the followin
   "id": "/mysql",
   "cpus": 1,
   "mem": 1024,
-  "disk": 0,
   "instances": 1,
   "container": {
     "type": "DOCKER",
@@ -63,9 +62,6 @@ Create a file named [mysql.marathon.json](mysql.marathon.json) with the followin
           }
         }
       ],
-      "privileged": false,
-      "parameters": [],
-      "forcePullImage": false
     }
   },
   "env": {
@@ -96,6 +92,10 @@ Run the following dcos command:
 dcos marathon app add mysql.marathon.json 
 </pre>
 This command will install MySQL server on your DCOS cluster and make it available on VIP 3.3.0.6 and standard MySQL port 3306. 
+
+# Test installation
+
+TODO: Add connection with Ruby app by Tobi.
 
 # Cleanup
 
