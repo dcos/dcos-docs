@@ -23,7 +23,7 @@ This document is for developers who would like to test theirs software which req
 # Prerequisites
 *   [DCOS](/administration/installing/) installed
 *   [DCOS CLI](/usage/cli/install/) installed
-*	[Cluster Size](../getting-started/cluster-size): at least one agent node with 1 CPU, 1GB of RAM and 1000MB of disk space available.
+*	  [Cluster Size](../getting-started/cluster-size): at least one agent node with 1 CPU, 1GB of RAM and 1000MB of disk space available.
 
 # Install MySQL from official Docker image
 Create a file named [mysql.marathon.json](mysql.marathon.json) with the following Marathon application descriptor:
