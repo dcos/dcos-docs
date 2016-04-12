@@ -25,13 +25,28 @@ In the following tutorial you will learn about how to use Cassandra on DCOS, fro
 Assuming you have a DC/OS cluster up and running, the first step is to [install Cassandra](https://docs.mesosphere.com/manage-service/cassandra/). As the minimum cluster size for this tutorial I recommend at least three nodes with 2 CPUs and 2 GB of RAM available, each:
 
     $ dcos package install cassandra
-    <TODO: Copy, paste the install command output>
+    Installing Marathon app for package [cassandra] version [1.0.0-2.2.5]
+    Installing CLI subcommand for package [cassandra] version [1.0.0-2.2.5]
+    New command available: dcos cassandra
+    DCOS Cassandra Service is being installed.
 
 While the DC/OS command line interface (CLI) is immediately available it takes a few moments until Cassandra is actually running in the cluster. Let's first check the DC/OS CLI and its new subcommand `cassandra`:
 
     $ dcos cassandra --help
-    Usage:
-        <TODO: Copy, paste command output>
+    Usage: dcos-cassandra cassandra [OPTIONS] COMMAND [ARGS]...
+    
+    Options:
+      --info / --no-info
+      --framework-name TEXT  Name of the Cassandra instance to query
+      --help                 Show this message and exit.
+    
+    Commands:
+      backup      Backup Cassandra data
+      cleanup     Cleanup old token mappings
+      connection  Provides connection information
+      node        Manage Cassandra nodes
+      restore     Restore Cassandra cluster from backup
+      seeds       Retrieve seed node information
 
 Now, let's check if Cassandra is running and healthy, in the cluster itself. For this, go to the DC/OS dashboard and you should see Cassandra there:
 
@@ -44,12 +59,12 @@ Now that you've a Cassandra cluster up and running, it's time to connect to our 
 
 Let's retrieve the connection information using following command:
 
-    $ dcos cassandra node connection
+    $ dcos cassandra connection
     {
-        nodes:[
-            "10.0.0.47:9160", 
-            "10.0.0.50:9160", 
-            "10.0.0.49:9160"
+        "nodes": [
+            "10.0.2.136:9042",
+            "10.0.2.138:9042",
+            "10.0.2.137:9042"
         ]
     }
 
