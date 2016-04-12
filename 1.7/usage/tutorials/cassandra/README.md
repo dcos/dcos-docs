@@ -51,7 +51,7 @@ While the DC/OS command line interface (CLI) is immediately available it takes a
 Now, let's check if Cassandra is running and healthy, in the cluster itself. For this, go to the DC/OS dashboard and you should see Cassandra there:
 
 <TODO: Get the image>
-![Cassandra in the dashboard](img/dcos-cassandra-dashboard.png)
+![Cassandra in the dashboard](img/cassandra-dashboard.png)
 
 # Using Cassandra to perform CRUD operations
 
