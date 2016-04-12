@@ -14,7 +14,9 @@ hide_from_related: false
 
 **Terminology**:
 
-- *Cluster* ... Two or more Cassandra instances that communicates over gossip protocol.
+- **Node**: A running Cassandra instance.
+- **Cluster**: Two or more Cassandra instances that communicates over gossip protocol.
+- **Keyspace**: A keyspace in Cassandra is a namespace that defines how data is replicated on nodes.
 
 **Scope**:
 
@@ -110,5 +112,6 @@ Let's query again to ensure that the row was deleted successfully:
     
 **Further resources**:
 For more information, please refer to following resources:
+
 1. [DC/OS Cassandra Official Documentation](https://docs.mesosphere.com/usage/services/cassandra/)
 2. [DataStax Cassandra Documentation](http://docs.datastax.com)
