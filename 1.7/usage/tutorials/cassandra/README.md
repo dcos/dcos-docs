@@ -62,7 +62,7 @@ At this point, we are now inside our DC/OS cluster and can connect to Cassandra 
 
     core@ip-10-0-6-153 ~ $ docker run cassandra:2.2.5 cqlsh <HOST> <PORT>
     
-Replace <HOST> and <PORT> with the actual host and port information that we retrieved by running `dcos cassandra node connection` command above. Example:
+Replace `<HOST>` and `<PORT>` with the actual host and port information that we retrieved by running `dcos cassandra node connection` command above. Example:
 
     core@ip-10-0-6-153 ~ $ docker run cassandra:2.2.5 cqlsh 10.0.0.47 9160
     cqlsh>
