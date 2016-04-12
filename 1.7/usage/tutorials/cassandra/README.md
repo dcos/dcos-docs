@@ -14,8 +14,7 @@ hide_from_related: false
 
 **Terminology**:
 
-- Cluster ... Two or more Cassandra instances that communicates over gossip protocol.
-
+- *Cluster* ... Two or more Cassandra instances that communicates over gossip protocol.
 
 **Scope**:
 
@@ -36,12 +35,64 @@ While the DC/OS command line interface (CLI) is immediately available it takes a
 
 Now, let's check if Cassandra is running and healthy, in the cluster itself. For this, go to the DC/OS dashboard and you should see Cassandra there:
 
+<TODO: Get the image>
 ![Cassandra in the dashboard](img/dcos-cassandra-dashboard.png)
 
 # Using Cassandra to perform CRUD operations
 
 Now that you've a Cassandra cluster up and running, it's time to connect to our Cassandra cluster and perform some CRUD operations. 
 
+Let's retrieve the connection information using following command:
+
+    $ dcos cassandra node connection
+    {
+        nodes:[
+            "10.0.0.47:9160", 
+            "10.0.0.50:9160", 
+            "10.0.0.49:9160"
+        ]
+    }
+
+Now, let's SSH into our DC/OS cluster, so that we can connect to our Cassandra cluster.
+
+    $ dcos node ssh --master-proxy --master
+    core@ip-10-0-6-153 ~ $ 
+
+At this point, we are now inside our DC/OS cluster and can connect to Cassandra cluster directly. Let's connect to the cluster using cqlsh client. Here's the general usage of this command:
+
+    core@ip-10-0-6-153 ~ $ docker run cassandra:2.2.5 cqlsh <HOST> <PORT>
+    
+Replace <HOST> and <PORT> with the actual host and port information that we retrieved by running `dcos cassandra node connection` command above. Example:
+
+    core@ip-10-0-6-153 ~ $ docker run cassandra:2.2.5 cqlsh 10.0.0.47 9160
+    cqlsh>
+    
+And, now we are connected to our Cassandra cluster. Let's create a sample keyspace called `demo`:
+
+    cqlsh> CREATE KEYSPACE demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
+    
+Next, let's create a sample table called `map` in our `demo` keyspace:
+
+    cqlsh> USE demo;CREATE TABLE map (key varchar, value varchar, PRIMARY KEY(key));
+    
+Let's insert some data in our table:
+
+    cqlsh> INSERT INTO demo.map(key, value) VALUES('Cassandra', 'Rocks!');
+    cqlsh> INSERT INTO demo.map(key, value) VALUES('StaticInfrastructure', 'BeGone!');
+    cqlsh> INSERT INTO demo.map(key, value) VALUES('Buzz', 'DC/OS is the new black!');
+    
+Now we have inserted some data, let's query it back to make sure it's persisted correctly:
+
+    cqlsh> SELECT * FROM demo.map;
+    
+Let's delete some data:
+
+    cqlsh> DELETE FROM demo.map where key = 'StaticInfrastructure';
+    
+Let's query again to ensure that the row was deleted successfully:
+
+    cqlsh> SELECT * FROM demo.map;
+    
 **Further resources**:
 
 
