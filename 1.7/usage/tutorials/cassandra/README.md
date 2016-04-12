@@ -109,7 +109,6 @@ Let's query again to ensure that the row was deleted successfully:
     cqlsh> SELECT * FROM demo.map;
     
 **Further resources**:
-
-
-
-
+For more information, please refer to following resources:
+1. [DC/OS Cassandra Documentation](http://dcos.io/)
+2. [DataStax Cassandra Documentation](http://docs.datastax.com)
