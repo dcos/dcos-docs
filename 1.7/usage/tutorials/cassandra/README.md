@@ -24,7 +24,7 @@ In the following tutorial you will learn about how to use Cassandra on DCOS, fro
 
 # Installing
 
-Assuming you have a DC/OS cluster up and running, the first step is to [install Cassandra](https://docs.mesosphere.com/manage-service/cassandra/). As the minimum cluster size for this tutorial I recommend at least three nodes with 2 CPUs and 2 GB of RAM available, each:
+Assuming you have a DC/OS cluster up and running, the first step is to [install Cassandra](https://docs.mesosphere.com/manage-service/cassandra/):
 
     $ dcos package install cassandra
     Installing Marathon app for package [cassandra] version [1.0.0-2.2.5]
