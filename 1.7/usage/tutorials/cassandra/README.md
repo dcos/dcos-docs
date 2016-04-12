@@ -75,11 +75,11 @@ Now, let's SSH into our DC/OS cluster, so that we can connect to our Cassandra c
 
 At this point, we are now inside our DC/OS cluster and can connect to Cassandra cluster directly. Let's connect to the cluster using cqlsh client. Here's the general usage of this command:
 
-    core@ip-10-0-6-153 ~ $ docker run cassandra:2.2.5 cqlsh <HOST> <PORT>
+    core@ip-10-0-6-153 ~ $ docker run cassandra:2.2.5 cqlsh <HOST>
     
-Replace `<HOST>` and `<PORT>` with the actual host and port information that we retrieved by running `dcos cassandra node connection` command above. Example:
+Replace `<HOST>` with the actual host, information that we retrieved by running `dcos cassandra node connection` command above. Example:
 
-    core@ip-10-0-6-153 ~ $ docker run cassandra:2.2.5 cqlsh 10.0.0.47 9160
+    core@ip-10-0-6-153 ~ $ docker run -ti cassandra:2.2.5 cqlsh 10.0.2.136
     cqlsh>
     
 And, now we are connected to our Cassandra cluster. Let's create a sample keyspace called `demo`:
