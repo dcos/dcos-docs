@@ -70,7 +70,7 @@ Let's retrieve the connection information using following command:
 
 Now, let's SSH into our DC/OS cluster, so that we can connect to our Cassandra cluster.
 
-    $ dcos node ssh --master-proxy --master
+    $ dcos node ssh --master-proxy --leader
     core@ip-10-0-6-153 ~ $ 
 
 At this point, we are now inside our DC/OS cluster and can connect to Cassandra cluster directly. Let's connect to the cluster using cqlsh client. Here's the general usage of this command:
