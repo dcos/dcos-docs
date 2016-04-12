@@ -10,7 +10,7 @@ hide_from_navigation: false
 hide_from_related: false
 ---
 
-[Apache Cassandra](https://cassandra.apache.org/) is a distributed database that's scalable, performant and highly available. DC/OS Cassandra is 
+[Apache Cassandra](https://cassandra.apache.org/) is a decentralized structured distributed storage system. Cassandra clusters are highly available, scalable, performant, and fault tolerant. DC/OS Cassandra allows you to quickly configure, install and manage Apache Cassandra. Multiple Cassandra clusters can also be installed on DC/OS and managed independently, so you can offer Cassandra as a managed service to your organization.
 
 **Terminology**:
 
@@ -110,5 +110,5 @@ Let's query again to ensure that the row was deleted successfully:
     
 **Further resources**:
 For more information, please refer to following resources:
-1. [DC/OS Cassandra Documentation](http://dcos.io/)
+1. [DC/OS Cassandra Official Documentation](https://docs.mesosphere.com/usage/services/cassandra/)
 2. [DataStax Cassandra Documentation](http://docs.datastax.com)
