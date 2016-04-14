@@ -131,8 +131,8 @@ This parameter specifies the type of storage backend to use for Exhibitor. You c
     - <master-private-ip-3>
     process_timeout: 120
     resolvers:
-    - 0.10.5.1
-    - 10.10.6.1
+    - <dns-resolver-1>
+    - <dns-resolver-2>
     roles: slave_public
     ssh_key_path: /genconf/ssh-key
     ssh_port: '<port-number>'
@@ -162,7 +162,8 @@ This parameter specifies the type of storage backend to use for Exhibitor. You c
     - <master-private-ip-3>
     process_timeout: 120
     resolvers: 
-    - 169.254.169.253
+    - <dns-resolver-1>
+    - <dns-resolver-2>
     roles: slave_public
     s3_bucket: mybucket
     s3_prefix: s3-example
@@ -194,8 +195,8 @@ This parameter specifies the type of storage backend to use for Exhibitor. You c
     num_masters: 3
     process_timeout: 120
     resolvers: 
-    - 8.8.4.4
-    - 8.8.8.8
+    - <dns-resolver-1>
+    - <dns-resolver-2>
     roles: slave_public
     ssh_key_path: /genconf/ssh-key
     ssh_port: '<port-number>'
