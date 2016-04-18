@@ -26,7 +26,7 @@ This document is for developers who would like to test theirs software which req
 *	  [Cluster Size](../getting-started/cluster-size): at least one agent node with 1 CPU, 1GB of RAM and 1000MB of disk space available.
 
 # Install MySQL from official Docker image
-Create a file named [mysql.marathon.json](mysql.marathon.json) with the following Marathon application descriptor:
+Create or download a file named [mysql.marathon.json](mysql.marathon.json) with the following Marathon application descriptor:
 <pre>
 {
   "id": "/mysql",
@@ -37,11 +37,6 @@ Create a file named [mysql.marathon.json](mysql.marathon.json) with the followin
     "type": "DOCKER",
     "volumes": [
       {
-        "containerPath": "/var/lib/mysql",
-        "hostPath": "mysqldata",
-        "mode": "RW"
-      },
-      {
         "containerPath": "mysqldata",
         "mode": "RW",
         "persistent": {
@@ -50,7 +45,7 @@ Create a file named [mysql.marathon.json](mysql.marathon.json) with the followin
       }
     ],
     "docker": {
-      "image": "mysql:5.6",
+      "image": "mysql:5.7.12",
       "network": "BRIDGE",
       "portMappings": [
         {
@@ -61,9 +56,12 @@ Create a file named [mysql.marathon.json](mysql.marathon.json) with the followin
             "VIP_0": "3.3.0.6:3306"
           }
         }
-      ],
+      ]
     }
   },
+  "args": [
+    "--datadir=/mnt/mesos/sandbox/mysqldata/"
+  ],
   "env": {
     "MYSQL_ROOT_PASSWORD": "MESOSPHERE_DC/OS_ROCKS",
     "MYSQL_USER": "user",
@@ -87,19 +85,73 @@ Create a file named [mysql.marathon.json](mysql.marathon.json) with the followin
   }
 }
 </pre>
-Run the following dcos command:
+Deploy the app via Marathon:
 <pre>
-dcos marathon app add mysql.marathon.json 
+$ dcos marathon app add mysql.marathon.json 
 </pre>
 This command will install MySQL server on your DCOS cluster and make it available on VIP 3.3.0.6 and standard MySQL port 3306. 
 
 # Test installation
 
-TODO: Add connection with Ruby app by Tobi.
+SSH to the master:
+<pre>
+dcos node ssh --master-proxy --leader
+</pre>
+Install MySQL client (CoreOS):
+<pre>
+$ /bin/toolbox 
+$ dnf install mysql
+</pre>
+Install MySQL client (CentOS):
+<pre>
+$ yum install mysql
+</pre>
+Create table in the mysqltutorial database:
+<pre>
+$ mysql -uuser -pDC/OS_ROCKS -e "CREATE TABLE messages(message VARCHAR(256));"  -h 3.3.0.6 mysqltutorial 
+</pre>
+Insert a record to the table:
+<pre>
+$ mysql -uuser -pDC/OS_ROCKS -e "INSERT INTO messages VALUES('test');" -h 3.3.0.6  mysqltutorial
+</pre>
+Make sure that the record is inserted:
+<pre>
+$ mysql -uuser -pDC/OS_ROCKS -e "SELECT * FROM messages;" -h 3.3.0.6 mysqltutorial
++---------+
+| message |
++---------+
+| test    |
++---------+
+</pre>
+From your local workstation, suspend the MySQL application:
+<pre>
+$ dcos marathon app stop /mysql
+Created deployment 3d9915f1-b067-439c-bd59-297362c217d8
+</pre>
+and make sure that the application doesn't have any running tasks:
+<pre>
+$ dcos marathon app list
+ID      MEM   CPUS  TASKS  HEALTH  DEPLOYMENT  CONTAINER  CMD                                           
+/mysql  1024   1     0/0    0/0       ---        DOCKER   [u'--datadir=/mnt/mesos/sandbox/mysqldata/']
+</pre>
+Start MySQL server again:
+<pre>
+$ dcos marathon app start /mysql
+Created deployment 9efc11a0-901e-4bf9-be17-82fed35cfc95
+</pre>
+From the master node, make sure that the data survived during the application restart:
+<pre>
+$ mysql -uuser -pDC/OS_ROCKS -e "SELECT * FROM messages;" -h 3.3.0.6 mysqltutorial
++---------+
+| message |
++---------+
+| test    |
++---------+
+</pre>
 
 # Cleanup
 
-To remove MySQL launch the following command:
+To remove MySQL launch, the following command:
 <pre>
-dcos marathon app remove mysql
+$ dcos marathon app remove /mysql
 </pre>

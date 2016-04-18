@@ -7,11 +7,6 @@
     "type": "DOCKER",
     "volumes": [
       {
-        "containerPath": "/var/lib/mysql",
-        "hostPath": "mysqldata",
-        "mode": "RW"
-      },
-      {
         "containerPath": "mysqldata",
         "mode": "RW",
         "persistent": {
@@ -20,7 +15,7 @@
       }
     ],
     "docker": {
-      "image": "mysql:5.6",
+      "image": "mysql:5.7.12",
       "network": "BRIDGE",
       "portMappings": [
         {
@@ -31,11 +26,15 @@
             "VIP_0": "3.3.0.6:3306"
           }
         }
-      ],
+      ]
     }
   },
+  "args": [
+    "--datadir=/mnt/mesos/sandbox/mysqldata/"
+  ],
   "env": {
-    "MYSQL_ROOT_PASSWORD": "MESOSPHERE_DC/OS_ROCKS", "MYSQL_USER": "user",
+    "MYSQL_ROOT_PASSWORD": "MESOSPHERE_DC/OS_ROCKS",
+    "MYSQL_USER": "user",
     "MYSQL_PASSWORD": "DC/OS_ROCKS",
     "MYSQL_DATABASE": "mysqltutorial"
   },
