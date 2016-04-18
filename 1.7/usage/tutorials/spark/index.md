@@ -22,21 +22,19 @@ of how to launch a Spark job to using Spark interactively with [Apache Zeppelin]
 Assuming you have a DC/OS cluster up and running, the first step is to [install Spark](https://docs.mesosphere.com/manage-service/spark/). As the minimum cluster size for this tutorial I recommend at least three nodes with 2 CPUs and 2 GB of RAM available, each:
 
     $ dcos package install spark
-    Note that the Apache Spark DC/OS Service is beta and there may be bugs, incomplete features, incorrect documentation or other discrepancies.
-    We recommend a minimum of two nodes with at least 2 CPU and 2GB of RAM available for the Spark Service and running a Spark job.
-    Note: The Spark CLI may take up to 5min to download depending on your connection.
-    Continue installing? [yes/no] yes
-    Installing Marathon app for package [spark] version [1.6.0]
-    Installing CLI subcommand for package [spark] version [1.6.0]
+    Installing Marathon app for package [spark] version [1.6.1-6]
+    Installing CLI subcommand for package [spark] version [1.6.1-6]
     New command available: dcos spark
-    The Apache Spark DC/OS Service has been successfully installed!
+    DC/OS Spark is being installed.
 
-    	Documentation: https://spark.apache.org/docs/latest/running-on-mesos.html
-    	Issues: https://issues.apache.org/jira/browse/SPARK
+    	Documentation: https://docs.mesosphere.com/spark-1-7/
+    	Issues: https://docs.mesosphere.com/support/
 
 While the DC/OS command line interface (CLI) is immediately available it takes a few minutes until Spark is actually running in the cluster. Let's first check the DC/OS CLI and its new subcommand `spark`:
 
-    $ dcos spark
+    $ dcos spark --help
+    Run and manage Spark jobs
+
     Usage:
         dcos spark --help
         dcos spark --info
@@ -53,6 +51,11 @@ While the DC/OS command line interface (CLI) is immediately available it takes a
                        [--file=<file>]
         dcos spark kill <submissionId> [--verbose]
         dcos spark webui
+
+    Options:
+        --help                  Show this screen
+        --info                  Show info
+        --version               Show version
 
 Now, we check if Spark is running and healthy, in the cluster itself. For this, go to the DC/OS dashboard and you should see Spark there:
 
