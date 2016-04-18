@@ -18,7 +18,7 @@ It will take around 10 minutes to complete this tutorial.
 
 **Target Audience**:
 
-This document is for developers who would like to test theirs software which requires MySQL in DCOS environment. This is a basic installation of MySQL server which doesn't include data backup and is not highly available, so it's not recommended to use it in production as is.
+This document is for developers who would like to test theirs software which requires MySQL in DCOS environment. This is a basic installation of MySQL server which doesn't include data backup and is not highly available.
 
 # Prerequisites
 *   [DCOS](/administration/installing/) installed
