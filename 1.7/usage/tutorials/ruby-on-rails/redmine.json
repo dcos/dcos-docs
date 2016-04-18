@@ -1,0 +1,38 @@
+{
+    "id": "/redmine",
+    "instances": 1,
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "sameersbn/redmine:latest",
+            "network": "BRIDGE",
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 0,
+                    "servicePort": 10008,
+                    "protocol": "tcp"
+                }
+            ]
+        }
+    },
+    "healthChecks": [{
+        "protocol": "HTTP",
+        "portIndex": 0
+    }],
+    "labels": {
+      "HAPROXY_GROUP": "external",
+      "HAPROXY_0_PORT": "10008"
+    },
+    "env": {
+      "DB_ADAPTER": "mysql2",
+      "DB_HOST": "3.3.0.6",
+      "DB_NAME": "redmine_production",
+      "DB_USER": "redmine",
+      "DB_PASS": "DC/OS_Rocks",
+      "REDMINE_SECRET_TOKEN": "641ce8912e68a4b73f5e4fc85cad54d451ed945eb10529106a9d8938e139e6dc97593b1db48601eb3e0745f7491a5b02a9303b772e0841eab8ec7ce19222e79b"
+    },
+    "ports": [0],
+    "cpus": 0.5,
+    "mem": 1024
+}

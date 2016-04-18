@@ -11,4 +11,4 @@ If you want to contribute some documentation, please do the following:
 1. When you're done, create a [pull request](https://help.github.com/articles/using-pull-requests/) to the original repo, `dcos-docs`.
 1. For all contributions that include hands-on instructions, such as found in `usage/` or `administration/`, the community managers will test-drive and validate before merging. We might come back to you asking you to fix stuff. All communication strictly via your pull request on GitHub.  
 
-Note that if you're unsure about what exactly should go into the tutorial, you can always check out [spark/](../1.7/tutorials/spark/) for reference.
+Note that if you're unsure about what exactly should go into the tutorial, you can always check out [spark/](/1.7/usage/tutorials/spark/) for reference.

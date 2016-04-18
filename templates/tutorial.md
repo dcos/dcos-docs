@@ -1,7 +1,7 @@
 ---
 post_title: Running XXX on DC/OS
 post_excerpt: ""
-layout: page
+layout: docs.jade
 published: true
 menu_order: 1
 page_options_require_authentication: false

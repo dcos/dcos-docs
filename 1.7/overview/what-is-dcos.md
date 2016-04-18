@@ -1,18 +1,9 @@
 ---
 post_title: What is DC/OS?
-post_excerpt: "DC/OS is a distribution of software that allows you to manage everything from two “machines” to thousands, as if they are a single computer. It automates placing processes, managing resources and configuring inter-process communication."
-layout: page
-published: true
 menu_order: 1
-page_options_require_authentication: false
-page_options_show_link_unauthenticated: false
-hide_from_navigation: false
-hide_from_related: false
 ---
 
-# What is DC/OS?
-
-DCOS is a distributed operating system based on the Apache Mesos distributed systems kernel. It enables the management of multiple machines as if they were a single computer. It automates resource management, schedules process placement, facilitates inter-process communication, and simplifies the installation and management of distributed services. Its included web interface and available command-line interface (CLI) facilitate remote management and monitoring of the cluster and its services.
+DC/OS is a distributed operating system based on the Apache Mesos distributed systems kernel. It enables the management of multiple machines as if they were a single computer. It automates resource management, schedules process placement, facilitates inter-process communication, and simplifies the installation and management of distributed services. Its included web interface and available command-line interface (CLI) facilitate remote management and monitoring of the cluster and its services.
 
 When you’re operating a datacenter, there are a set of common operations that you do because you have to, not because you want to. In a single computer environment, your operating system automatically takes care of these things. When was the last time you had to manually tell your laptop which processor core to run your application on? For those of you who who responded with anything other than “never”, there are some amazing computers at the Computer History Museum that you might want to check out.
 

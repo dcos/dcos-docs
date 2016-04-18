@@ -1,0 +1,4 @@
+language: bash
+install: true
+script:
+- scripts/validate-reindex.sh
