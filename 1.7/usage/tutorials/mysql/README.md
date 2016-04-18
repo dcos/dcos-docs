@@ -85,7 +85,7 @@ Create or download a file named [mysql.marathon.json](mysql.marathon.json) with 
   }
 }
 </pre>
-Deploy the app via Marathon:
+Deploy the application via Marathon. From the computer that you installed the [DC/OS CLI](/usage/cli/install/) on, you'll need to run the following command. This takes the service definition from above and adds it to Marathon.
 <pre>
 $ dcos marathon app add mysql.marathon.json 
 </pre>
