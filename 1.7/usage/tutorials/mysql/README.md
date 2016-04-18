@@ -89,7 +89,7 @@ Deploy the application via Marathon. From the computer that you installed the [D
 <pre>
 $ dcos marathon app add mysql.marathon.json 
 </pre>
-This command will install MySQL server on your DCOS cluster and make it available on VIP 3.3.0.6 and standard MySQL port 3306. 
+Once the service definition has been added, marathon will start waiting for a [resource offer]() that is large enough to accommodate starting MySQL on virtual private IP (VIP) 3.3.0.6 and standard MySQL port 3306. Take a look at the [architecture]() if you're interested in some more of the details behind tasks starting on DC/OS.
 
 # Test installation
 
