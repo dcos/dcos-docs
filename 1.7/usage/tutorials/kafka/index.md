@@ -17,17 +17,17 @@ Approximately 10 minutes.
 
 **Terminology**:
 
-- **Broker:** A Kafka message broker that routes messages to one or more topics
-- **Topic:** A Kafka topic is message filtering mechanism in the pub/sub systems. Subscribers register to receive/consume messages from topics
-- **Producer:** An application that producers messages to a Kafka topic
-- **Consumer:** An application that consumes messages from a Kafka topic
+- **Broker:** A Kafka message broker that routes messages to one or more topics.
+- **Topic:** A Kafka topic is message filtering mechanism in the pub/sub systems. Subscribers register to receive/consume messages from topics.
+- **Producer:** An application that producers messages to a Kafka topic.
+- **Consumer:** An application that consumes messages from a Kafka topic.
 
 **Scope**:
 
-In this tutorial you will learn:
-* How to install the Kafka service
-* How to use the enhanced DC/OS CLI to create Kafka topics
-* How to use Kafka on DC/OS to produce and consume messages
+In this tutorial you will learn how to:
+* Install the Kafka service.
+* Use the enhanced DC/OS CLI to create Kafka topics.
+* Use Kafka on DC/OS to produce and consume messages.
 
 ## Table of Contents
 
@@ -55,8 +55,8 @@ In this tutorial you will learn:
 
 ## Prerequisites
 
-- A running DC/OS cluster with 3 nodes, each with 2 CPUs and 2 GB of RAM available
-- [DC/OS CLI](/docs/1.7/usage/cli/install/) installed
+- A running DC/OS cluster with 3 nodes, each with 2 CPUs and 2 GB of RAM available.
+- [DC/OS CLI](/docs/1.7/usage/cli/install/) installed.
 
 ## Install Kafka
 
