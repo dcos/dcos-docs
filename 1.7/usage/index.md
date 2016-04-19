@@ -16,6 +16,7 @@ Now go to the DC/OS Dashboard and open the Marathon service. You should [see](im
 
 Once you've had a good look around in the DC/OS Dashboard and familiarized yourself with the DC/OS CLI, here are a few more things that you might want to check out:
 
+- DC/OS [FAQ](/usage/faq)
 - If you have a DevOps role:
   - How to run [NGINX](/usage/tutorials/nginx/)
   - How to run a [Ruby on Rails](/usage/tutorials/ruby-on-rails/) app
