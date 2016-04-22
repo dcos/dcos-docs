@@ -26,7 +26,7 @@ Markdown in this repository is formatted for rendering with [Jekyll](https://jek
 
 Contribute to the docs using one of the following options:
 
-* Create a Github issue with a suggestion for a tutorial (for example: I'd like to see a tutorial on Apache Kafka).
+* Create [DCOS JIRA](https://dcosjira.atlassian.net/) ([dcos-docs component](https://dcosjira.atlassian.net/issues/?jql=project%20%3D%20DCOS%20AND%20component%20%3D%20dcos-docs)) with a suggestion for a tutorial (for example: I'd like to see a tutorial on Apache Kafka).
 * Update or write a new doc yourself following the [Contributing Guidelines](CONTRIBUTING.md).
 
 ## License and Authors
