@@ -16,6 +16,11 @@ Log in to the DC/OS CLI to obtain the auth [token](/docs/1.7/administration/secu
 
 ![auth token](../img/auth-token.gif)
 
+After you login successfully, run this command to see your `<authtoken>`:
+```bash
+$ dcos config show core.dcos_acs_token
+```
+
 # Make HTTP request using the Authorization header
 
 To authenticate an HTTP request against a DC/OS component, specify the `<authtoken>` in the request header.
