@@ -113,14 +113,24 @@ The DC/OS installation creates these folders:
 8.  Click **Log In To DC/OS**. If this doesn't work, take a look at the [troubleshooting docs][9]
 
     ![login](../img/dcos-gui-login.png)
-    
+
+9. Archive your installer files for safe-keeping. You'll need this archive to make new agents, including the [public agent][4].
+
+    ```bash
+    # <Ctrl-C> to exit installer
+    $ cd genconf/serve
+    $ sudo tar cf dcos-install.tar *
+    # Move the dcos-install.tar file to a safe place
+    ```
+
     You are done!
-    
+
     ![dashboard](../img/ui-dashboard.gif)
 
 ## Next Steps
 
 - [Add users to your cluster][10]
+- [Add a public agent][4]
 - [Install the DC/OS Command-Line Interface (CLI)][5]
 - [Troubleshooting DC/OS installation][9]
 - [Using your cluster][6]
@@ -129,9 +139,9 @@ The DC/OS installation creates these folders:
 [1]: https://downloads.dcos.io/dcos/EarlyAccess/dcos_generate_config.sh
 [2]: /docs/1.7/overview/service-discovery/
 [3]: /docs/1.7/administration/installing/custom/system-requirements/
+[4]: /docs/1.7/administration/installing/custom/create-public-agent/
 [5]: /docs/1.7/usage/cli/install/
 [6]: /docs/1.7/usage/
 [7]: /docs/1.7/administration/installing/custom/uninstall/
 [9]: /docs/1.7/administration/installing/custom/troubleshooting/
 [10]: /docs/1.7/administration/user-management/
-

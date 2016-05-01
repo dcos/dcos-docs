@@ -308,9 +308,19 @@ To install DC/OS:
 
     ![dashboard](../img/ui-dashboard.gif)
 
+8. Archive your installer files for safe-keeping. You'll need this archive to make new agents, including the [public agent][11].
+
+    ```bash
+    # <Ctrl-C> to exit installer
+    $ cd genconf/serve
+    $ sudo tar cf dcos-install.tar *
+    # Move the dcos-install.tar file to a safe place
+    ```
+
 # Next Steps
 
 - [Add users to your cluster][10]
+- [Add a public agent][11]
 - [Install the DC/OS Command-Line Interface (CLI)][2]
 - [Troubleshooting DC/OS installation][9]
 - [Use your cluster][8]
@@ -351,3 +361,4 @@ After DC/OS is installed and deployed across your cluster, you can add more agen
  [8]: /docs/1.7/usage/
  [9]: /docs/1.7/administration/installing/custom/troubleshooting/
  [10]: /docs/1.7/administration/user-management/
+ [11]: /docs/1.7/administration/installing/custom/create-public-agent/
