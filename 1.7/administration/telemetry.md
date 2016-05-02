@@ -84,8 +84,8 @@ Along with the health of each system component in your cluster, this also tells 
 
 When using the DC/OS UI, we receive two types of notifications:
 
-Login information
-The pages you’ve viewed while navigating the UI
+* Login information
+* The pages you’ve viewed while navigating the UI
 
 <hr>
 
