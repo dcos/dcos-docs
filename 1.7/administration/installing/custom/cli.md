@@ -303,15 +303,6 @@ To install DC/OS:
 7.  Launch the DC/OS web interface at `http://<public-master-ip>/` and login. If this doesn't work, take a look at the [troubleshooting docs][9]
 
     ![alt text](../img/ui-installer-login.gif)
-
-8. Archive your installer files for safe-keeping. You'll need this archive to make new agents, including the [public agent][11].
-
-    ```bash
-    # <Ctrl-C> to exit installer
-    $ cd genconf/serve
-    $ sudo tar cf dcos-install.tar *
-    # Move the dcos-install.tar file to a safe place
-    ```
     
     You are done!
 

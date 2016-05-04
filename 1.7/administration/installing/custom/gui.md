@@ -114,15 +114,6 @@ The DC/OS installation creates these folders:
 
     ![login](../img/dcos-gui-login.png)
 
-9. Archive your installer files for safe-keeping. You'll need this archive to make new agents, including the [public agent][4].
-
-    ```bash
-    # <Ctrl-C> to exit installer
-    $ cd genconf/serve
-    $ sudo tar cf dcos-install.tar *
-    # Move the dcos-install.tar file to a safe place
-    ```
-
     You are done!
 
     ![dashboard](../img/ui-dashboard.gif)
