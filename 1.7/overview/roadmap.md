@@ -58,7 +58,7 @@ Multiple configuration profiles in Universe packages, to support dev/prod config
 Support for dependencies in Universe packages.
 
 ### Support more third part containerizers
-Besides MesosContainerizer and DockerContainerizer, Users would like to use [Hyper](https://hyper.sh/) as the container
+Besides MesosContainerizer and DockerContainerizer, Users would like to use [Hyper](http://www.hypercontainer.io/) as the container
 implementation to provide full Hypervisor in servers rather than use cgroups based container implementations.
 After [Modularize the containerizer interface](https://issues.apache.org/jira/browse/MESOS-3709) and its related tickets
 become done, it make it possible to load other third part containerizer modules and use [rkt](https://coreos.com/rkt/docs/latest/),
