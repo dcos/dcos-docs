@@ -62,7 +62,7 @@ Besides MesosContainerizer and DockerContainerizer, Users would like to use [Hyp
 implementation to provide full Hypervisor in servers rather than use cgroups based container implementations.
 After [Modularize the containerizer interface](https://issues.apache.org/jira/browse/MESOS-3709) and its related tickets
 become done, it make it possible to load other third part containerizer modules and use [rkt](https://coreos.com/rkt/docs/latest/),
-[KVM](http://www.linux-kvm.org/page/Main_Page) and Hyper(https://hyper.sh/) in DC/OS.
+[KVM](http://www.linux-kvm.org/page/Main_Page) and Hyper(http://www.hypercontainer.io/) in DC/OS.
 
 ### GPU Support
 Support for discovery, isolation, and consumption of GPUs.
