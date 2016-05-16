@@ -70,7 +70,7 @@
 
         * Include all required assets in your `/foo` directory, for example, Marathon app spec, JSON docs, or a Dockerfile.
 
-        * If you're unsure about what exactly should go into a tutorial, you can always check out [spark/](/1.7/usage/tutorials/spark/) for reference.
+        * If you're unsure about what exactly should go into a tutorial, you can always check out [spark/](/docs/1.7/usage/tutorials/spark/) for reference.
 
 1. Push your changes into the feature branch of your remote.
 
@@ -109,11 +109,11 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
 
 1. Replace the content from the upstream master with the content from your local dcos-docs repo using one of the following methods.
 
-  - Delete the `dcos-website/dcos-dcos` directory and replace it with a symlink to your local dcos-docs repo. 
+  - Delete the `dcos-website/dcos-dcos` directory and replace it with a symlink to your local `dcos-docs` repo. For example, if your directory structure is `/projects/dcos-website` and `/projects/dcos-docs`, you can issue these commands from the `dcos-website` directory:
 
      ```
      $ rm -r dcos-docs
-     $ ln -s ~/dcos-docs
+     $ ln -s ~/Projects/dcos-docs dcos-docs
      ```
     
   - Copy the contents of your local dcos-docs repo into the `/dcos-website/dcos-docs` folder.
