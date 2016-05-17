@@ -46,8 +46,8 @@ To assign multiple VIPs to your application, switch to JSON mode and add the add
           "protocol": "tcp",
           "name": "test",
           "labels": {
-            "VIP_0": "111.2.1.23",
-            "VIP_1": "111.2.1.23:5050"
+            "VIP_0": "111.2.1.23:80",
+            "VIP_1": "111.2.1.23:42"
           }
         },
         {
