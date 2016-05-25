@@ -35,11 +35,11 @@ Here are the master node hardware requirements.
 
   <tr>
     <td>
-      Nodes: 1<br />OS: Enterprise Linux 7 kernel 3.10.0-327 or CoreOS Stable<br />Processor: 4 cores<br />Memory: 32 GB RAM<br />Hard disk space: 120 GB
+      Nodes: 1<br />OS: RHEL/CentOS 7.2<br />Processor: 4 cores<br />Memory: 32 GB RAM<br />Hard disk space: 120 GB
     </td>
 
     <td>
-      Nodes: 3<br />OS: Enterprise Linux 7 kernel 3.10.0-327 or CoreOS Stable<br />Processor: 4 cores<br />Memory: 32 GB RAM<br />Hard disk space: 120 GB
+      Nodes: 3<br />OS: RHEL/CentOS 7.2<br />Processor: 4 cores<br />Memory: 32 GB RAM<br />Hard disk space: 120 GB
     </td>
   </tr>
   <tr>
@@ -66,11 +66,11 @@ Here are the agent node hardware requirements.
 
   <tr>
     <td class="tg-031e">
-      Nodes: 1<br />OS: Enterprise Linux 7 kernel 3.10.0-327 or CoreOS Stable<br />Processor: 2 cores<br />Memory: 16 GB RAM<br />Hard disk space: 60 GB
+      Nodes: 1<br />OS: RHEL/CentOS 7.2<br />Processor: 2 cores<br />Memory: 16 GB RAM<br />Hard disk space: 60 GB
     </td>
 
     <td class="tg-031e">
-      Nodes: 6<br />OS: Enterprise Linux 7 kernel 3.10.0-327 or CoreOS Stable<br />Processor: 2 cores<br />Memory: 16 GB RAM<br />Hard disk space: 60 GB
+      Nodes: 6<br />OS: RHEL/CentOS 7.2<br />Processor: 2 cores<br />Memory: 16 GB RAM<br />Hard disk space: 60 GB
     </td>
   </tr>
 
@@ -125,9 +125,9 @@ Here are the agent node hardware requirements.
 
 Each Linux distribution requires Docker to be installed in a specific way:
 
-*   **CoreOS** - Comes with Docker pre-installed and pre-configured.
-*   **RHEL** - Install Docker by using a subscription channel. For more information, see <a href="https://access.redhat.com/articles/881893" target="_blank">Docker Formatted Container Images on Red Hat Systems</a>. <!-- $ curl -sSL https://get.docker.com | sudo sh -->
 *   **CentOS** - [Install Docker from Docker's yum repository][2].
+*   **RHEL** - Install Docker by using a subscription channel. For more information, see <a href="https://access.redhat.com/articles/881893" target="_blank">Docker Formatted Container Images on Red Hat Systems</a>. <!-- $ curl -sSL https://get.docker.com | sudo sh -->
+*   **CoreOS** - Comes with Docker pre-installed and pre-configured.
 
 For more more information, see Docker's <a href="http://docs.docker.com/engine/installation/" target="_blank">distribution-specific installation instructions</a>.
 
