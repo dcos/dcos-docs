@@ -4,6 +4,8 @@ nav_title: Cloud
 menu_order: 1
 ---
 
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
+
 Looking to install DC/OS on your cloud of choice? Look no further! You can use a template or use our advanced custom installer.
 
 # Amazon Web Services

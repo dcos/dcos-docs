@@ -3,6 +3,8 @@ post_title: Log Management in DC/OS with ELK
 nav_title: ELK
 menu_order: 1
 ---
+
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 You can pipe system and application logs from a DC/OS cluster to your existing ElasticSearch, Logstash, and Kibana (ELK) server.
 
 **Prerequisites**

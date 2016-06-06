@@ -4,7 +4,7 @@ post_title: >
 nav_title: Reference Implementation ACS
 menu_order: 1
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 [DC/OS](https://github.com/dcos) is a distributed operating system -- powered by [Apache Mesos](https://mesos.apache.org) -- that treats collections of CPUs, RAM, networking and so on as a distributed kernel and then implements core distributed system components that handle system-wide tasks such as scheduling, dns, service discovery, and others without regard to the underlying infrastructure. The [Azure Container Service](https://azure.microsoft.com/documentation/articles/container-service-deployment/) is a reference implementation of DC/OS optimized to take advantage of the features of Microsoft Azure infrastructure. If you already have an Azure account, you can try out a reference implementation of DC/OS built on Microsoft Azure by [creating an Azure Container Service cluster](https://aka.ms/acscreate). (Grab a [free Azure trial account](https://azure.microsoft.com/pricing/free-trial/) first if you don't have one.)
 
 This document describes:

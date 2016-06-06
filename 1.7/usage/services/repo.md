@@ -1,7 +1,7 @@
 ---
 post_title: Package Repository
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 [DC/OS services][1] are generally installed in one of two ways, either through Marathon directly or from a DC/OS package repository. By default, the [DC/OS Command-Line Interface][2] is configured to use the primary public package repository: [Mesosphere Universe][1].
 
 ## Install a Packaged Service

@@ -3,6 +3,7 @@ post_title: Filtering DC/OS Task Logs with Splunk
 nav_title: Fitlering Splunk
 menu_order: 4
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 The file system paths of DC/OS task logs contain information such as the agent ID, framework ID, and executor ID. You can use this information to filter the log output for specific tasks, applications, or agents.
 
 **Prerequisite**

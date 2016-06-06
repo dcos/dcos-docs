@@ -3,7 +3,7 @@ post_title: Updating the CLI
 nav_title: Updating
 menu_order: 3
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 You can update the DC/OS CLI to the latest version or downgrade to an older version.
 
 # <a name="upgrade"></a>Upgrade the CLI

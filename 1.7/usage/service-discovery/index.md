@@ -3,7 +3,7 @@ post_title: Service Discovery and Load Balancing in DC/OS
 nav_title: Service Discovery
 menu_order: 3
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 In a dynamic environment, actually discovering where a service is currently running is difficult. There are many different ways to go about this, but we strongly recommend using [VIPs][1].
 
 You can check out our deep dive on how we've implemented [VIPs and L4 load balancing][4]. This solution really makes working with services on DC/OS easy.

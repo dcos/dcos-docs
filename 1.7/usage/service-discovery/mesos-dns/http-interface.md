@@ -3,6 +3,7 @@ post_title: HTTP Interface
 post_excerpt: ""
 layout: docs.jade
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 Mesos-DNS implements a simple REST API for service discovery over HTTP:
 
 # <a name="get-version"></a>`GET /v1/version`

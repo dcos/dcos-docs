@@ -4,7 +4,7 @@ post_title: >
 nav_title: Distributed DNS
 menu_order: 3
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 ## Background
 Tasks move around frequently in DC/OS, resources must be dynamically resolved by an application protocol, and they are referred to by name. This means that DNS is an integral part of DC/OS. Rather than implementing a ZooKeeper or Mesos client in every project, we've chosen DNS as the lingua franca for discovery amongst all of our components in DC/OS.
 

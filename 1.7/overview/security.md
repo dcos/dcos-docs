@@ -3,7 +3,6 @@ post_title: Security in DC/OS
 nav_title: Security
 menu_order: 7
 ---
-
 This topic discusses the security features in DC/OS and
 best practices for deploying DC/OS securely.
 

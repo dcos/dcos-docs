@@ -1,7 +1,7 @@
 ---
 post_title: Marathon-LB
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 After you boot a DC/OS cluster, all tasks can be discovered using Mesos-DNS. Discovery through DNS, however, has some limitations that include:
 
 *   DNS does not identify service ports, unless you use an SRV query; most apps are not able to use SRV records "out of the box."

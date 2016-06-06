@@ -3,7 +3,7 @@ post_title: >
   Autoscaling via. requests/second
 nav_title: Requests/Second
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 You can use the [marathon-lb-autoscale][1] application to implement request rate-based autoscaling with Marathon. The marathon-lb-autoscale application works with any application that uses TCP traffic and can be routed through HAProxy.
 
 marathon-lb-autoscale collects data from all HAProxy instances to determine the current RPS (requests per second) for your apps. The autoscale controller then attempts to maintain a defined target number of requests per second per service instance. marathon-lb-autoscale makes API calls to Marathon to scale the app.

@@ -3,6 +3,7 @@ post_title: Install DC/OS on Azure
 nav_title: Azure
 menu_order: 1
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 
 This document explains how to install DC/OS by using the Azure Marketplace.
 

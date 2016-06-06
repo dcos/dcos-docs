@@ -1,7 +1,7 @@
 ---
 post_title: Service Naming
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 Mesos-DNS defines the DNS top-level domain `.mesos` for Mesos tasks that are running on DC/OS. Tasks and services are discovered by looking up A and, optionally, SRV records within this Mesos domain.
 
 To enumerate all the DNS records that Mesos-DNS will respond to, take a look at the [DNS naming documentation][4]

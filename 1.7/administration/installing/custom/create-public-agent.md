@@ -3,6 +3,7 @@ post_title: Creating a Public Agent
 nav_title: Public Agent
 menu_order: 8
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 
 In DC/OS, agent nodes that are publicly accessible are designated as public and those that are not are designated as private. By default, agent nodes are designated as private during [GUI][1] or [CLI][2] installation.
 

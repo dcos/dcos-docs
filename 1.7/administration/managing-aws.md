@@ -2,7 +2,7 @@
 post_title: Managing AWS
 menu_order: 9
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 ## Finding your public addresses
 
 The DC/OS AWS CloudFormation template creates 1 Mesos agent node

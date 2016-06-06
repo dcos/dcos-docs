@@ -1,7 +1,7 @@
 ---
 post_title: Configuring
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 You can customize your DC/OS service during installation with a JSON configuration file. Otherwise, the services are installed by using default values.
 
 The general process is as follows:

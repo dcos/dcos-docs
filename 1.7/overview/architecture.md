@@ -3,7 +3,7 @@ post_title: The Architecture of DC/OS
 nav_title: Architecture
 menu_order: 2
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 An operating system abstracts resources such as CPU, RAM, and networking and provides common services to applications. DC/OS is a distributed operating system that abstracts the resources of a cluster of machines and provides common services. These common services include running processes across a number of nodes, service discovery, and package management. This topic discusses the architecture of DC/OS and the interaction of its components.
 
 To simplify the understanding of DC/OS, we will reuse the Linux terminology for kernel and user space. The kernel space is a protected area that is not accessible to users and involves low-level operations such as resource allocation, security, and process isolation. The user space is where the user applications and higher order services live, for example the GUI of your OS.

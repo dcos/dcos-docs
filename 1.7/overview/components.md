@@ -3,6 +3,13 @@ post_title: "An Introduction to DC/OS Components"
 nav_title: Components
 menu_order: 4
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
+
+What are the core DC/OS components?
+<!--more-->
+By components, we're referring to the services which work together to bring the DC/OS ecosystem alive. The core component is of course [Apache Mesos](http://mesos.apache.org/) but the DC/OS is actually made of of *many* more services than just this.
+
+If you log into any host in the DC/OS cluster, you can view the currently running services by inspecting `/etc/systemd/system/dcos.target.wants/`.
 
 ```
 ip-10-0-6-126 system # ls dcos.target.wants/
@@ -14,12 +21,6 @@ dcos-cosmos.service              dcos-keepalived.service       dcos-signal.servi
 dcos-ddt.service                 dcos-logrotate.service        dcos-signal.timer
 dcos-epmd.service                dcos-logrotate.timer          dcos-spartan.service
 ```
-
-What are the core DC/OS components?
-<!--more-->
-By components, we're referring to the services which work together to bring the DC/OS ecosystem alive. The core component is of course [Apache Mesos](http://mesos.apache.org/) but the DC/OS is actually made of of *many* more services than just this.
-
-If you log into any host in the DC/OS cluster, you can view the currently running services by inspecting `/etc/systemd/system/dcos.target.wants/`.
 
 ## Admin Router Service
 Admin Router is our core internal load balancer. Admin Router is a customized [Nginx](https://www.nginx.com/resources/wiki/) which allows us to proxy all the internal services on :80.

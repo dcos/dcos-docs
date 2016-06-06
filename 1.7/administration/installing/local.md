@@ -4,6 +4,8 @@ nav_title: Local
 menu_order: 3
 ---
 
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
+
 This installation method uses Vagrant to create a cluster of virtual machines on your local machine that can be used for demos, development, and testing with DC/OS.
 
 # 1. Download DC/OS Installer

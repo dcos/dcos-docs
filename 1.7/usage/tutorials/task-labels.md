@@ -1,7 +1,7 @@
 ---
 post_title: Labeling Tasks
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 This tutorial illustrates how labels can be defined using the Marathon web interface and HTTP API, and how information pertaining to applications that are running can be queried based on label value criteria.
 
 When you deploy applications or containers in a DC/OS cluster, you can associate a tag or label with your deployed components in order to track and report usage of the cluster by those components. For example, you may want to assign a cost center identifier or a customer number to a Mesos application and produce a summary report at the end of the month with usage metrics such as the amount of CPU and memory allocated to the applications by cost center or customer.

@@ -4,6 +4,8 @@ nav_title: Troubleshooting
 menu_order: 5
 ---
 
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
+
 During DC/OS installation, each of the components will converge from a failing state to a running state in the logs.
 
 Take a look at the [boot sequence][4] to understand what order everything comes up in.
