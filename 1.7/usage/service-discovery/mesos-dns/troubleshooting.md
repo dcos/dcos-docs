@@ -3,7 +3,7 @@ post_title: 'Troubleshooting'
 post_excerpt: ""
 layout: docs.jade
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 # How can I check the Mesos-DNS version?
 
 You can check the Mesos-DNS version with `mesos-dns -version`.

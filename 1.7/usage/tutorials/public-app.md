@@ -2,7 +2,7 @@
 post_title: Deploying Public Services
 nav_title: Public Services
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 DC/OS agent nodes can be designated as [public](/docs/1.7/overview/concepts/#public) or [private](/docs/1.7/overview/concepts/#private) during [advanced](/docs/1.7/administration/installing/custom/) or [cloud](/docs/1.7/administration/installing/cloud/) installations. Public agent nodes provide public access to your DC/OS applications. By default apps are launched on private agent nodes. To launch an app on a public node, you must create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified.
 
 

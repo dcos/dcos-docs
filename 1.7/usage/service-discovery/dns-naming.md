@@ -3,6 +3,7 @@ post_title: Discovering Service DNS Names
 nav_tile: Discovering DNS Names
 menu_order: 1
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 You can get a comprehensive list of the apps being run on your DC/OS cluster nodes.
 
 **Prerequisites:** [DC/OS and DC/OS CLI][1] are installed

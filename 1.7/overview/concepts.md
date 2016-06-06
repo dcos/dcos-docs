@@ -3,6 +3,7 @@ post_title: The Concepts of DC/OS
 nav_title: Concepts
 menu_order: 5
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 This page contains terms and definitions for DC/OS.
 
 # Admin Router

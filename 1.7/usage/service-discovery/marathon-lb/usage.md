@@ -3,6 +3,7 @@ post_title: Getting Started with marathon-lb
 nav_title: Getting Started
 menu_order: 1
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 To demonstrate marathon-lb, you can boot a DC/OS cluster on AWS to run an internal and external load balancer. The external load balancer will be used for routing external HTTP traffic into the cluster, and the internal load balancer will be used for internal service discovery and load balancing. Since we’ll be doing this on AWS, external traffic will first hit an external load balancer configured to expose our "public" agent nodes.
 
 ## Prequisistes

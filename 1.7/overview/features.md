@@ -3,6 +3,7 @@ post_title: The Features of DC/OS
 nav_title: Features
 menu_order: 3
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 This is an overview of the features that make DC/OS more than the sum of its parts.
 
 - [High Resource Utilization](#high-resource-utilization)

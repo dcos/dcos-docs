@@ -2,7 +2,7 @@
 post_title: Uninstalling Services
 nav_title: Uninstalling
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 ## Uninstall a service with the CLI
 
 1.  Uninstall a datacenter service with this command:

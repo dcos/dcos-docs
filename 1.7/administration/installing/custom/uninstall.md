@@ -4,6 +4,8 @@ nav_title: Uninstall
 menu_order: 6
 ---
 
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
+
 You can uninstall DC/OS from each node individually or from all nodes at once.
 
 ## Uninstall all nodes

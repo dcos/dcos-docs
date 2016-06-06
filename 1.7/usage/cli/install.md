@@ -3,7 +3,7 @@ post_title: Installing the CLI
 nav_title: Installing
 menu_order: 1
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 *   [Installing the DC/OS CLI on Unix, Linux, and OS X][1]
 *   [Installing the DC/OS CLI on Windows][2]
 

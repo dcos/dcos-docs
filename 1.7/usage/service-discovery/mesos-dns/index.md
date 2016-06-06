@@ -1,7 +1,7 @@
 ---
 post_title: Mesos-DNS
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 [Mesos-DNS][1] provides service discovery within DC/OS clusters. It is fully integrated into DC/OS and allows applications and services on the cluster to find each other through the [domain name system (DNS)][2], similar to how services discover each other throughout the Internet.
 
 Applications launched by [Marathon][3] are assigned names such as `search.marathon.mesos` or `log-aggregator.marathon.mesos`. Mesos-DNS resolves names to both the IP address of the node and the ports that the application is using. DC/OS applications and services discover the IP addresses and ports of other applications by making DNS queries or by making HTTP requests through a REST API.

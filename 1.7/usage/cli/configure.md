@@ -3,6 +3,7 @@ post_title: Configuring the CLI
 nav_title: Configuring  
 menu_order: 2
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 
 You can access DC/OS CLI configuration with this command:
 

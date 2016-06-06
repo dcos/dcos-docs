@@ -2,7 +2,7 @@
 post_title: Logging
 menu_order: 3
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 DC/OS cluster nodes generate logs that contain diagnostic and status information for DC/OS core components and DC/OS services.
 
 ## Service and Task Logs

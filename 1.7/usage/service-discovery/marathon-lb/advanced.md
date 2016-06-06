@@ -3,6 +3,7 @@ post_title: Advanced Features
 post_excerpt: ""
 layout: docs.jade
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 ## HAProxy configuration
 
 marathon-lb works by automatically generating configuration for HAProxy and then reloading HAProxy as needed. marathon-lb generates the HAProxy configuration based on application data available from the Marathon REST API. It can also subscribe to the [Marathon Event Bus][10] for real-time updates. When an application starts, stops, relocates or has any change in health status, marathon-lb will automatically regenerate the HAProxy configuration and reload HAProxy.

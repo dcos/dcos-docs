@@ -3,7 +3,7 @@ post_title: High Availability in DC/OS
 nav_title: High Availability
 menu_order: 6
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 This document discusses the high availability features in DC/OS and best
 practices for building highly available applications on DC/OS.
 

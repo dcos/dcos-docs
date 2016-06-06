@@ -3,6 +3,7 @@ post_title: Load Balancing and VIPs
 nav_title: Load Balancing
 menu_order: 2
 ---
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 
 DC/OS comes with an east-west load balancer that's meant to be used to enable multi-tier microservices architectures. It acts as a TCP Layer 4 load balancer, and it's tightly integrated with the kernel.
 

@@ -3,7 +3,7 @@ post_title: Uninstalling the CLI
 nav_title: Uninstalling
 menu_order: 4
 ---
-
+<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
 You can uninstall the CLI with these commands.
 
 1. Delete your DC/OS CLI installation directory.
