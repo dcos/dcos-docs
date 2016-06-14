@@ -12,7 +12,7 @@ First, it's necessary to download the [DC/OS 1.7.0 Installer](https://downloads.
 
     $ curl -O https://downloads.dcos.io/dcos/EarlyAccess/dcos_generate_config.sh
 
-See the [DC/OS Installer Release List](/releases/) for other versions.
+See the [DC/OS Installer Release List](https://dcos.io/releases/) for other versions.
 
 # 2. Install DC/OS Vagrant
 
