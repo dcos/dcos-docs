@@ -1,8 +1,8 @@
-+---
-+post_title: Configure DC/OS for Proxy
-+nav_title: Configure Proxy
-+menu_order: 9
-+---
+---
+post_title: Configure DC/OS for Proxy
+nav_title: Configure Proxy
+menu_order: 9
+---
 
 By default the DC/OS [Universe](https://github.com/mesosphere/universe) repository is hosted on the internet. The DC/OS [OAuth Service](https://github.com/dcos/dcos-oauth) must have access to `dcos.auth0.com` to fetch the required public key via HTTPS to validate access tokens. If your DC/OS cluster is behind a corporate proxy, you must update your configuration post-installation to fetch the Universe packages and OAuth service to work. 
 

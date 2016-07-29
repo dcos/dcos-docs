@@ -14,7 +14,7 @@ marathon-lb has a templating feature for specifying custom HAProxy configuration
 
 To specify a global template:
 
-1.  Create a file on your local machine called `HAPROXY_HEAD` with the following contents in a directory called `templates`. Next, create a file called `HAPROXY_HEAD` in a directory called `templates` with the contents below:
+1.  On your local machine, create a file called `HAPROXY_HEAD` in a directory called `templates` with the contents below:
 
         global daemon log /dev/log local0 log /dev/log local1 notice maxconn 4096 tune.ssl.default-dh-param 2048 defaults log global retries 3 maxconn 3000 timeout connect 5s timeout client 30s timeout server 30s option redispatch listen stats bind 0.0.0.0:9090 balance mode http stats enable monitor-uri /\_haproxy\_health_check
 

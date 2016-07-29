@@ -1,12 +1,14 @@
 ---
-post_title: AWS DC/OS Installation Guide
+post_title: Installing DC/OS on AWS
 nav_title: AWS
 menu_order: 0
 ---
 
-You can create a DC/OS cluster for Amazon Web Services (AWS) by using the DC/OS template on AWS CloudFormation.
+You can create a DC/OS cluster for Amazon Web Services (AWS) by using the DC/OS templates on AWS CloudFormation. 
 
-Depending on the DC/OS services that you install, you might have to modify the DC/OS templates to suit your needs. For more information, see [Scaling the DC/OS cluster in AWS][1].
+These instructions provide a basic AWS CloudFormation template that creates a DC/OS cluster that is suitable for demonstrations and POCs. This is the fastest way to get started with the DC/OS templates for AWS CloudFormation. 
+
+For a complete set of DC/OS configuration options, see the [Advanced AWS Install Guide](/docs/1.7/administration/installing/cloud/aws/advanced/).
 
 # System requirements
 
@@ -20,10 +22,12 @@ An Amazon EC2 <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.x
 
 ## Software
 
-- An AWS account.
+- An Amazon Web Services account.
 - SSH installed and configured. This is required for accessing nodes in the DC/OS cluster.
 
 # Install DC/OS
+
+Depending on the DC/OS services that you install, you might have to modify the DC/OS templates to suit your needs. For more information, see [Scaling the DC/OS cluster in AWS][1].
 
 **Prerequisite:**
 You must have an Amazon EC2 Key Pair for the same region as your cluster. Key pairs cannot be shared across regions. The AWS key pair uses public-key cryptography to provide secure login to your AWS cluster. For more information about creating an Amazon EC2 Key Pair, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair" target="_blank">documentation</a>.

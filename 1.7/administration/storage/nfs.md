@@ -13,7 +13,7 @@ For some stateful services, such as Jenkins/Velocity, it can be convenient to mo
 
 - These instructions are CoreOS-specific.
 - This is not an HA NFS server. It runs on a single master and should only be used as a proof of concept.
-- If you have access to a pre-existing NFS or another network store, skip to <a href="part2">part II</a>.
+- If you have access to a pre-existing NFS or another network store, skip to <a href="#part2">part II</a>.
 
 ### Part I: Configure the master with the file-share
 

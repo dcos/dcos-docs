@@ -10,4 +10,3 @@ To get a better feeling for what DC/OS is and what it does, jump into some of th
 - [What is DC/OS?](what-is-dcos/)
 - [DC/OS Architecture](architecture/)
 - [DC/OS Features](features/)
-- [DC/OS Security](security/)

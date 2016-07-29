@@ -33,7 +33,7 @@ These steps must be performed on a machine that is configured as a DC/OS node. A
 2.  Remove the old directory structures on the agent node.
 
     ```bash
-    $ sudo rm -rf /etc/mesosphere /opt/mesosphere /var/lib/mesos
+    $ sudo rm -rf /etc/mesosphere /opt/mesosphere /var/lib/mesos /var/lib/dcos
     ```
 
 3.  Restart the machine.

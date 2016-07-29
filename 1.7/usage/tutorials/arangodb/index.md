@@ -33,10 +33,10 @@ The DC/OS CLI provides a convenient way to deploy applications on your DC/OS clu
 Deploying ArangoDB via the DC/OS CLI is as easy as:
 
 ```bash
-$ dcos package install arangodb
+$ dcos package install arangodb3
 ```
 
-This command installs the `arangodb` subcommand and starts an instance of the ArangoDB service with its default configuration under its standard name, "arangodb" via Marathon.
+This command installs the `arangodb3` subcommand and starts an instance of the ArangoDB service with its default configuration under its standard name, "arangodb3" via Marathon.
 
 Open the DC/OS web interface in your browser and click the Services tab to watch ArangoDB start up on your Open DC/OS cluster:
 
@@ -46,37 +46,31 @@ Click the ArangoDB task to reveal the subtask that the framework has started:
 
 ![Tasks](img/tasks.png)
 
-Click “Open Service” to open the ArangoDB dashboard:
-
-![Dashboard](img/dashboard.png)
-
-By default, ArangoDB will not expose itself to the outside. The IPs listed here are the internal IPs in the cluster. To access the nodes from the outside, we recommend using [sshuttle](https://github.com/sshuttle/sshuttle).
-
-The exact way to dig a tunnel using sshuttle varies from infrastructure to infrastructure. The following is an example for an AWS cluster:
-
-```bash
-$ sshuttle --python /opt/mesosphere/bin/python3.4 -r core@54.171.143.132 10.0.0.0/8
-```
-
-The IP may be extracted from the top left corner of the DC/OS web interface:
-
-![Dashboard](img/ip.png)
-
-**Note:** Some sshuttle versions had problems during our tests. Version 0.77.3 worked properly for us.
-
-Afterwards, you should be able to access the internal IPs from outside. Click the coordinator link in the ArangoDB web interface to open the ArangoDB coordinator:
+Click “Open Service” to open the ArangoDB web interface.
 
 ![Dashboard](img/arangodb.png)
 
 Congratulations! You now have ArangoDB running on DC/OS.
 
+## Using ArangoDB within the DC/OS cluster
+
+Now that ArangoDB is running you can fill it with some data and use it as a data store for your applications.
+
+To get started, talk to the "Coordinators" of your ArangoDB cluster. You should not hardcode the "Coordinators" IP addresses and ports in your applications because they can move or change at any time throughout your cluster lifetime (e.g. tasks might fail, up- and downscaling) .
+
+To connect to ArangoDB from the inside deploy the [ArangoDB Mesos HAProxy](https://github.com/arangodb/arangodb-mesos-haproxy).
+
+Clone the repository and start the proxy:
+
+```bash
+$ git clone https://github.com/arangodb/arangodb-mesos-haproxy
+$ cd arangodb-mesos-haproxy
+$ dcos marathon app add marathon.json
+```
+
+To make your proxy highly available or scale it, you can simply add a few more instances via the Marathon UI.
+
 ## Further reading
-
-### Service discovery
-
-ArangoDB integrates with [DC/OS service discovery](/docs/1.7/usage/service-discovery/mesos-dns/service-naming/). You should use this to talk to the coordinator from within the cluster. To find out the IP of the coordinator, do a standard DNS lookup for `arangodb-coordinator1.arangodb.mesos`.
-
-Then, issue a SRV DNS request to `arangodb-coordinator1.arangodb.mesos` to find out the port.
 
 ### Deinstallation/Shutdown
 
@@ -84,7 +78,7 @@ Use the following commands to shut down and delete your ArangoDB service and the
 command line tool:
 
 ```bash
-$ dcos arangodb uninstall; dcos package uninstall arangodb
+$ dcos arangodb3 uninstall; dcos package uninstall arangodb3
 ```
 
 The first command uses the `arangodb` subcommand to gracefully shut down and
@@ -114,7 +108,7 @@ $ dcos package describe --config arangodb
 
 For further information, visit: https://github.com/arangoDB/arangodb-mesos-framework
 
-The ArrangoDB service is also distributed in binary form as a Docker image: arangodb/arangodb-mesos-framework
+The ArangoDB service is also distributed in binary form as a Docker image: arangodb/arangodb-mesos-framework
 
 See the [README.md](https://github.com/ArangoDB/arangodb-mesos-framework)
 in the framework repository for details on how the framework scheduler is
@@ -137,5 +131,6 @@ channels:
 Additionally, we track issues, bug reports, and questions via the GitHub
 issue trackers at
 
-- [arangodb-dcos](https://github.com/ArangoDB/arangodb-dcos/issues): The DC/OS subcommand
-- [arangodb-mesos](https://github.com/arangodb/arangodb-mesos/issues): The ArangoDB service
+- [arangodb-dcos](https://github.com/ArangoDB/arangodb3-dcos/issues): The DC/OS subcommand
+- [arangodb-mesos](https://github.com/arangodb/arangodb-mesos-framework/issues): The ArangoDB service
+- [arangodb-mesos-haproxy](https://github.com/arangodb/arangodb-mesos-haproxy/issues): The ArangoDB Mesos Proxy

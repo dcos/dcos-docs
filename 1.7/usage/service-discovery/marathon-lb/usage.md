@@ -203,7 +203,7 @@ Modify the external nginx app to look like this:
       }],
       "labels":{
         "HAPROXY_GROUP":"external",
-        "HAPROXY_0_VHOST":"brenden-j-PublicSl-1LTLKZEH6B2G6-1145355943.us-west-2.elb.amazonaws.com"
+        "HAPROXY_0_VHOST":"brenden-j-publicsl-1ltlkzeh6b2g6-1145355943.us-west-2.elb.amazonaws.com"
       }
     }
 

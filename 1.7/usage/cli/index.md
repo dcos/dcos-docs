@@ -78,7 +78,7 @@ The configuration settings are stored in the `dcos.toml` file. You can modify th
     dcos config set core.email jdoe@mesosphere.com
     
 
-**mesos_master_url** The Mesos mast URL. This must be of the format: `http://<host>:<port>`. For example, to set your Mesos master URL:
+**mesos_master_url** The Mesos master URL. This must be of the format: `http://<host>:<port>`. For example, to set your Mesos master URL:
 
     dcos config set core.mesos_master_url 52.34.160.132:5050
     

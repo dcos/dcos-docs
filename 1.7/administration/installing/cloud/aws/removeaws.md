@@ -1,6 +1,6 @@
 ---
 post_title: Uninstalling on Amazon Web Services
-menu_order: 1
+menu_order: 300
 ---
 You can uninstall DC/OS from AWS with these instructions.
 

@@ -1,7 +1,7 @@
 ---
 post_title: Mount Disk Resources
 menu_order: 0
--------------
+---
 
 # Overview
 

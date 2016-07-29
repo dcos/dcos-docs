@@ -267,14 +267,21 @@ menu_order: 5
         Administer and manage DC/OS cluster nodes.
     
     Usage:
+        dcos node --help
         dcos node --info
         dcos node [--json]
-        dcos node log [--follow --lines=N --leader --master --mesos-id=<mesos-id>]
+        dcos node log [--follow --lines=N --leader --master --mesos-id=<mesos-id> --slave=<slave-id>]
         dcos node ssh [--option SSHOPT=VAL ...]
                       [--config-file=<path>]
                       [--user=<user>]
                       [--master-proxy]
-                      (--leader | --master | --mesos-id=<mesos-id>)
+                      (--leader | --master | --mesos-id=<mesos-id> | --slave=<slave-id>)
+                      [<command>]
+        dcos node diagnostics create (<nodes>)...
+        dcos node diagnostics delete <bundle>
+        dcos node diagnostics download <bundle> [--location=<location>]
+        dcos node diagnostics (--list | --status | --cancel)
+                           [--json]
     
     Commands:
         log
@@ -282,6 +289,13 @@ menu_order: 5
         ssh
             Establish an SSH connection to the master or agent nodes of your DC/OS
             cluster.
+        diagnostics create
+            Create a diagnostics bundle. Nodes can be: ip address, hostname, mesos ID
+            or key words "all", "masters", "agents".
+        diagnostics download
+            Download a diagnostics bundle.
+        diagnostics delete
+            Delete a diagnostics bundle.
     
     Options:
         --config-file=<path>
@@ -299,25 +313,35 @@ menu_order: 5
         --lines=N
             Print the last N lines, where 10 is the default.
         --master
-            Deprecated. Please use `--leader`.
+            Deprecated. Please use --leader.
         --master-proxy
             Proxy the SSH connection through a master node. This can be useful when
             accessing DC/OS from a separate network. For example, in the default AWS
-            configuration, the private agents are unreachable from the public
+            configuration, the private slaves are unreachable from the public
             internet. You can access them using this option, which will first hop
             from the publicly available master.
-        --mesos-id=<mesos-id>
-            The Mesos ID of a node.
         --option SSHOPT=VAL
             The SSH options. For information, enter `man ssh_config` in your
             terminal.
         --slave=<agent-id>
-            Deprecated. Please use `--mesos-id=<mesos-id>`.
+            Agent node with the provided ID.
         --user=<user>
-            The SSH user, where the default is core.
+            The SSH user, where the default user [default: core].
+        --list
+            List available diagnostics bundles.
+        --status
+            Print diagnostics job status.
+        --cancel
+            Cancel a running diagnostics job.
+        --location=<location>
+            Download a diagnostics bundle to a particular location.
+            If not set, default to present working directory.
         --version
             Print version information.
     
+    Positional Arguments:
+        <command>
+            Command to execute on the DCOS cluster node.
 
 By default, `dcos node ssh` connects to the private IP of the node, which is only accessible from hosts within the same network, so you must use the `--master-proxy` option to access your cluster from an outside network. For example, in the default AWS configuration, the private agents are unreachable from the public internet, but you can SSH to them using this option, which will proxy the SSH connection through the publicly reachable master.
 

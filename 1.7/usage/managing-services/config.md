@@ -52,4 +52,4 @@ Each service installs with a set of default parameters. You can discover the def
     $ dcos package install --options=marathon-config.json marathon
     ```
 
-For more information, see the [dcos package](/docs/1.7/usage/cli/command-reference/#cli-dcos-package) documentation.
+For more information, see the [dcos package](/docs/1.7/usage/cli/command-reference/#dcospackage) documentation.
