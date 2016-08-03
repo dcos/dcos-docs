@@ -114,6 +114,9 @@ If you are doing a cloud installation on [AWS](/docs/1.7/administration/installi
 If you are doing a cloud installation on [Azure](/docs/1.7/administration/installing/cloud/azure/), you currently cannot disable authentication. This will be added in a future release along with other
 options to customize authentication.
 
+Note that if you’ve already installed your cluster and would like to disable this in-place, you can go through an upgrade with the same parameter set.
+
+
 ## Ad Blockers and the DC/OS UI
 
 During testing, we have observed issues with loading the DC/OS UI login page

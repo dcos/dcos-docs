@@ -12,5 +12,5 @@ DC/OS uses the JSON Web Token (JWT) format for its authentication tokens. JWT is
 [OpenID Connect 1.0](https://openid.net/specs/openid-connect-core-1_0.html), which is a simple identity layer built on top of the
 [OAuth 2.0](http://oauth.net/2/) protocol.
 
-DC/OS oauth provides an HTTP API for managing local user in a RESTful fashion.
+DC/OS OAuth provides an HTTP API for managing local users in a RESTful fashion.
 
