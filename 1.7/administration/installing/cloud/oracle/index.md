@@ -80,8 +80,8 @@ These steps assume that you've spun up the bootstrap instance and that you are l
 1. Download and execute the [generator script][orchestration-generator.sh]:
 
   ```bash
-  $ curl -O https://dcos.io/docs/1.7/administration/installing/cloud/oracle/orchestration-generator.sh
-  $ ./orchestration-generator.sh
+  $ curl -O https://raw.githubusercontent.com/dcos/dcos-docs/master/1.7/administration/installing/cloud/oracle/orchestration-generator.sh
+  $ bash orchestration-generator.sh
   ```
 
 2. Enter below values when prompted:
