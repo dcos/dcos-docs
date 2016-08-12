@@ -26,7 +26,7 @@ Before describing the software architecture we describe the packet flow that wil
 
 ##DC/OS overlay in action
 
-![Agent configuration for containers running on MesosContainerizer and Docker once the VxLAN has been configured.](path goes here)
+![Agent configuration for containers running on MesosContainerizer and Docker once the VxLAN has been configured.](./overlay-files/ip-per-container_mesos_dcos.001)
 Figure 1: Agent configuration for containers running on MesosContainerizer and Docker once the VxLAN has been configured.
 
 We can explain the operation of the overlay with an example. Figure 1 shows a 2 agent DC/OS cluster. To get the DC/OS overlay to work we need to allocate a subnet large enough to address the containers running on the overlay. The address space selected should be non-overlapping from the host network to ensure any misconfiguration when setting up the overlay. In the exampe shown, the host network is 10.0.0.0/8 and the address space chosen for the overlay is 9.0.0.0/8  . 
@@ -67,7 +67,7 @@ The challenges gives us a laundry list that need to be addressed to make the DC/
 
 ##Software Architecture
 
-![Software architecture for DC/OS overlay control plane.](path goes here)
+![Software architecture for DC/OS overlay control plane.](./overlay-files/Figure2overlaydesigndoc)
 Figure 2: Software architecture for DC/OS overlay control plane. 
 
 Figure 2 describes the software architecture that we plan to implement to realize a control plane for the DC/OS overlay. The blocks in orange are the missing pieces that have to be built. Below, we describe each of the missing pieces and functionality that they provide. 
