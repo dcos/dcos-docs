@@ -4,7 +4,7 @@ nav_title: Getting Started
 menu_order: 10
 ---
 
-You can create and administer jobs in the DC/OS web interface, the DC/OS CLI, or via the API.
+You can create and administer jobs in the DC/OS web interface or via the API.
 
 # DC/OS Web Interface
 
@@ -20,9 +20,9 @@ From the DC/OS web interface, click the **Jobs** tab, then the **New Job** butto
 * **Docker Container** - Fill in this field if you will use a Docker image to specify the action of your job.
 * **Labels**
 
-## Modify, View, or Remove a Job
+## Modify, Remove, or View a Job
 
-From the "Jobs" tab, click the name of your job to modify or delete your job. While the job is running you can click the job instance to drill down to "Details," "Files," and "Logs" data.
+From the "Jobs" tab, click the name of your job to modify or delete your job. While the job is running, you can click the job instance to drill down to "Details," "Files," and "Logs" data.
 
 # Metronome API
 
