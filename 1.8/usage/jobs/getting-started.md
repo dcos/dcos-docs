@@ -24,6 +24,7 @@ From the DC/OS web interface, click the **Jobs** tab, then the **New Job** butto
 
 From the "Jobs" tab, click the name of your job to modify or delete your job. While the job is running you can click the job instance to drill down to "Details," "Files," and "Logs" data.
 
+<!--
 # DC/OS CLI
 
 You can create and manage jobs from the DC/OS CLI using `dcos job` commands. To see a full list of available commands, run `dcos job --help`.
@@ -126,6 +127,8 @@ To view details about your job's schedule, run:
 ```
 dcos job schedule show <job-id>
 ```
+
+-->
 
 # Metronome API
 
