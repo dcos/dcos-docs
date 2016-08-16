@@ -6,8 +6,13 @@ RUN useradd -ms /bin/bash -g admin docsuser
 
 # Install system packages and npm modules.
 RUN apt-get update
-RUN apt-get install -y sudo ruby nodejs nodejs-legacy npm git sudo
-RUN apt-get install gulp -g
+RUN apt-get install -y sudo ruby nodejs nodejs-legacy npm git curl sudo
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
+RUN apt-get install nvm
+RUN nvm install 6.3.1 && nvm alias default 6.3.1
+ENV source ~/.profile
+RUN npm install gulp -g
+RUN npm update
 
 # Enable sudo for docsuser.
 RUN echo 'docsuser ALL= NOPASSWD: ALL' >> /etc/sudoers
