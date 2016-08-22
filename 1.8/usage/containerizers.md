@@ -10,7 +10,7 @@ DC/OS supports both [the default Mesos containerizer and the Docker containerize
 
 While other containerizers play well with DC/OS, the Mesos containerizer does not depend upon other container technologies and can therefore take advantage of more Mesos features.
 
-The Mesos containerizer now supports provisioning Docker and AppC container images (the ["universal containerizer"](http://mesos.apache.org/documentation/latest/container-image/_), so you can take advantage of the Mesos containerizer and still launch an alternative container image. This support also removes your dependency on the Docker daemon.
+The Mesos containerizer now supports provisioning Docker and AppC container images (the ["universal containerizer"](http://mesos.apache.org/documentation/latest/container-image/_)), so you can take advantage of the Mesos containerizer and still launch an alternative container image. This support also removes your dependency on the Docker daemon.
 
 This latest version of the Mesos containerizer introduces a new `credential`, with a "principal" and an optional "secret" field to authenticate when downloading the Docker or AppC image.
 
