@@ -14,7 +14,7 @@ While other containerizers play well with DC/OS, the Mesos containerizer does no
 
 The Mesos containerizer supports provisioning [Docker](https://docker.com/) and [AppC](https://github.com/appc/spec) container images (the ["unified containerizer"](http://mesos.apache.org/documentation/latest/container-image)). This means that you can use both the Mesos containerizer and other container image types in DC/OS.
 
-The Mesos containerizer removes your dependency on the Docker daemon. The Docker daemon can hang when there are too many containers, making troubleshooting difficult. In addition, Docker must be installed on each of your agent nodes in order to use the Docker containerizer. This means you need to upgrade Docker on the agent nodes each time a new version of Docker comes out. The Mesos containerizer is more stable and allows deployment at scale.
+The Mesos containerizer removes your dependency on the Docker daemon. With previous versions of Docker, if the Docker daemon was not responsive, a restart to the daemon caused all containers to stop on the host. In addition, Docker must be installed on each of your agent nodes in order to use the Docker containerizer. This means you need to upgrade Docker on the agent nodes each time a new version of Docker comes out. The Mesos containerizer is more stable and allows deployment at scale.
 
 ## Provisioning Docker or AppC Containers with the Mesos Containerizer (Experimental)
 
