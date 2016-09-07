@@ -18,7 +18,7 @@ The Mesos containerizer removes your dependency on the Docker daemon. The Docker
 
 ## Provisioning Docker or AppC Containers with the Mesos Containerizer (Experimental)
 
-To run Docker or AppC containers with the Mesos containerizer, specify the container type `MESOS` and a `docker` or `appc` object.
+To run Docker or AppC containers with the Mesos containerizer, specify the container type `MESOS` and a `docker` or `appc` object in your [Marathon application definition](http://mesosphere.github.io/marathon/docs/application-basics.html).
 
 The Mesos containerizer provides a `credential`, with a `principal` and an optional `secret` field to authenticate when downloading the Docker or AppC image.
 
@@ -39,7 +39,7 @@ The Mesos containerizer provides a `credential`, with a `principal` and an optio
         "mem": 16.0,
         "instances": 1
     }
-	
+
 For the moment, you can only use these features of the Mesos containerizer via a JSON app definition, not through the DC/OS web interface.
 
 # Docker Containerizer
@@ -59,3 +59,4 @@ Use the Docker containerizer if you need specific features of the Docker package
     }
 
 [Learn more about launching Docker containers on Marathon](http://mesosphere.github.io/marathon/docs/native-docker.html).
+[Follow a Docker app tutorial](/docs/1.8/usage/tutorials/docker-app/).
