@@ -17,8 +17,9 @@ The Mesos unified containerizer offers the following advantages:
 * **Removes your dependency on the Docker daemon**: With previous versions of Docker, if the Docker daemon was not responsive, a restart to the daemon caused all containers to stop on the host. In addition, Docker must be installed on each of your agent nodes in order to use the Docker containerizer. This means that in order to use the Docker containerizer you need to upgrade Docker on the agent nodes each time a new version of Docker comes out.
 * The Mesos unified containerizer is more stable and allows deployment at scale.
 * The Mesos unified containerizer offers features not available in the Docker containerizer, such as GPU and CNI support.
+* The Mesos unified containerizer allows you to take advantage of continuing innovation within both the Mesos and DC/OS, including features such as IP per container, strict container isolation and more.
 
-
+**Note:** This new Mesos unified containerizer functionality is in the experimental phase. We encourage [feedback from the DC/OS community](https://dcos.io/community/).
 
 ## Provisioning Docker or AppC Containers with the Mesos Containerizer
 
@@ -47,8 +48,6 @@ The Mesos containerizer provides a `credential`, with a `principal` and an optio
 ```
 
 For the moment, you can only use these features of the Mesos containerizer via a JSON app definition, not through the DC/OS web interface.
-
-**Note:** This new Mesos unified containerizer functionality is in the technical preview phase. We encourage [feedback from the DC/OS community](https://dcos.io/community/).
 
 # Docker Containerizer
 
