@@ -8,7 +8,7 @@ By default the DC/OS [Universe](https://github.com/mesosphere/universe) reposito
 
 ## Configure DC/OS Master node
 
-1.  Create `/var/lib/dcos/` directory if it doesn't exist and add the following variables in the file `/var/lib/dcos/environment.proxy`:
+1.  Create `/opt/mesosphere/etc` directory if it doesn't exist and add the following variables in the file `/opt/mesosphere/etc/proxy.env`:
 
     ```
     http_proxy=http://user:pass@host:port
