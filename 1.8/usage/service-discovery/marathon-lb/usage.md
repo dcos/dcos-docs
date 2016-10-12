@@ -13,7 +13,7 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
 
 1.  Install Marathon-LB.
 
-        $ dcos package install Marathon-LB
+        $ dcos package install marathon-lb
 
     To check that Marathon-LB is working, [find the IP for your public node](/docs/1.8/administration/locate-public-agent/) and navigate to `http://<public agent ip>:9090/haproxy?stats`. You willl see a statistics report page like this:
 
