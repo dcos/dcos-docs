@@ -99,7 +99,7 @@ In this step you deploy the containerized Tweeter app to a public node.
 
     The service talks to Cassandra via `node-0.cassandra.mesos:9042`, and Kafka via `broker-0.kafka.mesos:9557` in this example. Traffic is routed via the Marathon-LB (Marathon-LB) because you added the HAPROXY_0_VHOST tag on the `tweeter.json` definition.
 
-1.  Go to the Marathon web interface to verify your app is up and healthy. Then, navigate to [public agent][9] node to see the Tweeter UI and post a Tweet.
+1.  Go to the DC/OS web interface to verify your app is up and healthy. Then, navigate to [public agent][9] node to see the Tweeter UI and post a Tweet.
 
     ![Tweeter][14]
 
