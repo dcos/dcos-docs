@@ -67,7 +67,7 @@ The DC/OS installation creates these folders:
 
     ```yaml
     ---
-    bootstrap_url: http://<bootstrap_public_ip>:<your_port>
+    bootstrap_url: http://<bootstrap_ip>:<your_port>
     cluster_name: '<cluster-name>'
     exhibitor_storage_backend: static
     ip_detect_filename: /genconf/ip-detect
