@@ -40,7 +40,10 @@ From each node, enter these commands:
 
 ```bash
 $ sudo -i /opt/mesosphere/bin/pkgpanda uninstall
-$ sudo rm -rf /opt/mesosphere /etc/mesosphere
+$ sudo rm -rf /opt/mesosphere /var/lib/mesosphere /etc/mesosphere /var/lib/zookeeper /var/lib/mesos /var/lib/dcos  /run/dcos
+$ sudo rm -rf /etc/profile.d/dcos.sh /etc/systemd/journald.conf.d/dcos.conf /etc/systemd/system/dcos-download.service /etc/systemd/system/dcos-link-env.service /etc/systemd/system/dcos-setup.service /etc/systemd/system/multi-user.target.wants/dcos-setup.service /etc/systemd/system/multi-user.target.wants/dcos.target 
+$ sudo rm -fr /run/mesos /var/log/mesos /tmp/dcos
+$ sudo systemctl daemon-reload
 ```
 
 **Tip:** Uninstalling DC/OS with these commands does not delete everything on the host.
