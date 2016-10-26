@@ -2,7 +2,7 @@
 post_title: Using Virtual IP Addresses
 menu_order: 10
 ---
-DC/OS can map traffic from a single Virtual IP (VIP) to multiple IP addresses and ports. DC/OS VIPs are **name-based**, which means clients connect with a service address instead of an IP address. DC/OS automatically generates name-based VIPs that do not collide with IP VIPs, so you don’t have to worry about it. This allows name-based VIPs to be automatically created when the service is installed.
+DC/OS can map traffic from a single Virtual IP (VIP) to multiple IP addresses and ports. DC/OS VIPs are **name-based**, which means clients connect with a service address instead of an IP address. DC/OS automatically generates name-based VIPs that do not collide with IP VIPs, so you don’t have to worry about collisions. This feature allows name-based VIPs to be created automatically when the service is installed.
 
 A named VIP contains 3 components:
 
