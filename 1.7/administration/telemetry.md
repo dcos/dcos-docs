@@ -35,8 +35,6 @@ You will see a ping to `segment.com` once per hour with this data:
     "health-unit-dcos-gen-resolvconf-timer-unhealthy": 0,
     "health-unit-dcos-history-service-service-total": 1,
     "health-unit-dcos-history-service-service-unhealthy": 0,
-    "health-unit-dcos-keepalived-service-total": 1,
-    "health-unit-dcos-keepalived-service-unhealthy": 0,
     "health-unit-dcos-logrotate-service-total": 3,
     "health-unit-dcos-logrotate-service-unhealthy": 0,
     "health-unit-dcos-logrotate-timer-total": 3,

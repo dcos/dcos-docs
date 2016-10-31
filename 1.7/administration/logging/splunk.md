@@ -39,7 +39,6 @@ For each Master node in your DC/OS cluster:
             -u dcos-exhibitor.service           \
             -u dcos-gen-resolvconf.service      \
             -u dcos-history.service             \
-            -u dcos-keepalived.service          \
             -u dcos-logrotate.service           \
             -u dcos-marathon.service            \
             -u dcos-mesos-dns.service           \

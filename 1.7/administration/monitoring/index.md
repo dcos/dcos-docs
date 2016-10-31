@@ -113,10 +113,6 @@ This is a service that helps the agent nodes locate the master nodes.<!-- dcos-g
 
 Periodically updates the systemd-resolved for Mesos DNS.<!-- dcos-gen-resolvconf.timer/ -->
 
-### Keepalived
-
-Runs keepalived to make a VRRP load balancer that can be used to access the masters.<!-- dcos-keepalived.service/ -->
-
 ### Layer 4 Load Balancer
 The DC/OS Layer 4 Load Balancer that enables multi-tier microservices architectures. For more information, see the [documentation](/docs/1.7/usage/service-discovery/load-balancing/).<!-- dcos-minuteman.service/ -->
 

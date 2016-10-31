@@ -118,7 +118,6 @@ The following list shows the components used by DC/OS itself. You'll note that t
 - hadoop
 - hdfs-mesos
 - java
-- keepalived
 - libevent
 - logrotate
 - marathon

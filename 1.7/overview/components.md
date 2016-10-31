@@ -16,9 +16,9 @@ dcos-adminrouter-reload.service  dcos-exhibitor.service        dcos-marathon.ser
 dcos-adminrouter-reload.timer    dcos-gen-resolvconf.service   dcos-mesos-dns.service
 dcos-adminrouter.service         dcos-gen-resolvconf.timer     dcos-mesos-master.service
 dcos-cluster-id.service          dcos-history-service.service  dcos-minuteman.service
-dcos-cosmos.service              dcos-keepalived.service       dcos-signal.service
-dcos-ddt.service                 dcos-logrotate.service        dcos-signal.timer
-dcos-epmd.service                dcos-logrotate.timer          dcos-spartan.service
+dcos-cosmos.service              dcos-signal.service           dcos-ddt.service
+dcos-logrotate.service           dcos-signal.timer             dcos-epmd.service
+dcos-logrotate.timer             dcos-spartan.service
 ```
 
 ## Admin Router Service
