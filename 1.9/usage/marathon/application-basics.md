@@ -135,9 +135,9 @@ In the following example application definition, we will focus on a simple Docke
 In this example, we are going to use the Marathon REST API to deploy the app `basic-3`:
 
 ```sh
-curl -X POST http://10.141.141.10:8080/v2/apps -d @basic-3.json -H "Content-type: application/json"
+curl -X POST <dcos-url>:8080/v2/apps -d @basic-3.json -H "Content-type: application/json"
 ```
 
-This assumes that you've pasted the example JSON into a file called `basic-3.json` and you're using [playa-mesos](https://github.com/mesosphere/playa-mesos), a Mesos sandbox environment based on Vagrant, for testing out the deployment. When you submit the above application definition to DC/OS you should see your new service running.
+When you submit the above application definition to DC/OS you should see your new service running from the **Services** tab of the DC/OS GUI.
 
-The result of this exercise is that Marathon has launched a Python-based web server in a Docker container, which is now serving the contents of the container's root directory at `http://10.141.141.10:31000`.
+Go to `<dcos-url>:3100` to see the contents of the Docker container's root directory.
