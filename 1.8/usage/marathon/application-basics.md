@@ -132,7 +132,7 @@ In the following example application definition, we will focus on a simple Docke
 }
 ```
 
-In this example, we are going to use the Marathon REST API to deploy the app `basic-3`: <!-- what URL is that? in general I need help translating this section to DC/OS-->
+In this example, we are going to use the Marathon REST API to deploy the app `basic-3`:
 
 ```sh
 curl -X POST http://10.141.141.10:8080/v2/apps -d @basic-3.json -H "Content-type: application/json"
