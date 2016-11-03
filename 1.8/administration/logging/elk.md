@@ -5,6 +5,14 @@ menu_order: 1
 ---
 You can pipe system and application logs from a DC/OS cluster to your existing ElasticSearch, Logstash, and Kibana (ELK) server.
 
+There are two ways to configue your system to ship these logs:
+
+**Dump Journald to a Trackable File**
+With this method, you configure journald to dump it's binary database of ogs to a file. At this point, you can use the basic file beat implementation, pointing it to the file, enabling file beat to ship the data in journal to your aggregated log tracking system.
+
+**Use [JournalBeat](https://github.com/mheese/journalbeat)**
+In this case, you log everyhing to journald as you usually would.  This method does not require any extra journald configuration. You can get logs out of journal directly using the JouranlBeat tool, which essentially tails th journal and sends those log lines to youraggregated solution. 
+
 **Prerequisites**
 
 These instructions are based on CoreOS 766.4.0 and might differ substantially from other Linux distributions. This document does not explain how to setup and configure an ELK server.
