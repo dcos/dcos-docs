@@ -132,12 +132,12 @@ In the following example application definition, we will focus on a simple Docke
 }
 ```
 
-In this example, we are going to use the Marathon REST API to deploy the app `basic-3`:
+In this example, we are going to use the Marathon REST API to deploy the app `basic-3` from the DC/OS CLI:
 
 ```sh
-curl -X POST <dcos-url>:8080/v2/apps -d @basic-3.json -H "Content-type: application/json"
+ curl -H -X POST <dcos-url>/service/marathon/v2/apps -d @basic-3.json -H "Content-type: application/json"
 ```
 
-When you submit the above application definition to DC/OS you should see your new service running from the **Services** tab of the DC/OS GUI.
+When you submit the above application definition to DC/OS, you should see your new service running from the **Services** tab of the DC/OS GUI.
 
 Go to `<dcos-url>:3100` to see the contents of the Docker container's root directory.
