@@ -4,13 +4,13 @@ nav_title: Application Definitions
 menu_order: 0
 ---
 
-Applications are an integral concept in Marathon. Each application typically represents a long-running service, of which there would be many instances running on multiple hosts. An application instance is called a *task*. The *application definition* describes everything needed to start and maintain the tasks. A Marathon application definition creates a DC/OS _service_.
+A Marathon application typically represents a long-running service, of which there would be many instances running on multiple hosts. An application instance is called a *task*. The *application definition* describes everything needed to start and maintain the tasks. A Marathon application definition creates a DC/OS _service_.
 
 # Hello Marathon: An Inline Shell Script
 
 ### Prerequisites
-- [A DC/OS cluster](/docs/1.9/administration/installing/)
-- [The DC/OS CLI installed](/docs/1.9/usage/cli/install/)
+- [A DC/OS cluster](/docs/1.8/administration/installing/)
+- [The DC/OS CLI installed](/docs/1.8/usage/cli/install/)
 
 Let's start with a simple example: an service that prints `Hello Marathon` to stdout and then sleeps for 5 sec, in an endless loop.
 Use the following JSON application definition to describe the application. Create a file with the name of your choice. 
@@ -37,7 +37,7 @@ When you define and launch a service, Marathon hands over execution to Mesos. Me
 
 ## Using Resources in Applications
 
-To run any non-trivial application, you typically depend on a collection of resources: files and/or archives of files. To manage resource allocation, Marathon has the concept of URIs. URIs use the Mesos fetcher to do the legwork in terms of downloading (and potentially) extracting resources.
+To run any non-trivial application, you typically depend on a collection of resources: files or archives of files. To manage resource allocation, Marathon has the concept of URIs (uniform resource identifiers). URIs use the [Mesos fetcher](http://mesos.apache.org/documentation/latest/fetcher/) to do the legwork in terms of downloading (and potentially) extracting resources.
 
 Before we dive into this topic, let's have a look at an example:
 
@@ -54,7 +54,7 @@ Before we dive into this topic, let's have a look at an example:
 }
 ```
 
-What the example above does: before executing the `cmd`, download the resource `https://example.com/app/cool-script.sh` (via Mesos) and make it available in the service instance's sandbox. Verify that it had been downloaded by visiting the DC/OS web interface and clicking on an instance of `basic-1`, then on the **Files** tab. You should find `cool-script.sh` there.
+The example above executes the `cmd`, downloads the resource `https://example.com/app/cool-script.sh` (via Mesos), and makes it available in the service instance's Mesos sandbox. You can verify that it has been downloaded by visiting the DC/OS web interface and clicking on an instance of `basic-1`, then on the **Files** tab. You should find `cool-script.sh` there.
 
 **Note:** As of Mesos v0.22 and above, the fetcher code does not make downloaded files executable by default. In the example above, `cmd` first makes the file executable.
 
@@ -85,7 +85,7 @@ The following example shows you how this looks in practice. Assume you have an a
 
 In contrast to the example `basic-1` we now have a `cmd` with the value `app/cool-script.sh`. When the zip file gets downloaded and extracted, a directory `app` according to the file name `app.zip` is created and the content of the zip file is extracted into it.
 
-You can specify more than one resource. For example, you could provide a git repository and some resources from a CDN as follows:
+You can specify more than one resource. For example, you could provide a Git repository and some resources from a CDN as follows:
 
 ```json
 {
@@ -111,7 +111,11 @@ A typical pattern in the development and deployment cycle is to have your automa
 
 With Marathon it is straightforward to run applications that use Docker images.
 
-In the following example application definition, we will focus on a simple Docker app: a Python-based web server using the image [python:3](https://registry.hub.docker.com/_/python/). Inside the container, the web server runs on port `8080` (the value of `containerPort`). `hostPort` is set to `0` so that Marathon assigns a random port on the Mesos agent, which is mapped to port 8080 inside the container.
+In the following example, you will create a simple Docker app and deploy it to DC/OS using the Marathon REST API.
+
+The Docker app is a Python-based web server that uses the image [python:3](https://registry.hub.docker.com/_/python/). Inside the container, the web server runs on port `8080` (the value of `containerPort`). `hostPort` is set to `0` so that Marathon assigns a random port on the Mesos agent, which is mapped to port 8080 inside the container.
+
+Paste the following JSON into a file named `basic-3.json`.
 
 ```json
 {
@@ -132,12 +136,12 @@ In the following example application definition, we will focus on a simple Docke
 }
 ```
 
-In this example, we are going to use the Marathon REST API to deploy the app `basic-3` from the DC/OS CLI:
+Use the Marathon REST API to deploy the app `basic-3` from the DC/OS CLI:
 
 ```sh
- curl -H "Authorization: token=$(dcos config show core.dcos_acs_token) -X POST <dcos-url>/service/marathon/v2/apps -d @basic-3.json -H "Content-type: application/json"
+ curl -H "Authorization: token=$(dcos config show core.dcos_acs_token)" -X POST <master-IP>/service/marathon/v2/apps -d @basic-3.json -H "Content-type: application/json"
 ```
 
 When you submit the above application definition to DC/OS, you should see your new service running from the **Services** tab of the DC/OS GUI.
 
-Go to `<dcos-url>:3100` to see the contents of the Docker container's root directory.
+Go to `<master-IP>:3100` to see the contents of the Docker container's root directory.
