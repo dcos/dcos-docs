@@ -1,0 +1,30 @@
+
+# Challenge
+So we scale-our app, how does that effect the way I can access it?
+
+
+
+# Steps
+  The problem is that we have public and private agent nodes. Services and apps run by default on the private ones. EXPLAIN WHY.
+
+
+  * Install marathon-lb `dcos package install marathon-lb`
+  * Check that it is running via `dcos task` and identify the public node it running on
+  * Check webapp on `publicNode:10000`
+
+  Note that we will explain the
+  EXPLAIN SINGLE POINT OF FAILURE AND WHY WE NEED ELB IN FRONT.
+
+# Outcome
+ We understood how apps can be found in the cluster.
+
+# Deep Dive
+        * Tradeoffs in service discovery
+            * When to use which method for service discovery
+            * Enumerate all MesosDNS tasks: `curl -s -f http://master.mesos:8123/v1/enumerate`
+
+            Mesos-DNS Resources
+
+    DNS in DC/OS: https://dcos.io/docs/1.8/usage/service-discovery/mesos-dns/
+    Mesos-DNS Website: http://mesosphere.github.io/mesos-dns/
+    Names VIPs: https://dcos.io/docs/1.8/usage/service-discovery/load-balancing-vips/
