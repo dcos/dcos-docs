@@ -37,7 +37,7 @@ When you define and launch a service, Marathon hands over execution to Mesos. Me
 
 ## Using Resources in Applications
 
-To run any non-trivial application, you typically depend on a collection of resources: files and/or archives of files. To manage resource allocation, Marathon has the concept of URIs. URIs use the Mesos fetcher to do the legwork in terms of downloading (and potentially) extracting resources.
+To run any non-trivial application, you typically depend on a collection of resources: files or archives of files. To manage resource allocation, Marathon has the concept of URIs. URIs use the Mesos fetcher to do the legwork in terms of downloading (and potentially) extracting resources.
 
 Before we dive into this topic, let's have a look at an example:
 
