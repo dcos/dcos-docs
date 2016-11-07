@@ -1,11 +1,20 @@
 
-# Challenge
-In the previous part we used `redis.marathon.l4lb.thisdcos.directory:6379` as address for connecting our webapp to redis. Redis could be running on any agent in the cluster (and on different ports...), who is this resolved?
+---
+post_title: DC/OS 101 - Connecting Apps/Service Discovery
+menu_order: 3
+---
+
+# Prerequisites
+We expect you to have access to a running DC/OS OSS cluster and the DC/OS CLI installed and configured.
+Furthermore, we expect you have just deployed app1 in the previous step of this tutorial.
+
+# Objective
+Our application in the previous part used`redis.marathon.l4lb.thisdcos.directory:6379` as address for connecting to redis. As redis might be running on any agent in the cluster (and furthermore on different ports), how does this address link to the actual running redis instance?
 
 # Steps
   This is called service discovery and is very important as we actually want to be ignorant (at least most of the times) about where our apps are running.
-  MesosDNS and named virtual IPs.
-  * SSH into cluster `dcos node ssh --master-proxy --leader`
+  DC/OS provides two options for serive discover: Mesos DNS and named virtual IPs.
+  * Let us shh into our cluster and see how this works: `dcos node ssh --master-proxy --leader`
   * MesosDNS
      * Automatically for every marathon app, pattern `<task>.<scheduler>.mesos` where the default scheduler for jobs is `marathon`
      * Use dig to retrieve the A-record `dig redis.marathon.mesos`
@@ -24,6 +33,6 @@ In the previous part we used `redis.marathon.l4lb.thisdcos.directory:6379` as ad
 
             Mesos-DNS Resources
 
-    DNS in DC/OS: https://dcos.io/docs/1.8/usage/service-discovery/mesos-dns/
+   [Mesos DNS in DC/OS](https://dcos.io/docs/1.8/usage/service-discovery/mesos-dns/)
     Mesos-DNS Website: http://mesosphere.github.io/mesos-dns/
     Names VIPs: https://dcos.io/docs/1.8/usage/service-discovery/load-balancing-vips/
