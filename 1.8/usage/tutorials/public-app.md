@@ -10,8 +10,9 @@ To launch an app on a public node, you must create a Marathon app definition wit
 
 **Prerequisite:**
 
-- DC/OS is [installed](/docs/1.8/administration/installing/)
-- DC/OS CLI is [installed](/docs/1.8/usage/cli/install/)
+* DC/OS is [installed](/docs/1.8/administration/installing/)
+* DC/OS CLI is [installed](/docs/1.8/usage/cli/install/)
+
 
 1.  Create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified. For example:
 

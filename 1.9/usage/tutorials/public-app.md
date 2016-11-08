@@ -8,10 +8,11 @@ DC/OS agent nodes can be designated as [public](/docs/1.9/overview/concepts/#pub
 
 To launch an app on a public node, you must create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified.
 
-**Prerequisite:**
+**Prerequisites:**
 
-- DC/OS is [installed](/docs/1.9/administration/installing/)
-- DC/OS CLI is [installed](/docs/1.9/usage/cli/install/)
+* DC/OS is [installed](/docs/1.9/administration/installing/)
+* DC/OS CLI is [installed](/docs/1.9/usage/cli/install/)
+
 
 1.  Create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified. For example:
 
