@@ -11,9 +11,16 @@ A named VIP contains 3 components:
  * Port (a port which the service is available on)
  * Service name
 
-You can assign a VIP to your application from the DC/OS web interface. The values you enter when you deploy a new service are translated into the appropriate `portDefininitions` or `portMappings` entry in your Marathon application definition.
+You can assign a VIP to your application from the DC/OS web interface. The values you enter when you deploy a new service are translated into these Marathon application definition entries:
 
-* VIPs follow the naming convention `<service-name>.marathon.l4lb.thisdcos.directory:<port>`.
+- `portDefininitions` if not using Docker containers
+- `portMappings` if using Docker containers
+
+VIPs follow this naming convention:
+ 
+```
+<service-name>.marathon.l4lb.thisdcos.directory:<port>
+```
 
 ## Prerequisite:
 
