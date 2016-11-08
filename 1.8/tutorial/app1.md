@@ -13,9 +13,9 @@ We have a working persistence layer -redis- running in our cluster now.
 Now, we deploy the first app connecting to it. Note that we deliberately choose to focus on the principles and to deploy a very simple app with no further logic than connecting to redis.
 
 # Steps
-  * Check App
+  * Check out app1
     * Let us first take a short look at the [app](https://raw.githubusercontent.com/joerg84/dcos-101/master/app1/app1.py). It is very simple and just checks whether it can reach redis and then prints the total number of keys stored in redis.
-  * Deploy App
+  * Deploy app
     * The python script has several dependencies (python version and redis-python), which we cannot assume to be present on all agent nodes. Hence we will run it in the `mesosphere/dcos-101` docker container providing all these dependencies. Feel free to take a look at the [DOCKERFILE](https://github.com/joerg84/dcos-101/blob/master/app1/DOCKERFILE) which was used to create the `mesosphere/dcos-101` image.
     * Have a look at the [app definition](https://raw.githubusercontent.com/joerg84/dcos-101/master/app1/app1.json). This app definition will download the python script and then run it inside the `mesosphere/dcos-101` docker container.
     * Add app to Marathon: `dcos marathon app add https://raw.githubusercontent.com/joerg84/dcos-101/master/app1/app1.json`

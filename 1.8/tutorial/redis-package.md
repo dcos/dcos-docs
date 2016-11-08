@@ -17,7 +17,8 @@ Redis is a key-value store which we will use for persisting data throughout the 
   * Install custom local universe
       AFTER REDIS IS MERGED TO UNIVERSE WE CAN DROP THIS STEP.
       * `dcos marathon app add https://raw.githubusercontent.com/joerg84/dcos-101/master/universe/marathon-local-universe.json`
-      * `dcos package repo add --index=0 dev-universe http://universe.marathon.mesos:8085/repo`
+      * Check that the deployment of the local-universe has finished: `dcos marathon app list`
+      * Add the local-universe as package repo: `dcos package repo add --index=0 dev-universe http://universe.marathon.mesos:8085/repo`
   * Install redis
       * Search the redis package in the (local) universe: `dcos package search redis`. This should return two entries (mr-redis and redis).
       * We are interested in the single redis container package which we install with `dcos package install redis`.

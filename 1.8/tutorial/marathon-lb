@@ -1,30 +1,36 @@
+---
+post_title: DC/OS 101 - Exposing Apps to the public
+menu_order: 3
+---
 
-# Challenge
-So we scale-our app, how does that effect the way I can access it?
+# Prerequisites
+We expect you to have access to a running DC/OS OSS cluster and the DC/OS CLI installed and configured.
+Furthermore, you have just deployed app2 in our cluster and have verified it is running.
 
+# Objective
+    Curling the app from within the cluster and viewing the raw html is a nice thing (more or less), but in reality, we want to expose the app to the public.
 
 
 # Steps
-  The problem is that we have public and private agent nodes. Services and apps run by default on the private ones. EXPLAIN WHY.
+ DC/OS has two different [node types](https://docs.mesosphere.com/1.8/overview/concepts/#dcos-agent-node): private and public agent nodes. Private agent nodes (usually) do not have ingress access from outside of the cluster, while public agent nodes allow for ingress access from outside the cluster.
 
+ Marathon will start application and services by default on private agent nodes and hence they cannout be accessed from the outside. The default pattern to expose an app to the outside is to use a load-balancer running on one of the public nodes. We will revisit the topic of load-balancing later in this tutorial, but for now, we choose marathon-lb as one potential load-balancer.
 
-  * Install marathon-lb `dcos package install marathon-lb`
-  * Check that it is running via `dcos task` and identify the public node it running on
-  * Check webapp on `publicNode:10000`
-
-  Note that we will explain the
-  EXPLAIN SINGLE POINT OF FAILURE AND WHY WE NEED ELB IN FRONT.
+   * Install marathon-lb: `dcos package install marathon-lb`
+   * Check that it is running: `dcos task` and identify the IP adress of the public agent node (Host) where marathon-lb is running on,
+    * Warning: If you started your cluster using a cloud provider, in particular, AWS `dcos task` might show you the private ip adress of the host which is not resolvable from the outside (e.g., if you see something like 10.0.4.8 it is very likely a private adress).
+    In that case, you need to retrieve the public IP your cloud provider. For example for AWS, one option would be to go to the console and then search for the instance with the private IP shown by 'dcos task'. The public IP will be listed in the instance description as `Public IP`.
+   * Connect to the webapp (from your local machine) via `<Public IP>:10000`. You should see a rendered version of the web page including the physical node and port app2 is running on.
+   * Use the web form to add a new Key:Value pair
+   * Let us verify the new key was actually added to redis
+     * Check the total number of keys using app1: `dcos task log app1`
+     * Check redis directly
+       * SSH into node where redis is running: `dcos node ssh --master-proxy --mesos-id=$(dcos task  redis --json |  jq -r '.[] | .slave_id')`
+        * NOTE: This requires you to have the key required to ssh to the machines added to your local ssh agent (e.g., via ssh-add key).
+       * As redis is running in docker container let us list all docker container `docker ps` and get the ContainerID.
+       * Connect to a bash session to the running container: `sudo docker exec -i -t CONTAINER_ID  /bin/bash`
+       * Start the redis CLI: `redis-cli`
+       * Check value is there: `get <newkey>`
 
 # Outcome
- We understood how apps can be found in the cluster.
-
-# Deep Dive
-        * Tradeoffs in service discovery
-            * When to use which method for service discovery
-            * Enumerate all MesosDNS tasks: `curl -s -f http://master.mesos:8123/v1/enumerate`
-
-            Mesos-DNS Resources
-
-    DNS in DC/OS: https://dcos.io/docs/1.8/usage/service-discovery/mesos-dns/
-    Mesos-DNS Website: http://mesosphere.github.io/mesos-dns/
-    Names VIPs: https://dcos.io/docs/1.8/usage/service-discovery/load-balancing-vips/
+ We used marathon-lb to expose app2 to the public and added a new key to redis using the web frontend.

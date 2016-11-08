@@ -1,10 +1,19 @@
 
-# Challenge
+---
+post_title: DC/OS 101 - Understanding Ressources
+menu_order: 3
+---
+
+# Prerequisites
+We expect you to have access to a running DC/OS OSS cluster and the DC/OS CLI installed and configured.
+Furthermore, you have just deployed app2 and marathon-lb in our cluster and have verified both are running.
+
+# Objective
 When scaling an app how is decided which app we should talk to?
 
 # Steps
   This is the topic of load balancing. With DC/OS you have two different in-built options: Marathon-lb and named vips.
-  We have seen both before in the context of Service discovery and when making app2 publically available.
+  We have seen both before in the context of service discovery and especially marathon-lb while making app2 publically available.
   * Scale app2 to two instances: `dcos marathon app update /dcos-101/app2 instances=2`
   * Marathon-lb
       * Check the webapp as before via http://<public-node>:10000, when doing this repeatedly you should see the request being served by different instances (see host:port pairs)
