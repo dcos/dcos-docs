@@ -1,17 +1,21 @@
 ---
-post_title: DC/OS 101 - First Steps
-menu_order: 3
+post_title: First Steps
+nav_title: First Steps
+menu_order: 1
 ---
 
 Welcome to part 1 of the DC/OS 101 Tutorial.
 
 # Prerequisites
-We expect you to have acess to a running DC/OS OSS cluster. Check out https://dcos.io/install/ for setup instructions for various cloud providers, on-premise, or vagrant setups.
-If you are unsure which way to choose, then we would recommend using the AWS templates.
+In order to get started with this tutorial, you should have acess to a running DC/OS OSS cluster with at least a single master node and 3 agent nodes (of which one is a public agent node). If you don't have these requirements set up, please follow the [setup instructions](https://dcos.io/install/) for various cloud providers, on-premise, or vagrant setups.
+If you are unsure which option to choose, then we would recommend using the [AWS templates](https://downloads.dcos.io/dcos/stable/aws.html?_ga=1.208466258.1790439002.1478539864).
+
+Note, that for this tutorial a setup with a single master node is suffcient, but for running production workloads you should have multiple master nodes.
 
 # Objective
 We have access to our cluster and already taken a first look at the UI.
 But UI is not the only way to access the cluster and hence we want to install the CLI and start exploring our cluster using the CLI.
+By the end of this section we will have installed the DC/OS CLI, and used it to explore our cluster.
 
 # Steps
   * Install the DC/OS CLI
@@ -20,18 +24,18 @@ But UI is not the only way to access the cluster and hence we want to install th
     * You can also add/invite friends and co-workers to your cluster, see [user management documentation](https://dcos.io/docs/1.8/administration/id-and-access-mgt/user-management/) for details
 
   * Explore the cluster:
-      * Check the running services with `dcos service`. Unless you already installed additional services there should be two services running on your cluster: marathon (basically the DC/OS init system) and metronom (basically the DC/OS cron scheduler).
+      * Check the running services with `dcos service`. Unless you already installed additional services there should be two services running on your cluster: marathon (basically the DC/OS init system) and metronome (basically the DC/OS cron scheduler).
       * Check the connected nodes with `dcos node`. You should be able to see your connected agents nodes (i.e., not the master nodes) in your cluster.
       * Explore the logs of the leading mesos master with `dcos node log --leader`. Mesos is basically the kernel of DC/OS and hence we will explore Mesos logs at multiple times during this tutorial.
       * To explore even more options of the CLI, check `dcos help`. There are also help options of the individual commands available e.g., `dcos node --help`. Alternatively, check the [CLI documentation](https://dcos.io/docs/1.8/usage/cli/).
 
 # Outcome
- We have successfully connected using the DC/OS CLI to our cluster and started exploring some of the options offered.
- In the consequitive sessions, we make further use of the CLI.
+Congratulations! We have successfully connected to your cluster using the DC/OS CLI, and started exploring some of the CLI commands.
+In the consequitive sessions, we make further use of the CLI.
 
 # Deep Dive
 We have already encountered several DC/OS components (including Mesos, Marathon, or Metronome) while experimenting with the DC/OS CLI.
-But what other components are there and how do they form DC/OS?
+But what other components make up DC/OS?
 
 ## DC/OS components
 DC/OS includes a number of components, many of which you can safely ignore for now and hence we only list the most relevant components here.

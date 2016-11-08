@@ -1,16 +1,17 @@
 ---
-post_title: DC/OS 101 - First Steps
+post_title: Deploying first Application
+nav_title: Deploying first Application
 menu_order: 3
 ---
 
 
 # Prerequisites
-We expect you to have access to a running DC/OS OSS cluster and the DC/OS CLI installed and configured.
-Furthermore, we expect you have installed redis in the previous step of this tutorial.
+In order to get started with this tutorial you should to have access to a running DC/OS OSS cluster and the DC/OS CLI installed and configured.
+Furthermore, you should have installed redis in the previous step of this tutorial. If you don't have these requirements set up, please follow the instructions in sections 1 and 2 [here](/docs/1.8/tutorial/cli/).
 
 # Objective
-We have a working persistence layer -redis- running in our cluster now.
-Now, we deploy the first app connecting to it. Note that we deliberately choose to focus on the principles and to deploy a very simple app with no further logic than connecting to redis.
+We now have a working persistence layer -redis- running in our cluster.
+In this section we deploy the first app connecting to redis. Note that we deliberately choose to focus on the principles and to deploy a very simple app with no further logic than connecting to redis.
 
 # Steps
   * Check out app1

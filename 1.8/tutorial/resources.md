@@ -1,24 +1,24 @@
-
 ---
-post_title: DC/OS 101 - Understanding Ressources
-menu_order: 3
+post_title: Understanding Ressources
+nav_title: Understanding Ressources
+menu_order: 7
 ---
 
 # Prerequisites
-We expect you to have access to a running DC/OS OSS cluster and the DC/OS CLI installed and configured.
+In order to get started with this tutorial, you should have access to a running DC/OS OSS cluster and the DC/OS CLI installed and configured.
 Furthermore, you have just deployed app2 in our cluster and have verified it is running.
 
 # Objective
-When installing all these apps, we can see that the overall resource utilization in the UI goes up.
-But what does increased resource utilization mean happen, how are resource limits enforced. How can I debug issues arising in the context of resource utilization?
+In this section we will learn how to monitor and understand our resource utilization, how resource limits are enforced, and how to debug resource utilization issues.
 
 # Steps
-Resource Mangement and resource isolation between task is one of the core challenges of an operating system to manage resources.
+Resource Mangement and resource isolation between tasks are core challenges for an operating system, which needs to manage resources.
 
-  * Deploy App
-    * Let us have a second look at the defintion of [app2](https://github.com/joerg84/dcos-101/blob/master/app2/app2.go).
-  ```
-{
+* Deploy App
+  * Let us have a second look at the defintion of [app2](https://github.com/joerg84/dcos-101/blob/master/app2/app2.go).
+
+  ~~~
+  {
   "id": "/dcos-101/app2",
   "cmd": "chmod u+x app2 && ./app2",
   "args": null,
@@ -30,10 +30,11 @@ Resource Mangement and resource isolation between task is one of the core challe
   "disk": 0,
   "gpus": 0,
   ...
-  ```
-  Note this specifies the allocated resources and hence the upper limit of resources which can be used by the task. This is not necessarly the same as acutally used resources which is usually less.
+  ~~~
 
-  When needed more resources for our app, we can scale in two dimensions: horizontally and vertically.
+  Note this specifies the allocated resources and hence the upper limit of resources which can be used by the task. This is not necessary the same as used resources, which is usually less.
+
+  When we need more resources for our app, we can scale in two dimensions: horizontally and vertically.
    * Scale horizontally by increasing the instance count
       * Two ways (scale an entire app group by a factor or directly set number of instances for an app)
         * Scale dcos-101 app group  (This is useful if you want to scale multiple apps in a single group)
@@ -55,14 +56,12 @@ Resource Mangement and resource isolation between task is one of the core challe
           * `dcos marathon app update /dcos-101/app2 instances=100` (potentially more if you have a large cluster)
           * Use `dcos marathon app list` to check that the `scale` deployment is stuck
           * `dcos marathon deployment list`
-          * Check marathon logs: TODO Discuss the easiest way to get marathon logs. `dcos service log marathon` does not work...
-          * The problem here is that there no matching resources (there might be for example resources left for the public-slace role, but not for *.
+          * The problem here is that there no matching resources (there might be for example resources left for the public-slace role, but not for the default role.
           * Solution: add nodes are scale app back to level at which resources are available `dcos marathon app update /dcos-101/app2 --force instances=1`. Note you have to use the `--force` flag here as the previous deployment is ongoing.
       * Too few resources on single node. Each app is started on a single node, hence resources must fit onto a single node.
           * `dcos marathon app update /dcos-101/app2 cpus=100`
           * Use `dcos marathon app list` to check that the `restart` deployment is stuck
           * `dcos marathon deployment list`
-          * Check marathon logs: TODO Discuss the easiest way to get marathon logs
           * The problem here is that there no resource offer being large enough to match the offer.
           * Solution: Privision larger nodes or scale app down to level where it fits onto the free resources on a single node `dcos marathon app update /dcos-101/app2 --force cpus=1`. Note that we have to use the force flag again.
    * Debugging resource isolation
@@ -81,4 +80,4 @@ Resource Mangement and resource isolation between task is one of the core challe
 
 
 # Outcome
- We explored the difference between allocated and used resources. Furthermore, we learned how to debug issues related to resources.
+Congratulations! You've now learned how to deploy apps to DC/OS, network those apps, expose them to the outside of the cluster with a load-balancer, scale them, and debug potential resource issues! You're practically a pro!
