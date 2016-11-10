@@ -7,6 +7,7 @@ menu_order: 20
 This quick reference provides a summary of the available options.
 
 To help explain, we'll use this imaginary application:
+
 * The Service is in the following hierarchy:
  * Group: `outergroup` > Group: `subgroup` > Service Name: `myapp`
 * Port: `555`
