@@ -11,12 +11,12 @@ The tutorial is designed to provide users and applications developers an overvie
 The DC/OS 101 tutorial includes the following sessions:
 
 * [First Steps][1]
-* [Installing the first package][2]
-* [Deploy first ppp][3]
+* [Installing Package][2]
+* [Deploying first Application][3]
 * [Connecting Apps/Service Discovery][4]
-* [Deploy second App][5]
-* [Exposing apps to the outside][6]
-* [Resources/Debugging][7]
+* [Deploying native Apps][5]
+* [Exposing Apps Publically][6]
+* [Understanding Ressources][7]
 * [Load-balancing][8]
 
 [1]: /docs/1.8/tutorial/cli/

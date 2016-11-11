@@ -1,6 +1,6 @@
 ---
-post_title: Loadbalancing
-nav_title: Loadbalancing
+post_title: Load-balancing
+nav_title: Load-balancing
 menu_order: 8
 ---
 
