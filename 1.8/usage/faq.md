@@ -34,10 +34,6 @@ A comprehensive overview of a few common service discovery implementations is av
 
 The current implementation of DC/OS only supports a Single Availability Zone/Failure Zone per Cluster and one single region per cluster.
 
-## How to add Mesos attributes to nodes in order to use Marathon constraints?
-
-In DC/OS, add the line `MESOS_ATTRIBUTES=<key>:<value>` to the file `/var/lib/dcos/mesos-slave-common` (it may need to be created) for each attribute you'd like to add. More information can be found [via the Mesos doc][3].
-
 ## How to add Mesos roles for a node in order to dedicate this node for some apps?
 
 Please review this link on [the Mesosphere Knowledge Base][4].
@@ -68,6 +64,5 @@ We recommend using CoreOS, matched with its correct versions and sensible defaul
 
 [1]: /docs/1.8/usage/service-discovery/load-balancing-vips/
 [2]: /docs/1.8/usage/service-discovery/
-[3]: http://mesos.apache.org/documentation/latest/attributes-resources/
 [4]: https://support.mesosphere.com/hc/en-us/articles/206474745-How-to-reserve-resources-for-certain-frameworks-in-Mesos-cluster-
 [5]: /docs/1.8/administration/installing/custom/convert-agent-type/

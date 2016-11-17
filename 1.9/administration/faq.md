@@ -16,6 +16,10 @@ DC/OS runs its own ZooKeeper supervised by Exhibitor and systemd, but users are 
 ## Q. Is it necessary to maintain a bootstrap node after the cluster is created?
 If you specify an Exhibitor storage backend type other than `exhibitor_storage_backend: static` in your cluster configuration [file](/docs/1.9/administration/installing/custom/configuration-parameters/), you must maintain the external storage for the lifetime of your cluster to facilitate leader elections. If your cluster is mission critical, you should harden your external storage by using S3 or running the bootstrap ZooKeeper as a quorum. Interruptions of service from the external storage can be tolerated, but permanent loss of state can lead to unexpected conditions.
 
+## How to add Mesos attributes to nodes in order to use Marathon constraints?
+
+In DC/OS, add the line `MESOS_ATTRIBUTES=<key>:<value>` to the file `/var/lib/dcos/mesos-slave-common` (it may need to be created) for each attribute you'd like to add. More information can be found [via the Mesos doc](http://mesos.apache.org/documentation/latest/attributes-resources/).
+
 ## Q. How do I gracefully shut down an agent?
 To gracefully kill an agent node's Mesos process and allow systemd to restart it, use the following command. _Note: If Auto Scaling Groups are in use, the node will be replaced automatically_:
 
