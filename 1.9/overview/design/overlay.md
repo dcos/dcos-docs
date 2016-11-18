@@ -10,7 +10,7 @@ menu_order: 5
 
 From a networking standpoint, in order to provide an end-user experience similar to that provided by a virtual machine environment it’s important to provide each container with its own IP address and network namespace. Providing containers with an isolated network stack ensures logical network isolation as well as network performance isolation between containers. Further, an ip-per-container allows the user/developer to use the traditional network operational tools (traceroute, tcpdump, wireshark) and processes they are familiar with, and helps their productivity in debugging network connectivity/performance issues. From an operational standpoint it becomes much easier to identify container specific traffic, and hence simplifies enforcement of network performance and security policies for containers.
 
-A default IP-per-container solution for DC/OS needs to be agnostic of the network on which DC/OS runs. Thus, in order to achieve IP-per-container we need to use an overlay network. Overlays make the container network topology independent of the underlying host network. Further, overlays provide complete segregation of container traffic from host traffic making policy enforcement on container traffic much simpler and independent of the host traffic. The challenge with implementing overlays is the cost of encapsulating and decapsulating container traffic, when containers send and receive traffic. To minimize the impact of these encap and decap operations on container network throughput, it is imperative that the overlay implements the encap/decap operations as part of the packet processing pipeline within the kernel. 
+A default IP-per-container solution for DC/OS needs to be agnostic of the network on which DC/OS runs. Thus, in order to achieve IP-per-container we need to use an virtual network. Overlays make the container network topology independent of the underlying host network. Further, overlays provide complete segregation of container traffic from host traffic making policy enforcement on container traffic much simpler and independent of the host traffic. The challenge with implementing overlays is the cost of encapsulating and decapsulating container traffic, when containers send and receive traffic. To minimize the impact of these encap and decap operations on container network throughput, it is imperative that the overlay implements the encap/decap operations as part of the packet processing pipeline within the kernel. 
 
 To achieve an IP-per-container solution for DC/OS, using overlays, we therefore need to choose an overlay technology that is actively supported by the Linux kernel. The most common overlay supported by the linux kernel is the VxLAN.
 
@@ -85,8 +85,8 @@ We plan to achieve all the above requirements for the DC/OS overlay by having tw
 
 The master module will be run as part of the Mesos master and will have the following responsibilities:
 1. It will be responsible for allocating the subnet to each of the agents. We will describe in more detail how the master module will use the replicated log to checkpoint this information for recovery during failover to a new Master.
-2. It will listen for the agent overlay modules to register and recover their allocated subnet. The agent overlay module will also use this endpoint to learn about the overlay subnets allocated to it (in case of multiple overlay networks), the subnets allocated to each of the Mesos and Docker bridges within an overlay and the VTEP IP and MAC address allocated to it.
-3. It exposes an HTTP endpoint “overlay-master/state” that presents the state of all the overlay networks in DC/OS. The response of this endpoint is backed by the following protobuf: https://github.com/dcos/mesos-overlay-modules/blob/master/include/overlay/overlay.proto#L86
+2. It will listen for the agent overlay modules to register and recover their allocated subnet. The agent overlay module will also use this endpoint to learn about the overlay subnets allocated to it (in case of multiple virtual networks), the subnets allocated to each of the Mesos and Docker bridges within an overlay and the VTEP IP and MAC address allocated to it.
+3. It exposes an HTTP endpoint “overlay-master/state” that presents the state of all the virtual networks in DC/OS. The response of this endpoint is backed by the following protobuf: https://github.com/dcos/mesos-overlay-modules/blob/master/include/overlay/overlay.proto#L86
 
 #### Agent mesos overlay module:
 
@@ -109,16 +109,16 @@ The master overlay module will be responsible for allocating the subnet, the VTE
 
 Once DC/OS module retrieves the subnet information from the master DC/OS module, it performs the following operations to allow _MesosContainerizer_ and _DockerContainerizer_ to launch containers on the overlay: 
 
-For _MesosContainerizer_ the DC/OS module can generate a CNI config at a specified location. The CNI config will have the bridge information and IPAM information for the network/cni isolator to configure containers on the **m-<overlay network name>** bridge.  
+For _MesosContainerizer_ the DC/OS module can generate a CNI config at a specified location. The CNI config will have the bridge information and IPAM information for the network/cni isolator to configure containers on the **m-<virtual network name>** bridge.  
 
-For _DockerContainerizer_ the DC/OS module, after retrieving the subnet, will create a “docker network” with the canonical name **“d-<overlay network name>”**. It will do so using the following docker command:
+For _DockerContainerizer_ the DC/OS module, after retrieving the subnet, will create a “docker network” with the canonical name **“d-<virtual network name>”**. It will do so using the following docker command:
 ''''docker network create \
 --driver=bridge \
 --subnet=<CIDR> \
---opt=com.docker.network.bridge.name=d-<overlay network name>
+--opt=com.docker.network.bridge.name=d-<virtual network name>
 --opt=com.docker.network.bridge.enable_ip_masquerade=false
 --opt=com.docker.network.driver.mtu=<overlay MTU>
-<overlay network name>''''
+<virtual network name>''''
 
 **NOTE:** The assumption for _DockerContainerizer_ to work with the DC/OS overlay is that the host is running Docker v1.11 or greater.
 **NOTE:** The default <overlay MTU> = 1420 bytes.

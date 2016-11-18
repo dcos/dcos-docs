@@ -75,9 +75,9 @@ An infrastructure network is a physical or virtual network provided by the infra
 
 #### <a name="dcos-virtual-network"></a>Virtual Network
 
-A DC/OS virtual network is specifically an overlay network internal to the cluster that connects DC/OS components and containerized tasks running on DC/OS.
+A DC/OS virtual network is specifically an virtual network internal to the cluster that connects DC/OS components and containerized tasks running on DC/OS.
 
-- The overlay network provided by DC/OS is VXLAN managed by the Virtual Network Service (Navstar).
+- The virtual network provided by DC/OS is VXLAN managed by the Virtual Network Service (Navstar).
 - Virtual networks must be configured by an administrator before being used by tasks.
 - Tasks on DC/OS may opt-in to being placed on a specific virtual network and given a container-specific IP.
 - Virtual networks allow logical subdivision of the tasks running on DC/OS.

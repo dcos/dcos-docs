@@ -123,7 +123,7 @@ All examples will refer to this sample application:
 * Port: `555`
  * Port Name: `myport`
  * Load-balanced
-* Running on overlay network
+* Running on virtual network
 
 `myapp` is a web server listening on port `555`. We'll be using `curl`
 as our client application. Each successful example will result in the HTML
