@@ -1,0 +1,545 @@
+swagger: '2.0'
+info:
+  version: 2.0.0
+  title: DC/OS Certificate Authority API
+schemes:
+  - https
+basePath: /ca/api/v2/
+tags: 
+  - name: info
+    description: Get certificate
+  - name: certificates
+    description: List certificates
+  - name: sign
+    description: Sign a CSR
+  - name: newkey
+    description: Create a CSR
+paths:
+  /info:
+    post:
+      summary: Get certificate and basic signing information
+      description: >-
+        This endpoint enables a client to obtain a certificate from the DC/OS Certificate Authority and some basic signing information. It does not require any DC/OS permissions.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: CA Info Query JSON
+          in: body
+          description: >-
+            Specifies which signing profile data should be provided.
+          required: false
+          schema:
+            $ref: '#/definitions/APICAInfoQuery'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/APICAInfoResponse'
+        '400':
+          description: >-
+            Bad request, supplied request arguments were invalid (e.g., input JSON could not be deserialized).
+          schema:
+            $ref: '#/definitions/APIErrorResponse'
+        '404':
+          description: There are no active signers, endpoint is disabled
+      tags:
+        - info
+  /sign:
+    post:
+      summary: Sign a Certificate Signing Request (CSR)
+      description: >-
+        This endpoint can be used to sign a Certificate Signing Request (CSR) provided by a client using the Certificate Authority's certificate. Requires either the `dcos:superuser` or the `dcos:adminrouter:ops:ca:ro` permission.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: CSR signing request
+          in: body
+          description: >-
+            Provides Certificate Signing Request (CSR) along with overrides and signing profile specification
+          required: true
+          schema:
+            $ref: '#/definitions/APISignCSRQuery'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/APISignCSRResponse'
+        '400':
+          description: >-
+            Bad request, supplied request arguments were invalid (e.g., input JSON could not be deserialized).
+          schema:
+            $ref: '#/definitions/APIErrorResponse'
+        '404':
+          description: There are no active signers, endpoint is disabled
+      tags:
+        - sign
+  /newkey:
+    post:
+      summary: Create a Certificate Signing Request (CSR)
+      description: >-
+        This endpoint can be used to create a Certificate Signing Request (CSR) based on JSON-encoded data. Requires either the `dcos:superuser` or the `dcos:adminrouter:ops:ca:ro` permission.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: JSON specification of CSR
+          in: body
+          description: >-
+            JSON-encoded CSR specification.
+          required: true
+          schema:
+            $ref: '#/definitions/APINewKeyQuery'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/APINewKeyResponse'
+        '400':
+          description: >-
+            Bad request; supplied request arguments were invalid (e.g., input JSON could not be deserialized).
+          schema:
+            $ref: '#/definitions/APIErrorResponse'
+        '404':
+          description: There are no active signers, endpoint is disabled
+      tags:
+        - newkey
+  /certificates:
+    post:
+      summary: Get a list of all certificates issued by CA
+      description: >-
+        This endpoint provides a way to list certificates issued by the Certificate Authority along with their attributes. All valid certificates are listed by default, but filtering is also possible. Requires either the `dcos:superuser` or the `dcos:adminrouter:ops:ca:ro` permission.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Certificates Query JSON
+          in: body
+          description: >-
+            Specification of the certificates that should be fetched from the database. By
+            default all valid certificates are fetched.
+          required: true
+          schema:
+            $ref: '#/definitions/APICertificatesQuery'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/APICertificatesResponse'
+        '400':
+          description: >-
+            Bad request, supplied arguments were invalid (i.e., malformed AKI/serial)
+          schema:
+            $ref: '#/definitions/APIErrorResponse'
+        '500':
+          description: >-
+            Internal error occured while processing the request (i.e., database error)
+          schema:
+            $ref: '#/definitions/APIErrorResponse'
+      tags:
+        - certificates
+definitions:
+  StringDigits:
+    type: string
+    default: ''
+    pattern: '^(?:\d+|)$'
+    description: 'Integer, as a string, i.e. "21421341313133214"'
+  HexEncodedBytes:
+    type: string
+    default: ''
+    pattern: '^(?:(?:[0-9A-F]{2}:)*(?:[0-9A-F]{2})|)$'
+    description: 'Uppercase hex-encoded bytes, i.e. A1:B2:C3:D4:E5:F6.'
+  ExpiryPeriod:
+    description: Contains a time duration in the form understood by Go's `time` package. Maximum unit of time that can be used here is the hour.
+    type: string
+  KeyUsages:
+    type: string
+    description: key usages
+    enum:
+      - signing
+      - digital signature
+      - content committment
+      - key encipherment
+      - key agreement
+      - data encipherment
+      - cert sign
+      - crl sign
+      - encipher only
+      - decipher only
+      - any
+      - server auth
+      - client auth
+      - code signing
+      - email protection
+      - s/mime
+      - ipsec end system
+      - ipsec tunnel
+      - ipsec user
+      - timestamping
+      - ocsp signing
+      - microsoft sgc
+      - netscape sgc
+  ProfileName:
+    type: string
+    description: In case when `profile` field was not provided, or a nonexistent profile was specified, the defalt signing profile information will be returned.
+  SubjectInfo:
+    type: object
+    description: a set of Subject Name attributes
+    properties:
+      C:
+        type: string
+        description: Common name
+      ST:
+        type: string
+        description: State
+      L:
+        type: string
+        description: Locality
+      O:
+        type: string
+        description: Organization
+      OU:
+        type: string
+        description: Organization unit
+  APIMessage:
+    type: object
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+  Digest:
+    type: object
+    required:
+      - md5
+      - sha-1
+    properties:
+      sha-1:
+        type: string
+      md5:
+        type: string
+  CertificateDescription:
+    allOf:
+      - type: object
+        required:
+          - status
+          - revoked_at
+          - reason
+          - ca_label
+        properties:
+          reason:
+            enum:
+              - unspecified
+              - keycompromise
+              - cacompromise
+              - affiliationchanged
+              - superseded
+              - cessationofoperation
+              - certificatehold
+              - removefromcrl
+              - privilegewithdrawn
+              - aacompromise
+            description: 'reason for revocation, only applicable if status != good'
+          status:
+            enum:
+              - good
+              - revoked
+              - unknown
+            description: 'status of the certificate, whether it is valid or revoked'
+          revoked_at:
+            type: string
+            format: dateTime
+          ca_label:
+            type: string
+      - $ref: '#/definitions/CertificateInfo'
+  CertificateInfo:
+    type: object
+    required:
+      - not_before
+      - not_after
+      - sigalg
+      - authority_key_id
+      - subject_key_id
+      - pem
+    properties:
+      pem:
+        type: string
+      subject_key_id:
+        $ref: '#/definitions/HexEncodedBytes'
+      authority_key_id:
+        $ref: '#/definitions/HexEncodedBytes'
+      sigalg:
+        type: string
+        description: Signature algorithm
+      not_before:
+        type: string
+        format: dateTime
+      not_after:
+        type: string
+        format: dateTime
+      sans:
+        description: An array of Subject Alternative Names
+        type: array
+        items:
+          type: string
+      issuer:
+        $ref: '#/definitions/PKIXName'
+      subject:
+        $ref: '#/definitions/PKIXName'
+  PKIXName:
+    type: object
+    description: >-
+      A PKIX name, please check certinfo/certinfo.go@dcos-ca, `go doc pkix.Name`
+      and `go doc pkix.AttributeTypeAndValue`.
+    properties:
+      common_name:
+        type: string
+      serial_number:
+        $ref: '#/definitions/StringDigits'
+      country:
+        type: string
+      organization:
+        type: string
+      organizational_unit:
+        type: string
+      locality:
+        type: string
+      province:
+        type: string
+      street_address:
+        type: string
+      postal_code:
+        type: string
+      Names:
+        type: array
+        items:
+          type: string
+  APINewKeyQuery:
+    type: object
+    required:
+      - hosts
+      - names
+    properties:
+      hosts:
+        type: array
+        description: List of hostnames that should be used as Subject Alternative Names (SANs)
+        items:
+          type: string
+      names:
+        type: array
+        items:
+          $ref: '#/definitions/SubjectInfo'
+      CN:
+        type: string
+        description: Common Name (CN) used for Certificate Signing Request (CSR)
+      key:
+        type: object
+        properties:
+          algo:
+            type: string
+            enum:
+              - rsa
+              - ecdsa
+          size:
+            type: integer
+            description: The permitted values depend on the type of key. RSA keys 2048 | 4096 | 8192. ECDSA keys 256 | 384 | 521.
+  APINewKeyResponse:
+    required:
+      - success
+      - errors
+      - result
+      - messages
+    properties:
+      result:
+        type: object
+        required:
+          - certificate_request
+          - private_key
+          - sums
+        properties:
+          certificate_request:
+            type: string
+            description: PEM encoded CSR
+          private_key:
+            type: string
+            description: PEM encoded private key for the generated CSR
+          sums:
+            type: object
+            description: digests of the generated CSR
+            required:
+              - certificate_request
+            properties:
+              certificate_request:
+                $ref: '#/definitions/Digest'
+      success:
+        type: boolean
+        enum:
+          - true
+      errors:
+        type: array
+        maxItems: 0
+        items:
+          $ref: '#/definitions/APIMessage'
+      messages:
+        type: array
+        maxItems: 0
+        items:
+          $ref: '#/definitions/APIMessage'
+  APISignCSRQuery:
+    type: object
+    required:
+      - certificate_request
+    properties:
+      certificate_request:
+        type: string
+        description: PEM-encoded Certificate Signing Request (CSR)
+      profile:
+        $ref: "#/definitions/ProfileName"
+      hosts:
+        type: array
+        items:
+          type: string
+          description: a list of SAN names which should override ones encoded in the CSR
+      subject:
+        type: array
+        items:
+          $ref: '#/definitions/SubjectInfo'
+  APISignCSRResponse:
+    required:
+      - success
+      - errors
+      - result
+      - messages
+    properties:
+      result:
+        type: object
+        required:
+          - certificate
+        properties:
+          certificate:
+            type: string
+            description: PEM-encoded signed certificate
+      success:
+        type: boolean
+        enum:
+          - true
+      errors:
+        type: array
+        maxItems: 0
+        items:
+          $ref: '#/definitions/APIMessage'
+      messages:
+        type: array
+        maxItems: 0
+        items:
+          $ref: '#/definitions/APIMessage'
+  APICAInfoQuery:
+    type: object
+    properties:
+      profile:
+        $ref: "#/definitions/ProfileName"
+  APICAInfoResponse:
+    required:
+      - success
+      - errors
+      - result
+      - messages
+    properties:
+      result:
+        required:
+          - certificate
+          - usages
+          - expiry
+        properties:
+          certificate:
+            type: string
+            description: PEM-encoded Certificate Authority certificate
+          usages:
+            $ref: "#/definitions/KeyUsages"
+          expiry:
+            $ref: "#/definitions/ExpiryPeriod"
+      success:
+        type: boolean
+        enum:
+          - true
+      errors:
+        type: array
+        maxItems: 0
+        items:
+          $ref: '#/definitions/APIMessage'
+      messages:
+        type: array
+        maxItems: 0
+        items:
+          $ref: '#/definitions/APIMessage'
+  APICertificatesQuery:
+    type: object
+    properties:
+      serial:
+        $ref: '#/definitions/StringDigits'
+      authority_key_id:
+        $ref: '#/definitions/HexEncodedBytes'
+      expired_ok:
+        type: boolean
+        default: false
+        description: 'If set to true, CA will return also expired certs in the reply.'
+    description: >-
+      All fields are optional. If omitted, the default values will be
+      assumed. If more than one field is specified then only the certificates
+      that fullfil all conditions will be selected (logical AND). Empty or
+      missing string fields are equivalent to '*'/all filtering.
+  APICertificatesResponse:
+    required:
+      - success
+      - errors
+      - result
+      - messages
+    properties:
+      result:
+        type: array
+        items:
+          $ref: '#/definitions/CertificateDescription'
+      success:
+        type: boolean
+        enum:
+          - true
+      errors:
+        type: array
+        maxItems: 0
+        items:
+          $ref: '#/definitions/APIMessage'
+      messages:
+        type: array
+        maxItems: 0
+        items:
+          $ref: '#/definitions/APIMessage'
+  APIErrorResponse:
+    required:
+      - success
+      - errors
+      - result
+      - messages
+    properties:
+      result:
+        type: object
+        properties: {}
+        additionalProperties: false
+      success:
+        type: boolean
+        enum:
+          - false
+      errors:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/definitions/APIMessage'
+      messages:
+        type: array
+        maxItems: 0
+        items:
+          $ref: '#/definitions/APIMessage'

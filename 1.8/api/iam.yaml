@@ -1,0 +1,1766 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: 'Identity and Access Management API'
+schemes:
+  - http
+  - https
+basePath: '/acs/api/v1'
+tags:
+  - name: login
+    description: Login
+  - name: jwks
+    description: JSON Web Key Set
+  - name: oidc
+    description: OpenID Connect
+  - name: saml
+    description: SAML
+  - name: ldap
+    description: LDAP configuration and users
+  - name: users
+    description: Users
+  - name: groups
+    description: Groups of users
+  - name: permissions
+    description: Permissions
+paths:
+  /auth/login:
+    post:
+      summary: Obtain an authentication token.
+      description: >
+        This endpoint accepts either a user ID and password (for a user account) 
+        or a service account ID and a service login token. If the credentials are 
+        validated, it returns an authentication token. 
+      tags:
+        - login
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: PasswordLoginObject
+          description: uid & password or uid & service login token.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/PasswordLoginObject"
+      responses:
+        200:
+          description: >
+            Authentication successful. The response body contains a JSON
+            object providing the authentication token.
+          schema:
+            $ref: "#/definitions/Token"
+          headers:
+            Set-Cookie:
+              description: >
+                A cookie containing the auth token (implementation detail for
+                browser support, should not be of interest to general API
+                consumers).
+              type: string
+        401:
+          description: Authentication failed.
+
+    get:
+      summary: Authenticate using an external identity provider.
+      description: >
+        Authenticate using an external OpenID Connect identity provider, as 
+        specified via query parameter.
+      tags:
+        - login
+      parameters:
+        - name: oidc-provider
+          description: OIDC provider ID
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: Redirect to the identity provider.
+  /auth/jwks:
+    get:
+      summary: Get the JSON Web Key Set.
+      description: >
+        This endpoint provides the IAM's JSON Web Key Set (JWKS), exposing public 
+        key details required for out-of-band authentication. The public key can 
+        be used to verify auth tokens signed by the IAM's private key (JSON Web 
+        Tokens of type RS256). For interpretation of the data provided by the 
+        JWKS endpoint see https://tools.ietf.org/html/rfc7517 and 
+        https://tools.ietf.org/html/rfc7518.
+      tags:
+          - jwks
+      responses:
+        200:
+          description: The response body contains a JSON Web Key Set document.
+          schema:
+            $ref: "#/definitions/jwks"
+
+  /auth/oidc/callback:
+    get:
+      summary: OpenID Connect callback URL.
+      description: >
+        After successfully logging in to an OpenID Connect identity provider,
+        the end user is redirected back to the IAM via this callback
+        URL. API consumers are not required to explicitly interact with this
+        endpoint. This URL usually needs to be handed over to an OpenID
+        Connect provider (often called "redirect" or "callback" URL).
+      tags:
+        - oidc
+      responses:
+        302:
+          description: OIDC authentication flow successful.
+        401:
+          description: Problem in authentication flow.
+
+  /auth/oidc/providers:
+    get:
+      summary: List of OIDC providers.
+      description: >
+        Get a list of the configured OIDC providers. The response
+        contains a JSON object, with each key being an OIDC provider ID and
+        each value being the corresponding provider description string.
+        This endpoint does not expose sensitive provider configuration details.
+      tags:
+        - oidc
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success.
+
+  /auth/oidc/providers/{provider-id}:
+    get:
+      summary: Get the configuration of a provider.
+      description: Get the configuration of the specified OIDC provider.
+      tags:
+        - oidc
+      produces:
+        - application/json
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: The ID of the OIDC provider that you want the configuration of.
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/OIDCProviderConfig"
+    put:
+      summary: Configure a new OIDC provider.
+      description: >
+        Add a new OIDC provider, assigning it the provider ID supplied in the 
+        URL and the configuration parameters specified in the JSON of the request.
+      tags:
+        - oidc
+      consumes:
+        - application/json
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: The ID of the provider to create.
+          type: string
+        - name:  Provider configuration object
+          description: OIDC provider configuration JSON object
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/OIDCProviderConfig"
+      responses:
+        201:
+          description: Provider created.
+        409:
+          description: Provider already exists.
+    patch:
+      summary: Update OIDC provider configuration
+      description: Update the configuration of an existing OIDC provider.
+      tags:
+        - oidc
+      consumes:
+        - application/json
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: The ID of the provider to modify.
+          type: string
+        - name: Provider configuration object
+          description: OIDC Provider configuration JSON object
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/OIDCProviderConfig"
+      responses:
+        204:
+          description: Update applied.
+        400:
+          description: Various errors (e.g., provider not yet configured).
+    delete:
+      summary: Delete provider.
+      description: >
+        Delete the specified OIDC provider. This disables authentication with 
+        the provider.
+      tags:
+        - oidc
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: The ID of the OIDC provider to delete.
+          type: string
+      responses:
+        204:
+          description: Success.
+
+  /auth/saml/providers:
+    get:
+      summary: Get a list of the configured SAML 2.0 providers.
+      description: >
+        Get a list of the configured SAML 2.0 providers. The response contains 
+        a JSON object. Each key is a SAML provider ID and its value is the SAML 
+        provider's description. This endpoint does not expose sensitive provider 
+        configuration details.
+      tags:
+        - saml
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success.
+
+  /auth/saml/providers/{provider-id}:
+    get:
+      summary: Get the configuration of a SAML provider.
+      description: Get the configuration of the specified SAML provider.
+      tags:
+        - saml
+      produces:
+        - application/json
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: >
+            The ID of the SAML provider whose configuration should 
+            be retrieved.
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/SAMLProviderConfig"
+    put:
+      summary: Configure a new SAML provider.
+      description: >
+        Add a new SAML provider, assigning it the provider ID supplied in the URL 
+        and the configuration parameters specified in the JSON of the request.
+      tags:
+        - saml
+      consumes:
+        - application/json
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: The ID of the provider to create.
+          type: string
+        - name:  Provider config object
+          description: Provider config JSON object
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/SAMLProviderConfig"
+      responses:
+        201:
+          description: Provider created.
+        409:
+          description: Provider already exists.
+    patch:
+      summary: Update SAML provider configuration.
+      description: Update the configuration of an existing SAML provider.
+      tags:
+        - saml
+      consumes:
+        - application/json
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: >
+            The ID of the SAML provider whose configuration should be modified.
+          type: string
+        - name: Provider config object
+          description: Provider config JSON object
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/SAMLProviderConfig"
+      responses:
+        204:
+          description: Update applied.
+        400:
+          description: Various errors (e.g., provider not yet configured).
+    delete:
+      summary: Delete provider.
+      description: Delete provider (disables authentication with that provider).
+      tags:
+        - saml
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: The ID of the SAML provider to delete.
+          type: string
+      responses:
+        204:
+          description: Success.
+
+  /auth/saml/providers/{provider-id}/sp-metadata:
+    get:
+      summary: Get SP metadata (XML).
+      description: >
+        The IAM acts as SAML service provider (SP). This endpoint provides the 
+        SP metadata as an XML document. Certain identity providers (IdPs) may 
+        want to directly consume this document and can use this resource to do so. 
+      tags:
+        - saml
+      produces:
+        - application/samlmetadata+xml
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: The ID of the SAML provider to retrieve the metadata for.
+          type: string
+      responses:
+        200:
+          description: >
+            The response body contains the metadata in UTF-8 encoding, setting 
+            the Content-Type to `application/samlmetadata+xml`.
+
+  /auth/saml/providers/{provider-id}/acs-callback-url:
+    get:
+      summary: Get the IAM SP authentication callback URL.
+      description: >
+        The IAM acts as SAML service provider (SP). A SAML identity provider
+        (IdP) usually requires the Assertion Consumer Service (ACS) callback URL 
+        of the SP. This is where the IdP makes the end user submit the 
+        authentication response. 
+      tags:
+        - saml
+      produces:
+        - application/json
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: >
+            The ID of the SAML provider to retrieve the ACS callback URL for.
+          type: string
+      responses:
+        200:
+          description: >
+            The response body contains a JSON object declaring the callback URL
+          schema:
+            $ref: "#/definitions/SAMLACSCallbackUrlObject"
+
+  /auth/saml/providers/{provider-id}/acs-callback:
+    post:
+      summary: The ACS callback endpoint of the SP.
+      description: >
+        The IAM acts as SAML service provider (SP). As part of the
+        authentication flow, a SAML identity provider (IdP) makes the end user 
+        submit an authentication response to this endpoint.
+      tags:
+        - saml
+      parameters:
+        - name: provider-id
+          in: path
+          required: true
+          description: >
+            The ID of the provider the authentication response is meant for.
+          type: string
+      responses:
+        302:
+          description: SAML authentication flow successful.
+        401:
+          description: Problem in authentication flow.
+
+  /users:
+    get:
+      summary: List all user or service accounts.
+      description: >
+        By default, returns all `User` objects. Passing the `services` parameter 
+        returns all service accounts. 
+      tags:
+        - users
+      parameters:
+        - name: type
+          in: query
+          description: >
+            If set to `services`, list only service accounts. If unset,
+            default to only listing user accounts.
+          type: string
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success.
+          schema:
+            type: object
+            properties:
+              array:
+                type: array
+                items:
+                  $ref: "#/definitions/User"
+
+  /users/{uid}:
+    get:
+      summary: Get a user object.
+      description: Get a specific `User` object.
+      tags:
+        - users
+      produces:
+        - application/json
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: The ID of the user object to retrieve.
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/User"
+    put:
+      summary: Create user.
+      description: >
+        Create user, assigning it the user ID in the URL and the properties 
+        passed in the body. You must pass one of the following: password, public 
+        key, or secret.
+      tags:
+        - users
+      consumes:
+        - application/json
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: The ID of the user to create.
+          type: string
+        - name: User creation object
+          description: Password/description.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/UserCreate"
+      responses:
+        201:
+          description: User created.
+        400:
+          description: >
+            Bad request. For example, if you did not pass in a password, public 
+            key, or secret.
+        409:
+          description: User already exists.
+    patch:
+      summary: Update user account.
+      description: >
+        Update either the description or the password of an existing user account.
+      tags:
+        - users
+      consumes:
+        - application/json
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: The ID of the user account to modify.
+          type: string
+        - name: User update object
+          description: Password/description.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/UserUpdate"
+      responses:
+        204:
+          description: Update applied.
+        501:
+          description: Not implemented for service accounts.
+
+    delete:
+      summary: Delete account.
+      description: Delete account.
+      tags:
+        - users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: The ID of the user account to delete.
+          type: string
+      responses:
+        204:
+          description: Success.
+
+  /users/{uid}/groups:
+    get:
+      summary: Retrieve groups the user is member of.
+      description: Retrieve groups the user is member of.
+      tags:
+        - users
+      produces:
+        - application/json
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: The ID of the user.
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/UserGroups"
+
+  /users/{uid}/permissions:
+    get:
+      summary: Retrieve permissions an account has.
+      description: >
+        Retrieve permissions this account has, and distinguish direct
+        permissions from those that are obtained through group membership.
+      produces:
+        - application/json
+      tags:
+        - users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: The ID of the user.
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/UserPermissions"
+
+  /groups:
+    get:
+      summary: Retrieve all group objects.
+      description: Retrieve array of `Group` objects.
+      tags:
+        - groups
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success.
+          schema:
+            type: object
+            properties:
+              array:
+                type: array
+                items:
+                  $ref: "#/definitions/Group"
+
+  /groups/{gid}:
+    get:
+      summary: Get single group object.
+      description: Get specific `Group` object.
+      tags:
+        - groups
+      produces:
+        - application/json
+      parameters:
+        - name: gid
+          in: path
+          required: true
+          description: The ID of the group to retrieve.
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/Group"
+    put:
+      summary: Create a group.
+      description: Create a group.
+      tags:
+        - groups
+      consumes:
+        - application/json
+      parameters:
+        - name: gid
+          in: path
+          required: true
+          description: The ID of the group.
+          type: string
+        - name: Group creation object
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/GroupCreate"
+      responses:
+        201:
+          description: Group created.
+        409:
+          description: Group exists.
+    patch:
+      summary: Update group.
+      description: Update existing group (description).
+      tags:
+        - groups
+      consumes:
+        - application/json
+      parameters:
+        - name: gid
+          in: path
+          required: true
+          description: The ID of the group to modify.
+          type: string
+        - name: Group update object
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/GroupUpdate"
+      responses:
+        204:
+          description: Update applied.
+    delete:
+      summary: Delete group.
+      description: Delete group.
+      tags:
+        - groups
+      parameters:
+        - name: gid
+          in: path
+          required: true
+          description: The ID of the group to delete.
+          type: string
+      responses:
+        204:
+          description: Success
+
+  /groups/{gid}/users:
+    get:
+      summary: Retrieve members of a group.
+      description: >
+        Retrieve users that are member of this group. Allows to query
+        service accounts, defaults to list only user accounts.
+      tags:
+        - groups
+      produces:
+        - application/json
+      parameters:
+        - name: gid
+          in: path
+          required: true
+          description: The group ID.
+          type: string
+        - name: type
+          in: query
+          description: >
+            If set to `services`, list only service accounts. If unset,
+            default to only listing user accounts members of a group.
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/GroupUsers"
+
+  /groups/{gid}/permissions:
+    get:
+      summary: Retrieve group permissions.
+      description: Retrieve permissions of this group.
+      tags:
+        - groups
+      produces:
+        - application/json
+      parameters:
+        - name: gid
+          in: path
+          required: true
+          description: The group ID.
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/GroupPermissions"
+
+  /groups/{gid}/users/{uid}:
+    delete:
+      summary: Delete user account from group.
+      description: Delete user account from group.
+      tags:
+        - groups
+      parameters:
+        - name: gid
+          in: path
+          required: true
+          description: The ID of the group to delete from.
+          type: string
+        - name: uid
+          in: path
+          required: true
+          description: The ID of the user account.
+          type: string
+      responses:
+        204:
+          description: Success.
+    put:
+      summary: Add account to group.
+      description: Add account to group.
+      tags:
+        - groups
+      parameters:
+        - name: gid
+          in: path
+          required: true
+          description: The ID of the group to add the user account to.
+          type: string
+        - name: uid
+          description: The ID of the account to add.
+          in: path
+          required: true
+          type: string
+      responses:
+        204:
+          description: Success
+        409:
+          description: account is already part of the group.
+
+  /acls:
+    get:
+      summary: Retrieve all ACL objects.
+      description: Get array of `ACL` objects.
+      tags:
+        - permissions
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              array:
+                type: array
+                items:
+                  $ref: "#/definitions/ACL"
+
+  /acls/{rid}:
+    get:
+      summary: Retrieve the permission for a specific resource
+      description: >
+        Retrieve the permission that corresponds to the specified resource.
+      tags:
+        - permissions
+      produces:
+        - application/json
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: The ID of the resource to retrieve the permission of.
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/ACL"
+    put:
+      summary: Create a new permission for a specific resource
+      description: >
+        Create a new permission for the specified resource, with actions 
+        specified in the body (if any). 
+      tags:
+        - permissions
+      consumes:
+        - application/json
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: >
+            The ID of the resource that the permission should be created to 
+            control access to.
+          type: string
+        - name: ACL
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/ACLCreate"
+      responses:
+        201:
+          description: Permission created.
+        409:
+          description: Already exists, i.e., the resource already has a permission set.
+    patch:
+      summary: Update a permission
+      description: Update a specified permission. 
+      tags:
+        - permissions
+      consumes:
+        - application/json
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: the name of the permission
+          type: string
+        - name: Permission update object
+          description: Updated permission.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/ACLUpdate"
+      responses:
+        204:
+          description: Success.
+    delete:
+      summary: Delete a permission
+      description: Delete the permission of the resource.
+      tags:
+        - permissions
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: The name of the permission to be deleted
+          type: string
+      responses:
+        204:
+          description: Success.
+
+  /acls/{rid}/users/{uid}:
+    get:
+      summary: Get the list of actions the user has for the permission
+      description: >
+        Get the list of actions the user is allowed to perform with the specified 
+        permission. Note: not all permissions have actions.
+      tags:
+        - permissions
+      produces:
+        - application/json
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: uid
+          in: path
+          required: true
+          description: account ID
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            type: object
+            properties:
+              array:
+                type: array
+                items:
+                  $ref: "#/definitions/Action"
+    delete:
+      summary: Delete all actions a user has for a permission
+      description: >
+        Delete all actions that have been given to a user for a specified 
+        permission. For example, if a user was allowed the `read` and `update` 
+        action for the `dcos:service:marathon:marathon:admin:leader`, this would 
+        delete both.
+      tags:
+        - permissions
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: uid
+          in: path
+          required: true
+          description: account ID.
+          type: string
+      responses:
+        204:
+          description: Success.
+
+  /acls/{rid}/users/{uid}/{action}:
+    get:
+      summary: Query whether action is allowed or not.
+      description: >
+        Query whether the user has a specified action for 
+        the permission.
+      tags:
+        - permissions
+      produces:
+        - application/json
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: uid
+          in: path
+          required: true
+          description: account ID
+          type: string
+        - name: action
+          in: path
+          required: true
+          description: action name
+          type: string
+      responses:
+        200:
+          description: Boolean answer in JSON response body.
+          schema:
+            $ref: "#/definitions/ActionAllowed"
+    put:
+      summary: Permit single action for given account and resource.
+      description: Permit single action for given account and resource.
+      tags:
+        - permissions
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: uid
+          in: path
+          required: true
+          description: account ID
+          type: string
+        - name: action
+          in: path
+          required: true
+          description: action name
+          type: string
+      responses:
+        204:
+          description: Success.
+    delete:
+      summary: Forbid single action for given account and resource.
+      description: Forbid single action for given account and resource.
+      tags:
+        - permissions
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: uid
+          in: path
+          required: true
+          description: account ID
+          type: string
+        - name: action
+          in: path
+          required: true
+          description: action name
+          type: string
+      responses:
+        204:
+          description: Success.
+
+  /acls/{rid}/groups/{gid}:
+    get:
+      summary: Get allowed actions for given resource and group.
+      description: Get allowed actions for given resource and group.
+      tags:
+        - permissions
+      produces:
+        - application/json
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: gid
+          in: path
+          required: true
+          description: group ID
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            type: object
+            properties:
+              array:
+                type: array
+                items:
+                  $ref: "#/definitions/Action"
+    delete:
+      summary: Forbid all actions of given group to given resource.
+      description: Forbid all actions of given group to given resource.
+      tags:
+        - permissions
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: gid
+          in: path
+          required: true
+          description: group ID
+          type: string
+      responses:
+        204:
+          description: Success.
+
+  /acls/{rid}/groups/{gid}/{action}:
+    get:
+      summary: Query whether action is allowed or not.
+      description: Query whether action is allowed or not.
+      tags:
+        - permissions
+      produces:
+        - application/json
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: gid
+          in: path
+          required: true
+          description: group ID
+          type: string
+        - name: action
+          in: path
+          required: true
+          description: action name
+          type: string
+      responses:
+        200:
+          description: Boolean answer in JSON response body.
+          schema:
+            $ref: "#/definitions/ActionAllowed"
+    put:
+      summary: Permit single action for given resource and group.
+      description: Permit single action for given resource and group.
+      tags:
+        - permissions
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: gid
+          in: path
+          required: true
+          description: group ID.
+          type: string
+        - name: action
+          in: path
+          required: true
+          description: action name
+          type: string
+      responses:
+        204:
+          description: Success.
+    delete:
+      summary: Forbid single action for given resource and group.
+      description: Forbid single action for given resource and group.
+      tags:
+        - permissions
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+        - name: gid
+          in: path
+          required: true
+          description: group ID
+          type: string
+        - name: action
+          in: path
+          required: true
+          description: action name
+          type: string
+      responses:
+        204:
+          description: Success.
+
+  /acls/{rid}/permissions:
+    get:
+      summary: Retrieve all users and groups with the permission
+      description: >
+        Retrieve all of the users and groups that have been given the 
+        specified permission, as well as the actions they are allowed 
+        to perform.
+      tags:
+        - permissions
+      produces:
+        - application/json
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          description: resource ID
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/ACLPermissions"
+
+  /ldap/importuser:
+    post:
+      summary: Import an LDAP user.
+      description: >
+        Attempt to import a user from the configured directory (LDAP) backend.
+      tags:
+        - ldap
+      consumes:
+        - application/json
+      parameters:
+        - name: LDAP username
+          description: >
+            A JSON object specifying the username (read: "login" or "user ID") 
+            of the user that should be imported. That string is equivalent to 
+            the `uid` the user is supposed to log in with after successful 
+            import. The exact meaning of this string depends on the configured 
+            LDAP authentication method.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/LDAPImportUserObject"
+      responses:
+        201:
+          description: Success.
+        400:
+          description: >
+            Various errors. If no directory backend has been configured yet,
+            the custom error code `ERR_LDAP_CONFIG_NOT_AVAILABLE` is set in
+            the response. If there was no LDAP search result or an error
+            occured during the search process, one of the custom error codes
+            `ERR_LDAP_IMPORT_USER_NOT_FOUND` and
+            `ERR_LDAP_IMPORT_SEARCH_FAILED` is set in the response, and a
+            description is provided to report the problem specifics.
+
+  /ldap/importgroup:
+    post:
+      summary: Import an LDAP group.
+      description: >
+        Attempt to import a group of users from the configured directory (LDAP)
+        back-end. See docs/ldap.md for details on group import.
+      tags:
+        - ldap
+      consumes:
+        - application/json
+      parameters:
+        - name: LDAP groupname
+          description: >
+            A JSON object specifying the name of the group to be imported.
+            The meaning of the name depends on the group search settings.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/LDAPImportGroupObject"
+      responses:
+        201:
+          description: Success.
+        400:
+          description: >
+            Various errors. If no LDAP directory has been configured yet,
+            the custom error code `ERR_LDAP_CONFIG_NOT_AVAILABLE` is set in
+            the response. If there was no LDAP search result or an error
+            occured during the search process, one of the custom error codes
+            `ERR_LDAP_IMPORT_GROUP_NOT_FOUND` and
+            `ERR_LDAP_IMPORT_SEARCH_FAILED` is set in the response, and a
+            description is provided to report the problem specifics.
+
+  /ldap/config:
+    get:
+      summary: Retrieve current LDAP configuration.
+      description: Retrieve current directory (LDAP) backend configuration.
+      produces:
+        - application/json
+      tags:
+        - ldap
+      responses:
+        200:
+          description: >
+            The response body contains a JSON object providing the current
+            configuration.
+          schema:
+            $ref: "#/definitions/LDAPConfiguration"
+        400:
+          description: >
+            Various errors. If no config has yet been stored, the custom error
+            code `ERR_LDAP_CONFIG_NOT_AVAILABLE` is set in the response.
+    put:
+      summary: Set new LDAP configuration.
+      description: >
+        Set new directory (LDAP) backend configuration. Replace current
+        configuration, if existing.
+      tags:
+        - ldap
+      consumes:
+        - application/json
+      parameters:
+        - name: LDAP configuration
+          description: JSON object containing the LDAP configuration details.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/LDAPConfiguration"
+      responses:
+        200:
+          description: >
+            Configuration has been persisted. Basic validation tests passed,
+            but the directory service was not contacted. You're encouraged to
+            now perform a basic feature check against the directory backend
+            with the newly set configuration, by using the the config test
+            endpoint.
+
+        400:
+          description: >
+            Various errors. If the configuration object itself is invalid, the
+            custom error code `ERR_LDAP_CONFIG_INVALID` is set in the
+            response, and a description sheds light onto the problem
+            specifics.
+    delete:
+      summary: Delete current LDAP configuration.
+      description: >
+         Delete current directory (LDAP) backend configuration. This
+         deactivates LDAP authentication.
+      tags:
+        - ldap
+      responses:
+        204:
+          description: Configuration deleted.
+        400:
+          description: >
+            Various errors. If no config has yet been stored, the custom error 
+            code `ERR_LDAP_CONFIG_NOT_AVAILABLE` is set in the response.
+
+  /ldap/config/test:
+    post:
+      summary: Test connection to the LDAP back-end.
+      description: >
+          Perform basic feature tests. Verify that the current directory
+          (LDAP) configuration parameters allow for a successful connection to 
+          the directory backend. For instance, this endpoint simulates the 
+          procedure for authentication via LDAP, but provides more useful
+          feedback upon failure than the actual login endpoint.
+      tags:
+        - ldap
+      consumes:
+        - application/json
+      parameters:
+        - name: Test user credentials
+          description: >
+            JSON object containing `uid` and password of an LDAP user. For the
+            most expressive test result, choose credentials different from the
+            lookup credentials. The `uid` is the string the user is supposed
+            to log in with after successful LDAP backend configuration.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/LDAPTestCredentials"
+      responses:
+        200:
+          description: >
+            Directory backend was reached and all feature tests passed.
+          schema:
+            $ref: "#/definitions/LDAPTestResultObject"
+        502:
+          description: >
+            Either there was a connection error or one of the feature tests
+            failed. To distinguish this response from a proxy-generated 502, a
+            JSON object is included in the response. It contains a message in
+            its `description` property, describing the problem in more detail.
+          schema:
+            $ref: "#/definitions/LDAPTestResultObject"
+
+definitions:
+
+  PasswordLoginObject:
+    type: object
+    required:
+      - uid
+    properties:
+      uid:
+        type: string
+      exp:
+        type: integer
+      password:
+        type: string
+      token:
+        type: string
+    additionalProperties: false
+
+  Token:
+    type: object
+    required:
+      - token
+    properties:
+      token:
+        type: string
+    additionalProperties: false
+
+  Action:
+    type: object
+    required:
+      - name
+      - url
+    properties:
+      name:
+        type: string
+      url:
+        type: string
+    additionalProperties: false
+
+  User:
+    type: object
+    required:
+      - uid
+      - url
+      - description
+      - is_remote
+    properties:
+      uid:
+        type: string
+      url:
+        type: string
+      description:
+        type: string
+      is_remote:
+        type: boolean
+      is_service:
+        type: boolean
+      public_key:
+        type: string
+    additionalProperties: false
+
+  UserCreate:
+    type: object
+    properties:
+      description:
+        type: string
+      password:
+        type: string
+      public_key:
+        type: string
+      secret:
+        type: string
+    additionalProperties: false
+
+  UserUpdate:
+    type: object
+    properties:
+      description:
+        type: string
+      password:
+        type: string
+    additionalProperties: false
+
+  UserGroups:
+    type: object
+    properties:
+      array:
+        type: array
+        items:
+          type: object
+          required:
+            - group
+            - membershipurl
+          properties:
+            membershipurl:
+              type: string
+            group:
+              $ref: "#/definitions/Group"
+          additionalProperties: false
+  
+  jwks:
+    type: object
+    properties:
+      keys:
+        type: array
+        items:
+          type: object
+          properties:
+            kid:
+              type: string
+            e:
+              type: string
+            alg:
+              type: string
+            kty:
+              type: string
+            use:
+              type: string
+            n:
+              type: string
+    additionalProperties: false
+
+  UserPermissions:
+    type: object
+    properties:
+      direct:
+        type: array
+        items:
+          type: object
+          required:
+            - rid
+            - description
+            - aclurl
+            - actions
+          properties:
+            rid:
+              type: string
+            description:
+              type: string
+            aclurl:
+              type: string
+            actions:
+              type: array
+              items:
+                $ref: "#/definitions/Action"
+          additionalProperties: false
+      groups:
+        type: array
+        items:
+          type: object
+          required:
+            - rid
+            - gid
+            - description
+            - aclurl
+            - membershipurl
+            - actions
+          properties:
+            rid:
+              type: string
+            gid:
+              type: string
+            description:
+              type: string
+            aclurl:
+              type: string
+            membershipurl:
+              type: string
+            actions:
+              type: array
+              items:
+                $ref: "#/definitions/Action"
+          additionalProperties: false
+    additionalProperties: false
+
+  Group:
+    type: object
+    required:
+      - gid
+      - url
+      - description
+    properties:
+      gid:
+        type: string
+      url:
+        type: string
+      description:
+        type: string
+    additionalProperties: false
+
+  GroupCreate:
+    type: object
+    required:
+      - description
+    properties:
+      description:
+        type: string
+    additionalProperties: false
+
+  GroupUpdate:
+    type: object
+    required:
+      - description
+    properties:
+      description:
+        type: string
+    additionalProperties: false
+
+  GroupUsers:
+    type: object
+    properties:
+      array:
+        type: array
+        items:
+          type: object
+          required:
+            - membershipurl
+            - user
+          properties:
+            membershipurl:
+              type: string
+            user:
+              $ref: "#/definitions/User"
+    additionalProperties: false
+
+  GroupPermissions:
+    type: object
+    properties:
+      array:
+        type: array
+        items:
+          type: object
+          required:
+            - rid
+            - description
+            - aclurl
+            - actions
+          properties:
+            rid:
+              type: string
+            description:
+              type: string
+            aclurl:
+              type: string
+            actions:
+              type: array
+              items:
+                $ref: "#/definitions/Action"
+    additionalProperties: false
+
+  ACL:
+    type: object
+    required:
+      - rid
+      - url
+      - description
+    properties:
+      rid:
+        type: string
+      url:
+        type: string
+      description:
+        type: string
+    additionalProperties: false
+
+  ACLCreate:
+    type: object
+    required:
+      - description
+    properties:
+      description:
+        type: string
+    additionalProperties: false
+
+  ACLUpdate:
+    type: object
+    required:
+      - description
+    properties:
+      description:
+        type: string
+    additionalProperties: false
+
+  ACLPermissions:
+    type: object
+    properties:
+      groups:
+        type: array
+        items:
+          type: object
+          required:
+            - gid
+            - groupurl
+            - actions
+          properties:
+            gid:
+              type: string
+            groupurl:
+              type: string
+            actions:
+              type: array
+              items:
+                $ref: "#/definitions/Action"
+      users:
+        type: array
+        items:
+          type: object
+          required:
+            - uid
+            - userurl
+            - actions
+          properties:
+            uid:
+              type: string
+            userurl:
+              type: string
+            actions:
+              type: array
+              items:
+                $ref: "#/definitions/Action"
+    additionalProperties: false
+
+  ActionAllowed:
+    type: object
+    required:
+      - allowed
+    properties:
+      allowed:
+        type: boolean
+    additionalProperties: false
+
+  OIDCProviderConfig:
+    type: object
+    required:
+      - description
+      - issuer
+      - base_url
+      - client_secret
+      - client_id
+    properties:
+      description:
+        type: string
+      issuer:
+        type: string
+      base_url:
+        type: string
+      client_secret:
+        type: string
+      client_id:
+        type: string
+    additionalProperties: false
+
+  SAMLProviderConfig:
+    type: object
+    required:
+      - description
+      - idp_metadata
+      - sp_base_url
+    properties:
+      description:
+        type: string
+      idp_metadata:
+        type: string
+      sp_base_url:
+        type: string
+    additionalProperties: false
+
+  SAMLACSCallbackUrlObject:
+    type: object
+    required:
+      - acs-callback-url
+    properties:
+      acs-callback-url:
+        type: string
+    additionalProperties: false
+
+  LDAPUserSearchConfig:
+    type: object
+    required:
+      - search-base
+      - search-filter-template
+    properties:
+      search-base:
+        type: string
+      search-filter-template:
+        type: string
+    additionalProperties: false
+
+  LDAPGroupSearchConfig:
+    type: object
+    required:
+      - search-base
+      - search-filter-template
+    properties:
+      search-base:
+        type: string
+      search-filter-template:
+        type: string
+    additionalProperties: false
+
+  LDAPConfiguration:
+    type: object
+    required:
+      - host
+      - port
+      - enforce-starttls
+      - use-ldaps
+      - lookup-dn
+      - lookup-password
+    properties:
+        host:
+          type: string
+        dntemplate:
+          type: string
+        port:
+          type: integer
+        enforce-starttls:
+          type: boolean
+        use-ldaps:
+          type: boolean
+        lookup-dn:
+          type: string
+        lookup-password:
+          type: string
+        user-search:
+          $ref: "#/definitions/LDAPUserSearchConfig"
+        group-search:
+          $ref: "#/definitions/LDAPGroupSearchConfig"
+    additionalProperties: false
+
+  LDAPImportUserObject:
+    type: object
+    required:
+      - username
+    properties:
+      username:
+        type: string
+    additionalProperties: false
+
+  LDAPImportGroupObject:
+    type: object
+    required:
+      - groupname
+    properties:
+      groupname:
+        type: string
+    additionalProperties: false
+
+  LDAPTestCredentials:
+    type: object
+    required:
+      - uid
+      - password
+    properties:
+      uid:
+        type: string
+      password:
+        type: string
+    additionalProperties: false
+
+  LDAPTestResultObject:
+    type: object
+    required:
+      - code
+      - description
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+    additionalProperties: false
