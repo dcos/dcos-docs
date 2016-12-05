@@ -1,6 +1,6 @@
 ---
 post_title: DC/OS 101
-menu_order: 2
+menu_order: 1
 ---
 
 This DC/OS 101 tutorial will guide you through the steps necessary to get started using DC/OS.

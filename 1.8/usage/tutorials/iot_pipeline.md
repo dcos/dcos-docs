@@ -1,6 +1,6 @@
 ---
 post_title: Building an IoT Pipeline
-menu_order: 0
+menu_order: 2
 ---
 
 
