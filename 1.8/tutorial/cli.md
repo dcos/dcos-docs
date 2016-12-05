@@ -39,7 +39,7 @@ But what other components make up DC/OS?
 
 ## DC/OS components
 DC/OS includes a number of components, many of which you can safely ignore for now and hence we only list the most relevant components here.
-A descrition of all components can be found [here](https://dcos.io/docs/1.8/overview/components/).
+A descrition of all components can be found in the [documentation](https://dcos.io/docs/1.8/overview/components/).
 * Marathon starts and monitors DC/OS applications and services.
 * Mesos is the kernel of DC/OS and responsible for low-level task maintenance.
 * Mesos DNS provides service discovery within the cluster.
@@ -48,7 +48,7 @@ A descrition of all components can be found [here](https://dcos.io/docs/1.8/over
 * Universe is the package repository from where you can install applications (e.g., Apache Spark or Apache Cassandra) on your cluster.
 
 ## DC/OS Terminology
-Again we will focus on the most important terminology here. More can be found [here](https://dcos.io/docs/1.8/overview/architecture/).
+Again we will focus on the most important terminology here. More details can be found in the [documentation](https://dcos.io/docs/1.8/overview/architecture/).
 * Master: aggregates resource offers from all agent nodes and provides them to registered frameworks.
 * Agent: runs a discrete Mesos task on behalf of a framework. The synonym of agent node is worker or slave node.
 * Scheduler: the scheduler component of a service, for example, the Marathon scheduler.

@@ -1,6 +1,6 @@
 ---
 post_title: Install First Package
-nav_title: Installing Package
+nav_title: Installing First Package
 menu_order: 2
 ---
 

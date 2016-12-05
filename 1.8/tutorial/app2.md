@@ -1,12 +1,12 @@
 ---
-post_title: Deploying native Apps
-nav_title: Native Apps
+post_title: Deploying native Applications
+nav_title: Native Applications
 menu_order: 5
 ---
 
 # Prerequisites
-In order to get started with this tutorial, you should have access to a running DC/OS OSS cluster and the DC/OS CLI installed and configured.
-Furthermore, we expect you have just deployed app1.
+* A [running DC/OS cluster](/docs/1.8/tutorial/cli/) with [the DC/OS CLI installed](link to installation instructions].
+* [app1](/docs/1.8/tutorial/app1/) deployed and running in your cluster.
 
 # Objective
 We already deployed an app which is running internally in our cluster (i.e., it is not targeted to users directly). Next, will deploy an app which provides a web UI to users.

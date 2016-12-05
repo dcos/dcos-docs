@@ -51,7 +51,7 @@ In this section, we will learn about DC/OS service discovery by exploring the di
     ~~~
 
     The full name is then generated using the following schema:
-    *vip-name.scheduler.l4lb.thisdcos.directory:vip-port*. In the example above, you can access the Redis service from within the cluster at the following address: redis.marathon.l4lb.thisdcos.directory:6379
+    *vip-name.scheduler.l4lb.thisdcos.directory:vip-port*. In the example above, you can access the Redis service from within the cluster at the following address: redis.marathon.l4lb.thisdcos.directory:6379.
 
 # Outcome
 You know how to use service discovery to connect to your application from within your DC/OS cluster.

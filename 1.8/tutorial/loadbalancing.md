@@ -1,12 +1,12 @@
 ---
 post_title: Load-balancing
 nav_title: Load-balancing
-menu_order: 8
+menu_order: 7
 ---
 
 # Prerequisites
-In order to get started with this tutorial, you should have access to a running DC/OS OSS cluster and the DC/OS CLI installed and configured.
-Furthermore, you have just deployed app2 and marathon-lb in our cluster and have verified both are running.
+* A [running DC/OS cluster](/docs/1.8/tutorial/cli/) with [the DC/OS CLI installed](link to installation instructions].
+* [app2 and marathon-lb](/docs/1.8/tutorial/app2/) deployed and running in your cluster.
 
 # Objective
 In the last session, we will scale our application to multiple instances, and learn how internal and external services chose which instance to use once our application has been scaled.
