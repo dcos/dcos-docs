@@ -4,27 +4,27 @@ nav_title: Azure
 menu_order: 1
 ---
 
-This document explains how to install DC/OS 1.8 through the Azure Marketplace.
+This document explains how to install DC/OS 1.8 through the Azure Marketplace. You can also install directly by using the [Azure Resource Manager templates](https://downloads.dcos.io/dcos/stable/azure.html) provided.
 
-You can alternatively skip the Azure Marketplace and install directly using the [Azure Resource Manager templates](https://downloads.dcos.io/dcos/stable/azure.html) provided.
-
-TIP: To get support on Azure Marketplace-related questions, join the Azure Marketplace [Slack community](http://join.marketplace.azure.com).
+To get support on Azure Marketplace-related questions, join the Azure Marketplace [Slack community](http://join.marketplace.azure.com).
 
 # System requirements
 
 ## Hardware
 
-To [use](/docs/1.8/usage/) all of the services offered in DC/OS, you should choose at least five Mesos Agents using `Standard_D2` [Virtual Machines](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/).
+- A standard D2 Microsoft Azure [virtual machine](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/)
+- A minimum of five Mesos agents
 
-Note that selecting fewer VMs will likely cause certain resource-intensive services such as distributed datastores not to work properly, ranging from installation issues to operational limitations.
+Selecting fewer VMs will likely cause certain resource-intensive services such as distributed datastores not to work properly, ranging from installation issues to operational limitations.
 
 ## Software
 
-You will need an active [Azure subscription](https://azure.microsoft.com/en-us/pricing/purchase-options/) to install DC/OS via the Azure Marketplace.
-
-Also, to access nodes in the DC/OS cluster you will need `ssh` installed and configured.
+- An active [Azure subscription](https://azure.microsoft.com/en-us/pricing/purchase-options/)
+- SSH installed and configured. This is required for [accessing nodes](/docs/1.8/administration/access-node/) in the DC/OS cluster.
 
 # Install DC/OS
+
+**Important:** [REX-ray](https://github.com/codedellemc/rexray/issues/528) does not support Azure.
 
 ## Step 1: Deploying the template
 
