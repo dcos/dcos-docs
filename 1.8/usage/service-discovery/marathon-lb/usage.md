@@ -64,7 +64,7 @@ menu_order: 000
 4.  From the DC/OS CLI, install Marathon-LB with your custom options file specified. 
 
     ```bash
-    $ dcos package install --options=<filename>.json marathon
+    $ dcos package install --options=<filename>.json marathon-lb
     ```
 
 ## Next steps
