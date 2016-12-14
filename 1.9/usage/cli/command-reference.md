@@ -373,6 +373,8 @@ menu_order: 5
         dcos node --info
         dcos node [--json]
         dcos node log [--follow --lines=N --leader --master --mesos-id=<mesos-id> --slave=<slave-id>]
+                      [--component=<component-name> --filter=<filter>...]
+        dcos node list-components [--leader --mesos-id=<mesos-id> --json]
         dcos node ssh [--option SSHOPT=VAL ...]
                       [--config-file=<path>]
                       [--user=<user>]
@@ -382,8 +384,7 @@ menu_order: 5
         dcos node diagnostics create (<nodes>)...
         dcos node diagnostics delete <bundle>
         dcos node diagnostics download <bundle> [--location=<location>]
-        dcos node diagnostics (--list | --status | --cancel)
-                           [--json]
+        dcos node diagnostics (--list | --status | --cancel) [--json]
     
     Commands:
         log
@@ -393,7 +394,7 @@ menu_order: 5
             cluster.
         diagnostics create
             Create a diagnostics bundle. Nodes can be: ip address, hostname, mesos ID
-            or key words "all", "masters", "agents".
+            or keywords "all", "masters", "agents" (notice the quotes around the keywords).
         diagnostics download
             Download a diagnostics bundle.
         diagnostics delete
@@ -440,6 +441,13 @@ menu_order: 5
             If not set, default to present working directory.
         --version
             Print version information.
+        --list-components
+            Print a list of available DC/OS components on specified node.
+        --component=<component-name>
+            Show DC/OS component logs.
+        --filter=<filter>
+            Filter logs by field and value. Filter must be a string separated by colon.
+            For example: --filter _PID:0 --filter _UID:1
     
     Positional Arguments:
         <command>
