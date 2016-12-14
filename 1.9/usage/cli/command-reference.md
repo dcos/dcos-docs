@@ -42,7 +42,7 @@ menu_order: 5
         dcos auth login
             [--provider=<provider_id>] [--username=<username>]
             [--password=<password> | --password-file=<password_file>
-            | --password-env=<password_env> | --service-key=<key_path>]
+            | --password-env=<password_env> | --private-key=<key_path>]
         dcos auth logout
     
     Commands:
@@ -66,7 +66,7 @@ menu_order: 5
             Specify path to a file that contains the password.
         --provider=<provider_id>
             Specify authentication provider to use for login.
-        --service-key=<key_path>
+        --private-key=<key_path>
             Specify path to file that contains the private key.
         --username=<username>
             Specify username for login.
