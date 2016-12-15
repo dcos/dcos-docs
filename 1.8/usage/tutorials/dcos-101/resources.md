@@ -1,6 +1,6 @@
 ---
-post_title: Understanding Ressources
-nav_title: Understanding Ressources
+post_title: Understanding Resources
+nav_title: Understanding Resources
 menu_order: 8
 ---
 

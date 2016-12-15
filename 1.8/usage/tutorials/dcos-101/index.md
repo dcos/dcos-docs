@@ -15,8 +15,8 @@ The DC/OS 101 tutorial includes the following sessions:
 * [Deploying first Application][3]
 * [Connecting Apps/Service Discovery][4]
 * [Deploying native Apps][5]
-* [Exposing Apps Publically][6]
-* [Understanding Ressources][7]
+* [Exposing Apps Publicly][6]
+* [Understanding Resources][7]
 * [Load-balancing][8]
 
 [1]: /docs/1.8/tutorial/cli/
