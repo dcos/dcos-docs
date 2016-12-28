@@ -3,6 +3,11 @@ post_title: Using Virtual IP Addresses
 post_excerpt: ""
 layout: docs.jade
 ---
+
+[Ports management][1] in Marathon is a powerful and complex feature: many configurations are possible depending on the type of container and the specific requirements.
+
+When you are running Marathon in a DC/OS cluster, you can use virtual addresses (VIPs) to make ports management easier. VIPs simplify inter-app communication and implement a reliable service-oriented architecture. VIPs map traffic from a single virtual address to multiple IP addresses and ports.
+
 DC/OS can map traffic from a single Virtual IP (VIP) and port to multiple IP addresses and ports. A VIP contains 2 components:
 
  * Private virtual IP address
@@ -67,6 +72,10 @@ To assign multiple VIPs to your application, switch to JSON mode and add the add
         }
       ]
     }
+    
+## Next steps
+
+Learn how to easily deploy a [WordPress and MySQL](/docs/1.7/usage/tutorials/wordpress-mysql/) installation on a DC/OS cluster.
 
 [1]: https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
 [2]: http://mesosphere.github.io/marathon/docs/ports.html

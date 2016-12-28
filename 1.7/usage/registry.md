@@ -4,7 +4,7 @@ nav_title: Private Docker Registry
 menu_order: 40
 ---
 
-You can use [a number of (hosted) options](https://mesosphere.com/blog/2015/10/14/docker-registries-the-good-the-bad-the-ugly/) to store and manage your Docker images, but you can also set up a private Docker registry yourself and run it within your DC/OS cluster. This private registry is based on the [Docker registry image](https://docs.docker.com/registry/) and stores images in a system using one of the available storage drivers.
+You can use a number of (hosted) [options](https://mesosphere.com/blog/2015/10/14/docker-registries-the-good-the-bad-the-ugly/) to store and manage your Docker images, but you can also set up a private Docker registry yourself and run it within your DC/OS cluster. This private registry is based on the [Docker registry image](https://docs.docker.com/registry/) and stores images in a system using one of the available storage drivers.
 
 The advantages of a private Docker registry are:
 

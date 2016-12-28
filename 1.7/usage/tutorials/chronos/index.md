@@ -68,7 +68,7 @@ Chronos is the "cron" for your Mesosphere DC/OS. It is a highly-available distri
     $ dcos package uninstall chronos
     ```
 
-2.  Open the Zookeeper Exhibitor web interface at `<hostname>/exhibitor`, where `<hostname>` is the [Mesos Master hostname][5].
+2.  Open the ZooKeeper Exhibitor web interface at `<hostname>/exhibitor`, where `<hostname>` is the [Mesos Master hostname][5].
 
     1.  Click on the **Explorer** tab and navigate to the `chronos` folder.
 
@@ -76,7 +76,7 @@ Chronos is the "cron" for your Mesosphere DC/OS. It is a highly-available distri
 
     2.  Choose Type **Delete**, enter the required **Username**, **Ticket/Code**, and **Reason** fields, and click **Next**.
 
-        ![Delete the Chronos path from Zookeeper](img/zkchronosdelete.png)
+        ![Delete the Chronos path from ZooKeeper](img/zkchronosdelete.png)
 
     3.  Click **OK** to confirm your deletion.
 

@@ -90,7 +90,7 @@ CloudFormation templates, a large number of ports are exposed to the Internet
 for the public zone. In production systems, it is unlikely that you would
 expose all of these ports. It's recommended that you close all ports except
 80 and 443 (for HTTP/HTTPS traffic) and use
-[Marathon-lb](/docs/1.7/usage/service-discovery/marathon-lb/) with HTTPS for
+[Marathon-LB](/docs/1.7/usage/service-discovery/marathon-lb/) with HTTPS for
 managing ingress traffic.
 
 ### Typical AWS deployment

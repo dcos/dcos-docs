@@ -10,7 +10,4 @@ DC/OS comes with a powerful CLI and a beautiful GUI, a package manager and many 
 
 Now that you know what DC/OS is, [check out the installation instructions](/docs/1.7/administration/installing/)!
 
----
-
-[Usage](/docs/1.7/usage/) | [Support](/docs/1.7/support/) | [Contribute](https://dcos.io/contribute)
 

@@ -18,7 +18,7 @@ You can view the DC/OS component details in the <a href="https://github.com/dcos
   </tr>
   <tr>
     <td>Admin Router Agent</td>
-    <td>This component is a high performance web server and a reverse proxy server that lists all of the agent nodes in your cluster.</td>
+    <td>This component (<code>dcos-adminrouter-agent</code>)is a high performance web server and a reverse proxy server that lists all of the agent nodes in your cluster.</td>
   </tr>
   <tr>
     <td>Admin Router Master</td>
@@ -62,11 +62,11 @@ You can view the DC/OS component details in the <a href="https://github.com/dcos
   </tr>
   <tr>
     <td>Erlang Port Mapping Daemon</td>
-    <td>This component (`dcos-epmd.service`) supports the internal DC/OS layer 4 load balancer that is called <a href="https://github.com/Netflix/exhibitor">Minuteman</a>.</td>
+    <td>This component (`dcos-epmd.service`) supports the internal DC/OS layer 4 load balancer that is called <a href="https://github.com/dcos/minuteman">Minuteman</a>.</td>
   </tr>
   <tr>
     <td>Exhibitor</td>
-    <td>This component (`dcos-exhibitor.service`) is the Exhibitor supervisor for Zookeeper. DC/OS uses Exhibitor, a project from <a href="https://github.com/Netflix/exhibitor">Netflix</a>, to manage and automate the deployment of <a href="/docs/1.8/overview/concepts/#exhibitorforzookeeper">ZooKeeper</a>.</td>
+    <td>This component (`dcos-exhibitor.service`) is the Exhibitor supervisor for ZooKeeper. DC/OS uses Exhibitor, a project from <a href="https://github.com/Netflix/exhibitor">Netflix</a>, to manage and automate the deployment of <a href="/docs/1.8/overview/concepts/#exhibitorforzookeeper">ZooKeeper</a>.</td>
   </tr>
   <tr>
     <td>Generate resolv.conf</td>
@@ -114,7 +114,7 @@ You can view the DC/OS component details in the <a href="https://github.com/dcos
   </tr>
   <tr>
     <td>Mesos DNS</td>
-    <td>This component (`dcos-mesos-dns.service`) provides service discovery within the cluster. Mesos-DNS is the internal DNS service (`dcos-mesos-dns.service`) for the DC/OS cluster. <a href="/docs/1.8/overview/concepts/#mesosdns">Mesos-DNS</a> provides the namespace `$service.mesos` to all cluster hosts. For example, you can login to your leading mesos master with `ssh leader.mesos`.</td>
+    <td>This component (`dcos-mesos-dns.service`) provides service discovery within the cluster. Mesos-DNS is the internal DNS service (`dcos-mesos-dns.service`) for the DC/OS cluster. <a href="/docs/1.8/overview/concepts/#mesos-dns">Mesos-DNS</a> provides the namespace `$service.mesos` to all cluster hosts. For example, you can login to your leading mesos master with `ssh leader.mesos`.</td>
   </tr>
   <tr>
     <td>History Service</td>
@@ -147,6 +147,10 @@ You can view the DC/OS component details in the <a href="https://github.com/dcos
     <td>Signal Timer</td>
     <td>This component (`dcos-signal.timer`) sets the Signal component interval at once per hour.</td>
   </tr>
+<tr>
+      <td>REX-Ray</td>
+      <td>This component (<code>dcos-rexray.service</code>) is the REX-Ray storage method for enabling external persistent volumes in Marathon.</td>
+    </tr>
 <tr>
       <td>System Package Manager API</td>
       <td>This component (`dcos-pkgpanda-api.service`) creates symlinks, installs systemd units, and sets up the roles for each host (master, private agent, public agent).</td>

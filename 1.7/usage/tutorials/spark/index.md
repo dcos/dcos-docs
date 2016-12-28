@@ -125,13 +125,13 @@ Pi is roughly 3.1412853333333333
 
 After all, it turns out to be useful to use the `dcos spark log` command: we get the result of the computation (an approximation for Pi) without having to dig into the logs.
 
-You can learn about further options on how to run a Spark job via the [DC/OS docs](https://docs.mesosphere.com/usage/services/spark/).
+You can learn about further options on how to run a Spark job via the [DC/OS docs](https://docs.mesosphere.com/1.7/usage/services/spark/).
 
 # Using Spark Interactively
 
 To interactively work with Spark, you can use [Apache Zeppelin](https://zeppelin.incubator.apache.org/) and here's what you need to do to install it.
 
-You typically want to access Zeppelin via a web browser outside of the DC/OS cluster. To access the Zeppelin UI from outside of the DC/OS cluster you have a number of options available: from launching it on a public node to [using Marathon-lb](/docs/1.7/usage/service-discovery/marathon-lb/).
+You typically want to access Zeppelin via a web browser outside of the DC/OS cluster. To access the Zeppelin UI from outside of the DC/OS cluster you have a number of options available: from launching it on a public node to [using Marathon-LB](/docs/1.7/usage/service-discovery/marathon-lb/).
 
 The following section will show you how to launch Zeppelin on a public node. This is fine for testing but be aware that this is going to make Zeppelin available on the public Internet (i.e. access from `0.0.0.0`) and with it, everyone out there can access your data and launch Spark jobs on your DC/OS cluster.
 
@@ -210,7 +210,7 @@ To get started with Zeppelin, check out the Zeppelin [docs](http://zeppelin.incu
 
 **Further resources**:
 
-- [DC/OS Spark Official Documentation](http://docs.mesosphere.com/usage/service-guides/spark)
+- [DC/OS Spark Official Documentation](http://docs.mesosphere.com/1.7/usage/service-guides/spark)
 - [Mesos-specific](https://spark.apache.org/docs/latest/running-on-mesos.html#configuration) configuration options for Spark
 - [Mesos run modes](https://spark.apache.org/docs/latest/running-on-mesos.html#mesos-run-modes) for Spark
 - A gentle introduction into [Spark on Mesos](http://www.slideshare.net/Typesafe_Inc/how-to-deploy-apache-spark-to-mesosdcos) by Lightbend

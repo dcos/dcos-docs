@@ -10,6 +10,7 @@ There main tabs in the DC/OS UI are:
 
 - [Dashboard](#dashboard)
 - [Services](#services)
+- [Jobs](#jobs)
 - [Network](#network)
 - [Nodes](#nodes)
 - [Universe](#universe)
@@ -31,7 +32,7 @@ From the dashboard you can easily monitor the health of your cluster.
 
 *   The Task Failure Rate panel provides a graph of the current percentage of tasks that are failing in your cluster.
 
-*   The Services Health panel provides an overview of the health of your services. Each service provides a healthcheck, run at intervals. This indicator shows the current status according to that healthcheck. A maximum of 5 services are displayed, sorted by priority of the most unhealthy. You can click the View all Services button for detailed information and a complete list of your services.
+*   The Services Health panel provides an overview of the health of your services. Each service provides a health check, run at intervals. This indicator shows the current status according to that health check. A maximum of 5 services are displayed, sorted by priority of the most unhealthy. You can click the View all Services button for detailed information and a complete list of your services.
 
 *   The Tasks panel provides the current number of tasks that are staged and running.
 
@@ -58,7 +59,7 @@ Clicking the service name opens the Services side panel, which provides CPU, mem
 
 # <a name="jobs"></a>Jobs
 
-The Jobs tab provides native support for creating and administering scheduled jobs. You can set up jobs with a scheduler by using the cron format.
+The Jobs tab provides native support for creating and administering scheduled jobs. You can set up jobs with a schedule in cron format. For more information, see the [documentation](/docs/1.8/usage/jobs/).
 
 ![Jobs](../img/dcos-jobs.png)
 

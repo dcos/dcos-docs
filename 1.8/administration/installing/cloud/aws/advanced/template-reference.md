@@ -208,16 +208,12 @@ The master templates create masters, on top of the infrastructure stack already 
     <th>Description</th>
   </tr>
   <tr>
-    <td>AcceptEULA</td>
-    <td>Read the Mesosphere EULA and indicate agreement: https://docs.mesosphere.com/community-edition-eula/.</td>
-  </tr>
-  <tr>
     <td>AdminSecurityGroup</td>
     <td>Admin URL Security Group. Controls Access to the Admin page</td>
   </tr>
   <tr>
     <td>ExhibitorS3Bucket</td>
-    <td>S3 Bucket resource name. Used by Exhibitor for Zookeeper discovery and coordination. See Exhibitor documentation on 'shared configuration': https://github.com/Netflix/exhibitor/wiki/Shared-Configuration for more information</td>
+    <td>S3 Bucket resource name. Used by Exhibitor for ZooKeeper discovery and coordination. See Exhibitor documentation on 'shared configuration': https://github.com/Netflix/exhibitor/wiki/Shared-Configuration for more information</td>
   </tr>
   <tr>
     <td>KeyName</td>

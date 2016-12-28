@@ -34,7 +34,7 @@ The demo creates four Marathon apps that run as Docker containers.
 * A [Microsoft Azure][3] account. Your DC/OS cluster can be running anywhere (it doesn't have to be running on Azure) 
 but the demo uses an Azure Storage Queue. If you don't already have an account you can get a [free trial][4]. 
 * A [running DC/OS cluster][5]. If you don't already have one, you can follow these [instructions for setting up a DC/OS cluster on Azure][6]. 
-* The Marathon REST API address. If you set up an [SSH tunnel on port 80 to your Marathon master node][7] you can access the Marathon REST API at http://localhost/marathon.
+* The Marathon REST API address. If you set up an [SSH tunnel on port 80 to your Marathon master node][7] you can access the Marathon REST API at `http://localhost/marathon`.
 * [Ruby][8] on your local machine to run the demo scripts. 
 
 # Set up an Azure Storage Account

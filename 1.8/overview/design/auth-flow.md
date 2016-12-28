@@ -22,7 +22,7 @@ An authentication operation via the DC/OS UI proceeds as follows:
    [dcos-oauth](https://github.com/dcos/dcos-oauth) service. If the user is the
    first user accessing the cluster, an account is automatically created. Any
    subsequent users must be added by any other user in the cluster as described
-   in the [User Management](/docs/1.8/administration/user-management/) page.
+   in the [User Management](/docs/1.8/administration/id-and-access-mgt/user-management/) page.
    If the user logging into the cluster is determined to be valid, they are
    issued with a HS256-signed JWT containing a `uid` claim which is specific to
    the cluster they are logging in to.

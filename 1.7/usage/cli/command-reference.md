@@ -3,7 +3,7 @@ post_title: CLI Command Reference
 nav_title: Reference
 menu_order: 5
 ---
-<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
+
 
 ## <a name="dcos"></a>dcos
 

@@ -45,6 +45,8 @@ The DC/OS installation creates these folders:
   </tr>
 </table>
 
+**Important:** Changes to `/opt/mesosphere` are unsupported. They can lead to unpredictable behavior in DC/OS and prevent upgrades.
+
 # Install DC/OS
 
 1.  Download the [DC/OS installer][1] to your bootstrap node.
@@ -143,8 +145,11 @@ The DC/OS installation creates these folders:
 
     ![postflight](../img/dcos-gui-postflight.png)
 
-    **Tip:** You can click **Download Logs** to view your logs locally.
-    **Tip:** If this takes longer than about 10 minutes, you've probably misconfigured your cluster. Go checkout the [troubleshooting documentation][9]
+    **Tips:** 
+    
+    *  If you encounter errors such as `Time is marked as bad`, `adjtimex`, or `Time not in sync` during Post-Flight, verify that Network Time Protocol (NTP) is enabled on all nodes. For more information, see the [system requirements](/docs/1.8/administration/installing/custom/system-requirements/#port-and-protocol).
+    *  You can click **Download Logs** to view your logs locally.
+    *  If this takes longer than about 10 minutes, you've probably misconfigured your cluster. Go checkout the [troubleshooting documentation][9].
 
 8.  Click **Log In To DC/OS**. If this doesn't work, take a look at the [troubleshooting docs][9].
 
@@ -189,4 +194,4 @@ It is recommended that you save your DC/OS installer file immediately after inst
 [6]: /docs/1.8/usage/
 [7]: /docs/1.8/administration/installing/custom/uninstall/
 [9]: /docs/1.8/administration/installing/custom/troubleshooting/
-[10]: /docs/1.8/administration/user-management/
+[10]: /docs/1.8/administration/id-and-access-mgt/user-management/

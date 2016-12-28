@@ -8,7 +8,7 @@ After you have [installed](/docs/1.8/administration/installing/) DC/OS and set u
 
 You can then launch a production-grade, highly available, containerized nginx web server with a single command from the DC/OS CLI. DC/OS keeps your web server running if it crashes, allows you to scale it via the user interface and update its config at runtime, and much more!
 
-1.  Run this command to launch a containerized [sample](https://dcos.io/docs/1.8/usage/nginx.json) app on DC/OS.
+1.  Run this command to launch a containerized [sample](/docs/1.8/usage/nginx.json) app on DC/OS.
 
     ```bash
     $ dcos marathon app add https://dcos.io/docs/1.8/usage/nginx.json

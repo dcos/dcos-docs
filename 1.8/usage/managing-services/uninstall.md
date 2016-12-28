@@ -100,7 +100,7 @@ When the framework cleaner has completed its work, it will automatically remove 
 
 ### Verifying the outcome
 
-To view the script's outcome, go to Mesos (http://your-cluster.com/mesos) and look at the task's `stdout` content. If `stdout` lacks content, run the following command manually:
+To view the script's outcome, go to Mesos (`http://your-cluster.com/mesos`) and look at the task's `stdout` content. If `stdout` lacks content, run the following command manually:
 
     # Determine id of agent which ran the Docker task. This is an example:
     

@@ -11,7 +11,6 @@ You must have a single bootstrap node, Mesos master nodes, and Mesos agent nodes
 
 1 node with 2 Cores, 16 GB RAM, 60 GB HDD. This is the node where DC/OS installation is run. This bootstrap node must also have:
 
-*   Python, pip, and virtualenv must be installed for the DC/OS [CLI][1]. pip must be configured to pull packages from PyPI or your private PyPI, if applicable.
 *   A High-availability (HA) TCP/Layer 3 load balancer, such as HAProxy, to balance the following TCP ports to all master nodes: 80, 443, 8080, 8181, 2181, 5050.
 *  An unencrypted SSH key that can be used to authenticate with the cluster nodes over SSH. Encrypted SSH keys are not supported.
 
@@ -90,18 +89,22 @@ Here are the agent node hardware requirements.
     $ sudo yum upgrade -y
     ```
 
-*   On RHEL 7 and CentOS 7, firewalld must be stopped and disabled. It is a known <a href="https://github.com/docker/docker/issues/16137" target="_blank">Docker issue</a> that firewalld interacts poorly with Docker. For more information, see the <a href="https://docs.docker.com/v1.6/installation/centos/#firewalld" target="_blank">Docker CentOS firewalld</a> documentation.
+*   On RHEL 7 and CentOS 7, firewalld must be stopped and disabled. It is a known <a href="https://github.com/docker/docker/issues/16137" target="_blank">Docker issue</a> that firewalld interacts poorly with Docker. For more information, see the <a href="https://github.com/docker/docker/blob/v1.6.2/docs/sources/installation/centos.md#firewalld" target="_blank">Docker CentOS firewalld</a> documentation.
 
     ```bash
     $ sudo systemctl stop firewalld && sudo systemctl disable firewalld
     ```
 *   DC/OS is installed to `/opt/mesosphere`. Make sure that `/opt/mesosphere` exists on a partition that is not on an LVM Logical Volume or shared storage.
+*   The Mesos master and agent persistent information of the cluster is stored in the `/var/lib/mesos` directory.
+    
+    **Important:** Do not remotely mount `/var/lib/mesos` or the Docker storage directory (by default `/var/lib/docker`).
+    
+*   Do not mount `/tmp` with `noexec`. This will prevent Exhibitor and ZooKeeper from running.
 
 ### Port and Protocol Configuration
 
 *   Secure Shell (SSH) must be enabled on all nodes.
 *   Internet Control Message Protocol (ICMP) must be enabled on all nodes.
-*   Network Time Protocol (NTP) must be enabled on all nodes for clock synchronization.
 *   Each node is network accessible from the bootstrap node.
 *   Each node has unfettered IP-to-IP connectivity from itself to all nodes in the DC/OS cluster.
 *   UDP must be open for ingress to port 53 on the masters. To attach to a cluster, the Mesos agent node service (`dcos-mesos-slave`) uses this port to find `leader.mesos`.
@@ -135,6 +138,8 @@ Docker must be installed on all bootstrap and cluster nodes. The supported versi
 
 * Run Docker commands as the root user (with `sudo`) or as a user in the <a href="https://docs.docker.com/engine/installation/linux/centos/#create-a-docker-group" target="_blank">docker user group</a>.
 
+* [Virtual networks](/docs/1.8/administration/overlay-networks/) require Docker 1.11.
+
 **Distribution-Specific Installation**
 
 Each Linux distribution requires Docker to be installed in a specific way:
@@ -149,13 +154,23 @@ For more more information, see Docker's <a href="http://docs.docker.com/engine/i
 
 To use the [GUI][4] or [CLI][1] installation methods, you must disable password prompts for sudo.
 
-Run this command to disable the sudo password prompt:
+Add the following line to your `/etc/sudoers` file. This disables the sudo password prompt.
 
 ```bash
 %wheel ALL=(ALL) NOPASSWD: ALL
 ```
 
 Alternatively, you can SSH as the root user.
+
+### Enable NTP
+
+Network Time Protocol (NTP) must be enabled on all nodes for clock synchronization. By default, during DC/OS startup you will receive an error if this is not enabled. You can check if NTP is enabled by running one of these commands, depending on your OS and configuration:
+
+```bash
+$ ntptime
+$ adjtimex -p
+$ timedatectl
+```
 
 ## Bootstrap node
 
@@ -208,6 +223,9 @@ On each of your cluster nodes, use the following command to:
     ```
 
     **Tip:** It may take a few minutes for your node to come back online after reboot.
+
+### Locale requirements
+You must set the `LC_ALL` and `LANG` environment variables to `en_US.utf-8`.  
 
 # Next steps
 

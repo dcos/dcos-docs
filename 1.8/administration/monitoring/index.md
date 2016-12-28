@@ -5,6 +5,8 @@ menu_order: 4
 
 Monitoring the health of all the pieces that make up DC/OS is vital to datacenter operators and for troubleshoooting hard-to-diagnose bugs. You can monitor the health of your cluster components from the DC/OS UI component health page. The component health page displays information from the system health API, which monitors the core DC/OS components.
 
+DC/OS components are the [systemd units](https://www.freedesktop.org/wiki/Software/systemd/) that make up the core of DC/OS. These components are monitored by our internal diagnostics utility (`dcos-3dt.service`). This utility scans all the DC/OS units, and then exposes an HTTP API on each host. For a complete description of the DC/OS components, see the [documentation](/docs/1.8/overview/components/).
+
 The component health page provides the health status of all DC/OS system components that are running in systemd. You can drill down by health status, host IP address, or specific systemd unit.
 
 ## Getting Started
@@ -31,35 +33,31 @@ The system health API has four possible states: 0 - 3, OK; CRITICAL; WARNING; UN
 
 ## System health HTTP API endpoint
 
-The system health endpoint is exposed at port 1050:
+The system health endpoint is exposed on port `1050` for masters, and through the DC/OS diagnostics utility on the master nodes:
 
-```bash
-$ curl <host_ip>:1050/system/health/v1
-```
+-  Master nodes
+
+   ```bash
+   $ curl localhost:1050/system/health/v1
+   ```
+   
+-  Agent nodes
+
+   ```bash
+   $ curl --unix-socket /run/dcos/3dt.sock http://localhost/system/health/v1
+   ```
 
 ## Aggregation
 
 Aggregation of the cluster health endpoints is accomplished by the same diagnostics application, but is only run on the master nodes. You can explore this API further by making a few queries to any master in your cluster:
 
 ```bash
-$ curl <master_ip>:1050/system/health/v1/units
-$ curl <master_ip>:1050/system/health/v1/nodes
-$ curl <master_ip>:1050/system/health/v1/report
+$ curl localhost:1050/system/health/v1/units
+$ curl localhost:1050/system/health/v1/nodes
+$ curl localhost:1050/system/health/v1/report
 ```
 
-The DC/OS user interface uses these aggregation endpoints to generate the data you explore in the system health console.
-
-## Components
-
-DC/OS components are the [systemd units](https://www.freedesktop.org/wiki/Software/systemd/) that make up the core of DC/OS. These components are monitored by our internal diagnostics utility (`dcos-diagnostics.service`). This utility scans all the DC/OS units, and then exposes an HTTP API on each host.
-
-You can query this HTTP API for any host in the cluster:
-
-```bash
-curl <host_ip>:1050/system/health/v1
-```
-
-For a complete description of the DC/OS components, see the [documentation](/docs/1.8/overview/components/).
+The DC/OS GUI uses these aggregation endpoints to generate the data you explore in the system health console.
 
 ## Known Issues
 
@@ -77,4 +75,4 @@ If you experience this behavior it's most likely your Mesos agent service on the
 
 ## Troubleshooting
 
-If you have any problems, you can check if the diagnostics service is running by SSH’ing to the Mesos leading master and checking the systemd status of the `dcos-ddt.service`.
+If you have any problems, you can check if the diagnostics service is running by SSH’ing to the Mesos leading master and checking the systemd status of the diagnostics component (`dcos-d3t.service`).

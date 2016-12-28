@@ -4,11 +4,11 @@ menu_order: 20
 ---
 ## HAProxy configuration
 
-Marathon-lb works by automatically generating configuration for HAProxy and then reloading HAProxy as needed. Marathon-lb generates the HAProxy configuration based on application data available from the Marathon REST API. It can also subscribe to the [Marathon Event Bus][10] for real-time updates. When an application starts, stops, relocates or has any change in health status, Marathon-lb will automatically regenerate the HAProxy configuration and reload HAProxy.
+Marathon-LB works by automatically generating configuration for HAProxy and then reloading HAProxy as needed. Marathon-LB generates the HAProxy configuration based on application data available from the Marathon REST API. It can also subscribe to the [Marathon Event Bus][10] for real-time updates. When an application starts, stops, relocates or has any change in health status, Marathon-LB will automatically regenerate the HAProxy configuration and reload HAProxy.
 
 ## Templates
 
-Marathon-lb has a templating feature for specifying custom HAProxy configuration parameters. Templates can be set either globally (for all apps), or on a per-app basis using labels. Let’s demonstrate an example of how to specify our own global template. Here’s the template we’ll use:
+Marathon-LB has a templating feature for specifying custom HAProxy configuration parameters. Templates can be set either globally (for all apps), or on a per-app basis using labels. Let’s demonstrate an example of how to specify our own global template. Here’s the template we’ll use:
 
 ### Global Template
 
@@ -24,15 +24,15 @@ To specify a global template:
 
     Take the file you created (`templates.tgz` if you use the script), and make it available from an HTTP server. If you’d like to use the sample one, use this URI: <https://downloads.mesosphere.com/marathon/marathon-lb/templates.tgz>
 
-3.  Augment the Marathon-lb config by saving the following JSON in a file called `options.json`:
+3.  Augment the Marathon-LB config by saving the following JSON in a file called `options.json`:
 
         { "marathon-lb":{ "template-url":"https://downloads.mesosphere.com/marathon/marathon-lb/templates.tgz" } }
 
-4.  Launch the new Marathon-lb:
+4.  Launch the new Marathon-LB:
 
         $ dcos package install --options=options.json marathon-lb
 
-    Your customized Marathon-lb HAProxy instance will now be running with the new template. [A full list of the templates available can be found here][2].
+    Your customized Marathon-LB HAProxy instance will now be running with the new template. [A full list of the templates available can be found here][2].
 
 ### Per-app Templates
 
@@ -80,16 +80,16 @@ Other options you may want to specify include enabling the [sticky option][3], [
 
 ## SSL Support
 
-Marathon-lb supports SSL, and you may specify multiple SSL certificates per frontend. Additional SSL certificates can be included by passing a list of paths with the extra `--ssl-certs` command line flag. You can inject your own SSL certificates into the Marathon-lb config by specifying the `HAPROXY_SSL_CERT` environment variable in your application definition.
+Marathon-LB supports SSL, and you may specify multiple SSL certificates per frontend. Additional SSL certificates can be included by passing a list of paths with the extra `--ssl-certs` command line flag. You can inject your own SSL certificates into the Marathon-LB config by specifying the `HAPROXY_SSL_CERT` environment variable in your application definition.
 
-If you do not specify an SSL certificate, Marathon-lb will generate a self-signed certificate at startup. If you are using multiple SSL certificates, you can select the SSL certificate per app service port by specifying the `HAPROXY_{n}_SSL_CERT` parameter, which corresponds to the file path for the SSL certificates specified. For example, you might have:
+If you do not specify an SSL certificate, Marathon-LB will generate a self-signed certificate at startup. If you are using multiple SSL certificates, you can select the SSL certificate per app service port by specifying the `HAPROXY_{n}_SSL_CERT` parameter, which corresponds to the file path for the SSL certificates specified. For example, you might have:
 
     "labels":{
       "HAPROXY_0_VHOST":"nginx.mesosphere.com",
       "HAPROXY_0_SSL_CERT":"/etc/ssl/certs/nginx.mesosphere.com"
     }
 
-The SSL certificates must be pre-loaded into the container for Marathon-lb to load them. You can do this by building your own image of Marathon-lb, rather than using the Mesosphere-provided image.
+The SSL certificates must be pre-loaded into the container for Marathon-LB to load them. You can do this by building your own image of Marathon-LB, rather than using the Mesosphere-provided image.
 
 ## Using HAProxy metrics
 
@@ -124,7 +124,7 @@ To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
           "--apps", "nginx_10000"
         ],
 
-    **Note: If you’re not already running an external Marathon-lb instance, launch it with `dcos package install marathon-lb`.**
+    **Note: If you’re not already running an external Marathon-LB instance, launch it with `dcos package install marathon-lb`.**
 
 2.  Launch your nginx test instance. The JSON app definition [can be found here][8]. Save the file, and launch with:
 

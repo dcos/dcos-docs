@@ -12,7 +12,7 @@ You can get a comprehensive list of the apps being run on your DC/OS cluster nod
         $ dcos node ssh --leader --master-proxy
         
     
-    For more information, the SSH [documentation][2].
+    For more information, see the SSH [documentation][2].
 
 2.  Run this command from your master node to view the node details:
     

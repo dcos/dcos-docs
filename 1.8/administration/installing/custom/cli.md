@@ -45,9 +45,11 @@ The DC/OS installation creates these folders:
   </tr>
 </table>
 
+**Important:** Changes to `/opt/mesosphere` are unsupported. They can lead to unpredictable behavior in DC/OS and prevent upgrades.
+
 # Configure your cluster
 
-1. Create a directory named `genconf` on your bootstrap node and navigate to it.
+1. Create a directory named `genconf` on your bootstrap node.
 
     ```bash
     $ mkdir -p genconf
@@ -133,7 +135,7 @@ The DC/OS installation creates these folders:
 
     In this step you create a YAML configuration file that is customized for your environment. DC/OS uses this configuration file during installation to generate your cluster installation files.
 
-    You can use this template to get started. This template specifies 3 masters, 5 [private](/docs/1.8/overview/concepts/#private) agents, 1 [public](/docs/1.8/overview/concepts/#public) agent, and SSH configuration specified. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][6].
+    You can use this template to get started. This template specifies 3 masters, 5 [private](/docs/1.8/overview/concepts/#private) agents, 1 [public](/docs/1.8/overview/concepts/#public) agent, an optional custom proxy, and SSH configuration specified. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][6].
 
     **Tip:** If Google DNS is not available in your country, you can replace the Google DNS servers `8.8.8.8` and `8.8.4.4` with your local DNS servers.
 
@@ -148,6 +150,7 @@ The DC/OS installation creates these folders:
     # Use this bootstrap_url value unless you have moved the DC/OS installer assets.
     bootstrap_url: file:///opt/dcos_install_tmp
     cluster_name: <cluster-name>
+    exhibitor_storage_backend: static
     master_discovery: static
     master_list:
     - <master-private-ip-1>
@@ -160,6 +163,12 @@ The DC/OS installation creates these folders:
     - 8.8.8.8
     ssh_port: 22
     ssh_user: <username>
+    # A custom proxy is optional. For details see the config documentation.
+    use_proxy: 'true'
+    http_proxy: http://<your_http_proxy>/
+    https_proxy: https://<your_https_proxy>/
+    no_proxy: 
+    - '*.int.example.com' 
     ```
 
 3.  Copy your private SSH key to `genconf/ssh_key`. For more information, see the [ssh_key_path][6] parameter.
@@ -208,9 +217,9 @@ To install DC/OS:
     ├── dcos-genconf.<HASH>.tar
     ├── dcos_generate_config.sh
     ├── genconf
+    │   ├── cluster_packages.json
     │   ├── config.yaml
     │   ├── ip-detect
-    │   ├── cluster_packages.json
     │   ├── serve
     │   ├── ssh_key
     │   ├── state
@@ -306,7 +315,7 @@ To install DC/OS:
 
 6.  Monitor Exhibitor and wait for it to converge at `http://<master-public-ip>:8181/exhibitor/v1/ui/index.html`.
 
-    **Tip:** This process can take about 10 minutes. During this time you will see the Master nodes become visible on the Exhibitor consoles and come online, eventually showing a green light.
+    __Tip:__ If you encounter errors such as `Time is marked as bad`, `adjtimex`, or `Time not in sync` during Post-Flight, verify that Network Time Protocol (NTP) is enabled on all nodes. For more information, see the [system requirements](/docs/1.8/administration/installing/custom/system-requirements/#port-and-protocol).
 
     ![alt text](../img/chef-zk-status.png)
 
@@ -380,5 +389,5 @@ After DC/OS is installed and deployed across your cluster, you can add more agen
  [7]: /docs/1.8/administration/installing/custom/uninstall/
  [8]: /docs/1.8/usage/
  [9]: /docs/1.8/administration/installing/custom/troubleshooting/
- [10]: /docs/1.8/administration/user-management/
+ [10]: /docs/1.8/administration/id-and-access-mgt/user-management/
  [11]: /docs/1.8/administration/installing/custom/convert-agent-type/

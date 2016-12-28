@@ -26,7 +26,7 @@ $ dcos package install chronos
 
 2.  Choose your package and click **Install package**. 
 
-3.  Confirm your installation or choose **Advanced Installation** to include a custom configuration, as discussed in [Customizing service installation parameters](#customizing-install).
+3.  Confirm your installation or choose [**Advanced Installation**](/docs/1.7/usage/managing-services/config/).
 
 ## Verifying your installation
 

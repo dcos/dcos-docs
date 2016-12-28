@@ -214,9 +214,9 @@ To install DC/OS:
     ├── dcos-genconf.<HASH>.tar
     ├── dcos_generate_config.sh
     ├── genconf
+    │   ├── cluster_packages.json
     │   ├── config.yaml
     │   ├── ip-detect
-    │   ├── cluster_packages.json
     │   ├── serve
     │   ├── ssh_key
     │   ├── state

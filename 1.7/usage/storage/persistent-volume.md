@@ -65,7 +65,7 @@ The second volume is a persistent volume with a `containerPath` that matches the
 
 ```json
 {
-  "containerPath": "data",
+  "containerPath": "mydata",
   "mode": "RW",
   "persistent": {
     "size": 1000

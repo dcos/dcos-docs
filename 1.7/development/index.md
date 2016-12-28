@@ -60,8 +60,6 @@ Service health check information can be surfaced in the DC/OS services UI tab by
 
 3. Setting `.framework` to true in `package.json`
 
-#### TODO: Add non-framework label based explanation here
-
 ### <a name="cli-subcommand"></a>CLI Subcommand
 
 If you would like to publish a DC/OS CLI Subcommand for use with your service it is common to have the Subcommand communicate with the running Service by sending HTTP requests through Admin Router to the Service.

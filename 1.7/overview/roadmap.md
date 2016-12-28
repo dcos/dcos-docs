@@ -54,11 +54,11 @@ Support running DC/OS nodes on Windows machines, and support for scheduling work
 
 ## Long Term
 
-## Jobs
+### Jobs
 Schedule run-to-completion jobs with DC/OS, such as ETL and system maintenance tasks. This is currently accomplished by the Chronos scheduler which needs to be installed separately. The goal of this project is to integrate this functionality into DC/OS itself.
 
-## Debugging
+### Debugging
 Tools for debugging applications at runtime, and integrating with existing debugging tools such as gdb and IDEs.
 
-## Autoscaling
+### Autoscaling
 Automatic scale-out of container-based applications based on configurable metrics such as response time and throughput.

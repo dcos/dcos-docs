@@ -1,6 +1,7 @@
 ---
 post_title: Getting Started
 nav_title: Getting Started
+feature_maturity: preview
 menu_order: 10
 ---
 
@@ -18,7 +19,7 @@ From the DC/OS web interface, click the **Jobs** tab, then the **New Job** butto
 * **Memory** - The amount of memory your job requires.
 * **Disk space** - The amount of disk space your job requires.
 * **Command** - The command your job will execute. Leave this blank if you will use a Docker image.
-* **Schedule** - Specify the schedule in cron format, as well as the time zone and starting deadline. Use [this crontab generator](http://crontab.guru) for help.
+* **Schedule** - Specify the schedule in cron format, as well as the time zone and starting deadline. Use [this crontab generator](http://crontab.guru) for help with cron format and this [list of time zones](http://www.timeanddate.com/time/zones/) for time zone format. DC/OS supports the standart 5 element cron expression (minute hour dayOfMonth month dayOfWeek) as well as an optional year at the end (minute hour dayOfMonth month dayOfWeek year).
 * **Docker Container** - Fill in this field if you will use a Docker image to specify the action of your job.
 * **Labels** - Attach metadata to your job.
 

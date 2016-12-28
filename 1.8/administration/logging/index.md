@@ -1,6 +1,6 @@
 ---
 post_title: Logging
-menu_order: 3
+menu_order: 3.4
 ---
 
 DC/OS cluster nodes generate logs that contain diagnostic and status information for DC/OS core components and DC/OS services.
@@ -85,4 +85,4 @@ journalctl -u dcos-exhibitor -b
 [2]: /docs/1.8/usage/cli/install/
 [3]: /docs/1.8/administration/logging/elk/
 [4]: /docs/1.8/administration/logging/splunk/
-[5]: /docs/1.8/administration/sshcluster/
+[5]: /docs/1.8/administration/access-node/sshcluster/

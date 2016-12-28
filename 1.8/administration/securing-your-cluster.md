@@ -35,37 +35,11 @@ By default, Admin Router will permit unencrypted HTTP traffic. This is not
 considered secure, and you must provide a valid TLS certificate and redirect
 all HTTP traffic to HTTPS in order to properly secure access to your cluster.
 
-Once you have a valid TLS certificate, install the certificate on each master.
+After you have a valid TLS certificate, install the certificate on each master.
 Copy the certificate and private key to a well known location, such as under
-`/etc/ssl/certs`. It's suggested that you change the permissions of the
-private key to not be world-readable. Edit the Admin Router `nginx.conf`, by
-opening the file located at
-`/opt/mesosphere/active/adminrouter/nginx/conf`. Modify the nginx
-configuration `server` section, to look like this:
+`/etc/ssl/certs`. 
 
-```
-  server {
-    listen 80 default_server;
-    server_name _;
-    return 301 https://$host$request_uri;
-  }
-
-  server {
-      listen 443 ssl spdy default_server;
-      ssl_certificate /etc/ssl/certs/your-cert.crt;
-      ssl_certificate_key /etc/ssl/certs/your-key.key;
-
-      # rest of config intentionally omitted
-```
-
-In the block above, we're adding a new `server` section above the existing one
-which will redirect all HTTP traffic to HTTPS. We've also removed the
-`listen 80 ...` directive from the second server section. After making the
-changes, restart Admin Router:
-
-```console
-# systemctl restart dcos-adminrouter
-```
+If you run HAProxy in front of Admin Router, you should secure the communication between them. For information about securing your communication, see the [documentation](/docs/1.8/administration/haproxy-adminrouter/).
 
 ### Private zone
 
@@ -90,7 +64,7 @@ CloudFormation templates, a large number of ports are exposed to the Internet
 for the public zone. In production systems, it is unlikely that you would
 expose all of these ports. It's recommended that you close all ports except
 80 and 443 (for HTTP/HTTPS traffic) and use
-[Marathon-lb](/docs/1.8/usage/service-discovery/marathon-lb/) with HTTPS for
+[Marathon-LB](/docs/1.8/usage/service-discovery/marathon-lb/) with HTTPS for
 managing ingress traffic.
 
 ### Typical AWS deployment

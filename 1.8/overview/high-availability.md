@@ -58,7 +58,7 @@ Fast failure detection comes in many forms. Services like ZooKeeper can be used 
 
 When failures do occur, failover [should be as fast as possible](https://en.wikipedia.org/wiki/Fail-fast). Fast failover can be achieved by:
 
- * Using an HA load balancer like [Marathon-lb](https://github.com/mesosphere/marathon-lb), or [Minuteman](https://github.com/dcos/minuteman) for internal layer 4    load balancing.
+ * Using an HA load balancer like [Marathon-LB](https://github.com/mesosphere/marathon-lb), or [Minuteman](https://github.com/dcos/minuteman) for internal layer 4    load balancing.
  * Building apps in accordance with the [12-factor app](http://12factor.net/)    manifesto.
  * Following REST best-practices when building services: in particular,    avoiding storing client state on the server between requests.
 

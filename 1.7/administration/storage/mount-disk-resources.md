@@ -84,7 +84,7 @@ In this example, a disk resource is added to a DC/OS agent post-install on a run
 
 8.  SSH to the agent and verify a new resource state.
 
-    Review the journald logs for references to the new volume `/dcos/volume0`. In particular, there should be an entry for the a gent starting up and the new volume0 Disk Mount resource.
+    Review the journald logs for references to the new volume `/dcos/volume0`. In particular, there should be an entry for the agent starting up and the new volume0 Disk Mount resource.
     
     ```bash
     $ journalctl -b | grep '/dcos/volume0'
@@ -105,7 +105,7 @@ Cloud provider storage services are typically used to back DC/OS Mount Volumes. 
 
 # Best Practices
 
-Disk Mount Resources are primarily for stateful services like Kafka and Cassandra which can benefit from having dedicated storage available throughout the cluster. Any service that utilizes a Disk Mount Resource hs exclusive access to the reserved resource. However, it is still important to consider the performance and reliability requirements for the service. The performance of a Disk Mount Resource is based on the characteristic of the underlying storage and DC/OS does not provide any data replication services. Consider the following:
+Disk Mount Resources are primarily for stateful services like Kafka and Cassandra which can benefit from having dedicated storage available throughout the cluster. Any service that utilizes a Disk Mount Resource has exclusive access to the reserved resource. However, it is still important to consider the performance and reliability requirements for the service. The performance of a Disk Mount Resource is based on the characteristic of the underlying storage and DC/OS does not provide any data replication services. Consider the following:
 
 * Use Disk Mount Resources with stateful services that have strict storage requirements.
 * Carefully consider the filesystem type, storage media (network attached, SSD, etc.), and volume characteristics (RAID levels, sizing, etc.) based on the storage needs and requirements of the stateful service.

@@ -1,6 +1,6 @@
 ---
 post_title: Upgrading
-menu_order: 11
+menu_order: 2.5
 ---
 
 ## Summary
@@ -11,6 +11,9 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 
 - The Advanced Installation method is the _only_ recommended upgrade path for DC/OS. It is recommended that you familiarize yourself with the [Advanced DC/OS Installation Guide][advanced-install] before proceeding.
 - The [VIP features](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-ip-addresses/), added in DC/OS 1.8, require that ports 32768 - 65535 are open between all agent and master nodes for both TCP and UDP.
+- Virtual networks require Docker 1.11. For more information, see the [documentation](/docs/1.8/administration/overlay-networks/).
+- The DC/OS UI and APIs may be inconsistent or unavailable while masters are being upgraded. Avoid using them until all masters have been upgraded and have rejoined the cluster. You can monitor the health of a master during an upgrade by watching Exhibitor on port 8181.
+- Task history in the Mesos UI will not persist through the upgrade.
 
 ## Prerequisites
 
@@ -22,6 +25,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - In CentOS or RedHat, install IP sets with this command (used in some IP detect scripts): `$ sudo yum install -y ipset`
 - You must be familiar with using `systemctl` and `journalctl` command line tools to review and monitor service status. Troubleshooting notes can be found at the end of this [document](#troubleshooting).
 - You must be familiar with the [Advanced DC/OS Installation Guide][advanced-install].
+- You should take a snapshot of ZooKeeper prior to upgrading. Marathon supports rollbacks, but does not support downgrades.
 
 ## Instructions
 
@@ -50,12 +54,18 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 
 ### DC/OS Masters
 
-Identify your Mesos leader node. This node should be the last master node that you upgrade. Proceed with upgrading every master node using the following procedure. When you complete each upgrade, monitor the logs to ensure the unit has re-joined the cluster and completed reconciliation.
+Identify the ZooKeeper leader among the masters. This node should be the last master node that you upgrade. You can determine whether a master node is a ZooKeeper leader by sending the `stat` command to the ZooKeeper client port.
+
+```
+$ echo stat | /opt/mesosphere/bin/toybox nc localhost 2181 | grep "Mode:"
+```
+
+Proceed with upgrading every master node using the following procedure. When you complete each upgrade, monitor the Mesos master metrics to ensure the node has rejoined the cluster and completed reconciliation.
 
 1.  Download the `dcos_install.sh` script:
 
     ```
-    $ curl -O <bootstrap_url>/dcos_install.sh
+    $ curl -O http://<bootstrap_url>:<your_port>/dcos_install.sh
     ```
 
 1.  Uninstall pkgpanda:
@@ -70,7 +80,7 @@ Identify your Mesos leader node. This node should be the last master node that y
     $ sudo rm -rf /opt/mesosphere /etc/mesosphere
     ```
 
-1. **Important:** If `exhibitor_storage_backend` is set to `zookeeper`, add the user `dcos_exhibitor` and give it ownership of the ZooKeeper data directory:
+1. **Important:** If the type of storage backend for Exhibitor is not set to `exhibitor_storage_backend: static`, add the user `dcos_exhibitor` and give it ownership of the ZooKeeper data directory:
 
     ```
     $ sudo useradd --system --home-dir /opt/mesosphere --shell /sbin/nologin -c 'DCOS System User' dcos_exhibitor
@@ -85,7 +95,8 @@ Identify your Mesos leader node. This node should be the last master node that y
 
 1.  Validate the upgrade
 
-    - Monitor the Exhibitor UI to confirm that the Master re-joins the ZooKeeper quorum successfully (the status indicator will turn green).  The Exhibitor UI is available at `http://<dcos_master>:8181/`.
+    - Monitor the Exhibitor UI to confirm that the Master rejoins the ZooKeeper quorum successfully (the status indicator will turn green).  The Exhibitor UI is available at `http://<dcos_master>:8181/`.
+    - Verify that `curl http://<dcos_master_private_ip>:5050/metrics/snapshot` has the metric `registrar/log/recovered` with a value of `1`.
     - Verify that `http://<dcos_master>/mesos` indicates that the upgraded master is running Mesos 1.0.1.
 
 ### DC/OS Agents
@@ -97,7 +108,7 @@ Identify your Mesos leader node. This node should be the last master node that y
 1.  Download The dcos_install.sh Script
 
     ```
-    $ curl -O <bootstrap_url>/dcos_install.sh
+    $ curl -O http://<bootstrap_url>:<your_port>/dcos_install.sh
     ```
 
 1.  Uninstall pkgpanda
@@ -135,7 +146,8 @@ Identify your Mesos leader node. This node should be the last master node that y
 
 1.  Validate the upgrade
 
-    Monitor the Mesos UI to verify that the upgraded node re-joins the DC/OS cluster and that tasks are reconciled (`http://<dcos_master>/mesos`).
+    - Verify that `curl http://<dcos_agent_private_ip>:5051/metrics/snapshot` has the metric `slave/registered` with a value of `1`.
+    - Monitor the Mesos UI to verify that the upgraded node rejoins the DC/OS cluster and that tasks are reconciled (`http://<dcos_master>/mesos`).
 
 ## <a name="troubleshooting"></a>Troubleshooting Recommendations
 
@@ -166,6 +178,6 @@ $ sudo journalctl -u dcos-mesos-slave
 
 ## Notes:
 
-- Packages available in the DC/OS 1.8 Universe are newer than those in the DC/OS 1.8 Universe. Services are not automatically upgraded when  DC/OS 1.8 is installed because not all DC/OS services have upgrade paths that will preserve existing state.
+- Packages available in the DC/OS 1.8 Universe are newer than those in the DC/OS 1.7 Universe. Services are not automatically upgraded when  DC/OS 1.8 is installed because not all DC/OS services have upgrade paths that will preserve existing state.
 
 [advanced-install]: /docs/1.8/administration/installing/custom/advanced/

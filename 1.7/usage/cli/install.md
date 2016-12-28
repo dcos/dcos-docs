@@ -4,6 +4,8 @@ nav_title: Installing
 menu_order: 1
 ---
 
+**Important:** DC/OS 1.8 introduces binary CLIs for Linux, Windows, and Mac. The install script is replaced with a simple binary CLI. The 1.8 CLI is compatible with DC/OS 1.6.1 forward. For more information, see the [documentation](/docs/1.7/usage/cli/install/).
+
 *   [Installing the DC/OS CLI on Unix, Linux, and OS X][1]
 *   [Installing the DC/OS CLI on Windows][2]
 

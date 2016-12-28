@@ -275,4 +275,4 @@ If a service launches multiple tasks with the same name, the DNS lookup will ret
  [1]: /docs/1.7/overview/concepts/
  [2]: ../troubleshooting/#leader
  [3]: https://tools.ietf.org/html/rfc952
- [4]: /docs/1.7/usage/service-discovery/dns-naming/
+ [4]: /docs/1.7/usage/service-discovery/mesos-dns/service-naming/
