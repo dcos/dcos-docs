@@ -11,9 +11,6 @@ The following pod definition specifies a pod with 3 containers. <!-- Validated. 
 ```json
 {
   "id": "/pod-with-multiple-containers",
-  "labels": {
-    "values": {}
-  },
   "version": "2016-09-22T09:18:05.928Z",
   "user": null,
   "environment": null,
@@ -202,7 +199,7 @@ This pod declares a “web” endpoint that listens on port 80. <!-- Validated. 
 }
 ```
 
-This pod adds a health check that references the “web” endpoint; mesos will execute an HTTP request against `http://<master-ip>:80/ping`. <!-- Validated. JSH 9/30/16 3:11pm -->
+This pod adds a health check that references the “web” endpoint; Mesos will execute an HTTP request against `http://<master-ip>:80/ping`. <!-- Validated. JSH 9/30/16 3:11pm -->
 
 ```json
 {
