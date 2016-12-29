@@ -239,7 +239,8 @@ The following pod definition can serve as a reference to create more complicated
   ],
   "networks": [
     {
-      "mode": "host"
+     "mode": "container", 
+     "name": "my-virtual-network-name"
     }
   ],
   "scaling": {
