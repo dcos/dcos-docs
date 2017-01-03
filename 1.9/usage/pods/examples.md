@@ -6,7 +6,7 @@ menu_order: 30
 
 # A pod with multiple containers
 	
-The following pod definition specifies a pod with 3 containers. <!-- Validated. JSH 9/30/16 -->
+The following pod definition specifies a pod with 3 containers. 
 
 ```json
 {
@@ -116,7 +116,7 @@ The following pod definition specifies a pod with 3 containers. <!-- Validated. 
 
 # A Pod that Uses Ephemeral Volumes
 
-The following pod definition specifies an ephemeral volume called `v1`. <!-- Validated. JSH 9/30/16 -->
+The following pod definition specifies an ephemeral volume called `v1`. 
 
 ```json
 {
@@ -221,7 +221,7 @@ The following pod definition specifies an ephemeral volume called `v1`. <!-- Val
 
 ## IP-per-Pod Networking
 
-The following pod definition specifies a virtual (user) network named `my-virtual-network-name`. <!-- Validated. JSH 9/30/16 -->
+The following pod definition specifies a virtual (user) network named `dcos`. 
 
 ```json
 {
@@ -292,7 +292,7 @@ The following pod definition specifies a virtual (user) network named `my-virtua
 }
 ```
 
-This pod declares a “web” endpoint that listens on port 80. <!-- Validated. JSH 9/30/16 3:23pm -->
+This pod declares a “web” endpoint that listens on port 80. 
 
 ```json
 {
@@ -372,7 +372,7 @@ This pod declares a “web” endpoint that listens on port 80. <!-- Validated. 
 }
 ```
 
-This pod adds a health check that references the “web” endpoint; Mesos will execute an HTTP request against `http://<master-ip>:80/ping`. <!-- Validated. JSH 9/30/16 3:11pm -->
+This pod adds a health check that references the “web” endpoint; Mesos will execute an HTTP request against `http://<master-ip>:80/ping`.
 
 ```json
 {
@@ -387,12 +387,12 @@ This pod adds a health check that references the “web” endpoint; Mesos will 
       "healthCheck": { "http": { "endpoint": "web", "path": "/ping" } }
     }
   ],
-  "networks": [ { "mode": "container", "name": "my-virtual-network-name" } ]
+  "networks": [ { "mode": "container", "name": "dcos" } ]
 }
 ```
 
 # Complete Pod 
-The following pod definition can serve as a reference to create more complicated pods. <!-- Validated. JSH 9/30/16 3:11pm -->
+The following pod definition can serve as a reference to create more complicated pods. 
 
 ```
 {
@@ -413,7 +413,7 @@ The following pod definition can serve as a reference to create more complicated
   "networks": [
     {
      "mode": "container", 
-     "name": "my-virtual-network-name"
+     "name": "dcos"
     }
   ],
   "scaling": {
