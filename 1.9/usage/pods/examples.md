@@ -6,7 +6,7 @@ menu_order: 30
 
 # A pod with multiple containers
 	
-The following pod definition specifies a pod with 3 containers. 
+The following pod definition specifies a pod with 3 containers. <!-- Validated by Joel 1/3/17 -->
 
 ```json
 {
@@ -116,7 +116,7 @@ The following pod definition specifies a pod with 3 containers.
 
 # A Pod that Uses Ephemeral Volumes
 
-The following pod definition specifies an ephemeral volume called `v1`. 
+The following pod definition specifies an ephemeral volume called `v1`. <!-- Validated by Joel 1/3/17 -->
 
 ```json
 {
@@ -221,7 +221,7 @@ The following pod definition specifies an ephemeral volume called `v1`.
 
 ## IP-per-Pod Networking
 
-The following pod definition specifies a virtual (user) network named `dcos`. 
+The following pod definition specifies a virtual (user) network named `dcos`. <!-- Validated by Joel 1/3/17 -->
 
 ```json
 {
@@ -292,7 +292,7 @@ The following pod definition specifies a virtual (user) network named `dcos`.
 }
 ```
 
-This pod declares a “web” endpoint that listens on port 80. 
+This pod declares a “web” endpoint that listens on port 80. <!-- Validated by Joel 1/3/17 -->
 
 ```json
 {
