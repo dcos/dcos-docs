@@ -27,6 +27,60 @@ From the DC/OS web interface, click the **Jobs** tab, then the **New Job** butto
 
 From the **Jobs** tab, click the name of your job to modify or delete your job. While the job is running you can click the job instance to drill down to **Details**, **Files**, and **Logs** data.
 
+# Job CLI
+
+## Add a Job
+
+The following command adds a job called `myjob.json`.
+
+```
+dcos job add myjob.json
+```
+
+You can (re)run `myjob` easily:
+
+```
+dcos job run myjob
+```
+
+## View Job details
+
+You can list all installed jobs
+
+```
+dcos job list
+```
+
+If you grab the Job ID from the previous command you can get the list of previous runs for a job
+
+```
+dcos job history myjob
+```
+
+## Read Job logs
+
+You can inspect the log for `myjob` using the CLI as well
+
+```
+dcos task --completed log myjob
+```
+
+If you want to be more specific you can pass it the Job run ID from `dcos job history` to only get the log for a specific run.
+
+## Modiyfing a Job
+
+You can update an existing Job using
+
+```
+dcos job update myjob.json
+```
+
+The following command removes a job regardless of whether the job is running:
+
+```
+dcos job remove myjob
+```
+
 # Metronome API
 
 You can also create and administer jobs via the API. [View the full API here](http://dcos.github.io/metronome/docs/generated/api.html).
