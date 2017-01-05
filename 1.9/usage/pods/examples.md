@@ -371,7 +371,7 @@ This pod declares a “web” endpoint that listens on port 80. <!-- Validated b
   }
 }
 ```
-
+<!-- 
 This pod adds a health check that references the “web” endpoint; Mesos will execute an HTTP request against `http://<master-ip>:80/ping`.
 
 ```json
@@ -507,3 +507,4 @@ The following pod definition can serve as a reference to create more complicated
   ]
 }
 ```
+-->
