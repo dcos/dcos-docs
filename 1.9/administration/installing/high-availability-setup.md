@@ -11,7 +11,7 @@ DC/OS supports multi-availability zone (AZ) configurations. This topic describes
 A zone is a failure domain that has isolated power, networking, and connectivity. Typically a single data center or independent fault domain on-premise or managed by a cloud provider. For example, AWS Availability Zones or GCP Zones. Servers within a zone are connected via high bandwidth (e.g. [1-10+ Gbps](https://blog.serverdensity.com/network-performance-aws-google-rackspace-softlayer/)), low-latency ([up to 1 ms](http://amistrongeryet.blogspot.com/2010/04/three-latency-anomalies.html)), and low-cost links.
 
 #### Region
-A region is a geographical region, such as a metro area, that consists of one or more zones. Zones within a region are connected via high bandwidth (e.g. [1-4 Gbps](https://blog.serverdensity.com/network-performance-aws-google-rackspace-softlayer/)), low-latency ([up to 1 ms](http://amistrongeryet.blogspot.com/2010/04/three-latency-anomalies.html)), low-cost links. Regions are typically connected through public internet via variable bandwidth (e.g. [10-100 Mbps](https://cloudharmony.com/speedtest-for-aws)) and latency ([100-500 ms](https://www.concurrencylabs.com/blog/choose-your-aws-region-wisely/)) links.
+A region is a geographical region, such as a metro area, that consists of one or more zones. Zones within a region are connected via high bandwidth (e.g. [1-4 Gbps](https://blog.serverdensity.com/network-performance-aws-google-rackspace-softlayer/)), low-latency (up to 10 ms), low-cost links. Regions are typically connected through public internet via variable bandwidth (e.g. [10-100 Mbps](https://cloudharmony.com/speedtest-for-aws)) and latency ([100-500 ms](https://www.concurrencylabs.com/blog/choose-your-aws-region-wisely/)) links.
 
 # General Recommendations
 
@@ -21,14 +21,14 @@ DC/OS master nodes should be connected to each other via highly available and lo
 Similarly, most DC/OS services use ZooKeeper (or etcd, consul, etc) for scheduler leader election and state storage. For this to be effective, service schedulers should be connected to the ZooKeeper ensemble via a highly available, low-latency network link.
 
 ## Routing
-DC/OS networking requires a unique address space. Cluster entities cannot share the same IP address. For example, apps and DC/OS agents must have unique address spaces.
+DC/OS networking requires a unique address space. Cluster entities cannot share the same IP address. For example, apps and DC/OS agents must have unique IP addresses.
 
 All IP addresses should be routable within the cluster.
 
 # Multi-AZ Recommendations
 Here are recommendations for specific multi-AZ configurations.
 
-**Important:** A typical DC/OS cluster has all master and agent nodes in the same zone. None of the following hybrid cloud and multi-DC setups have been explicitly tested or verified by Mesosphere.
+**Important:** A typical DC/OS cluster has all master and agent nodes in the same zone. None of the following multi-AZ setups have been explicitly tested or verified by Mesosphere.
 
 ## Single-zone masters and cross-zone agents within a region
 All DC/OS masters are present in a single zone, but the agents can span multiple zones within that region.
@@ -51,7 +51,7 @@ DC/OS masters and agents span multiple zones within a region.
 
 #### Recommendations
 
-- Quorum size and placement of masters should tolerate zone failure. For example, for a quorum size of 2, place each of the 3 masters in a separate zone.
+- Quorum size and placement of masters should tolerate zone failure. For example, for a quorum size of two, place each of the three masters in a separate zone. Do not place a quorum of masters into a single zone.
 - Quorum size and placement of masters should tolerate zone failure for DC/OS service schedulers. This can be achieved using constraints.
 - For ease of failover of apps between zones, ensure that either apps do not depend on zone level resources or that those resources are properly replicated and migrated on failover.
 
