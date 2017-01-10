@@ -4,7 +4,9 @@ nav_title: Custom CF Template
 menu_order: 102
 ---
 
-You can create custom advanced templates for DC/OS. You can then deploy and run DC/OS from your own private S3 bucket. 
+You can create custom CloudFormation advanced templates for DC/OS. You can then deploy and run DC/OS from your own private S3 bucket. 
+
+The custom templates are created from the DC/OS advanced installer.
 
 **Prerequisites:**
 
