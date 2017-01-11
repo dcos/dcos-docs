@@ -10,11 +10,11 @@ DC/OS tasks are [Mesos tasks](/docs/1.9/overview/concepts/#mesos-task) that have
 
 # Executors
 
-Task types are determined by the [Mesos Executor](/docs/1.9/overview/concepts/#mesos-executor) that executes them, which is specified by the [scheduler](/docs/1.9/overview/concepts/#dcos-scheduler) that schedules them. In Mesos, the scheduler is called a [framework](/docs/1.9/overview/concepts/#mesos-framework), but that term is confusing within the broader context of DC/OS. So we just use the terms "scheduler", "executor", and "task" explicitly.
+Task are executed by a [Mesos Executor](/docs/1.9/overview/concepts/#mesos-executor) which gets specified by the [scheduler](/docs/1.9/overview/concepts/#dcos-scheduler) when it launches a task. In Mesos, the scheduler and it's executor(s) are called a [framework](/docs/1.9/overview/concepts/#mesos-framework), but within the broader context of DC/OS we'll often use the terms "scheduler", "executor", and "task" explicitly.
 
 ### Built-in executors
 
-Mesos includes built-in executors that are available to all schedulers, but schedulers can also include their own executors.
+Mesos includes built-in executors that are available to all schedulers, but schedulers can also use their own executors.
 
 - Command Executor - execute shell commands or Docker containers
 - Default Executor (Mesos 1.1) - execute a group of shell commands or Docker containers

@@ -122,8 +122,6 @@ All examples will refer to this sample application:
 * Group: `mygroup`
 * Port: `555`
  * Port Name: `myport`
- * Load-balanced
-* Running on virtual network
 
 `myapp` is a web server listening on port `555`. We'll be using `curl`
 as our client application. Each successful example will result in the HTML
@@ -136,8 +134,7 @@ served by `myapp` to be output output as text.
     $ dcos tunnel socks
 
     ## Example
-    $ curl --proxy socks5://127.0.0.1:1080 mygroupmyapp.marathon.l4lb.thisdcos.directory:555
-    $ curl --proxy socks5://127.0.0.1:1080 _myport._myapp.mygroup._tcp.marathon.mesos
+    $ curl --proxy socks5h://127.0.0.1:1080 myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
     ```
 
 1. Configure your application to use the proxy on port 1080.
@@ -155,7 +152,7 @@ served by `myapp` to be output output as text.
 
     ### Watch out!
     ## This won't work because you can't specify a port in transparent mode
-    $ curl mygroupmyapp.marathon.l4lb.thisdcos.directory.mydcos.directory:555
+    $ curl myapp-mygroup.marathon.agentip.dcos.thisdcos.directory.mydcos.directory:555
     ```
 
 1. In transparent mode, the HTTP proxy works by port forwarding. Append `.mydcos.directory` to the end of your domain when you enter commands. For instance, `http://example.com/?query=hello` becomes `http://example.com.mydcos.directory/?query=hello`. **Note:** In transparent mode, you cannot specify a port in a URL.
@@ -167,8 +164,8 @@ served by `myapp` to be output output as text.
     $ dcos tunnel http --port 8000
 
     ## Example
-    $ curl --proxy 127.0.0.1:8000 mygroupmyapp.marathon.l4lb.thisdcos.directory:555
     $ curl --proxy 127.0.0.1:8000 _myport._myapp.mygroup._tcp.marathon.mesos
+    $ curl --proxy 127.0.0.1:8000 myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
     ```
 
 1. Configure your application to use the proxy on the port you specified above.
@@ -216,8 +213,7 @@ Run the following command from the DC/OS CLI
 $ sudo dcos tunnel vpn
 
 ## Example
-$ curl mygroupmyapp.marathon.l4lb.thisdcos.directory:555
-$ curl _myport._myapp.mygroup._tcp.marathon.mesos
+$ curl myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
 ```
 
 The VPN client attempts to auto-configure DNS, but this functionality does not work on macOS. To use the VPN client on macOS, [add the DNS servers](https://support.apple.com/kb/PH18499?locale=en_US) that DC/OS Tunnel instructs you to use.

@@ -34,7 +34,7 @@ This JSON creates a simple job with no schedule.
     curl -X POST -H "Content-Type: application/json" -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs -d@/Users/<your-username>/<myjob>.json
     ```
 
-# Create a Job with a Schedule via the DC/OS CLI
+# Create a Job with a Schedule
 **Note:** This example JSON only works when you add the job from the DC/OS CLI or the UI. Use the [example below](#schedule-with-api) to create a scheduled job via the API.
 
 1. Create a JSON file with the following contents.

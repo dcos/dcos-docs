@@ -18,7 +18,7 @@ DC/OS virtual networks allow containers launched through the Mesos Containerizer
 
 **Note:** Isolation guarantees among subnets depend on your firewall policies.
 
-[Learn how to use virtual networks in your applications](/docs/1.8/usage/service-discovery/load-balancing-vips/overlay-networks/).
+[Learn how to use virtual networks in your applications](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-networks/).
 
 # Overview
 

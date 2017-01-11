@@ -17,14 +17,14 @@ The virtual network feature is enabled by default in DC/OS. The default configur
         prefix: 26
 ```
 
-Each virtual network is identified by a canonical `name` (see [limitations](/docs/1.8/administration/overlay-networks/) for constraints on naming virtual networks). Containers launched on an virtual network get an IP address from the subnet allocated to the virtual network. To remove the dependency on a global IPAM, the overlay subnet is further split into smaller subnets. Each of the smaller subnets is allocated to an agent. The agents can then use a host-local IPAM to allocate IP addresses from their respective subnets to containers launched on the agent and attached to the given
+Each virtual network is identified by a canonical `name` (see [limitations](/docs/1.9/administration/virtual-networks/) for constraints on naming virtual networks). Containers launched on an virtual network get an IP address from the subnet allocated to the virtual network. To remove the dependency on a global IPAM, the overlay subnet is further split into smaller subnets. Each of the smaller subnets is allocated to an agent. The agents can then use a host-local IPAM to allocate IP addresses from their respective subnets to containers launched on the agent and attached to the given
 overlay. The `prefix` determines the size of the subnet (carved from the overlay subnet) allocated to each agent and thus defines the number of agents on which the overlay can run.
 
 In the default configuration above each virtual network is allocated a /8 subnet (in the “subnet” field), which is then divided into /26 container subnets to be used on each host that will be part of the network (in the “prefix” field) as shown:
 
-![Virtual network address space](/docs/1.8/administration/overlay-networks/img/overlay-network-address-space.png)
+![Virtual network address space](/docs/1.9/administration/virtual-networks/img/overlay-network-address-space.png)
 
-The bits reserved for ContainerID (6 in this example) are then subdivided into two equal groups (of 5 bits in this example) that are used for Mesos containers and Docker containers respectively. With the default configuration, each agent will be able to host a maximum of 2^5=32 Mesos containers and 32 docker containers. With this specific configuration, if a service tries to launch more than 32 tasks on the Mesos containerizer or the Docker containerizer, it will receive a `TASK_FAILED`. Consult the [limitations](/docs/1.8/administration/overlay-networks/) section of the main Virtual Networks page to learn more about this constraint.
+The bits reserved for ContainerID (6 in this example) are then subdivided into two equal groups (of 5 bits in this example) that are used for Mesos containers and Docker containers respectively. With the default configuration, each agent will be able to host a maximum of 2^5=32 Mesos containers and 32 docker containers. With this specific configuration, if a service tries to launch more than 32 tasks on the Mesos containerizer or the Docker containerizer, it will receive a `TASK_FAILED`. Consult the [limitations](/docs/1.9/administration/virtual-networks/) section of the main Virtual Networks page to learn more about this constraint.
 
 You can modify the default virtual network configuration and add more virtual networks to fit your needs. Currently, you can only add or delete an virtual network at install time. The next section describes how you can add more virtual networks to the existing default configuration.
 
@@ -65,7 +65,7 @@ You can override the default network or add additional virtual networks by modif
           prefix: 24
 ```
 
-In the above example, we have defined two virtual networks. The virtual network `dcos` retains the default virtual network, and we have added another virtual network called `dcos-1` with subnet range `192.168.0.0/16`. When you create a network, you must give it a name and a subnet. That name is used to launch Marathon tasks and other Mesos framework tasks using this specific virtual network. Due to restrictions on the size of Linux device names, the virtual network name must be less than thirteen characters. Consult the [limitations](/docs/1.8/administration/overlay-networks/) section of the main Virtual Networks page to learn more.
+In the above example, we have defined two virtual networks. The virtual network `dcos` retains the default virtual network, and we have added another virtual network called `dcos-1` with subnet range `192.168.0.0/16`. When you create a network, you must give it a name and a subnet. That name is used to launch Marathon tasks and other Mesos framework tasks using this specific virtual network. Due to restrictions on the size of Linux device names, the virtual network name must be less than thirteen characters. Consult the [limitations](/docs/1.9/administration/virtual-networks/) section of the main Virtual Networks page to learn more.
 
 # Retrieving virtual network state
 

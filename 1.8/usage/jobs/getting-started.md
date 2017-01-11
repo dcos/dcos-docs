@@ -130,7 +130,19 @@ dcos job schedule remove <job-id> <schedule-id>
 dcos job schedule update <job-id> <schedule-file>.json
 ```
  
-## View a Job
+## View Job Details
+
+List all jobs:
+
+```
+dcos job list
+```
+
+List all previous runs of your job:
+
+```
+dcos job history <job-id>
+```
 
 To view details about your job, run:
  
@@ -142,6 +154,20 @@ To view details about your job's schedule, run:
  
 ```
 dcos job schedule show <job-id>
+```
+
+### Read Job logs
+
+Inspect the log for your job:
+
+```
+dcos task log --completed <job-id>
+```
+
+To get the log for only a specific job run, use a job run ID from `dcos job history <job-id>`
+
+```
+dcos task log --completed <job-run-id>
 ```
 
 # Jobs API
