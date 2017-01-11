@@ -19,4 +19,4 @@ Take a look at the [mesos-DNS documentation][4] for a more in-depth look at how 
 
 [1]: /docs/1.8/usage/service-discovery/
 [4]: /docs/1.8/usage/service-discovery/mesos-dns/
-[5]: /docs/1.8/usage/service-discovery/dns-naming/
+[5]: /docs/1.8/usage/service-discovery/mesos-dns/service-naming/#dns-naming

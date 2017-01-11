@@ -275,4 +275,4 @@ The DC/OS UI sends two types of notifications to [Segment](https://segment.com/d
 
 ## Opt-Out
 
-You can also choose to opt-out of the telemetry features. For more information, see the [documentation](/docs/1.8/administration/installing/opt-out/).
+You can also choose to opt-out of the telemetry features. For more information, see the [documentation](/docs/1.8/administration/opt-out/).

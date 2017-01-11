@@ -39,7 +39,7 @@ In this tutorial you will learn how to:
 
 ## Installing Cassandra
 
-Assuming you have a DC/OS cluster up and running, the first step is to [install Cassandra](https://docs.mesosphere.com/manage-service/cassandra/)
+Assuming you have a DC/OS cluster up and running, the first step is to [install Cassandra](/docs/1.7/usage/managing-services/install/)
 
 ### Typical installation
 
@@ -202,7 +202,7 @@ cqlsh> SELECT * FROM demo.map;
 $ dcos package uninstall cassandra
 ```
 
-Use the [framework cleaner](/docs/1.7/usage/managing-services/uninstall/#framework-cleaner) script to remove your Cassandra instance from Zookeeper and to destroy all data associated with it. The script requires several arguments, the values for which are derived from your service name:
+Use the [framework cleaner](/docs/1.7/usage/managing-services/uninstall/#framework-cleaner) script to remove your Cassandra instance from ZooKeeper and to destroy all data associated with it. The script requires several arguments, the values for which are derived from your service name:
 
 `framework-role` is `cassandra_role`
 `framework-principal` is `cassandra_principal`
@@ -210,5 +210,5 @@ Use the [framework cleaner](/docs/1.7/usage/managing-services/uninstall/#framewo
 
 **Further resources**
 
-1. [DC/OS Cassandra Official Documentation](https://docs.mesosphere.com/usage/services/cassandra/)
+1. [DC/OS Cassandra Official Documentation](https://docs.mesosphere.com/1.7/usage/services/cassandra/)
 1. [DataStax Cassandra Documentation](http://docs.datastax.com)

@@ -4,51 +4,62 @@ nav_title: Configuring
 menu_order: 001
 ---
 
-Each service installs with a set of default parameters. You can discover the default parameters and change them as desired.
+Each Universe service installs with a set of default parameters. You can discover the default parameters and change them as desired.
 
 This topic describes how to use the DC/OS CLI to configure services. You can also customize services by using the [**Services**](/docs/1.8/usage/webinterface/#services) tab in the DC/OS UI. 
 
-1. View the available configuration options for the service with the `dcos package describe --config <package-name>` command.
+1.  From the DC/OS CLI, view the available configuration options for a service with the `dcos package describe --config <package-name>` command. This command displays the config.json file for a specified [Universe](https://github.com/mesosphere/universe) package.
+
+    For example, to view the Marathon config.json file:
 
     ```bash
     $ dcos package describe --config marathon
+    ```
+    
+    The output should look similar to this:
+    
+    ```json
     {
-     "properties": {
-        "application": {
-          "cpus": {
-            "default": 2.0,
-            "description": "CPU shares to allocate to each Marathon instance.",
-            "minimum": 0.0,
-            "type": "number"
-         },
-        ...
-        "mem": {
-          "default": 1024.0,
-          "description": "Memory (MB) to allocate to each Marathon task.",
-          "minimum": 512.0,
-          "type": "number"
-         },
-         ...
-    }
+      "additionalProperties": false,
+      "description": "Marathon DCOS Service properties",
+      "properties": {
+        "jvm": {
+          "additionalProperties": false,
+          "description": "JVM configuration properties",
+          "properties": {
+            "heap-max": {
+              "default": 768,
+              "description": "Memory (MB) max size for the JVM heap. This number should be less than the memory allocated to the Marathon instance (General rule: 50%).",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "heap-min": {
+              "default": 256,
+              "description": "Memory (MB) start size for the JVM heap. This number should be be less or equals than the heap-max.",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+    ...      
     ```
 
-2.  Create a JSON configuration file. You can choose an arbitrary name, but you might want to choose a pattern like `<package-name>-config.json`. For example, `marathon-config.json`.
+2.  Create a JSON configuration file with your customizations. You can choose an arbitrary name, but you might want to choose a pattern like `<package-name>-config.json`. For example, `marathon-config.json`.
 
     ```bash
     $ nano marathon-config.json
     ```
 
-3.  Use the `properties` objects (see [Discovering the default parameters](#discover-defaults)) to build your JSON options file. For example, to change the number of Marathon CPU shares to 3 and memory allocation to 2048:
+    For example, to change the number of Marathon CPU shares to 3 and memory allocation to 2048:
 
     ```json
     {
-      "application": {
+      "marathon": {
         "cpus": 3.0, "mem": 2048.0
        }
     }
     ```
 
-4.  From the DC/OS CLI, install the DC/OS service with the custom options file specified:
+4.  From the DC/OS CLI, install the DC/OS service with your custom options file specified. For example, to install Marathon with the custom options:
 
     ```bash
     $ dcos package install --options=marathon-config.json marathon

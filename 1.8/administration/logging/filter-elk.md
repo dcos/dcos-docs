@@ -9,28 +9,6 @@ The file system paths of DC/OS task logs contain information such as the agent I
 
 *   [An ELK stack that aggregates DC/OS logs][1]
 
-# <a name="configuration"></a>Configuration
-
-1.  Create the following `dcos` pattern file in your custom patterns directory located at `$PATTERNS_DIR`:
-
-        PATHELEM [^/]+
-        TASKPATH ^/var/lib/mesos/slave/slaves/%{PATHELEM:agent}/frameworks/%{PATHELEM:framework}/executors/%{PATHELEM:executor}/runs/%{PATHELEM:run}
-
-
-2.  Update the configuration file for your Logstash instance to include the following `grok` filter, where `$PATTERNS_DIR` is replaced with your custom patterns directory:
-
-        filter {
-            grok {
-                patterns_dir => "$PATTERNS_DIR"
-                match => { "file" => "%{TASKPATH}" }
-            }
-        }
-
-
-3.  Restart Logstash.
-
-    Logstash will extract the `agent`, `framework`, `executor`, and `run` fields. These fields are shown in the metadata of all Mesos task log events. Elasticsearch queries will also show results from those fields.
-
 # <a name="usage"></a>Usage Example
 
 In the screenshots below, we are using Kibana hosted by [logz.io][2], but your Kibana interface will look similar.

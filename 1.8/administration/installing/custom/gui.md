@@ -45,6 +45,8 @@ The DC/OS installation creates these folders:
   </tr>
 </table>
 
+**Important:** Changes to `/opt/mesosphere` are unsupported. They can lead to unpredictable behavior in DC/OS and prevent upgrades.
+
 # Install DC/OS
 
 1.  Download the [DC/OS installer][1] to your bootstrap node.
@@ -192,4 +194,4 @@ It is recommended that you save your DC/OS installer file immediately after inst
 [6]: /docs/1.8/usage/
 [7]: /docs/1.8/administration/installing/custom/uninstall/
 [9]: /docs/1.8/administration/installing/custom/troubleshooting/
-[10]: /docs/1.8/administration/user-management/
+[10]: /docs/1.8/administration/id-and-access-mgt/user-management/

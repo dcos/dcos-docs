@@ -4,7 +4,7 @@ nav_title: Configuring
 menu_order: 001
 ---
 
-Each service installs with a set of default parameters. You can discover the default parameters and change them as desired.
+Each Universe service installs with a set of default parameters. You can discover the default parameters and change them as desired.
 
 1. View the available configuration options for the service with the `dcos package describe --config <package-name>` command.
 

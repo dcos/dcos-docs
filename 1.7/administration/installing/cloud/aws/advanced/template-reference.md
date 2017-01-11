@@ -35,10 +35,6 @@ The Zen templates ([zen-1.json](https://s3.amazonaws.com/downloads.mesosphere.io
     <td>AWS EC2 Key Pair to SSH into instances</td>
   </tr>
   <tr>
-    <td>AcceptEULA</td>
-    <td>Read the Mesosphere EULA and indicate agreement.</td>
-  </tr>
-  <tr>
     <td>Vpc</td>
     <td>Existing VPC to use. Nodes will be launched using subnets and Internet Gateway under this VPC</td>
   </tr>
@@ -159,16 +155,12 @@ The master templates ([advanced-master-1.json](https://s3.amazonaws.com/download
     <th>Description</th>
   </tr>
   <tr>
-    <td>AcceptEULA</td>
-    <td>Read the Mesosphere EULA and indicate agreement: https://docs.mesosphere.com/community-edition-eula/.</td>
-  </tr>
-  <tr>
     <td>AdminSecurityGroup</td>
     <td>Admin URL Security Group. Controls Access to the Admin page</td>
   </tr>
   <tr>
     <td>ExhibitorS3Bucket</td>
-    <td>S3 Bucket resource name. Used by Exhibitor for Zookeeper discovery and coordination. See Exhibitor documentation on 'shared configuration': https://github.com/Netflix/exhibitor/wiki/Shared-Configuration for more information</td>
+    <td>S3 Bucket resource name. Used by Exhibitor for ZooKeeper discovery and coordination. See Exhibitor documentation on 'shared configuration': https://github.com/Netflix/exhibitor/wiki/Shared-Configuration for more information</td>
   </tr>
   <tr>
     <td>KeyName</td>

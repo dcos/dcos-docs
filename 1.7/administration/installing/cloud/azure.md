@@ -4,7 +4,7 @@ nav_title: Azure
 menu_order: 1
 ---
 
-This document explains how to install DC/OS by using the Azure Marketplace.
+This document explains how to install DC/OS 1.7 using the Azure Resource Manager templates.
 
 TIP: To get support on Azure Marketplace-related questions, join the Azure Marketplace [Slack community](http://join.marketplace.azure.com).
 
@@ -26,31 +26,8 @@ Also, to access nodes in the DC/OS cluster you will need `ssh` installed and con
 
 ## Step 1: Deploying the template
 
-To deploy DC/OS using an [Azure Resource Manager](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/) template, first go to [portal.azure.com](https://portal.azure.com/), click on `+ New` and enter `DC/OS`:
+To install DC/OS 1.7 on Azure, use the [Azure Resource Manager templates](https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/azure.html) provided.
 
-![Searching for DC/OS template](../img/dcos-azure-marketplace-step1a.png)
-
-In the search result page, pick `DC/OS on Azure`:
-
-![Selecting DC/OS template](../img/dcos-azure-marketplace-step1b.png)
-
-In the template, click on `Create`:
-
-![Creating deployment using DC/OS template](../img/dcos-azure-marketplace-step1c.png)
-
-Complete the installation wizard steps. Note: you are only required to fill in the `Basic` section, however it is strongly recommended that you create a new resource group (simplifies installation and cluster teardown):
-
-![Filling in DC/OS template](../img/dcos-azure-marketplace-step1d.png)
-
-After you've clicked on the final `Create` button you should see something like the screen below. The default 5 node configuration should take about 15 minutes to deploy.
-
-![Deploying DC/OS template](../img/dcos-azure-marketplace-step1e.png)
-
-After the deployment succeeded, click on the resource group (`mydcoscluster` here) and you should get to the resource group. If you don't see it, try searching for your research group and if the deployment failed, delete the deployment and the resource group and start again:
-
-![DC/OS template successfully deployed](../img/dcos-azure-marketplace-step1f.png)
-
-Congratulations, you have now deployed DC/OS by using an Azure Resource Manager template! Next we will access the cluster.
 
 ## Step 2: Accessing DC/OS
 
@@ -67,7 +44,7 @@ Click on the latest deployment and copy the value of `MASTERFQDN` in the `Output
 Use the value of `MASTERFQDN` you found in the `Outputs` section in the previous step and paste it in the following command:
 
 ```bash
-$ ssh azureuser@masterfqdn -p 2200 -L 8000:localhost:80
+$ ssh azureuser@$MASTERFQDN -p 2200 -L 8000:localhost:80
 ```
 
 For example, in my case:
@@ -95,7 +72,7 @@ Note that the following commands can be used to run the DC/OS CLI directly on th
 
 ```bash
 # Connect to master node with ssh
-$ ssh -p2200 azureuser@MASTER_LOAD_BALANCER -L 8000:localhost:80
+$ ssh -p2200 azureuser@$MASTERFQDN -L 8000:localhost:80
 
 # Install virtualenv
 $ sudo apt-get -y install virtualenv

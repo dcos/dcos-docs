@@ -48,6 +48,8 @@ The DC/OS installation creates these folders:
   </tr>
 </table>
 
+**Important:** Changes to `/opt/mesosphere` are unsupported. They can lead to unpredictable behavior in DC/OS and prevent upgrades.
+
 
 # Configure your cluster
 
@@ -61,13 +63,13 @@ The DC/OS installation creates these folders:
 
     In this step you create a YAML configuration file that is customized for your environment. DC/OS uses this configuration file during installation to generate your cluster installation files.
 
-    You can use this template to get started. This template specifies 3 Mesos masters, 3 ZooKeeper instances for Exhibitor storage, static master discovery list, internal storage backend for Exhibitor, and Google DNS resolvers. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][1].
+    You can use this template to get started. This template specifies three Mesos masters, three ZooKeeper instances for Exhibitor storage, static master discovery list, internal storage backend for Exhibitor, a custom proxy, and Google DNS resolvers. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][1].
 
     **Tip:** If Google DNS is not available in your country, you can replace the Google DNS servers `8.8.8.8` and `8.8.4.4` with your local DNS servers.
 
     ```yaml
     ---
-    bootstrap_url: http://<bootstrap_public_ip>:<your_port>
+    bootstrap_url: http://<bootstrap_ip>:<your_port>
     cluster_name: '<cluster-name>'
     exhibitor_storage_backend: static
     ip_detect_filename: /genconf/ip-detect
@@ -79,6 +81,11 @@ The DC/OS installation creates these folders:
     resolvers:
     - 8.8.4.4
     - 8.8.8.8
+    use_proxy: 'true'
+    http_proxy: http://<your_http_proxy>/
+    https_proxy: https://<your_https_proxy>/
+    no_proxy: 
+    - '*.int.example.com'    
     ```
 
 2. Create a `ip-detect` script
@@ -178,6 +185,10 @@ To install DC/OS:
 
 1.  From the bootstrap node, run the DC/OS installer shell script to generate a customized DC/OS build file. The setup script extracts a Docker container that uses the generic DC/OS install files to create customized DC/OS build files for your cluster. The build files are output to `./genconf/serve/`.
 
+    ```bash
+    $ sudo bash dcos_generate_config.sh
+    ```
+
     At this point your directory structure should resemble:
 
         ├── dcos-genconf.<HASH>.tar
@@ -185,12 +196,6 @@ To install DC/OS:
         ├── genconf
         │   ├── config.yaml
         │   ├── ip-detect
-
-1.  Run this command to generate your customized DC/OS build file:
-
-    ```bash
-    $ sudo bash dcos_generate_config.sh
-    ```
 
     **Tip:** For the install script to work, you must have created `genconf/config.yaml` and `genconf/ip-detect`.
 
@@ -264,7 +269,7 @@ To install DC/OS:
 
 1.  Monitor Exhibitor and wait for it to converge at `http://<master-ip>:8181/exhibitor/v1/ui/index.html`.
 
-    __Tip:__ If you encounter errors such as `Time is marked as bad`, `adjtimex`, or `Time not in sync` in journald, verify that Network Time Protocol (NTP) is enabled on all nodes. Although it is not recommended, you can disable the startup check for NTP by setting the `check_time: 'false'` in the [configuration file](/docs/1.8/administration/installing/custom/configuration-parameters/#check-time). For more information, see the [system requirements](/docs/1.8/administration/installing/custom/system-requirements/#port-and-protocol).
+    __Tip:__ If you encounter errors such as `Time is marked as bad`, `adjtimex`, or `Time not in sync` in journald, verify that Network Time Protocol (NTP) is enabled on all nodes. For more information, see the [system requirements](/docs/1.8/administration/installing/custom/system-requirements/#port-and-protocol).
 
     ![alt text](../img/chef-zk-status.png)
 
@@ -288,4 +293,4 @@ To install DC/OS:
 [7]: /docs/1.8/overview/concepts/#private
 [8]: /docs/1.8/administration/installing/custom/uninstall/
 [9]: /docs/1.8/administration/installing/custom/troubleshooting/
-[10]: /docs/1.8/administration/user-management/
+[10]: /docs/1.8/administration/id-and-access-mgt/user-management/

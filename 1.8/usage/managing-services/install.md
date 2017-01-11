@@ -31,12 +31,12 @@ From the DC/OS UI you can install services from the **Services** or **Universe**
 
 2.  Choose your package and click **Install package**. 
 
-3.  Confirm your installation or choose **Advanced Installation** to include a custom configuration, as discussed in [Customizing service installation parameters](#customizing-install).
+3.  Confirm your installation or choose [**Advanced Installation**](/docs/1.8/usage/managing-services/config/) to include a custom configuration.
 
 ### Services tab
 
 1.  Navigate to the [**Services**](/docs/1.8/usage/webinterface/#services) tab in the DC/OS UI.
-1.  Specify your Marathon app definition and click **Deploy**.
+1.  Click **Deploy Service** and specify your Marathon app definition.
 1.  Click **Deploy**. 
 
 ## Verifying your installation

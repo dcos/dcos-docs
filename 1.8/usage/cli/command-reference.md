@@ -4,7 +4,7 @@ nav_title: Reference
 menu_order: 5
 ---
 
-## dcos
+# dcos
 
     Description:
         The Mesosphere Datacenter Operating System (DC/OS) spans all of the machines in
@@ -30,7 +30,7 @@ menu_order: 5
             Print version information.
     
 
-## dcos auth
+# dcos auth
 
     Description:
         Authenticate to DC/OS cluster.
@@ -54,7 +54,7 @@ menu_order: 5
         --version
             Print version information.
 
-## dcos config
+# dcos config
 
     Description:
         Manage the DC/OS configuration file.
@@ -92,7 +92,7 @@ menu_order: 5
             The value of the property.
     
 
-## dcos help
+# dcos help
 
     Description:
         Display help information about DC/OS.
@@ -118,7 +118,7 @@ menu_order: 5
         <subcommand>
             The subcommand name.
     
-## dcos job
+# dcos job
 
     Description:
         Deploy and manage jobs in DC/OS.
@@ -202,7 +202,7 @@ menu_order: 5
         <schedule-id>
             The schedule ID.
 
-## dcos marathon
+# dcos marathon
 
     Description:
         Deploy and manage applications to DC/OS.
@@ -344,7 +344,7 @@ menu_order: 5
             The factor to scale an application group by.
     
 
-## dcos node
+# dcos node
 
     Description:
         Administer and manage DC/OS cluster nodes.
@@ -428,7 +428,7 @@ menu_order: 5
 
 By default, `dcos node ssh` connects to the private IP of the node, which is only accessible from hosts within the same network, so you must use the `--master-proxy` option to access your cluster from an outside network. For example, in the default AWS configuration, the private agents are unreachable from the public internet, but you can SSH to them using this option, which will proxy the SSH connection through the publicly reachable master.
 
-## <a name="cli-dcos-package"></a>dcos package
+# <a name="cli-dcos-package"></a>dcos package
 
     Description:
         Install and manage software packages from the a DC/OS package repository.
@@ -525,7 +525,7 @@ By default, `dcos node ssh` connects to the private IP of the node, which is onl
             https://universe.mesosphere.com/rep
     
 
-## dcos service
+# dcos service
 
     Description:
         Manage DC/OS services.
@@ -580,7 +580,7 @@ By default, `dcos node ssh` connects to the private IP of the node, which is onl
 
 **Important:** To view the native DC/OS Marathon logs by using the `dcos service log marathon` command, you must be on the same network or connected by VPN to your cluster. For more information, see [Accessing native DC/OS Marathon logs][1].
 
-## dcos task
+# dcos task
 
     Description:
         Manage DC/OS tasks.

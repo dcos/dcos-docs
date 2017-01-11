@@ -12,7 +12,7 @@ Take a look at the [boot sequence][4] to understand what order everything comes 
 
 ZooKeeper and Exhibitor start on the master nodes. The Exhibitor storage location must be configured properly for this to work. For more information, see the [exhibitor_storage_backend][1] parameter.
 
-DC/OS uses ZooKeeper, a high-performance coordination service to manage the installed DC/OS services. Exhibitor automatically configures Zookeeper on the master nodes during your DC/OS installation. For more information, see [Configuration Parameters][5].
+DC/OS uses ZooKeeper, a high-performance coordination service to manage the installed DC/OS services. Exhibitor automatically configures ZooKeeper on the master nodes during your DC/OS installation. For more information, see [Configuration Parameters][5].
 
 *   Go to the Exhibitor web interface and view status at `<master-hostname>/exhibitor`.
 

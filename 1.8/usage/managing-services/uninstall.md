@@ -59,10 +59,29 @@ The script takes the following flags:
 
 These are some examples of default configurations (these will vary depending on selected task name, etc):
 
-* Cassandra default: docker run mesosphere/janitor /janitor.py -r cassandra-role -p cassandra-principal -z dcos-service-cassandra
-* HDFS default: docker run mesosphere/janitor /janitor.py -r hdfs-role -p hdfs-principal -z dcos-service-hdfs
-* Kafka default: docker run mesosphere/janitor /janitor.py -r kafka-role -p kafka-principal -z dcos-service-kafka
-* Custom values: docker run mesosphere/janitor /janitor.py -r <custom_role> -p <custom_principal> -z dcos-service-<custom_service_name>
+* Cassandra default: 
+
+  ```bash
+  $ docker run mesosphere/janitor /janitor.py -r cassandra-role -p cassandra-principal -z dcos-service-cassandra
+  ```
+  
+* HDFS default: 
+
+  ```bash
+  $ docker run mesosphere/janitor /janitor.py -r hdfs-role -p hdfs-principal -z dcos-service-hdfs
+  ```
+  
+* Kafka default: 
+
+  ```bash
+  $ docker run mesosphere/janitor /janitor.py -r kafka-role -p kafka-principal -z dcos-service-kafka
+  ```
+  
+* Custom values: 
+  
+  ```bash
+  $ docker run mesosphere/janitor /janitor.py -r <custom_role> -p <custom_principal> -z dcos-service-<custom_service_name>
+  ```
 
 ### Running from the DC/OS CLI
 
@@ -100,7 +119,7 @@ When the framework cleaner has completed its work, it will automatically remove 
 
 ### Verifying the outcome
 
-To view the script's outcome, go to Mesos (http://your-cluster.com/mesos) and look at the task's `stdout` content. If `stdout` lacks content, run the following command manually:
+To view the script's outcome, go to Mesos (`http://your-cluster.com/mesos`) and look at the task's `stdout` content. If `stdout` lacks content, run the following command manually:
 
     # Determine id of agent which ran the Docker task. This is an example:
     

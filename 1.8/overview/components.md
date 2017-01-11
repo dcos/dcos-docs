@@ -61,12 +61,17 @@ You can view the DC/OS component details in the <a href="https://github.com/dcos
     <td>This component (`dcos-spartan-watchdog.timer`) wakes up the DNS Dispatcher Watchdog every 5 minutes, to see if DC/OS needs to restart DNS Dispatcher.</td>
   </tr>
   <tr>
+      <td>Downloads Service
+        </td>
+      <td>This component (`dcos-download.service`) downloads the DC/OS installation tarball on first boot.</td>
+      </tr>
+  <tr>
     <td>Erlang Port Mapping Daemon</td>
-    <td>This component (`dcos-epmd.service`) supports the internal DC/OS layer 4 load balancer that is called <a href="https://github.com/Netflix/exhibitor">Minuteman</a>.</td>
+    <td>This component (`dcos-epmd.service`) supports the internal DC/OS layer 4 load balancer that is called <a href="https://github.com/dcos/minuteman">Minuteman</a>.</td>
   </tr>
   <tr>
     <td>Exhibitor</td>
-    <td>This component (`dcos-exhibitor.service`) is the Exhibitor supervisor for Zookeeper. DC/OS uses Exhibitor, a project from <a href="https://github.com/Netflix/exhibitor">Netflix</a>, to manage and automate the deployment of <a href="/docs/1.8/overview/concepts/#exhibitorforzookeeper">ZooKeeper</a>.</td>
+    <td>This component (`dcos-exhibitor.service`) is the Exhibitor supervisor for ZooKeeper. DC/OS uses Exhibitor, a project from <a href="https://github.com/Netflix/exhibitor">Netflix</a>, to manage and automate the deployment of <a href="/docs/1.8/overview/concepts/#exhibitorforzookeeper">ZooKeeper</a>.</td>
   </tr>
   <tr>
     <td>Generate resolv.conf</td>
@@ -114,7 +119,7 @@ You can view the DC/OS component details in the <a href="https://github.com/dcos
   </tr>
   <tr>
     <td>Mesos DNS</td>
-    <td>This component (`dcos-mesos-dns.service`) provides service discovery within the cluster. Mesos-DNS is the internal DNS service (`dcos-mesos-dns.service`) for the DC/OS cluster. <a href="/docs/1.8/overview/concepts/#mesosdns">Mesos-DNS</a> provides the namespace `$service.mesos` to all cluster hosts. For example, you can login to your leading mesos master with `ssh leader.mesos`.</td>
+    <td>This component (`dcos-mesos-dns.service`) provides service discovery within the cluster. Mesos-DNS is the internal DNS service (`dcos-mesos-dns.service`) for the DC/OS cluster. <a href="/docs/1.8/overview/concepts/#mesos-dns">Mesos-DNS</a> provides the namespace `$service.mesos` to all cluster hosts. For example, you can login to your leading mesos master with `ssh leader.mesos`.</td>
   </tr>
   <tr>
     <td>History Service</td>

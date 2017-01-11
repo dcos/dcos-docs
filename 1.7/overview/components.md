@@ -16,9 +16,9 @@ dcos-adminrouter-reload.service  dcos-exhibitor.service        dcos-marathon.ser
 dcos-adminrouter-reload.timer    dcos-gen-resolvconf.service   dcos-mesos-dns.service
 dcos-adminrouter.service         dcos-gen-resolvconf.timer     dcos-mesos-master.service
 dcos-cluster-id.service          dcos-history-service.service  dcos-minuteman.service
-dcos-cosmos.service              dcos-keepalived.service       dcos-signal.service
-dcos-ddt.service                 dcos-logrotate.service        dcos-signal.timer
-dcos-epmd.service                dcos-logrotate.timer          dcos-spartan.service
+dcos-cosmos.service              dcos-signal.service           dcos-ddt.service
+dcos-logrotate.service           dcos-signal.timer             dcos-epmd.service
+dcos-logrotate.timer             dcos-spartan.service
 ```
 
 ## Admin Router Service
@@ -46,6 +46,8 @@ From this complete list of cluster hosts, it queries all 3DT health endpoints (`
 ## Distributed DNS Proxy
 Distributed DNS Proxy is our internal DNS dispatcher. It conforms to RFC5625 as a DNS forwarder for DC/OS cluster services.
 
+## Downloads Service
+This component (`dcos-download.service`) downloads the DC/OS installation tarball on first boot.
 
 ## Erlang Port Mapper (EPMD) Service
 The erlang port mapper is designed to support our internal layer 4 load balancer we call `minuteman`.

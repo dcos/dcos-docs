@@ -26,6 +26,7 @@ The following is a list of ports used by internal DC/OS [components](/docs/1.8/o
 |Port   |systemd unit   | 
 |---|---|
 |  62053 |  DNS Dispatcher (`dcos-spartan.service`) |
+|  64000 |  DCOS Overlay |
 
 ## Master
 

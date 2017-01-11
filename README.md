@@ -1,7 +1,7 @@
 # DC/OS Documentation [![Build Status](https://jenkins.mesosphere.com/service/jenkins/buildStatus/icon?job=public-dcos-docs-master)](https://jenkins.mesosphere.com/service/jenkins/job/public-dcos-docs-master)
 Documentation for the Datacenter Operating System (DC/OS)
 
-These documents are used as source to generate [dev.dcos.io/docs](https://dev.dcos.io/docs) (staging) and [dcos.io/docs](https://dcos.io/docs) (production). They are submoduled into [dcos-website](https://github.com/dcos/dcos-website) for deployment.
+These documents are used as source to generate [dev.dcos.io/docs](https://dev.dcos.io/docs) (staging) and [dcos.io/docs](/docs) (production). They are submoduled into [dcos-website](https://github.com/dcos/dcos-website) for deployment.
 
 
 **Issue tracking is moving to the [DCOS JIRA](https://dcosjira.atlassian.net/) ([docs component](https://dcosjira.atlassian.net/issues/?jql=project%20%3D%20DCOS%20AND%20component%20%3D%20docs)).
@@ -9,224 +9,240 @@ Issues on Github will be disabled soon.**
 
 # Contributing
 
-- [Styling and formatting your contribution](#styling)
+If this is your first contribution to an open source software (OSS) project, congratulations! Contributing to the docs is a great way to get started; you can learn more about DC/OS, and contribute back to an OSS project right away. No expertise necessary. If you are an old hand, welcome back!
+
+Below you will find some instructions on how to contribute to the DC/OS docs. By following them you help make sure that no one unnecessarily duplicates work, and that the people who can merge (approve and integrate) your contribution are aware that you’re working on something. In order to follow these instructions you’ll need to have a [GitHub account](https://github.com/join?source=header-home) and an account on the [DC/OS JIRA](https://dcosjira.atlassian.net/admin/users/sign-up). If you aren’t signed up for those things yet go do it now. We’ll be here when you get back.
+
 - [Making your contribution](#making)
+- [Styling and formatting your contribution](#styling)
 - [Building and testing your content locally](#test-local)
-- [Submitting your pull request](#submitting)
-
-
-## <a name="styling"></a>Styling and formatting your contribution
-
-- Use [GitHub-flavored markdown](https://help.github.com/enterprise/11.10.340/user/articles/github-flavored-markdown/).
-
-- Use relative links.
-
-- Begin all links at the root `docs` level and include the version number subdirectory. (e.g., `/docs/1.8/administration/access-node/sshcluster/`).
-
-- Each directory must contain an `index.md` file. This acts as the base-level topic for each folder in the site (required).
-
-- Do not include file names in your paths. Our site converts any files not named `index.md` into directory names. For example, the directory `/docs/1.8/administration/` contains a file named `user-management.md`. To link to this content on the live site, you would use the following path: `/docs/1.8/administration/user-management/`.
-
-- The table of contents of each page is automatically generated based on the top-level headers.
-
-- Directory tables of contents are automatically generated based on `post_title` (or `nav_title`) and `post_excerpt` headers.
-
-- Use active voice whenever possible.
-
-- Use sentence-style capitalization for headings.
 
 ## <a name="making"></a>Making your contribution
 
-1. Create a [JIRA issue](https://dcosjira.atlassian.net/secure/CreateIssue!default.jspa) and select **docs** as the component.
+1. Search [JIRA](https://dcosjira.atlassian.net/browse/DCOS-508?jql=project%20%3D%20DCOS%20AND%20component%20%3D%20documentation) to make sure that no one is already working on your issue. If you find your issue and it isn’t assigned to anyone, it’s free: assign it to yourself! If you don’t see the issue you want to work on, [create a new issue](https://dcosjira.atlassian.net/secure/CreateIssue!default.jspa), select documentation as the component, and assign it to yourself. That way other contributors will know you are working on it.
 
-1. [Fork](https://help.github.com/articles/fork-a-repo/) the [dcos-docs](https://github.com/dcos/dcos-docs) repo (you only have to do this once).
+1. If this is your first contribution [Fork](https://help.github.com/articles/fork-a-repo/) the [dcos-docs](https://github.com/dcos/dcos-docs) repo. (Once you’ve forked the repo, that fork stays associated with your GitHub account. If you try to fork it again GitHub will remind you that you already have a fork.)
 
-1. Clone your fork of the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
+1. Create a local repository, or if you already have one make sure it is up to date.
 
-    ```bash
-    $ git clone https://github.com/<your-user-name>/dcos-docs
-    ```
+  - If this is your first contribution, go to your terminal, navigate to the directory where you keep your Git projects, and clone your fork of the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
 
-1. Create a branch on your fork using your JIRA number as the name.
+
+      ```bash
+      $ git clone https://github.com/<your-user-name>/dcos-docs
+      ```
+
+  - If this isn't your first contribution check out the master branch
+
+        ```bash
+        $ git checkout master
+        ```
+
+      and update it by following these [instructions](https://help.github.com/articles/syncing-a-fork/).
+
+1. Create a new branch of your local repository using your JIRA number as the name. This way other contributors can find the JIRA issue that descirbes the goal of your contribution.
 
     ```bash
     $ git checkout -b dcos-nnn
     ```
 
-1. Create your content. In most cases you should be able to create your content within the existing directory structure. 
+1. Create your content.
 
-    - To create a single page:
-        1. Create a markdown file `{post_slug}.md` where `post_slug` is your file name. File names become URIs. If you want this page to be a child of another page, place the `.md` file in the parent folder.
-        1. Add your page content, including the required metadata `post_title` and optional `nav_title` and `menu_order`. Do not include any other metadata.
-        
-               ```
-               ---
-               post_title: The Title
-               ---
-               Post markdown goes here.
-               ```
-    - To create a page with hierarchy:
-        1. Create a new directory in the appropriate location of the correctly versioned release (e.g., `/1.8/foo`) and a child page within this folder named `index.md` (e.g. `/1.8/foo/index.md`). The actual URI of your page will be `/1.8/foo/`, not `/1.8/foo/index`. For example, if it's a tutorial for 1.7, create a new directory here `/1.8/usage/tutorials/foo/`.
-        1. Add your page content, including the required metadata `post_title` and optional `nav_title` and `menu_order`. Do not include any other metadata.
-                
-               ```bash
-               ---
-               post_title: The Title
-               ---
-               Post markdown goes here.
-               ```
+  - In most cases you should be able to create your content within the existing directory structure.
+  - If you're not sure how to add formatting, take a look at a live doc with the type of content you want to add, and copy the formatting in that doc's markdown file.
+  - Be sure you follow the style and formatting guidelines in the [next section](#styling).
+  - Don't forget to update your post's metadata if necessary, including the required metadata `post_title` and optional `nav_title` and `menu_order`. Where applicable, add the optional `feature_maturity` label. Description of various feature maturity phases can be found [here](https://dcos.io/docs/1.8/overview/feature-maturity/).
 
-    - **Tips:** 
-        * Check the `templates` directory to see if there is a template that corresponds to the type of content you are creating. For example, if it's a tutorial you can copy [templates/tutorial.md](templates/tutorial.md) into `foo/` and rename it to `foo/index.md`. Adapt the sections in your new `foo/index.md` to the specifics of your content.
+  The metadata should be at the very top of the post's file, and look something like this:
 
-        * Add images in a child `foo/img/` directory.  
+    ```
+    ---
+    post_title: This is how you update the documentation
+    nav_title: Update Docs
+    menu_order: 5
+    feature_maturity: preview
+    ---
+    The rest of your document's text will go here, underneath the second set of dashes.
+    ```    
 
-        * Include all required assets in your `/foo` directory, for example, Marathon app spec, JSON docs, or a Dockerfile.
+  - Don't forget to save your changes
 
-        * If you're unsure about what exactly should go into a tutorial, you can always check out [spark/](/docs/1.8/usage/tutorials/spark/) for reference.
+1. When you're happy with your improvements, build a local copy of the website by following these [instructions](#test-local) to make sure that everything looks good, and that nothing is broken.
 
-1. Push your changes into the feature branch of your remote.
+1. Push your changes into the feature branch of your remote repository on github.com.
+
+  1. First, add your changes (this gets them ready to be included in your commit).
 
     ```bash
     $ git add .
-    $ git commit -m "Addresses issue DCOS-nnn"
+    ```
+
+  1. Next commit the changes you made to your local branch, and add a useful message so that everyone knows what you've changed.
+
+    ```bash
+    $ git commit -m "Addresses issue DCOS-nnn. More useful stuff here"
+    ```
+
+  1. Finally push your changes up to your remote branch on GitHub, so that you can open a pull request.
+
+    ```bash
     $ git push origin dcos-nnn
     ```
 
+1. Submit a [pull request](https://help.github.com/articles/using-pull-requests/) against the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
+
+  - Don't forget to add a link to this PR in your [JIRA issue](https://dcosjira.atlassian.net/).
+  - Community managers will test drive and validate contributions that include hands-on instructions, and they'll probably ask for improvements or modifications by commenting on your PR. If you agree with their changes, go to the same branch of your local repo that you made when you first created your content, and repeat steps 5-7 above. If you don't agree with their comments, discuss it more on the PR. Pull requests are where the real collaboration on open source projects happens.
+
+## <a name="styling"></a>Styling and formatting your contribution
+
+- Use [GitHub-flavored markdown](https://help.github.com/enterprise/11.10.340/user/articles/github-flavored-markdown/).
+- Use relative links.
+  - Begin all links at the root `docs` level and include the version number subdirectory. (e.g., `/docs/1.8/administration/sshcluster/`).
+- Do not include file extensions in your link or image paths. Our site converts any files not named `index.md` into directory names. For example, the directory `/docs/1.8/administration/` contains a file named `user-management.md`. To link to this content on the live site, you would use the following path: `/docs/1.8/administration/user-management/`.
+- Each directory must contain an `index.md` file. This acts as the base-level topic for each folder in the site (required).
+- The table of contents of each page is automatically generated based on the top-level headers.
+  - Directory tables of contents are automatically generated based on `post_title` (or `nav_title`) and `post_excerpt` headers.
+- Use active voice whenever possible.
+- Use sentence-style capitalization for headings.
+
+In addition to the above technical notes, make sure you read your doc for clarity and accuracy. Pretend you are someone else seeing your instructions for the first time. Try to follow them based only on the information you provided. Can they stand alone? Are they clear? What have you assumed about your reader, and were those assumptions fair?
+
 ## <a name="test-local"></a>Building and testing your content locally
+
+Pick one of the below methods to build your changes, integrated with the rest of dcos.io, on your local machine. This makes sure that your changes don't break the docs or the website. If you're not sure which method you should use to build the website locally, we recommend the automated build, because it has fewer prerequisites and is more reliable. If you find problems with your doc, edit the file. Your local build should update every time you save your changes.
+
 
 ### Automated build
 This method builds and launches a Docker container. For more information, see this [PR](https://github.com/dcos/dcos-docs/pull/532).
 
-**Prerequisite:** Latest version of [Docker](https://docs.docker.com/engine/installation/) installed and running.
+#### Prerequisite
+
+Latest version of [Docker](https://docs.docker.com/engine/installation/) installed and running.
+
+#### Building
 
 1. Run `sudo make`.
 
     **Tip:** This can take up to 15 minutes to complete.
 1. Visit [localhost](http://localhost:3000)
 
+#### Troubleshooting
+
+If your build fails with an error (e.g. `npm ERR!     /website/npm-debug.log`), try deleting the `/dcos-docs/tmp` directory and re-running the `make` command.
 
 ### Manual build
 
-We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) of the [dcos-website](https://github.com/dcos/dcos-website) repo. Before submitting your pull request against the [dcos-docs](https://github.com/dcos/dcos-docs) repo, fork the parent [dcos-website](https://github.com/dcos/dcos-website) repo and build the site locally. This will allow you to confirm that your content renders correctly and that all of your links work. 
+We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) of the [dcos-website](https://github.com/dcos/dcos-website) repo. Fork the parent [dcos-website](https://github.com/dcos/dcos-website) repo and build the site locally. This will allow you to confirm that your content renders correctly and that all of your links work. For each step, follow the instructions for your operating system.
 
-#### Prerequisites:
+#### Prerequisites
 
-1.  Install the prerequisites:
+1.  [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
 
-    1.  [Ruby](https://www.ruby-lang.org/en/documentation/installation/) 
-        
-        -  *CentOS*
-        
-           ```bash
-           $ sudo yum install -y ruby
-           ```
-           
-        -  *MacOS using [Homebrew](http://brew.sh/)*
-        
-            ```bash
-            $ brew install ruby
-            ```
-        
-    1.  [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-    
-        -  *CentOS*
-                
-            ```bash
-            $ sudo yum install git
-            ```
-            
-        -  *MacOS using [Homebrew](http://brew.sh/)*
-        
-            ```bash
-            $ brew install git
-            ```
-        
-    1.  Install EPEL repo, [Node](https://docs.npmjs.com/getting-started/installing-node), and NPM.
-    
-        -  *CentOS*
-        
-            ```bash
-            $ sudo yum install -y epel-release && sudo yum install -y nodejs && sudo yum install -y npm && npm update
-            ```
-            
-        -  *MacOS using [Homebrew](http://brew.sh/)*
-        
-            ```bash
-            $ brew install -y nodejs 
-            $ brew install npm
-            $ npm update
-            ```
-        
-    1.  nvm 6.3.1
-        
-        -  *CentOS*
-        
-            ```bash
-            $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
-            $ nvm install 6.3.1 && nvm alias default 6.3.1
-            ```
-            
-        -  *MacOS*
-        
-            ```bash
-            $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
-            $ nvm install 6.3.1 && nvm alias default 6.3.1
-            ```
-        
-    1.  [Gulp](http://gulpjs.com/)
-    
-        -  *CentOS*
-        
-            ```bash
-            $ sudo npm install --global gulp-cli
-            ```
-        
-        -  *MacOS*
-        
-            ```bash
-            $ npm install --global gulp-cli
-            ```
+  -  *CentOS*
+
+     ```bash
+     $ sudo yum install -y ruby
+     ```
+
+  -  *MacOS using [Homebrew](http://brew.sh/)*
+
+      ```bash
+      $ brew install ruby
+      ```
+
+1.  [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
+  -  *CentOS*
+
+      ```bash
+      $ sudo yum install git
+      ```
+
+  -  *MacOS using [Homebrew](http://brew.sh/)*
+
+      ```bash
+      $ brew install git
+      ```
+
+1.  Install EPEL repo, [Node](https://docs.npmjs.com/getting-started/installing-node), and NPM.
+
+  -  *CentOS*
+
+      ```bash
+      $ sudo yum install -y epel-release && sudo yum install -y nodejs && sudo yum install -y npm && npm update
+      ```
+
+  -  *MacOS using [Homebrew](http://brew.sh/)*
+
+      ```bash
+      $ brew install -y nodejs
+      $ brew install npm
+      $ npm update
+      ```
+
+1.  nvm 6.3.1
+
+  -  *CentOS*
+
+      ```bash
+      $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
+      $ nvm install 6.3.1 && nvm alias default 6.3.1
+      ```
+
+  -  *MacOS*
+
+      ```bash
+      $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
+      $ nvm install 6.3.1 && nvm alias default 6.3.1
+      ```
+
+1.  [Gulp](http://gulpjs.com/)
+
+  -  *CentOS*
+
+      ```bash
+      $ sudo npm install --global gulp-cli
+      ```
+
+  -  *MacOS*
+
+      ```bash
+      $ npm install --global gulp-cli
+      ```
 
 1. Clone the dcos-website repo.
 
-    ```bash
-    $ git clone https://github.com/dcos/dcos-website 
-    ```
+  ```bash
+  $ git clone https://github.com/dcos/dcos-website
+  ```
 
 1. Check out the develop branch of `dcos-website`.
 
-    ```bash
-    $ git checkout develop
-    ```
+  ```bash
+  $ git checkout develop
+  ```
 
 1. Initialize the `dcos-docs` submodule with the content from the upstream master.
 
-    ```bash
-    $ git submodule update --init --recursive
-    ```
+  ```bash
+  $ git submodule update --init --recursive
+  ```
 
-    Optional: replace the content from the upstream master with the content from your local `dcos-docs` repo. Delete the `dcos-website/dcos-dcos` directory and replace it with a symlink to your local `dcos-docs` repo. For example, if your directory structure is `/projects/dcos-website` and `/projects/dcos-docs`, you can issue these commands from the `dcos-website` directory:
+  Optional: replace the content from the upstream master with the content from your local `dcos-docs` repo. Delete the `dcos-website/dcos-dcos` directory and replace it with a symlink to your local `dcos-docs` repo. For example, if your directory structure is `/projects/dcos-website` and `/projects/dcos-docs`, you can issue these commands from the `dcos-website` directory:
 
-     ```bash
-     $ rm -r dcos-docs
-     $ ln -s <local-path-to-dcos-docs> dcos-docs
-     ``` 
+   ```bash
+   $ rm -r dcos-docs
+   $ ln -s <local-path-to-dcos-docs> dcos-docs
+   ```
 
-1. Launch the local web server to view your changes.
+#### Building
 
-    ```bash
-    $ npm start
-    ```
-    
-## <a name="submitting"></a>Submitting your pull request
+Launch the local web server to view your changes.
 
-1. When you're done, submit a [pull request](https://help.github.com/articles/using-pull-requests/) against the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
-
-1. Add a link to this PR in your [JIRA issue](https://dcosjira.atlassian.net/).
-
-For all contributions that include hands-on instructions, such as found in `usage/` or `administration/`, the community managers will test-drive and validate before merging. They might come back to you asking you to fix things. All communications should take place within your pull request on GitHub.  
-
+  ```bash
+  $ npm start
+  ```
 
 ## License and Authors
 

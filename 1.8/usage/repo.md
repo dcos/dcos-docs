@@ -9,7 +9,7 @@ DC/OS comes pre-configured with the [Mesosphere Universe](https://github.com/mes
 You can use either the web interface or the CLI to:
 
 * [Listing](#listing)
-* [Searching](#find-packages)
+* [Searching](#finding-packages)
 * [Adding](#adding)
 * [Removing](#removing)
 
@@ -48,7 +48,7 @@ Add a repo with the name `your-repo` and the repo URL `https://universe.yourcomp
 $ dcos package repo add your-repo https://universe.yourcompany.com/repo
 ```
 
-For full instructions on how to build an run your own Universe repo see the [Universe Server Documentation](https://github.com/mesosphere/universe#universe-server).
+For full instructions on how to build and run your own Universe repo see the [Universe Server Documentation](https://github.com/mesosphere/universe#universe-server).
 
 ## <a name="removing"></a>Removing a Repository
 

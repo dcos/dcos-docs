@@ -9,7 +9,7 @@ When developing services on DC/OS, you may find it helpful to access your cluste
 **Warning:** DC/OS Tunnel is appropriate for development, debugging, and testing only. Do not use DC/OS Tunnel in production.
 
 # SOCKS
-DC/OS Tunnel can run a SOCKS proxy over SSH to the cluster. SOCKS proxies work for any protocol, but your service must be configured to use the proxy, which runs on port 1080 by default.
+DC/OS Tunnel can run a SOCKS proxy over SSH to the cluster. SOCKS proxies work for any protocol, but your client must be configured to use the proxy, which runs on port 1080 by default.
 
 # HTTP
 
@@ -19,10 +19,10 @@ The HTTP proxy can run in two modes: transparent and standard.
 In transparent mode, the HTTP proxy runs as superuser on port 80 and does not require modification to your application. Access URLs by appending the `mydcos.directory` domain. You can also [use DNS SRV records as if they were URLs](#srv). The HTTP proxy cannot currently access HTTPS in transparent mode.
 
 ## Standard Mode
-Though you must configure your service to use the HTTP proxy in standard mode, it does not have any of the limitations of transparent mode. As in transparent mode, you can use [DNS SRV](#srv) records as URLs.
+Though you must configure your client to use the HTTP proxy in standard mode, it does not have any of the limitations of transparent mode. As in transparent mode, you can use [DNS SRV](#srv) records as URLs.
 
 <a name="srv"></a>
-## SRV Records
+### SRV Records
 A SRV DNS record is a mapping from a name to a IP/port pair. DC/OS creates SRV records in the form `_<port-name>._<service-name>._tcp.marathon.mesos`. The HTTP proxy exposes these as URLs. This feature can be useful for communicating with DC/OS services.
 
 # VPN
@@ -109,42 +109,66 @@ DC/OS Tunnel provides you with full access to the DNS, masters, and agents from 
 # Using DC/OS Tunnel
 
 ## Prerequisites
+* Only Linux and macOS are currently supported.
 * The [DC/OS CLI](/docs/1.8/usage/cli/install/).
-* The DC/OS Tunnel package. Run `dcos package install tunnel-cli --cli` from the DC/OS CLI.
+* The DC/OS Tunnel package. Run `dcos package install tunnel-cli --cli`.
 * [SSH access](/docs/1.8/administration/access-node/sshcluster/) (key authentication only).
 * [The OpenVPN client](https://openvpn.net/index.php/open-source/downloads.html) for VPN functionality.
 
-**Note:** Only Linux and OS X are supported currently.
+## Example Application
 
-##  SOCKS
-Run the following command from the DC/OS CLI:
+All examples will refer to this sample application:
+* Service Name: `myapp`
+* Group: `mygroup`
+* Port: `555`
+ * Port Name: `myport`
 
-```
-$ dcos tunnel socks
-```
+`myapp` is a web server listening on port `555`. We'll be using `curl`
+as our client application. Each successful example will result in the HTML
+served by `myapp` to be output output as text.
 
-Configure your application to use the proxy on port 1080: `127.0.0.1:1080`
+##  Using DC/OS Tunnel to run a SOCKS Proxy
+1. Run the following command from the DC/OS CLI:
 
-##  HTTP
+    ```
+    $ dcos tunnel socks
+
+    ## Example
+    $ curl --proxy socks5h://127.0.0.1:1080 myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
+    ```
+
+1. Configure your application to use the proxy on port 1080.
+
+##  Using DC/OS Tunnel to run a HTTP Proxy
 ### Transparent Mode
 
-Run the following command from the DC/OS CLI:
+1. Run the following command from the DC/OS CLI:
 
-```
-$ sudo dcos tunnel http
-```
+    ```
+    $ sudo dcos tunnel http
 
-#### Port Forwarding
-In transparent mode, the HTTP proxy works by port forwarding. Append `.mydcos.directory` to the end of your domain when you enter commands. For instance, `http://example.com/?query=hello` becomes `http://example.com.mydcos.directory/?query=hello`. **Note:** In transparent mode, you cannot specify a port in a URL.
+    ## Example
+    $ curl _myport._myapp.mygroup._tcp.marathon.mesos.mydcos.directory
+
+    ### Watch out!
+    ## This won't work because you can't specify a port in transparent mode
+    $ curl myapp-mygroup.marathon.agentip.dcos.thisdcos.directory.mydcos.directory:555
+    ```
+
+1. In transparent mode, the HTTP proxy works by port forwarding. Append `.mydcos.directory` to the end of your domain when you enter commands. For instance, `http://example.com/?query=hello` becomes `http://example.com.mydcos.directory/?query=hello`. **Note:** In transparent mode, you cannot specify a port in a URL.
 
 ### Standard mode
-To run the HTTP proxy in standard mode, without root privileges, use the `--port` flag to configure it to use another port:
+1. To run the HTTP proxy in standard mode, without root privileges, use the `--port` flag to configure it to use another port:
 
-```
-$ dcos tunnel http --port 8000
-```
+    ```
+    $ dcos tunnel http --port 8000
 
-Then, configure your application to run HTTP on the port you specified above.
+    ## Example
+    $ curl --proxy 127.0.0.1:8000 _myport._myapp.mygroup._tcp.marathon.mesos
+    $ curl --proxy 127.0.0.1:8000 myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
+    ```
+
+1. Configure your application to use the proxy on the port you specified above.
 
 ### SRV Records
 The HTTP proxy exposes DC/OS SRV records as URLs in the form `_<port-name>._<service-name>._tcp.marathon.mesos.mydcos.directory` (transparent mode) or `_<port-name>._<service-name>._tcp.marathon.mesos` (standard mode).
@@ -182,24 +206,51 @@ Alternatively, you can add `name` to the `portMappings` or `portDefinitions` fie
   ]
 ```
 
-## VPN
+##  Using DC/OS Tunnel to run a VPN
 Run the following command from the DC/OS CLI
 
 ```
 $ sudo dcos tunnel vpn
+
+## Example
+$ curl myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
 ```
 
-The VPN client attempts to auto-configure DNS, but this functionality does not work on Mac OSX. To use the VPN client on OSX, [add the DNS servers](https://support.apple.com/kb/PH18499?locale=en_US) that DC/OS Tunnel instructs you to use.
+The VPN client attempts to auto-configure DNS, but this functionality does not work on macOS. To use the VPN client on macOS, [add the DNS servers](https://support.apple.com/kb/PH18499?locale=en_US) that DC/OS Tunnel instructs you to use.
 
-When you use the VPN, you are virtually within your cluster. To access your master node, just enter the following from your terminal:
-
-```
-$ ssh core@master.mesos
-```
-
-Similarly, you can interact with your agent nodes from virtually within the cluster. For instance:
+When you use the VPN, you are virtually within your cluster. You can access
+your master and agent nodes directly:
 
 ```
+$ ping master.mesos
 $ ping slave.mesos
-$ host slave.mesos
 ```
+
+### macOS OpenVPN Client Installation
+* If using [homebrew](http://brew.sh/) then install with:
+    ```
+    $ brew install openvpn
+    ```
+    Then to use it:
+
+    Either add `/usr/local/sbin` to your `$PATH`,
+
+    or add the flag `--client=/usr/local/sbin/openvpn` like so:
+    ```
+    $ sudo dcos tunnel vpn --client=/usr/local/sbin/openvpn
+    ```
+
+* Another option is to install [TunnelBlick](https://tunnelblick.net/)
+    (_don't run it_, we are only installing it for the `openvpn` executable)
+    and add the flag `--client=/Applications/Tunnelblick.app/Contents/Resources/openvpn/openvpn-*/openvpn` like so:
+    ```
+    $ sudo dcos tunnel vpn --client=/Applications/Tunnelblick.app/Contents/Resources/openvpn/openvpn-*/openvpn
+    ```
+
+
+### Linux OpenVPN Client Installation
+`openvpn` should be available via your distribution's package manager.
+
+For example:
+* Ubuntu: `apt-get update && apt-get install openvpn`
+* ArchLinux: `pacman -S openvpn`

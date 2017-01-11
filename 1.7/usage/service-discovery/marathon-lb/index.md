@@ -4,7 +4,7 @@ post_title: Marathon-LB
 
 Marathon-LB is based on HAProxy, a rapid proxy and load balancer. HAProxy provides proxying and load balancing for TCP and HTTP based applications, with features such as SSL support, HTTP compression, health checking, Lua scripting and more. Marathon-LB subscribes to Marathon’s event bus and updates the HAProxy configuration in real time.
 
-Up to date documentation for MLB can be found on the GitHub page.
+Up to date documentation for Marathon-LB can be found on the GitHub page.
 
  * [Marathon-LB GitHub project][1]
  * [Detailed templates documentation][2]

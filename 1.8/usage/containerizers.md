@@ -1,6 +1,7 @@
 ---
 post_title: Using Mesos Containerizers
 nav_title: Mesos Containerizers
+feature_maturity: experimental
 menu_order: 40 
 ---
 
@@ -8,11 +9,9 @@ Containerizers allow you to run tasks in containers. Running tasks in containers
 
 DC/OS supports the Mesos containerizer types [DC/OS Universal container runtime](http://mesos.apache.org/documentation/latest/containerizer/#Mesos) and [Docker containerizer](http://mesos.apache.org/documentation/latest/containerizer/#Docker).
 
-**Important:** This feature is considered [experimental](/docs/1.8/overview/feature-maturity/#experimental): use it at your own risk. We might add, change, or delete any functionality as described in this document. We encourage [feedback from the DC/OS community](https://dcos.io/community/).
-
 # DC/OS Universal container runtime
 
-The [Universal container runtime](http://mesos.apache.org/documentation/latest/container-image) extends the Mesos containerizer to support provisioning [Docker](https://docker.com/) and [AppC](https://github.com/appc/spec) container images. This means that you can use both the Mesos containerizer and other container image types in DC/OS. While other containerizers still play well with DC/OS, the Universal container runtime does not depend upon other container technologies and can therefore take advantage of more Mesos features.
+The [Universal container runtime](http://mesos.apache.org/documentation/latest/container-image) extends the Mesos containerizer to support provisioning [Docker](https://docker.com/) container images ([AppC](https://github.com/appc/spec) coming soon). This means that you can use both the Mesos containerizer and other container image types in DC/OS. You can still use the Docker container runtime directly with DC/OS, but the Universal container runtime supports running Docker images without depending on the Docker Engine, which allows for better integration with Mesos.
 
 The Universal container runtime offers the following advantages:
 
@@ -21,11 +20,11 @@ The Universal container runtime offers the following advantages:
 * The Universal container runtime offers features not available in the Docker containerizer, such as GPU and CNI support.
 * The Universal container runtime allows you to take advantage of continuing innovation within both the Mesos and DC/OS, including features such as IP per container, strict container isolation and more.
 
-## Provisioning Docker or AppC Containers with the Mesos Containerizer
+## Provisioning Docker Containers with the Mesos Containerizer
 
-To run Docker or AppC containers with the Universal container runtime, specify the container type `MESOS` and a `docker` or `appc` object in your [Marathon application definition](http://mesosphere.github.io/marathon/docs/application-basics.html).
+To run Docker containers with the Universal container runtime, specify the container type `MESOS` and a `docker` object in your [Marathon application definition](http://mesosphere.github.io/marathon/docs/application-basics.html).
 
-The Mesos containerizer provides a `credential`, with a `principal` and an optional `secret` field to authenticate when downloading the Docker or AppC image.
+The Mesos containerizer provides a `credential`, with a `principal` and an optional `secret` field to authenticate when downloading the Docker image.
 
 ```json
 {

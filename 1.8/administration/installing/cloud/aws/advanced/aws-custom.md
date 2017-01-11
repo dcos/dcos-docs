@@ -39,7 +39,7 @@ You can create custom advanced templates for DC/OS. You can then deploy and run 
 1.  Create a configuration file in the `genconf` directory and save as `config.yaml`. This configuration file specifies your AWS credentials and the S3 location to store the generated artifacts. These are the required parameters:
 
     ```bash
-    aws_template_storage_bucket: cody-test-advanced
+    aws_template_storage_bucket: <s3-bucket-name>
     aws_template_storage_bucket_path: <path-to-directory>
     aws_template_storage_region_name: <your-region>
     aws_template_upload: true

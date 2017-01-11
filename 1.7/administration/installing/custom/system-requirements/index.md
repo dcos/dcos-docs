@@ -2,7 +2,7 @@
 post_title: System Requirements
 menu_order: 000
 ---
-<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
+
 
 # Hardware Prerequisites
 
@@ -91,7 +91,7 @@ Here are the agent node hardware requirements.
     $ sudo yum upgrade -y
     ```
 
-*   On RHEL 7 and CentOS 7, firewalld must be stopped and disabled. It is a known <a href="https://github.com/docker/docker/issues/16137" target="_blank">Docker issue</a> that firewalld interacts poorly with Docker. For more information, see the <a href="https://docs.docker.com/v1.6/installation/centos/#firewalld" target="_blank">Docker CentOS firewalld</a> documentation.
+*   On RHEL 7 and CentOS 7, firewalld must be stopped and disabled. It is a known <a href="https://github.com/docker/docker/issues/16137" target="_blank">Docker issue</a> that firewalld interacts poorly with Docker. For more information, see the <a href="https://github.com/docker/docker/blob/v1.6.2/docs/sources/installation/centos.md#firewalld" target="_blank">Docker CentOS firewalld</a> documentation.
 
     ```bash
     $ sudo systemctl stop firewalld && sudo systemctl disable firewalld
@@ -150,7 +150,7 @@ For more more information, see Docker's <a href="http://docs.docker.com/engine/i
 
 To use the [GUI][4] or [CLI][1] installation methods, you must disable password prompts for sudo.
 
-Run this command to disable the sudo password prompt:
+Add the following line to your `/etc/sudoers` file. This disables the sudo password prompt.
 
 ```bash
 %wheel ALL=(ALL) NOPASSWD: ALL

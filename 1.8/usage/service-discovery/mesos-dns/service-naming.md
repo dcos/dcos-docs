@@ -1,10 +1,15 @@
 ---
 post_title: Service Naming
+menu_order: 0
 ---
 
 Mesos-DNS defines the DNS top-level domain `.mesos` for Mesos tasks that are running on DC/OS. Tasks and services are discovered by looking up A and, optionally, SRV records within this Mesos domain.
 
-To enumerate all the DNS records that Mesos-DNS will respond to, take a look at the [DNS naming documentation][4].
+- [A Records](#a-records)
+- [SRV Records](#srv-records)
+- [Other Records](#other-records)
+- [Task and Service Naming Conventions](#naming-conventions)
+- [Discovering Service DNS Names](#dns-naming)
 
 # <a name="a-records"></a>A Records
 
@@ -79,7 +84,7 @@ On a DC/OS cluster, ports are offered by agent nodes in the same way as other re
 
 The following table shows the rules that govern SRV generation:
 
-<table class="table" style="width: 400px !important;">
+<table class="table">
   <thead>
     <tr>
       <th>
@@ -272,7 +277,134 @@ If a service launches multiple tasks with the same name, the DNS lookup will ret
 
 **Caution:** It is possible to have a name collision if *different* services launch tasks that have the same hostname. If different services launch tasks with identical Mesos-DNS hostnames, or if Mesos-DNS truncates app IDs to create identical Mesos-DNS hostnames, applications will communicate with the wrong agent nodes and fail unpredictably.
 
+# <a name="dns-naming"></a>Discovering the DNS names for a service
+
+You can get a comprehensive list of the apps running on your DC/OS cluster nodes.
+
+**Prerequisites:** [DC/OS and DC/OS CLI](/docs/1.8/administration/installing/) are installed.
+
+1.  SSH into your node. For example, use this CLI command to SSH to your master:
+
+    ```bash
+    $ dcos node ssh --leader --master-proxy
+    ```
+
+    For more information, see the SSH [documentation](/docs/1.8/administration/access-node/sshcluster/).
+
+2.  Run this command from your master node to view the node details:
+
+    ```bash
+    $ curl http://localhost:8123/v1/enumerate
+    ```
+
+    In this example, Kafka and Chronos are installed:
+
+    ```bash
+       $ curl http://localhost:8123/v1/enumerate
+         {
+           "frameworks": [
+            {
+             "tasks": null,
+             "name": "chronos"
+            },
+            {
+             "tasks": null,
+             "name": "kafka"
+            },
+            {
+             "tasks": [
+              {
+               "name": "kafka",
+               "id": "kafka.443d5d63-f527-11e5-81a5-2a8c0aaf83b5",
+               "records": [
+                {
+                 "name": "kafka.marathon.mesos.",
+                 "host": "10.0.2.162",
+                 "rtype": "A"
+                },
+                {
+                 "name": "kafka-7fdws-s0.marathon.mesos.",
+                 "host": "10.0.2.162",
+                 "rtype": "A"
+                },
+                {
+                 "name": "kafka.marathon.slave.mesos.",
+                 "host": "10.0.2.162",
+                 "rtype": "A"
+                },
+                {
+                 "name": "kafka-7fdws-s0.marathon.slave.mesos.",
+                 "host": "10.0.2.162",
+                 "rtype": "A"
+                },
+                {
+                 "name": "_kafka._tcp.marathon.slave.mesos.",
+                 "host": "kafka-7fdws-s0.marathon.slave.mesos.:14799",
+                 "rtype": "SRV"
+                },
+                {
+                 "name": "_kafka._udp.marathon.slave.mesos.",
+                 "host": "kafka-7fdws-s0.marathon.slave.mesos.:14799",
+                 "rtype": "SRV"
+                },
+                {
+                 "name": "_kafka._tcp.marathon.mesos.",
+                 "host": "kafka-7fdws-s0.marathon.mesos.:14799",
+                 "rtype": "SRV"
+                }
+               ]
+              },
+              {
+               "name": "chronos",
+               "id": "chronos.40a4f462-f527-11e5-81a5-2a8c0aaf83b5",
+               "records": [
+                {
+                 "name": "chronos.marathon.mesos.",
+                 "host": "10.0.2.162",
+                 "rtype": "A"
+                },
+                {
+                 "name": "chronos-4dj75-s0.marathon.mesos.",
+                 "host": "10.0.2.162",
+                 "rtype": "A"
+                },
+                {
+                 "name": "chronos.marathon.slave.mesos.",
+                 "host": "10.0.2.162",
+                 "rtype": "A"
+                },
+                {
+                 "name": "chronos-4dj75-s0.marathon.slave.mesos.",
+                 "host": "10.0.2.162",
+                 "rtype": "A"
+                },
+                {
+                 "name": "_chronos._tcp.marathon.slave.mesos.",
+                 "host": "chronos-4dj75-s0.marathon.slave.mesos.:9106",
+                 "rtype": "SRV"
+                },
+                {
+                 "name": "_chronos._udp.marathon.slave.mesos.",
+                 "host": "chronos-4dj75-s0.marathon.slave.mesos.:9106",
+                 "rtype": "SRV"
+                },
+                {
+                 "name": "_chronos._tcp.marathon.mesos.",
+                 "host": "chronos-4dj75-s0.marathon.mesos.:9106",
+                 "rtype": "SRV"
+                }
+               ]
+              }
+             ],
+             "name": "marathon"
+            }
+           ]
+    ```
+
+
+
+
+
  [1]: /docs/1.8/overview/concepts/
  [2]: ../troubleshooting/#leader
  [3]: https://tools.ietf.org/html/rfc952
- [4]: /docs/1.8/usage/service-discovery/dns-naming/

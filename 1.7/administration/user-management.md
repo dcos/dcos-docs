@@ -17,7 +17,7 @@ To manage users:
 
     **Tip:** Any user with access to DC/OS can invite more users. Each DC/OS user is an administrator, there is no explicit concept of privileges with DC/OS.
 
-    ![new DC/OS user](../id-and-access-mgt/img/ui-add-user.gif)
+    ![new DC/OS user](/docs/1.7/administration/id-and-access-mgt/img/ui-add-user.gif)
 
     ### Delete users
 
@@ -30,7 +30,7 @@ To manage users:
 
     *   To log out of the DC/OS web interface, click on your username in the lower left corner and select **Sign Out**.
 
-        ![log out](../id-and-access-mgt/img/auth-enable-logout-user.gif)
+        ![log out](/docs/1.7/administration/id-and-access-mgt/img/auth-enable-logout-user.gif)
 
         You can now log in as another user.
 
@@ -45,4 +45,4 @@ To manage users:
 
 ## Next Steps
 
-For more information on security, check out [Security and Authentication](../id-and-access-mgt/)
+For more information on security, check out [Security and Authentication](/docs/1.7/administration/id-and-access-mgt/)
