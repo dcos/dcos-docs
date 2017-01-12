@@ -8,9 +8,7 @@ DC/OS supports high-availability configurations, including mult-zone, multi-regi
 # Terminology
 
 ## Rack
-A rack is is a physical server. If you have racks, you should spread your masters across racks. 
-
-There is no direct mapping of a rack to AWS. 
+A rack is typically composed of a set of servers (nodes) with its own power supply and switch (or switches), all attached to the same frame. On public cloud platforms such as AWS, there is no equivalent concept of a rack. 
 
 ## Region
 A region is a geographical region, such as a metro area, that consists of one or more zones. Zones within a region are connected via high bandwidth (e.g. [1-4 Gbps](https://blog.serverdensity.com/network-performance-aws-google-rackspace-softlayer/)), low-latency (up to 10 ms), low-cost links. Regions are typically connected through public internet via variable bandwidth (e.g. [10-100 Mbps](https://cloudharmony.com/speedtest-for-aws)) and latency ([100-500 ms](https://www.concurrencylabs.com/blog/choose-your-aws-region-wisely/)) links.
