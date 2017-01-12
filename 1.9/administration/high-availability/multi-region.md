@@ -3,6 +3,8 @@ post_title: Multiple Regions
 menu_order: 2
 ---
 
+DC/OS supports multiple region configurations. This topic describes the setup recommendations and caveats.
+
 # Single region masters and cross-region agents 
 DC/OS masters are within a region, possibly spanning zones. DC/OS agents span multiple regions. This setup is similar to masters in an on-prem datacenter and agents running on-prem and on public cloud. 
 
