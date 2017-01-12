@@ -6,7 +6,7 @@ menu_order: 6
 
 This document discusses the high availability features in DC/OS and best practices for building highly available applications on DC/OS.
 
-### Leader/follower architecture
+# Leader/follower architecture
 
 A common pattern in highly available systems is the leader/follower concept. This is also sometimes referred to as: master/slave, primary/replica, or some
 combination thereof. Generally speaking, this architecture is used when you have one authoritative process, with N standby processes. In some systems, the standby processes might also be capable of serving requests or performing other operations. For example, when running a database like MySQL with a master and replica, the replica is able to serve read-only requests, but it cannot accept writes (only the master will accept writes).
@@ -25,22 +25,22 @@ Marathon may be operated in HA mode, which allows running multiple Marathon inst
 
 ZooKeeper is used by numerous services in DC/OS to provide consistency. ZooKeeper can be used as a distributed locking service, a state store, and a messaging system. ZooKeeper uses Paxos-like log replication and a leader/follower architecture to maintain consistency across multiple ZooKeeper instances. For a more detailed explanation of how ZooKeeper works, check out the [ZooKeeper internals document](https://zookeeper.apache.org/doc/r3.4.8/zookeeperInternals.html).
 
-### Fault domain isolation
+# Fault domain isolation
 
 Fault domain isolation is an important part of building HA systems. In order to correctly handle failure scenarios, systems must be distributed across fault domains in order survive outages. There are different types of fault domains, a few examples of which are:
 
  * Physical domains: this includes machine, rack, datacenter, region, availability zone,   and so on.
  * Network domains: machines within the same network may be subject  to network partitions. For example, a shared network switch may fail or have  invalid configuration.
 
-With DC/OS, you can distribute masters across racks for HA, or across DCs and regions. Agents may be distributed across regions or DCs, and it's recommended that you tag agents with attributes to describe their location. Synchronous services like ZooKeeper should also remain within the same region/DC to reduce network latency. For more information, see the multi-AZ [documentation](/docs/1.9/administration/installing/high-availability-setup/).
+With DC/OS, you can distribute masters across racks for HA, or across regions. Agents may be distributed across regions, and it's recommended that you tag agents with attributes to describe their location. Synchronous services like ZooKeeper should also remain within the same region to reduce network latency. For more information, see the Configuring High-Availibility [documentation](/docs/1.9/administration/high-availability/).
 
 For applications which require HA, they should also be distributed across fault domains. With Marathon, this can be accomplished by using the [`UNIQUE`  and `GROUP_BY` constraints operator](https://mesosphere.github.io/marathon/docs/constraints.html).
 
-### Separation of concerns
+# Separation of concerns
 
 HA services should be decoupled, with responsibilities divided amongst services. For example, web services should be decoupled from databases and shared caches.
 
-### Eliminating single points of failure
+# Eliminating single points of failure
 
 Single points of failure come in many forms. A service like ZooKeeper, for example, can become a single point of failure when every service in your system shares one ZooKeeper cluster. You can reduce risks by running multiple ZooKeeper clusters for separate services. With DC/OS, there's an [Exhibitor package](https://github.com/mesosphere/exhibitor-dcos) included which makes this easy:
 
@@ -50,11 +50,11 @@ $ dcos package install exhibitor
 
 Other common single points of failure include: single database instances (like a MySQL), one-off services, and non-HA load balancers.
 
-### Fast failure detection
+# Fast failure detection
 
 Fast failure detection comes in many forms. Services like ZooKeeper can be used to provide failure detection, such as detecting network partitions or host failures. Service health checks can also be used to detect certain types of failures. As a matter of best practice, services *should* expose health check endpoints, which can be used by services like Marathon.
 
-### Fast failover
+# Fast failover
 
 When failures do occur, failover [should be as fast as possible](https://en.wikipedia.org/wiki/Fail-fast). Fast failover can be achieved by:
 
