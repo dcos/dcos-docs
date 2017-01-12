@@ -8,9 +8,9 @@ You must first obtain an authentication token and then include it in your HTTP r
 
 Authentication tokens expire after 5 days. You can view the expiration time in the ["exp" (Expiration Time) Claim](https://tools.ietf.org/html/rfc7519#section-4.1.4) of the JSON Web Token (JWT). You can refresh your token by re-logging in to DC/OS.
 
-# Generate the authentication token
+# Obtain an authentication token
 
-You can obtain your authentication token using DC/OS CLI. When you log into the DC/OS CLI, you paste an OpenID Connect token into your terminal prompt. This OpenID Connect token logs you into DC/OS CLI but does not allow you to access the HTTP API endpoints. You must obtain an authentication token to gain access to the HTTP API endpoints. Complete the following steps to obtain your authentication token.
+You can obtain your authentication token using DC/OS CLI. When you log into the DC/OS CLI, you paste an OpenID Connect ID token into your terminal prompt. This OpenID Connect ID token logs you into DC/OS CLI but does not allow you to access the HTTP API endpoints. You must obtain an authentication token to gain access to the HTTP API endpoints. Complete the following steps to obtain your authentication token.
 
 [Log in to the DC/OS CLI](/docs/1.8/administration/id-and-access-mgt/managing-authentication#log-in-cli).
 
