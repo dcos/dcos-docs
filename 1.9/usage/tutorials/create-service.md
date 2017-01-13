@@ -11,7 +11,7 @@ You can run DC/OS services you create or install a package from the [Universe pa
 Services you create yourself are administered by Marathon and can be configured and run [from the DC/OS CLI](/docs/1.9/usage/cli/command-reference/) with `dcos marathon` subcommands (eg `dcos marathon app add myapp.json`) or via the DC/OS web interface.
 
 # Universe Package Repository
-Packaged DC/OS services created by Mesosphere or the community, like Spark or Kafka, appear on the **Universe** tab of the DC/OS web interface, or you can search for a package from [the DC/OS CLI](/docs/1.9/usage/cli/command-reference/). You can configure and run Universe services from the DC/OS web interface or via the DC/OS CLI with the `dcos package install <package-name>` command. Visit the [Managing Services](/docs/1.9/usage/managing-services/) section to learn more about installing, configuring, and uninstalling services in Universe.
+Packaged DC/OS services created by Mesosphere or the community, like Spark or Kafka, appear on the **Packages** tab of the DC/OS web interface, or you can search for a package from [the DC/OS CLI](/docs/1.9/usage/cli/command-reference/). You can configure and run Universe services from the DC/OS web interface or via the DC/OS CLI with the `dcos package install <package-name>` command. Visit the [Managing Services](/docs/1.9/usage/managing-services/) section to learn more about installing, configuring, and uninstalling services in Universe.
 
 # Create and Run Your Own DC/OS Service
 In this tutorial, we'll go over creating a simple one-command service and a containerized service using both the DC/OS web interface and the CLI.

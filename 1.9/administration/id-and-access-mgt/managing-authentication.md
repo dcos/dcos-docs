@@ -15,7 +15,7 @@ Users are granted access to DC/OS by another authorized user. A default user is 
 
 To manage users:
 
-1.  Launch the DC/OS web interface and login with your username (Google, GitHub, and Microsoft) and password.
+1.  Launch the DC/OS web interface and log in with your username (Google, GitHub, and Microsoft) and password.
 
 2.  Click on the **System** -> **Organization** tab and choose your action.
 
@@ -36,13 +36,13 @@ To manage users:
 
     To switch users, you must log out of the current user and then back in as the new user.
 
-    *   To log out of the DC/OS web interface, click on your username in the upper-left side and select **Sign Out**.
+    *   To log out of the DC/OS web interface, click on your username in the top left corner and select **Sign Out**.
 
         ![log out](../img/auth-enable-logout-user.gif)
 
         You can now log in as another user.
 
-    *   To log out of the DC/OS CLI, enter the this command:
+    *   To log out of the DC/OS CLI, enter this command:
 
         ```bash
         $ dcos config unset core.dcos_acs_token
@@ -57,7 +57,7 @@ Authentication is only supported for DC/OS CLI version 0.4.3 and above. See [her
 
 The DC/OS CLI stores the token in a configuration file in the `.dcos` directory under the home directory of the user running the CLI. This token can be used with the curl command to access DC/OS APIs, using curl or wget. For example, `curl -H 'Authorization: token=<token>' http://cluster`.
 
-1.  Run this CLI command to authenticate to your cluster:
+1.  From a terminal prompt, use the following command to authenticate to your cluster.
 
     ```bash
     $ dcos auth login
@@ -70,22 +70,32 @@ The DC/OS CLI stores the token in a configuration file in the `.dcos` directory 
 
         https://<public-master-ip>/login?redirect_uri=urn:ietf:wg:oauth:2.0:oob
 
-    Enter authentication token:
+    Enter OpenID Connect ID Token:
     ```
 
-1.  Paste the link from the CLI into your browser and sign in.
+1.  Copy the URL in your terminal prompt and paste it into your browser.
 
-    ![alt](../img/auth-login.gif)
+    ![alt](../img/auth-login.png)
 
-1.  Copy the authentication token from your browser.
+1.  Click the button that corresponds to your preferred identity provider. 
 
-    ![alt](../img/auth-login-token.gif)
+1.  Provide your credentials to the identity provider if prompted. If you have already authenticated to the identity provider during your current browser session, you won't need to do so again.  
 
-1.  Paste the authentication token in to your terminal.
+    ![alt](../img/auth-login-token.png)
+    
+1.  Click **Copy to Clipboard**.
+
+1.  Return to your terminal prompt and paste the OpenID Connect ID token value in at the prompt.
+
+1.  You should receive the following message.
+
+    ```bash
+    Login successful!
+    ```
 
 ## Logging out of the DC/OS CLI
 
-To logout, run this command:
+To log out, run this command:
 
 ```bash
 $ dcos auth logout
@@ -93,7 +103,7 @@ $ dcos auth logout
 
 ## Debugging
 
-To debug authentication problems, refer to the Admin Router and dcos-oauth logs on the masters, you can run:
+To debug authentication problems, check the Admin Router and dcos-oauth logs on the masters using the following commands.
 
 ```bash
 $ sudo journalctl -u dcos-adminrouter.service
@@ -135,9 +145,7 @@ security features as well as on introducing new ones in the coming releases.
 
 ## Next Steps
 
-- [Understand DC/OS security](/docs/1.9/administration/securing-your-cluster/)
-- [Learn how to monitor a DC/OS cluster](/docs/1.9/administration/monitoring/)
+- [Understand DC/OS security](/docs/1.8/administration/securing-your-cluster/)
+- [Learn how to monitor a DC/OS cluster](/docs/1.8/administration/monitoring/)
 
  [1]: https://en.wikipedia.org/wiki/STARTTLS
-
-

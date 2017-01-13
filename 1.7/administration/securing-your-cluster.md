@@ -40,7 +40,7 @@ Copy the certificate and private key to a well known location, such as under
 `/etc/ssl/certs`. It's suggested that you change the permissions of the
 private key to not be world-readable. Edit the Admin Router `nginx.conf`, by
 opening the file located at
-`/opt/mesosphere/active/adminrouter/nginx/conf`. Modify the nginx
+`/opt/mesosphere/active/adminrouter/nginx/conf`. Modify the NGINX
 configuration `server` section, to look like this:
 
 ```
@@ -104,7 +104,7 @@ A typical AWS deployment including AWS Load Balancers is shown below:
 Access to the admin zone is controlled by the Admin Router.
 
 HTTP requests incoming to your DC/OS cluster are proxied through the Admin
-Router (using [Nginx](http://nginx.org) with
+Router (using [NGINX](http://nginx.org) with
 [OpenResty](https://openresty.org) at its core). The Admin Router denies
 access to most HTTP endpoints for unauthenticated requests. In order for a
 request to be authenticated, it needs to present a valid authentication token

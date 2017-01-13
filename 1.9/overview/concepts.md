@@ -4,12 +4,8 @@ nav_title: Concepts
 menu_order: 5
 ---
 
-- [DC/OS Concepts](#dcos-concepts)
-- [Mesos Concepts](#mesos-concepts)
-- [Marathon Concepts](#marathon-concepts)
 
-
-## <a name="dcos-concepts"></a>DC/OS Concepts
+# <a name="dcos-concepts"></a>DC/OS Concepts
 
 DC/OS is made up of many open source components, several of which existed before DC/OS. The terms used in this document may be similar to pre-existing terms that you are familiar with, however, they might be used in a different way with DC/OS.
 
@@ -41,6 +37,7 @@ DC/OS is made up of many open source components, several of which existed before
 - [Package Manager](#dcos-package-manager)
 - [Package Registry](#dcos-package-registry)
 - [Mesosphere Universe](#mesosphere-universe)
+- [Container-Registry](#container-registry)
 - [Cloud Template](#cloud-template)
 
 ### <a name="dcos"></a>DC/OS
@@ -51,7 +48,7 @@ DC/OS is a [distributed operating system](https://en.wikipedia.org/wiki/Distribu
 - Unlike traditional [operating systems](https://en.wikipedia.org/wiki/Operating_system), DC/OS runs on a [cluster of nodes](#cluster), instead of a single machine. Each DC/OS node also has a [host operating system](#host-operating-system) that manages the underlying machine.
 - DC/OS is made up of many components, most notably a distributed systems kernel ([Mesos](#mesos)) and a container orchestration engine ([Marathon](#marathon)).
 - Prior to version 1.6, DC/OS was known as The Datacenter Operating System (DCOS). With version 1.6 the platform was renamed to DC/OS and open sourced.
-- While the core of DC/OS is open source, premium distributions like [Mesosphere Enterprise DC/OS](https://mesosphere.com/product/) may include additional components and features (e.g. multitenancy, fine-grained permissions, secrets management, and end-to-end encryption).
+- While DC/OS itself is open source, premium distributions like [Mesosphere Enterprise DC/OS](https://mesosphere.com/product/) may include additional closed-source components and features (e.g. multitenancy, fine-grained permissions, secrets management, and end-to-end encryption).
 
 ### <a name="dcos-gui"></a>DC/OS GUI
 
@@ -92,7 +89,7 @@ A DC/OS node is a virtual or physical machine on which a Mesos agent and/or Meso
 A DC/OS master node is a virtual or physical machine that runs a collection of DC/OS components that work together to manage the rest of the cluster.
 
 - Each master node contains multiple DC/OS components, including most notably a [Mesos master](#mesos-master) process.
-- Master nodes work in a [quorum](https://en.wikipedia.org/wiki/Quorum_(distributed_computing&#41;) to provide consistency of cluster coordination. To avoid [split brain](https://en.wikipedia.org/wiki/Split-brain_(computing&#41;) cluster partitioning, clusters should always have an odd number of master nodes. For example, having three master nodes allows one to be down; having five master nodes allows two to be down, allowing for failure during a rolling update. Additional master nodes can be added for additional risk tolerance.
+- Master nodes work in a [quorum](https://en.wikipedia.org/wiki/Quorum_%28distributed_computing%29) to provide consistency of cluster coordination. To avoid [split brain](https://en.wikipedia.org/wiki/Split-brain_%28computing%29) cluster partitioning, clusters should always have an odd number of master nodes. For example, having three master nodes allows one to be down; having five master nodes allows two to be down, allowing for failure during a rolling update. Additional master nodes can be added for additional risk tolerance.
 - A cluster with only one master node is usable for development, but is not highly available and may not be able to recover from failure.
 
 #### <a name="dcos-agent-node"></a>Agent Node
@@ -106,7 +103,7 @@ For more information, see [Network Security](/docs/1.9/administration/securing-y
 
 ##### <a name="private-agent-node"></a>Private Agent Node
 
-A private agent node is an agent node that is on a network that *does not* have ingress access from outside of the cluster via the cluster’s infrastructure networking.
+A private agent node is an agent node that is on a network that *does not* allow ingress from outside of the cluster via the cluster’s infrastructure networking.
 
 - The Mesos agent on each private agent node is, by default, configured with none of its resources allocated to any specific Mesos roles (`*`).
 - Most service packages install by default on private agent nodes.
@@ -114,7 +111,7 @@ A private agent node is an agent node that is on a network that *does not* have 
 
 ##### <a name="public-agent-node"></a>Public Agent Node
 
-A public agent node is an agent node that is on a network that *does* have ingress access from outside of the cluster via the cluster’s infrastructure networking.
+A public agent node is an agent node that is on a network that *does* allow ingress from outside of the cluster via the cluster’s infrastructure networking.
 
 - The Mesos agent on each public agent node is configured with the `public_ip:true` agent attribute and all of its resources allocated to the `slave_public` role.
 - Public agent nodes are used primarily for externally facing reverse proxy load balancers, like [Marathon-LB](/docs/1.9/usage/service-discovery/marathon-lb/).
@@ -240,7 +237,7 @@ The DC/OS package manager ([Cosmos](https://github.com/dcos/cosmos)) is a compon
 
 ### <a name="dcos-package-registry"></a>Package Registry
 
-A DC/OS package registry is a repository of packages.
+A DC/OS package registry is a repository of DC/OS packages.
 
 - The [DC/OS package manager](#dcos-package-manager) may be configured to install packages from one or more package registries.
 
@@ -250,6 +247,12 @@ The Mesosphere Universe is a public package registry, managed by Mesosphere.
 
 For more information, see the [Universe repository](https://github.com/mesosphere/universe) on GitHub.
 
+### <a name="container-registry"></a>Container Registry
+
+A container registry is a repository of pre-built container images.
+
+The [Docker Runtime](#mesos-docker-runtime) and [Mesos Container Runtime](#mesos-universal-container-runtime) can both pull and run Docker images from public or private Docker container registries.
+
 ### <a name="cloud-template"></a>Cloud Template
 
 A cloud template is an infrastructure-specific method of decoratively describing a DC/OS cluster.
@@ -257,7 +260,7 @@ A cloud template is an infrastructure-specific method of decoratively describing
 For more information, see [Cloud Installation Options](/docs/1.9/administration/installing/cloud/).
 
 
-## <a name="mesos-concepts"></a>Mesos Concepts
+# <a name="mesos-concepts"></a>Mesos Concepts
 
 The following terms are contextually correct when talking about Apache Mesos, but may be hidden by other abstraction within DC/OS.
 
@@ -365,7 +368,7 @@ Mesos-DNS is a DC/OS component that provides service discovery within the cluste
 
 For more information, see the [Mesos-DNS documentation](/docs/1.9/usage/service-discovery/mesos-dns/).
 
-## <a name="marathon-concepts"></a>Marathon Concepts
+# <a name="marathon-concepts"></a>Marathon Concepts
 
 The following terms are contextually correct when talking about Marathon, but may be hidden by other abstraction within DC/OS.
 
@@ -399,4 +402,4 @@ A Marathon pod is a long-running service that may have one or more instances tha
 
 ### <a name="marathon-group"></a>Group
 
-A Marathon group is a set of services (applications and/or pods) within a hierarchical directory [path](https://en.wikipedia.org/wiki/Path_(computing&#41;) structure for namespacing and organization.
+A Marathon group is a set of services (applications and/or pods) within a hierarchical directory [path](https://en.wikipedia.org/wiki/Path_%28computing%29) structure for namespacing and organization.

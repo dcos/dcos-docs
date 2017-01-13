@@ -9,7 +9,7 @@ To continuously improve the DC/OS experience, a telemetry component is included 
 - [User interface telemetry](#user-interface)
 
 # <a name="core"></a>Core telemetry
-The DC/OS [Signal](/docs/1.9/overview/components/#signal) component queries the diagnostics service `/system/health/v1/report` endpoint on the leading master and sends this data to [Segment](https://segment.com/docs/) which Mesosphere then uses to track usage metrics and customer support.  
+The [DC/OS Signal](/docs/1.9/overview/architecture/components/#dcos-signal) component queries the diagnostics service `/system/health/v1/report` endpoint on the leading master and sends this data to [Segment](https://segment.com/docs/) which Mesosphere then uses to track usage metrics and customer support.
 
 The information collected by the Signal component is separated into these categories: Diagnostics, Mesos, and Package service. 
 
@@ -64,14 +64,14 @@ For each category this data is collected:
 
 ## Diagnostics
 
-This information is collected from the DC/OS [Diagnostics](/docs/1.9/overview/components/#diagnostics) component. For every systemd unit, the following information is collected, where `<UNIT_NAME>` is component name:
+This information is collected from the [DC/OS Diagnostics](/docs/1.9/overview/architecture/components/#dcos-diagnostics) component. For every systemd unit, the following information is collected, where `<UNIT_NAME>` is component name:
 
 ```
 "health-unit-dcos-<UNIT_NAME>-total": 3, "health-unit-dcos-<UNIT_NAME>-unhealthy": 0,
 ```
 
 ## Mesos
-This information is collected from the DC/OS [Mesos Master](/docs/1.9/overview/components/#mesos-master) component.
+This information is collected from the [Apache Mesos](/docs/1.9/overview/architecture/components/#apache-mesos) component.
 
 <table class="table">
 <tr>
@@ -103,8 +103,8 @@ This information is collected from the DC/OS [Mesos Master](/docs/1.9/overview/c
 </table>
 
     
-## Package service
-This information is collected from the DC/OS [Package service](/docs/1.9/overview/components/#package-service) component.
+## Cosmos
+This information is collected from the [Cosmos](/docs/1.9/overview/architecture/components/#cosmos) component.
 
 <table class="table">
 <tr>

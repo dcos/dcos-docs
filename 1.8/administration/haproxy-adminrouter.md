@@ -61,7 +61,7 @@ These instructions provide a tested [HAProxy](http://www.haproxy.org/) configura
     
       # Overwrite Host header to 'dcoshost'. This makes the Location
       # header in DC/OS Admin Router upstream responses contain a
-      # predictable hostname (nginx uses this header value when
+      # predictable hostname (NGINX uses this header value when
       # constructing absolute redirect URLs). That value is used
       # in the response Location header rewrite logic (see regular
       # expression-based rewrite in the backend section below).

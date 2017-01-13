@@ -200,7 +200,7 @@ To install DC/OS:
 
     **Tip:** For the install script to work, you must have created `genconf/config.yaml` and `genconf/ip-detect`.
 
-1.  <a name="nginx"></a>From your home directory, run this command to host the DC/OS install package through an nginx Docker container. For `<your-port>`, specify the port value that is used in the `bootstrap_url`.
+1.  <a name="nginx"></a>From your home directory, run this command to host the DC/OS install package through an NGINX Docker container. For `<your-port>`, specify the port value that is used in the `bootstrap_url`.
 
     ```bash
     $ sudo docker run -d -p <your-port>:80 -v $PWD/genconf/serve:/usr/share/nginx/html:ro nginx
@@ -222,7 +222,7 @@ To install DC/OS:
         $ mkdir /tmp/dcos && cd /tmp/dcos
         ```
 
-    3.  Download the DC/OS installer from the nginx Docker container, where `<bootstrap-ip>` and `<your_port>` are specified in `bootstrap_url`:
+    3.  Download the DC/OS installer from the NGINX Docker container, where `<bootstrap-ip>` and `<your_port>` are specified in `bootstrap_url`:
 
         ```bash
         $ curl -O http://<bootstrap-ip>:<your_port>/dcos_install.sh
@@ -248,7 +248,7 @@ To install DC/OS:
         $ mkdir /tmp/dcos && cd /tmp/dcos
         ```
 
-    3.  Download the DC/OS installer from the nginx Docker container, where `<bootstrap-ip>` and `<your_port>` are specified in `bootstrap_url`:
+    3.  Download the DC/OS installer from the NGINX Docker container, where `<bootstrap-ip>` and `<your_port>` are specified in `bootstrap_url`:
 
         ```bash
         $ curl -O http://<bootstrap-ip>:<your_port>/dcos_install.sh

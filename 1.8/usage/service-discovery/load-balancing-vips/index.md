@@ -32,7 +32,7 @@ We also recommend taking advantage of Mesos health checks. Mesos health checks a
  
  This ensures the HTTP status code returned is 200. It also assumes your application binds to localhost. The `${PORT0}` is set as a variable by Marathon. We do not recommend using TCP health checks because they can provide misleading status information about a service.
  
- **Important:** Docker container command health checks are run inside the Docker container. For example, if cURL is used to check nginx, the nginx container must have cURL installed, or the container must mount `/opt/mesosphere` in RW mode.
+ **Important:** Docker container command health checks are run inside the Docker container. For example, if cURL is used to check NGINX, the NGINX container must have cURL installed, or the container must mount `/opt/mesosphere` in RW mode.
 
 ### Demo
 If you would like to run a demo, you can configure a Marathon app as mentioned above, and use the URI `https://s3.amazonaws.com/sargun-mesosphere/linux-amd64`, as well as the command `chmod 755 linux-amd64 && ./linux-amd64 -listener=:${PORT0} -say-string=version1` to execute it. You can then test it by hitting the application with the command: `curl http://1.2.3.4:5000`. This app exposes an HTTP API. This HTTP API answers with the PID, hostname, and the 'say-string' that's specified in the app definition. In addition, it exposes a long-running endpoint at `http://1.2.3.4:5000/stream`, which will continue to stream until the connection is terminated. The code for the application is available here: `https://github.com/mesosphere/helloworld`.

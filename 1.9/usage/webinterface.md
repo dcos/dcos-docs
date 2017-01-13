@@ -6,16 +6,6 @@ menu_order: 0
 
 The DC/OS web interface provides a rich graphical view of your DC/OS cluster. With the web interface you can view the current state of your entire cluster and DC/OS services. The web interface is installed as a part of your DC/OS installation.
 
-There main tabs in the DC/OS UI are:
-
-- [Dashboard](#dashboard)
-- [Services](#services)
-- [Jobs](#jobs)
-- [Network](#network)
-- [Nodes](#nodes)
-- [Universe](#universe)
-- [System](#system)
-
 Additionally, there is a User Menu on the upper-left side of the web interface that includes links for documentation, CLI installation, and user sign out.
 
 # <a name="dashboard"></a>Dashboard
@@ -63,6 +53,12 @@ The Jobs tab provides native support for creating and administering scheduled jo
 
 ![Jobs](../img/dcos-jobs.png)
 
+# <a name="universe"></a>Packages
+
+The Packages tab shows all of the available DC/OS services from package [repositories](/docs/1.9/usage/repo/). You can install packages from the DC/OS Universe with a single click. The packages can be installed with defaults or customized directly in the web interface.
+
+![universe](../img/ui-dashboard-universe.gif)
+
 # <a name="nodes"></a>Nodes
 
 The Nodes tab provides a comprehensive view of all of the nodes that are used across your cluster. You can view a graph that shows the allocation percentage rate for CPU, memory, or disk.
@@ -77,25 +73,19 @@ You can switch to **Grid** view to see a "donuts" percentage visualization.
 
 Clicking on a node opens the Nodes side panel, which provides CPU, memory, and disk usage graphs and lists all tasks on the node. Use the dropdown or a custom filter to sort tasks and click on details for more information. Click on a task listed on the Nodes side panel to see detailed information about the task’s CPU, memory, and disk usage and the task’s files and directory tree.
 
-# <a name="network"></a>Network
+# <a name="network"></a>Networking
 
-The Network tab provides information helpful for troubleshooting your virtual networks. You can see which containers are on which network and see their IP addresses. For more information, see the [documentation](/docs/1.9/administration/overlay-networks/ip-per-container/).
+The Network tab provides information for troubleshooting your virtual networks. You can see which containers are on which network and see their IP addresses. For more information, see the [documentation](/docs/1.9/administration/virtual-networks/ip-per-container/).
 
 ![Network](../img/ui-dashboard-network.gif)
-
-# <a name="universe"></a>Universe
-
-The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.9/usage/repo/). You can install packages from the DC/OS Universe with a single click. The packages can be installed with defaults or customized directly in the web interface.
-
-![universe](../img/ui-dashboard-universe.gif)
 
 # <a name="system"></a>System
 
 The System tab provides access to the administration controls of DC/OS. From this tab you can:
 
-- View the system health of your DC/OS components
-- Manage your DC/OS package repositories
-- Manage user access
+- View the system health of your DC/OS components from the **Components** tab.
+- Manage your DC/OS package repositories from the **Settings** tab.
+- Manage user access from the **Organization** tab.
 
 ![system](../img/ui-dashboard-system1.gif)
 

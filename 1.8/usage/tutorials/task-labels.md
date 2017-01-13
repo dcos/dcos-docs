@@ -1,21 +1,21 @@
 ---
-post_title: Labeling Tasks
+post_title: Labeling Tasks and Jobs
 menu_order: 12
 ---
 
-This tutorial illustrates how labels can be defined using the DC/OS web interface and the Marathon HTTP API, and how information pertaining to applications that are running can be queried based on label value criteria.
+This tutorial illustrates how labels can be defined using the DC/OS web interface and the Marathon HTTP API, and how information pertaining to applications and jobs that are running can be queried based on label value criteria.
 
-When you deploy applications or containers in a DC/OS cluster, you can associate a tag or label with your deployed components in order to track and report usage of the cluster by those components. For example, you may want to assign a cost center identifier or a customer number to a Mesos application and produce a summary report at the end of the month with usage metrics such as the amount of CPU and memory allocated to the applications by cost center or customer.
+When you deploy applications, containers, or jobs in a DC/OS cluster, you can associate a tag or label with your deployed components in order to track and report usage of the cluster by those components. For example, you may want to assign a cost center identifier or a customer number to a Mesos application and produce a summary report at the end of the month with usage metrics such as the amount of CPU and memory allocated to the applications by cost center or customer.
 
 # Assigning Labels to Applications and Tasks
 
 You can attach labels to tasks either via the **Services** tab of the DC/OS web interface or from the DC/OS CLI. You can specify more than one label, but each label can have only one value.
 
-## Assign a Label from the DC/OS Web Interface
+## Assign a Label to an Application or Task from the DC/OS Web Interface
 
 From the DC/OS web interface, click the **Services** tab. You can add labels when you deploy a new service or edit an existing one from the **Labels** tab.
 
-## Assign a label from the DC/OS CLI
+## Assign a Label to an Application or Task from the DC/OS CLI
 
 You can also specify label values in the `labels` parameter of your application definition. 
 
@@ -39,6 +39,42 @@ Then, deploy from the DC/OS CLI:
 
 ```bash
 $ dcos marathon app add <myapp>.json
+```
+
+# Assigning Labels to Jobs
+
+You can attach labels to jobs either via the **Jobs** tab of the DC/OS web interface or from the DC/OS CLI. You can specify more than one label, but each label can have only one value.
+
+## Assign a Label to a Job from the DC/OS Web Interface
+
+From the DC/OS web interface, click the **Jobs** tab. You can add labels when you deploy a new job or edit an existing one from the **Labels** tab.
+
+## Assign a Label to a Job from the DC/OS CLI
+
+You can also specify label values in the `labels` parameter of your job definition. 
+
+    $ vi myjob.json
+    
+     ```json
+        {
+          "id": "my-job",
+          "description": "A job that sleeps",
+          "labels": {
+            "department": "marketing"
+          },
+          "run": {
+            "cmd": "sleep 1000",
+            "cpus": 0.01,
+            "mem": 32,
+            "disk": 0
+          }
+        }
+     ```
+
+Then, deploy from the DC/OS CLI:
+
+```bash
+$ dcos marathon job add <myjob>.json
 ```
 
 # Displaying Label Information

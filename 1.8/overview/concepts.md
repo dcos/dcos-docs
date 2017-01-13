@@ -106,7 +106,7 @@ For more information, see [Network Security](/docs/1.8/administration/securing-y
 
 ##### <a name="private-agent-node"></a>Private Agent Node
 
-A private agent node is an agent node that is on a network that *does not* have ingress access from outside of the cluster via the cluster’s infrastructure networking.
+A private agent node is an agent node that is on a network that *does not* allow ingress from outside of the cluster via the cluster’s infrastructure networking.
 
 - The Mesos agent on each private agent node is, by default, configured with none of its resources allocated to any specific Mesos roles (`*`).
 - Most service packages install by default on private agent nodes.
@@ -114,7 +114,7 @@ A private agent node is an agent node that is on a network that *does not* have 
 
 ##### <a name="public-agent-node"></a>Public Agent Node
 
-A public agent node is an agent node that is on a network that *does* have ingress access from outside of the cluster via the cluster’s infrastructure networking.
+A public agent node is an agent node that is on a network that *does* allow ingress from outside of the cluster via the cluster’s infrastructure networking.
 
 - The Mesos agent on each public agent node is configured with the `public_ip:true` agent attribute and all of its resources allocated to the `slave_public` role.
 - Public agent nodes are used primarily for externally facing reverse proxy load balancers, like [Marathon-LB](/docs/1.8/usage/service-discovery/marathon-lb/).

@@ -101,7 +101,7 @@ In this tutorial, a custom Docker app is created and added to Marathon.
 
     This file specifies a simple Marathon application called “nginx” that runs one instance of itself on a public node.
 
-3.  Add the nginx Docker container to Marathon by using the DC/OS command:
+3.  Add the NGINX Docker container to Marathon by using the DC/OS command:
 
     ```bash
     $ dcos marathon app add nginx.json

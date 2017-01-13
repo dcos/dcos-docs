@@ -22,7 +22,7 @@ dcos-logrotate.timer             dcos-spartan.service
 ```
 
 ## Admin Router Service
-Admin Router is our core internal load balancer. Admin Router is a customized [Nginx](https://www.nginx.com/resources/wiki/) which allows us to proxy all the internal services on :80.
+Admin Router is our core internal load balancer. Admin Router is a customized [NGINX](https://www.nginx.com/resources/wiki/) which allows us to proxy all the internal services on :80.
 
 Without Admin Router being up, you could not access the DC/OS UI. Admin Router is a core component of the DC/OS ecosystem.
 

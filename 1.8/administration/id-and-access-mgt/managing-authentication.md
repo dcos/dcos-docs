@@ -57,7 +57,7 @@ Authentication is only supported for DC/OS CLI version 0.4.3 and above. See [her
 
 The DC/OS CLI stores the token in a configuration file in the `.dcos` directory under the home directory of the user running the CLI. This token can be used with the curl command to access DC/OS APIs, using curl or wget. For example, `curl -H 'Authorization: token=<token>' http://cluster`.
 
-1.  Run this CLI command to authenticate to your cluster:
+1.  From a terminal prompt, use the following command to authenticate to your cluster.
 
     ```bash
     $ dcos auth login
@@ -70,18 +70,28 @@ The DC/OS CLI stores the token in a configuration file in the `.dcos` directory 
 
         https://<public-master-ip>/login?redirect_uri=urn:ietf:wg:oauth:2.0:oob
 
-    Enter authentication token:
+    Enter OpenID Connect ID Token:
     ```
 
-1.  Paste the link from the CLI into your browser and sign in.
+1.  Copy the URL in your terminal prompt and paste it into your browser.
 
-    ![alt](../img/auth-login.gif)
+    ![alt](../img/auth-login.png)
 
-1.  Copy the authentication token from your browser.
+1.  Click the button that corresponds to your preferred identity provider. 
 
-    ![alt](../img/auth-login-token.gif)
+1.  Provide your credentials to the identity provider if prompted. If you have already authenticated to the identity provider during your current browser session, you won't need to do so again.  
 
-1.  Paste the authentication token in to your terminal.
+    ![alt](../img/auth-login-token.png)
+    
+1.  Click **Copy to Clipboard**.
+
+1.  Return to your terminal prompt and paste the OpenID Connect ID token value in at the prompt.
+
+1.  You should receive the following message.
+
+    ```bash
+    Login successful!
+    ```
 
 ## Logging out of the DC/OS CLI
 
@@ -139,5 +149,3 @@ security features as well as on introducing new ones in the coming releases.
 - [Learn how to monitor a DC/OS cluster](/docs/1.8/administration/monitoring/)
 
  [1]: https://en.wikipedia.org/wiki/STARTTLS
-
-

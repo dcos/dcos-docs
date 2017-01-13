@@ -26,7 +26,7 @@ DC/OS components use `systemd-journald` to store their logs. To access the DC/OS
 $ journalctl -u "dcos-*" -b
 ```
 
-You can view the logs for specific [components](/docs/1.9/overview/components/) by entering the component name. For example, to access Admin Router logs, run this command:
+You can view the logs for specific [components](/docs/1.9/overview/architecture/components/) by entering the component name. For example, to access Admin Router logs, run this command:
     
 ```bash
 journalctl -u dcos-nginx -b

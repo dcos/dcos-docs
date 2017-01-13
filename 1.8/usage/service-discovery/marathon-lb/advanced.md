@@ -36,7 +36,7 @@ To specify a global template:
 
 ### Per-app Templates
 
-To create a template for an individual app, modify the application definition. In the example below, the default template for the external nginx application definition (`nginx-external.json`) has been modified to *disable* HTTP keep-alive. While this is an artificial example, there may be cases where you need to override certain defaults per-application.
+To create a template for an individual app, modify the application definition. In the example below, the default template for the external NGINX application definition (`nginx-external.json`) has been modified to *disable* HTTP keep-alive. While this is an artificial example, there may be cases where you need to override certain defaults per-application.
 
     {
       "id": "nginx-external",
@@ -126,7 +126,7 @@ To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
     **Note: If you’re not already running an external Marathon-LB instance, launch it with `dcos package install Marathon-LB`.**
 
-2.  Launch your nginx test instance. The JSON app definition [can be found here][8]. Save the file, and launch with:
+2.  Launch your NGINX test instance. The JSON app definition [can be found here][8]. Save the file, and launch with:
 
         $ dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/84d0ab8ac057aaacba05/raw/d028fa9477d30b723b140065748e43f8fd974a84/nginx.json
 
@@ -134,17 +134,17 @@ To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
         $ dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/fe3fb0c13c19a96c362e/raw/32280a39e1a8a6fe2286d746b0c07329fedcb722/siege.json
 
-    Now, if you check the HAProxy status page, you should see requests hitting the nginx instance:
+    Now, if you check the HAProxy status page, you should see requests hitting the NGINX instance:
 
     ![image02](../img/image02-800x508.png)
 
-    Under the “Session rate” section, you can see there are currently about 54 requests per second on the nginx fronted.
+    Under the “Session rate” section, you can see there are currently about 54 requests per second on the NGINX fronted.
 
 4.  Scale the siege app so that we generate a large number of HTTP requests:
 
         $ dcos marathon app update /siege instances=15
 
-    After a few minutes you will see that the nginx app has been automatically scaled up to serve the increased traffic.
+    After a few minutes you will see that the NGINX app has been automatically scaled up to serve the increased traffic.
 
 5.  Experiment with the parameters for marathon-lb-autoscale (which are [documented here][14]). Try changing the interval, number of samples, and other values until you achieve the desired effect. The default values are fairly conservative, which may or may not meet your expectations. It’s suggested that you include a 50 percent safety factor in the target RPS. For example, if you measure your application as being able to meet SLAs at 1500 RPS with 1 CPU and 1GiB of memory, you may want to set the target RPS to 1000.
 

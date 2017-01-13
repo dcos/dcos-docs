@@ -5,9 +5,6 @@ menu_order: 10
 
 The purpose of the feature maturity phases is to educate customers, partners, and Mesosphere field and support organizations about the maturity and quality of features.
 
-- [Criteria](#criteria)
-- [Phases](#phases)
-
 # <a name="criteria"></a>Criteria
 
 ## Completeness

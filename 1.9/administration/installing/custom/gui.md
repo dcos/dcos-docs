@@ -137,13 +137,13 @@ The DC/OS installation creates these folders:
 
 6.  Click **Deploy** to install DC/OS on your cluster. If errors any errors are found, fix and then click **Retry**.
 
-    ![deploy](../img/dcos-gui-deploy.png)
+    ![deploy](../img/ui-installer-deploy.png)
 
     **Tip:** This step might take a few minutes, depending on the size of your cluster.
 
 7.  Click **Run Post-Flight**. If errors any errors are found, fix and then click **Retry**.
 
-    ![postflight](../img/dcos-gui-postflight.png)
+    ![postflight](../img/ui-installer-post-flight.png)
 
     **Tips:** 
     
@@ -157,7 +157,7 @@ The DC/OS installation creates these folders:
 
     You are done!
 
-    ![dashboard](../img/ui-dashboard.gif)
+    ![Dashboard](/docs/1.9/usage/img/dcos-gui.png)
 
 # <a name="backup"></a>(Optional) Backup your DC/OS installer files
 It is recommended that you save your DC/OS installer file immediately after installation completes and before you start using DC/OS. These installer files can be used to add more agent nodes to your cluster, including the [public agent][4] node.

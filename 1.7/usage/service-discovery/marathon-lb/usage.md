@@ -37,7 +37,7 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
 
         $ dcos package install --options=options.json marathon-lb
 
-3.  Now there are 2 load balancers: an internal load balancer and an external one, which was installed along with Marathon-LB. Launch an external version of nginx to demonstrate the features. Launch this app on DC/OS by pasting the JSON below into a file called `nginx-external.json`.
+3.  Now there are 2 load balancers: an internal load balancer and an external one, which was installed along with Marathon-LB. Launch an external version of NGINX to demonstrate the features. Launch this app on DC/OS by pasting the JSON below into a file called `nginx-external.json`.
 
         {
           "id": "nginx-external",
@@ -75,7 +75,7 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
 
     The application definition includes a special label with the key `HAPROXY_GROUP`. This label tells Marathon-LB whether or not to expose the application. The external Marathon-LB was started with the `--group` parameter set to `external`, which is the default.
 
-4.  Now, launch the internal nginx.
+4.  Now, launch the internal NGINX.
 
         {
           "id": "nginx-internal",
@@ -115,7 +115,7 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
 
     Notice that we’re specifying a servicePort parameter. The servicePort is the port that exposes this service on Marathon-LB. By default, port 10000 through to 10100 are reserved for Marathon-LB services, so you should begin numbering your service ports from 10000.
 
-    Add one more instance of nginx to be exposed both internally and externally:
+    Add one more instance of NGINX to be exposed both internally and externally:
 
         {
           "id": "nginx-everywhere",
@@ -147,7 +147,7 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
           }
         }
 
-    Note the servicePort does not overlap with the other nginx instances.
+    Note the servicePort does not overlap with the other NGINX instances.
 
     Service ports can be defined either by using port mappings (as in the examples above), or with the `ports` parameter in the Marathon app definition.
 
@@ -160,7 +160,7 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
         $ curl http://marathon-lb.marathon.mesos:10002/
         $ curl http://marathon-lb-internal.marathon.mesos:10002/
 
-    Each of these should return the nginx ‘Welcome’ page:
+    Each of these should return the NGINX ‘Welcome’ page:
 
     ![lb3](../img/lb3.jpg)
 
@@ -172,9 +172,9 @@ To test the vhost feature, navigate to the AWS console and look for your public 
 
 ![lb5](../img/lb5.jpg)
 
-Our ELB is able to route traffic to HAProxy. Next, let’s modify our nginx app to expose our service. To do this, you’ll need to get the public DNS name for the ELB from the `Description` tab. In this example, my public DNS name is `brenden-j-PublicSl-1LTLKZEH6B2G6-1145355943.us-west-2.elb.amazonaws.com`.
+Our ELB is able to route traffic to HAProxy. Next, let’s modify our NGINX app to expose our service. To do this, you’ll need to get the public DNS name for the ELB from the `Description` tab. In this example, my public DNS name is `brenden-j-PublicSl-1LTLKZEH6B2G6-1145355943.us-west-2.elb.amazonaws.com`.
 
-Modify the external nginx app to look like this:
+Modify the external NGINX app to look like this:
 
     {
       "id": "nginx-external",
@@ -207,7 +207,7 @@ Modify the external nginx app to look like this:
       }
     }
 
-We’ve added the label `HAPROXY_0_VHOST`, which tells Marathon-LB to expose nginx on the external load balancer with a virtual host. The `0` in the label key corresponds to the servicePort index, beginning from 0. If you had multiple servicePort definitions, you would iterate them as 0, 1, 2, and so on. Note that if you _do_ specify a vhost, you don't strictly need to provide a service port—Marathon will assign one for you.
+We’ve added the label `HAPROXY_0_VHOST`, which tells Marathon-LB to expose NGINX on the external load balancer with a virtual host. The `0` in the label key corresponds to the servicePort index, beginning from 0. If you had multiple servicePort definitions, you would iterate them as 0, 1, 2, and so on. Note that if you _do_ specify a vhost, you don't strictly need to provide a service port—Marathon will assign one for you.
 
 Now, if you navigate to the ELB public DNS address in your browser, you should see the following:
 

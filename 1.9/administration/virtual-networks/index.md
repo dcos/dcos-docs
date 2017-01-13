@@ -18,7 +18,7 @@ DC/OS virtual networks allow containers launched through the Mesos Containerizer
 
 **Note:** Isolation guarantees among subnets depend on your firewall policies.
 
-[Learn how to use virtual networks in your applications](/docs/1.8/usage/service-discovery/load-balancing-vips/overlay-networks/).
+[Learn how to use virtual networks in your applications](/docs/1.9/usage/service-discovery/load-balancing-vips/virtual-networks/).
 
 # Overview
 
@@ -36,11 +36,11 @@ The components of the virtual network interact in the following ways:
 
 - For intra-node IP discovery we use an overlay orchestrator called Virtual Network Service. This operator-facing system component is responsible for programming the overlay backend using a library called [lashup](https://github.com/dcos/lashup) that implements a gossip protocol to disseminate and coordinate overlay routing information among all Mesos agents in the DC/OS cluster.
 
-**Note:** Your network must adhere to the [DC/OS system requirements](/docs/1.8/administration/installing/custom/system-requirements/) to use DC/OS virtual networks.
+**Note:** Your network must adhere to the [DC/OS system requirements](/docs/1.9/administration/installing/custom/system-requirements/) to use DC/OS virtual networks.
 
 # Virtual Network Service: DNS
 
-The [Virtual Network Service](/docs/1.8/overview/components/)
+The [Virtual Network Service](/docs/1.9/overview/architecture/components/)
 maps names to IPs on your virtual network. You can use these DNS addresses to access your task:
 
 * **Container IP:** Provides the container IP address: `<taskname>.<framework_name>.containerip.dcos.thisdcos.directory`
@@ -53,7 +53,7 @@ Terminology:
 # Limitations
 * The DC/OS virtual network does not allow services to reserve IP addresses that result in ephemeral addresses for containers across multiple incarnations on the virtual network. This restriction ensures that a given client connects to the correct service.
 
-  [VIPs (virtual IP addresses)](/docs/1.8/usage/service-discovery/load-balancing-vips/) are built in to DC/OS and offer a clean way of allocating static addresses to services. If you are using virtual networks, you should use VIPs to access your services in order to support cached DNS requests and static IP addresses.
+  [VIPs (virtual IP addresses)](/docs/1.9/usage/service-discovery/load-balancing-vips/) are built in to DC/OS and offer a clean way of allocating static addresses to services. If you are using virtual networks, you should use VIPs to access your services in order to support cached DNS requests and static IP addresses.
 
 * The limitation on the total number of containers on the virtual network is the same as the number of IP addresses available on the overlay subnet. However, the limitation on the number of containers on an agent depends on the subnet (which will be a subset of the overlay subnet) allocated to the agent. For a given agent subnet, half the address space is allocated to the `MesosContainerizer` and the other half is allocated to the `DockerContainerizer`.
 

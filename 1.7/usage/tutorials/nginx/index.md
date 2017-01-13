@@ -45,7 +45,7 @@ Here's how the above `options.json` file configures our NGINX docker container:
 * `contentUrl`: This parameter is the URL to a file archive of a static website that we would like to serve using NGINX.
 * `contentDir`: This parameter is the name of the directory that gets created when the file specified using `contentUrl` is downloaded and uncompressed.
 
-Next, we are going to install nginx using this `options.json` file:
+Next, we are going to install NGINX using this `options.json` file:
 
 ```bash
 dcos package install nginx --options=options.json

@@ -61,7 +61,7 @@ It's worth nothing that point 3, above, are the tools you need to use. Here's a 
 #### Simplified BSD
 
 - Datadog
-- Nginx
+- NGINX
 
 #### MIT
 

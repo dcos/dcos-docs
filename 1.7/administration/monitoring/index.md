@@ -67,11 +67,11 @@ Here is an explanation of the components shown in the UI.
 
 ### Admin Router
 
-The Admin Router is an open-source Nginx configuration created by Mesosphere that provides central authentication and proxy to DC/OS services within the cluster.<!-- dcos-adminrouter.service/ -->
+The Admin Router is an open-source NGINX configuration created by Mesosphere that provides central authentication and proxy to DC/OS services within the cluster.<!-- dcos-adminrouter.service/ -->
 
 ### Admin Router Reloader
 
-Restarts the Admin Router Nginx server so that it can pick up new DNS resolutions, for example `master.mesos` and `leader.mesos`.<!-- dcos-adminrouter-reload.service/ -->
+Restarts the Admin Router NGINX server so that it can pick up new DNS resolutions, for example `master.mesos` and `leader.mesos`.<!-- dcos-adminrouter-reload.service/ -->
 
 ### Admin Router Reloader Timer
 

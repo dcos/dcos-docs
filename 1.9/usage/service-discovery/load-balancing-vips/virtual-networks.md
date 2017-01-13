@@ -17,7 +17,7 @@ DC/OS enables virtual networking through the use of virtual networks. DC/OS virt
 
 # Using Virtual Networks
 
-First, you or the data center operator needs to [configure the virtual networks](/docs/1.9/administration/overlay-networks/).
+First, you or the data center operator needs to [configure the virtual networks](/docs/1.9/administration/virtual-networks/).
 
 Virtual networks are configured at install time. You or the data center operator will specify a canonical name for each network in the `config.yaml`. When your service needs to launch a container, refer to it by that canonical name.
 

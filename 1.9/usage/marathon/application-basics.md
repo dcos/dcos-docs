@@ -9,8 +9,8 @@ A Marathon application typically represents a long-running service, of which the
 # Hello Marathon: An Inline Shell Script
 
 ### Prerequisites
-- [A DC/OS cluster](/docs/1.8/administration/installing/)
-- [The DC/OS CLI installed](/docs/1.8/usage/cli/install/)
+- [A DC/OS cluster](/docs/1.9/administration/installing/)
+- [The DC/OS CLI installed](/docs/1.9/usage/cli/install/)
 
 Let's start with a simple example: an service that prints `Hello Marathon` to stdout and then sleeps for 5 sec, in an endless loop.
 Use the following JSON application definition to describe the application. Create a file with the name of your choice. 

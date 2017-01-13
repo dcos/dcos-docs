@@ -17,7 +17,7 @@ We have seen both before in the context of service discovery and especially mara
 Now we will explore both options in more detail.
 * First, scale app2 to two instances: `dcos marathon app update /dcos-101/app2 instances=2`
 * Marathon-lb
-    * Check app2 as before via *http://public-node>10000*. When you do this repeatedly you should see the request being served by different instances of app2.
+    * Check app2 as before via `http://<public-node>10000`. When you do this repeatedly you should see the request being served by different instances of app2.
     * You can also check the Marathon-LB stats via `http://<public-node>:9090/haproxy?stats`
 * Named VIPs
     * We have seen named vips before for service discovery inside our cluster

@@ -10,7 +10,7 @@ This is an overview of the features that make DC/OS more than the sum of its par
 - [Container Orchestration](#container-orchestration)
 - [Extensible Resource Isolation](#extensible-resource-isolation)
 - [Stateful Storage Support](#stateful-storage-support)
-- [Public and Private Package Repositories](#public-and-private-package-repositories)
+- [Package Management](#package-management)
 - [Cloud-Agnostic Installer](#cloud-agnostic-installer)
 - [Web and Command Line Interfaces](#web-and-command-line-interfaces)
 - [Elastic Scalability](#elastic-scalability)
@@ -71,9 +71,9 @@ Local ephemeral storage is the Mesos default for allocating temporary disk space
 Local persistent volumes bridge the gap and provide fast, persistent storage. If your service is replicating data already or your drives are RAID and backed up to nearline or tape drive, local volumes might give you enough fault tolerance without the speed tax.
 
 
-## Public and Private Package Repositories
+## Package Management
 
-DC/OS makes it easy to install both community and proprietary packaged services.
+DC/OS makes it easy to install both public community and private proprietary packaged services.
 
 The Mesosphere Universe Package Repository connects you with a library of open source industry-standard schedulers, services, and applications. Why reinvent the wheel if you don't have to? Take advantage of community projects to handle batch job scheduling, highly available data storage, robust message queuing, and more.
 

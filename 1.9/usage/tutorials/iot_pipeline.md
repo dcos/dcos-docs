@@ -34,7 +34,7 @@ This tutorial demonstrates how you can build a complete IoT pipeline on DC/OS in
 *  The public IP address of your public agent node. After you have installed DC/OS with a public agent node declared, you can [navigate to the public IP address][9] of your public agent node.
 
 # Install the DC/OS services you'll need
-From the DC/OS web interface [**Universe**](/docs/1.9/usage/webinterface/#universe) tab, install Cassandra, Kafka, Marathon-LB, and Zeppelin.
+From the DC/OS web interface [**Packages**](/docs/1.9/usage/webinterface/#universe) tab, install Cassandra, Kafka, Marathon-LB, and Zeppelin.
 
 __Tip:__ You can also install DC/OS packages from the DC/OS CLI with the [`dcos package install`][11] command.
 
@@ -110,7 +110,7 @@ Use the `post-tweets.json` app a large number of Shakespeare tweets from a file:
         $ dcos marathon app add post-tweets.json
     
 
-The app will post more than 100k tweets one by one, so you'll see them coming in steadily when you refresh the page. Click the **Network** tab in the DC/OS web interface to see the load balancing in action.
+The app will post more than 100k tweets one by one, so you'll see them coming in steadily when you refresh the page. Click the **Networking** tab in the DC/OS web interface to see the load balancing in action.
 
 The post-tweets app works by streaming to the VIP `1.1.1.1:30000`. This address is declared in the `cmd` parameter of the `post-tweets.json` app definition. The app uses the service discovery and load balancer service that is installed on every DC/OS node. You can see the Tweeter app defined with this VIP in the json definition under `VIP_0`.
 

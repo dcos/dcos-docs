@@ -30,8 +30,8 @@ VIPs follow this naming convention:
 
 1.  From the DC/OS [web interface](/docs/1.9/usage/webinterface/), click on the **Services** tab and either click your service name or click **Deploy Service** to create a new service.
 
-    *   Select the **Network** tab.
-    *   To edit an existing application, click **Edit**. You can then select the **Network** menu option.
+    *   Select the **Networking** tab.
+    *   To edit an existing application, click **Edit**. You can then select the **Networking** menu option.
 
 2.  Check the **Load Balanced** checkbox, then fill in the **LB Port**, **Name**, and **Protocol** fields. As you fill in these fields, the service addresses that Marathon sets up will appear at the bottom of the screen. You can assign multiple VIPs to your app by clicking **+ Add an endpoint**.
 

@@ -171,9 +171,9 @@ Before installing DC/OS, you must ensure that your bootstrap node has the follow
 
 Download and save the [DC/OS setup file][3] to your bootstrap node. This file is used to create your customized DC/OS build file.
 
-### Docker Nginx (advanced installer)
+### Docker NGINX (advanced installer)
 
-For advanced install only, install the Docker Nginx image with this command:
+For advanced install only, install the Docker NGINX image with this command:
 
 ```bash
 $ sudo docker pull nginx

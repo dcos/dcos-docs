@@ -9,19 +9,27 @@ You can create multiple virtual networks to isolate different portions of your o
 
 # iptables rules
 
-DC/OS uses [iptables](http://linux.die.net/man/8/iptables) to set up virtual network isolation. iptables are a high-speed, built-in mechanism for filtering traffic in Linux systems. We recommend configuring filtering by deploying a homogenous set of rules to all nodes in your infrastructure. In order to simplify this, we also recommend using the [ipset](http://ipset.netfilter.org/ipset.man.html) feature of iptables.
+DC/OS uses [iptables](http://linux.die.net/man/8/iptables) to set up virtual network isolation. iptables are a high-speed, built-in mechanism for filtering traffic in Linux systems. We recommend configuring filtering by deploying a homogenous set of rules to all nodes in your infrastructure. To simplify this, we also recommend using the [ipset](http://ipset.netfilter.org/ipset.man.html) feature of iptables.
+
+**Important:** These commands should be run on all cluster nodes. 
 
 Set up your own chain that jumps from the `FORWARD` chain. You can do this by running the following command:
 
     $ iptables -N dcos-isolation
 
-We want to set up a default deny or a default accept policy between filtered overlays. To set up default deny, run the following:
+Now set up a default deny or a default accept policy between filtered overlays. 
 
-    $ iptables -A dcos-isolation -j REJECT
+-  To set up default deny, run the following:
 
-To set up default accept, run the following:
+   ```bash
+   $ iptables -A dcos-isolation -j REJECT
+   ```
 
-    $ iptables -A dcos-isolation -j RETURN
+-  To set up default accept, run the following:
+
+   ```bash
+   $ iptables -A dcos-isolation -j RETURN
+   ```
 
 To make troubleshooting easier, use the `REJECT` directive as opposed to the `DROP` directive. The default is to allow all.
 
