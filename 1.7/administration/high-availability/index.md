@@ -3,18 +3,18 @@ post_title: High-Availibility
 menu_order: 3.1
 ---
 
-DC/OS supports high-availability configurations, including mult-zone, multi-region, and hybrid cloud. 
+DC/OS supports high-availability configurations, including multi-zone, multi-region, and hybrid cloud. 
 
 # Terminology
 
-## Rack
-A rack is typically composed of a set of servers (nodes) with its own power supply and switch (or switches), all attached to the same frame. On public cloud platforms such as AWS, there is no equivalent concept of a rack.
+## Zone
+A zone is a failure domain that has isolated power, networking, and connectivity. Typically a zone is a single data center or independent fault domain on-premise, or managed by a cloud provider. For example, AWS Availability Zones or GCP Zones. Servers within a zone are connected via high bandwidth (e.g. 1-10+ Gbps), low-latency (up to 1 ms), and low-cost links.
 
 ## Region
 A region is a geographical region, such as a metro area, that consists of one or more zones. Zones within a region are connected via high bandwidth (e.g. [1-4 Gbps](https://blog.serverdensity.com/network-performance-aws-google-rackspace-softlayer/)), low-latency (up to 10 ms), low-cost links. Regions are typically connected through public internet via variable bandwidth (e.g. [10-100 Mbps](https://cloudharmony.com/speedtest-for-aws)) and latency ([100-500 ms](https://www.concurrencylabs.com/blog/choose-your-aws-region-wisely/)) links.
 
-## Zone
-A zone is a failure domain that has isolated power, networking, and connectivity. Typically a zone is a single data center or independent fault domain on-premise, or managed by a cloud provider. For example, AWS Availability Zones or GCP Zones. Servers within a zone are connected via high bandwidth (e.g. 1-10+ Gbps), low-latency (up to 1 ms), and low-cost links.
+## Rack
+A rack is typically composed of a set of servers (nodes) with its own power supply and switch (or switches), all attached to the same frame. On public cloud platforms such as AWS, there is no equivalent concept of a rack.
 
 # General Recommendations
 
