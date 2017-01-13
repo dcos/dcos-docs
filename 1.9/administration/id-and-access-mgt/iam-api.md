@@ -10,7 +10,7 @@ Authentication tokens expire after 5 days. You can view the expiration time in t
 
 # Obtain an authentication token
 
-You can obtain your authentication token using DC/OS CLI. When you log into the DC/OS CLI, you paste an OpenID Connect ID token into your terminal prompt. This OpenID Connect ID token logs you into DC/OS CLI but does not allow you to access the HTTP API endpoints. You must obtain an authentication token to gain access to the HTTP API endpoints. Complete the following steps to obtain your authentication token.
+You can obtain your authentication token using the DC/OS CLI. When you log into the DC/OS CLI, you paste an OpenID Connect ID token into your terminal prompt. This OpenID Connect ID token logs you into the DC/OS CLI but does not allow you to access the HTTP API endpoints. You must obtain an authentication token to gain access to the HTTP API endpoints. Complete the following steps to obtain your authentication token.
 
 [Log in to the DC/OS CLI](/docs/1.9/administration/id-and-access-mgt/managing-authentication#log-in-cli).
 
@@ -28,15 +28,16 @@ DC/OS endpoints expect to find your authentication token in the `Authorization` 
 Authorization: token=<authentication-token>
 ```
 
-When using cURL, you can use the following bash `$(dcos config show core.dcos_acs_token)` to extract the token value from your configuration file.
+With cURL, you can use command substitution 
+to extract the token value from your configuration file. The following examples illustrate this syntax.
 
-The following full command shows how to authenticate to the Marathon API using cURL.
+**Sample Marathon request:**
 
 ```bash
 $ curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/service/marathon/v2/apps
 ```
 
-The following full command shows how to authenticate to the Mesos API using cURL.
+**Sample Mesos request:**
 
 ```bash
 $ curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/mesos/master/state.json
