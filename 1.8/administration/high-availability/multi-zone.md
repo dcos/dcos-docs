@@ -5,27 +5,26 @@ menu_order: 1
 
 DC/OS supports multiple zone (multi-AZ) configurations. This topic describes the setup recommendations and caveats.
 
-**Important:** A typical DC/OS cluster has all master and agent nodes in the same zone. The cost of having masters spread across zones usually outweigh the benefits. None of the following multi-AZ setups have been explicitly tested or verified by Mesosphere.
+**Important:** A typical DC/OS cluster has all master and agent nodes in the same zone. The cost of having masters spread across zones usually outweighs the benefits. None of the following multi-AZ setups have been explicitly tested or verified by Mesosphere.
 
-# Single-zone masters and cross-zone agents within a region
+# Single-Zone Masters and Cross-Zone Agents Within a Region
 All DC/OS masters are present in a single zone, but the agents can span multiple zones within that region.
 
 #### Recommendations
 
-
-- If you are using a rack, you should distribute masters across the racks.
+- If you are using a rack, distribute masters across the racks.
 - All agents within a zone should be tagged with an attribute (e.g., `zone:us-east-1a`) to easily constrain apps and services to specific zones.
 - Any DC/OS service schedulers should be scheduled to the same zone as masters (e.g., by using constraints).
-- For ease of failover of apps between zones, ensure that apps do not depend on zone level resources or that those resources are properly replicated and migrated on failover. Also ensure there is enough spare capacity in each zone to handle failover workload.
+- For ease of failover of apps between zones, ensure that apps do not depend on zone level resources or that those resources are properly replicated and migrated on failover. Also, ensure there is enough spare capacity in each zone to handle failover workload.
 
 #### Caveats
 
 - If an agent-only zone fails, all other zones will continue to function normally. Apps from the failed zone will be rescheduled into other zones as long as there is spare capacity.
 - If an agent-only zone gets partitioned from the masters-containing zone, apps will continue to run in that zone but schedulers might “reschedule” copies of the apps into other zones. 
-- If a masters-containing zone fails, apps in other zones continue to run. But app updates or rescheduling of failed apps is not possible, until a quorum of masters come up.
+- If a masters-containing zone fails, apps in other zones continue to run. However, app updates or rescheduling of failed apps is not possible until a quorum of masters come up.
 - The total cross-sectional bandwidth between zones is limited. This means that performance can be degraded for data (I/O) intensive DC/OS services if deployed across zones.
 
-# Cross-zone masters and cross-zone agents within a region
+# Cross-Zone Masters and Cross-Zone Zgents Within a Region
 DC/OS masters and agents span multiple zones within a region.
 
 #### Recommendations
