@@ -5,6 +5,11 @@ menu_order: 2
 
 DC/OS supports multiple region configurations. This topic describes the setup recommendations and caveats.
 
+**Important:** 
+
+- None of the following multi-AZ setups have been explicitly tested or verified.
+- A typical DC/OS cluster has all master and agent nodes in the same zone. The cost of having masters spread across zones usually outweighs the benefits. 
+
 # Single Region Masters and Cross-Region Agents 
 DC/OS masters are within a region, possibly spanning zones. DC/OS agents span multiple regions. This setup is similar to masters in an on-prem datacenter and agents running on-prem and on public cloud. 
 

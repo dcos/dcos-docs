@@ -5,7 +5,10 @@ menu_order: 1
 
 DC/OS supports multiple zone (multi-AZ) configurations. This topic describes the setup recommendations and caveats.
 
-**Important:** A typical DC/OS cluster has all master and agent nodes in the same zone. The cost of having masters spread across zones usually outweighs the benefits. None of the following multi-AZ setups have been explicitly tested or verified by Mesosphere.
+**Important:** 
+
+- None of the following multi-AZ setups have been explicitly tested or verified.
+- A typical DC/OS cluster has all master and agent nodes in the same zone. The cost of having masters spread across zones usually outweighs the benefits.
 
 # Single-Zone Masters and Cross-Zone Agents Within a Region
 All DC/OS masters are present in a single zone, but the agents can span multiple zones within that region.
@@ -24,7 +27,7 @@ All DC/OS masters are present in a single zone, but the agents can span multiple
 - If a masters-containing zone fails, apps in other zones continue to run. However, app updates or rescheduling of failed apps is not possible until a quorum of masters come up.
 - The total cross-sectional bandwidth between zones is limited. This means that performance can be degraded for data (I/O) intensive DC/OS services if deployed across zones.
 
-# Cross-Zone Masters and Cross-Zone Zgents Within a Region
+# Cross-Zone Masters and Cross-Zone Agents Within a Region
 DC/OS masters and agents span multiple zones within a region.
 
 #### Recommendations
