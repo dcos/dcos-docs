@@ -1,5 +1,6 @@
 ---
 post_title: Multiple Regions
+feature_maturity: unsupported
 menu_order: 2
 ---
 
@@ -7,7 +8,7 @@ DC/OS supports multiple region configurations. This topic describes the setup re
 
 **Important:** 
 
-- None of the following multi-AZ setups have been explicitly tested or verified.
+- The following multi-region setups are not supported and have not been tested or verified.
 - A typical DC/OS cluster has all master and agent nodes in the same zone. The cost of having masters spread across zones usually outweighs the benefits. 
 
 # Single Region Masters and Cross-Region Agents 
