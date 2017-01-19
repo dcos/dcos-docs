@@ -184,7 +184,7 @@ This required parameter specifies a YAML nested list (`-`) of DNS resolvers for 
 
 ### use_proxy
 
-This parameters specifies whether to enable the DC/OS proxy.
+This parameter specifies whether to enable the DC/OS proxy. 
 
 *  `use_proxy: 'false'` Do not configure DC/OS [components](/docs/1.9/overview/architecture/components/) to use a custom proxy. This is the default value.
 *  `use_proxy: 'true'` Configure DC/OS [components](/docs/1.9/overview/architecture/components/) to use a custom proxy. If you specify `use_proxy: 'true'`, you can also specify these parameters:
