@@ -32,7 +32,7 @@ Fault domain isolation is an important part of building HA systems. In order to 
  * Physical domains: this includes machine, rack, datacenter, region, availability zone,   and so on.
  * Network domains: machines within the same network may be subject  to network partitions. For example, a shared network switch may fail or have  invalid configuration.
 
-With DC/OS, you can distribute masters across racks for HA, or across regions. Agents may be distributed across regions, and it's recommended that you tag agents with attributes to describe their location. Synchronous services like ZooKeeper should also remain within the same region to reduce network latency. For more information, see the Configuring High-Availibility [documentation](/docs/1.8/administration/high-availability/).
+With DC/OS, you can distribute masters across racks for HA, or across regions. Agents may be distributed across regions, and it's recommended that you tag agents with attributes to describe their location. Synchronous services like ZooKeeper should also remain within the same region to reduce network latency. 
 
 For applications which require HA, they should also be distributed across fault domains. With Marathon, this can be accomplished by using the [`UNIQUE`  and `GROUP_BY` constraints operator](https://mesosphere.github.io/marathon/docs/constraints.html).
 
