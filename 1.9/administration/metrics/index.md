@@ -7,11 +7,11 @@ menu_order: 3.5
 The [metrics component](https://github.com/dcos/dcos-metrics) provides metrics from DC/OS cluster hosts, containers running on those hosts, and from applications running on DC/OS which choose to send statsd metrics to our Mesos Metrics Module. The metrics component is natively integrated with DC/OS version 1.9 and later and is available per-host from the `/system/v1/metrics/v0` HTTP API endpoint. No additional setup is required.  
 
 ## Overview
-There are three layers of metrics identified in DC/OS: 
+There are three layers of metrics available in DC/OS: 
 
   * Host: metrics about the specific node which is part of the DC/OS cluster. 
   * Container: metrics about cgroup allocations from tasks running in Mesos or Docker containerizers. 
-  * Application: metrics about a specific application running inside a Mesos containerizer.
+  * Application: metrics about a specific application running inside the DC/OS Universal [container runtime](/docs/1.9/usage/containerizers/).
 
 The metrics component provides an HTTP API which exposes these three areas. 
 
