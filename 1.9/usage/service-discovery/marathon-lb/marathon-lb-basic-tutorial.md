@@ -27,42 +27,42 @@ In this tutorial, Marathon-LB is used as the edge load balancer and service disc
     
     1. In the labels field, add an entry for `HAPROXY_0_VHOST` and assign it the value of your public agent IP. Remove the leading `http://` and the trailing `/` from the IP. Remember to add a comma after the preceding field.
 
-    The complete JSON service definition file should resemble:
-    
-    ```json
-    {
-      "id": "dcos-website",
-      "container": {
-        "type": "DOCKER",
-        "docker": {
-          "image": "mesosphere/dcos-website:<image-tag>",
-          "network": "BRIDGE",
-          "portMappings": [
-            { "hostPort": 0, "containerPort": 80, "servicePort": 10004 }
-          ]
+        The complete JSON service definition file should resemble:
+        
+        ```json
+        {
+          "id": "dcos-website",
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "mesosphere/dcos-website:<image-tag>",
+              "network": "BRIDGE",
+              "portMappings": [
+                { "hostPort": 0, "containerPort": 80, "servicePort": 10004 }
+              ]
+            }
+          },
+          "instances": 3,
+          "cpus": 0.25,
+          "mem": 100,
+          "healthChecks": [{
+              "protocol": "HTTP",
+              "path": "/",
+              "portIndex": 0,
+              "timeoutSeconds": 2,
+              "gracePeriodSeconds": 15,
+              "intervalSeconds": 3,
+              "maxConsecutiveFailures": 2
+          }],
+          "labels":{
+            "HAPROXY_DEPLOYMENT_GROUP":"dcos-website",
+            "HAPROXY_DEPLOYMENT_ALT_PORT":"10005",
+            "HAPROXY_GROUP":"external",
+            "HAPROXY_0_REDIRECT_TO_HTTPS":"true",
+            "HAPROXY_0_VHOST": "<public-agent-ip>"
+          }
         }
-      },
-      "instances": 3,
-      "cpus": 0.25,
-      "mem": 100,
-      "healthChecks": [{
-          "protocol": "HTTP",
-          "path": "/",
-          "portIndex": 0,
-          "timeoutSeconds": 2,
-          "gracePeriodSeconds": 15,
-          "intervalSeconds": 3,
-          "maxConsecutiveFailures": 2
-      }],
-      "labels":{
-        "HAPROXY_DEPLOYMENT_GROUP":"dcos-website",
-        "HAPROXY_DEPLOYMENT_ALT_PORT":"10005",
-        "HAPROXY_GROUP":"external",
-        "HAPROXY_0_REDIRECT_TO_HTTPS":"true",
-        "HAPROXY_0_VHOST": "<public-agent-ip>"
-      }
-    }
-    ```
+        ```
 
 1.  Run the service from the DC/OS CLI using the following command:
     
@@ -74,4 +74,4 @@ In this tutorial, Marathon-LB is used as the edge load balancer and service disc
 
     ![Healthy Service](/docs/1.9/usage/tutorials/img/healthy-dcos-website.png)
 
-1.  Go to your public agent to see the site running.
+1.  Go to your public agent to see the site running. For information about how to find your public agent IP, see the [documentation](/docs/1.9/administration/locate-public-agent/).
