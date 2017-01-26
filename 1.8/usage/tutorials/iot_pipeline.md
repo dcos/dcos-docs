@@ -135,7 +135,7 @@ Next, you'll perform real-time analytics on the stream of tweets coming in from 
  [1]: https://docs.mesosphere.com/1.8/usage/service-guides/cassandra/
  [2]: https://docs.mesosphere.com/1.8/usage/service-guides/kafka
  [3]: https://docs.mesosphere.com/1.8/usage/service-guides/spark/
- [4]: https://docs.mesosphere.com/1.8/usage/service-guides/zeppelin/
+ [4]: http://zeppelin.apache.org/
  [5]: https://github.com/mesosphere/marathon-lb
  [6]: /docs/1.8/overview/concepts/
  [7]: /docs/1.8/administration/installing/cloud/

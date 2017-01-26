@@ -16,7 +16,7 @@ menu_order: 11
 **Scope**:
 
 In the following tutorial you will learn about how to use Spark on DC/OS, from the simple first steps
-of how to launch a Spark job to using Spark interactively with [Apache Zeppelin](https://zeppelin.incubator.apache.org/).
+of how to launch a Spark job to using Spark interactively with [Apache Zeppelin](http://zeppelin.apache.org/).
 
 # Installing
 
@@ -127,7 +127,7 @@ You can learn about further options on how to run a Spark job via the [DC/OS doc
 
 # Using Spark Interactively
 
-To interactively work with Spark, you can use [Apache Zeppelin](https://zeppelin.incubator.apache.org/) and here's what you need to do to install it.
+To interactively work with Spark, you can use [Apache Zeppelin](http://zeppelin.apache.org/) and here's what you need to do to install it.
 
 You typically want to access Zeppelin via a web browser outside of the DC/OS cluster. To access the Zeppelin UI from outside of the DC/OS cluster you have a number of options available: from launching it on a public node to [using Marathon-LB](/docs/1.9/usage/service-discovery/marathon-lb/).
 
