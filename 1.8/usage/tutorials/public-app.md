@@ -18,7 +18,7 @@ To launch an app on a public node, you must create a Marathon app definition wit
 
     ```json
     {
-        "id": "/product/service/myApp",
+        "id": "/product/service/myapp",
         "container": {
         "type": "DOCKER",
         "docker": {
@@ -38,10 +38,10 @@ To launch an app on a public node, you must create a Marathon app definition wit
 
     For more information about the `acceptedResourceRoles` parameter, see the Marathon REST API [documentation](https://mesosphere.github.io/marathon/docs/rest-api.html).
 
-1.  Add the your app to Marathon by using this command, where `myApp.json` is your app:
+1.  Add the your app to Marathon by using this command, where `myapp.json` is your app:
 
     ```bash
-    $ dcos marathon app add myApp.json
+    $ dcos marathon app add myapp.json
     ```
 
     If this is added successfully, there is no output.
@@ -58,7 +58,7 @@ To launch an app on a public node, you must create a Marathon app definition wit
     
     ```bash
     ID      MEM  CPUS  TASKS  HEALTH  DEPLOYMENT  CONTAINER  CMD
-        /myApp   64  0.1    0/1    ---      scale       DOCKER   None
+        /myapp   64  0.1    0/1    ---      scale       DOCKER   None
     ```
     
     **Tip:** You can also view deployed apps by using the **Services** tab of DC/OS [GUI](/docs/1.8/usage/webinterface/#services).

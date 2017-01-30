@@ -22,12 +22,12 @@ $ dcos package install chronos
     
 ## Installing a service using the UI
 
-From the DC/OS UI you can install services from the **Services** or **Packages** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.9/usage/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
+From the DC/OS UI you can install services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.9/usage/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
 
 
 ### Universe tab
 
-1.  Navigate to the [**Packages**](/docs/1.9/usage/webinterface/#universe) page in the DC/OS UI.
+1.  Navigate to the [**Universe > Packages**](/docs/1.9/usage/webinterface/#universe) page in the DC/OS UI.
 
 2.  Choose your package and click **Install package**. 
 
@@ -36,8 +36,7 @@ From the DC/OS UI you can install services from the **Services** or **Packages**
 ### Services tab
 
 1.  Navigate to the [**Services**](/docs/1.9/usage/webinterface/#services) tab in the DC/OS UI.
-1.  Click **Deploy Service** and specify your Marathon app definition.
-1.  Click **Deploy**. 
+1.  Click **RUN A SERVICE** and specify your Marathon app definition.
 
 ## Verifying your installation
 

@@ -1,10 +1,9 @@
 ---
-post_title: Updating a User-Created Service inline
-nav_title: Updating a Service inline
+post_title: Updating a Deployed App 
 menu_order: 30
 ---
 
-The [DC/OS CLI][1] Marathon sub-command allows you to easily view and update the configuration of existing services that you have created.
+You can easily view and update the configuration of a deployed app by using the `dcos marathon` command.
 
 **Note:** The process for updating packages from the [DC/OS Universe](/docs/1.9/usage/webinterface/#-a-name-universe-a-universe) is different. Visit the [Managing Services](/docs/1.9/usage/managing-services/config/) section for more information.
 

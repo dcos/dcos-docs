@@ -11,7 +11,7 @@ You can run DC/OS services you create or install a package from the [Universe pa
 Services you create yourself are administered by Marathon and can be configured and run [from the DC/OS CLI](/docs/1.9/usage/cli/command-reference/) with `dcos marathon` subcommands (eg `dcos marathon app add myapp.json`) or via the DC/OS web interface.
 
 # Universe Package Repository
-Packaged DC/OS services created by Mesosphere or the community, like Spark or Kafka, appear on the **Packages** tab of the DC/OS web interface, or you can search for a package from [the DC/OS CLI](/docs/1.9/usage/cli/command-reference/). You can configure and run Universe services from the DC/OS web interface or via the DC/OS CLI with the `dcos package install <package-name>` command. Visit the [Managing Services](/docs/1.9/usage/managing-services/) section to learn more about installing, configuring, and uninstalling services in Universe.
+Packaged DC/OS services created by Mesosphere or the community, like Spark or Kafka, appear on the **Universe > Packages** tab of the DC/OS web interface, or you can search for a package from [the DC/OS CLI](/docs/1.9/usage/cli/command-reference/). You can configure and run Universe services from the DC/OS web interface or via the DC/OS CLI with the `dcos package install <package-name>` command. Visit the [Managing Services](/docs/1.9/usage/managing-services/) section to learn more about installing, configuring, and uninstalling services in Universe.
 
 # Create and Run Your Own DC/OS Service
 In this tutorial, we'll go over creating a simple one-command service and a containerized service using both the DC/OS web interface and the CLI.
@@ -22,7 +22,7 @@ In this tutorial, we'll go over creating a simple one-command service and a cont
 
 ## Create and Run a Simple Service from the DC/OS Web Interface
 
-1. Click the **Services** tab of the DC/OS web interface, then click the **Deploy Service**.
+1. Click the **Services** tab of the DC/OS web interface, then click the **RUN A SERVICE**.
 1. Enter a name for your service in the **ID** field. In the **Command** field, enter `sleep 10`.
 1. Click **Deploy**.
 
@@ -76,7 +76,7 @@ In this tutorial, we'll go over creating a simple one-command service and a cont
 ## Create and Run a Containerized Service from the DC/OS Web Interface
 
 1. Go to the `hello-dcos` page of the [Mesosphere Docker Hub repository](https://hub.docker.com/r/mesosphere/hello-dcos/tags/) and note down the latest image tag.
-1. Click the **Services** tab of the DC/OS web interface, then click the **Deploy Service**.
+1. Click the **Services** tab of the DC/OS web interface, then click the **RUN A SERVICE**.
 1. Enter a name for your service in the **ID** field.
 1. Click the **Container Settings** tab and enter the following in the **Container Image** field: `mesosphere/hello-dcos:<image-tag>`. Replace `<image-tag>` with the tag you copied in step 1.
 

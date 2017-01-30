@@ -166,7 +166,7 @@ driver.
 
 ### Create an Application with External Volumes from the DC/OS Web Interface
 
-1. Click the **Services** tab, then **Deploy Service**.
+1. Click the **Services** tab, then **RUN A SERVICE**.
 
 1. If you are using a Docker Container, click **Container Settings** and configure your Docker container.
 

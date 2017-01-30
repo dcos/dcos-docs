@@ -22,7 +22,7 @@ We're going to create a job that runs every 10 seconds and prints the current da
 
 # <a name="chronosinstall"></a>Installing Chronos on DC/OS
 
-1.  From the DC/OS web ui, go to the **Services** tab and click on **Chronos** to open its web UI.
+1.  From the DC/OS web interface, go to the **Services** tab and click on **Chronos** to open its web UI.
 
 1.  In the Chronos UI, click the **New Job** link to bring up the form for creating jobs.
 

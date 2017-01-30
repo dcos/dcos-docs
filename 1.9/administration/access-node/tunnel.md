@@ -177,7 +177,7 @@ The HTTP proxy exposes DC/OS SRV records as URLs in the form `_<port-name>._<ser
 The `<service-name>` is the entry in the **ID** field of a service you create from the DC/OS web interface or the value of the `id` field in your Marathon application definition.
 
 #### Add a Named Port from the DC/OS Web Interface
-To name a port from the DC/OS web interface, go to the **Services** tab, click the name of your service, and then click **Edit**. Enter a name for your port on the **Networking** tab.
+To name a port from the DC/OS web interface, go to the **Services > Services** tab, click the name of your service, and then click **Edit**. Enter a name for your port on the **Networking** tab.
 
 #### Add a Named Port in a Marathon Application Definition
 Alternatively, you can add `name` to the `portMappings` or `portDefinitions` field of a Marathon application definition. Whether you use `portMappings` or `portDefinitions` depends on whether you are using `BRIDGE` or `HOST` networking. [Learn more about networking and ports in Marathon](https://mesosphere.github.io/marathon/docs/ports.html).

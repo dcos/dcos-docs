@@ -176,7 +176,7 @@ Now that you have your application definitions ready, let's fire up the DC/OS Ma
 
 ## Deploying the Web App via the Marathon Web Interface
 
-From the DC/OS web interface, click the **Services** tab and select **Marathon**.
+From the DC/OS web interface, click the **Services > Services** tab and select **Marathon**.
 
 - To create a new application, click **Create Application** and switch to the `JSON mode` by clicking on the toggle in the upper right corner.
 - Erase the contents of the text area and paste in the JSON app definition for MySQL above.

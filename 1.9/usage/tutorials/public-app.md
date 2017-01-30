@@ -4,17 +4,14 @@ nav_title: Public Services
 menu_order: 10
 ---
 
-DC/OS agent nodes can be designated as [public](/docs/1.9/overview/concepts/#public) or [private](/docs/1.9/overview/concepts/#private) during [installation](/docs/1.9/administration/installing/). Public agent nodes provide public access to your DC/OS applications. By default apps are launched on private agent nodes. 
-
-To launch an app on a public node, you must create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified.
+By default apps are launched on private agent nodes, but you can use these instructions to launch on public agent nodes. DC/OS agent nodes can be designated as [public](/docs/1.9/overview/concepts/#public) or [private](/docs/1.9/overview/concepts/#private) during [installation](/docs/1.9/administration/installing/). Public agent nodes provide public access to your DC/OS applications. 
 
 **Prerequisites:**
 
 * DC/OS is [installed](/docs/1.9/administration/installing/)
 * DC/OS CLI is [installed](/docs/1.9/usage/cli/install/)
 
-
-1.  Create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified. For example:
+1.  Create a Marathon app definition with the required `"acceptedResourceRoles":["slave_public"]` parameter specified. For example:
 
     ```json
     {
@@ -62,6 +59,8 @@ To launch an app on a public node, you must create a Marathon app definition wit
     ```
     
     **Tip:** You can also view deployed apps by using the **Services** tab of DC/OS [GUI](/docs/1.9/usage/webinterface/#services).
+    
+Now that your app is deployed to DC/OS, you will need to configure your load balancer to point to the port specified in your app definition (e.g. port `80`).
 
  [1]: /docs/1.9/tutorials/containerized-app/
  [3]: /docs/1.9/administration/installing/

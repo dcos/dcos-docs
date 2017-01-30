@@ -43,7 +43,7 @@ menu_order: 0
     
 # Launching a pod from the DC/OS UI
 
-You can also launch a pod from the [**Services**](/docs/1.9/usage/webinterface) tab of the DC/OS web interface. Select **Services** -> **Deploy Service**, then toggle to JSON mode and paste in the application definition supplied above.
+You can also launch a pod from the [**Services**](/docs/1.9/usage/webinterface) tab of the DC/OS web interface. Select **Services -> Services -> RUN A SERVICE**, then toggle to JSON mode and paste in the application definition supplied above.
 
 After you launch your pod, you’ll see your new pod on the **Services** tab of the DC/OS web interface. Click the pod to see information about the status of the containers in your pod.
 

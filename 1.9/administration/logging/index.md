@@ -14,7 +14,7 @@ You can access DC/OS task logs by running this CLI command:
 $ dcos task log --follow my-service-name
 ```
 
-From the **Services** tab in the [DC/OS GUI](/docs/1.9/usage/webinterface/) you can download all the log files for your service. You can also monitor stdout/stderr.
+From the **Services > Services** tab in the [DC/OS GUI](/docs/1.9/usage/webinterface/) you can download all the log files for your service. You can also monitor stdout/stderr.
 
 For more information, see the Service and Task Logs [documentation](/docs/1.9/administration/logging/quickstart/).
 

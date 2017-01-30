@@ -26,11 +26,11 @@ Services can be uninstalled from either the web interface or the CLI. If the ser
 
 ### Uninstalling a service using the UI
 
-From the DC/OS UI you can uninstall services from the **Services** or **Packages** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.9/usage/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
+From the DC/OS UI you can uninstall services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.9/usage/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
 
 ### Universe tab
 
-1.  Navigate to the **Packages** page in the DC/OS [UI](/docs/1.9/usage/webinterface/#universe).
+1.  Navigate to the **Universe > Packages** page in the DC/OS [UI](/docs/1.9/usage/webinterface/#universe).
 
 2.  Click on the **Installed** tab to see your installed services.
 
@@ -39,7 +39,9 @@ From the DC/OS UI you can uninstall services from the **Services** or **Packages
 ### Services tab
 
 1.  Navigate to the [**Services**](/docs/1.9/usage/webinterface/#services) tab in the DC/OS UI.
-1.  Select your application and click **Edit**, then select the **More -> Destroy**.
+1.  Select your application and click the toggle to **Destroy**.
+    
+    ![Destory app](/docs/1.9/usage/managing-services/img/app-destory.png)
 
 ## <a name="framework-cleaner"></a>Cleaning up ZooKeeper
 
