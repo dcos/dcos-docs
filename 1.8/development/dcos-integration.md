@@ -12,17 +12,28 @@ When a DC/OS Service is installed and ran on DC/OS, the service is generally dep
 
 Admin Router currently supports only one reverse proxy destination.
 
-In order to allow Admin Router to function as a reverse proxy for the DC/OS Service one of the following methods should be used
+## Service Endpoints
 
-## Framework Web UI URL
+Admin Router allows marathon tasks to define custom service UI and HTTP endpoints, which are made available as `/services/<service-name>`. This can be achieved by setting the following marathon task labels:
 
-If the DC/OS Service will register with Mesos as a framework, the `webui_url` framework property may be specified and will be used by Admin Router to proxy requests to the service.
+```
+"labels": {
+    "DCOS_SERVICE_NAME": "service-name",
+    "DCOS_SERVICE_PORT_INDEX": "0",
+    "DCOS_SERVICE_SCHEME": "http"
+  }
+```
 
-* The URL must NOT end with a backslash (/). For example, this is good `internal.dcos.host.name:10000`, and this is bad `internal.dcos.host.name:10000/`.
+In this case `http://<dcos-cluster>/services/service-name` would be forwarded to the host running the task using the first port allocated to the task.
+
+In order for the forwarding to work reliably across task failures, we recommend co-locating the endpoints with the task. This way, if the task is restarted on a potentially other host and with different ports, Admin Router will pick up the new labels and update the routing. NOTE: Due to caching there might be an up to 30-second delay until the new routing is working.
+
+We would recommend having only a single task setting these labels for a given service-name.
+In the case of multiple task instances with the same service-name label, admin router will pick one of the tasks instances deterministically, but this might make debugging issues more difficult.
 
 Since the paths to resources for clients connecting to Admin Router will differ from those paths the Service actually has, ensure the Service is friendly to running behind a proxy. This often means relative paths are preferred to absolute paths. In particular, resources expected to be used by a UI should be verified to work through a proxy.
 
-When the `webui_url` is provided, a link to the service will be available from the DC/OS UI. The link will be generated based on a convention of: `/service/<service_name>`. For example, `<dcos_host>/service/unicorn` is the proxy to the `webui_url`.
+Tasks running in nested [marathon app groups](https://mesosphere.github.io/marathon/docs/application-groups.html) will be available only using their service name (i.e, `/services/<service-name>`) and not considering the marathon app group name (i.e., `/services/app-group/<service-name>`).
 
 # <a name="dcos-ui"></a>DC/OS UI
 
