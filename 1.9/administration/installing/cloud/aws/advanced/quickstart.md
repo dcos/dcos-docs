@@ -78,7 +78,7 @@ Use the `zen.sh` script to create the Zen template dependencies. These dependenc
 ## <a name="launch"></a>Launch the DC/OS advanced template on CloudFormation
 
 1.  Go to [CloudFormation](https://console.aws.amazon.com/cloudformation/home) and click **Create Stack**.
-1.  On the **Select Template** page, upload the [Zen](/docs/1.9/administration/installing/cloud/aws/advanced/template-reference/#zen) template from your workstation and click **Next**.
+1.  On the **Select Template** page, upload the [Zen](/docs/1.9/administration/installing/cloud/aws/advanced/template-reference/#zen) template (e.g. `https://s3-us-west-2.amazonaws.com/dcos/templates/dcos/config_id/6a7451f6dec/cloudformation/el7-zen-1.json`) from your workstation and click **Next**.
 1.  On the **Specify Details** page, specify these values and and click **Next**.
 
     ![AWS UI](../img/aws-advanced-1.png)
