@@ -17,7 +17,7 @@ You can use the web interface or the CLI to:
 
 ## <a name="listing"></a>Listing repositories
 
-To see which package repositories are currently configured, enter this CLI command:   
+To see which package repositories are currently installed, enter this CLI command:   
 
 ```bash
 $ dcos package repo list
