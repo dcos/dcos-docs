@@ -371,30 +371,11 @@ This pod declares a “web” endpoint that listens on port 80. <!-- Validated b
   }
 }
 ```
-<!-- 
-This pod adds a health check that references the “web” endpoint; Mesos will execute an HTTP request against `http://<master-ip>:80/ping`.
-
-```json
-{
-  "id": "/pod-with-healthcheck",
-  "scaling": { "kind": "fixed", "instances": 1 },
-  "containers": [
-    {
-      "name": "sleep1",
-      "exec": { "command": { "shell": "sleep 1000" } },
-      "resources": { "cpus": 0.1, "mem": 32 },
-      "endpoints": [ { "name": "web", "containerPort": 80, "protocol": [ "http" ] } ],
-      "healthCheck": { "http": { "endpoint": "web", "path": "/ping" } }
-    }
-  ],
-  "networks": [ { "mode": "container", "name": "dcos" } ]
-}
-```
 
 # Complete Pod 
 The following pod definition can serve as a reference to create more complicated pods. 
 
-```
+```json
 {
   "id": "/complete-pod",
   "labels": {
@@ -407,7 +388,7 @@ The following pod definition can serve as a reference to create more complicated
   "volumes": [
     {
       "name": "etc",
-      "host": "/hdd/tools/docker/registry"
+      "host": "/etc"
     }
   ],
   "networks": [
@@ -438,12 +419,6 @@ The following pod definition can serve as a reference to create more complicated
   "containers": [
     {
       "name": "container1",
-      "exec": {
-        "command": {
-          "shell": "sleep 100"
-        },
-        "overrideEntrypoint": false
-      },
       "resources": {
         "cpus": 1,
         "mem": 128,
@@ -455,12 +430,12 @@ The following pod definition can serve as a reference to create more complicated
           "name": "http-endpoint",
           "containerPort": 80,
           "hostPort": 0,
-          "protocol": [ "http" ],
+          "protocol": [ "HTTP" ],
           "labels": {}
         }
       ],
       "image": {
-        "id": "mesosphere/marathon:latest",
+        "id": "nginx:latest",
         "kind": "DOCKER",
         "forcePull": false
       },
@@ -470,30 +445,30 @@ The following pod definition can serve as a reference to create more complicated
       "user": "root",
       "healthCheck": {
         "gracePeriodSeconds": 30,
-        "intervalSeconds": 2,
+        "intervalSeconds": 5,
         "maxConsecutiveFailures": 3,
-        "timeoutSeconds": 20,
+        "timeoutSeconds": 4,
         "delaySeconds": 2,
         "http": {
-          "path": "/health",
+          "path": "/",
           "scheme": "HTTP",
           "endpoint": "http-endpoint"
         }
       },
       "volumeMounts": [
         {
-          "name": "env",
+          "name": "etc",
           "mountPath": "/mnt/etc",
           "readOnly": true
         }
       ],
       "artifacts": [
         {
-          "uri": "https://foo.com/archive.zip",
+          "uri": "https://ftp.gnu.org/gnu/glibc/glibc-2.25.tar.gz",
           "executable": false,
           "extract": true,
           "cache": true,
-          "destPath": "newname.zip"
+          "destPath": "glibc-2.25.tar.gz"
         }
       ],
       "labels": {
@@ -507,4 +482,3 @@ The following pod definition can serve as a reference to create more complicated
   ]
 }
 ```
--->
