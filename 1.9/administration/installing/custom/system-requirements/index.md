@@ -83,12 +83,6 @@ Here are the agent node hardware requirements.
   </tr>
 </table>
 
-*   Your Linux distribution must be running the latest version. You can update CentOS with this command:
-
-    ```bash
-    $ sudo yum upgrade -y
-    ```
-
 *   On RHEL 7 and CentOS 7, firewalld must be stopped and disabled. It is a known <a href="https://github.com/docker/docker/issues/16137" target="_blank">Docker issue</a> that firewalld interacts poorly with Docker. For more information, see the <a href="https://github.com/docker/docker/blob/v1.6.2/docs/sources/installation/centos.md#firewalld" target="_blank">Docker CentOS firewalld</a> documentation.
 
     ```bash
