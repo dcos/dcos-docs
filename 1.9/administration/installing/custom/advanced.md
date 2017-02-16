@@ -40,11 +40,11 @@ The DC/OS installation creates these folders:
   </tr>
   <tr>
     <td><code>/var/lib/dcos</code></td>
-    <td>Contains the DC/OS data.</td>
+    <td>Contains the DC/OS and Mesos Master data.</td>
   </tr>
   <tr>
     <td><code>/var/lib/mesos</code></td>
-    <td>Contains the Mesos data.</td>
+    <td>Contains the Mesos Agent data.</td>
   </tr>
 </table>
 
