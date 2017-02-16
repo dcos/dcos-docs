@@ -69,7 +69,7 @@ In the above example, we have defined two virtual networks. The virtual network 
 
 # Retrieving virtual network state
 
-After DC/OS installation is complete, you can query the virtual network configuration using the `https://leader.mesos/overlay-master/state` endpoint from your browser. The `network` key at the bottom lists the current overlay configuration and the `agents` key is a list showing how overlays are split across the Mesos agents. The following shows the network state when there is a single overlay in the cluster named `dcos`.
+After DC/OS installation is complete, you can query the virtual network configuration using the `https://leader.mesos:5050/overlay-master/state` endpoint from your browser. The `network` key at the bottom lists the current overlay configuration and the `agents` key is a list showing how overlays are split across the Mesos agents. The following shows the network state when there is a single overlay in the cluster named `dcos`.
 
 ```json
 "agents": [
