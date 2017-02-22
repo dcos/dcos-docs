@@ -9,11 +9,11 @@ Welcome to part 1 of the DC/OS 101 Tutorial.
 # Prerequisites
 In order to get started with this tutorial, you should have access to a running DC/OS OSS cluster with at least a single master node and 3 agent nodes (of which one is a public agent node). If you don't have these requirements set up, please follow the [setup instructions](https://dcos.io/install/) for various cloud providers, on-premise, or vagrant setups.
 If you are unsure which option to choose, then we would recommend using the [AWS templates](https://downloads.dcos.io/dcos/stable/aws.html?_ga=1.208466258.1790439002.1478539864).
+We have access to our cluster and have already taken a first look at the UI.
 
 **Note**: For this tutorial a setup with a single master node is suffcient, but for running production workloads you should have multiple master nodes.
 
 # Objective
-We have access to our cluster and have already taken a first look at the UI. You can also access the cluster from your local machine via the DC/OS CLI.
 By the end of this section we will have installed the DC/OS CLI and used it to explore our cluster.
 
 # Steps
@@ -36,19 +36,19 @@ We will make further use of the CLI in the sections that follow.
 We have already encountered several DC/OS components (including Mesos, Marathon, or Metronome) while experimenting with the DC/OS CLI.
 But what other components make up DC/OS?
 
+## DC/OS Terminology
+We will focus on the most important terminology here. More details can be found in the [documentation](https://dcos.io/docs/1.8/overview/architecture/).
+* Master: Aggregates resource offers from all agent nodes and provides them to registered frameworks.
+* Agent: Runs a discrete Mesos task on behalf of a framework. The synonym of agent node is worker or slave node.
+* Scheduler: The scheduler component of a service, for example, the Marathon scheduler.
+* Task: a unit of work scheduled by a Mesos framework and executed on a Mesos agent.
+
 ## DC/OS components
 DC/OS includes a number of components, many of which you can safely ignore for now and hence we only list the most relevant components here.
 A description of all components can be found in the [documentation](https://dcos.io/docs/1.8/overview/components/).
-* Marathon starts and monitors DC/OS applications and services.
-* Mesos is the kernel of DC/OS and responsible for low-level task maintenance.
-* Mesos DNS provides service discovery within the cluster.
-* Minuteman is the internal layer 4 load balancer.
-* Admin Router is an open source NGINX configuration that provides central authentication and proxy to DC/OS services.
-* Universe is the package repository that holds the DC/OS services (e.g., Apache Spark of Apache Cassandra) that you can install on your cluster directly from the DC/OS UI and CLI.
-
-## DC/OS Terminology
-Again we will focus on the most important terminology here. More details can be found in the [documentation](https://dcos.io/docs/1.8/overview/architecture/).
-* Master: aggregates resource offers from all agent nodes and provides them to registered frameworks.
-* Agent: runs a discrete Mesos task on behalf of a framework. The synonym of agent node is worker or slave node.
-* Scheduler: the scheduler component of a service, for example, the Marathon scheduler.
-* Task: a unit of work scheduled by a Mesos framework and executed on a Mesos agent.
+* Marathon: Starts and monitors DC/OS applications and services.
+* Mesos: The kernel of DC/OS and responsible for low-level task maintenance.
+* Mesos DNS: Provides service discovery within the cluster.
+* Minuteman: The internal layer 4 load balancer.
+* Admin Router: An open source NGINX configuration that provides central authentication and proxy to DC/OS services.
+* Universe: The package repository that holds the DC/OS services (e.g., Apache Spark of Apache Cassandra) that you can install on your cluster directly from the DC/OS UI and CLI.
