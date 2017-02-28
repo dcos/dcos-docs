@@ -146,10 +146,10 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
         ...
         ```
     
-    -  Agent node, where your node ID (`<node-id>`) is specified:
+    -  Agent node, where your node ID (`<mesos-id>`) is specified:
     
        ```bash
-       $ dcos node list-components --mesos-id=<node-id>
+       $ dcos node list-components --mesos-id=<mesos-id>
        ```
        
        The output should resemble:
