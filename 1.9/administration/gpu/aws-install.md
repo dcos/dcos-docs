@@ -2,7 +2,7 @@
 post_title: Configure Your AWS Cluster
 nav_title: Configure Your AWS Cloud Cluster
 feature_maturity: experimental
-menu_order: 2
+menu_order: 1
 ---
 
 #  Prerequisites

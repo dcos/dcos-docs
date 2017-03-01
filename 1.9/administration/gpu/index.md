@@ -1,5 +1,5 @@
 ---
-post_title: Enabling GPU Acceleration
+post_title: Enabling GPU Support
 feature_maturity: experimental
 menu_order: 110
 ---
@@ -10,3 +10,5 @@ To get started, create a GPU-enabled DC/OS cluster.
 
 - [Configure an AWS cluster](/docs/1.9/usage/gpu/aws-install/).
 - [Configure a non-AWS cluster](/docs/1.9/usage/gpu/custom-install/).
+
+After creating a GPU-enable DC/OS cluster you can utilize GPUs from a [marathon app](/docs/1.9/usage/marathon/gpus/).

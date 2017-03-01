@@ -1,11 +1,11 @@
 ---
 post_title: Configure Your Service for GPUs
-nav_title: Configure Your Service
+nav_title: Using GPUs
 feature_maturity: experimental
 menu_order: 3
 ---
 
-Once your cluster is configured to support GPUs, add the `gpus` parameter to your [Marathon application definition](/docs/1.9/usage/marathon/application-basics/).
+Once your cluster is [configured to support GPUs](/docs/1.9/administration/gpu/), add the `gpus` parameter to your [Marathon application definition](/docs/1.9/usage/marathon/application-basics/).
 
 # Examples
 
@@ -60,7 +60,7 @@ You will also see an entry for **GPU** on the **Configuration** tab of the page 
 }
 ```
 
-Once your service has deployed, check the contents of `stdout` to verify that the service is producing the proper output from the `nvidia-smi` command. You should see something like the following, repeated once every 5 seconds. Access the log [via the DC/OS CLI](https://dcos.io/docs/1.9/administration/logging/quickstart/) or from the **Health** page for your service on the DC/OS dashboard.
+Once your service has deployed, check the contents of `stdout` to verify that the service is producing the proper output from the `nvidia-smi` command. You should see something like the following, repeated once every 5 seconds. Access the log [via the DC/OS CLI](/docs/1.9/administration/logging/quickstart/) or from the **Health** page for your service on the DC/OS dashboard.
 ```
 +------------------------------------------------------+
 | NVIDIA-SMI 352.79     Driver Version: 352.79         |
@@ -74,3 +74,5 @@ Once your service has deployed, check the contents of `stdout` to verify that th
 ```
 
 You will also see an entry for **GPU** on the **Configuration** tab of the page for your service.
+
+See [here for limitations and further information](/docs/1.9/usage/marathon/gpus/limitations/).
