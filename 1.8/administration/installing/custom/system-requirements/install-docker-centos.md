@@ -16,6 +16,8 @@ In addition to the general [Docker requirements and recommendations for DC/OS][1
 
 * Format node storage as XFS. As of CentOS 7.2, "<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.2_Release_Notes/technology-preview-file_systems.html" target="_blank">only XFS is currently supported for use as a lower layer file system</a>".
 
+* Use `direct-lvm` as the method to access Docker backing store in production. For more information, see [Selecting a Storage Driver](https://docs.docker.com/engine/userguide/storagedriver/selectadriver/).
+
 # Instructions
 
 The following instructions demonstrate how to use Docker with OverlayFS on CentOS 7.
