@@ -2,7 +2,7 @@
 post_title: Configure a Non-AWS Cluster
 nav_title: Configure a Non-AWS Cluster
 feature_maturity: experimental
-menu_order: 2
+menu_order: 10
 ---
 
 Follow the steps below to configure [a custom DC/OS installation](/docs/1.9/administration/installing/custom/) to run on bare metal, virtual machines, or on a cloud.
