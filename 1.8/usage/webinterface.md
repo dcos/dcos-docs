@@ -40,7 +40,7 @@ From the dashboard you can easily monitor the health of your cluster.
 
 # <a name="services"></a>Services
 
-The Services tab provides a full featured interface to the native DC/OS Marathon instance. This Services tab provides a comprehensive view of all of the services that you are running. You can view a graph that shows the allocation percentage rate for CPU, memory, or disk. You can filter services by health status or service name.
+The Services tab provides a full-featured interface to the native DC/OS Marathon instance. This Services tab provides a comprehensive view of all of the services that you are running. You can view a graph that shows the allocation percentage rate for CPU, memory, or disk. You can filter services by health status or service name.
 
 ![Services](../img/dcos-services.png)
 
