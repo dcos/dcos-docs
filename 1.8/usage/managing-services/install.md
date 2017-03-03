@@ -31,7 +31,7 @@ $ dcos package install chronos
     
 ## Web interface
 
-From the DC/OS web interface you can install services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
+From the DC/OS web interface you can install services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
 
 
 -  **Universe tab**
@@ -75,7 +75,7 @@ For more information, see [CLI command reference](/docs/1.8/usage/cli/command-re
     
 ## Web interface
 
-From the DC/OS web interface you can install services from the **Services** tab. The Services tab provides a full featured interface to the native DC/OS Marathon instance.
+From the DC/OS web interface you can install services from the **Services** tab. The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
 
 1.  Navigate to the [**Services**](/docs/1.8/usage/webinterface/#services) tab in the DC/OS web interface.
 1.  Click **Deploy Service** and specify your Marathon app definition.

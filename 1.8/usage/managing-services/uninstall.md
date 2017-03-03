@@ -26,7 +26,7 @@ Services can be uninstalled from either the web interface or the CLI. If a Unive
 
 ### Web interface
 
-From the DC/OS web interface you can uninstall services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
+From the DC/OS web interface you can uninstall services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
 
 ### Universe tab
 
@@ -55,7 +55,7 @@ From the DC/OS web interface you can uninstall services from the **Services** or
 
 ### Web interface
 
-From the DC/OS web interface you can uninstall services from the **Services**. The Services tab provides a full featured interface to the native DC/OS Marathon instance.
+From the DC/OS web interface you can uninstall services from the **Services**. The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
 
 ### Services tab
 
