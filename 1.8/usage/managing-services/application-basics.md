@@ -1,16 +1,13 @@
 ---
-post_title: Application Definitions
-nav_title: Application Definitions
-menu_order: 0
+post_title: Application Basics
+menu_order: 001.2
 ---
 
-A Marathon application typically represents a long-running service, of which there would be many instances running on multiple hosts. An application instance is called a *task*. The *application definition* describes everything needed to start and maintain the tasks. A Marathon application definition creates a DC/OS _service_.
+A Marathon application typically represents a long-running service that has many instances running on multiple hosts. An application instance is called a *task*. The *application definition* describes everything needed to start and maintain the tasks. A Marathon application definition creates a DC/OS _service_.
 
-# Hello Marathon: An Inline Shell Script
 
-### Prerequisites
-- [A DC/OS cluster](/docs/1.8/administration/installing/)
-- [The DC/OS CLI installed](/docs/1.8/usage/cli/install/)
+
+# Deploying Hello Marathon: An Inline Shell Script
 
 Let's start with a simple example: an service that prints `Hello Marathon` to stdout and then sleeps for 5 sec, in an endless loop.
 Use the following JSON application definition to describe the application. Create a file with the name of your choice. 
@@ -35,7 +32,7 @@ dcos marathon app add <your-service-name>.json
 
 When you define and launch a service, Marathon hands over execution to Mesos. Mesos creates a sandbox directory for each task. The sandbox directory is a directory on each agent node that acts as an execution environment and contains relevant log files. The `stderr` and `stdout` streams are also written to the sandbox directory.
 
-## Using Resources in Applications
+# Declaring Resources in Applications
 
 To run any non-trivial application, you typically depend on a collection of resources: files or archives of files. To manage resource allocation, Marathon has the concept of URIs (uniform resource identifiers). URIs use the [Mesos fetcher](http://mesos.apache.org/documentation/latest/fetcher/) to do the legwork in terms of downloading (and potentially) extracting resources.
 
@@ -107,7 +104,7 @@ A typical pattern in the development and deployment cycle is to have your automa
 * `s3a:`
 * `s3n:`
 
-## A Simple Docker-based Application
+# Deploying a Simple Docker-based Application with the REST API
 
 With Marathon it is straightforward to run applications that use Docker images.
 

@@ -5,11 +5,6 @@ menu_order: 90
 
 This is the DC/OS tutorials section, covering how to use DC/OS components as well as stateless and stateful DC/OS services. Typically, the services discussed here are available and installable from the [Universe](https://github.com/mesosphere/universe).
 
-# Getting started
-
-- [DC/OS 101](/docs/1.8/usage/tutorials/dcos-101/) This tutorial guides you through the steps necessary to get started using DC/OS.
-- 
-
 # DC/OS examples repository
 
 The tutorials that are located in [dcos/examples](https://github.com/dcos/examples/) GitHub repo. These tutorials contain examples of how to install and use DC/OS services.

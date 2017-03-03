@@ -1,11 +1,11 @@
 ---
-post_title: Deploying a Public Service
+post_title: Exposing a Service
 menu_order: 005
 ---
 
-DC/OS agent nodes can be designated as [public](/docs/1.8/overview/concepts/#public) or [private](/docs/1.8/overview/concepts/#private) during [installation](/docs/1.8/administration/installing/). Public agent nodes provide public access to your DC/OS applications. By default apps are launched on private agent nodes. 
+DC/OS agent nodes can be designated as [public](/docs/1.8/overview/concepts/#public) or [private](/docs/1.8/overview/concepts/#private) during [installation](/docs/1.8/administration/installing/). Public agent nodes provide access from outside of the cluster via infrastructure networking to your DC/OS services. By default apps are launched on private agent nodes and are not accessible. 
 
-To launch an app on a public node, you must create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified.
+To launch an app on a public node, you must create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified and configure an edge load balancer and service discovery mechanism. This example 
 
 **Prerequisite:**
 
@@ -61,7 +61,19 @@ To launch an app on a public node, you must create a Marathon app definition wit
     ```
     
     **Tip:** You can also view deployed apps by using the **Services** tab of DC/OS [GUI](/docs/1.8/usage/webinterface/#services).
+    
+1.  Configure an edge load balancer and service discovery mechanism. 
 
- [1]: /docs/1.8/tutorials/containerized-app/
- [3]: /docs/1.8/administration/installing/
- [4]: /docs/1.8/usage/cli/install/
+    - AWS users: If you installed DC/OS by using the [AWS CloudFormation templates](/docs/1.8/administration/installing/cloud/aws/), an ELB is included. However, you must reconfigure the health check on the public ELB to expose the app to the port specified in your app definition (e.g. port 80).
+    - All other users: You can use [Marathon-LB](/docs/1.8/usage/service-discovery/marathon-lb/), a rapid proxy and load balancer that is based on HAProxy. 
+
+1.  Go to your public agent to see the site running. For information about how to find your public agent IP, see the [documentation](/docs/1.8/administration/locate-public-agent/).
+
+    You should see the following message in your browser: 
+    
+    ![Hello Brave World](/docs/1.8/usage/managing-services/img/helloworld.png)
+    
+## Next steps
+
+Learn how to load balance your app on a public node using [Marathon-LB](/docs/1.8/usage/service-discovery/marathon-lb/marathon-lb-basic-tutorial/).
+

@@ -1,10 +1,7 @@
 ---
-post_title: Ports
-nav_title: Ports
-menu_order: 10
+post_title: Service Ports
+menu_order: 003.3
 ---
-
-Port configuration for applications in Marathon can be confusing and there is [an outstanding issue](https://github.com/mesosphere/marathon/issues/670) to redesign the ports API. This page attempts to explain more clearly how they work.
 
 You can use [virtual addresses (VIPs)](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-ip-addresses/) to make ports management easier. VIPs simplify inter-app communication and implement a reliable service-oriented architecture. VIPs map traffic from a single virtual address to multiple IP addresses and ports.
 
@@ -34,7 +31,7 @@ You can use [virtual addresses (VIPs)](/docs/1.8/usage/service-discovery/load-ba
 
 # Random Port Assignment
 
-Using the value 0 for any port settings indicates to Marathon that you would like a random port assignment. However, if `containerPort` is set to 0 within a `portMapping`, it is set to the same value as `hostPort`.
+Using the value `0` for any port settings indicates to Marathon that you would like a random port assignment. However, if `containerPort` is set to `0` within a `portMapping`, it is set to the same value as `hostPort`.
 
 # Environment Variables
 
