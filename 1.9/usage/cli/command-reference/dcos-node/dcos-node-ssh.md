@@ -17,8 +17,6 @@ dcos node ssh <command> [OPTION]
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `--config-file=<path>`   |             | Path to SSH configuration file. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--leader`   |             |  The leading master. |
 | `--master`   |             |  This option is deprecated and is replaced by `--leader`. |
 | `--master-proxy`   |             | Proxy the SSH connection through a master node. This can be useful when accessing DC/OS from a separate network. For example, in the default AWS configuration, the private agents are unreachable from the public internet. You can access them using this option, which will proxy the SSH connection through the publicly reachable master. |
@@ -26,7 +24,6 @@ dcos node ssh <command> [OPTION]
 | `--mesos-id=<mesos-id>`   |             | The agent ID of a node. |
 | `--slave=<agent-id>`   |             | This option is deprecated and is replaced by `--mesos-id`. |
 | `--user=<user>`   |   `core`   | The SSH user. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

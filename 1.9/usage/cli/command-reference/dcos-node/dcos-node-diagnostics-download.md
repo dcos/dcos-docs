@@ -16,10 +16,7 @@ dcos node diagnostics download <bundle> [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--location=<location>`   |  Current directory |  Download the diagnostics bundle to a specific location. If not set, the default location is your current working directory. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

@@ -16,10 +16,7 @@ dcos package repo remove <repo-name> [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `<repo-name>`   |             |  Name of the package repository. For example, `Universe`. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

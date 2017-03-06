@@ -17,9 +17,6 @@ dcos marathon group scale <group-id> <scale-factor> [OPTION]
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `--force`   |             | Disable checks in Marathon during updates. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

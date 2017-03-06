@@ -16,10 +16,7 @@ dcos marathon app list [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--json`   |             |  Print JSON-formatted data. |
-| `--version, v`   |             | Print version information. |
 
 # Parent command
 

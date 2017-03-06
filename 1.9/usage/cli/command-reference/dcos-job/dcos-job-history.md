@@ -16,11 +16,8 @@ dcos job history <job-id> [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--json`   |             |  Print JSON-formatted list. |
 | `--show-failures`   |             |  Show the failure table and statistics for history. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

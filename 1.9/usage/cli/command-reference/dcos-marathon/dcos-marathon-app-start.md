@@ -17,10 +17,7 @@ dcos marathon app start <app-id> [OPTION]
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `--force`   |             | Disable checks in Marathon during updates. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--instances`   |             | The number of instances. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

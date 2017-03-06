@@ -19,11 +19,8 @@ dcos service log <file> <service> [OPTION]
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `--follow`   |             |  Dynamically update the log. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--lines=N`   |     10      |  Print the last N lines. |
 | `--ssh-config-file=<path>`   |           | The path to the SSH config file. This is used to access the Marathon logs. |
-| `--version, v`   |             | Print version information. | 
 
 # Positional arguments
 

@@ -18,10 +18,7 @@ dcos task log <file> <task> [OPTION]
 |---------|-------------|-------------|
 | `--completed`   |             | Print completed and in-progress tasks. |
 | `--follow`   |             |  Dynamically update the log. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--lines=N`   |     10      |  Print the last N lines. |
-| `--version, v`   |             | Print version information. | 
 
 # Positional arguments
 

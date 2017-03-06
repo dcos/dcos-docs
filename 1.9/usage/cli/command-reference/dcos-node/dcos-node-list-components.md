@@ -16,12 +16,9 @@ dcos node list-components [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--json`   |             |  Print JSON-formatted data. |
 | `--leader`   |             |  The leading master. |
 | `--mesos-id=<mesos-id>`   |             | The agent ID of a node. |
-| `--version, v`   |             | Print version information. |
 
 # Parent command
 

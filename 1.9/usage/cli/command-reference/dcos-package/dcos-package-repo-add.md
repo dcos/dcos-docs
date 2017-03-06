@@ -16,10 +16,7 @@ dcos package repo add <repo-name> <repo-url> [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
 | `--index=<index>`   |             | The numerical position in the package repository list. Package repositories are searched in descending order. By default, the Universe repository first in the list. |
-| `--info`   |             |  Print a short description of this subcommand. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

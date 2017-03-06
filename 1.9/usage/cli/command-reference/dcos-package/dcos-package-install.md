@@ -19,11 +19,8 @@ dcos package install <package-name> [OPTION]
 | `--app`   |             |  Application only. |
 | `--app-id=<app-id>`   |             |  The application ID. |
 | `--cli`   |             |  Command line only. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--options=<file>`   |             | Path to a JSON file that contains customized package installation options. |
 | `--package-version=<package-version>`   |             | The package version. |
-| `--version, v`   |             | Print version information. |
 | `--yes`   |             | Disable interactive mode and assume "yes" is the answer to all prompts. |
 
 # Positional arguments

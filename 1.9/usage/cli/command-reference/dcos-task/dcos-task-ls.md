@@ -17,10 +17,7 @@ dcos task ls <task> <path> [OPTION]
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `--completed`   |             | Print completed and in-progress tasks. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--long`   |             |  Print full Mesos sandbox file attributes. |
-| `--version, v`   |             | Print version information. | 
 
 # Positional arguments
 

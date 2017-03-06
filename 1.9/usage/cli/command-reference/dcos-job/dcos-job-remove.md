@@ -16,10 +16,7 @@ dcos job remove <job-id> [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--stop-current-job-runs`   |             |  Remove all running jobs. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

@@ -14,11 +14,7 @@ dcos config unset <name> [OPTION]
 
 # Options
 
-| Name, shorthand | Default | Description |
-|---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
-| `--version`   |             |  Print version information. |
+None.
 
 # Positional arguments
 

@@ -16,11 +16,9 @@ dcos marathon deployment watch <deployment-id> [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--interval=<interval>`   |             | Number of seconds to wait between actions. |
 | `--max-count=<max-count>`   |             | Maximum number of entries to fetch and return. |
-| `--version, v`   |             | Print version information. |
+
 
 # Positional arguments
 

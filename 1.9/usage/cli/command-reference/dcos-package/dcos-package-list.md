@@ -18,10 +18,7 @@ dcos package list <package-name> [OPTION]
 |---------|-------------|-------------|
 | `--app-id=<app-id>`   |             |  The application ID. |
 | `--cli`   |             |  Command line only. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--json`   |             |  JSON-formatted data. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

@@ -17,12 +17,9 @@ dcos node diagnostics [OPTION]
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `--cancel`   |             | Cancel a running diagnostics job. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--list`   |             |  List the available diagnostics bundles. |
 | `--json`   |             |  Print JSON-formatted data. |
 | `--status`   |             |  Print diagnostics job status. |
-| `--version, v`   |             | Print version information. |
 
 # Parent command
 

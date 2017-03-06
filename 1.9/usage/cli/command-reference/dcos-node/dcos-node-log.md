@@ -16,15 +16,12 @@ dcos node log [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--leader`   |             |  The leading master. |
 | `--follow`   |             |  Dynamically update the log. |
 | `--lines=N`   |     10      |  Print the last N lines. |
 | `--master`   |             |  This option is deprecated and is replaced by `--leader`. |
 | `--mesos-id=<mesos-id>`   |             | The agent ID of a node. |
 | `--slave=<agent-id>`   |             | This option is deprecated and is replaced by `--mesos-id`. |
-| `--version, v`   |             | Print version information. |
 
 # Parent command
 

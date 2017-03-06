@@ -16,10 +16,7 @@ dcos marathon group remove <group-id> [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
 | `--force`   |             | Disable checks in Marathon during updates. |
-| `--info`   |             |  Print a short description of this subcommand. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

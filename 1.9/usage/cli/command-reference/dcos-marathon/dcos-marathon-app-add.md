@@ -14,10 +14,7 @@ dcos marathon app add <app-resource> [OPTION]
 
 # Options
 
-| Name, shorthand | Default | Description |
-|---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--version, v`   |             | Print version information. |
+None.
 
 # Positional arguments
 

@@ -20,9 +20,6 @@ dcos package uninstall <package-name> [OPTION]
 | `--app`   |             |  Application only. |
 | `--app-id=<app-id>`   |             |  The application ID. |
 | `--cli`   |             |  Command line only. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
-| `--version, v`   |             | Print version information. |
 
 # Positional arguments
 

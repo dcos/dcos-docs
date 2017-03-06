@@ -17,10 +17,7 @@ dcos marathon pod list [OPTION]
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `--config-schema`   |             |  Show the configuration schema for the Marathon subcommand. |
-| `--help, h`   |             |  Print usage. |
 | `--json`   |             |  Print JSON-formatted data. |
-| `--info`   |             |  Print a short description of this subcommand. |
-| `--version, v`   |             | Print version information. |
 
 # Parent command
 

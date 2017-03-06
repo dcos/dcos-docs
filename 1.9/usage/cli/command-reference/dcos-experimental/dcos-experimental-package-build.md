@@ -16,11 +16,8 @@ dcos experimental package build <build-definition> [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--json`   |             |  JSON-formatted data. |
 | `--output-directory=<output-directory>`   | current working directory | Path to the directory where the data should be stored.|
-| `--version, v`   |             | Print version information. |  
     
 # Positional arguments
 

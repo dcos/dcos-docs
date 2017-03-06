@@ -17,9 +17,6 @@ dcos marathon debug list [OPTION]
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `--json`   |             |  Print JSON-formatted data. |
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
-| `--version, v`   |             | Print version information. |
 
 # Parent command
 

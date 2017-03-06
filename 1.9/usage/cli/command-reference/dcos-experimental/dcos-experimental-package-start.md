@@ -16,12 +16,9 @@ dcos experimental service start <package-name> [OPTION]
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `--help, h`   |             |  Print usage. |
-| `--info`   |             |  Print a short description of this subcommand. |
 | `--json`   |             |  JSON-formatted data. |
 | `--options=<options-file>`   |             | Path to a JSON file that contains customized package execution options. |
 | `--package-version=<package-version>`   |             | The package version. |
-| `--version, v`   |             | Print version information. |  
     
 # Positional arguments
 
