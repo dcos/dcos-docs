@@ -33,7 +33,7 @@ The metrics component is natively integrated with DC/OS and no additional setup 
         $ dcos marathon app add test-metrics.json
         ```
         
-1.  [SSH to the agent node](/1.9/administration/access-node/sshcluster/) that is running your app, where (`--mesos-id=<mesos-id>`) is the Mesos ID of the node running your app.
+1.  [SSH to the agent node](/docs/1.9/administration/access-node/sshcluster/) that is running your app, where (`--mesos-id=<mesos-id>`) is the Mesos ID of the node running your app.
 
     ```
     $ dcos node ssh --master-proxy --mesos-id=<mesos-id>
