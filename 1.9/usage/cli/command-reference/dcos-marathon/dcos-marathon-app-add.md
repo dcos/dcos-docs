@@ -20,7 +20,7 @@ None.
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `<app-resource>`   |             |  Path to a file or HTTP(S) URL that contains the app's JSON definition. If omitted, the definition is read from stdin. For a detailed description see the [documentation](https://docs.mesosphere.com/usage/marathon/rest-api/). |
+| `<app-resource>`   |             |  Path to a file or HTTP(S) URL that contains the app's JSON definition. If omitted, the definition is read from stdin. For a detailed description, see the [documentation](https://docs.mesosphere.com/usage/marathon/rest-api/). |
 
 # Parent command
 
@@ -58,7 +58,7 @@ In this example, a simple app is deployed to DC/OS Marathon.
 1.  Add your app to Marathon:
 
     ```bash
-    dcos marathon app add myapp.json
+    dcos marathon app add <my-app.json>
     ```
     
     If this is added successfully, there is no output.
