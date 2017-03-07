@@ -41,7 +41,7 @@ From the DC/OS UI you can uninstall services from the **Services** or **Universe
 1.  Navigate to the [**Services**](/docs/1.9/usage/webinterface/#services) tab in the DC/OS UI.
 1.  Select your application and click the toggle to **Destroy**.
     
-    ![Destory app](/docs/1.9/usage/managing-services/img/app-destory.png)
+    ![Destory app](/docs/1.9/usage/managing-services/img/app-destroy.png)
 
 ## <a name="framework-cleaner"></a>Cleaning up ZooKeeper
 

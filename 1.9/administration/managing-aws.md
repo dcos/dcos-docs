@@ -18,23 +18,9 @@ To change the number of agent nodes with AWS:
 
 Your new machines will take a few minutes to initialize; you can watch them in the EC2 console. The DC/OS web interface will update as soon as the new nodes register.
 
-## Upgrading a DC/OS cluster in AWS
+<!-- ## Upgrading
 
-You can update an existing DC/OS cluster or services to use the latest DC/OS template.
-
-To upgrade a DC/OS cluster:
-
-1.  Create a new DC/OS cluster by using the latest [DC/OS template][2] for AWS.
-
-2.  Migrate your active DC/OS services and apps to the new DC/OS cluster:
-
-    1.  Migrate, Extract, Transform and Load (ETL) the app data to the new cluster.
-
-    2.  Migrate your DC/OS services and apps to the new cluster.
-
-    3.  Change the DNS so that it points to the DC/OS services running in the new cluster.
-
-3.  Shutdown your existing DC/OS cluster.
+See the upgrade [documentation](/docs/1.9/administration/installing/cloud/aws/upgrading/). -->
 
  [1]: /docs/1.9/administration/securing-your-cluster/
  [2]: /docs/1.9/administration/installing/cloud/aws/

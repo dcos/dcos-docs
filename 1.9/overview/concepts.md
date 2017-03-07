@@ -154,9 +154,9 @@ A Marathon service consists of zero or more containerized service instances. Eac
     - Marathon pod instances map 1 to many with tasks.
 - Service instances are restarted as a new Mesos Task when they exit prematurely.
 - Service instances may be re-scheduled onto another agent node if they exit prematurely and the agent is down or does not have enough resources any more.
-- Services may be installed directly via the [DC/OS API (Marathon)](http://mesosphere.github.io/marathon/docs/rest-api.html) or indirectly via the [DC/OS package manager (Cosmos)](#package-manager) from a [package repository](#dcos-package-repository) like [Mesosphere Universe](#mesosphere-universe). The [DC/OS GUI](#dcos-gui) and [DC/OS CLI](#dcos-cli) may be used to interact with the DC/OS package manager more easily.
+- Services may be installed directly via the [DC/OS API (Marathon)](http://mesosphere.github.io/marathon/docs/rest-api.html) or indirectly via the [DC/OS Package Manager (Cosmos)](#package-manager) from a [package repository](#dcos-package-repository) like [Mesosphere Universe](#mesosphere-universe). The [DC/OS GUI](#dcos-gui) and [DC/OS CLI](#dcos-cli) may be used to interact with the DC/OS Package Manager (Cosmos) more easily.
 - A Marathon service may be a [DC/OS scheduler](#dcos-scheduler), but not all services are schedulers.
-- A Marathon service is an abstraction around Marathon service instances which are an abstraction around Mesos tasks. Other schedulers (e.g. Metronome, Jenkins) have their own names for abstractions around Mesos tasks.
+- A Marathon service is an abstraction around Marathon service instances which are an abstraction around Mesos tasks. Other schedulers (e.g. DC/OS Jobs (Metronome), Jenkins) have their own names for abstractions around Mesos tasks.
 
 Examples: Cassandra (scheduler), Marathon-on-Marathon, Kafka (scheduler), Nginx, Tweeter.
 
@@ -194,7 +194,7 @@ A DC/OS service group is a hierarchical (path-like) set of DC/OS services for na
 
 ### <a name="dcos-job"></a>Job
 
-A DC/OS job is a set of similar short-lived job instances, running as Mesos tasks, managed by the Jobs service scheduler (Metronome)
+A DC/OS job is a set of similar short-lived job instances, running as Mesos tasks, managed by the DC/OS Jobs (Metronome) component.
 
 - A job can be created to run only once, or may run regularly on a schedule.
 
@@ -203,7 +203,7 @@ A DC/OS job is a set of similar short-lived job instances, running as Mesos task
 A DC/OS scheduler is a Mesos scheduler that runs as a systemd service on master nodes or Mesos task on agent nodes.
 
 - The key differences between a DC/OS scheduler and Mesos scheduler are where it runs and how it is installed.
-- Some schedulers come pre-installed as DC/OS components (e.g. Marathon, Metronome).
+- Some schedulers come pre-installed as DC/OS components (e.g. Marathon, DC/OS Jobs (Metronome)).
 - Some schedulers can be installed by users as user services (e.g Kafka, Cassandra).
 - Some schedulers run as multiple service instances to provide high availability (e.g. Marathon).
 - In certain security modes within Enterprise DC/OS, a DC/OS scheduler must authenticate and be authorized using a service account in order to register with Mesos as a framework.
@@ -222,7 +222,7 @@ A DC/OS component is a DC/OS system service that is distributed with DC/OS.
 - Components may be deployed in a high availability configuration.
 - Most components run on the master nodes, but some (e.g. mesos-agent) run on the agent nodes.
 
-Examples: Mesos, Marathon, Mesos-DNS, Bouncer, Admin Router, Cosmos, Minuteman, History Service, etc.
+Examples: Mesos, Marathon, Mesos-DNS, Bouncer, Admin Router, DC/OS Package Manager (Cosmos), Minuteman, History Service, etc.
 
 ### <a name="dcos-package"></a>Package
 
@@ -230,16 +230,16 @@ A DC/OS package is a bundle of metadata that describes how to configure, install
 
 ### <a name="dcos-package-manager"></a>Package Manager
 
-The DC/OS package manager ([Cosmos](https://github.com/dcos/cosmos)) is a component that manages installing and uninstalling packages on a DC/OS cluster.
+The [DC/OS Package Manager (Cosmos)(https://github.com/dcos/cosmos)) is a component that manages installing and uninstalling packages on a DC/OS cluster.
 
-- The DC/OS GUI and DC/OS CLI act as clients to interact with the DC/OS package manager.
-- The [DC/OS package manager API](https://github.com/dcos/cosmos) allows programmatic interaction.
+- The DC/OS GUI and DC/OS CLI act as clients to interact with the DC/OS Package Manager.
+- The [DC/OS Package Manager API](https://github.com/dcos/cosmos) allows programmatic interaction.
 
 ### <a name="dcos-package-registry"></a>Package Registry
 
 A DC/OS package registry is a repository of DC/OS packages.
 
-- The [DC/OS package manager](#dcos-package-manager) may be configured to install packages from one or more package registries.
+- The [DC/OS Package Manager](#dcos-package-manager) may be configured to install packages from one or more package registries.
 
 ### <a name="mesosphere-universe"></a>Mesosphere Universe
 
@@ -348,7 +348,7 @@ A Mesos resource offer provides a set of unallocated resources (e.g. cpu, disk, 
 
 ### <a name="mesos-containerizer"></a>Containerizer
 
-A Mesos containerizer is a containerization and resource isolation abstraction around a specific container runtime, namely the [Docker Runtime](#mesos-docker-runtime) and [Mesos Universal Container Runtime](#mesos-universal-container-runtime).
+A containerizer is a containerization and resource isolation abstraction around a specific container runtime, namely the [Docker Runtime](#mesos-docker-runtime) and [Mesos Universal Container Runtime](#mesos-universal-container-runtime).
 
 #### <a name="mesos-universal-container-runtime"></a>Mesos Universal Container Runtime
 

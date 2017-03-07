@@ -13,21 +13,31 @@ You can create and administer jobs in the DC/OS web interface, from the DC/OS CL
 
 ## Add a Job
 
-From the DC/OS web interface, click the **Jobs** tab, then the **New Job** button. Fill in the following fields, or toggle to JSON mode to edit the JSON directly:
+From the DC/OS web interface, click the **Jobs** tab, then the **Create a Job** button. Fill in the following fields, or toggle to JSON mode to edit the JSON directly.
 
-* **Job ID** - The ID of your job.
+### **General** Tab
+* **ID** - The ID of your job.
 * **Description** - A description of your job.
-* **CPU** - The amount of CPU your job requires.
-* **Memory** - The amount of memory your job requires.
-* **Disk space** - The amount of disk space your job requires.
+* **CPUs** - The amount of CPU your job requires.
+* **Mem** - The amount of memory, in MiB, your job requires.
+* **Disk space** - The amount of disk space, in MiB, your job requires.
 * **Command** - The command your job will execute. Leave this blank if you will use a Docker image.
-* **Schedule** - Specify the schedule in cron format, as well as the time zone and starting deadline. Use [this crontab generator](http://crontab.guru) for help.
-* **Docker Container** - Fill in this field if you will use a Docker image to specify the action of your job.
-* **Labels** - Attach metadata to your job so you can filter them. [Learn more about labels](/docs/1.9/usage/tutorials/task-labels/).
+
+### **Schedule** Tab
+Check the **Run on a Schedule** to reveal the following fields.
+* **Cron Schedule** - Specify the schedule in cron format. Use [this crontab generator](http://crontab.guru) for help.
+* **Time Zone** - Enter the time zone in [TZ format](http://www.timezoneconverter.com/cgi-bin/zonehelp), e.g. America/New_York.
+* **Starting Deadline** - This is the time, in seconds, to start the job if it misses scheduled time for any reason. Missed jobs executions will be counted as failed ones.
+
+### **Docker Container** Tab
+* **Image** - Enter the the Docker image you will use to specify the action of your job, if you are using one.
+
+### **Labels**
+**Label Name** and **Label Value** - Attach metadata to your jobs so you can filter them. [Learn more about labels](/docs/1.9/usage/tutorials/task-labels/).
 
 ## Modify, View, or Remove a Job
 
-From the **Jobs** tab, click the name of your job to modify or delete your job. While the job is running you can click the job instance to drill down to **Details**, **Files**, and **Logs** data.
+From the **Jobs** tab, click the name of your job and then the menu on the upper right to modify or delete it. While the job is running you can click the job instance to drill down to **Details**, **Files**, and **Logs** data.
 
 # DC/OS CLI
   

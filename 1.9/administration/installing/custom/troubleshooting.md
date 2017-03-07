@@ -32,7 +32,7 @@ menu_order: 400
     1. Exhibitor 
     1. Mesos master 
     1. Mesos DNS 
-    1. DNS Dispatcher 
+    1. DNS Forwarder (Spartan)
     1. DC/OS Marathon
     1. Jobs 
     1. Admin Router
@@ -51,7 +51,7 @@ menu_order: 400
 
 1. Ensure that firewalls and any other connection-filtering mechanisms are not interfering with cluster component communications. TCP, UDP, and ICMP must be permitted.
     
-   Ensure that services that bind to port `53`, which is required by DNS Dispatcher (`dcos-spartan.service`), are disabled and stopped. For example: 
+   Ensure that services that bind to port `53`, which is required by DNS Forwarder (`dcos-spartan.service`), are disabled and stopped. For example:
    
    ```bash
    sudo systemctl disable dnsmasq && sudo systemctl stop dnsmasq
@@ -103,7 +103,7 @@ menu_order: 400
         
             **Note:** Running this command in multi-master configurations can take up to 10-15 minutes to complete. If it doesn't complete after 10-15 minutes, you should carefully review the `journalctl -flu dcos-exhibitor` logs.
 
-1.  Verify whether you can ping the DNS Dispatcher (`ready.spartan`). If not, review the DNS Dispatcher service logs: ﻿⁠⁠⁠⁠
+1.  Verify whether you can ping the DNS Forwarder (`ready.spartan`). If not, review the DNS Dispatcher service logs: ﻿⁠⁠⁠⁠
 
     ```bash
     journalctl -flu dcos-spartan﻿⁠⁠⁠⁠

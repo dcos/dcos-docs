@@ -77,7 +77,7 @@ DC/OS provides a way to view and operate a large number of individual machine-le
 <div data-role="collapsible">
 <h2>DC/OS Installer</h2>
 <div>
-<p><strong>Description:</strong> The DC/OS Installer (dcos_generate_config.sh) generates install artifacts and installs DC/OS. As part of the install process on each node, the DC/OS Download service downloads the install artifacts from the bootstrap machine and the DC/OS Setup service installs components using PkgPanda.</p>
+<p><strong>Description:</strong> The DC/OS Installer (dcos_generate_config.sh) generates install artifacts and installs DC/OS. As part of the install process on each node, the DC/OS Download service downloads the install artifacts from the bootstrap machine and the DC/OS Setup service installs components using the DC/OS Component Package Manager (Pkgpanda).</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -152,10 +152,12 @@ DC/OS includes built-in orchestration of the most commonly used high level conta
 </div>
 </div>
 
+<a name="metronome"></a>
+<a name="dcos-jobs"></a>
 <div data-role="collapsible">
-<h2>Metronome</h2>
+<h2>DC/OS Jobs (Metronome)</h2>
 <div>
-<p><strong>Description:</strong> Metronome orchestrates short-lived, scheduled or immediate, containerized jobs.</p>
+<p><strong>Description:</strong> DC/OS Jobs (Metronome) orchestrates short-lived, scheduled or immediate, containerized jobs.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -241,9 +243,9 @@ DC/OS supports multiple container runtimes using [Mesos' containerizer abstracti
 No software runs perfectly, especially not the first time. Distribute tasks across a cluster and the normal patterns of analyzing and debugging these services become tedious and painful. So DC/OS includes several components to help ease the pain of debugging distributed systems by aggregating, caching, and streaming logs, metrics, and cluster state metadata.
 
 <div data-role="collapsible">
-<h2>DC/OS Diagnostics</h2>
+<h2>DC/OS Diagnostics (3DT)</h2>
 <div>
-<p><strong>Description:</strong> The DC/OS Diagnostics service aggregates and exposes system component health. DC/OS Diagnostics is also known as DC/OS Distributed Diagnostics Tool (3DT).</p>
+<p><strong>Description:</strong> DC/OS Diagnostics (3DT) aggregates and exposes component health. DC/OS Diagnostics is also known as DC/OS Distributed Diagnostics Tool (3DT).</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -264,7 +266,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
 <h2>DC/OS Log</h2>
 <div>
 <p><strong><em>NEW IN 1.9.0</em></strong></p>
-<p><strong>Description:</strong> The DC/OS Log service exposes component, container, and task logs.</p>
+<p><strong>Description:</strong> The DC/OS Log service exposes node, component, and container (task) logs.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -310,7 +312,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
 <h2>DC/OS Metrics</h2>
 <div>
 <p><strong><em>NEW IN 1.9.0</em></strong></p>
-<p><strong>Description:</strong> The DC/OS Metrics service exposes host, container, and task metrics.</p>
+<p><strong>Description:</strong> The DC/OS Metrics service exposes node, container, and application metrics.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -417,10 +419,12 @@ In a world where machines are are given numbers instead of names, tasks are sche
 </div>
 </div>
 
+<a name="spartan"></a>
+<a name="dns-forwarder"></a>
 <div data-role="collapsible">
-<h2>Spartan</h2>
+<h2>DNS Forwarder (Spartan)</h2>
 <div>
-<p><strong>Description:</strong> Spartan forwards DNS requests to multiple DNS servers. Spartan Watchdog restarts Spartan when it is unhealthy.</p>
+<p><strong>Description:</strong> DNS Forwarder (Spartan) forwards DNS requests to multiple DNS servers. Spartan Watchdog restarts Spartan when it is unhealthy.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -441,7 +445,7 @@ In a world where machines are are given numbers instead of names, tasks are sche
 <div data-role="collapsible">
 <h2>Generate resolv.conf</h2>
 <div>
-<p><strong>Description:</strong> Generate resolv.conf configures network name resolution (<a href="https://www.freedesktop.org/software/systemd/man/systemd-resolved.service.html)">systemd-resolved</a> by updating <code class="nowrap">/etc/resolv.conf</code> to facilitate DC/OS's software defined networking.</p>
+<p><strong>Description:</strong> Generate resolv.conf configures network name resolution by updating <code class="nowrap">/etc/resolv.conf</code> to facilitate DC/OS's software defined networking.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -497,10 +501,12 @@ In a world where machines are are given numbers instead of names, tasks are sche
 </div>
 </div>
 
+<a name="epmd"></a>
+<a name="erlang-port-mapping-daemon"></a>
 <div data-role="collapsible">
-<h2>Erlang Port Mapping Daemon</h2>
+<h2>Erlang Port Mapping Daemon (EPMD)</h2>
 <div>
-<p><strong>Description:</strong> Erlang Port Mapping Daemon (EPMD) maps symbolic names to machine addresses, facilitating named virtual IPs.</p>
+<p><strong>Description:</strong> Erlang Port Mapping Daemon (EPMD) facilitates communication between distributed Erlang programs.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -521,10 +527,12 @@ In a world where machines are are given numbers instead of names, tasks are sche
 
 Just as machine operating systems need package management to install, upgrade, configure, and remove individual applications and services, a datacenter operating system needs package management to do the same for distributed services. In DC/OS there are two levels of package management: machine-level for components; and cluster-level for user services.
 
+<a name="cosmos"></a>
+<a name="dcos-package-manager"></a>
 <div data-role="collapsible">
-<h2>Cosmos</h2>
+<h2>DC/OS Package Manager (Cosmos)</h2>
 <div>
-<p><strong>Description:</strong> Cosmos installs and manages DC/OS packages from <a href="/docs/1.9/usage/repo/">DC/OS package repositories</a>, such as <a href="https://github.com/mesosphere/universe">Mesosphere Universe</a>.</p>
+<p><strong>Description:</strong> DC/OS Package Manager (Cosmos) installs and manages DC/OS packages from <a href="/docs/1.9/usage/repo/">DC/OS package repositories</a>, such as the <a href="https://github.com/mesosphere/universe">Mesosphere Universe</a>.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -540,10 +548,12 @@ Just as machine operating systems need package management to install, upgrade, c
 </div>
 </div>
 
+<a name="pkgpanda"></a>
+<a name="dcos-component-package-manager"></a>
 <div data-role="collapsible">
-<h2>Pkgpanda</h2>
+<h2>DC/OS Component Package Manager (Pkgpanda)</h2>
 <div>
-<p><strong>Description:</strong> Pkgpanda installs and manages DC/OS components.</p>
+<p><strong>Description:</strong> DC/OS Component Package Manager (Pkgpanda) installs and manages DC/OS components.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -563,12 +573,12 @@ Just as machine operating systems need package management to install, upgrade, c
 
 # IAM and Security
 
-Identity management in DC/OS is delegated to external identity providers, taking advantage of existing infrastructure to reduce the cost and time to market. Security is provided via OAuth authentication and enforced at the edge by Admin Router's reverse proxy.
+Identity management in DC/OS is delegated to external identity providers, taking advantage of existing infrastructure to reduce the cost and time to market. Security is provided via OpenID Connect authentication and enforced at the edge by Admin Router's reverse proxy.
 
 <div data-role="collapsible">
 <h2>DC/OS Authentication</h2>
 <div>
-<p><strong>Description:</strong> The DC/OS Authentication (OAuth) service authenticates users using [OpenID Connect](http://openid.net/connect/) and [Auth0](https://auth0.com/).</p>
+<p><strong>Description:</strong> The DC/OS Authentication (OAuth) service authenticates DC/OS users using [OpenID Connect](http://openid.net/connect/) and [Auth0](https://auth0.com/).</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -626,7 +636,7 @@ Several components are configured to use [systemd timers](https://www.freedeskto
 
 # Component Installation
 
-DC/OS components are installed, upgraded, and managed by [pkgpanda](https://github.com/dcos/dcos/tree/master/pkgpanda), a package manager for systemd units.
+DC/OS components are installed, upgraded, and managed by [DC/OS Component Package Manager (Pkgpanda)](https://github.com/dcos/dcos/tree/master/pkgpanda), a package manager for systemd units.
 
 To see the full list of packages managed by the DC/OS installer, see the [packages directory of the DC/OS source repository](https://github.com/dcos/dcos/tree/master/packages).
 

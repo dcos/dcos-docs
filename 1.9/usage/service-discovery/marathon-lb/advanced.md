@@ -16,8 +16,24 @@ To specify a global template:
 
 1.  On your local machine, create a file called `HAPROXY_HEAD` in a directory called `templates` with the contents below:
 
-        global daemon log /dev/log local0 log /dev/log local1 notice maxconn 4096 tune.ssl.default-dh-param 2048 defaults log global retries 3 maxconn 3000 timeout connect 5s timeout client 30s timeout server 30s option redispatch listen stats bind 0.0.0.0:9090 balance mode http stats enable monitor-uri /\_haproxy\_health_check
-
+        global
+          daemon
+          log /dev/log local0
+          log /dev/log local1 notice
+          maxconn 4096
+          tune.ssl.default-dh-param 2048
+        defaults
+          log global
+          retries 3
+          maxconn 3000
+          timeout connect 5s
+          timeout client 30s
+          timeout server 30s
+          option redispatch
+        listen stats
+          bind 0.0.0.0:9090
+          balance mode http
+          stats enable monitor-uri /_haproxy_health_check
     In the code above, the following items have changed from the default: `maxconn`, `timeout client`, and `timeout server`.
 
 2.  Tar or zip the file. [Here’s a handy script you can use to do this][1].
@@ -26,7 +42,11 @@ To specify a global template:
 
 3.  Augment the Marathon-LB config by saving the following JSON in a file called `options.json`:
 
-        { "marathon-lb":{ "template-url":"https://downloads.mesosphere.com/marathon/marathon-lb/templates.tgz" } }
+        {
+          "marathon-lb": {
+            "template-url":"https://downloads.mesosphere.com/marathon/marathon-lb/templates.tgz"
+          }
+        }
 
 4.  Launch the new Marathon-LB:
 

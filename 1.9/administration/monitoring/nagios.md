@@ -50,7 +50,7 @@ for unit in `ls /etc/systemd/system/dcos.target.wants`; do
 done
 ```
 
-If a service is not healthy, such as adminrouter, we will get a failure from this script:
+If a component service is not healthy, such as Admin Router, we will get a failure from this script:
 
 ```bash
 ip-10-0-6-126 core # ./dcos_unit_check.sh

@@ -11,7 +11,7 @@ To continuously improve the DC/OS experience, a telemetry component is included 
 # <a name="core"></a>Core telemetry
 The [DC/OS Signal](/docs/1.9/overview/architecture/components/#dcos-signal) component queries the diagnostics service `/system/health/v1/report` endpoint on the leading master and sends this data to [Segment](https://segment.com/docs/) which Mesosphere then uses to track usage metrics and customer support.
 
-The information collected by the Signal component is separated into these categories: Diagnostics, Mesos, and Package service. 
+The information reported by DC/OS Signal comes from several components: DC/OS Diagnostics (3DT), Apache Mesos, and DC/OS Package Manager (Cosmos).
 
 For each category this data is collected:
 
@@ -32,7 +32,7 @@ For each category this data is collected:
 </pre>
 </td></tr>
 <tr><td>event</td>
-<td>This is the category that appears in Segment. Possible values are <code>package_list</code> (Package service), <code>health</code> (Diagnostics), and <code>mesos_track</code> (Mesos). For example:
+<td>This is the category that appears in Segment. Possible values are <code>package_list</code> (Package Manager), <code>health</code> (Diagnostics), and <code>mesos_track</code> (Mesos). For example:
 <pre>
 "event": "package_list"
 </pre>
@@ -64,7 +64,7 @@ For each category this data is collected:
 
 ## Diagnostics
 
-This information is collected from the [DC/OS Diagnostics](/docs/1.9/overview/architecture/components/#dcos-diagnostics) component. For every systemd unit, the following information is collected, where `<UNIT_NAME>` is component name:
+This information is collected from the [DC/OS Diagnostics (3DT)](/docs/1.9/overview/architecture/components/#dcos-diagnostics) component. For every systemd unit, the following information is collected, where `<UNIT_NAME>` is component name:
 
 ```
 "health-unit-dcos-<UNIT_NAME>-total": 3, "health-unit-dcos-<UNIT_NAME>-unhealthy": 0,
@@ -103,8 +103,8 @@ This information is collected from the [Apache Mesos](/docs/1.9/overview/archite
 </table>
 
     
-## Cosmos
-This information is collected from the [Cosmos](/docs/1.9/overview/architecture/components/#cosmos) component.
+## Package Manager
+This information is collected from the [DC/OS Package Manager (Cosmos)](/docs/1.9/overview/architecture/components/#dcos-package-manager) component.
 
 <table class="table">
 <tr>
@@ -275,4 +275,4 @@ The DC/OS UI sends two types of notifications to [Segment](https://segment.com/d
 
 ## Opt-Out
 
-You can also choose to opt-out of the telemetry features. For more information, see the [documentation](/docs/1.9/administration/opt-out/).
+You can also choose to opt-out of the telemetry features. For more information, see the [documentation](/docs/1.9/administration/installing/opt-out/).

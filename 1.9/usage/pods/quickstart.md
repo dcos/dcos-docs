@@ -34,16 +34,18 @@ menu_order: 0
     ```bash
     $ dcos marathon pod add simple-pod.json
     ```
-  
+
 1. Verify the status of your pod.
 
     ```
     dcos marathon pod show simplepod
     ```
-    
+
 # Launching a pod from the DC/OS UI
 
-You can also launch a pod from the [**Services**](/docs/1.9/usage/webinterface) tab of the DC/OS web interface. Select **Services -> Services -> RUN A SERVICE**, then toggle to JSON mode and paste in the application definition supplied above.
+You can also launch a pod from the [**Services**](/docs/1.9/usage/webinterface) tab of the DC/OS web interface. Select **Services -> Services -> RUN A SERVICE -> Multi-container (Pod)**, then toggle to JSON mode and paste in the application definition supplied above.
+
+If you already have other services running, go to **Services -> Services**, then click the **+** on the upper right hand side.
 
 After you launch your pod, you’ll see your new pod on the **Services** tab of the DC/OS web interface. Click the pod to see information about the status of the containers in your pod.
 

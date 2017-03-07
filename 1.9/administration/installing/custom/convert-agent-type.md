@@ -33,7 +33,7 @@ You can determine the node type by running this command from the DC/OS CLI.
 
 ### Uninstall the DC/OS private agent software
 
-1.  Uninstall the current DC/OS software on the agent node.
+1.  Uninstall DC/OS on the agent node.
 
     ```bash
     $ sudo -i /opt/mesosphere/bin/pkgpanda uninstall
