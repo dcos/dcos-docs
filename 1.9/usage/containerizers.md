@@ -1,7 +1,7 @@
 ---
 post_title: Using Mesos Containerizers
 nav_title: Mesos Containerizers
-feature_maturity: experimental
+feature_maturity: preview
 menu_order: 40 
 ---
 
