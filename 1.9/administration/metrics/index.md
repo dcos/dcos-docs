@@ -1,6 +1,6 @@
 ---
 post_title: Metrics
-feature_maturity: experimental
+feature_maturity: preview
 menu_order: 3.5
 ---
 

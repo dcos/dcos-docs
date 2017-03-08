@@ -1,7 +1,7 @@
 ---
 post_title: Quick Start
 menu_order: 0
-feature_maturity: experimental
+feature_maturity: preview
 ---
 
 Use this guide to get started with the DC/OS metrics component. 

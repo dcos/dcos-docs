@@ -1,6 +1,6 @@
 ---
 post_title: Metrics API 
-feature_maturity: experimental
+feature_maturity: preview
 menu_order: 1
 ---
 
