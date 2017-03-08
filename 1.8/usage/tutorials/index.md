@@ -7,7 +7,7 @@ This is the DC/OS tutorials section, covering how to use DC/OS components as wel
 
 # DC/OS examples repository
 
-The tutorials that are located in [dcos/examples](https://github.com/dcos/examples/) GitHub repo. These tutorials contain examples of how to install and use DC/OS services.
+These tutorials, located in the [dcos/examples](https://github.com/dcos/examples/) GitHub repo, contain examples of how to install and use DC/OS services.
                                                                                                   
 <table class="table" border="0">
   <tr>

@@ -4,7 +4,7 @@ nav_title: Deploying
 menu_order: 000
 ---
 
-You can install and deploy DC/OS services from a package repository such as the [Mesosphere Universe](/docs/1.8/overview/concepts/#mesosphere-universe) or deploy your own user-created services.
+You can install and deploy DC/OS services from a package repository, such as the [Mesosphere Universe](/docs/1.8/overview/concepts/#mesosphere-universe) or deploy your own user-created services.
 
 ### In this topic:
 
@@ -31,7 +31,7 @@ $ dcos package install chronos
     
 ## Web interface
 
-From the DC/OS web interface you can install services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
+From the DC/OS web interface, you can install services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
 
 
 -  **Universe tab**
@@ -68,7 +68,7 @@ Go to the **Services** tab and confirm that the service is running. For more inf
 The general syntax for installing a service with the CLI follows. 
 
 ```bash
-$ dcos marathon app add <myapp.json>
+$ dcos marathon app add <myapp>.json
 ```
 
 For more information, see [CLI command reference](/docs/1.8/usage/cli/command-reference/).
@@ -95,7 +95,7 @@ Go to the **Services** tab and confirm that the service is running. For more inf
 
 # Example
 
-This tutorials shows how to create and deploy a simple one-command service and a containerized service using both the DC/OS web interface and the CLI.
+This tutorial shows how to create and deploy a simple one-command service and a containerized service using both the DC/OS web interface and the CLI.
 
 ### Prerequisites
 - [A DC/OS cluster](/docs/1.8/administration/installing/)

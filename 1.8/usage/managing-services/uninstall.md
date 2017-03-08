@@ -6,7 +6,7 @@ menu_order: 007
 
 ## About uninstalling services
 
-Services can be uninstalled from either the web interface or the CLI. If a Universe service has any reserved resources, you also need to run the framework cleaner script. The framework cleaner script removes the service instance from ZooKeeper, along with any data associated with it.  
+Services can be uninstalled from either the web interface or the CLI. If a Universe service has any reserved resources, you also need to run the framework cleaner script. The [framework cleaner script](#framework-cleaner) removes the service instance from ZooKeeper, along with any data associated with it.  
 
 # Uninstalling Universe services
 

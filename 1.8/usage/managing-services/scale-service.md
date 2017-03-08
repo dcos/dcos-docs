@@ -4,7 +4,7 @@ nav_title: Scaling
 menu_order: 003.2
 ---
 
-This tutorials shows how to scale a service using the DC/OS web interface and the CLI.
+This tutorial shows how to scale a service using the DC/OS web interface and the CLI.
 
 ### Scale Your Service from the DC/OS Web Interface
 
