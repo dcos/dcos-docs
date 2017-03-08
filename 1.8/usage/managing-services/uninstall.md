@@ -1,16 +1,16 @@
 ---
 post_title: Uninstalling Services
 nav_title: Uninstalling
-menu_order: 004
+menu_order: 007
 ---
 
 ## About uninstalling services
 
-Services can be uninstalled from either the web interface or the CLI. If the service has any reserved resources, you also need to run the framework cleaner script. The framework cleaner script removes the service instance from ZooKeeper, along with any data associated with it.  
+Services can be uninstalled from either the web interface or the CLI. If a Universe service has any reserved resources, you also need to run the framework cleaner script. The framework cleaner script removes the service instance from ZooKeeper, along with any data associated with it.  
 
-## Uninstalling a service
+# Uninstalling Universe services
 
-### Uninstalling a service using the CLI
+### CLI
 
 1.  Uninstall a datacenter service with this command:
 
@@ -24,13 +24,13 @@ Services can be uninstalled from either the web interface or the CLI. If the ser
     $ dcos package uninstall chronos
     ```
 
-### Uninstalling a service using the UI
+### Web interface
 
-From the DC/OS UI you can uninstall services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
+From the DC/OS web interface you can uninstall services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
 
 ### Universe tab
 
-1.  Navigate to the **Universe** page in the DC/OS [UI](/docs/1.8/usage/webinterface/#universe).
+1.  Navigate to the **Universe** page in the DC/OS [web interface](/docs/1.8/usage/webinterface/#universe).
 
 2.  Click on the **Installed** tab to see your installed services.
 
@@ -38,7 +38,28 @@ From the DC/OS UI you can uninstall services from the **Services** or **Universe
 
 ### Services tab
 
-1.  Navigate to the [**Services**](/docs/1.8/usage/webinterface/#services) tab in the DC/OS UI.
+1.  Navigate to the [**Services**](/docs/1.8/usage/webinterface/#services) tab in the DC/OS web interface.
+1.  Select your application and click **Edit**, then select the **More -> Destroy**.
+
+# Uninstalling user-created services
+
+### CLI
+
+1.  Uninstall a user-created service with this command:
+
+    ```bash
+    $ dcos marathon app remove [--force] <app-id>
+    ```
+    
+    For more information, see the [command reference](/docs/1.8/usage/cli/command-reference/#dcos-marathon).
+
+### Web interface
+
+From the DC/OS web interface you can uninstall services from the **Services**. The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
+
+### Services tab
+
+1.  Navigate to the [**Services**](/docs/1.8/usage/webinterface/#services) tab in the DC/OS web interface.
 1.  Select your application and click **Edit**, then select the **More -> Destroy**.
 
 ## <a name="framework-cleaner"></a>Cleaning up ZooKeeper
