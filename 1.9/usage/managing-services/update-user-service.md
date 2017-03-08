@@ -1,11 +1,11 @@
 ---
-post_title: Updating a Deployed App 
-menu_order: 30
+post_title: Updating a User-Created Service
+menu_order: 003.4
 ---
 
 You can easily view and update the configuration of a deployed app by using the `dcos marathon` command.
 
-**Note:** The process for updating packages from the [DC/OS Universe](/docs/1.9/usage/webinterface/#-a-name-universe-a-universe) is different. Visit the [Managing Services](/docs/1.9/usage/managing-services/config/) section for more information.
+**Note:** The process for updating packages from the [DC/OS Universe](/docs/1.9/usage/webinterface/#-a-name-universe-a-universe) is different. For more information, see the [documentation](/docs/1.9/usage/managing-services/config-universe-service/).
 
 # Update an Environment Variable
 
@@ -58,4 +58,4 @@ $ dcos marathon app show test-app | jq '.env'
 ```
 
  [1]: /docs/1.9/usage/cli/
- [2]: https://mesosphere.github.io/marathon/docs/task-environment-vars.html
+ [2]: https://mesosphere.github.io/managing-services/docs/task-environment-vars.html

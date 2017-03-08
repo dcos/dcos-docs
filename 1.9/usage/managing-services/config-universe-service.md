@@ -1,7 +1,6 @@
 ---
-post_title: Advanced Configuration
-nav_title: Configuring
-menu_order: 001
+post_title: Configuring Universe Services
+menu_order: 002
 ---
 
 Each Universe service installs with a set of default parameters. You can discover the default parameters and change them as desired.

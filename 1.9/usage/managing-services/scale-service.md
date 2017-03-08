@@ -26,3 +26,4 @@ This tutorial shows how to scale a service using the DC/OS web interface and the
     ```bash
     $ dcos marathon app list
     ```
+    

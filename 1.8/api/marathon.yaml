@@ -1,0 +1,2695 @@
+swagger: '2.0'
+info:
+  version: 2.0.0
+  title: Marathon REST API
+securityDefinitions: {}
+basePath: /v2
+tags:
+  - name: apps
+  - name: deployments
+  - name: groups
+  - name: artifacts
+  - name: events
+  - name: info
+  - name: leader
+  - name: plugins
+  - name: queue
+  - name: ping
+  - name: metrics
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /apps/{app_id}/restart:
+    post:
+      description: Restart all tasks of this application.
+      tags:
+        - apps
+      operationId: V2AppsRestartByAppId
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: '#/definitions/V2AppsRestartresponse'
+        404:
+          description: No task found with this `app_id`.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /apps/{app_id}/tasks/{task_id}:
+    delete:
+      description: Kill the task with ID `task_id` that belongs to the application `app_id`.
+      tags:
+      - apps
+      operationId: V2AppsTasksByAppIdAndTaskId
+      produces:
+      - application/json
+      parameters:
+      - name: scale
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: If `scale=true` is specified, then the application is scaled down by the number of killed tasks. Only possible if `wipe=false` or not specified.
+      - name: wipe
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: If `wipe=true` is specified and the app uses local persistent volumes, associated dynamic reservations will be unreserved, and persistent volumes will be destroyed. Only possible if `scale=false` or not specified.
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: task_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success.
+        404:
+          description: No task found with this task_id.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /apps/{app_id}/tasks:
+    get:
+      description: List all running tasks for application `app_id`.
+      tags:
+      - apps
+      operationId: V2AppsTasksByAppId
+      produces:
+      - application/json
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Lists running tasks for the application specified.
+          schema:
+            $ref: '#/definitions/V2AppsTasksresponse'
+        404:
+          description: No task found with this `app_id`.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Kill tasks that belong to the application `app_id`
+      tags:
+      - apps
+      operationId: V2AppsTasksByAppId1
+      produces:
+      - application/json
+      parameters:
+      - name: host
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: all tasks of that application on the supplied slave are killed
+      - name: scale
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: If `scale=true` is specified, then the application is scaled down by the number of killed tasks. Only possible if `wipe=false` or not specified.
+      - name: wipe
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: If `wipe=true` is specified and the app uses local persistent volumes, associated dynamic reservations will be unreserved, and persistent volumes will be destroyed. Only possible if `scale=false` or not specified.
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success.
+        404:
+          description: No task found with this `app_id`.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /apps/{app_id}/versions/{version}:
+    get:
+      description: List the configuration of the application with id `app_id` at version `version`.
+      tags:
+      - apps
+      operationId: V2AppsVersionsByAppIdAndVersion
+      produces:
+      - application/json
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: version
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Lists app configuration.
+          schema:
+            $ref: '#/definitions/V2AppsVersionsresponse'
+        404:
+          description: No task found with this `app_id`.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /apps/{app_id}/versions:
+    get:
+      description: List the versions of the application with id `app_id`
+      tags:
+      - apps
+      operationId: V2AppsVersionsByAppId
+      produces:
+      - application/json
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Lists versions of the app specified.
+          schema:
+            $ref: '#/definitions/V2AppsVersionsresponse21'
+        404:
+          description: No task found with this `app_id`.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /apps/{app_id}:
+    get:
+      description: Get the application with id `app_id`. The response includes some status information besides the current configuration of the app. You can specify optional embed arguments, to get more embedded information.
+      tags:
+      - apps
+      operationId: V2AppsByAppId
+      produces:
+      - application/json
+      parameters:
+      - name: embed
+        in: query
+        required: false
+        x-is-map: false
+        enum:
+        - Enum_app.tasks
+        - Enum_app.count
+        - Enum_app.deployments
+        - Enum_app.lastTaskFailure
+        - Enum_app.failures
+        - Enum_app.taskStats
+        type: string
+        description: >-
+          Embeds nested resources that match the supplied path. You can specify this parameter multiple times with different values. <br/>
+
+          - <code>app.tasks</code>. embed tasks Note&#58; if this embed is definded, it automatically sets <code>apps.deployments</code> but this will change in a future release. Please define all embeds explicitly.
+
+          - <code>app.counts</code>. embed all task counts (tasksStaged, tasksRunning, tasksHealthy, tasksUnhealthy) <br/> Note&#58; currently embedded by default but this will change in a future release. Please define all embeds explicitly.
+
+          - <code>app.deployments</code>. embed all deployment identifier, if the related app currently is in deployment.
+
+          - <code>app.readiness</code> embed all readiness check results
+
+          - <code>app.lastTaskFailure</code> embeds the lastTaskFailure for the application if there is one.
+
+          - <code>app.failures</code> Shorthand for apps.lastTaskFailure, apps.tasks, apps.counts and apps.deployments.<br/> Note&#58; deprecated and will be removed in future versions Please define all embeds explicitly.
+
+          - <code>app.taskStats</code> exposes task statatistics in the JSON.
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/V2Appsresponse'
+        404:
+          description: No task found with this `app_id`.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: >-
+        Replaces parameters of a running application. If no application with the given id exists, it will be created. If there is an application with this id, all running instances get upgraded to the new definition.
+
+
+        Note&#58;  This operation will create a deployment. The operation finishes, if the deployment succeeds. You can query the deployments endoint to see the status of the deployment.
+      tags:
+      - apps
+      operationId: V2AppsByAppId1
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: body
+        in: body
+        required: true
+        x-is-map: false
+        schema:
+          $ref: '#/definitions/AppDefinition'
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: '#/definitions/V2AppsRestartresponse'
+        404:
+          description: No task found with this `app_id`.
+        400:
+          description: The application definition provided in the body is not valid.
+        422:
+          description: The entity send can not be preocessed, since there are validation errors
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: >-
+        Destroy an application. All data about that application will be deleted.
+
+        Note&#58;  This operation will create a deployment. The operation finishes, if the deployment succeeds. You can query the deployments endoint to see the status of the deployment.
+      tags:
+      - apps
+      operationId: V2AppsByAppId2
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description:  Success.
+        404:
+          description: No app with this id known.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /apps:
+    get:
+      description: Get the list of running applications. Several filters can be applied via the following query parameters.
+      tags:
+      - apps
+      operationId: V2Apps
+      produces:
+      - application/json
+      parameters:
+      - name: cmd
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: Filter the result to only return apps whose `cmd` field contains the given value
+      - name: id
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: Filter the result to only return apps whose `id` is or contains the given value
+      - name: label
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: >-
+          A label selector query contains one or more label selectors, which are comma separated. Marathon supports three types of selectors existence-based, equality-based and set-based. In the case of multiple selectors, all must be satisfied so comma separator acts as an AND logical operator. Labels and values must consist of alphanumeric characters plus `-` `_` and `.` `-A-Za-z0-9_.`. Any other character is possible, but must be escaped with a backslash character.
+
+          * <code>Existence based Selector Query</code> Matches the existence of a label <br/> Example&#58; my_label,environment
+
+          * <code>Equality based Selector Query</code> Matches existence of labels and the (non) equality of the value.<br/> Example&#58; environment==production, tier!=frontend
+
+          * <code>Set based Selector Query</code> Matches existence of labels and the (non) existence of the value in a given set<br/> Example&#58; environment in (stage,production), tier notin (frontend, service)
+      - name: embed
+        in: query
+        required: false
+        x-is-map: false
+        enum:
+        - Enum_apps.tasks
+        - Enum_apps.count
+        - Enum_apps.deployments
+        - Enum_apps.lastTaskFailure
+        - Enum_apps.failures
+        - Enum_apps.taskStats
+        type: string
+        description: >-
+          Embeds nested resources that match the supplied path. You can specify this parameter multiple times with different values.
+
+          - <code>apps.tasks</code> embed all tasks of each application<br/> Note&#58; if this embed is definded, it automatically sets <code>apps.deployments</code> but this will change in a future release. Please define all embeds explicitly.
+
+          - <code>apps.counts</code> embed all task counts (tasksStaged, tasksRunning, tasksHealthy, tasksUnhealthy) <br/> Note&#58; currently embedded by default but this will change in a future release. Please define all embeds explicitly.
+
+          - <code>apps.deployments</code> embed all deployment identifier, if the related app currently is in deployment.
+
+          - <code>apps.readiness</code> embed all readiness check results
+
+          - <code>apps.lastTaskFailure</code> embeds the lastTaskFailure for the application if there is one.
+
+          - <code>apps.failures</code> Shorthand for apps.lastTaskFailure, apps.tasks, apps.counts and apps.deployments.<br/> Note&#58; deprecated and will be removed in future versions Please define all embeds explicitly.
+
+          - <code>apps.taskStats</code> exposes task statatistics in the JSON.
+      responses:
+        200:
+          description: Lists running applications.
+          schema:
+            $ref: '#/definitions/V2Appsresponse'
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: >-
+        Change multiple applications either by upgrading existing ones or creating new ones. If there is an update to an already running application, the application gets upgraded. All instances of this application get replaced by the new version. The order of dependencies will be applied correctly. The upgradeStrategy defines the behaviour of the upgrade.
+
+        If the id of the application is not known, the application gets started. The order of dependencies will be applied correctly. It is possible to mix upgrades and installs.
+
+        If you have more complex scenarios with upgrades, use the groups endpoint.
+
+        Note&#58;  This operation will create a deployment. The operation finishes, if the deployment succeeds. You can query the deployments endoint to see the status of the deployment.
+      tags:
+      - apps
+      operationId: V2Apps1
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: body
+        in: body
+        required: true
+        x-is-map: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: '#/definitions/V2AppsRestartresponse'
+        409:
+          description: There is an already deployed application with this name
+        400:
+          description: The application definition provided in the body is not valid.
+        422:
+          description: The entity send can not be preocessed, since there are validation errors
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: >-
+        Create and start a new application.
+
+        Note&#58;  This operation will create a deployment. The operation finishes, if the deployment succeeds. You can query the deployments endoint to see the status of the deployment.
+      tags:
+      - apps
+      operationId: V2Apps2
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        x-is-map: false
+        schema:
+          $ref: '#/definitions/AppDefinition'
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: '#/definitions/V2AppsVersionsresponse'
+        409:
+          description: There is an already deployed application with this name
+        400:
+          description: The application definition provided in the body is not valid.
+        422:
+          description: The entity send can not be preocessed, since there are validation errors
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /deployments/{deployment_id}:
+    delete:
+      description: Revert the deployment with `deployment_id` by creating a new deployment which reverses all changes.
+      tags:
+      - deployments
+      operationId: V2DeploymentsByDeploymentId
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: If set to <code>false</code> (the default) then the deployment is canceled and a new deployment is created to revert the changes of this deployment. Without concurrent deployments, this restores the configuration before this deployment. If set to <code>true</code>, then the deployment is still canceled but no rollback deployment is created.
+      - name: deployment_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success.
+        404:
+          description: The deployment plan with the given id can not be found.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /deployments:
+    get:
+      description: >-
+        List all running deployments. A deployment is a change in the service setup.
+
+        A deployment is identified by an id, affects a set of applications and is composed of deployment steps.
+
+        Every step contains a list of actions with following types
+
+        * <code>StartApplication</code> starts an application, which is currently not running.
+
+        * <code>StopApplication</code> stops an already running application.
+
+        * <code>ScaleApplication</code> changes the number of instances of an application and allows to kill specified instances while scaling.
+
+        * <code>RestartApplication</code> upgrades an already deployed application with a new version.
+
+        * <code>ResolveArtifacts</code> Resolve all artifacts of an application
+      tags:
+      - deployments
+      operationId: V2Deployments
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Lists running deployments.
+          schema:
+            type: string
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /groups/versions:
+    get:
+      description: List all versions of the group with the specified path.
+      tags:
+      - groups
+      operationId: V2GroupsVersions
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Lists all versions of the group with the specified path.
+          schema:
+            type: array
+            items:
+              type: string
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /groups:
+    get:
+      description: Get the group with all applications and all transitive child groups.
+      tags:
+      - groups
+      operationId: V2Groups
+      produces:
+      - application/json
+      parameters:
+      - name: embed
+        in: query
+        required: false
+        x-is-map: false
+        enum:
+        - Enum_group.groups
+        - Enum_group.apps
+        - Enum_group.apps.tasks
+        - Enum_group.apps.count
+        - Enum_group.apps.deployments
+        - Enum_group.apps.lastTaskFailure
+        - Enum_group.apps.failures
+        - Enum_group.apps.taskStats
+        type: string
+        description: >-
+          Embeds nested resources that match the supplied path. You can specify this parameter multiple times with different values. Unknown embed parameters are ignored. If you omit this parameter, it defaults to <code>group.groups</code>, <code>group.apps</code>
+
+          - <code>group.groups</code> embed all child groups of each group<br/>
+
+          - <code>group.apps</code> embed all apps of each group<br/>
+
+          - <code>group.apps.tasks</code> embed all tasks of each application<br/>
+
+          - <code>group.apps.counts</code> embed all task counts (tasksStaged, tasksRunning, tasksHealthy, tasksUnhealthy) <br/>
+
+          - <code>group.apps.deployments</code> embed all deployment identifier, if the related app currently is in deployment.
+
+          - <code>group.apps.readiness</code> embed all readiness check results
+
+          - <code>group.apps.lastTaskFailure</code> embeds the lastTaskFailure for the application if there is one.
+
+          - <code>group.apps.taskStats</code> exposes task statistics in the JSON.
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: '#/definitions/Group'
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: "Change parameters of a deployed application group. The new group parameters get applied.\n\n* Changes to application parameters will result in a restart of this application.\n* A new application added to the group will be started.\n* An existing application removed from the group will be stopped.\n\nIf there are no changes to the application definition, no restart is triggered. During restart marathon keeps track, that the configured amount of minimal running instances are _always_ available.\nThis method allows 2 special modes for the update operation>\n\n* Provide only the `version` field in the group definition. This will rollback the group to that given version\n* Provide only the `scaleBy` field will scale all transitive applications instance counts by the given factor.\n\nWhen one of version or scaleBy are set, nothing else than a version change or transitive instance count scaling will be applied. If both version and scaleBy are set, only a version rollback will be performed – the scaleBy value will not be applied.\nA deployment can run forever. This is the case, when the new application has a problem and does not become healthy. In this case, human interaction is needed with 2 possible choices\n\n* Rollback to an existing older version\n* Update with a newer version of the group which does not have the problems of the old one.\n\nSince the deployment of the group can take a considerable amount of time, this endpoint returns immediately with a version. The failure or success of the action is signalled via event. There is a group_change_success and group_change_failed with the given version."
+      tags:
+      - groups
+      operationId: V2Groups1
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: body
+        in: body
+        required: true
+        x-is-map: false
+        schema:
+          $ref: '#/definitions/Group'
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: '#/definitions/V2AppsRestartresponse'
+        400:
+          description: The group definition provided in the body is not valid.
+        422:
+          description: The entity send can not be preocessed, since there are validation errors
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Create and start a new application group. Application groups can contain other application groups.
+      tags:
+      - groups
+      operationId: V2Groups2
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: body
+        in: body
+        required: true
+        x-is-map: false
+        schema:
+          $ref: '#/definitions/Group'
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: '#/definitions/V2AppsRestartresponse'
+        400:
+          description: The group definition provided in the body is not valid.
+        409:
+          description: There is an already deployed group with this name
+        422:
+          description: The entity send can not be preocessed, since there are validation errors
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Destroy a group. All data about that group and all associated applications will be deleted. The failure or success of the action is signalled via events. There is a group_change_success and group_change_failed with the given version.
+      tags:
+      - groups
+      operationId: V2Groups3
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      responses:
+        200:
+          description: Success.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /groups/{group_id}/versions:
+    get:
+      description: List all versions the group with the specified path.
+      tags:
+      - groups
+      operationId: V2GroupsVersionsByGroupId
+      produces:
+      - application/json
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: List all versions the group with the specified path.
+          schema:
+            type: array
+            items:
+              type: string
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /groups/{group_id}:
+    get:
+      description: Get the group with all applications and all transitive child groups.
+      tags:
+      - groups
+      operationId: V2GroupsByGroupId
+      produces:
+      - application/json
+      parameters:
+      - name: embed
+        in: query
+        required: false
+        x-is-map: false
+        enum:
+        - Enum_group.groups
+        - Enum_group.apps
+        - Enum_group.apps.tasks
+        - Enum_group.apps.count
+        - Enum_group.apps.deployments
+        - Enum_group.apps.lastTaskFailure
+        - Enum_group.apps.failures
+        - Enum_group.apps.taskStats
+        type: string
+        description: >-
+          Embeds nested resources that match the supplied path. You can specify this parameter multiple times with different values. Unknown embed parameters are ignored. If you omit this parameter, it defaults to <code>group.groups</code>, <code>group.apps</code>
+
+          - <code>group.groups</code> embed all child groups of each group<br/>
+
+          - <code>group.apps</code> embed all apps of each group<br/>
+
+          - <code>group.apps.tasks</code> embed all tasks of each application<br/>
+
+          - <code>group.apps.counts</code> embed all task counts (tasksStaged, tasksRunning, tasksHealthy, tasksUnhealthy) <br/>
+
+          - <code>group.apps.deployments</code> embed all deployment identifier, if the related app currently is in deployment.
+
+          - <code>group.apps.readiness</code> embed all readiness check results
+
+          - <code>group.apps.lastTaskFailure</code> embeds the lastTaskFailure for the application if there is one.
+
+          - <code>group.apps.taskStats</code> exposes task statistics in the JSON.
+      - name: group_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Gives the group with all applications and all transitive child groups.
+          schema:
+            $ref: '#/definitions/Group'
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: "Change parameters of a deployed application group. The new group parameters get applied.\n\n* Changes to application parameters will result in a restart of this application.\n* A new application added to the group will be started.\n* An existing application removed from the group will be stopped.\n\nIf there are no changes to the application definition, no restart is triggered. During restart marathon keeps track, that the configured amount of minimal running instances are _always_ available.\nThis method allows 2 special modes for the update operation>\n\n* Provide only the `version` field in the group definition. This will rollback the group to that given version\n* Provide only the `scaleBy` field will scale all transitive applications instance counts by the given factor.\n\nWhen one of version or scaleBy are set, nothing else than a version change or transitive instance count scaling will be applied. If both version and scaleBy are set, only a version rollback will be performed – the scaleBy value will not be applied.\nA deployment can run forever. This is the case, when the new application has a problem and does not become healthy. In this case, human interaction is needed with 2 possible choices\n\n* Rollback to an existing older version\n* Update with a newer version of the group which does not have the problems of the old one.\n\nSince the deployment of the group can take a considerable amount of time, this endpoint returns immediately with a version. The failure or success of the action is signalled via event. There is a group_change_success and group_change_failed with the given version."
+      tags:
+      - groups
+      operationId: V2GroupsByGroupId1
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: group_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: body
+        in: body
+        required: true
+        x-is-map: false
+        schema:
+          $ref: '#/definitions/Group'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/V2AppsRestartresponse'
+        400:
+          description: The group definition provided in the body is not valid.
+        422:
+          description: The entity send can not be preocessed, since there are validation errors
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Create and start a new application group. Application groups can contain other application groups.
+      tags:
+      - groups
+      operationId: V2GroupsByGroupId2
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: group_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: body
+        in: body
+        required: true
+        x-is-map: false
+        schema:
+          $ref: '#/definitions/Group'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/V2AppsRestartresponse'
+        400:
+          description: The group definition provided in the body is not valid.
+        409:
+          description: There is an already deployed group with this name
+        422:
+          description: The entity send can not be preocessed, since there are validation errors
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Destroy a group. All data about that group and all associated applications will be deleted. The failure or success of the action is signalled via events. There is a group_change_success and group_change_failed with the given version.
+      tags:
+      - groups
+      operationId: V2GroupsByGroupId3
+      produces:
+      - application/json
+      parameters:
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: group_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /tasks/delete:
+    post:
+      description: Kill a list of running tasks.
+      tags:
+      - tasks
+      operationId: V2TasksDelete
+      produces:
+      - application/json
+      parameters:
+      - name: scale
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: If `scale=true` is specified, then the related application is scaled down by the number of killed tasks. Only possible if `wipe=false` or not specified.
+      - name: wipe
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: If `wipe=true` is specified and the app uses local persistent volumes, associated dynamic reservations will be unreserved, and persistent volumes will be destroyed. Only possible if `scale=false` or not specified.
+      - name: force
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: >-
+          Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.
+
+          Caution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!
+      - name: body
+        in: body
+        required: true
+        x-is-map: false
+        schema:
+          $ref: '#/definitions/V2TasksDeleterequest'
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: '#/definitions/V2AppsTasksresponse'
+        400:
+          description: There are unknown task ids, that can not be killed.
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+        409:
+          description: There is an already running deployment, that affects this application. To override this deployment, use the force=true flag
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /tasks:
+    get:
+      description: List all running tasks.
+      tags:
+      - tasks
+      operationId: V2Tasks
+      produces:
+      - application/json
+      parameters:
+      - name: status
+        in: query
+        required: false
+        x-is-map: false
+        enum:
+        - running
+        - staging
+        type: string
+        description: Filter the list of tasks by status
+      responses:
+        200:
+          description: Lists tasks.
+          schema:
+            $ref: '#/definitions/V2AppsTasksresponse'
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /artifacts/{path}:
+    get:
+      description: Download an artifact from the artifact store. The path is the relative path in the artifact store.
+      tags:
+      - artifacts
+      operationId: V2ArtifactsByPath3
+      produces:
+      - application/json
+      parameters:
+      - name: path
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            type: string
+        404:
+          description: There is no artifact in the artifact store with this path.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Upload an artifact to the artifact store. A multipart form upload request has to be performed. The form parameter name has to be ```file```. The path used to store the file is taken from the url path. The response holds the URL of the artifact in the artifact store in the Location Header.
+      tags:
+      - artifacts
+      operationId: V2ArtifactsByPath
+      produces:
+      - application/json
+      parameters:
+      - name: path
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: file
+        in: formData
+        required: false
+        x-is-map: false
+        type: file
+        format: file
+        description: The file to upload
+      responses:
+        200:
+          description: Success
+          schema:
+            type: string
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Upload an artifact to the artifact store. A multipart form upload request has to be performed. The form parameter name has to be ```file```. The path used to store the file is taken from the url path. The response holds the URL of the artifact in the artifact store in the Location Header.
+      tags:
+      - artifacts
+      operationId: V2ArtifactsByPath1
+      produces:
+      - application/json
+      parameters:
+      - name: path
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: file
+        in: formData
+        required: false
+        x-is-map: false
+        type: file
+        format: file
+        description: The file to upload
+      responses:
+        200:
+          description: Success.
+          schema:
+            type: string
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Delete an artifact from the artifact store. The path is the relative path in the artifact store.
+      tags:
+      - artifacts
+      operationId: V2ArtifactsByPath2
+      produces:
+      - application/json
+      parameters:
+      - name: path
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success
+        404:
+          description: There is no artifact in the artifact store with this path.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /artifacts:
+    post:
+      description: Upload an artifact to the artifact store. A multipart form upload request has to be performed. The form parameter name has to be ```file```. The filename used in the artifact store, is the same as given by the form parameter. The response holds the URL of the artifact in the artifact store in the Location Header.
+      tags:
+      - artifacts
+      operationId: V2Artifacts
+      produces:
+      - application/json
+      parameters:
+      - name: file
+        in: formData
+        required: false
+        x-is-map: false
+        type: file
+        format: file
+        description: The file to upload
+      responses:
+        200:
+          description: Success.
+          schema:
+            type: string
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /events:
+    get:
+      description: >-
+        Attach to the marathon event stream.
+
+        To use this endpoint, the client has to accept the text/event-stream content type.
+
+        Please note a request to this endpoint will not be closed by the server. If an event happens on the server side, this event will be propagated to the client immediately. See [Server Sent Events](http://www.w3schools.com/html/html5_serversentevents.asp) for a more detailed explanation.
+
+        Note for ApiConsole&#58; this function will not yield the expected result from inside ApiConsole.
+      tags:
+      - events
+      operationId: V2Events
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Success.
+          schema:
+            type: string
+        405:
+          description: A request has been made without the correct Accept Header
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /eventSubscriptions:
+    get:
+      description: List all event subscriber callback URLs. _NOTE To activate this endpoint, you need to startup a Marathon instance with `--event_subscriber http_callback`_
+      tags:
+      - events
+      operationId: V2EventSubscriptions
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: '#/definitions/V2EventSubscriptionsresponse'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Subscribe to the event callback mechanism with the specified callback URL.
+      tags:
+      - events
+      operationId: V2EventSubscriptions1
+      produces:
+      - application/json
+      parameters:
+      - name: callbackUrl
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: The URL to an endpoint that is able to handle post requests for every event that is send.
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/V2EventSubscriptionsresponse204'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Unregister a callback URL from the event subscribers list.
+      tags:
+      - events
+      operationId: V2EventSubscriptions2
+      produces:
+      - application/json
+      parameters:
+      - name: callbackUrl
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: The URL to an endpoint that is able to handle post requests for every event that is send.
+      responses:
+        200:
+          description: Success.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /info:
+    get:
+      description: Get info about the Marathon Instance
+      tags:
+      - info
+      operationId: V2Info
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Gives info.
+          schema:
+            $ref: '#/definitions/V2Inforesponse'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /leader:
+    get:
+      description: Returns the current leader.
+      tags:
+      - leader
+      operationId: V2Leader
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Displays current leader.
+          schema:
+            $ref: '#/definitions/V2Leaderresponse'
+        404:
+          description: If there is no current leader.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Causes the current leader to abdicate, triggering a new election.
+      tags:
+      - leader
+      operationId: V2Leader1
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Success.
+        404:
+          description: If there is no current leader.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /plugins/{plugin_id}/{path}:
+    get:
+      description: Get request is handled by the plugin.
+      tags:
+      - plugins
+      operationId: V2PluginsByPluginIdAndPath
+      produces:
+      - application/json
+      parameters:
+      - name: plugin_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: path
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: Put request is handled by the plugin.
+      tags:
+      - plugins
+      operationId: V2PluginsByPluginIdAndPath1
+      produces:
+      - application/json
+      parameters:
+      - name: plugin_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: path
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Post request is handled by the plugin.
+      tags:
+      - plugins
+      operationId: V2PluginsByPluginIdAndPath2
+      produces:
+      - application/json
+      parameters:
+      - name: plugin_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: path
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Delete request is handled by the plugin.
+      tags:
+      - plugins
+      operationId: V2PluginsByPluginIdAndPath3
+      produces:
+      - application/json
+      parameters:
+      - name: plugin_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      - name: path
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /plugins:
+    get:
+      description: Returns the list of all loaded plugins
+      tags:
+      - plugins
+      operationId: V2Plugins
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Lists all loaded plugins.
+          schema:
+            $ref: '#/definitions/V2Pluginsresponse'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /queue/{app_id}/delay:
+    delete:
+      description: If an application fails too often in a specified amount of time (according to the application definition), the task launch will be delayed. This delay can be removed by calling this endpoint. The effect is, that the tasks of this application will be launched immediately.
+      tags:
+      - queue
+      operationId: V2QueueDelayByAppId
+      produces:
+      - application/json
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        x-is-map: false
+        type: string
+      responses:
+        200:
+          description: Success.
+        404:
+          description: there is no delay for the given application with id `app_id`
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /queue:
+    get:
+      description: >-
+        List all the tasks queued up or waiting to be scheduled. This is mainly used for troubleshooting and occurs when scaling changes are requested and the volume of scaling changes out paces the ability to schedule those tasks.
+
+        In addition to the application in the queue, you see also the task count that needs to be started.
+
+        If the task has a rate limit, then a delay to the start gets applied. You can see this delay for every application with the seconds to wait before the next launch will be tried.
+      tags:
+      - queue
+      operationId: V2Queue
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Lists queued tasks.
+          schema:
+            $ref: '#/definitions/V2Queueresponse'
+        401:
+          description: Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request.
+        403:
+          description: Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /ping:
+    get:
+      description: Ping this Marathon instance.
+      tags:
+      - ping
+      operationId: Ping
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Success.
+          schema:
+            type: string
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /metrics:
+    get:
+      description: Get metrics data from this Marathon instance
+      tags:
+      - metrics
+      operationId: Metrics
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Provides metrics data. 
+          schema:
+            $ref: '#/definitions/Metricsresponse'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  ResponseError:
+    title: ResponseError
+    type: string
+    enum:
+    - message
+  V2AppsRestartresponse:
+    title: V2 Apps Restart response
+    type: object
+    properties:
+      deploymentId:
+        type: string
+      version:
+        type: string
+    required:
+    - deploymentId
+    - version
+  ResponseError4:
+    title: ResponseError4
+    type: string
+    enum:
+    - message
+    - deployments
+  V2AppsTasksresponse:
+    title: V2 Apps Tasks response
+    type: object
+    properties:
+      tasks:
+        type: array
+        items:
+          type: string
+    required:
+    - tasks
+  V2AppsVersionsresponse:
+    title: V2 Apps Versions response
+    type: object
+    properties:
+      id:
+        type: string
+      instances:
+        type: integer
+        format: int32
+      cmd:
+        type: string
+      cpus:
+        type: number
+        format: double
+      disk:
+        type: integer
+        format: int32
+      mem:
+        type: integer
+        format: int32
+      acceptedResourceRoles:
+        type: array
+        items:
+          type: string
+      args:
+        type: array
+        items:
+          type: string
+      backoffFactor:
+        type: number
+        format: double
+      backoffSeconds:
+        type: integer
+        format: int32
+      constraints:
+        type: array
+        items:
+          type: string
+      container:
+        type: string
+      dependencies:
+        type: array
+        items:
+          type: string
+      env:
+        type: string
+      executor:
+        type: string
+      healthChecks:
+        type: array
+        items:
+          type: string
+      readinessChecks:
+        type: array
+        items:
+          type: string
+      labels:
+        type: string
+      maxLaunchDelaySeconds:
+        type: integer
+        format: int32
+      ipAddress:
+        type: string
+      portDefinitions:
+        type: array
+        items:
+          type: string
+      requirePorts:
+        type: boolean
+      upgradeStrategy:
+        type: string
+      fetch:
+        type: array
+        items:
+          type: string
+      user:
+        type: string
+      secrets:
+        type: string
+      taskKillGracePeriodSeconds:
+        type: integer
+        format: int32
+    required:
+    - id
+    - instances
+    - cmd
+    - cpus
+    - disk
+    - mem
+    - acceptedResourceRoles
+    - args
+    - backoffFactor
+    - backoffSeconds
+    - constraints
+    - container
+    - dependencies
+    - env
+    - executor
+    - healthChecks
+    - readinessChecks
+    - labels
+    - maxLaunchDelaySeconds
+    - ipAddress
+    - portDefinitions
+    - requirePorts
+    - upgradeStrategy
+    - fetch
+    - user
+    - secrets
+    - taskKillGracePeriodSeconds
+  V2AppsVersionsresponse21:
+    title: V2 Apps Versions response21
+    type: object
+    properties:
+      versions:
+        type: array
+        items:
+          type: string
+    required:
+    - versions
+  embedEnum:
+    title: embedEnum
+    type: string
+    enum:
+    - Enum_app.tasks
+    - Enum_app.count
+    - Enum_app.deployments
+    - Enum_app.lastTaskFailure
+    - Enum_app.failures
+    - Enum_app.taskStats
+  V2Appsresponse:
+    title: V2 Apps response
+    type: object
+    properties:
+      apps:
+        type: array
+        items:
+          type: string
+    required:
+    - apps
+  AppDefinition:
+    title: AppDefinition
+    type: object
+    properties:
+      acceptedResourceRoles:
+        description: Optional. A list of resource roles. Marathon considers only resource offers with roles in this list for launching tasks of this app. If you do not specify this, Marathon considers all resource offers with roles that have been configured by the `--default_accepted_resource_roles` command line flag. If no `--default_accepted_resource_roles` was given on startup, Marathon considers all resource offers. To register Marathon for a role, you need to specify the `--mesos_role` command line flag on startup. If you want to assign all resources of a slave to a role, you can use the `--default_role` argument when starting up the slave. If you need a more fine-grained configuration, you can use the `--resources` argument to specify resource shares per role. See [the Mesos attribute and resources documentation](http://mesos.apache.org/documentation/latest/attributes-resources/) for details.
+        type: array
+        items:
+          type: string
+      args:
+        description: An array of strings that represents an alternative mode of specifying the command to run. This was motivated by safe usage of containerizer features like a custom Docker ENTRYPOINT. This args field may be used in place of cmd even when using the default command executor. This change mirrors API and semantics changes in the Mesos CommandInfo protobuf message starting with version `0.20.0`.  Either `cmd` or `args` must be supplied. It is invalid to supply both `cmd` and `args` in the same app.
+        type: array
+        items:
+          type: string
+      backoffFactor:
+        description: Configures exponential backoff behavior when launching potentially sick apps. This prevents sandboxes associated with consecutively failing tasks from filling up the hard disk on Mesos slaves. The backoff period is multiplied by the factor for each consecutive failure until it reaches maxLaunchDelaySeconds. This applies also to tasks that are killed due to failing too many health checks.
+        type: number
+        format: double
+      backoffSeconds:
+        description: Configures exponential backoff behavior when launching potentially sick apps. This prevents sandboxes associated with consecutively failing tasks from filling up the hard disk on Mesos slaves. The backoff period is multiplied by the factor for each consecutive failure until it reaches maxLaunchDelaySeconds. This applies also to tasks that are killed due to failing too many health checks.
+        type: integer
+        format: int32
+      cmd:
+        description: The command that is executed.  This value is wrapped by Mesos via `/bin/sh -c ${app.cmd}`.  Either `cmd` or `args` must be supplied. It is invalid to supply both `cmd` and `args` in the same app.
+        type: string
+      constraints:
+        description: Valid constraint operators are one of UNIQUE, CLUSTER, GROUP_BY, LIKE, UNLIKE, MAX_PER.
+        type: array
+        items:
+          type: string
+      container:
+        $ref: '#/definitions/Container'
+      cpus:
+        description: The number of CPU shares this application needs per instance. This number does not have to be integer, but can be a fraction.
+        type: number
+        format: double
+      dependencies:
+        description: A list of services upon which this application depends. An order is derived from the dependencies for performing start/stop and upgrade of the application. For example, an application /a relies on the services /b which itself relies on /c. To start all 3 applications, first /c is started than /b than /a.
+        type: array
+        items:
+          type: string
+      disk:
+        description: How much disk space in MB is needed for this application. This number does not have to be an integer, but can be a fraction.
+        type: number
+        format: double
+      env:
+        type: string
+      executor:
+        description: The executor to use to launch this application. Different executors are available. The simplest one (and the default if none is given) is //cmd, which takes the cmd and executes that on the shell level.
+        type: string
+      fetch:
+        description: Provided URIs are passed to Mesos fetcher module and resolved in runtime.
+        type: array
+        items:
+          $ref: '#/definitions/Fetch'
+      healthChecks:
+        type: array
+        items:
+          $ref: '#/definitions/HealthCheck'
+      id:
+        description: Unique identifier for the app consisting of a series of names separated by slashes. Each name must be at least 1 character and may only contain digits (`0-9`), dashes (`-`), dots (`.`), and lowercase letters (`a-z`). The name may not begin or end with a dash.
+        type: string
+      instances:
+        description: 'The number of instances of this application to start. Please note: this number can be changed any time as needed to scale the application.'
+        type: integer
+        format: int32
+      labels:
+        description: Attaching metadata to apps can be useful to expose additional information to other services, so we added the ability to place labels on apps (for example, you could label apps staging and production to mark services by their position in the pipeline).
+        type: string
+      maxLaunchDelaySeconds:
+        description: Configures exponential backoff behavior when launching potentially sick apps. This prevents sandboxes associated with consecutively failing tasks from filling up the hard disk on Mesos slaves. The backoff period is multiplied by the factor for each consecutive failure until it reaches maxLaunchDelaySeconds. This applies also to tasks that are killed due to failing too many health checks.
+        type: integer
+        format: int32
+      mem:
+        description: The amount of memory in MB that is needed for the application per instance.
+        type: number
+        format: double
+      gpus:
+        description: The amount of GPU cores that is needed for the application per instance.
+        type: integer
+        format: int32
+      ipAddress:
+        description: If an application definition includes the 'ipAddress' field, then Marathon will request a per-task IP from Mesos. A separate ports/portMappings configuration is then disallowed.
+        $ref: '#/definitions/IpAddress'
+      ports:
+        description: An array of required port resources on the agent host. The number of items in the array determines how many dynamic ports are allocated for every task. For every port that is zero, a globally unique (cluster-wide) port is assigned and provided as part of the app definition to be used in load balancing definitions.
+        type: array
+        items:
+          type: integer
+          format: int32
+      portDefinitions:
+        description: An array of required port resources on the agent host. The number of items in the array determines how many dynamic ports are allocated for every task. For every port definition with port number zero, a globally unique (cluster-wide) service port is assigned and provided as part of the app definition to be used in load balancing definitions.
+        type: array
+        items:
+          $ref: '#/definitions/PortDefinition'
+      readinessChecks:
+        type: array
+        items:
+          $ref: '#/definitions/ReadinessCheck'
+      residency:
+        description: When using local persistent volumes that pin tasks onto agents, these values define how Marathon handles terminal states of these tasks.
+        $ref: '#/definitions/Residency'
+      requirePorts:
+        description: Normally, the host ports of your tasks are automatically assigned. This corresponds to the requirePorts value false which is the default. If you need more control and want to specify your host ports in advance, you can set requirePorts to true. This way the ports you have specified are used as host ports. That also means that Marathon can schedule the associated tasks only on hosts that have the specified ports available.
+        type: boolean
+      secrets:
+        description: A map with named secret declarations. The key is used to reference the values from other places in the app definition.
+        type: string
+      storeUrls:
+        description: URL's that have to be resolved and put into the artifact store, before the task will be started.
+        type: array
+        items:
+          type: string
+      taskKillGracePeriodSeconds:
+        description: Configures the number of seconds between escalating from SIGTERM to SIGKILL when signalling tasks to terminate. Using this grace period, tasks should perform orderly shut down immediately upon receiving SIGTERM.
+        type: integer
+        format: int32
+      upgradeStrategy:
+        description: During an upgrade all instances of an application get replaced by a new version. The upgradeStrategy controls how Marathon stops old versions and launches new versions.
+        $ref: '#/definitions/UpgradeStrategy'
+      uris:
+        description: URIs defined here are resolved, before the application gets started. If the application has external dependencies, they should be defined here.
+        type: array
+        items:
+          type: string
+      user:
+        description: The user to use to run the tasks on the agent.
+        type: string
+      version:
+        description: The version of this definition.
+        type: string
+        format: date-time
+      versionInfo:
+        description: Detailed version information.
+        $ref: '#/definitions/VersionInfo'
+    required:
+    - id
+  Container:
+    title: Container
+    type: object
+    properties:
+      docker:
+        $ref: '#/definitions/Docker'
+      appc:
+        $ref: '#/definitions/Appc'
+      type:
+        description: Container engine type. Supported engine types at the moment are DOCKER and MESOS.
+        $ref: '#/definitions/Type'
+      volumes:
+        type: array
+        items:
+          $ref: '#/definitions/Volume'
+  Docker:
+    title: Docker
+    type: object
+    properties:
+      credential:
+        description: Credential to authenticate with the docker registry.
+        $ref: '#/definitions/Credential'
+      forcePullImage:
+        description: The container will be pulled, regardless if it is already available on the local system.
+        type: boolean
+      image:
+        description: The name of the docker image to use.
+        type: string
+      network:
+        description: The networking mode, this container should operate in. One of BRIDGE|HOST|NONE|USER
+        $ref: '#/definitions/Network'
+      parameters:
+        description: Allowing arbitrary parameters to be passed to docker CLI. Note that anything passed to this field is not guaranteed to be supported moving forward, as we might move away from the docker CLI.
+        type: array
+        items:
+          $ref: '#/definitions/Parameter'
+      portMappings:
+        type: array
+        items:
+          $ref: '#/definitions/PortMapping'
+      privileged:
+        description: Run this docker image in privileged mode.
+        type: boolean
+    required:
+    - image
+  Credential:
+    title: Credential
+    type: object
+    properties:
+      principal:
+        description: Principal to authenticate with the docker registry.
+        type: string
+      secret:
+        description: Secret to authenticate with the docker registry.
+        type: string
+    required:
+    - principal
+  Network:
+    title: Network
+    type: string
+    enum:
+    - BRIDGE
+    - HOST
+    - NONE
+    - USER
+  Parameter:
+    title: Parameter
+    type: object
+    properties:
+      key:
+        description: Key of this parameter
+        type: string
+      value:
+        description: Value of this parameter
+        type: string
+    required:
+    - key
+    - value
+  PortMapping:
+    title: PortMapping
+    type: object
+    properties:
+      containerPort:
+        description: 'Refers to the port the application listens to inside of the container. It is optional and defaults to 0. For each containerPort with a value of 0 Marathon assigns the containerPort the same value as the assigned hostPort. This is especially useful for apps that advertise the port they are listening on to the outside world for P2P communication. Without containerPort: 0 they would erroneously advertise their private container port which is usually not the same as the externally visible host port.'
+        type: integer
+        format: int32
+      hostPort:
+        description: Retains the traditional meaning in Marathon, which is a random port from the range included in the Mesos resource offer. The resulting host ports for each task are exposed via the task details in the REST API and the Marathon web UI. hostPort is optional. In BRIDGE mode it defaults to 0 if left unspecified. In USER mode an unspecified hostPort does not allocate a port from a Mesos offer.
+        type: integer
+        format: int32
+      labels:
+        description: This can be used to add metadata to be interpreted by external applications such as firewalls.
+        type: string
+      name:
+        description: Name of the service hosted on this port. If provided, it must be unique over all port mappings.
+        type: string
+      protocol:
+        description: Protocol of the port (one of ['tcp', 'udp'] or 'udp,tcp' for both). Defaults to 'tcp'.
+        $ref: '#/definitions/Protocol'
+      servicePort:
+        description: Is a helper port intended for doing service discovery using a well-known port per service. The assigned servicePort value is not used/interpreted by Marathon itself but supposed to used by load balancer infrastructure. See Service Discovery Load Balancing doc page. The servicePort parameter is optional and defaults to 0. Like hostPort, If the value is 0, a random port will be assigned. If a servicePort value is assigned by Marathon then Marathon guarantees that its value is unique across the cluster. The values for random service ports are in the range [local_port_min, local_port_max] where local_port_min and local_port_max are command line options with default values of 10000 and 20000, respectively.
+        type: integer
+        format: int32
+  Protocol:
+    title: Protocol
+    type: string
+    enum:
+    - tcp
+    - udp
+    - Enum_udp,tcp
+  Appc:
+    title: Appc
+    type: object
+    properties:
+      image:
+        description: The name of the AppC image to use.
+        type: string
+      id:
+        description: An image ID is a string of the format 'hash-value', where 'hash' is the hash algorithm used and 'value' is the hex-encoded digest. Currently the only permitted hash algorithm is sha512.
+        type: string
+      labels:
+        description: 'Optional labels. Suggested labels: ''version'', ''os'', and ''arch''.'
+        type: string
+      forcePullImage:
+        description: The container will be pulled, regardless if it is already available on the local system.
+        type: boolean
+    required:
+    - image
+  Type:
+    title: Type
+    type: string
+    enum:
+    - MESOS
+    - DOCKER
+  Volume:
+    title: Volume
+    type: object
+    properties:
+      containerPath:
+        description: The path of the volume in the container
+        type: string
+      hostPath:
+        description: The path of the volume on the host
+        type: string
+      persistent:
+        $ref: '#/definitions/Persistent'
+      external:
+        $ref: '#/definitions/External'
+      mode:
+        description: Possible values are RO for ReadOnly and RW for Read/Write
+        $ref: '#/definitions/Mode'
+  Persistent:
+    title: Persistent
+    type: object
+    properties:
+      size:
+        description: The size of the persistent volume in MiB
+        type: integer
+        format: int32
+  External:
+    title: External
+    type: object
+    properties:
+      size:
+        description: The size of the external volume in MiB
+        type: integer
+        format: int32
+      name:
+        description: The name of the volume
+        type: string
+      provider:
+        description: The name of the volume provider
+        type: string
+      options:
+        description: Provider-specific volume configuration options
+        type: string
+  Mode:
+    title: Mode
+    type: string
+    enum:
+    - RO
+    - RW
+  Fetch:
+    title: Fetch
+    type: object
+    properties:
+      uri:
+        description: URI to be fetched by Mesos fetcher module
+        type: string
+      executable:
+        description: Set fetched artifact as executable
+        type: boolean
+      extract:
+        description: Extract fetched artifact if supported by Mesos fetcher module
+        type: boolean
+      cache:
+        description: Cache fetched artifact if supported by Mesos fetcher module
+        type: boolean
+      outputFile:
+        description: Rename fetched artifact with the given name
+        type: string
+    required:
+    - uri
+  HealthCheck:
+    title: HealthCheck
+    type: object
+    properties:
+      command:
+        type: array
+        items:
+          $ref: '#/definitions/Command'
+      gracePeriodSeconds:
+        description: Health check failures are ignored within this number of seconds of the task being started or until the task becomes healthy for the first time.
+        type: integer
+        format: int32
+      ignoreHttp1xx:
+        description: Ignore HTTP 1xx responses.
+        type: boolean
+      intervalSeconds:
+        description: Number of seconds to wait between health checks.
+        type: integer
+        format: int32
+      maxConsecutiveFailures:
+        description: Number of consecutive health check failures after which the unhealthy task should be killed.
+        type: integer
+        format: int32
+      path:
+        description: 'Path to endpoint exposed by the task that will provide health status. Example: /path/to/health. Note: only used if protocol == HTTP[S].'
+        type: string
+      port:
+        description: The specific port to connect to. In case of dynamic ports, see portIndex.
+        type: integer
+        format: int32
+      portIndex:
+        description: Index in this app's ports array to be used for health requests. An index is used so the app can use random ports, like [0, 0, 0] for example, and tasks could be started with port environment variables like $PORT1.
+        type: integer
+        format: int32
+      protocol:
+        description: Protocol of the requests to be performed. One of HTTP, HTTPS, TCP or COMMAND.
+        $ref: '#/definitions/Protocol47'
+      timeoutSeconds:
+        description: Number of seconds after which a health check is considered a failure regardless of the response.
+        type: integer
+        format: int32
+  Command:
+    title: Command
+    type: object
+    properties:
+      value:
+        description: The health check command to execute.
+        type: string
+  Protocol47:
+    title: Protocol47
+    type: string
+    enum:
+    - HTTP
+    - HTTPS
+    - TCP
+    - COMMAND
+  IpAddress:
+    title: IpAddress
+    type: object
+    properties:
+      discovery:
+        description: Information useful for service discovery.
+        $ref: '#/definitions/Discovery'
+      groups:
+        description: Array of network groups. One IP address can belong to zero or more network groups. The idea is that containers can only reach containers with which they share at least one network group.
+        type: array
+        items:
+          type: string
+      labels:
+        description: Key value pair for meta data on that network interface.
+        type: string
+      networkName:
+        description: If present, declares the name of the network that the container should join. In practice it is up to the IPAM to decide how to interpret this field.
+        type: string
+  Discovery:
+    title: Discovery
+    type: object
+    properties:
+      ports:
+        description: Array of objects describing the ports exposed by each task.
+        type: array
+        items:
+          $ref: '#/definitions/Port'
+  Port:
+    title: Port
+    description: Port
+    type: object
+    properties:
+      number:
+        description: The port number.
+        type: integer
+        format: int32
+      name:
+        description: Name of the port.
+        type: string
+      protocol:
+        description: Protocol of the port (one of ['tcp', 'udp']).
+        $ref: '#/definitions/Protocol51'
+  Protocol51:
+    title: Protocol51
+    type: string
+    enum:
+    - tcp
+    - udp
+  PortDefinition:
+    title: PortDefinition
+    type: object
+    properties:
+      port:
+        description: if requirePorts is set to true, then this port number will be used on the agent host Otherwise if the requirePorts is set to false and this port number is not zero, then it will be used as a service port and a dynamic port will be used on the agent host. If it is set to zero, a dynamic port will be used on the host and a unique service port will be assigned by Marathon.
+        type: integer
+        format: int32
+      labels:
+        description: This can be used to add metadata to be interpreted by external applications such as firewalls.
+        type: string
+      name:
+        description: Name of the service hosted on this port. If provided, it must be unique over all port definitions.
+        type: string
+      protocol:
+        description: Protocol of the port (one of ['tcp', 'udp']). Defaults to 'tcp'.
+        $ref: '#/definitions/Protocol51'
+  ReadinessCheck:
+    title: ReadinessCheck
+    description: Query these readiness checks to determine if a task is ready to serve requests.
+    type: object
+    properties:
+      name:
+        description: The name used to identify this readiness check.
+        type: string
+      protocol:
+        description: Protocol of the requests to be performed. One of HTTP, HTTPS.
+        $ref: '#/definitions/Protocol55'
+      path:
+        description: 'Path to endpoint exposed by the task that will provide readiness status. Example: /path/to/health.'
+        type: string
+      portName:
+        description: 'Name of the port to query as described in the portDefinitions. Example: http-api.'
+        type: string
+      intervalSeconds:
+        description: Number of seconds to wait between readiness checks. Defaults to 30 seconds
+        type: integer
+        format: int32
+      timeoutSeconds:
+        description: Number of seconds after which a health check is considered a failure regardless of the response. Must be smaller than intervalSeconds. Defaults to 10 seconds.
+        type: integer
+        format: int32
+      httpStatusCodesForReady:
+        description: The HTTP(s) status code to treat as 'ready'.
+        type: array
+        items:
+          type: integer
+          format: int32
+      preserveLastResponse:
+        description: If and only if true, preserve the last readiness check responses and expose them in the API as part of a deployment..
+        type: boolean
+  Protocol55:
+    title: Protocol55
+    type: string
+    enum:
+    - HTTP
+    - HTTPS
+  Residency:
+    title: Residency
+    type: object
+    properties:
+      relaunchEscalationTimeoutSeconds:
+        description: When a task using persistent local volumes cannot be restarted on the agent it's been pinned to, Marathon will try to launch this task on another node after this timeout. Defaults to 3600 (one hour).
+        type: integer
+        format: int32
+      taskLostBehavior:
+        description: When Marathon receives a TASK_LOST status update indicating that the agent running the task is gone, this property defines whether Marathon will launch the task on another node or not. Defaults to WAIT_FOREVER
+        $ref: '#/definitions/TaskLostBehavior'
+  TaskLostBehavior:
+    title: TaskLostBehavior
+    type: string
+    enum:
+    - WAIT_FOREVER
+    - RELAUNCH_AFTER_TIMEOUT
+  UpgradeStrategy:
+    title: UpgradeStrategy
+    type: object
+    properties:
+      maximumOverCapacity:
+        description: A number between 0 and 1 which is multiplied with the instance count. This is the maximum number of additional instances launched at any point of time during the upgrade process.
+        type: number
+        format: double
+      minimumHealthCapacity:
+        description: A number between 0 and 1 that is multiplied with the instance count. This is the minimum number of healthy nodes that do not sacrifice overall application purpose. Marathon will make sure, during the upgrade process, that at any point of time this number of healthy instances are up.
+        type: number
+        format: double
+  VersionInfo:
+    title: VersionInfo
+    type: object
+    properties:
+      lastScalingAt:
+        description: Contains the time stamp of the last change to this app which was not simply a scaling or a restarting configuration.
+        type: string
+        format: date-time
+      lastConfigChangeAt:
+        description: Contains the time stamp of the last change including changes like scaling or restarting the app. Since our versions are time based, this is currently equal to version.
+        type: string
+        format: date-time
+  ResponseError61:
+    title: ResponseError61
+    type: string
+    enum:
+    - message
+    - details
+  embedEnum71:
+    title: embedEnum71
+    type: string
+    enum:
+    - Enum_apps.tasks
+    - Enum_apps.count
+    - Enum_apps.deployments
+    - Enum_apps.lastTaskFailure
+    - Enum_apps.failures
+    - Enum_apps.taskStats
+  embedEnum124:
+    title: embedEnum124
+    type: string
+    enum:
+    - Enum_group.groups
+    - Enum_group.apps
+    - Enum_group.apps.tasks
+    - Enum_group.apps.count
+    - Enum_group.apps.deployments
+    - Enum_group.apps.lastTaskFailure
+    - Enum_group.apps.failures
+    - Enum_group.apps.taskStats
+  Group:
+    title: Group
+    type: object
+    properties:
+      id:
+        description: Unique identifier for the app consisting of a series of names separated by slashes. Each name must be at least 1 character and may only contain digits (`0-9`), dashes (`-`), dots (`.`), and lowercase letters (`a-z`). The name may not begin or end with a dash.
+        type: string
+      apps:
+        description: The list of AppDefinitions in this group. See AppDefinition.json for the schema.
+        type: array
+        items:
+          $ref: '#/definitions/App'
+      groups:
+        description: Groups can build a tree. Each group can contain sub-groups. The sub-groups are defined here.
+        type: array
+        items:
+          $ref: '#/definitions/Group'
+      dependencies:
+        description: A list of services upon which this application depends. An order is derived from the dependencies for performing start/stop and upgrade of the application. For example, an application /a relies on the services /b which itself relies on /c. To start all 3 applications, first /c is started than /b than /a.
+        type: array
+        items:
+          type: string
+      version:
+        description: The version of this definition.
+        type: string
+        format: date-time
+    required:
+    - id
+  App:
+    title: App
+    type: object
+    properties:
+      acceptedResourceRoles:
+        description: Optional. A list of resource roles. Marathon considers only resource offers with roles in this list for launching tasks of this app. If you do not specify this, Marathon considers all resource offers with roles that have been configured by the `--default_accepted_resource_roles` command line flag. If no `--default_accepted_resource_roles` was given on startup, Marathon considers all resource offers. To register Marathon for a role, you need to specify the `--mesos_role` command line flag on startup. If you want to assign all resources of a slave to a role, you can use the `--default_role` argument when starting up the slave. If you need a more fine-grained configuration, you can use the `--resources` argument to specify resource shares per role. See [the Mesos attribute and resources documentation](http://mesos.apache.org/documentation/latest/attributes-resources/) for details.
+        type: array
+        items:
+          type: string
+      args:
+        description: An array of strings that represents an alternative mode of specifying the command to run. This was motivated by safe usage of containerizer features like a custom Docker ENTRYPOINT. This args field may be used in place of cmd even when using the default command executor. This change mirrors API and semantics changes in the Mesos CommandInfo protobuf message starting with version `0.20.0`.  Either `cmd` or `args` must be supplied. It is invalid to supply both `cmd` and `args` in the same app.
+        type: array
+        items:
+          type: string
+      backoffFactor:
+        description: Configures exponential backoff behavior when launching potentially sick apps. This prevents sandboxes associated with consecutively failing tasks from filling up the hard disk on Mesos slaves. The backoff period is multiplied by the factor for each consecutive failure until it reaches maxLaunchDelaySeconds. This applies also to tasks that are killed due to failing too many health checks.
+        type: number
+        format: double
+      backoffSeconds:
+        description: Configures exponential backoff behavior when launching potentially sick apps. This prevents sandboxes associated with consecutively failing tasks from filling up the hard disk on Mesos slaves. The backoff period is multiplied by the factor for each consecutive failure until it reaches maxLaunchDelaySeconds. This applies also to tasks that are killed due to failing too many health checks.
+        type: integer
+        format: int32
+      cmd:
+        description: The command that is executed.  This value is wrapped by Mesos via `/bin/sh -c ${app.cmd}`.  Either `cmd` or `args` must be supplied. It is invalid to supply both `cmd` and `args` in the same app.
+        type: string
+      constraints:
+        description: Valid constraint operators are one of UNIQUE, CLUSTER, GROUP_BY, LIKE, UNLIKE, MAX_PER.
+        type: array
+        items:
+          type: string
+      container:
+        $ref: '#/definitions/Container'
+      cpus:
+        description: The number of CPU shares this application needs per instance. This number does not have to be integer, but can be a fraction.
+        type: number
+        format: double
+      dependencies:
+        description: A list of services upon which this application depends. An order is derived from the dependencies for performing start/stop and upgrade of the application. For example, an application /a relies on the services /b which itself relies on /c. To start all 3 applications, first /c is started than /b than /a.
+        type: array
+        items:
+          type: string
+      disk:
+        description: How much disk space in MB is needed for this application. This number does not have to be an integer, but can be a fraction.
+        type: number
+        format: double
+      env:
+        type: string
+      executor:
+        description: The executor to use to launch this application. Different executors are available. The simplest one (and the default if none is given) is //cmd, which takes the cmd and executes that on the shell level.
+        type: string
+      fetch:
+        description: Provided URIs are passed to Mesos fetcher module and resolved in runtime.
+        type: array
+        items:
+          $ref: '#/definitions/Fetch'
+      healthChecks:
+        type: array
+        items:
+          $ref: '#/definitions/HealthCheck'
+      id:
+        description: Unique identifier for the app consisting of a series of names separated by slashes. Each name must be at least 1 character and may only contain digits (`0-9`), dashes (`-`), dots (`.`), and lowercase letters (`a-z`). The name may not begin or end with a dash.
+        type: string
+      instances:
+        description: 'The number of instances of this application to start. Please note: this number can be changed any time as needed to scale the application.'
+        type: integer
+        format: int32
+      labels:
+        description: Attaching metadata to apps can be useful to expose additional information to other services, so we added the ability to place labels on apps (for example, you could label apps staging and production to mark services by their position in the pipeline).
+        type: string
+      maxLaunchDelaySeconds:
+        description: Configures exponential backoff behavior when launching potentially sick apps. This prevents sandboxes associated with consecutively failing tasks from filling up the hard disk on Mesos slaves. The backoff period is multiplied by the factor for each consecutive failure until it reaches maxLaunchDelaySeconds. This applies also to tasks that are killed due to failing too many health checks.
+        type: integer
+        format: int32
+      mem:
+        description: The amount of memory in MB that is needed for the application per instance.
+        type: number
+        format: double
+      gpus:
+        description: The amount of GPU cores that is needed for the application per instance.
+        type: integer
+        format: int32
+      ipAddress:
+        description: If an application definition includes the 'ipAddress' field, then Marathon will request a per-task IP from Mesos. A separate ports/portMappings configuration is then disallowed.
+        $ref: '#/definitions/IpAddress'
+      ports:
+        description: An array of required port resources on the agent host. The number of items in the array determines how many dynamic ports are allocated for every task. For every port that is zero, a globally unique (cluster-wide) port is assigned and provided as part of the app definition to be used in load balancing definitions.
+        type: array
+        items:
+          type: integer
+          format: int32
+      portDefinitions:
+        description: An array of required port resources on the agent host. The number of items in the array determines how many dynamic ports are allocated for every task. For every port definition with port number zero, a globally unique (cluster-wide) service port is assigned and provided as part of the app definition to be used in load balancing definitions.
+        type: array
+        items:
+          $ref: '#/definitions/PortDefinition'
+      readinessChecks:
+        type: array
+        items:
+          $ref: '#/definitions/ReadinessCheck'
+      residency:
+        description: When using local persistent volumes that pin tasks onto agents, these values define how Marathon handles terminal states of these tasks.
+        $ref: '#/definitions/Residency'
+      requirePorts:
+        description: Normally, the host ports of your tasks are automatically assigned. This corresponds to the requirePorts value false which is the default. If you need more control and want to specify your host ports in advance, you can set requirePorts to true. This way the ports you have specified are used as host ports. That also means that Marathon can schedule the associated tasks only on hosts that have the specified ports available.
+        type: boolean
+      secrets:
+        description: A map with named secret declarations. The key is used to reference the values from other places in the app definition.
+        type: string
+      storeUrls:
+        description: URL's that have to be resolved and put into the artifact store, before the task will be started.
+        type: array
+        items:
+          type: string
+      taskKillGracePeriodSeconds:
+        description: Configures the number of seconds between escalating from SIGTERM to SIGKILL when signalling tasks to terminate. Using this grace period, tasks should perform orderly shut down immediately upon receiving SIGTERM.
+        type: integer
+        format: int32
+      upgradeStrategy:
+        description: During an upgrade all instances of an application get replaced by a new version. The upgradeStrategy controls how Marathon stops old versions and launches new versions.
+        $ref: '#/definitions/UpgradeStrategy'
+      uris:
+        description: URIs defined here are resolved, before the application gets started. If the application has external dependencies, they should be defined here.
+        type: array
+        items:
+          type: string
+      user:
+        description: The user to use to run the tasks on the agent.
+        type: string
+      version:
+        description: The version of this definition.
+        type: string
+        format: date-time
+      versionInfo:
+        description: Detailed version information.
+        $ref: '#/definitions/VersionInfo'
+    required:
+    - id
+  V2TasksDeleterequest:
+    title: V2 Tasks Delete request
+    type: object
+    properties:
+      ids:
+        type: array
+        items:
+          type: string
+    required:
+    - ids
+  statusEnum:
+    title: statusEnum
+    type: string
+    enum:
+    - running
+    - staging
+  V2EventSubscriptionsresponse:
+    title: V2 EventSubscriptions response
+    type: object
+    properties:
+      callbackUrls:
+        type: array
+        items:
+          type: string
+    required:
+    - callbackUrls
+  V2EventSubscriptionsresponse204:
+    title: V2 EventSubscriptions response204
+    type: object
+    properties:
+      callbackUrl:
+        type: string
+      clientIp:
+        type: string
+      eventType:
+        type: string
+    required:
+    - callbackUrl
+    - clientIp
+    - eventType
+  V2Inforesponse:
+    title: V2 Info response
+    type: object
+    properties:
+      name:
+        type: string
+      version:
+        type: string
+      elected:
+        type: boolean
+      leader:
+        type: string
+      frameworkId:
+        type: string
+      marathon_config:
+        type: string
+      zookeeper_config:
+        type: string
+      event_subscriber:
+        type: string
+      http_config:
+        type: string
+    required:
+    - name
+    - version
+    - elected
+    - leader
+    - frameworkId
+    - marathon_config
+    - zookeeper_config
+    - event_subscriber
+    - http_config
+  V2Leaderresponse:
+    title: V2 Leader response
+    type: object
+    properties:
+      leader:
+        type: string
+    required:
+    - leader
+  V2Pluginsresponse:
+    title: V2 Plugins response
+    type: object
+    properties:
+      plugins:
+        type: array
+        items:
+          type: string
+    required:
+    - plugins
+  V2Queueresponse:
+    title: V2 Queue response
+    type: object
+    properties:
+      queue:
+        type: array
+        items:
+          type: string
+    required:
+    - queue
+  Metricsresponse:
+    title: Metrics response
+    type: object
+    properties:
+      counters:
+        type: string
+      gauges:
+        type: string
+      histograms:
+        type: string
+      meters:
+        type: string
+      timers:
+        type: string
+      version:
+        type: string
+    required:
+    - counters
+    - gauges
+    - histograms
+    - meters
+    - timers
+    - version

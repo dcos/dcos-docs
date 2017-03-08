@@ -5,7 +5,7 @@ menu_order: 005
 
 DC/OS agent nodes can be designated as [public](/docs/1.8/overview/concepts/#public) or [private](/docs/1.8/overview/concepts/#private) during [installation](/docs/1.8/administration/installing/). Public agent nodes provide access from outside of the cluster via infrastructure networking to your DC/OS services. By default, services are launched on private agent nodes and are not accessible from outside the cluster. 
 
-To launch a service on a public node, you must create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified and configure an edge load balancer and service discovery mechanism. This example 
+To launch a service on a public node, you must create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified and configure an edge load balancer and service discovery mechanism.  
 
 **Prerequisite:**
 
@@ -35,7 +35,7 @@ To launch a service on a public node, you must create a Marathon app definition 
     }
     ```
 
-    For more information about the `acceptedResourceRoles` parameter, see the Marathon REST API [documentation](https://mesosphere.github.io/marathon/docs/rest-api.html).
+    For more information about the `acceptedResourceRoles` parameter, see the Marathon REST API [documentation](/docs/1.8/usage/managing-services/rest-api/).
 
 1.  Add the your app to Marathon by using this command, where `myapp.json` is your app:
 

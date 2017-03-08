@@ -180,7 +180,7 @@ The `<service-name>` is the entry in the **ID** field of a service you create fr
 To name a port from the DC/OS web interface, go to the **Services** tab, click the name of your service, and then click **Edit**. Enter a name for your port on the **Network** tab.
 
 #### Add a Named Port in a Marathon Application Definition
-Alternatively, you can add `name` to the `portMappings` or `portDefinitions` field of a Marathon application definition. Whether you use `portMappings` or `portDefinitions` depends on whether you are using `BRIDGE` or `HOST` networking. [Learn more about networking and ports in Marathon](https://mesosphere.github.io/marathon/docs/ports.html).
+Alternatively, you can add `name` to the `portMappings` or `portDefinitions` field of a Marathon application definition. Whether you use `portMappings` or `portDefinitions` depends on whether you are using `BRIDGE` or `HOST` networking. [Learn more about networking and ports in Marathon](/docs/1.8/usage/managing-services/service-ports/).
 
 ```json
 "portMappings": [

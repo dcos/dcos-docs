@@ -1,10 +1,11 @@
 ---
-post_title: Deploying Public Services
-nav_title: Public Services
-menu_order: 10
+post_title: Exposing a Service
+menu_order: 005
 ---
 
-By default apps are launched on private agent nodes, but you can use these instructions to launch on public agent nodes. DC/OS agent nodes can be designated as [public](/docs/1.9/overview/concepts/#public) or [private](/docs/1.9/overview/concepts/#private) during [installation](/docs/1.9/administration/installing/). Public agent nodes provide public access to your DC/OS applications. 
+DC/OS agent nodes can be designated as [public](/docs/1.9/overview/concepts/#public) or [private](/docs/1.9/overview/concepts/#private) during [installation](/docs/1.9/administration/installing/). Public agent nodes provide access from outside of the cluster via infrastructure networking to your DC/OS services. By default, services are launched on private agent nodes and are not accessible from outside the cluster.
+ 
+To launch a service on a public node, you must create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified and configure an edge load balancer and service discovery mechanism.
 
 **Prerequisites:**
 
@@ -33,7 +34,7 @@ By default apps are launched on private agent nodes, but you can use these instr
     }
     ```
 
-    For more information about the `acceptedResourceRoles` parameter, see the Marathon REST API [documentation](https://mesosphere.github.io/marathon/docs/rest-api.html).
+    For more information about the `acceptedResourceRoles` parameter, see the Marathon REST API [documentation](/docs/1.9/usage/managing-services/rest-api/).
 
 1.  Add the your app to Marathon by using this command, where `myApp.json` is your app:
 
@@ -69,12 +70,8 @@ By default apps are launched on private agent nodes, but you can use these instr
 
     You should see the following message in your browser: 
     
-    ![Hello Brave World](/docs/1.9/usage/tutorials/img/helloworld.png)
+    ![Hello Brave World](/docs/1.9/usage/managing-services/img/helloworld.png)
     
 ## Next steps
 
 Learn how to load balance your app on a public node using [Marathon-LB](/docs/1.9/usage/service-discovery/marathon-lb/marathon-lb-basic-tutorial/).
-
- [1]: /docs/1.9/tutorials/containerized-app/
- [3]: /docs/1.9/administration/installing/
- [4]: /docs/1.9/usage/cli/install/

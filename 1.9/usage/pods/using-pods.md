@@ -4,7 +4,7 @@ feature_maturity: experimental
 menu_order: 20
 ---
 
-You can create and manage your pods via the DC/OS CLI or via the `/v2/pods/` endpoint of the [Marathon REST API](http://mesosphere.github.io/marathon/docs/generated/api.html).
+You can create and manage your pods via the DC/OS CLI or via the `/v2/pods/` endpoint of the [Marathon REST API](/docs/1.9/usage/managing-services/rest-api/).
 
 # Using the Pods CLI
 
