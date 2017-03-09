@@ -55,8 +55,8 @@ To launch a service on a public node, you must create a Marathon app definition 
     The output should look like this:
     
     ```bash
-    ID     MEM  CPUS  TASKS  HEALTH  DEPLOYMENT  CONTAINER  CMD
-   /myApp   64  0.1    0/1    ---      scale       DOCKER   None
+     ID     MEM  CPUS  TASKS  HEALTH  DEPLOYMENT  CONTAINER  CMD
+    /myApp   64  0.1    0/1    ---      scale       DOCKER   None
     ```
     
     **Tip:** You can also view deployed apps by using the **Services** tab of DC/OS [GUI](/docs/1.9/usage/webinterface/#services).

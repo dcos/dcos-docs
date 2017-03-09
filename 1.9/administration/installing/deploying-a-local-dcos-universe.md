@@ -21,8 +21,8 @@ You can install and run DC/OS services on a datacenter without internet access w
 
      ```bash
      $ curl -v https://downloads.mesosphere.com/universe/public/local-universe.tar.gz -o local-universe.tar.gz
-     $ curl -v https://raw.githubusercontent.com/mesosphere/universe/version-3.x/docker/local-universe/dcos-local-universe-http.service
-     $ curl -v https://raw.githubusercontent.com/mesosphere/universe/version-3.x/docker/local-universe/dcos-local-universe-registry.service
+     $ curl -v https://raw.githubusercontent.com/mesosphere/universe/version-3.x/docker/local-universe/dcos-local-universe-http.service -o dcos-local-universe-http.service
+     $ curl -v https://raw.githubusercontent.com/mesosphere/universe/version-3.x/docker/local-universe/dcos-local-universe-registry.service -o dcos-local-universe-registry.service
      ```
 
 2. Use [secure copy](https://linux.die.net/man/1/scp) to transfer the Universe and registry files to a master node. Replace `<master-IP>` with the public IP address of a master before issuing the following commands.

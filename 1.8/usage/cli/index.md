@@ -100,14 +100,7 @@ $ dcos config set core.email jdoe@mesosphere.com
 $ dcos config set core.mesos_master_url 52.34.160.132:5050
 ```
     
-
-**reporting** Indicate whether to report usage events to Mesosphere. By default this is set to `True`. For example, to set to false:
-
-```bash
-$ dcos config set core.reporting False
-```
     
-
 **ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `False`. For example, to set to true:
 
 ```bash
@@ -119,13 +112,6 @@ $ dcos config set core.ssl_verify True
 
 ```bash
 $ dcos config set core.timeout 3
-```
-    
-
-**token** The OAuth access token. For example, to change the OAuth token:
-
-```bash
-$ dcos config set core.token <token>
 ```
 
  

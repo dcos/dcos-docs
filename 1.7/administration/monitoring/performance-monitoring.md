@@ -17,7 +17,7 @@ Marathon has a timer metric that determines how long an event has taken place. T
 
 ## Marathon metrics
 
-Marathon provides a number of [metrics][1] for monitoring. Here are the ones that are particularly useful to DC/OS.
+Marathon provides a number of [metrics][1] for monitoring. Here are the ones that are particularly useful to DC/OS. You can query the metrics HTTP endpoint in your DC/OS cluster at `<Master-Public-IP>/marathon/metrics`.
 
 **Lifetime metrics**
 

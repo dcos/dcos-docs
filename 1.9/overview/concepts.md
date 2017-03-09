@@ -348,7 +348,7 @@ A Mesos resource offer provides a set of unallocated resources (e.g. cpu, disk, 
 
 ### <a name="mesos-containerizer"></a>Containerizer
 
-A Mesos containerizer is a containerization and resource isolation abstraction around a specific container runtime, namely the [Docker Runtime](#mesos-docker-runtime) and [Mesos Universal Container Runtime](#mesos-universal-container-runtime).
+A containerizer is a containerization and resource isolation abstraction around a specific container runtime, namely the [Docker Runtime](#mesos-docker-runtime) and [Mesos Universal Container Runtime](#mesos-universal-container-runtime).
 
 #### <a name="mesos-universal-container-runtime"></a>Mesos Universal Container Runtime
 

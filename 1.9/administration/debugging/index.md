@@ -4,19 +4,30 @@ feature_maturity: experimental
 menu_order: 3.3
 ---
 
-When things go wrong, you need to see the logs to understand how to fix it. DC/OS services and tasks write `stdout` and `stderr` files in their sandboxes by default. Traditionally, log aggregation has been the solution here. Write the logs locally and then ship all that data elsewhere for someone to actually access. Moving data around is expensive, especially when it ends up being written multiple times.
+The `dcos task exec` command allows you to execute an arbitrary command inside of a task's container and stream its output back to your local terminal. It offers an experience very similar to [`docker exec`](https://docs.docker.com/engine/reference/commandline/exec/), without any need for SSH keys. 
 
-For most debugging tasks, log aggregation ends up being a particularly heavy solution for a simple task. All you want is to see the logs, where they come from doesn’t actually matter. By scoping the debugging task down to this level, we’ve been able to provide a couple simple solutions that work for most use cases.
+You can execute this command in any of the following four modes.
 
-DC/OS knows where every task has run in your cluster. It is also able to stream every file your application outputs. By combining these two features, you’re able to use the CLI or GUI to access historical and current logs such as stdout/stderr from your local machine.
+- `dcos task exec <task-id> <command>` (no flags): streams STDOUT and STDERR from the remote terminal to your local terminal as raw bytes. 
 
-Let’s say that you’ve got a service misbehaving. For some reason, it is continually crashing and you need to figure out why. You don’t need to SSH to a specific machine to find the logs and start to understand this problem. Instead, you can use the CLI or GUI to immediately get access to the files that your service is creating.
+- `dcos task exec --tty <task-id> <command>`: streams STDOUT and STDERR from the remote terminal to your local terminal, but not as raw bytes. Instead, this option puts your local terminal into raw mode, allocates a remote pseudo terminal (PYT), and streams the STDOUT and STDERR through the remote PTY. 
+
+- `dcos task exec --interactive <task-id> <command>` streams STDOUT and STDERR from the remote terminal to your local terminal and streams STDIN from your local terminal to the remote command. 
+
+- `dcos task exec --interactive --tty <task-id> <command>`: streams STDOUT and STDERR from the remote terminal to your local terminal and streams STDIN from your local terminal to the remote terminal. Also puts your local terminal into raw mode; allocates a remote pseudo terminal (PYT); and streams STDOUT, STDERR, and STDIN through the remote PTY. This mode offers the maximum functionality.
+
+**Note:** If your mode streams raw bytes, you won't be able to launch programs like `vim`, because these programs require the use of control characters.
+
+**Tip:** We have included the text of the full flags above for readability, but each one can be shortened. Instead of typing `--interactive`, you can just type `-i`. Likewise, instead of typing `--tty`, you can just type `-t`.
+
+**Requirement:** To use the debugging feature, the service or job must be launched using either the Mesos container runtime or the Universal container runtime. Debugging cannot be used on containers launched with the Docker runtime. See [Using Mesos Containerizers](https://dcos.io/docs/1.9/usage/containerizers/) for more information.
 
 <!-- Fork a Process Inside a Mesos Container, stream its output (OSS) -->
 <!-- Support Optional Stream of STDIN to Forked Process (OSS) -->
 <!-- Support Optional Pseudo-Teletype for Forked Process (OSS) -->
 <!-- Secure the the Debugging API with Fine Grained Auth (Enterprise) -->
 
-# Debugging with the DC/OS CLI
+For more information, see:
 
-The `dcos task exec` command enables you to run any command inside a task container on a node, including interactive Bash shells. It provides full AuthN and AuthZ support with DC/OS in strict mode (Enterprise Only). You do not need SSH access to a node. This functionality is similar to the [`docker exec`](https://docs.docker.com/engine/reference/commandline/exec/) command. For more information, see the [Quick Start](/docs/1.9/administration/debugging/quickstart/).
+- [Command reference](/docs/1.9/usage/cli/command-reference/)
+- [Quick Start](/docs/1.9/administration/debugging/quickstart/).

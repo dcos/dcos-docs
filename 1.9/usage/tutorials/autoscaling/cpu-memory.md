@@ -22,10 +22,10 @@ Periodially, `marathon-autoscale.py` will monitor the aggregate CPU and memory u
 
 SSH to the system where you will run `marathon-autoscale.py` and install it.
 
-1.  SSH to the node where you will run `marathon-autoscale.py`, where node ID (`<node-id>`) is the node where you want to run the app.
+1.  SSH to the node where you will run `marathon-autoscale.py`, where node ID (`<mesos-id>`) is the node where you want to run the app.
     
     ```bash
-    $ dcos node ssh --master-proxy --mesos-id=<node-id>
+    $ dcos node ssh --master-proxy --mesos-id=<mesos-id>
     ```
     
     **Tip:** Run `dcos node` to get the available node IDs.

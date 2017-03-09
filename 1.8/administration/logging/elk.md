@@ -1,7 +1,6 @@
 ---
 post_title: Log Management in DC/OS with ELK
 menu_order: 1
-enterprise: 'no'
 ---
 
 You can pipe system and application logs from the nodes in a DC/OS cluster to your existing ElasticSearch, Logstash, and Kibana (ELK) server. This document describes how to store all unfiltered logs directly on ElasticSearch, and then perform filtering and specialized querying on ElasticSearch directly. The Filebeat output from each node is sent directly to a centralized ElasticSearch instance, without using Logstash. If you're interested in using Logstash for log processing or parsing, consult the [Filebeat][2] and [Logstash][8] documentation.
@@ -57,7 +56,7 @@ For all nodes in your DC/OS cluster:
 
 For each Master node in your DC/OS cluster:
 
-1.  Create a script that will parse the output of the DC/OS master `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
+1.  Create a script that will parse the output of the DC/OS master `journalctl` logs and funnel them all to `/var/log/dcos/dcos.log`.
 
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
@@ -117,7 +116,7 @@ For each Master node in your DC/OS cluster:
 
 For each Agent node in your DC/OS cluster:
 
-1.  Create a script that will parse the output of the DC/OS agent `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
+1.  Create a script that will parse the output of the DC/OS agent `journalctl` logs and funnel them all to `/var/log/dcos/dcos.log`.
 
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 

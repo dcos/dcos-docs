@@ -78,54 +78,5 @@ $ export DCOS_DEBUG=true
 
 By default, the DC/OS command line stores its configuration files in a directory called `~/.dcos` within your HOME directory. However, you can specify a different location by using the `DCOS_CONFIG` environment variable.
 
-The configuration settings are stored in the `dcos.toml` file. You can modify these settings with the `dcos config` command.
-
-**dcos_url** The the public master IP of your DC/OS installation. This is set by default during installation. For example:
-
-```bash
-$ dcos config set core.dcos_url 52.36.102.191
-```
-    
-
-**email** Your email address. This is set by default during installation. For example, to reset your email address:
-
-```bash
-$ dcos config set core.email jdoe@mesosphere.com
-```
-    
-
-**mesos_master_url** The Mesos mast URL. This must be of the format: `http://<host>:<port>`. For example, to set your Mesos master URL:
-
-```bash
-$ dcos config set core.mesos_master_url 52.34.160.132:5050
-```
-    
-
-**reporting** Indicate whether to report usage events to Mesosphere. By default this is set to `True`. For example, to set to false:
-
-```bash
-$ dcos config set core.reporting False
-```
-    
-
-**ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `False`. For example, to set to true:
-
-```bash
-$ dcos config set core.ssl_verify True
-```
-    
-
-**timeout** Request timeout in seconds, with a minimum value of 1 second. By default this is set to 5 seconds. For example, to set to 3 seconds:
-
-```bash
-$ dcos config set core.timeout 3
-```
-    
-
-**token** The OAuth access token. For example, to change the OAuth token:
-
-```bash
-$ dcos config set core.token <token>
-```
-
+The configuration settings are stored in the `dcos.toml` file. You can modify these settings with the [dcos config set](/docs/1.9/usage/cli/command-reference/dcos-config/dcos-config-set/) command.
  

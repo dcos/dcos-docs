@@ -9,6 +9,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 
 **Important:**
 
+- Review the [release notes](https://dcos.io/releases/) before upgrading DC/OS.
 - The Advanced Installation method is the _only_ recommended upgrade path for DC/OS. It is recommended that you familiarize yourself with the [Advanced DC/OS Installation Guide][advanced-install] before proceeding.
 - The [VIP features](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-ip-addresses/), added in DC/OS 1.8, require that ports 32768 - 65535 are open between all agent and master nodes for both TCP and UDP.
 - Virtual networks require Docker 1.11. For more information, see the [documentation](/docs/1.8/administration/virtual-networks/).
@@ -68,13 +69,13 @@ Proceed with upgrading every master node using the following procedure. When you
     $ curl -O http://<bootstrap_url>:<your_port>/dcos_install.sh
     ```
 
-1.  Uninstall pkgpanda:
+1.  Remove all of the DC/OS software packages:
 
     ```
     $ sudo -i /opt/mesosphere/bin/pkgpanda uninstall
     ```
 
-1.  Remove the DC/OS 1.7 data directory:
+1.  Remove the DC/OS install and config directories:
 
     ```
     $ sudo rm -rf /opt/mesosphere /etc/mesosphere
@@ -105,19 +106,19 @@ Proceed with upgrading every master node using the following procedure. When you
 
 ### On all DC/OS Agents:
 
-1.  Download The dcos_install.sh Script
+1.  Download the dcos_install.sh script:
 
     ```
     $ curl -O http://<bootstrap_url>:<your_port>/dcos_install.sh
     ```
 
-1.  Uninstall pkgpanda
+1.  Remove all of the DC/OS software packages:
 
     ```
     $ sudo -i /opt/mesosphere/bin/pkgpanda uninstall
     ```
 
-1.  Remove The DC/OS 1.8 Data Directory and add `mesos-resources`
+1.  Remove the DC/OS install and config directories:
 
     ```
     $ sudo rm -rf /opt/mesosphere /etc/mesosphere
@@ -130,7 +131,7 @@ Proceed with upgrading every master node using the following procedure. When you
     $ sudo touch /var/lib/dcos/mesos-resources
     ```
 
-1.  Install DC/OS 1.8
+1.  Install DC/OS 1.8:
 
     -  [Private](/docs/1.8/overview/concepts/#private) agents (default)
 
@@ -144,7 +145,7 @@ Proceed with upgrading every master node using the following procedure. When you
        $ sudo bash dcos_install.sh -d slave_public
        ```
 
-1.  Validate the upgrade
+1.  Validate the upgrade:
 
     - Verify that `curl http://<dcos_agent_private_ip>:5051/metrics/snapshot` has the metric `slave/registered` with a value of `1`.
     - Monitor the Mesos UI to verify that the upgraded node rejoins the DC/OS cluster and that tasks are reconciled (`http://<dcos_master>/mesos`).
