@@ -12,8 +12,8 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 ## Create and Run a Simple Service from the DC/OS Web Interface
 
 1. Click the **Services** tab of the DC/OS web interface, then click the **RUN A SERVICE**.
-1. Enter a name for your service in the **ID** field. In the **Command** field, enter `sleep 10`.
-1. Click **Deploy**.
+1. Click **Single Container** and enter a name for your service in the **SERVICE ID** field. In the **Command** field, enter `sleep 10`.
+1. Click **REVIEW & RUN**.
 
     ![Create a service in the DC/OS UI](/docs/1.9/usage/tutorials/img/deploy-svs-ui.png)
 
@@ -66,13 +66,13 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 
 1. Go to the `hello-dcos` page of the [Mesosphere Docker Hub repository](https://hub.docker.com/r/mesosphere/hello-dcos/tags/) and note down the latest image tag.
 1. Click the **Services** tab of the DC/OS web interface, then click the **RUN A SERVICE**.
-1. Enter a name for your service in the **ID** field.
+1. Click **Single Container** and enter a name for your service in the **SERVICE ID** field.
 1. Click the **Container Settings** tab and enter the following in the **Container Image** field: `mesosphere/hello-dcos:<image-tag>`. Replace `<image-tag>` with the tag you copied in step 1.
 
     ![Containerized service in the DC/OS UI](/docs/1.9/usage/tutorials/img/deploy-container-ui.png)
 
 1. Click **Deploy**.
-1. In the **Services** tab, click the name of your service, then choose on of the task instances. Click **Logs**, then toggle to the **Output (stdout)** view to see the output of the service.
+1. In the **Services** tab, click the name of your service, then choose on of the task instances. Click **Logs**, then toggle to the **STDERR** and **STDOUT** to see the output of the service.
 
     ![Running containerized service in the DC/OS UI](/docs/1.9/usage/tutorials/img/container-running-ui.png)
 
