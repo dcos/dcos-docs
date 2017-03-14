@@ -3,6 +3,8 @@ post_title: Usage
 menu_order: 3
 ---
 
+The usage topics help you run programs and services on an existing DC/OS cluster.
+
 # Getting Started
 After you have [installed](/docs/1.7/administration/installing/) DC/OS and set up the CLI on your local machine, familiarize yourself with the DC/OS UI [Dashboard](/docs/1.7/usage/webinterface/) and DC/OS [CLI](/docs/1.7/usage/cli/).
 
