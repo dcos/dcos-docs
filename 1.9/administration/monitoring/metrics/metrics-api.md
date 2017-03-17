@@ -6,7 +6,6 @@ menu_order: 1
 
 You can use your custom built tools to get any metric, either from running Mesos tasks or the hosts which run your DC/OS cluster. 
 
-
 # About the Metrics API
 
 The HTTP producer is enabled by default and exposes a JSON-formatted HTTP API on each node in the cluster. These APIs include both metrics datapoints as well as dimensions, or key/value pairs with relevant node and cluster metadata.
