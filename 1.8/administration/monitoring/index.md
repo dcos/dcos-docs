@@ -75,4 +75,4 @@ If you experience this behavior it's most likely your Mesos agent service on the
 
 ## Troubleshooting
 
-If you have any problems, you can check if the diagnostics service is running by SSH’ing to the Mesos leading master and checking the systemd status of the diagnostics component (`dcos-d3t.service`).
+If you have any problems, you can check if the diagnostics service is running by SSH’ing to the Mesos leading master and checking the systemd status of the diagnostics component (`dcos-3dt.service`).
