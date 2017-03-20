@@ -10,14 +10,14 @@ The tutorial is designed to provide users and applications developers an overvie
 
 The DC/OS 101 tutorial includes the following sessions:
 
-* [First Steps][1]
-* [Installing Package][2]
-* [Deploying first Application][3]
-* [Connecting Apps/Service Discovery][4]
-* [Deploying native Apps][5]
-* [Exposing Apps Publicly][6]
-* [Understanding Resources][7]
-* [Load-balancing][8]
+1. [First Steps][1]
+1. [Installing Package][2]
+1. [Deploying first Application][3]
+1. [Connecting Apps/Service Discovery][4]
+1. [Deploying native Apps][5]
+1. [Exposing Apps Publicly][6]
+1. [Understanding Resources][7]
+1. [Load-balancing][8]
 
 [1]: /docs/1.9/usage/tutorials/dcos-101/cli/
 [2]: /docs/1.9/usage/tutorials/dcos-101/redis-package/
