@@ -4,7 +4,7 @@ menu_order: 0
 ---
 
 # Description
-Launch a process (`<cmd>`) inside of a task (`<task>`) container.
+Launch a process (`<cmd>`) inside of a task's (`<task>`) container.
 
 # Usage
 
