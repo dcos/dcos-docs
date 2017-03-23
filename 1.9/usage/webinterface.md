@@ -92,12 +92,12 @@ View the system health of your DC/OS components from the **Components** tab.
 # Settings
 Manage your DC/OS package repositories from the **Settings** tab.
 
-![Settings](/docs/1.9/administration/usage/img/package-repositories.png)
+![Settings](/docs/1.9/usage/img/package-repositories.png)
 
 # Organization
 Manage user access from the **Organization** tab.
 
-![Organization](/docs/1.9/administration/usage/img/organization.png)
+![Organization](/docs/1.9/usage/img/organization.png)
 
 
 [3]: https://mesosphere.github.io/marathon/docs/health-checks.html
