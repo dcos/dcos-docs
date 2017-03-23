@@ -8,7 +8,7 @@ The Metrics API exposes node, container, and application metrics.
 
 The Metrics API is backed by the [DC/OS Metrics component](/docs/1.9/overview/architecture/components/#dcos-metrics), which runs on all nodes in the cluster.
 
-For more information about using the Metrics API, see [Metrics](/docs/1.9/administration/metrics/).
+For more information about using the Metrics API, see [Metrics](/docs/1.9/administration/monitoring/metrics/).
 
 
 ## Routes

@@ -29,7 +29,7 @@ From the DC/OS GUI you can install services from the **Services** or **Universe*
 
 1.  Navigate to the [**Universe > Packages**](/docs/1.9/usage/webinterface/#universe) page in the DC/OS GUI.
 
-    ![universe](/docs/1.9/usage/img/ui-dashboard-universe.gif)
+    ![universe](/docs/1.9/usage/managing-services/img/ui-dashboard-universe.gif)
 
 2.  Choose your package and click **INSTALL PACKAGE**. 
 
