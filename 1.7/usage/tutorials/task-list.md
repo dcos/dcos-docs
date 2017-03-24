@@ -10,7 +10,7 @@ The [DC/OS CLI][1] allows you to easily view completed tasks.
 In this example, all completed HDFS tasks are shown:
 
 ```bash
-$ dcos task --completed hdfs
+dcos task --completed hdfs
 NAME  USER  STATE                      ID
 hdfs  root    F    hdfs.6b18a882-00a5-11e5-9926-56847afe9799
 hdfs  root    K    hdfs.6eacf2d3-00a5-11e5-9926-56847afe9799

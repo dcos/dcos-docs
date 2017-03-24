@@ -31,13 +31,13 @@ This page provides instructions on how to contribute to the DC/OS documentation.
 
 
       ```bash
-      $ git clone https://github.com/<your-user-name>/dcos-docs
+      git clone https://github.com/<your-user-name>/dcos-docs
       ```
 
   - If this isn't your first contribution check out the master branch
 
         ```bash
-        $ git checkout master
+        git checkout master
         ```
 
       and update it by following these [instructions](https://help.github.com/articles/syncing-a-fork/).
@@ -45,7 +45,7 @@ This page provides instructions on how to contribute to the DC/OS documentation.
 1. Create a new branch of your local repository using your JIRA number as the name. This way other contributors can find the JIRA issue that descirbes the goal of your contribution.
 
     ```bash
-    $ git checkout -b dcos-nnn
+    git checkout -b dcos-nnn
     ```
 
 1. Create your content.
@@ -76,19 +76,19 @@ This page provides instructions on how to contribute to the DC/OS documentation.
   1. First, add your changes (this gets them ready to be included in your commit).
 
     ```bash
-    $ git add .
+    git add .
     ```
 
   1. Next commit the changes you made to your local branch, and add a useful message so that everyone knows what you've changed.
 
     ```bash
-    $ git commit -m "Addresses issue DCOS-nnn. More useful stuff here"
+    git commit -m "Addresses issue DCOS-nnn. More useful stuff here"
     ```
 
   1. Finally push your changes up to your remote branch on GitHub, so that you can open a pull request.
 
     ```bash
-    $ git push origin dcos-nnn
+    git push origin dcos-nnn
     ```
 
 1. Submit a [pull request](https://help.github.com/articles/using-pull-requests/) against the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
@@ -145,13 +145,13 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
      ```bash
-     $ sudo yum install -y ruby
+     sudo yum install -y ruby
      ```
 
   -  *MacOS using [Homebrew](http://brew.sh/)*
 
       ```bash
-      $ brew install ruby
+      brew install ruby
       ```
 
 1.  [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -159,13 +159,13 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
       ```bash
-      $ sudo yum install git
+      sudo yum install git
       ```
 
   -  *MacOS using [Homebrew](http://brew.sh/)*
 
       ```bash
-      $ brew install git
+      brew install git
       ```
 
 1.  Install EPEL repo, [Node](https://docs.npmjs.com/getting-started/installing-node), and NPM.
@@ -173,15 +173,15 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
       ```bash
-      $ sudo yum install -y epel-release && sudo yum install -y nodejs && sudo yum install -y npm && npm update
+      sudo yum install -y epel-release && sudo yum install -y nodejs && sudo yum install -y npm && npm update
       ```
 
   -  *MacOS using [Homebrew](http://brew.sh/)*
 
       ```bash
-      $ brew install -y nodejs
-      $ brew install npm
-      $ npm update
+      brew install -y nodejs
+      brew install npm
+      npm update
       ```
 
 1.  nvm 6.3.1
@@ -189,15 +189,15 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
       ```bash
-      $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
-      $ nvm install 6.3.1 && nvm alias default 6.3.1
+      curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
+      nvm install 6.3.1 && nvm alias default 6.3.1
       ```
 
   -  *MacOS*
 
       ```bash
-      $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
-      $ nvm install 6.3.1 && nvm alias default 6.3.1
+      curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
+      nvm install 6.3.1 && nvm alias default 6.3.1
       ```
 
 1.  [Gulp](http://gulpjs.com/)
@@ -205,38 +205,38 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
       ```bash
-      $ sudo npm install --global gulp-cli
+      sudo npm install --global gulp-cli
       ```
 
   -  *MacOS*
 
       ```bash
-      $ npm install --global gulp-cli
+      npm install --global gulp-cli
       ```
 
 1. Clone the dcos-website repo.
 
   ```bash
-  $ git clone https://github.com/dcos/dcos-website
+  git clone https://github.com/dcos/dcos-website
   ```
 
 1. Check out the develop branch of `dcos-website`.
 
   ```bash
-  $ git checkout develop
+  git checkout develop
   ```
 
 1. Initialize the `dcos-docs` submodule with the content from the upstream master.
 
   ```bash
-  $ git submodule update --init --recursive
+  git submodule update --init --recursive
   ```
 
   Optional: replace the content from the upstream master with the content from your local `dcos-docs` repo. Delete the `dcos-website/dcos-dcos` directory and replace it with a symlink to your local `dcos-docs` repo. For example, if your directory structure is `/projects/dcos-website` and `/projects/dcos-docs`, you can issue these commands from the `dcos-website` directory:
 
    ```bash
-   $ rm -r dcos-docs
-   $ ln -s <local-path-to-dcos-docs> dcos-docs
+   rm -r dcos-docs
+   ln -s <local-path-to-dcos-docs> dcos-docs
    ```
 
 #### Building
@@ -244,7 +244,7 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
 Launch the local web server to view your changes.
 
   ```bash
-  $ npm start
+  npm start
   ```
 
 ## License and Authors

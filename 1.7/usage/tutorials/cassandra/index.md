@@ -46,7 +46,7 @@ Assuming you have a DC/OS cluster up and running, the first step is to [install 
 Install Cassandra using the DC/OS CLI:
 
 ```bash
-$ dcos package install cassandra
+dcos package install cassandra
 Installing Marathon app for package [cassandra] version [1.0.0-2.2.5]
 Installing CLI subcommand for package [cassandra] version [1.0.0-2.2.5]
 New command available: dcos cassandra
@@ -60,7 +60,7 @@ While the DC/OS command line interface (CLI) is immediately available, it takes 
 1. Verify existing DC/OS repositories:
 
     ```bash
-    $ dcos package repo list
+    dcos package repo list
     Universe: https://universe.mesosphere.com/repo
     ```
 
@@ -69,19 +69,19 @@ While the DC/OS command line interface (CLI) is immediately available, it takes 
     You can either list all available versions for Cassandra:
 
     ```bash
-    $ dcos package list cassandra
+    dcos package list cassandra
     ```
 
     Or you can search for a particular one:
 
     ```bash
-    $ dcos package search cassandra
+    dcos package search cassandra
     ```
 
 1. Install a specific version of the Cassandra package:
 
     ```bash
-    $ dcos package install --yes --force --package-version=<package_version> Cassandra
+    dcos package install --yes --force --package-version=<package_version> Cassandra
     ```
 
 ### Manual installation via the web interface
@@ -93,7 +93,7 @@ You can also install the Cassandra service from DC/OS Universe via `http://<dcos
 Validate that the installation added the enhanced DC/OS CLI for Cassandra:
 
 ```bash
-$ dcos cassandra --help
+dcos cassandra --help
 Usage: dcos-cassandra cassandra [OPTIONS] COMMAND [ARGS]...
 
 Options:
@@ -121,7 +121,7 @@ Go to the DC/OS dashboard to validate that the Cassandra service is running and 
 Retrieve the connection information:
 
 ```bash
-$ dcos cassandra connection
+dcos cassandra connection
 {
     "address": [
         "10.0.2.66:9042",
@@ -139,20 +139,20 @@ $ dcos cassandra connection
 SSH into your DC/OS cluster to connect to your Cassandra cluster:
 
 ```
-$ dcos node ssh --master-proxy --leader
+dcos node ssh --master-proxy --leader
 core@ip-10-0-6-153 ~ $
 ```
 
 You are now inside your DC/OS cluster and can connect to the Cassandra cluster directly. Connect to the cluster using the cqlsh client:
 
 ```bash
-core@ip-10-0-6-153 ~ $ docker run cassandra:2.2.5 cqlsh <HOST>
+core@ip-10-0-6-153 ~ docker run cassandra:2.2.5 cqlsh <HOST>
 ```
 
 Replace `<HOST>` with the actual host, which that we retrieved by running `dcos cassandra connection`, above:
 
 ```bash
-core@ip-10-0-6-153 ~ $ docker run -ti cassandra:2.2.5 cqlsh 10.0.2.66
+core@ip-10-0-6-153 ~ docker run -ti cassandra:2.2.5 cqlsh 10.0.2.66
 cqlsh>
 ```
 
@@ -199,7 +199,7 @@ cqlsh> SELECT * FROM demo.map;
 ### Uninstalling
 
 ```bash
-$ dcos package uninstall cassandra
+dcos package uninstall cassandra
 ```
 
 Use the [framework cleaner](/docs/1.7/usage/managing-services/uninstall/#framework-cleaner) script to remove your Cassandra instance from ZooKeeper and to destroy all data associated with it. The script requires several arguments, the values for which are derived from your service name:

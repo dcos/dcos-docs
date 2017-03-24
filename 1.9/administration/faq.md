@@ -24,23 +24,23 @@ In DC/OS, add the line `MESOS_ATTRIBUTES=<key>:<value>` to the file `/var/lib/dc
 To gracefully kill an agent node's Mesos process and allow systemd to restart it, use the following command. _Note: If Auto Scaling Groups are in use, the node will be replaced automatically_:
 
 ```bash
-$ sudo systemctl kill -s SIGUSR1 dcos-mesos-slave
+sudo systemctl kill -s SIGUSR1 dcos-mesos-slave
 ```
 
 - _For a public agent:_
 
     ```bash
-    $ sudo systemctl kill -s SIGUSR1 dcos-mesos-slave-public
+    sudo systemctl kill -s SIGUSR1 dcos-mesos-slave-public
     ```
 
 - To gracefully kill the process and prevent systemd from restarting it, add a `stop` command:
 
     ```bash
-    $ sudo systemctl kill -s SIGUSR1 dcos-mesos-slave && sudo systemctl stop dcos-mesos-slave
+    sudo systemctl kill -s SIGUSR1 dcos-mesos-slave && sudo systemctl stop dcos-mesos-slave
     ```
 
 - _For a public agent:_
 
     ```bash
-    $ sudo systemctl kill -s SIGUSR1 dcos-mesos-slave-public && sudo systemctl stop dcos-mesos-slave-public
+    sudo systemctl kill -s SIGUSR1 dcos-mesos-slave-public && sudo systemctl stop dcos-mesos-slave-public
     ```

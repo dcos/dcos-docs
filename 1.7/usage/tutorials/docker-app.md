@@ -18,14 +18,14 @@ In this tutorial, a custom Docker app is created and added to Marathon.
 1.  In the `dcos` directory created by the DC/OS CLI installation script, create a new directory named `simple-docker-tutorial` and navigate to it:
 
     ```bash
-    $ mkdir simple-docker-tutorial
-    $ cd simple-docker-tutorial
+    mkdir simple-docker-tutorial
+    cd simple-docker-tutorial
     ```
 
 2.  Create a file named `index.html` by using nano, or another text editor of your choice:
 
     ```bash
-    $ nano index.html
+    nano index.html
     ```
 
 3.  Paste the following markup into `index.html` and save:
@@ -41,7 +41,7 @@ In this tutorial, a custom Docker app is created and added to Marathon.
 4.  Create and edit a Dockerfile by using nano, or another text editor of your choice:
 
     ```bash
-    $ nano Dockerfile
+    nano Dockerfile
     ```
 
 5.  Paste the following commands into it and save:
@@ -54,19 +54,19 @@ In this tutorial, a custom Docker app is created and added to Marathon.
 6.  Build the container, where `<username>` is your Docker Hub username:
 
     ```bash
-    $ docker build -t <username>/simple-docker .
+    docker build -t <username>/simple-docker .
     ```
 
 7.  Log in to Docker Hub:
 
     ```bash
-    $ docker login
+    docker login
     ```
 
 8.  Push your container to Docker Hub, where `<username>` is your Docker Hub username:
 
     ```bash
-    $ docker push <username>/simple-docker
+    docker push <username>/simple-docker
     ```
 
 ## Add your Docker app to Marathon
@@ -74,7 +74,7 @@ In this tutorial, a custom Docker app is created and added to Marathon.
 1.  Create a file named `nginx.json` by using nano, or another text editor of your choice:
 
     ```bash
-    $ nano nginx.json
+    nano nginx.json
     ```
 
 2.  Paste the following into the `nginx.json` file. If you’ve created your own Docker container, replace the image name mesosphere with your Docker Hub username:
@@ -104,7 +104,7 @@ In this tutorial, a custom Docker app is created and added to Marathon.
 3.  Add the NGINX Docker container to Marathon by using the DC/OS command:
 
     ```bash
-    $ dcos marathon app add nginx.json
+    dcos marathon app add nginx.json
     ```
 
     If this is added successfully, there is no output.
@@ -112,7 +112,7 @@ In this tutorial, a custom Docker app is created and added to Marathon.
 4.  Verify that the app is added:
 
     ```bash
-    $ dcos marathon app list
+    dcos marathon app list
     ID      MEM  CPUS  TASKS  HEALTH  DEPLOYMENT  CONTAINER  CMD
     /nginx   64  0.1    0/1    ---      scale       DOCKER   None
     ```

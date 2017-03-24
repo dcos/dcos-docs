@@ -54,12 +54,12 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 
 1. Run the service with the following command.
     ```bash
-    $ dcos marathon app add my-app-cli.json
+    dcos marathon app add my-app-cli.json
     ```
 
 1. Run the following command to verify that your service is running:
     ```bash
-    $ dcos marathon app list
+    dcos marathon app list
     ```
     You can also click the name of your service in the **Services** view of the DC/OS web interface to see it running and monitor health.
 
@@ -119,6 +119,6 @@ This tutorial shows how to create and deploy a simple one-command service and a 
     ```
 1. Run the following command to verify that your service is running:
     ```bash
-    $ dcos marathon app list
+    dcos marathon app list
     ```
 1. In the **Services** tab of the DC/OS web interface, click the name of your service, then choose on of the task instances. Click **Logs**, then toggle to the **Output (stdout)** view to see the output of the service.

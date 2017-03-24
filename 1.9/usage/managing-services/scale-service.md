@@ -21,21 +21,21 @@ This tutorial shows how to scale a service using the web interface and the CLI.
 1.  Enter the following command from the CLI, :
 
     ```bash
-    $ dcos marathon app update <app-id> instances=<total_desired_instances>
+    dcos marathon app update <app-id> instances=<total_desired_instances>
     ```
     
 1.  Enter this command to see your scaled service. 
 
     ```bash
-    $ dcos task <task-id>
+    dcos task <task-id>
     ```
     
 
 For example, this task is scaled to 6 instances:
     
 ```bash
-$ dcos marathon app update basic-0 instances=6
-$ dcos task basic-0
+dcos marathon app update basic-0 instances=6
+dcos task basic-0
 NAME     HOST        USER  STATE  ID                                            
 basic-0  10.0.0.10   root    R    basic-0.1c73e448-0b47-11e7-a8b6-de4438bbb8f0  
 basic-0  10.0.1.101  root    R    basic-0.1c739626-0b47-11e7-a8b6-de4438bbb8f0  

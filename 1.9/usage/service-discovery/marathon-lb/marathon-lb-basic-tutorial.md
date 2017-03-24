@@ -67,7 +67,7 @@ In this tutorial, Marathon-LB is used as the edge load balancer and service disc
 1.  Run the service from the DC/OS CLI using the following command:
     
     ```bash
-    $ dcos marathon app add dcos-website.json
+    dcos marathon app add dcos-website.json
     ```
 
 1.  Go to the **Services** tab of the DC/OS web interface to verify that your application is healthy.

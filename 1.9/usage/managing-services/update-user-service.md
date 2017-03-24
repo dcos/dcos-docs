@@ -14,13 +14,13 @@ Use the `dcos marathon app update` command from the DC/OS CLI to update any aspe
 A single element of the [`env` field][2] can be updated by specifying a JSON string in a command argument.
 
 ```bash
-$ dcos marathon app update test-app env='{"APISERVER_PORT":"25502"}'
+dcos marathon app update test-app env='{"APISERVER_PORT":"25502"}'
 ```
 
 Now, run the command below to see the result of your update:
 
 ```bash
-$ dcos marathon app show test-app | jq '.env'
+dcos marathon app show test-app | jq '.env'
 ```
 
 # Update all Environment Variables
@@ -30,7 +30,7 @@ The entire [`env` field][1] can also be updated by specifying a JSON file in a c
 First, save the existing environment variables to a file:
 
 ```bash
-$ dcos marathon app show test-app | jq .env >env_vars.json
+dcos marathon app show test-app | jq .env >env_vars.json
 ```
 
 The file will contain the JSON for the `env` field:
@@ -48,13 +48,13 @@ Now edit the `env_vars.json` file. Make the JSON a valid object by enclosing the
 Specify this CLI command with the JSON file specified:
 
 ```bash
-$ dcos marathon app update test-app < env_vars.json
+dcos marathon app update test-app < env_vars.json
 ```
 
 View the results of your update:
 
 ```bash
-$ dcos marathon app show test-app | jq '.env'
+dcos marathon app show test-app | jq '.env'
 ```
 
  [1]: /docs/1.9/usage/cli/

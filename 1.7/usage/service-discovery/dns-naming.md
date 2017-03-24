@@ -9,19 +9,19 @@ You can get a comprehensive list of the apps being run on your DC/OS cluster nod
 
 1.  SSH into your node. For example, use this CLI command to SSH to your master:
     
-        $ dcos node ssh --leader --master-proxy
+        dcos node ssh --leader --master-proxy
         
     
     For more information, see the SSH [documentation][2].
 
 2.  Run this command from your master node to view the node details:
     
-        $ curl http://master.mesos:8123/v1/enumerate
+        curl http://master.mesos:8123/v1/enumerate
         
     
     In this example Kafka and Chronos are installed:
     
-        $ curl http://master.mesos:8123/v1/enumerate
+        curl http://master.mesos:8123/v1/enumerate
           {
             "frameworks": [
              {

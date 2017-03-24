@@ -60,7 +60,7 @@ Use the `zen.sh` script to create the Zen template dependencies. These dependenc
 1.  Run the `zen.sh` script with an optional tag value for your DC/OS stack specified (`STACK_NAME`), or use the default `dcos`. This value will be used to tag your DC/OS cluster in AWS.  
 
     ```bash
-    $ bash ./zen.sh <STACK_NAME>
+    bash ./zen.sh <STACK_NAME>
     ```
 
     The output should look like this:

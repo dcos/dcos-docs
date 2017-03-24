@@ -37,13 +37,13 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Digit
 2.  [Download the DC/OS Terraform manifests from GitHub](https://github.com/jmarhee/digitalocean-dcos-terraform) into a local  directory.
 
     ```bash
-    $ git clone https://github.com/jmarhee/digitalocean-dcos-terraform
+    git clone https://github.com/jmarhee/digitalocean-dcos-terraform
     ```
 
 3.  From that directory, generate an ssh keypair:
 
     ```bash
-    $ ssh-keygen -t rsa -f ./do-key
+    ssh-keygen -t rsa -f ./do-key
     ```
 
 4.  Get yourself a token to use against the API. You can [follow the documentation](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2).
@@ -51,13 +51,13 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Digit
 4.  Add the key to DigitalOcean:
 
     ```bash
-    $ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d '{"name":"dcos-key","public_key":"<public-key>"}' "https://api.digitalocean.com/v2/account/keys"
+    curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d '{"name":"dcos-key","public_key":"<public-key>"}' "https://api.digitalocean.com/v2/account/keys"
     ```
 
 4. Get the key ID:
 
     ```bash
-    $ curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $TOKEN' "https://api.digitalocean.com/v2/account/keys"
+    curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $TOKEN' "https://api.digitalocean.com/v2/account/keys"
     ```
 
 4.  Copy `sample.terraform.tfvars` to a new file named `terraform.tfvars`, and edit the new file, filling in the values as desired. The following are blank and if not filled in, you will be prompted by terraform when necessary:

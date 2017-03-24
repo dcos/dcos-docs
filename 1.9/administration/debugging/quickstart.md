@@ -28,13 +28,13 @@ You can run commands inside a container by using the `dcos task exec` command. I
 1.  Deploy the service on DC/OS:
 
     ```bash
-    $ dcos marathon app add my-app.json
+    dcos marathon app add my-app.json
     ```
 
 1.  Get the task ID of the job with this CLI command:
 
     ```bash
-    $ dcos task
+    dcos task
     ```
     
     The output should look similar to this: 
@@ -47,7 +47,7 @@ You can run commands inside a container by using the `dcos task exec` command. I
 1.  Run this command to show the hostname of the container running your app, where `<task-ID>` is your task ID.
 
     ```bash
-    $ dcos task exec <task_id> hostname
+    dcos task exec <task_id> hostname
     ```
     
     The output should look similar to this:
@@ -75,13 +75,13 @@ You can run interactive commands on machines in your cluster by using the `dcos 
 1.  Deploy the app on DC/OS:
 
     ```bash
-    $ dcos marathon app add my-interactive-app.json
+    dcos marathon app add my-interactive-app.json
     ```
 
 1.  Get the task ID of the app with this CLI command:
 
     ```bash
-    $ dcos task
+    dcos task
     ```
     
     The output should look similar to this: 
@@ -100,18 +100,18 @@ You can run interactive commands on machines in your cluster by using the `dcos 
 1.  Upload the script to your task container:
 
     ```bash
-    $ cat hello-world.sh | dcos task exec -i <task_id> bash -c "cat > hello-world.sh"
+    cat hello-world.sh | dcos task exec -i <task_id> bash -c "cat > hello-world.sh"
     ```
     
 1.  Give the file executable permissions:
 
     ```bash
-    $ dcos task exec <task_id> chmod a+x hello-world.sh
+    dcos task exec <task_id> chmod a+x hello-world.sh
     ```
 1. Run the script inside of the container:
 
     ```bash
-    $ dcos task exec <task_id> ./hello-world.sh
+    dcos task exec <task_id> ./hello-world.sh
     ```
 
     The output should look similar to this:
@@ -154,13 +154,13 @@ In this example, a long running [job](/docs/1.9/usage/jobs/) is launched by usin
     1.  Deploy the job with this CLI command:
     
         ```bash
-        $ dcos job add my-job.json
+        dcos job add my-job.json
         ```
         
     1.  Verify that the job has been successfully deployed:
     
         ```bash
-        $ dcos job list
+        dcos job list
         ```
         
         The output should resemble:
@@ -173,13 +173,13 @@ In this example, a long running [job](/docs/1.9/usage/jobs/) is launched by usin
     1.  Run the job:
     
         ```bash
-        $ dcos job run my-job
+        dcos job run my-job
         ```
 
 1.  Get the task ID of the job with this CLI command:
 
     ```bash
-    $ dcos task
+    dcos task
     ```
     
     The output should look similar to this: 
@@ -192,7 +192,7 @@ In this example, a long running [job](/docs/1.9/usage/jobs/) is launched by usin
 1.  Launch a process inside of the container with the task ID (`<task_id>`) specified and attach a TTY to it. This will launch an interactive Bash session.
 
     ```bash
-    $ dcos task exec --interactive --tty <task_id> bash
+    dcos task exec --interactive --tty <task_id> bash
     ```
     
     You should now be inside the container running an interactive Bash session.

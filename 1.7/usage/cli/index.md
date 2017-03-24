@@ -10,7 +10,7 @@ You can use the DC/OS command-line interface (CLI) to manage your cluster nodes,
 
 To list available commands, either run `dcos` with no parameters or run `dcos help`:
 
-    $ dcos
+    dcos
     Command line utility for the Mesosphere Datacenter Operating
     System (DC/OS). The Mesosphere DC/OS is a distributed operating
     system built around Apache Mesos. This utility provides tools
@@ -38,12 +38,12 @@ The DC/OS CLI supports several environment variables that you can set dynamicall
 
 `DCOS_CONFIG` Set the path to the DC/OS configuration file. By default, this variable is set to `DCOS_CONFIG=/<home-directory>/.dcos/dcos.toml`. For example, if you moved your DC/OS configuration file to `/home/jdoe/config/` you can specify this command:
 
-    $ export DCOS_CONFIG=/home/jdoe/config/dcos.toml
+    export DCOS_CONFIG=/home/jdoe/config/dcos.toml
     
 
 `DCOS_SSL_VERIFY` Indicates whether to verify SSL certificates for HTTPS (`true`) or set the path to the SSL certificates (`false`). By default, this is variable is set to `true`. This is equivalent to setting the `core.ssl_config` option in the DC/OS configuration file. For example, to set the path to SSL certificates:
 
-    $ export DCOS_SSL_VERIFY=false
+    export DCOS_SSL_VERIFY=false
     
 
 `DCOS_LOG_LEVEL` Prints log messages to stderr at or above the level indicated. This is equivalent to the `--log-level` command-line option. The severity levels are:
@@ -56,12 +56,12 @@ The DC/OS CLI supports several environment variables that you can set dynamicall
 
 For example, to set the log level to warning:
 
-    $ export DCOS_LOG_LEVEL=warning
+    export DCOS_LOG_LEVEL=warning
     
 
 `DCOS_DEBUG` Indicates whether to print additional debug messages to `stdout`. By default this is set to `false`. For example:
 
-    $ export DCOS_DEBUG=true
+    export DCOS_DEBUG=true
     
 
 # Configuration Files

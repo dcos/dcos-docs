@@ -47,7 +47,7 @@ serve as the deployment platform for any user-created applications that are
 deployed by Jenkins.
 
 ```bash
-$ dcos package install marathon
+dcos package install marathon
 We recommend a minimum of one node with at least 2 CPU shares and 1GB of RAM
 available for the Marathon DC/OS Service.
 Continue installing? [yes/no] yes
@@ -73,7 +73,7 @@ to pin it to a single agent in the DC/OS cluster. Create the file
 to correspond to an agent IP in your DC/OS cluster:
 
 ```bash
-$ cat options.json
+cat options.json
 {
     "storage": {
         "pinned-hostname": "10.100.100.88"
@@ -89,7 +89,7 @@ Once you create `options.json`, you can then install Jenkins by running the
 following command:
 
 ```bash
-$ dcos package install jenkins --options=options.json
+dcos package install jenkins --options=options.json
 ```
 
 Once ready, Jenkins will appear as a service in the DC/OS dashboard.
@@ -107,7 +107,7 @@ If you already have a mount point, great! Create an `options.json` file that
 resembles the following example:
 
 ```bash
-$ cat options.json
+cat options.json
 {
     "service": {
         "name": "jenkins-prod",
@@ -123,7 +123,7 @@ $ cat options.json
 Then, install Jenkins by running the following command:
 
 ```bash
-$ dcos package install jenkins --options=options.json
+dcos package install jenkins --options=options.json
 ```
 
 If you don't have a file share set up and are looking for a solution, continue
@@ -155,7 +155,7 @@ connection string labeled `SSHMASTER0` in the `Outputs` section of the
 Next, add the private SSH key locally:
 
 ```bash
-$ ssh-add ~/.ssh/azure
+ssh-add ~/.ssh/azure
 Identity added: /Users/mhausenblas/.ssh/azure (/Users/mhausenblas/.ssh/azure)
 ```
 
@@ -163,7 +163,7 @@ And now, login to the master node. Note that the `-L 8000:localhost:80` is
 forwarding port 8000 from your local machine to port 80 on the remote host.
 
 ```bash
-$ ssh azureuser@jenkinsmgmt.westus.cloudapp.azure.com -A -p 2200 \
+ssh azureuser@jenkinsmgmt.westus.cloudapp.azure.com -A -p 2200 \
     -L 8000:localhost:80
 ```
 
@@ -172,14 +172,14 @@ created in the previous step. First, let's make 100% sure that the CIFS mount
 utils are available:
 
 ```bash
-$ sudo apt-get update && sudo apt-get -y install cifs-utils
+sudo apt-get update && sudo apt-get -y install cifs-utils
 ```
 
 Now we can mount the file share:
 
 ```bash
-azureuser@dcos-master-415F65E0-0:~$ sudo mkdir -p /mnt/jenkins
-azureuser@dcos-master-415F65E0-0:~$ sudo mount -t cifs    \
+azureuser@dcos-master-415F65E0-0:~sudo mkdir -p /mnt/jenkins
+azureuser@dcos-master-415F65E0-0:~sudo mount -t cifs    \
   //mh9storage.file.core.windows.net/jenkins /mnt/jenkins \
   -o vers=3.0,username=REDACTED,password=REDACTED,dir_mode=0777,file_mode=0777
 ```
@@ -198,7 +198,7 @@ If all is well, you should be able to list the contents of the mounted file
 share on the DC/OS master node:
 
 ```bash
-azureuser@dcos-master-415F65E0-0:~$ ls -al /mnt/jenkins
+azureuser@dcos-master-415F65E0-0:~ls -al /mnt/jenkins
 total 1
 -rwxrwxrwx 1 root root 19 Mar 20 11:21 test.txt
 ```
@@ -206,14 +206,14 @@ total 1
 Finally, using the pssh tool, configure each of the DC/OS agents to mount the file share.
 
 ```bash
-$ sudo apt-get install pssh
-$ cat pssh_agents
+sudo apt-get install pssh
+cat pssh_agents
 10.0.0.4
 10.0.0.5
 10.32.0.4
 
-$ parallel-ssh -O StrictHostKeyChecking=no -l azureuser -h pssh_agents "if [ ! -d "/mnt/jenkins" ]; then mkdir -p "/mnt/jenkins" ; fi"
-$ parallel-ssh -O StrictHostKeyChecking=no -l azureuser -h pssh_agents "mount -t cifs //mh9storage.file.core.windows.net/jenkins /mnt/jenkins -o vers=3.0,username=REDACTED,password=REDACTED,dir_mode=0777,file_mode=0777"
+parallel-ssh -O StrictHostKeyChecking=no -l azureuser -h pssh_agents "if [ ! -d "/mnt/jenkins" ]; then mkdir -p "/mnt/jenkins" ; fi"
+parallel-ssh -O StrictHostKeyChecking=no -l azureuser -h pssh_agents "mount -t cifs //mh9storage.file.core.windows.net/jenkins /mnt/jenkins -o vers=3.0,username=REDACTED,password=REDACTED,dir_mode=0777,file_mode=0777"
 ```
 
 ### Creating an NFS file share with Amazon EFS
@@ -304,7 +304,7 @@ An example of a Marathon deployment follows:
 Using the DC/OS CLI, run the following command:
 
 ```
-$ dcos package uninstall jenkins
+dcos package uninstall jenkins
 ```
 
 ## Further Reading

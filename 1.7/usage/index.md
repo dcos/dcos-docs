@@ -13,7 +13,7 @@ You can then launch a production-grade, highly available, containerized NGINX we
 1.  Run this command to launch a containerized [sample](/docs/1.7/usage/nginx.json) app on DC/OS.
 
     ```bash
-    $ dcos marathon app add https://dcos.io/docs/1.7/usage/nginx.json
+    dcos marathon app add https://dcos.io/docs/1.7/usage/nginx.json
     ```
 
 1.  Go to the "Services" tab of the DC/OS Dashboard to see the NGINX web server up and running and ready to serve traffic!

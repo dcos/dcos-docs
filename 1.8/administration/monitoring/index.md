@@ -38,13 +38,13 @@ The system health endpoint is exposed on port `1050` for masters, and through th
 -  Master nodes
 
    ```bash
-   $ curl localhost:1050/system/health/v1
+   curl localhost:1050/system/health/v1
    ```
    
 -  Agent nodes
 
    ```bash
-   $ curl --unix-socket /run/dcos/3dt.sock http://localhost/system/health/v1
+   curl --unix-socket /run/dcos/3dt.sock http://localhost/system/health/v1
    ```
 
 ## Aggregation
@@ -52,9 +52,9 @@ The system health endpoint is exposed on port `1050` for masters, and through th
 Aggregation of the cluster health endpoints is accomplished by the same diagnostics application, but is only run on the master nodes. You can explore this API further by making a few queries to any master in your cluster:
 
 ```bash
-$ curl localhost:1050/system/health/v1/units
-$ curl localhost:1050/system/health/v1/nodes
-$ curl localhost:1050/system/health/v1/report
+curl localhost:1050/system/health/v1/units
+curl localhost:1050/system/health/v1/nodes
+curl localhost:1050/system/health/v1/report
 ```
 
 The DC/OS GUI uses these aggregation endpoints to generate the data you explore in the system health console.

@@ -33,6 +33,6 @@ None.
 # Show Pod JSON
 To see the pod definition, run the following command:
 ```
-$ dcos marathon pod show <pod-id>
+dcos marathon pod show <pod-id>
 ```
 You can use the `show` command to read data about the pod programmatically.

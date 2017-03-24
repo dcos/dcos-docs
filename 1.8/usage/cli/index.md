@@ -11,7 +11,7 @@ You can quickly [install](/docs/1.8/usage/cli/install) the CLI from the DC/OS we
 To list available commands, either run `dcos` with no parameters or run `dcos help`:
 
 ```bash
-$ dcos
+dcos
 Command line utility for the Mesosphere Datacenter Operating
 System (DC/OS). The Mesosphere DC/OS is a distributed operating
 system built around Apache Mesos. This utility provides tools
@@ -40,14 +40,14 @@ These environment variables are supported by the DC/OS CLI and can be set dynami
 Set the path to the DC/OS configuration file. By default, this variable is set to `DCOS_CONFIG=/<home-directory>/.dcos/dcos.toml`. For example, if you moved your DC/OS configuration file to `/home/jdoe/config/` you can specify this command:
 
 ```bash
-$ export DCOS_CONFIG=/home/jdoe/config/dcos.toml
+export DCOS_CONFIG=/home/jdoe/config/dcos.toml
 ```
     
 #### `DCOS_SSL_VERIFY` 
 Indicates whether to verify SSL certificates for HTTPS (`true`) or set the path to the SSL certificates (`false`). By default, this is variable is set to `true`. Setting this environment variable is equivalent to setting the `core.ssl_config` option in the DC/OS configuration [file](#configuration-files). For example, to indicate that you want to set the path to SSL certificates:
 
 ```bash
-$ export DCOS_SSL_VERIFY=false
+export DCOS_SSL_VERIFY=false
 ```
 
 #### `DCOS_LOG_LEVEL` 
@@ -62,7 +62,7 @@ Prints log messages to stderr at or above the level indicated. This is equivalen
 For example, to set the log level to warning:
 
 ```bash
-$ export DCOS_LOG_LEVEL=warning
+export DCOS_LOG_LEVEL=warning
 ```
     
 
@@ -70,7 +70,7 @@ $ export DCOS_LOG_LEVEL=warning
 Indicates whether to print additional debug messages to `stdout`. By default this is set to `false`. For example:
 
 ```bash
-$ export DCOS_DEBUG=true
+export DCOS_DEBUG=true
 ```
     
 
@@ -83,35 +83,35 @@ The configuration settings are stored in the `dcos.toml` file. You can modify th
 **dcos_url** The the public master IP of your DC/OS installation. This is set by default during installation. For example:
 
 ```bash
-$ dcos config set core.dcos_url 52.36.102.191
+dcos config set core.dcos_url 52.36.102.191
 ```
     
 
 **email** Your email address. This is set by default during installation. For example, to reset your email address:
 
 ```bash
-$ dcos config set core.email jdoe@mesosphere.com
+dcos config set core.email jdoe@mesosphere.com
 ```
     
 
 **mesos_master_url** The Mesos mast URL. This must be of the format: `http://<host>:<port>`. For example, to set your Mesos master URL:
 
 ```bash
-$ dcos config set core.mesos_master_url 52.34.160.132:5050
+dcos config set core.mesos_master_url 52.34.160.132:5050
 ```
     
     
 **ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `False`. For example, to set to true:
 
 ```bash
-$ dcos config set core.ssl_verify True
+dcos config set core.ssl_verify True
 ```
     
 
 **timeout** Request timeout in seconds, with a minimum value of 1 second. By default this is set to 5 seconds. For example, to set to 3 seconds:
 
 ```bash
-$ dcos config set core.timeout 3
+dcos config set core.timeout 3
 ```
 
  

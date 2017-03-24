@@ -58,7 +58,7 @@ In this step you deploy the containerized Tweeter app to a public node.
 1.  Clone the [Tweeter][13] GitHub repository to your local directory.
 
     ```bash
-    $ git clone git@github.com:mesosphere/tweeter.git
+    git clone git@github.com:mesosphere/tweeter.git
     ```
 
 2.  Add the `HAPROXY_0_VHOST` label to the `tweeter.json` Marathon app definition file. `HAPROXY_0_VHOST` exposes Nginx on the external load balancer with a virtual host. The `HAPROXY_0_VHOST` value is the hostname of your [public agent][9] node. 
@@ -88,13 +88,13 @@ In this step you deploy the containerized Tweeter app to a public node.
 4.  Install and deploy Tweeter with this command.
     
     ```bash
-    $ dcos marathon app add tweeter.json
+    dcos marathon app add tweeter.json
     ```
     
     **Tip:** The `instances` parameter in `tweeter.json` specifies the number of app instances. Use the following command to scale your app up or down:
     
     ```bash
-    $ dcos marathon app update tweeter instances=<number_of_desired_instances>
+    dcos marathon app update tweeter instances=<number_of_desired_instances>
     ```
 
     The service talks to Cassandra via `node-0.cassandra.mesos:9042`, and Kafka via `broker-0.kafka.mesos:9557` in this example. Traffic is routed via the Marathon-LB (Marathon-LB) because you added the HAPROXY_0_VHOST tag on the `tweeter.json` definition.
@@ -107,7 +107,7 @@ In this step you deploy the containerized Tweeter app to a public node.
 
 Use the `post-tweets.json` app a large number of Shakespeare tweets from a file:
 
-        $ dcos marathon app add post-tweets.json
+        dcos marathon app add post-tweets.json
     
 
 The app will post more than 100k tweets one by one, so you'll see them coming in steadily when you refresh the page. Click the **Network** tab in the DC/OS web interface to see the load balancing in action.

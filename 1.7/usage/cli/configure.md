@@ -6,7 +6,7 @@ menu_order: 2
 
 You can access DC/OS CLI configuration with this command:
 
-    $ dcos config show
+    dcos config show
     
 You should see this output:
     
@@ -25,13 +25,13 @@ If you are using multiple DC/OS installations (e.g. dev, test, prod), you might 
 
 *   View the current value of `dcos_url` with this command:
     
-        $ dcos config show core.dcos_url
+        dcos config show core.dcos_url
         http://example.com
         
 
 *   Update the value of `dcos_url` with this command:
     
-        $ dcos config set core.dcos_url http://example.com
+        dcos config set core.dcos_url http://example.com
         
     
     Subsequent commands will now be issued to the updated URL.
@@ -49,10 +49,10 @@ To configure a proxy for the CLI:
 
 *   From the CLI terminal, define the environment variables `http_proxy` and `https_proxy`:
     
-        $ export http_proxy=’http://<user>:<pass>@<proxy_host>:<http_proxy_port>’
-        $ export https_proxy=’https://<user>:<pass>@<proxy_host>:<https_proxy_port>’
+        export http_proxy=’http://<user>:<pass>@<proxy_host>:<http_proxy_port>’
+        export https_proxy=’https://<user>:<pass>@<proxy_host>:<https_proxy_port>’
         
 
 *   Define `no_proxy` for domains that you don’t want to use the proxy for:
     
-        $ export no_proxy=".mesos,.thisdcos.directory,.dcos.directory,.zk,127.0.0.1,localhost,foo.bar.com,.baz.com”
+        export no_proxy=".mesos,.thisdcos.directory,.dcos.directory,.zk,127.0.0.1,localhost,foo.bar.com,.baz.com”

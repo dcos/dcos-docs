@@ -45,7 +45,7 @@ To manage users:
     *   To log out of the DC/OS CLI, enter this command:
 
         ```bash
-        $ dcos config unset core.dcos_acs_token
+        dcos config unset core.dcos_acs_token
         Removed [core.dcos_acs_token]
         ```
 
@@ -60,7 +60,7 @@ The DC/OS CLI stores the token in a configuration file in the `.dcos` directory 
 1.  From a terminal prompt, use the following command to authenticate to your cluster.
 
     ```bash
-    $ dcos auth login
+    dcos auth login
     ```
 
     Here is an example of the output:
@@ -98,7 +98,7 @@ The DC/OS CLI stores the token in a configuration file in the `.dcos` directory 
 To log out, run this command:
 
 ```bash
-$ dcos auth logout
+dcos auth logout
 ```
 
 ## Debugging
@@ -106,8 +106,8 @@ $ dcos auth logout
 To debug authentication problems, check the Admin Router and dcos-oauth logs on the masters using the following commands.
 
 ```bash
-$ sudo journalctl -u dcos-adminrouter.service
-$ sudo journalctl -u dcos-oauth.service
+sudo journalctl -u dcos-adminrouter.service
+sudo journalctl -u dcos-oauth.service
 ```
 
 ## Authentication opt-out

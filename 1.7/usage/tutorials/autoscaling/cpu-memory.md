@@ -17,9 +17,9 @@ Periodially, `marathon-autoscale.py` will monitor the aggregate CPU and memory u
 
 SSH to the system where you will run marathon-autoscale.py and install it:
 
-        $ dcos node ssh --master
-        $ git clone https://github.com/mesosphere/marathon-autoscale.git
-        $ cd marathon-autoscale
+        dcos node ssh --master
+        git clone https://github.com/mesosphere/marathon-autoscale.git
+        cd marathon-autoscale
 
 # Run the application
 
@@ -34,7 +34,7 @@ When you run the application, you'll be prompted for the following parameters:
 *   **max_instances (int)** - The ceiling for the number of instances to stop scaling out EVEN if thresholds are crossed.
 
 ```bash
-$ /opt/mesosphere/bin/python marathon-autoscale.py
+/opt/mesosphere/bin/python marathon-autoscale.py
 Enter the DNS hostname or IP of your Marathon Instance : ip-**-*-*-***
 Enter the Marathon Application Name to Configure Autoscale for from the Marathon UI : testing
 Enter the Max percent of Mem Usage averaged across all Application Instances to trigger Autoscale (ie. 80) : 5

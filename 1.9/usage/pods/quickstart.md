@@ -32,7 +32,7 @@ menu_order: 0
 1.  Launch the pod on DC/OS with the following DC/OS CLI command:
 
     ```bash
-    $ dcos marathon pod add simple-pod.json
+    dcos marathon pod add simple-pod.json
     ```
 
 1. Verify the status of your pod.

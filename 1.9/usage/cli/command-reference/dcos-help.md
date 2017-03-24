@@ -28,7 +28,7 @@ dcos help <subcommand>
 The `dcos help config` command is the same as `dcos config --help`.
 
 ```bash
-$ dcos help config
+dcos help config
 Description:
     Manage the DC/OS configuration file.
 

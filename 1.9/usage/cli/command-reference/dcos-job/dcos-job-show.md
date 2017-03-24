@@ -35,7 +35,7 @@ None.
 In this example, the job definition for `my-scheduled-job` is shown.
 
 ```bash
-$ dcos job show my-scheduled-job
+dcos job show my-scheduled-job
 ```
 
 Here is the output:

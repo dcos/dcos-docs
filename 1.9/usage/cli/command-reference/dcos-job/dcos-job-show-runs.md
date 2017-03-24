@@ -39,7 +39,7 @@ dcos job show runs <job-id> [OPTION]
 In this example, the successful runs for a job are shown.
 
 ```bash
-$ dcos job show runs my-scheduled-job
+dcos job show runs my-scheduled-job
 ```
 
 Here is the output:

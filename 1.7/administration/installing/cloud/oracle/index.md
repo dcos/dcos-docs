@@ -80,8 +80,8 @@ These steps assume that you've spun up the bootstrap instance and that you are l
 1. Download and execute the generator script (`orchestration-generator.sh`):
 
   ```bash
-  $ curl -O https://dcos.io/docs/1.7/administration/installing/cloud/oracle/orchestration-generator.sh
-  $ ./orchestration-generator.sh
+  curl -O https://dcos.io/docs/1.7/administration/installing/cloud/oracle/orchestration-generator.sh
+  ./orchestration-generator.sh
   ```
 
 2. Enter below values when prompted:
@@ -148,7 +148,7 @@ These steps assume that you've spun up the bootstrap instance and that you are l
 2. Enable OverlayFS:
 
   ```bash
-  $ sudo tee /etc/modules-load.d/overlay.conf <<EOF
+  sudo tee /etc/modules-load.d/overlay.conf <<EOF
   overlay
   EOF
   ```
@@ -156,13 +156,13 @@ These steps assume that you've spun up the bootstrap instance and that you are l
 3. Reboot instance to load new kernel module:
 
   ```bash
-  $ sudo reboot
+  sudo reboot
   ```
 
 4. Wait for the instance to reboot and login again after reboot and then configure `yum` to add the Docker Repository:
 
   ```bash
-  $ sudo tee /etc/yum.repos.d/docker.repo <<EOF
+  sudo tee /etc/yum.repos.d/docker.repo <<EOF
   [dockerrepo]
   name=Docker Repository
   baseurl=https://yum.dockerproject.org/repo/main/centos/$releasever/
@@ -175,7 +175,7 @@ These steps assume that you've spun up the bootstrap instance and that you are l
 5. Next, configure `systemd`:
 
   ```bash
-  $ sudo mkdir -p /etc/systemd/system/docker.service.d && sudo tee /etc/systemd/system/docker.service.d/override.conf <<EOF
+  sudo mkdir -p /etc/systemd/system/docker.service.d && sudo tee /etc/systemd/system/docker.service.d/override.conf <<EOF
   [Service]
   ExecStart=
   ExecStart=/usr/bin/docker daemon --storage-driver=overlay
@@ -185,9 +185,9 @@ These steps assume that you've spun up the bootstrap instance and that you are l
 6. Install and launch the Docker engine:
 
   ```bash
-  $ sudo yum install --assumeyes --tolerant docker-engine unzip ipset
-  $ sudo systemctl start docker
-  $ sudo systemctl enable docker
+  sudo yum install --assumeyes --tolerant docker-engine unzip ipset
+  sudo systemctl start docker
+  sudo systemctl enable docker
   ```
 
 ## Configure and install the DC/OS cluster
@@ -225,7 +225,7 @@ These steps assume that you've spun up the bootstrap instance and that you are l
 2. Execute below command to create the `ip-detect` script:
 
   ```bash
-  $ cat > genconf/ip-detect <<EOF
+  cat > genconf/ip-detect <<EOF
   #!/bin/sh
   curl -fsSL http://169.254.169.254/latest/meta-data/local-ipv4
   EOF
@@ -236,49 +236,49 @@ These steps assume that you've spun up the bootstrap instance and that you are l
 4. Convert the private key to `openssh` format to use between the instances using:
 
   ```bash
-  $ sudo docker run --rm --volume=/home/centos/dcos_private_key.ppk:/tmp/id.ppk --volume=/home/centos/:/tmp/out/ czerasz/putty-tools
+  sudo docker run --rm --volume=/home/centos/dcos_private_key.ppk:/tmp/id.ppk --volume=/home/centos/:/tmp/out/ czerasz/putty-tools
   ```
 
 5. Adapt the permissions and copy the generated key:
 
   ```bash
-  $ sudo chown centos key && cp key genconf/ssh_key && chmod 0600 genconf/ssh_key
+  sudo chown centos key && cp key genconf/ssh_key && chmod 0600 genconf/ssh_key
   ```
 
 6. Download the DC/OS installer:
 
   ```bash
-  $ curl -O https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/dcos_generate_config.sh
+  curl -O https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/dcos_generate_config.sh
   ```
 
 7. Run the following command to generate your customized DC/OS build file:
 
   ```bash
-  $ sudo bash dcos_generate_config.sh --genconf
+  sudo bash dcos_generate_config.sh --genconf
   ```
 
 8. Install prerequisites:
 
   ```bash
-  $ sudo bash dcos_generate_config.sh --install-prereqs
+  sudo bash dcos_generate_config.sh --install-prereqs
   ```
 
 9. Check if DC/OS is installable (checks if all dependencies are present):
 
   ```bash
-  $ sudo bash dcos_generate_config.sh --preflight
+  sudo bash dcos_generate_config.sh --preflight
   ```
 
 10. If everything shows OK in the previous step, you can install DC/OS:
 
   ```bash
-  $ sudo bash dcos_generate_config.sh--deploy
+  sudo bash dcos_generate_config.sh--deploy
   ```
 
 11. Check if the installation has completed as expected:
 
   ```bash
-  $ sudo bash dcos_generate_config.sh --postflight
+  sudo bash dcos_generate_config.sh --postflight
   ```
 
 ## Configure public node
@@ -295,8 +295,8 @@ These steps assume that you've spun up the bootstrap instance and that you are l
 2. Download and execute the public agent script (`install_public_slave.sh`) script:
 
   ```bash
-  $ curl -O https://dcos.io/docs/1.7/administration/installing/cloud/oracle/install_public_slave.sh
-  $ ./install_public_slave.sh
+  curl -O https://dcos.io/docs/1.7/administration/installing/cloud/oracle/install_public_slave.sh
+  ./install_public_slave.sh
   ```
 
 ## Access the DC/OS Dashboard

@@ -19,7 +19,7 @@ From the DC/OS web interface, click the **Services** tab. You can add labels whe
 
 You can also specify label values in the `labels` parameter of your application definition. 
 
-    $ vi myapp.json
+    vi myapp.json
     
     {
         "id": "myapp",
@@ -38,7 +38,7 @@ You can also specify label values in the `labels` parameter of your application 
 Then, deploy from the DC/OS CLI:
 
 ```bash
-$ dcos marathon app add <myapp>.json
+dcos marathon app add <myapp>.json
 ```
 
 # Assigning Labels to Jobs
@@ -55,7 +55,7 @@ From the DC/OS web interface, click the **Jobs** tab. You can add labels when yo
 
 You can also specify label values in the `labels` parameter of your job definition. 
 
-    $ vi myjob.json
+    vi myjob.json
     
      ```json
         {
@@ -76,7 +76,7 @@ You can also specify label values in the `labels` parameter of your job definiti
 Then, deploy from the DC/OS CLI:
 
 ```bash
-$ dcos marathon job add <myjob>.json
+dcos marathon job add <myjob>.json
 ```
 
 # Displaying Label Information
@@ -88,7 +88,7 @@ You can also use the Marathon HTTP API from the DC/OS CLI to query the running a
  
 The code snippet below shows an HTTP request issued to the Marathon HTTP API. The curl program is used in this example to submit the HTTP GET request, but you can use any program that is able to send HTTP GET/PUT/DELETE requests. You can see the HTTP end-point is `https://52.88.210.228/marathon/v2/apps` and the parameters sent along with the HTTP request include the label criteria `?label=COST_CENTER==0001`:
 
-    $ curl --insecure \
+    curl --insecure \
     > https://52.88.210.228/marathon/v2/apps?label=COST_CENTER==0001 \
     > | python -m json.tool | more
 

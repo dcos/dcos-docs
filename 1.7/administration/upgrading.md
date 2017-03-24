@@ -22,7 +22,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - You must have access to copies of the config files used with DC/OS 1.6: `config.yaml` and `ip-detect`.
 - You must be using systemd 218 or newer to maintain task state.
 - All hosts (masters and agents) must be able to communicate with all other hosts on all ports, for both TCP and UDP.
-- In CentOS or RedHat, install IP sets with this command (used in some IP detect scripts): `$ sudo yum install -y ipset`
+- In CentOS or RedHat, install IP sets with this command (used in some IP detect scripts): `sudo yum install -y ipset`
 - You must be familiar with using `systemctl` and `journalctl` command line tools to review and monitor service status. Troubleshooting notes can be found at the end of this [document](#troubleshooting).
 - You must be familiar with the [Advanced DC/OS Installation Guide][advanced-install].
 
@@ -56,7 +56,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 Identify the ZooKeeper leader among the masters. This node should be the last master node that you upgrade. You can determine whether a master node is a ZooKeeper leader by sending the `stat` command to the ZooKeeper client port.
 
 ```
-$ echo stat | /opt/mesosphere/bin/toybox nc localhost 2181 | grep "Mode:"
+echo stat | /opt/mesosphere/bin/toybox nc localhost 2181 | grep "Mode:"
 ```
 
 Proceed with upgrading every master node using the following procedure. When you complete each upgrade, monitor the logs to ensure the node has rejoined the cluster and completed reconciliation.
@@ -64,25 +64,25 @@ Proceed with upgrading every master node using the following procedure. When you
 1.  Download the `dcos_install.sh` script:
 
     ```
-    $ curl -O <bootstrap_url>/dcos_install.sh
+    curl -O <bootstrap_url>/dcos_install.sh
     ```
 
 1.  Remove all of the DC/OS software packages:
 
     ```
-    $ sudo -i /opt/mesosphere/bin/pkgpanda uninstall
+    sudo -i /opt/mesosphere/bin/pkgpanda uninstall
     ```
 
 1.  Remove the DC/OS install and config directories:
 
     ```
-    $ sudo rm -rf /opt/mesosphere /etc/mesosphere
+    sudo rm -rf /opt/mesosphere /etc/mesosphere
     ```
 
 1. Install DC/OS 1.7:
 
     ```
-    $  sudo bash dcos_install.sh -d master
+     sudo bash dcos_install.sh -d master
     ```
 
 1.  Validate the upgrade
@@ -99,26 +99,26 @@ Proceed with upgrading every master node using the following procedure. When you
 1.  Download the dcos_install.sh script:
 
     ```
-    $ curl -O <bootstrap_url>/dcos_install.sh
+    curl -O <bootstrap_url>/dcos_install.sh
     ```
 
 1.  Remove all of the DC/OS software packages:
 
     ```
-    $ sudo -i /opt/mesosphere/bin/pkgpanda uninstall
+    sudo -i /opt/mesosphere/bin/pkgpanda uninstall
     ```
 
 1.  Remove the DC/OS install and config directories:
 
     ```
-    $ sudo rm -rf /opt/mesosphere /etc/mesosphere
+    sudo rm -rf /opt/mesosphere /etc/mesosphere
     ```
 
 1.  The DC/OS installer discovers and combines your agent's configuration parameters into a file named `mesos-resources`. As a part of this process the available disk space of each node is calculated. If you have not made explicit disk size reservations, you must create a placeholder for the disk reservation file. This prevents the installer from building a new disk reservation file that might conflict with your stored agent metadata:
 
     ```
-    $ sudo mkdir -p /var/lib/dcos
-    $ sudo touch /var/lib/dcos/mesos-resources
+    sudo mkdir -p /var/lib/dcos
+    sudo touch /var/lib/dcos/mesos-resources
     ```
 
 1.  Install DC/OS 1.7:
@@ -126,13 +126,13 @@ Proceed with upgrading every master node using the following procedure. When you
     -  [Private](/docs/1.7/overview/concepts/#private) agents (default)
 
        ```
-       $ sudo bash dcos_install.sh -d slave
+       sudo bash dcos_install.sh -d slave
        ```
 
     -  [Public](/docs/1.7/overview/concepts/#public) Agents
 
        ```
-       $ sudo bash dcos_install.sh -d slave_public
+       sudo bash dcos_install.sh -d slave_public
        ```
 
 1.  Validate the upgrade:
@@ -146,24 +146,24 @@ The following commands should provide insight into upgrade issues:
 ### On All Cluster Nodes
 
 ```
-$ sudo journalctl -u dcos-download
-$ sudo journalctl -u dcos-spartan
-$ sudo systemctl | grep dcos
+sudo journalctl -u dcos-download
+sudo journalctl -u dcos-spartan
+sudo systemctl | grep dcos
 ```
 
 ### On DC/OS Masters
 
 ```
-$ sudo journalctl -u dcos-exhibitor
-$ less /opt/mesosphere/active/exhibitor/usr/zookeeper/zookeeper.out
-$ sudo journalctl -u dcos-mesos-dns
-$ sudo journalctl -u dcos-mesos-master
+sudo journalctl -u dcos-exhibitor
+less /opt/mesosphere/active/exhibitor/usr/zookeeper/zookeeper.out
+sudo journalctl -u dcos-mesos-dns
+sudo journalctl -u dcos-mesos-master
 ```
 
 ### On DC/OS Agents
 
 ```
-$ sudo journalctl -u dcos-mesos-slave
+sudo journalctl -u dcos-mesos-slave
 ```
 
 ## Notes:

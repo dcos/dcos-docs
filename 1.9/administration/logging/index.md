@@ -11,25 +11,25 @@ DC/OS cluster nodes generate logs that contain diagnostic and status information
 You can access information about DC/OS scheduler services, like Marathon or Kafka, with the following CLI command:
 
 ```bash
-$ dcos service log --follow <scheduler-service-name>
+dcos service log --follow <scheduler-service-name>
 ```
 
 You can access DC/OS task logs by running this CLI command:
 
 ```bash
-$ dcos task log --follow <service-name>
+dcos task log --follow <service-name>
 ```
 
 You access the logs for the master node with the following CLI command:
 
 ```bash
-$ dcos node log --leader
+dcos node log --leader
 ```
 
 To access the logs for an agent node, run `dcos node` to get the Mesos IDs of your nodes, then run the following CLI command:
 
 ```bash
-$ dcos node log --mesos-id=<node-id>
+dcos node log --mesos-id=<node-id>
 ```
 
 You can download all the log files for your service from the **Services > Services** tab in the [DC/OS GUI](/docs/1.9/usage/webinterface/). You can also monitor stdout/stderr.
@@ -41,7 +41,7 @@ For more information, see the Service and Task Logs [quick start guide](/docs/1.
 DC/OS components use `systemd-journald` to store their logs. To access the DC/OS core component logs, [SSH into a node][5] and run this command to see all logs:
 
 ```bash
-$ journalctl -u "dcos-*" -b
+journalctl -u "dcos-*" -b
 ```
 
 You can view the logs for specific [components](/docs/1.9/overview/architecture/components/) by entering the component name. For example, to access Admin Router logs, run this command:

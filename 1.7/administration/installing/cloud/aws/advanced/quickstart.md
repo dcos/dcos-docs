@@ -69,7 +69,7 @@ Use the `zen.sh` script to create the Zen template dependencies. These dependenc
 1.  Run the script with a single argument, `STACK_NAME`. This argument is used to tag the AWS resources created. For example, to add the `dcos`tag:
 
     ```bash
-    $ bash ./zen.sh dcos
+    bash ./zen.sh dcos
     ```
 
     The output should look like this:

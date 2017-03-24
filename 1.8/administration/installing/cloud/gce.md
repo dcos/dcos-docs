@@ -25,7 +25,7 @@ A bootstrap node is required to run the scripts and to bootstrap the DC/OS clust
 1.  After creating the bootstrap instance, start the instance and run the following from the shell. These commands install prerequisite software on your bootstrap node.
 
     ```bash
-    $ sudo yum update google-cloud-sdk &&
+    sudo yum update google-cloud-sdk &&
     sudo yum update &&
     sudo yum install epel-release &&
     sudo yum install python-pip &&
@@ -44,7 +44,7 @@ You must create the RSA public/private keypairs to allow passwordless logins via
 1.  Run this command to generate the keys:
 
     ```bash
-    $ ssh-keygen -t rsa -f ~/.ssh/id_rsa -C ajazam
+    ssh-keygen -t rsa -f ~/.ssh/id_rsa -C ajazam
     ```
 
     Do not enter a password when prompted.
@@ -54,19 +54,19 @@ You must create the RSA public/private keypairs to allow passwordless logins via
 1.  Open RSA pub key:
 
     ```bash
-    $ vi ~/.ssh/id_rsa.pub
+    vi ~/.ssh/id_rsa.pub
     ```
 
     You should see something like this:
 
     ```bash
-    $ ssh-rsa abcdefghijklmaasnsknsdjfsdfjs;dfj;sdflkjsd ajazam
+    ssh-rsa abcdefghijklmaasnsknsdjfsdfjs;dfj;sdflkjsd ajazam
     ```
 
 1.  Prefix your username, followed by a colon, to the above line. Also
 
     ```bash
-    $ ajazam:ssh-rsa abcdefghijklmaasnsknsdjfsdfjs;dfj;sdflkjsd ajazam
+    ajazam:ssh-rsa abcdefghijklmaasnsknsdjfsdfjs;dfj;sdflkjsd ajazam
     ```
 
 1.  Save contents of `id_rsa.pub`.
@@ -74,8 +74,8 @@ You must create the RSA public/private keypairs to allow passwordless logins via
 1.  Add the rsa public key to your project
 
     ```bash
-    $ chmod 400 ~/.ssh/id_rsa
-    $ gcloud compute project-info add-metadata --metadata-from-file sshKeys=~/.ssh/id_rsa.pub
+    chmod 400 ~/.ssh/id_rsa
+    gcloud compute project-info add-metadata --metadata-from-file sshKeys=~/.ssh/id_rsa.pub
     ```
 
 ### Configure Docker
@@ -91,7 +91,7 @@ You must create the RSA public/private keypairs to allow passwordless logins via
 1.  To install Docker add the Yum repo.
 
     ```bash
-    $ sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
+    sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
     [dockerrepo]
     name=Docker Repository
     baseurl=https://yum.dockerproject.org/repo/main/centos/7/
@@ -104,7 +104,7 @@ You must create the RSA public/private keypairs to allow passwordless logins via
 1.  Install the Docker package.
 
     ```bash
-    $ sudo yum install docker-engine-1.11.2
+    sudo yum install docker-engine-1.11.2
     ```
 
 1.  Add following changes to `/usr/lib/systemd/system/docker.service`.
@@ -116,19 +116,19 @@ You must create the RSA public/private keypairs to allow passwordless logins via
 1.  Reload systemd.
 
     ```bash
-    $ sudo systemctl daemon-reload
+    sudo systemctl daemon-reload
     ```
 
 1.  Start Docker.
 
     ```bash
-    $ sudo systemctl start docker.service
+    sudo systemctl start docker.service
     ```
 
 1.  Verify that Docker works.
 
     ```bash
-    $ sudo docker run hello-world
+    sudo docker run hello-world
     ```
 
 ## <a name="install"></a>Install the DC/OS GCE scripts
@@ -136,13 +136,13 @@ You must create the RSA public/private keypairs to allow passwordless logins via
 1.  Download the `dcos-gce` scripts
 
     ```bash
-    $ git clone https://github.com/dcos-labs/dcos-gce
+    git clone https://github.com/dcos-labs/dcos-gce
     ```
 
 1.  Change directory.
 
     ```bash
-    $ cd dcos-gce
+    cd dcos-gce
     ```
 
 1.  Review and customize the `dcos_gce/group_vars/all`. You should review `project`, `subnet`, `login_name`, `bootstrap_public_ip`, and `zone`. To install DC/OS v1.8.4 stable, ensure that:
@@ -168,20 +168,20 @@ Ensure The IP address for master0 in dcos_gce/hosts is the next consecutive IP f
 1.  To create and configure the master nodes run this command:
 
     ```bash
-    $ ansible-playbook -i hosts install.yml
+    ansible-playbook -i hosts install.yml
     ```
 
 1.  To create and configure the private nodes run this command:
 
     ```bash
-    $ ansible-playbook -i hosts add_agents.yml --extra-vars "start_id=0001 end_id=0002 agent_type=private"
+    ansible-playbook -i hosts add_agents.yml --extra-vars "start_id=0001 end_id=0002 agent_type=private"
     ```
     Where `start_id=0001` and `end_id=0002` specify the range of IDs that are appended to the hostname "agent" to create unique agent names. If `start_id` is not specified, a default value of `0001` is used.  If the `end_id` is not specified, a default value of `0001` is used. The values for `agent_type` are either private or public. If an `agent_type` is not specified, a default value of `agent_type=private` is used.
 
 1.  To create public nodes run this command:
 
     ```bash
-    $ ansible-playbook -i hosts add_agents.yml --extra-vars "start_id=0003 end_id=0004 agent_type=public"
+    ansible-playbook -i hosts add_agents.yml --extra-vars "start_id=0003 end_id=0004 agent_type=public"
     ```
 
 ## <a name="configure"></a>Configurable parameters

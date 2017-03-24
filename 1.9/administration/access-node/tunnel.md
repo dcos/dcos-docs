@@ -131,10 +131,10 @@ served by `myapp` to be output output as text.
 1. Run the following command from the DC/OS CLI:
 
     ```
-    $ dcos tunnel socks
+    dcos tunnel socks
 
     ## Example
-    $ curl --proxy socks5h://127.0.0.1:1080 myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
+    curl --proxy socks5h://127.0.0.1:1080 myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
     ```
 
 1. Configure your application to use the proxy on port 1080.
@@ -145,14 +145,14 @@ served by `myapp` to be output output as text.
 1. Run the following command from the DC/OS CLI:
 
     ```
-    $ sudo dcos tunnel http
+    sudo dcos tunnel http
 
     ## Example
-    $ curl _myport._myapp.mygroup._tcp.marathon.mesos.mydcos.directory
+    curl _myport._myapp.mygroup._tcp.marathon.mesos.mydcos.directory
 
     ### Watch out!
     ## This won't work because you can't specify a port in transparent mode
-    $ curl myapp-mygroup.marathon.agentip.dcos.thisdcos.directory.mydcos.directory:555
+    curl myapp-mygroup.marathon.agentip.dcos.thisdcos.directory.mydcos.directory:555
     ```
 
 1. In transparent mode, the HTTP proxy works by port forwarding. Append `.mydcos.directory` to the end of your domain when you enter commands. For instance, `http://example.com/?query=hello` becomes `http://example.com.mydcos.directory/?query=hello`. **Note:** In transparent mode, you cannot specify a port in a URL.
@@ -161,11 +161,11 @@ served by `myapp` to be output output as text.
 1. To run the HTTP proxy in standard mode, without root privileges, use the `--port` flag to configure it to use another port:
 
     ```
-    $ dcos tunnel http --port 8000
+    dcos tunnel http --port 8000
 
     ## Example
-    $ curl --proxy 127.0.0.1:8000 _myport._myapp.mygroup._tcp.marathon.mesos
-    $ curl --proxy 127.0.0.1:8000 myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
+    curl --proxy 127.0.0.1:8000 _myport._myapp.mygroup._tcp.marathon.mesos
+    curl --proxy 127.0.0.1:8000 myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
     ```
 
 1. Configure your application to use the proxy on the port you specified above.
@@ -210,10 +210,10 @@ Alternatively, you can add `name` to the `portMappings` or `portDefinitions` fie
 Run the following command from the DC/OS CLI
 
 ```
-$ sudo dcos tunnel vpn
+sudo dcos tunnel vpn
 
 ## Example
-$ curl myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
+curl myapp-mygroup.marathon.agentip.dcos.thisdcos.directory:555
 ```
 
 The VPN client attempts to auto-configure DNS, but this functionality does not work on macOS. To use the VPN client on macOS, [add the DNS servers](https://support.apple.com/kb/PH18499?locale=en_US) that DC/OS Tunnel instructs you to use.
@@ -222,14 +222,14 @@ When you use the VPN, you are virtually within your cluster. You can access
 your master and agent nodes directly:
 
 ```
-$ ping master.mesos
-$ ping slave.mesos
+ping master.mesos
+ping slave.mesos
 ```
 
 ### macOS OpenVPN Client Installation
 * If using [homebrew](http://brew.sh/) then install with:
     ```
-    $ brew install openvpn
+    brew install openvpn
     ```
     Then to use it:
 
@@ -237,14 +237,14 @@ $ ping slave.mesos
 
     or add the flag `--client=/usr/local/sbin/openvpn` like so:
     ```
-    $ sudo dcos tunnel vpn --client=/usr/local/sbin/openvpn
+    sudo dcos tunnel vpn --client=/usr/local/sbin/openvpn
     ```
 
 * Another option is to install [TunnelBlick](https://tunnelblick.net/)
     (_don't run it_, we are only installing it for the `openvpn` executable)
     and add the flag `--client=/Applications/Tunnelblick.app/Contents/Resources/openvpn/openvpn-*/openvpn` like so:
     ```
-    $ sudo dcos tunnel vpn --client=/Applications/Tunnelblick.app/Contents/Resources/openvpn/openvpn-*/openvpn
+    sudo dcos tunnel vpn --client=/Applications/Tunnelblick.app/Contents/Resources/openvpn/openvpn-*/openvpn
     ```
 
 

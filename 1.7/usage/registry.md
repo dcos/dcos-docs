@@ -48,7 +48,7 @@ Open an SSH connection to a master node in the cluster with credentials forwardi
 Apply this workaround for minuteman to all of your cluster nodes so that you can push and pull images to and from the registry.
 
 ```bash
-$ for i in $(curl -sS master.mesos:5050/slaves | jq '.slaves[] | .hostname' | tr -d '"'); do ssh "$i" -oStrictHostKeyChecking=no "sudo sysctl -w net.netfilter.nf_conntrack_tcp_be_liberal=1"; done
+for i in $(curl -sS master.mesos:5050/slaves | jq '.slaves[] | .hostname' | tr -d '"'); do ssh "$i" -oStrictHostKeyChecking=no "sudo sysctl -w net.netfilter.nf_conntrack_tcp_be_liberal=1"; done
 ```
 
 ### Create a self signed cert
@@ -58,9 +58,9 @@ The first step is to create a self-signed certificate to secure a Docker registr
 You can create a self-signed certificate to secure a registry by using OpenSSL. This command creates a certificate that uses a minuteman VIP to access the registry. 
 
 ```bash
-$ cp /usr/lib/ssl/openssl.cnf ./openssl.cnf
-$ sed -i "/\[ v3_ca \]/a subjectAltName = IP:192.168.0.1" ./openssl.cnf
-$ openssl req -config ./openssl.cnf -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out domain.crt -subj "/C=US/ST=WA/L=Mill Creek/O=flak.io/CN=192.168.0.1"
+cp /usr/lib/ssl/openssl.cnf ./openssl.cnf
+sed -i "/\[ v3_ca \]/a subjectAltName = IP:192.168.0.1" ./openssl.cnf
+openssl req -config ./openssl.cnf -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out domain.crt -subj "/C=US/ST=WA/L=Mill Creek/O=flak.io/CN=192.168.0.1"
 ```
 
 Creating a self-signed certificate using a VIP that works with Docker is a bit more complicated, because the OpenSSL configuration must be modified to include the VIP in the subject alternative name.
@@ -70,13 +70,13 @@ Note: alternatively, a certificate could be created using either the Mesos-DNS n
 Below are the steps needed to use Mesos DNS:
 
 ```bash
-$ openssl req -config ./openssl.cnf -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out domain.crt -subj "/C=US/ST=WA/L=Mill Creek/O=flak.io/CN=registry.marathon.mesos"
+openssl req -config ./openssl.cnf -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out domain.crt -subj "/C=US/ST=WA/L=Mill Creek/O=flak.io/CN=registry.marathon.mesos"
 ```
 
 Hostname referencing a minuteman VIP:
 
 ```bash
-$ openssl req -config ./openssl.cnf -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out domain.crt -subj "/C=US/ST=WA/L=Mill Creek/O=flak.io/CN=reg.flak.io"
+openssl req -config ./openssl.cnf -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out domain.crt -subj "/C=US/ST=WA/L=Mill Creek/O=flak.io/CN=reg.flak.io"
 ```
 
 The remainder of the walkthrough focuses on using VIPs.
@@ -90,19 +90,19 @@ The Docker registry itself requires the certificate and the private key. You can
 You can use the following commands to copy the certificate and keys to all agents in the cluster:
 
 ```bash
-$ MESOS_AGENTS=$(curl -sS master.mesos:5050/slaves | jq '.slaves[] | .hostname' | tr -d '"');
-$ for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo mkdir --parent /etc/privateregistry/certs/"; done
-$ for i in $MESOS_AGENTS; do scp -o StrictHostKeyChecking=no ./domain.* "$i":~/; done
-$ for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo mv ./domain.* /etc/privateregistry/certs/"; done
+MESOS_AGENTS=$(curl -sS master.mesos:5050/slaves | jq '.slaves[] | .hostname' | tr -d '"');
+for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo mkdir --parent /etc/privateregistry/certs/"; done
+for i in $MESOS_AGENTS; do scp -o StrictHostKeyChecking=no ./domain.* "$i":~/; done
+for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo mv ./domain.* /etc/privateregistry/certs/"; done
 ```
 
 You must configure the Docker daemon on all machines that require registry access to trust the self-signed certificate. You must  create a folder that matches the FQDN in the `certs.d` folder and copy the certificate to the folder using the name `ca.crt`. You can use the following script to create the folders and copy the files into the appropriate locations:
 
 ```bash
-$ MESOS_AGENTS=$(curl -sS master.mesos:5050/slaves | jq '.slaves[] | .hostname' | tr -d '"');
-$ for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo mkdir --parent /etc/docker/certs.d/192.168.0.1"; done
-$ for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo cp /etc/privateregistry/certs/domain.crt /etc/docker/certs.d/192.168.0.1/ca.crt"; done
-$ for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo systemctl restart docker"; done
+MESOS_AGENTS=$(curl -sS master.mesos:5050/slaves | jq '.slaves[] | .hostname' | tr -d '"');
+for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo mkdir --parent /etc/docker/certs.d/192.168.0.1"; done
+for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo cp /etc/privateregistry/certs/domain.crt /etc/docker/certs.d/192.168.0.1/ca.crt"; done
+for i in $MESOS_AGENTS; do ssh "$i" -oStrictHostKeyChecking=no "sudo systemctl restart docker"; done
 ```
 
 ### Docker in Docker
@@ -114,7 +114,7 @@ When running Docker in Docker on cluster agents that contain the certificate, yo
 Now that you have copied the certificates to the nodes, you can deploy a Docker registry using the certificates. The following steps deploy a registry instance using the self-signed certificates. You must have a storage backend configured using one of the supported [storage drivers](https://docs.docker.com/registry/storage-drivers/).
 
 ```bash
-$ cat registry.json
+cat registry.json
 {
   "id": "/registry",
   "cpus": 0.5,
@@ -162,7 +162,7 @@ $ cat registry.json
   ]
 }
 
-$ dcos marathon app add registry.json
+dcos marathon app add registry.json
 ```
 
 ## Test the deployment

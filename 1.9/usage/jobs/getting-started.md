@@ -73,19 +73,19 @@ You can create and manage jobs from the DC/OS CLI using `dcos job` commands. To 
  
 1. Add the job:
     ```bash
-    $ dcos job add <myjob>.json
+    dcos job add <myjob>.json
     ```
  
     **Note:** You can choose any name for your job file.
  
 1. Go to the "Jobs" tab of the DC/OS web interface to verify that you have added your job, or verify from the CLI:
     ```bash
-    $ dcos job list
+    dcos job list
     ```
  
 ## Schedule-Only JSON
  
-If you use the same schedule for more than one job, you can create a separate JSON file for the schedule. Use the `$ dcos job schedule add  <job-id> <schedule-file>` command to associate a job with the schedule.
+If you use the same schedule for more than one job, you can create a separate JSON file for the schedule. Use the `dcos job schedule add  <job-id> <schedule-file>` command to associate a job with the schedule.
  
 ```json
 {
@@ -104,13 +104,13 @@ If you use the same schedule for more than one job, you can create a separate JS
 1. Enter the following command on the DC/OS CLI:
  
     ```
-    $ dcos job remove <job-id>
+    dcos job remove <job-id>
     ```
  
 1. Go to the "Jobs" tab of the DC/OS web interface to verify that you have removed your job, or verify from the CLI:
  
     ```
-    $ dcos job list
+    dcos job list
     ```
  
 ## Modify a Job
@@ -118,7 +118,7 @@ If you use the same schedule for more than one job, you can create a separate JS
 To modify your job, by update your JSON job file, then run
  
 ```
-$ dcos job update <job-file>.json
+dcos job update <job-file>.json
 ```
 
 ### Modify a Job's Schedule
@@ -130,7 +130,7 @@ You can update the schedule of your job in two ways, depending if your job has a
 Modify the `schedules` parameter of your `<job-file>.json`. Then run
 
 ```
-$ dcos job update <job-file>.json
+dcos job update <job-file>.json
 ```
 
 #### Modify a Job with a Separate Schedule file
@@ -138,9 +138,9 @@ $ dcos job update <job-file>.json
 Modify your `<schedule-file>.json`. Then, run one of the following commands:
  
 ```bash
-$ dcos job schedule add <job-id> <schedule-file>.json
-$ dcos job schedule remove <job-id> <schedule-id>
-$ dcos job schedule update <job-id> <schedule-file>.json
+dcos job schedule add <job-id> <schedule-file>.json
+dcos job schedule remove <job-id> <schedule-id>
+dcos job schedule update <job-id> <schedule-file>.json
 ```
  
 ## View Job Details
@@ -148,25 +148,25 @@ $ dcos job schedule update <job-id> <schedule-file>.json
 List all jobs:
 
 ```
-$ dcos job list
+dcos job list
 ```
 
 List all previous runs of your job:
 
 ```
-$ dcos job history <job-id>
+dcos job history <job-id>
 ```
 
 To view details about your job, run:
  
 ```
-$ dcos job show <job-id>
+dcos job show <job-id>
 ```
  
 To view details about your job's schedule, run:
  
 ```
-$ dcos job schedule show <job-id>
+dcos job schedule show <job-id>
 ```
 
 ### Read Job logs
@@ -174,13 +174,13 @@ $ dcos job schedule show <job-id>
 Inspect the log for your job:
 
 ```
-$ dcos task log --completed <job-id>
+dcos task log --completed <job-id>
 ```
 
 To get the log for only a specific job run, use a job run ID from `dcos job history <job-id>`
 
 ```
-$ dcos task log --completed <job-run-id>
+dcos task log --completed <job-run-id>
 ```
 
 # <a name="jobs-api"></a>Jobs API
@@ -194,14 +194,14 @@ You can also create and administer jobs via the API. [View the full API here](ht
 The following command adds a job called `myjob.json`.
 
 ```
-$ curl -X POST -H "Content-Type: application/json" -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs -d@/Users/<your-username>/<myjob>.json
+curl -X POST -H "Content-Type: application/json" -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs -d@/Users/<your-username>/<myjob>.json
 ```
 
 ## Remove a Job
 
 The following command removes a job regardless of whether the job is running:
 ```
-$ curl -X DELETE -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs/<myjob>?stopCurrentJobRuns=true
+curl -X DELETE -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs/<myjob>?stopCurrentJobRuns=true
 ```
 
 To remove a job only if it is not running, set `stopCurrentJobRuns` to `False`.
@@ -211,19 +211,19 @@ To remove a job only if it is not running, set `stopCurrentJobRuns` to `False`.
 The following command shows all jobs:
 
 ```
-$ curl -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs
+curl -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs
 ```
 
 The following command lists job runs:
 
 ```
-$ curl -H "Authorization: token=$(dcos config show core.dcos_acs_token)" "$(dcos config show core.dcos_url)/service/metronome/v1/jobs/<myjob>/runs/"
+curl -H "Authorization: token=$(dcos config show core.dcos_acs_token)" "$(dcos config show core.dcos_url)/service/metronome/v1/jobs/<myjob>/runs/"
 ```
 
 Stop a run with the following command:
 
 ```
-$ curl -X POST -H "Authorization: token=$(dcos config show core.dcos_acs_token)" "$(dcos config show core.dcos_url)/service/metronome/v1/jobs/<myjob>/runs/20160725212507ghwfZ/actions/stop"
+curl -X POST -H "Authorization: token=$(dcos config show core.dcos_acs_token)" "$(dcos config show core.dcos_url)/service/metronome/v1/jobs/<myjob>/runs/20160725212507ghwfZ/actions/stop"
 ```
 
 <a name="add-sched"></a>
@@ -232,5 +232,5 @@ $ curl -X POST -H "Authorization: token=$(dcos config show core.dcos_acs_token)"
 The following command adds a schedule to a job:
 
 ```
-$ curl -X POST -H "Content-Type: application/json" -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs/<job-id>/schedules -d@/Users/<your-username>/<schedule-file>.json 
+curl -X POST -H "Content-Type: application/json" -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs/<job-id>/schedules -d@/Users/<your-username>/<schedule-file>.json 
 ```

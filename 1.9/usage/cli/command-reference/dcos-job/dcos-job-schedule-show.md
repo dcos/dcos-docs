@@ -37,7 +37,7 @@ dcos job schedule show <job-id> [OPTION]
 In this example, a job named `my-scheduled-job` is reviewed.
 
 ```bash
-$ dcos job schedule show my-scheduled-job
+dcos job schedule show my-scheduled-job
 ```
    
 Here is the output:

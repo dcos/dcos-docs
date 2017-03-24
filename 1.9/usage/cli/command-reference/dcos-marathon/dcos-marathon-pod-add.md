@@ -34,5 +34,5 @@ None.
 
 To add a pod, first create a JSON pod definition. Then, run the following command:
 ```
-$ dcos marathon pod add <pod-json-file>
+dcos marathon pod add <pod-json-file>
 ```

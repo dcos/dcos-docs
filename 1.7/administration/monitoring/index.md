@@ -38,7 +38,7 @@ The system health API has four possible states: 0 - 3, OK; CRITICAL; WARNING; UN
 The system health endpoint is exposed at port 1050:
 
 ```bash
-$ curl <host_ip>:1050/system/health/v1
+curl <host_ip>:1050/system/health/v1
 ```
 
 ## Aggregation
@@ -46,9 +46,9 @@ $ curl <host_ip>:1050/system/health/v1
 Aggregation of the cluster health endpoints is accomplished by the same diagnostics application, but is only run on the master nodes. You can explore this API further by making a few queries to any master in your cluster:
 
 ```bash
-$ curl <master_ip>:1050/system/health/v1/units
-$ curl <master_ip>:1050/system/health/v1/nodes
-$ curl <master_ip>:1050/system/health/v1/report
+curl <master_ip>:1050/system/health/v1/units
+curl <master_ip>:1050/system/health/v1/nodes
+curl <master_ip>:1050/system/health/v1/report
 ```
 
 The DC/OS user interface uses these aggregation endpoints to generate the data you explore in the system health console.
