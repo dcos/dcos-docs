@@ -50,7 +50,7 @@ These metrics are automatically collected.
 | cpu.user         |   Percentage of CPU used by the user.   |
 | cpu.wait         |   Percentage idle while waiting for an operation to complete.    |
 | load.1min         |     Load average for the past minute.       |
-| load.5min         |   Load average for the past 15 minutes 5 minutes.        |
+| load.5min         |   Load average for the past 5 minutes.        |
 | load.15min         |    Load average for the past 15 minutes.        |
 | memory.buffers         |   Number of memory buffers.     |
 | memory.cached         |   Amount of cached memory.   |
