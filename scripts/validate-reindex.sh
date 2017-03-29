@@ -5,7 +5,8 @@ set -o nounset
 set -o pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE}")/.." && pwd -P)"
-
+#test build.
+echo `whoami`
 reindex_out="$(${REPO_ROOT}/scripts/reindex.sh)"
 if [[ -n "${reindex_out}" ]]; then
   echo "Invalid index: file name matches directory name" >&2
