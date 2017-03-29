@@ -35,4 +35,4 @@ dcos task exec [--interactive --tty] <task> <cmd> [<args>...]
 
 # Examples
 
-For examples, see the debugging [documentation](/docs/1.9/administration/debugging/quickstart/).
+For examples, see the debugging [documentation](/docs/1.9/usage/debugging/).
