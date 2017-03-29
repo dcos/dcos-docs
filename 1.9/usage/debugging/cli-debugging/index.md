@@ -26,7 +26,7 @@ The DC/OS CLI provides a set of debugging subcommands to troubleshoot a stuck se
 - A service or pod that is stuck in deployment.
 
 ## Sample application definitions
-If you do not currently have a service or pod that is stuck in deployment, you can use the following two [Marathon application definitions](/docs/1.9/usage/marathon/application-basics/) to test the instructions in this section.
+If you do not currently have a service or pod that is stuck in deployment, you can use the following two [Marathon application definitions](/docs/1.9/usage/managing-services/application-basics/) to test the instructions in this section.
 
 - mem-app.json
 
