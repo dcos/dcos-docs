@@ -49,15 +49,15 @@ The `agent`, `framework`, `executor`, and `run` fields should now be available t
 
 For example, in the Splunk web UI, you can type `framework=*` into the Search field. This will show all of the events where the `framework` field is defined:
 
-![Splunk Framework Exists](../img/splunk-framework-exists.png)
+![Splunk Framework Exists](/docs/1.9/administration/logging/aggregating/img/splunk-framework-exists.png)
 
 Click the disclosure triangle next to one of these events to view the details. This will show all of the fields extracted from the task log file path:
 
-![Splunk Fields](../img/splunk-fields.png)
+![Splunk Fields](/docs/1.9/administration/logging/aggregating/img/splunk-fields.png)
 
 Finally, let's search for all of the events that reference the framework ID of the event shown in the screenshot above, but that do not contain the chosen `framework` field. This will show us only non-task results:
 
-![Splunk Framework Search](../img/splunk-framework-search.png)
+![Splunk Framework Search](/docs/1.9/administration/logging/aggregating/img/splunk-framework-search.png)
 
 # <a name="templates"></a>Template Examples
 

@@ -11,7 +11,7 @@ Issues on Github will be disabled soon.**
 
 If this is your first contribution to an open source software (OSS) project, congratulations! Contributing to the documentation is a great way to get started. By following these instructions you can learn more about DC/OS, and contribute back to an OSS project right away. No expertise necessary!
 
-This page provides instructions on how to contribute to the DC/OS documentation. The process ensures that work is not duplicated, and that your contributions are merged and approved by the admins. To get started you need a [GitHub account](https://github.com/join?source=header-home) and an account on the [DC/OS JIRA](https://dcosjira.atlassian.net/admin/users/sign-up).
+This page provides instructions on how to contribute to the DC/OS documentation. The process ensures that work is not duplicated, and that your contributions are merged and approved by the admins. To get started you need a [GitHub account](https://github.com/join?source=header-home) and an account on the [DC/OS JIRA](https://jira.mesosphere.com/).
 
 - [Making your contribution](#making)
 - [Styling and formatting your contribution](#styling)
@@ -19,9 +19,9 @@ This page provides instructions on how to contribute to the DC/OS documentation.
 
 ## <a name="making"></a>Making your contribution
 
-1. Search [JIRA](https://dcosjira.atlassian.net/issues/?filter=10201) to review the currently open issues and make sure that no one is already working on your issue. If you find an open issue that is unassigned that you want to work, you can assign it to yourself! If you don’t see an issue related to yours, [create a new issue](https://dcosjira.atlassian.net/secure/CreateIssue!default.jspa), select documentation as the component, and assign it to yourself.
+1. Search [JIRA](https://jira.mesosphere.com/) to review the currently open issues and make sure that no one is already working on your issue. If you find an open issue that is unassigned that you want to work, you can assign it to yourself! If you don’t see an issue related to yours, [create a new issue](https://jira.mesosphere.com/secure/CreateIssue!default.jspa), select documentation as the component, and assign it to yourself.
 
-  <img src="/images/2017-01-11_JIRA_screen_cap.png"/>
+  <img src="/images/2017-03-13_JIRA_screen_cap.png"/>
 
 1. If this is your first contribution [Fork](https://help.github.com/articles/fork-a-repo/) the [dcos-docs](https://github.com/dcos/dcos-docs) repo. (Once you’ve forked the repo, that fork stays associated with your GitHub account. If you try to fork it again GitHub will remind you that you already have a fork.)
 
@@ -31,13 +31,13 @@ This page provides instructions on how to contribute to the DC/OS documentation.
 
 
       ```bash
-      $ git clone https://github.com/<your-user-name>/dcos-docs
+      git clone https://github.com/<your-user-name>/dcos-docs
       ```
 
   - If this isn't your first contribution check out the master branch
 
         ```bash
-        $ git checkout master
+        git checkout master
         ```
 
       and update it by following these [instructions](https://help.github.com/articles/syncing-a-fork/).
@@ -45,7 +45,7 @@ This page provides instructions on how to contribute to the DC/OS documentation.
 1. Create a new branch of your local repository using your JIRA number as the name. This way other contributors can find the JIRA issue that descirbes the goal of your contribution.
 
     ```bash
-    $ git checkout -b dcos-nnn
+    git checkout -b dcos-nnn
     ```
 
 1. Create your content.
@@ -53,7 +53,7 @@ This page provides instructions on how to contribute to the DC/OS documentation.
   - In most cases you should be able to create your content within the existing directory structure.
   - If you're not sure how to add formatting, take a look at [dcos.io/docs](dcos.io/docs/) for examples.
   - Be sure you follow the style and formatting guidelines in the [next section](#styling).
-  - Don't forget to update your post's metadata if necessary, including the required metadata `post_title` and optional `nav_title` and `menu_order`. Where applicable, add the optional `feature_maturity` label. Description of various feature maturity phases can be found [here](https://dcos.io/docs/1.8/overview/feature-maturity/).
+  - Don't forget to update your post's metadata if necessary, including the required metadata `post_title` and optional `nav_title` and `menu_order`. Where applicable, add the optional `feature_maturity` label. Description of various feature maturity phases can be found [here](dcos.io/docs/overview/feature-maturity/).
 
   The metadata should be at the very top of the post's file, and look something like this:
 
@@ -76,24 +76,24 @@ This page provides instructions on how to contribute to the DC/OS documentation.
   1. First, add your changes (this gets them ready to be included in your commit).
 
     ```bash
-    $ git add .
+    git add .
     ```
 
   1. Next commit the changes you made to your local branch, and add a useful message so that everyone knows what you've changed.
 
     ```bash
-    $ git commit -m "Addresses issue DCOS-nnn. More useful stuff here"
+    git commit -m "Addresses issue DCOS-nnn. More useful stuff here"
     ```
 
   1. Finally push your changes up to your remote branch on GitHub, so that you can open a pull request.
 
     ```bash
-    $ git push origin dcos-nnn
+    git push origin dcos-nnn
     ```
 
 1. Submit a [pull request](https://help.github.com/articles/using-pull-requests/) against the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
 
-  - Don't forget to add a link to this PR in your [JIRA issue](https://dcosjira.atlassian.net/).
+  - Don't forget to add a link to this PR in your [JIRA issue](https://jira.mesosphere.com/).
   - Community managers will test drive and validate contributions that include hands-on instructions, and they'll probably ask for improvements or modifications by commenting on your PR. If you agree with their changes make them in your local repo and repeat steps 5-7 above, or feel free to continue the discussion.
 
 ## <a name="styling"></a>Styling and formatting your contribution
@@ -110,6 +110,17 @@ This page provides instructions on how to contribute to the DC/OS documentation.
 - Use sentence-style capitalization for headings.
 
 In addition to the above technical notes, make sure you read your doc for clarity and accuracy. Pretend you are someone else seeing your instructions for the first time, and try to follow them based only on the information you provided.
+
+## <a name="screenshots"></a>Screenshots
+
+- We should always use a more realistic cluster name and user name (e.g. not `joel-master-ee-` or `Bootstrap User`). 
+- For the browser window, we should stick with a standard resolution (1440x900) and be consistent with it across all screenshots, unless we are intentionally cropping in on a key area of the window. 
+- For the browser window, we should strip all browser chrome, bookmarks, user-specific extensions, themes, etc. You can easily hide this without having to remove them.
+- Don’t zoom in/out on your browser. This creates weird styling issues.
+- Be careful of focus. For example, be careful that the browser toolbar is not the focus. This causes the viewer to assume there is a reason we are focused on the address bar.
+- Crop to the pixel. If you want a clean capture of the entire browser:
+    - (a) lose the browser entirely and crop to the exact bounds of the UI 
+    - (b) use CMD+SHIFT+4 then hit SPACE then click the window you want to capture
 
 ## <a name="test-local"></a>Building and testing your content locally
 
@@ -145,13 +156,13 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
      ```bash
-     $ sudo yum install -y ruby
+     sudo yum install -y ruby
      ```
 
   -  *MacOS using [Homebrew](http://brew.sh/)*
 
       ```bash
-      $ brew install ruby
+      brew install ruby
       ```
 
 1.  [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -159,13 +170,13 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
       ```bash
-      $ sudo yum install git
+      sudo yum install git
       ```
 
   -  *MacOS using [Homebrew](http://brew.sh/)*
 
       ```bash
-      $ brew install git
+      brew install git
       ```
 
 1.  Install EPEL repo, [Node](https://docs.npmjs.com/getting-started/installing-node), and NPM.
@@ -173,15 +184,15 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
       ```bash
-      $ sudo yum install -y epel-release && sudo yum install -y nodejs && sudo yum install -y npm && npm update
+      sudo yum install -y epel-release && sudo yum install -y nodejs && sudo yum install -y npm && npm update
       ```
 
   -  *MacOS using [Homebrew](http://brew.sh/)*
 
       ```bash
-      $ brew install -y nodejs
-      $ brew install npm
-      $ npm update
+      brew install -y nodejs
+      brew install npm
+      npm update
       ```
 
 1.  nvm 6.3.1
@@ -189,15 +200,15 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
       ```bash
-      $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
-      $ nvm install 6.3.1 && nvm alias default 6.3.1
+      curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
+      nvm install 6.3.1 && nvm alias default 6.3.1
       ```
 
   -  *MacOS*
 
       ```bash
-      $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
-      $ nvm install 6.3.1 && nvm alias default 6.3.1
+      curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash
+      nvm install 6.3.1 && nvm alias default 6.3.1
       ```
 
 1.  [Gulp](http://gulpjs.com/)
@@ -205,38 +216,38 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
   -  *CentOS*
 
       ```bash
-      $ sudo npm install --global gulp-cli
+      sudo npm install --global gulp-cli
       ```
 
   -  *MacOS*
 
       ```bash
-      $ npm install --global gulp-cli
+      npm install --global gulp-cli
       ```
 
 1. Clone the dcos-website repo.
 
   ```bash
-  $ git clone https://github.com/dcos/dcos-website
+  git clone https://github.com/dcos/dcos-website
   ```
 
 1. Check out the develop branch of `dcos-website`.
 
   ```bash
-  $ git checkout develop
+  git checkout develop
   ```
 
 1. Initialize the `dcos-docs` submodule with the content from the upstream master.
 
   ```bash
-  $ git submodule update --init --recursive
+  git submodule update --init --recursive
   ```
 
   Optional: replace the content from the upstream master with the content from your local `dcos-docs` repo. Delete the `dcos-website/dcos-dcos` directory and replace it with a symlink to your local `dcos-docs` repo. For example, if your directory structure is `/projects/dcos-website` and `/projects/dcos-docs`, you can issue these commands from the `dcos-website` directory:
 
    ```bash
-   $ rm -r dcos-docs
-   $ ln -s <local-path-to-dcos-docs> dcos-docs
+   rm -r dcos-docs
+   ln -s <local-path-to-dcos-docs> dcos-docs
    ```
 
 #### Building
@@ -244,7 +255,7 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
 Launch the local web server to view your changes.
 
   ```bash
-  $ npm start
+  npm start
   ```
 
 ## License and Authors

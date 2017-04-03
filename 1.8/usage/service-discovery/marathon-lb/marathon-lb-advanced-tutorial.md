@@ -87,7 +87,7 @@ Set up your internal load balancer. To do this, we must first specify some confi
     1.  Deploy the external NGINX app on DC/OS using this command:
 
         ```bash
-        $ dcos marathon app add nginx-external.json
+        dcos marathon app add nginx-external.json
         ```
 
 ## Deploy an internal facing NGINX app
@@ -139,7 +139,7 @@ Set up your internal load balancer. To do this, we must first specify some confi
     1.  Deploy the internal NGINX app on DC/OS using this command:
     
         ```bash
-        $ dcos marathon app add nginx-internal.json
+        dcos marathon app add nginx-internal.json
         ```
         
 ## Deploy an external and internal facing NGINX app
@@ -185,7 +185,7 @@ Set up your internal load balancer. To do this, we must first specify some confi
     1.  Deploy the NGINX everywhere app on DC/OS using this command:
             
         ```bash
-        $ dcos marathon app add nginx-everywhere.json
+        dcos marathon app add nginx-everywhere.json
         ```
         
 ## Confirm that your apps are deployed and accessible from within cluster
@@ -194,13 +194,13 @@ Set up your internal load balancer. To do this, we must first specify some confi
 
     ```bash
     # Access to external load balancer
-    $ curl http://marathon-lb.marathon.mesos:10000/
+    curl http://marathon-lb.marathon.mesos:10000/
     # Access to internal load balancer
-    $ curl http://marathon-lb-internal.marathon.mesos:10001
+    curl http://marathon-lb-internal.marathon.mesos:10001
     # Access to nginx app from external load balancer
-    $ curl http://marathon-lb.marathon.mesos:10002/
+    curl http://marathon-lb.marathon.mesos:10002/
     #Access to nginx app from internal load balancer
-    $ curl http://marathon-lb-internal.marathon.mesos:10002/
+    curl http://marathon-lb-internal.marathon.mesos:10002/
     ```
 
     Each of these should return the NGINX ‘Welcome’ page:
@@ -233,7 +233,7 @@ To demonstrate the vhost feature:
     1.  Run this command to replace the contents of the deployed `nginx-external.json` with your modified local copy:
    
         ```bash
-        $ cat nginx-external.json | dcos marathon app update nginx-external
+        cat nginx-external.json | dcos marathon app update nginx-external
         ```
    
         You should see output similar to this:

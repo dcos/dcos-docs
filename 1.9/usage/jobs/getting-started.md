@@ -1,6 +1,5 @@
 ---
-post_title: Getting Started
-nav_title: Getting Started
+post_title: Quick Start
 feature_maturity: preview
 menu_order: 10
 ---
@@ -9,11 +8,13 @@ You can create and administer jobs in the DC/OS web interface, from the DC/OS CL
 
 # DC/OS Web Interface
 
-**Note:** The DC/OS web interface does not cover all possible CLI commands and API calls. For more advanced jobs configuration, use the `dcos job` commands of the DC/OS CLI or the Jobs API.
+**Note:** The DC/OS web interface provides a subset of the CLI and API functionality. For advanced job configurations, use the [dcos job](/docs/1.9/usage/cli/command-reference/dcos-job/) commands or the Jobs [API](#jobs-api).
 
 ## Add a Job
 
 From the DC/OS web interface, click the **Jobs** tab, then the **Create a Job** button. Fill in the following fields, or toggle to JSON mode to edit the JSON directly.
+
+![Create JOB UI](../img/create-job.png)
 
 ### **General** Tab
 * **ID** - The ID of your job.
@@ -84,7 +85,7 @@ You can create and manage jobs from the DC/OS CLI using `dcos job` commands. To 
  
 ## Schedule-Only JSON
  
-If you use the same schedule for more than one job, you can create a separate JSON file for the schedule. Use the [`dcos job schedule add` command](#add-sched) associate a job with the schedule.
+If you use the same schedule for more than one job, you can create a separate JSON file for the schedule. Use the `dcos job schedule add  <job-id> <schedule-file>` command to associate a job with the schedule.
  
 ```json
 {
@@ -182,7 +183,7 @@ To get the log for only a specific job run, use a job run ID from `dcos job hist
 dcos task log --completed <job-run-id>
 ```
 
-# Jobs API
+# <a name="jobs-api"></a>Jobs API
 
 You can also create and administer jobs via the API. [View the full API here](http://dcos.github.io/metronome/docs/generated/api.html).
 

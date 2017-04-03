@@ -9,7 +9,7 @@ Add a job.
 # Usage
 
 ```bash
-dcos job add <job-file>` [OPTION]
+dcos job add <job-file> [OPTION]
 ```
 
 # Options

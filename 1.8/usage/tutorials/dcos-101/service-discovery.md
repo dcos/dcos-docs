@@ -13,12 +13,12 @@ Our application in the previous part used `redis.marathon.l4lb.thisdcos.director
 In this section, we will learn about DC/OS service discovery by exploring the different options for service discovery for apps in DC/OS.
 
 # Steps
-  [Service discovery](https://dcos.io/docs/1.8/usage/service-discovery/) allows you to connect to your applications without necessarily knowing where they are running. Service discovery is particularly useful in cases where applications may fail and be restarted on a different host.
+  [Service discovery](/docs/1.8/usage/service-discovery/) allows you to connect to your applications without necessarily knowing where they are running. Service discovery is particularly useful in cases where applications may fail and be restarted on a different host.
 
   DC/OS provides two options for service discovery: Mesos-DNS and Named virtual IPs.
   * SSH into your cluster to see how these service discovery methods work: `dcos node ssh --master-proxy --leader`,
   <a name="mesosdns"></a>
-  * [Mesos-DNS](https://dcos.io/docs/1.8/usage/service-discovery/mesos-dns/) assigns a Mesos-DNS for every Marathon app. The naming pattern is  *task.scheduler.mesos* and the default scheduler for jobs is `marathon`, so the Mesos-DNS name for our redis service is *redis.marathon.mesos*.
+  * [Mesos-DNS](/docs/1.8/usage/service-discovery/mesos-dns/) assigns a Mesos-DNS for every Marathon app. The naming pattern is  *task.scheduler.mesos* and the default scheduler for jobs is `marathon`, so the Mesos-DNS name for our redis service is *redis.marathon.mesos*.
 
   Let us use [dig](https://linux.die.net/man/1/dig) to retrieve the address record (also called the A record): `dig redis.marathon.mesos`.
 
@@ -45,7 +45,7 @@ In this section, we will learn about DC/OS service discovery by exploring the di
   So we now know that our redis app is running on 10.0.0.43:30585.
 
   <a name="namedvips"></a>
-  * [Named Vips](https://dcos.io/docs/1.8/usage/service-discovery/load-balancing-vips/) allow you to assign name/port pairs to your apps. Named VIPs allow you to assign meaningful names to your apps.
+  * [Named Vips](/docs/1.8/usage/service-discovery/load-balancing-vips/) allow you to assign name/port pairs to your apps. Named VIPs allow you to assign meaningful names to your apps.
   For example, we can assign a named VIP to our redis service by adding the following to the package definition:
 
   ~~~

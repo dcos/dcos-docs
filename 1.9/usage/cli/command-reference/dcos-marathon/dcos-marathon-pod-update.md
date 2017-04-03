@@ -36,7 +36,7 @@ dcos marathon pod update <pod-id> [OPTION]
 To update a pod, first modify the JSON definition for the pod, then run the following command: 
 
 ```
-$ dcos marathon pod update <pod-id> < <new-pod-definition>
+dcos marathon pod update <pod-id> < <new-pod-definition>
 ```
 
 If the pod is currently deploying, you will not be able to update the pod. To update the pod anyway, run the command with the `--force` flag.

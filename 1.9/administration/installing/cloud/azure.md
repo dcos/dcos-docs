@@ -1,5 +1,5 @@
 ---
-post_title: Install DC/OS on Azure
+post_title: Running DC/OS on Azure
 nav_title: Azure
 menu_order: 1
 ---
@@ -44,18 +44,18 @@ Click on the latest deployment and copy the value of `MASTERFQDN` in the `Output
 Use the value of `MASTERFQDN` you found in the `Outputs` section in the previous step and paste it in the following command:
 
 ```bash
-$ ssh azureuser@$MASTERFQDN -p 2200 -L 8000:localhost:80
+ssh azureuser@$MASTERFQDN -p 2200 -L 8000:localhost:80
 ```
 
 For example, in my case:
 
 ```bash
-$ ssh azureuser@dcosmaster.westus.cloudapp.azure.com -p 2200 -L 8000:localhost:80
+ssh azureuser@dcosmaster.westus.cloudapp.azure.com -p 2200 -L 8000:localhost:80
 ```
 
 Now you can visit `http://localhost:8000` on your local machine and view the DC/OS Dashboard.
 
-![DC/OS dashboard](../img/ui-dashboard.gif)
+![DC/OS dashboard](/docs/1.9/usage/img/dcos-gui.png)
 
 ### Caveats
 
@@ -72,19 +72,19 @@ Note that the following commands can be used to run the DC/OS CLI directly on th
 
 ```bash
 # Connect to master node with ssh
-$ ssh -p2200 azureuser@$MASTERFQDN -L 8000:localhost:80
+ssh -p2200 azureuser@$MASTERFQDN -L 8000:localhost:80
 
 # Install virtualenv
-$ sudo apt-get -y install virtualenv
+sudo apt-get -y install virtualenv
 
 # Install CLI on the master node and configure with http://localhost
-$ mkdir -p dcos && cd dcos &&
-$ curl -O https://downloads.dcos.io/dcos-cli/install-optout.sh && \
+mkdir -p dcos && cd dcos &&
+curl -O https://downloads.dcos.io/dcos-cli/install-optout.sh && \
    bash ./install-optout.sh . http://localhost && \
    source ./bin/env-setup
 
 # Now you can use the DC/OS CLI:
-$ dcos package search
+dcos package search
 ```
 
 ## Tear Down the DC/OS cluster

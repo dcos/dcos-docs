@@ -1,5 +1,5 @@
 ---
-post_title: DigitalOcean DC/OS Installation Guide
+post_title: Running DC/OS on DigitalOcean
 nav_title: DigitalOcean
 menu_order: 2
 ---
@@ -37,13 +37,13 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Digit
 2.  [Download the DC/OS Terraform manifests from GitHub](https://github.com/jmarhee/digitalocean-dcos-terraform) into a local  directory.
 
     ```bash
-    $ git clone https://github.com/jmarhee/digitalocean-dcos-terraform
+    git clone https://github.com/jmarhee/digitalocean-dcos-terraform
     ```
 
 3.  From that directory, generate an ssh keypair:
 
     ```bash
-    $ ssh-keygen -t rsa -f ./do-key
+    ssh-keygen -t rsa -f ./do-key
     ```
 
 4.  Get yourself a token to use against the API. You can [follow the documentation](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2).
@@ -51,13 +51,13 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Digit
 4.  Add the key to DigitalOcean:
 
     ```bash
-    $ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d '{"name":"dcos-key","public_key":"<public-key>"}' "https://api.digitalocean.com/v2/account/keys"
+    curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d '{"name":"dcos-key","public_key":"<public-key>"}' "https://api.digitalocean.com/v2/account/keys"
     ```
 
 4. Get the key ID:
 
     ```bash
-    $ curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $TOKEN' "https://api.digitalocean.com/v2/account/keys"
+    curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $TOKEN' "https://api.digitalocean.com/v2/account/keys"
     ```
 
 4.  Copy `sample.terraform.tfvars` to a new file named `terraform.tfvars`, and edit the new file, filling in the values as desired. The following are blank and if not filled in, you will be prompted by terraform when necessary:
@@ -106,7 +106,7 @@ Launch the DC/OS web interface by entering the Mesos master IP address:
 
 2.  Install the DC/OS Command-Line Interface (CLI). You can install the CLI to administer your DC/OS cluster. You can access the documentation at any time by clicking the cluster name in the upper-left side.
 
-    ![dcos help link](../../../img/digitalocean_help_link.png)
+    ![install CLI](/docs/1.9/usage/cli/img/install-cli-terminal.png)
 
 ## Next steps
 

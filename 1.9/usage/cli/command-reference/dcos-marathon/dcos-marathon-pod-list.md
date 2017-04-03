@@ -30,5 +30,5 @@ dcos marathon pod list [OPTION]
 # List Pods
 List pods and the number of containers they have with the following command:
 ```
-$ dcos marathon pod list
+dcos marathon pod list
 ```

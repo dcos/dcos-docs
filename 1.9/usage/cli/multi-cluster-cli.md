@@ -17,7 +17,7 @@ This variable only affects the terminal you are currently connected to. After yo
 1.  Open a terminal and run this command to connect a cluster, with the path to your cluster configuration specified (`path/to/dcos/config`):
 
     ```bash
-    $ export DCOS_CONFIG=path/to/dcos/config
+    export DCOS_CONFIG=path/to/dcos/config
     ```
     
     For example, to connect to a cluster config located in `/<home-directory>/dcos-config/dcos-alice.toml` run this command:
@@ -29,7 +29,7 @@ This variable only affects the terminal you are currently connected to. After yo
 1.  To disconnect from a cluster, close the terminal session or run this command:
 
     ```bash
-    $ unset DCOS_CONFIG
+    unset DCOS_CONFIG
     ```
     
    

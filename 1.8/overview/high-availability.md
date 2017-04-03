@@ -45,7 +45,7 @@ HA services should be decoupled, with responsibilities divided amongst services.
 Single points of failure come in many forms. A service like ZooKeeper, for example, can become a single point of failure when every service in your system shares one ZooKeeper cluster. You can reduce risks by running multiple ZooKeeper clusters for separate services. With DC/OS, there's an [Exhibitor package](https://github.com/mesosphere/exhibitor-dcos) included which makes this easy:
 
 ```
-$ dcos package install exhibitor
+dcos package install exhibitor
 ```
 
 Other common single points of failure include: single database instances (like a MySQL), one-off services, and non-HA load balancers.

@@ -16,7 +16,7 @@ In this tutorial, Marathon-LB is used as an internal and external load balancer.
 
 1.  Verify that Marathon-LB is working. Find the public IP for your [public node](/docs/1.9/administration/locate-public-agent/) and navigate to `<public-agent-IP>:9090/haproxy?stats`. You will see a statistics report page like this:
 
-    ![lb2](../img/lb2.jpg)
+    ![lb2](/docs/1.9/usage/service-discovery/marathon-lb/img/lb2.jpg)
 
 
 ## Deploy an internal load balancer with Marathon-LB
@@ -87,7 +87,7 @@ Set up your internal load balancer. To do this, we must first specify some confi
     1.  Deploy the external NGINX app on DC/OS using this command:
 
         ```bash
-        $ dcos marathon app add nginx-external.json
+        dcos marathon app add nginx-external.json
         ```
 
 ## Deploy an internal facing NGINX app
@@ -139,7 +139,7 @@ Set up your internal load balancer. To do this, we must first specify some confi
     1.  Deploy the internal NGINX app on DC/OS using this command:
     
         ```bash
-        $ dcos marathon app add nginx-internal.json
+        dcos marathon app add nginx-internal.json
         ```
         
 ## Deploy an external and internal facing NGINX app
@@ -185,7 +185,7 @@ Set up your internal load balancer. To do this, we must first specify some confi
     1.  Deploy the NGINX everywhere app on DC/OS using this command:
             
         ```bash
-        $ dcos marathon app add nginx-everywhere.json
+        dcos marathon app add nginx-everywhere.json
         ```
         
 ## Confirm that your apps are deployed and accessible from within cluster
@@ -194,18 +194,18 @@ Set up your internal load balancer. To do this, we must first specify some confi
 
     ```bash
     # Access to external load balancer
-    $ curl http://marathon-lb.marathon.mesos:10000/
+    curl http://marathon-lb.marathon.mesos:10000/
     # Access to internal load balancer
-    $ curl http://marathon-lb-internal.marathon.mesos:10001
+    curl http://marathon-lb-internal.marathon.mesos:10001
     # Access to nginx app from external load balancer
-    $ curl http://marathon-lb.marathon.mesos:10002/
+    curl http://marathon-lb.marathon.mesos:10002/
     #Access to nginx app from internal load balancer
-    $ curl http://marathon-lb-internal.marathon.mesos:10002/
+    curl http://marathon-lb-internal.marathon.mesos:10002/
     ```
 
     Each of these should return the NGINX ‘Welcome’ page:
 
-    ![lb3](../img/lb3.jpg)
+    ![lb3](/docs/1.9/usage/service-discovery/marathon-lb/img/lb3.jpg)
 
 ## Virtual hosts
 
@@ -234,7 +234,7 @@ To demonstrate the vhost feature:
     1.  Run this command to replace the contents of the deployed `nginx-external.json` with your modified local copy:
    
         ```bash
-        $ cat nginx-external.json | dcos marathon app update nginx-external
+        cat nginx-external.json | dcos marathon app update nginx-external
         ```
    
         You should see output similar to this:
@@ -270,7 +270,7 @@ To demonstrate the vhost feature:
 
 1.  Navigate to the public agent in your browser and you should see the following:
 
-    ![lb6](../img/lb6.jpg)
+    ![lb6](/docs/1.9/usage/service-discovery/marathon-lb/img/lb6.jpg)
 
  [1]: /docs/1.9/administration/installing/
  [2]: /docs/1.9/usage/cli/install/

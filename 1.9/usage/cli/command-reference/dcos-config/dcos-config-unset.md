@@ -35,7 +35,7 @@ None.
 In this example, the `core.ssl_verify` property is removed.
 
 ```bash
-$ dcos config unset core.ssl_verify
+dcos config unset core.ssl_verify
 ```
 
 Here is the output:

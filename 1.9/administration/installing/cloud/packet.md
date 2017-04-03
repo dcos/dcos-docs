@@ -1,5 +1,5 @@
 ---
-post_title: Packet DC/OS Installation Guide
+post_title: Running DC/OS on Packet
 nav_title: Packet
 menu_order: 3
 ---
@@ -37,13 +37,13 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Packe
 2.  [Download the DC/OS Terraform manifests from GitHub](https://github.com/dcos/packet-terraform) into a local  directory.
 
     ```bash
-    $ git clone https://github.com/dcos/packet-terraform
+    git clone https://github.com/dcos/packet-terraform
     ```
 
 3.  From that directory, generate an ssh keypair:
 
     ```bash
-    $ ssh-keygen -t rsa -f ./packet-key
+    ssh-keygen -t rsa -f ./packet-key
     ```
 
 4.  Copy `sample.terraform.tfvars` to a new file named `terraform.tfvars`, and edit the new file, filling in the values as desired. The following are blank and if not filled in, you will be prompted by terraform when necessary:
@@ -92,7 +92,7 @@ Launch the DC/OS web interface by entering the Mesos master IP address:
 
 2.  Install the DC/OS Command-Line Interface (CLI). You can install the CLI to administer your DC/OS cluster. You can access the documentation at any time by clicking the cluster name in the upper-left side.
 
-    ![dcos help link](../../../img/packet_help_link.png)
+    ![install CLI](/docs/1.9/usage/cli/img/install-cli-terminal.png)
 
 ## Next steps
 

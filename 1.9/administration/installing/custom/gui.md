@@ -28,7 +28,7 @@ The DC/OS installation creates these folders:
     <td>Contains copies of the units in `/etc/systemd/system/dcos.target.wants`. They must be at the top folder as well as inside `dcos.target.wants`.</td>
   </tr>
   <tr>
-    <td><code>/var/lib/zookeeper</code></td>
+    <td><code>/var/lib/dcos/exhibitor/zookeeper</code></td>
     <td>Contains the [ZooKeeper](/docs/1.9/overview/concepts/#zookeeper) data.</td>
   </tr>
   <tr>
@@ -52,13 +52,13 @@ The DC/OS installation creates these folders:
 1.  Download the [DC/OS installer][1] to your bootstrap node.
 
     ```bash
-    $ curl -O https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+    curl -O https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
     ```
 
 1.  From your terminal, start the DC/OS GUI installer with this command.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --web
+    sudo bash dcos_generate_config.sh --web
     ```
 
     Here is an example of the output.
@@ -72,7 +72,7 @@ The DC/OS installation creates these folders:
     **Tip:** You can add the verbose (`-v`) flag to see the debug output:
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --web -v
+    sudo bash dcos_generate_config.sh --web -v
     ```
 
 2.  Launch the DC/OS web installer in your browser at: `http://<bootstrap-node-public-ip>:9000`.
@@ -131,7 +131,7 @@ The DC/OS installation creates these folders:
    **Important:* If you exit your GUI installation before launching DC/OS, you must do this before reinstalling:
 
     *   SSH to each node in your cluster and run `rm -rf /opt/mesosphere`.
-    *   SSH to your bootstrap master node and run `rm -rf /var/lib/zookeeper`
+    *   SSH to your bootstrap master node and run `rm -rf /var/lib/dcos/exhibitor/zookeeper`
 
     ![preflight](../img/dcos-gui-run-preflight.png)
 
@@ -157,7 +157,7 @@ The DC/OS installation creates these folders:
 
     You are done!
 
-    ![Dashboard](/docs/1.9/usage/img/dcos-gui.png)
+    ![DC/OS dashboard](/docs/1.9/usage/img/dcos-gui.png)
 
 # <a name="backup"></a>(Optional) Backup your DC/OS installer files
 It is recommended that you save your DC/OS installer file immediately after installation completes and before you start using DC/OS. These installer files can be used to add more agent nodes to your cluster, including the [public agent][4] node.
@@ -166,15 +166,15 @@ It is recommended that you save your DC/OS installer file immediately after inst
 
     ```bash
     # <Ctrl-C> to exit installer
-    $ cd genconf/serve
-    $ sudo tar cf dcos-install.tar *
+    cd genconf/serve
+    sudo tar cf dcos-install.tar *
     ```
 
 1.  Copy the `dcos-install.tar` file to another location for backup. For example, you can use Secure Copy (scp) to copy `dcos-install.tar` to your home directory:
 
     ```bash
-    $ exit
-    $ scp -i $username@$node-ip:~/genconf/serve/dcos-install.tar ~
+    exit
+    scp -i $username@$node-ip:~/genconf/serve/dcos-install.tar ~
     ```
 
 ## Next Steps

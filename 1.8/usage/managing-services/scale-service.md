@@ -18,11 +18,11 @@ This tutorial shows how to scale a service using the DC/OS web interface and the
 1.  Enter the following command from the CLI:
 
     ```bash
-    $ dcos marathon app update <app-id> instances=<number_of_desired_instances>
+    dcos marathon app update <app-id> instances=<number_of_desired_instances>
     ```
     
 1.  Enter the following command to view information about your services. 
 
     ```bash
-    $ dcos marathon app list
+    dcos marathon app list
     ```

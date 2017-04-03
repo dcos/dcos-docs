@@ -4,24 +4,34 @@ nav_title: Installing
 menu_order: 1
 ---
 
-The recommended method to install the DC/OS CLI is by clicking the quick-launch icon on the top-left panel of the DC/OS [web interface](/docs/1.9/usage/webinterface). Or, you can manually install the CLI by following these instructions.
+The recommended method to install the DC/OS CLI is from the DC/OS web interface. Or, you can manually install the CLI by using the instructions [below](#manual). 
 
-<!-- Insert screenshot here, once design is finished. -->
+# Installing CLI from the web interface
+
+1.  Click **Install CLI** from the top-left panel of the DC/OS web interface.
+
+    ![CLI install UI](/docs/1.9/usage/cli/img/install-cli.png)
+    
+1.  Copy and paste the code snippets into your terminal.
+
+    ![CLI copy/paste](/docs/1.9/usage/cli/img/install-cli-terminal.png)
+
+# <a name="manual"></a>Manually installing the CLI
 
 *   [Installing the DC/OS CLI on Linux](#linux)
 *   [Installing the DC/OS CLI on OS X](#osx)
 *   [Installing the DC/OS CLI on Windows](#windows)
 
-# <a name="linux"></a>Installing on Linux
+## <a name="linux"></a>Installing on Linux
 
-#### Prerequisites
+### Prerequisites
 
 *   A system external to your DC/OS cluster that you can install the CLI.
 *   Network access from the external system to your DC/OS cluster.
 *   A command-line environment, such as Terminal.
 *   cURL: Installed by default on most Linux distributions.
 
-#### Installing the DC/OS CLI
+### Installing the DC/OS CLI
 
 1.  Download the DC/OS CLI binary (`dcos`) to your local directory (for example, `/usr/local/bin/`).
 
@@ -53,37 +63,16 @@ The recommended method to install the DC/OS CLI is by clicking the quick-launch 
 
     Your CLI should now be authenticated with your cluster! Enter `dcos` to get started.
 
-    ```bash
-    ./dcos
-    Command line utility for the Mesosphere Datacenter Operating
-    System (DC/OS). The Mesosphere DC/OS is a distributed operating
-    system built around Apache Mesos. This utility provides tools
-    for easy management of a DC/OS installation.
+## <a name="osx"></a>Installing on OS X
 
-    Available DC/OS commands:
-
-       auth           	Authenticate to DC/OS cluster
-       config         	Manage the DC/OS configuration file
-       help           	Display help information about DC/OS
-       marathon       	Deploy and manage applications to DC/OS
-       node           	Administer and manage DC/OS cluster nodes
-       package        	Install and manage DC/OS software packages
-       service        	Manage DC/OS services
-       task           	Manage DC/OS tasks
-
-    Get detailed command description with 'dcos <command> --help'.
-    ```
-
-# <a name="osx"></a>Installing on OS X
-
-#### Prerequisites
+### Prerequisites
 
 *   A system external to your DC/OS cluster that you can install the CLI.
 *   Network access from the external system to your DC/OS cluster.
 *   A command-line environment, such as Terminal.
 *   cURL: Installed by default on OS X
 
-#### Installing the DC/OS CLI
+### Installing the DC/OS CLI
 
 1.  Download the DC/OS CLI binary (`dcos`) to your local directory (for example, `/usr/local/bin/`).
 
@@ -116,30 +105,9 @@ The recommended method to install the DC/OS CLI is by clicking the quick-launch 
 
     Your CLI should now be authenticated with your cluster! Enter `dcos` to get started.
 
-    ```bash
-    dcos
-    Command line utility for the Mesosphere Datacenter Operating
-    System (DC/OS). The Mesosphere DC/OS is a distributed operating
-    system built around Apache Mesos. This utility provides tools
-    for easy management of a DC/OS installation.
-    
-    Available DC/OS commands:
-    
-       auth           	Authenticate to DC/OS cluster
-       config         	Manage the DC/OS configuration file
-       help           	Display help information about DC/OS
-       marathon       	Deploy and manage applications to DC/OS
-       node           	Administer and manage DC/OS cluster nodes
-       package        	Install and manage DC/OS software packages
-       service        	Manage DC/OS services
-       task           	Manage DC/OS tasks
-    
-    Get detailed command description with 'dcos <command> --help'.
-    ```
+## <a name="windows"></a>Installing on Windows
 
-# <a name="windows"></a>Installing on Windows
-
-#### Prerequisites
+### Prerequisites
 
 *   A system external to your DC/OS cluster onto which you will install the CLI
 *   Network access from the external system to your DC/OS cluster
@@ -165,25 +133,4 @@ The recommended method to install the DC/OS CLI is by clicking the quick-launch 
 
     Follow the instructions in the DC/OS CLI. For more information about security, see the [documentation](/docs/1.9/administration/id-and-access-mgt/).
 
-    Your CLI should now be authenticated with your cluster!
-
-    ```powershell
-    dcos
-    Command line utility for the Mesosphere Datacenter Operating
-    System (DC/OS). The Mesosphere DC/OS is a distributed operating
-    system built around Apache Mesos. This utility provides tools
-    for easy management of a DC/OS installation.
-
-    Available DC/OS commands:
-
-       auth           	Authenticate to DC/OS cluster
-       config         	Manage the DC/OS configuration file
-       help           	Display help information about DC/OS
-       marathon       	Deploy and manage applications to DC/OS
-       node           	Administer and manage DC/OS cluster nodes
-       package        	Install and manage DC/OS software packages
-       service        	Manage DC/OS services
-       task           	Manage DC/OS tasks
-
-    Get detailed command description with 'dcos <command> --help'.
-    ```
+    Your CLI should now be authenticated with your cluster! Enter `dcos` to get started.

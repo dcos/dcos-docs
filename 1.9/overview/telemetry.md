@@ -199,8 +199,6 @@ Here is an example of the JSON telemetry report that is collected:
             "health-unit-dcos-mesos-slave-service-unhealthy": 0,
             "health-unit-dcos-metronome-service-total": 1,
             "health-unit-dcos-metronome-service-unhealthy": 0,
-            "health-unit-dcos-minuteman-service-total": 3,
-            "health-unit-dcos-minuteman-service-unhealthy": 0,
             "health-unit-dcos-navstar-service-total": 3,
             "health-unit-dcos-navstar-service-unhealthy": 0,
             "health-unit-dcos-oauth-service-total": 1,

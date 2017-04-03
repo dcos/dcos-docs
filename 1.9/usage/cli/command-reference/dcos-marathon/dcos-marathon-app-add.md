@@ -66,7 +66,7 @@ In this example, a simple app is deployed to DC/OS Marathon.
 1.  Verify that the app is added with this command:
 
     ```bash
-    $ dcos marathon app list
+    dcos marathon app list
     ```
     
     The output should look like this:

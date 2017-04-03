@@ -24,7 +24,7 @@ By the end of this session we will have installed our first service - Redis - fr
       * By looking at the redis log: `dcos task log redis`. This command will show us the logs (stdout and stderr) of the redis task. This allows you to check whether the actual startup was sucessful.
   * Let's use redis by storing a key manually via the redis-cli
       * SSH into the node where redis is running: `dcos node ssh --master-proxy --mesos-id=$(dcos task  redis --json |  jq -r '.[] | .slave_id')`
-        * **Note**: This requires you to have the ssh-key required to conenct to the machines added to your local ssh agent (e.g., via ssh-add my_public_key). Check the [documentation](https://dcos.io/docs/1.8/administration/access-node/sshcluster/) for further details.
+        * **Note**: This requires you to have the ssh-key required to conenct to the machines added to your local ssh agent (e.g., via ssh-add my_public_key). Check the [documentation](/docs/1.8/administration/access-node/sshcluster/) for further details.
       * Because Redis is running in Docker container, we can list all docker containers using `docker ps` and get the ContainerID.
       * Connect to a bash session in the running container: `sudo docker exec -i -t CONTAINER_ID  /bin/bash`
       * Start the Redis CLI: `redis-cli`

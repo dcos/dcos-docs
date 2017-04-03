@@ -62,7 +62,7 @@ VIPs follow this naming convention:
     Alternatively, you can create a service with a VIP from the DC/OS CLI. Create a file with your application definition JSON, then launch the service on DC/OS:
     
     ```bash
-    $ dcos marathon app add <service-name>.json
+    dcos marathon app add <service-name>.json
     ```
     
 * Whether your application definition requires `portMappings` or `portDefinitions` depends on whether you are using BRIDGE or HOST networking. If you create your service in the DC/OS web interface, the appropriate field is selected for you. For more information on port configuration, see the [Marathon ports documentation][1].
@@ -74,7 +74,7 @@ Certain DC/OS services, such as Kafka, automatically create VIPs when you instal
 To view the VIP for Kafka, run `dcos kafka connection` from the DC/OS CLI. 
 
 ```bash
-$ dcos kafka connection
+dcos kafka connection
 ```
 Here is a sample response:
 

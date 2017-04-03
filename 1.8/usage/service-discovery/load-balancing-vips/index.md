@@ -27,7 +27,7 @@ It is recommended when you use our VIPs you keep long-running, persistent connec
 We also recommend taking advantage of Mesos health checks. Mesos health checks are surfaced to the load balancing layer. **Marathon** only converts **command** health checks to Mesos health checks. You can simulate HTTP health checks via a command similar to:
  
  ```bash
- $ test "$(curl -4 -w '%{http_code}' -s http://localhost:${PORT0}/|cut -f1 -d" ")" == 200
+ test "$(curl -4 -w '%{http_code}' -s http://localhost:${PORT0}/|cut -f1 -d" ")" == 200
  ```
  
  This ensures the HTTP status code returned is 200. It also assumes your application binds to localhost. The `${PORT0}` is set as a variable by Marathon. We do not recommend using TCP health checks because they can provide misleading status information about a service.

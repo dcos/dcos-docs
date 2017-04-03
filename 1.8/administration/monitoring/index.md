@@ -24,7 +24,7 @@ You can debug further by clicking the node to view the component journald (log) 
 
 ## Health States
 
-Possible health states are unhealthy and healthy. We infer this from codes 0 and 1.
+Possible health states are unhealthy and healthy. We infer this from the system health API codes `0` and `1`.
 
 - **Healthy** All cluster nodes are healthy. The units are loaded and not in the "active" or "inactive" state.
 - **Unhealthy** One or more nodes have issues. The units are not loaded or are in the "active" or "inactive" state.
@@ -38,13 +38,13 @@ The system health endpoint is exposed on port `1050` for masters, and through th
 -  Master nodes
 
    ```bash
-   $ curl localhost:1050/system/health/v1
+   curl localhost:1050/system/health/v1
    ```
    
 -  Agent nodes
 
    ```bash
-   $ curl --unix-socket /run/dcos/3dt.sock http://localhost/system/health/v1
+   curl --unix-socket /run/dcos/3dt.sock http://localhost/system/health/v1
    ```
 
 ## Aggregation
@@ -52,9 +52,9 @@ The system health endpoint is exposed on port `1050` for masters, and through th
 Aggregation of the cluster health endpoints is accomplished by the same diagnostics application, but is only run on the master nodes. You can explore this API further by making a few queries to any master in your cluster:
 
 ```bash
-$ curl localhost:1050/system/health/v1/units
-$ curl localhost:1050/system/health/v1/nodes
-$ curl localhost:1050/system/health/v1/report
+curl localhost:1050/system/health/v1/units
+curl localhost:1050/system/health/v1/nodes
+curl localhost:1050/system/health/v1/report
 ```
 
 The DC/OS GUI uses these aggregation endpoints to generate the data you explore in the system health console.
@@ -75,4 +75,4 @@ If you experience this behavior it's most likely your Mesos agent service on the
 
 ## Troubleshooting
 
-If you have any problems, you can check if the diagnostics service is running by SSH’ing to the Mesos leading master and checking the systemd status of the diagnostics component (`dcos-d3t.service`).
+If you have any problems, you can check if the diagnostics service is running by SSH’ing to the Mesos leading master and checking the systemd status of the diagnostics component (`dcos-3dt.service`).

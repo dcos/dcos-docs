@@ -4,7 +4,7 @@ menu_order: 1
 feature_maturity: experimental
 ---
 
-**Warning:** Volume size is specified in GiB. There is currently an inaccuracy in the DC/OS GUI where the volume size is marked in MiB. When creating a volume, make sure you specify the number of **GiB** you need, not MiB.
+**Warning:** Volume size is specified in GiB.
 
 Use external volumes when fault-tolerance is crucial for your app. If a host fails, the native Marathon instance reschedules your app on another host, along with its associated data, without user intervention. External volumes also typically offer a larger amount of storage.
 
@@ -112,6 +112,8 @@ You can specify an external volume in your Marathon app definition. [Learn more 
 In the app definition above:
 
 *   `containerPath` specifies where the volume is mounted inside the container. For Mesos external volumes, this must be a single-level path relative to the container; it cannot contain a forward slash (`/`). For more information, see [the REX-Ray documentation on data directories][7].
+
+* The `size` of the volume must be specified in **GiB**.
 
 *   `name` is the name that your volume driver uses to look up your volume. When your task is staged on an agent, the volume driver queries the storage service for a volume with this name. If one does not exist, it is [created implicitly][8]. Otherwise, the existing volume is reused.
 

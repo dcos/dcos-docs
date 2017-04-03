@@ -1,6 +1,6 @@
 ---
 post_title: Enabling GPU Support
-feature_maturity: experimental
+feature_maturity: preview
 menu_order: 110
 ---
 

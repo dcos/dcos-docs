@@ -157,9 +157,9 @@ This parameter specifies whether to enable the DC/OS proxy.
 *  `use_proxy: 'false'` Do not configure DC/OS [components](/docs/1.8/overview/components/) to use a custom proxy. This is the default value.
 *  `use_proxy: 'true'` Configure DC/OS [components](/docs/1.8/overview/components/) to use a custom proxy. If you specify `use_proxy: 'true'`, you can also specify these parameters:
     
-    *  `http_proxy: <your_http_proxy>` This parameter specifies the HTTP proxy.
-    *  `https_proxy: <your_https_proxy>` This parameter specifies the HTTPS proxy.
-    *  `no_proxy: - <ip-address>` This parameter specifies YAML nested list (-) of addresses to exclude from the proxy.
+    *  `http_proxy: http://<user>:<pass>@<proxy_host>:<http_proxy_port>` This parameter specifies the HTTP proxy.
+    *  `https_proxy: https://<user>:<pass>@<proxy_host>:<https_proxy_port>` This parameter specifies the HTTPS proxy.
+    *  `no_proxy: - .<(sub)domain>` This parameter specifies YAML nested list (-) of addresses to exclude from the proxy.
     
     **Important:** 
     
@@ -364,10 +364,11 @@ ssh_user: <username>
     ssh_port: 22
     ssh_user: centos
     use_proxy: 'true'
-    http_proxy: http://<your_http_proxy>/
-    https_proxy: https://<your_https_proxy>/
+    http_proxy: http://<proxy_host>:<http_proxy_port>
+    https_proxy: https://<proxy_host>:<https_proxy_port>
     no_proxy:
-    - '*.int.example.com'
+    - 'foo.bar.com'
+    - '.baz.com'
 ```
 
  [1]: https://en.wikipedia.org/wiki/YAML

@@ -13,8 +13,8 @@ You can upgrade an existing DC/OS CLI installation to the latest build.
 1.  From your DC/OS CLI installation directory, enter this command to update the DC/OS CLI:
     
     ```bash
-    $ source bin/activate
-    $ pip install -U dcoscli
+    source bin/activate
+    pip install -U dcoscli
     ```
 
 # <a name="downgrade"></a>Downgrade the CLI
@@ -26,7 +26,7 @@ You can downgrade an existing DC/OS CLI installation to an older version.
 1.  Delete your DC/OS CLI installation directories:
     
     ```bash
-    $ sudo rm -rf dcos && rm -rf ~/.dcos
+    sudo rm -rf dcos && rm -rf ~/.dcos
     ```
 
 2.  Install the legacy version of the DC/OS CLI, where <public-master-ip> is the public IP of your master node:

@@ -32,7 +32,7 @@ Chronos is the "cron" for your Mesosphere DC/OS. It is a highly-available distri
 1.  From the DC/OS CLI, enter this command:
 
     ```bash
-    $ dcos package install chronos
+    dcos package install chronos
     ```
 
     **Tip:** You can specify a JSON configuration file along with the Chronos installation command: `dcos package install chronos --options=<config_file>`. For more information, see the [dcos package section of the CLI command reference][4].
@@ -50,7 +50,7 @@ Chronos is the "cron" for your Mesosphere DC/OS. It is a highly-available distri
     Run this command to view installed services:
 
     ```bash
-    $ dcos package list
+    dcos package list
     ```
 
     You should see Chronos in the output:
@@ -65,7 +65,7 @@ Chronos is the "cron" for your Mesosphere DC/OS. It is a highly-available distri
 1.  From the DC/OS CLI, enter this command:
 
     ```bash
-    $ dcos package uninstall chronos
+    dcos package uninstall chronos
     ```
 
 2.  Open the ZooKeeper Exhibitor web interface at `<hostname>/exhibitor`, where `<hostname>` is the [Mesos Master hostname][5].

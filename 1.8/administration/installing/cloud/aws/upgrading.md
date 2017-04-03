@@ -21,12 +21,12 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
    1. Using DC/OS CLI:
 
       ```bash
-      $ dcos node ssh --master-proxy --leader
+      dcos node ssh --master-proxy --leader
       ```
    1. After you are logged in, run the following command. This command creates a new 1.8 directory (`/var/lib/dcos/exhibitor/zookeeper`) as a symlink to the old (`/var/lib/zookeeper`):
 
       ```bash
-      $ for node in $(dig +short master.mesos); do ssh -o StrictHostKeyChecking=no $node "sudo mkdir -p /var/lib/dcos/exhibitor && sudo ln -s /var/lib/zookeeper /var/lib/dcos/exhibitor/zookeeper"; done
+      for node in $(dig +short master.mesos); do ssh -o StrictHostKeyChecking=no $node "sudo mkdir -p /var/lib/dcos/exhibitor && sudo ln -s /var/lib/zookeeper /var/lib/dcos/exhibitor/zookeeper"; done
       ```
 
    1. Go to `http://master-node/exhibitor`.
@@ -55,7 +55,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
       * Identify the ZooKeeper leader among the masters. This node should be the last master node that you delete. You can determine whether a master node is a ZooKeeper leader by sending the `stat` command to the ZooKeeper client port.
 
         ```bash
-        $ echo stat | /opt/mesosphere/bin/toybox nc localhost 2181 | grep "Mode:"
+        echo stat | /opt/mesosphere/bin/toybox nc localhost 2181 | grep "Mode:"
         ```
 
         When you complete deleting each node, monitor the Mesos master metrics to ensure the node has rejoined the cluster and completed reconciliation.

@@ -20,7 +20,7 @@ You can use the web interface or the CLI to:
 To see which package repositories are currently installed, enter this CLI command:   
 
 ```bash
-$ dcos package repo list
+dcos package repo list
 Universe: https://universe.mesosphere.com/repo
 ```
 
@@ -29,13 +29,13 @@ Universe: https://universe.mesosphere.com/repo
 To search for packages, run this CLI command:
 
 ```bash
-$ dcos package search [--json <query>]
+dcos package search [--json <query>]
 ```
 
 For example, this command searches for big data packages:
 
 ```bash
-$ dcos package search "big data"
+dcos package search "big data"
 NAME VERSION FRAMEWORK SOURCE DESCRIPTION
 spark 1.4.0-SNAPSHOT True https://github.com/mesosphere/universe/archive/version-1.x.zip Spark is a fast and general cluster computing system for Big Data
 ```
@@ -51,7 +51,7 @@ dcos package repo add <repo-name> <repo-url>
 For example, this command adds a repo named `your-repo` with the URL `https://universe.yourcompany.com/repo`:
 
 ```bash
-$ dcos package repo add your-repo https://universe.yourcompany.com/repo
+dcos package repo add your-repo https://universe.yourcompany.com/repo
 ```
 
 For full instructions on how to build and run your own Universe repo see the [Universe Server Documentation](https://github.com/mesosphere/universe#universe-server)
@@ -61,11 +61,11 @@ For full instructions on how to build and run your own Universe repo see the [Un
 To remove a repo, run this command:
 
 ```bash
-$ dcos package repo remove <repo-name>
+dcos package repo remove <repo-name>
 ```
 
 For example, this command removes a repo named `your-repo`:
 
 ```bash
-$ dcos package repo remove your-repo
+dcos package repo remove your-repo
 ```

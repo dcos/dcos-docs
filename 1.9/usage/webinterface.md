@@ -32,7 +32,7 @@ From the dashboard you can easily monitor the health of your cluster.
 
 The Services tab provides a full-featured interface to the native DC/OS Marathon instance. This Services tab provides a comprehensive view of all of the services that you are running. You can view a graph that shows the allocation percentage rate for CPU, memory, or disk. You can filter services by health status or service name.
 
-![Services](../img/dcos-services.png)
+![Services](/docs/1.9/usage/tutorials/img/tweeter-services6.png)
 
 By default all of your services are displayed, sorted by service name. You can also sort the services by health status, number of tasks, CPU, memory, or disk space allocated.
 
@@ -51,11 +51,11 @@ Clicking the service name opens the Services side panel, which provides CPU, mem
 
 The Jobs tab provides native support for creating and administering scheduled jobs. You can set up jobs with a schedule in cron format. For more information, see the [documentation](/docs/1.9/usage/jobs/).
 
-![Jobs](../img/dcos-jobs.png)
+![Jobs](/docs/1.9/usage/img/dcos-jobs.png)
 
-# <a name="universe"></a>Packages
+# <a name="universe"></a>Universe
 
-The Packages tab shows all of the available DC/OS services from package [repositories](/docs/1.9/usage/repo/). You can install packages from the DC/OS Universe with a single click. The packages can be installed with defaults or customized directly in the web interface.
+The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.9/usage/repo/). You can install packages from the DC/OS Universe with a single click. The packages can be installed with defaults or customized directly in the web interface.
 
 ![universe](../img/ui-dashboard-universe.gif)
 
@@ -79,14 +79,25 @@ The Network tab provides information for troubleshooting your virtual networks. 
 
 ![Network](../img/ui-dashboard-network.gif)
 
-# <a name="system"></a>System
+# <a name="system"></a>System Overview
+View the cluster details from the **System Overview** tab.
 
-The System tab provides access to the administration controls of DC/OS. From this tab you can:
+![System overview](/docs/1.9/usage/img/system-overview.png)
 
-- View the system health of your DC/OS components from the **Components** tab.
-- Manage your DC/OS package repositories from the **Settings** tab.
-- Manage user access from the **Organization** tab.
+# Components
+View the system health of your DC/OS components from the **Components** tab.
 
-![system](../img/ui-dashboard-system1.gif)
+![Components](/docs/1.9/administration/monitoring/img/component-system-view.png)
+
+# Settings
+Manage your DC/OS package repositories from the **Settings** tab.
+
+![Settings](/docs/1.9/usage/img/package-repositories.png)
+
+# Organization
+Manage user access from the **Organization** tab.
+
+![Organization](/docs/1.9/usage/img/organization.png)
+
 
 [3]: https://mesosphere.github.io/marathon/docs/health-checks.html

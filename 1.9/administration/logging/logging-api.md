@@ -1,46 +1,57 @@
 ---
-post_title: Logging API 
+post_title: Logging API
 feature_maturity: preview
 menu_order: 3
 ---
 
-# About the Logging API
+The Logging API exposes node, component, and container (task) logs.
 
-Use the Logging API to get the system logs from DC/OS.
+The Logging API is backed by the [DC/OS Log component](/docs/1.9/overview/architecture/components/#dcos-log), which runs on all nodes in the cluster.
 
-# Response format
+For more information about using the Logging API, see [Logging](/docs/1.9/administration/logging/).
+
+
+## Routes
+
+Access to the Logging API is proxied through the Admin Router on each node using the following route:
+
+```
+/system/v1/logs/v1/
+```
+
+Access to the Logging API of the agent nodes is also proxied through the master nodes:
+
+```
+/system/v1/agent/{agent_id}/logs/v1/
+```
+
+To determine the address of your cluster, see [Cluster Access](/docs/1.9/api/access/).
+
+
+## Format
 
 The API request header can be any the following:
-        
+
 - `text/plain`, `text/html`, `*/*` request logs in text format, ending with `\n`.
 - `application/json` request logs in JSON format.
 - `text/event-stream` request logs in Server-Sent-Events format.
 
-# Host name and base path
 
-The host name to use will vary depending on where your app is running.
+## Resources
 
-- If your app will run inside of the cluster, use `http[s]://localhost`.
-- If your app will run outside of the DC/OS cluster, you should use the cluster URL. In a production environment, this should be the path to the load balancer that sits in front of your masters. 
+The following resources are available under both of the above routes:
 
-  **Tip:** To obtain the cluster URL, use either of these methods:
-  
-  - Launch the DC/OS web interface and copy the domain name from the browser. 
-  - Log into the DC/OS CLI and type `dcos config show core.dcos_url` to get the cluster URL. You can also reference this as a variable in the CLI by using `$(dcos config show core.dcos_url)`.
+<div class="swagger-section">
+  <div id="message-bar" class="swagger-ui-wrap message-success" data-sw-translate=""></div>
+  <div id="swagger-ui-container" class="swagger-ui-wrap" data-api="/docs/1.9/api/logs.yaml">
 
-# Base path
+  <div class="info" id="api_info">
+    <div class="info_title">Loading docs...</div>
+  <div class="info_description markdown"></div>
+</div>
 
-Append `/system/v1/logs/v1/` to the host name, as shown below.
 
-```bash
-https://<host-name-or-ip>/system/v1/logs/v1/
-```
-
-# API reference
-
-[api-explorer api='/1.9/api/dcos-log.yaml']
-
-# Examples
+## Examples
 
 ## GET parameters
 - `/system/v1/logs/v1/stream/?skip_prev=10` get the last 10 entires from the journal and follow new events.

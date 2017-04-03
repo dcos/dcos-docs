@@ -22,13 +22,13 @@ You can determine the node type by running this command from the DC/OS CLI.
 -   Run this command to determine how many private agents are there in the cluster. A result of `0` indicates that there are no private agents.
 
     ```bash
-    $ dcos node --json | jq --raw-output '.[] | select(.reserved_resources.slave_public == null) | .id' | wc -l
+    dcos node --json | jq --raw-output '.[] | select(.reserved_resources.slave_public == null) | .id' | wc -l
     ```
 
 -   Run this command to determine how many public agents are there in the cluster. A result of `0` indicates that there are no public agents.
     
     ```bash
-    $ dcos node --json | jq --raw-output '.[] | select(.reserved_resources.slave_public != null) | .id' | wc -l
+    dcos node --json | jq --raw-output '.[] | select(.reserved_resources.slave_public != null) | .id' | wc -l
     ```
 
 ### Uninstall the DC/OS private agent software
@@ -36,21 +36,21 @@ You can determine the node type by running this command from the DC/OS CLI.
 1.  Uninstall the current DC/OS software on the agent node.
 
     ```bash
-    $ sudo -i /opt/mesosphere/bin/pkgpanda uninstall
-    $ sudo systemctl stop dcos-mesos-slave
-    $ sudo systemctl disable dcos-mesos-slave
+    sudo -i /opt/mesosphere/bin/pkgpanda uninstall
+    sudo systemctl stop dcos-mesos-slave
+    sudo systemctl disable dcos-mesos-slave
     ```
 
 2.  Remove the old directory structures on the agent node.
 
     ```bash
-    $ sudo rm -rf /etc/mesosphere /opt/mesosphere /var/lib/mesos /var/lib/dcos
+    sudo rm -rf /etc/mesosphere /opt/mesosphere /var/lib/mesos /var/lib/dcos
     ```
 
 3.  Restart the machine.
 
     ```bash
-    $ sudo reboot
+    sudo reboot
     ```        
 
 ### Install DC/OS and convert agent node
@@ -59,25 +59,25 @@ Copy the archived DC/OS installer file (`dcos-install.tar`) to the node that tha
 1.  Copy the files to your agent node. For example, you can use Secure Copy (scp) to copy `dcos-install.tar` to your home directory:
 
     ```bash
-    $ scp ~/dcos-install.tar $username@$node-ip:~/dcos-install.tar
+    scp ~/dcos-install.tar $username@$node-ip:~/dcos-install.tar
     ```
 
 2.  SSH to the machine:
 
     ```bash
-    $ ssh $USER@$AGENT
+    ssh $USER@$AGENT
     ```
 
 1.  Create a directory for the installer files:
 
      ```bash
-     $ sudo mkdir -p /opt/dcos_install_tmp
+     sudo mkdir -p /opt/dcos_install_tmp
      ```
 
 1.  Unpackage the `dcos-install.tar` file:
 
     ```bash
-    $ sudo tar xf dcos-install.tar -C /opt/dcos_install_tmp
+    sudo tar xf dcos-install.tar -C /opt/dcos_install_tmp
     ```
 
 1.  Run this command to install DC/OS on your agent nodes. You must designate your agent nodes as public or private.
@@ -85,13 +85,13 @@ Copy the archived DC/OS installer file (`dcos-install.tar`) to the node that tha
     Private agent nodes:
     
     ```bash
-    $ sudo bash /opt/dcos_install_tmp/dcos_install.sh slave
+    sudo bash /opt/dcos_install_tmp/dcos_install.sh slave
     ```
     
     Public agent nodes:
     
     ```bash
-    $ sudo bash /opt/dcos_install_tmp/dcos_install.sh slave_public
+    sudo bash /opt/dcos_install_tmp/dcos_install.sh slave_public
     ```
 
  [1]: /docs/1.8/administration/installing/custom/gui/

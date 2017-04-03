@@ -1,7 +1,7 @@
 ---
 post_title: Support and Feedback
 nav_title: Support
-menu_order: 5
+menu_order: 6
 ---
 
 DC/OS is a free and open source project and community-supported product.

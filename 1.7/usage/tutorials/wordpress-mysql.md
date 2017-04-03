@@ -189,11 +189,11 @@ You can also assign a VIP to your application via the DC/OS Marathon web interfa
 - Paste your application definition into a JSON file, such as `vip-tutorial.json`.
 - Add the app to Marathon:
   ```bash
-  $ dcos marathon app add vip-tutorial.json
+  dcos marathon app add vip-tutorial.json
   ```
 - Verify that the app has been added:
   ```bash
-  $ dcos marathon app list
+  dcos marathon app list
   ```
 
 For more information on port configuration, see the [ports documentation][1].

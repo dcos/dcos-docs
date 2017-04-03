@@ -3,4 +3,4 @@ post_title: Administration
 menu_order: 2
 ---
 
-This section covers the installation, administration, and management of DC/OS.
+The administration topics help you set up, administer, and manage your DC/OS cluster. 

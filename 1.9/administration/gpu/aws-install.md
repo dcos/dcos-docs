@@ -6,7 +6,7 @@ menu_order: 0
 ---
 
 #  Prerequisites
-- The AWS DC/OS advanced template [system requirements](https://dcos.io/docs/1.9/administration/installing/cloud/aws/advanced/system-requirements/).
+- The AWS DC/OS advanced template [system requirements](/docs/1.9/administration/installing/cloud/aws/advanced/system-requirements/).
 - The `zen.sh` script copied to your local machine. The script and instructions are [here](/docs/1.9/administration/installing/cloud/aws/advanced/quickstart/).
 
 ## Create Dependencies

@@ -63,6 +63,12 @@ The Jobs tab provides native support for creating and administering scheduled jo
 
 ![Jobs](../img/dcos-jobs.png)
 
+# <a name="network"></a>Network
+
+The Network tab provides information helpful for troubleshooting your virtual networks. You can see which containers are on which network and see their IP addresses. For more information, see the [documentation](/docs/1.8/administration/virtual-networks/ip-per-container/).
+
+![Network](../img/ui-dashboard-network.gif)
+
 # <a name="nodes"></a>Nodes
 
 The Nodes tab provides a comprehensive view of all of the nodes that are used across your cluster. You can view a graph that shows the allocation percentage rate for CPU, memory, or disk.
@@ -76,12 +82,6 @@ You can switch to **Grid** view to see a "donuts" percentage visualization.
 ![Nodes](../img/dcos-donuts.png)
 
 Clicking on a node opens the Nodes side panel, which provides CPU, memory, and disk usage graphs and lists all tasks on the node. Use the dropdown or a custom filter to sort tasks and click on details for more information. Click on a task listed on the Nodes side panel to see detailed information about the task’s CPU, memory, and disk usage and the task’s files and directory tree.
-
-# <a name="network"></a>Network
-
-The Network tab provides information helpful for troubleshooting your virtual networks. You can see which containers are on which network and see their IP addresses. For more information, see the [documentation](/docs/1.8/administration/virtual-networks/ip-per-container/).
-
-![Network](../img/ui-dashboard-network.gif)
 
 # <a name="universe"></a>Universe
 

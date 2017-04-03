@@ -39,7 +39,7 @@ To launch a service on a public node, you must create a Marathon app definition 
 1.  Add the your app to Marathon by using this command, where `myApp.json` is your app:
 
     ```bash
-    $ dcos marathon app add myApp.json
+    dcos marathon app add myApp.json
     ```
 
     If this is added successfully, there is no output.
@@ -49,7 +49,7 @@ To launch a service on a public node, you must create a Marathon app definition 
 1.  Verify that the app is added with this command:
 
     ```bash
-    $ dcos marathon app list
+    dcos marathon app list
     ```
     
     The output should look like this:

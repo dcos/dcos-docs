@@ -43,7 +43,7 @@ We're going to create a job that runs every 10 seconds and prints the current da
 1.  Let's verify that our job ran successfully. Run the following CLI command to view all completed tasks:
 
     ```bash
-    $ dcos task --completed ct*
+    dcos task --completed ct*
     ```
 
     The `--completed` argument includes tasks that have completed their execution. Chronos uses the prefix `ct` for all its tasks, so `ct*` filters only Chronos tasks.
@@ -60,7 +60,7 @@ We're going to create a job that runs every 10 seconds and prints the current da
 1.  To view the output of a task, copy one of the values under the `ID` column in the output of the previous command, and use it as the argument to `dcos task log`:
 
     ```bash
-    $ dcos task log --completed ct:1460844479000:0:Date:
+    dcos task log --completed ct:1460844479000:0:Date:
     ```
 
     The output should look similar to this, and include a line with the current date:

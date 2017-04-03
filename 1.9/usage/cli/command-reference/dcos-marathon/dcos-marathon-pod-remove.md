@@ -35,7 +35,7 @@ dcos marathon pod remove <pod-id> [OPTION]
 # Remove a Pod
 Remove a pod with the following command:
 ```
-$ dcos marathon pod remove <pod-id>
+dcos marathon pod remove <pod-id>
 ```
 
 If the pod is currently deploying, you will not be able to remove the pod. To remove the pod anyway, run the command with the `--force` flag.

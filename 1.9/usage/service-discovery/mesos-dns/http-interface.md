@@ -10,7 +10,7 @@ Mesos-DNS implements a simple REST API for service discovery over HTTP:
 
 Lists in JSON format the Mesos-DNS version and source code URL.
 
-    $ curl http://10.190.238.173:8123/v1/version
+    curl http://10.190.238.173:8123/v1/version
     {
         "Service":"Mesos-DNS",
         "URL":"https://github.com/mesosphere/mesos-dns","Version":"0.1.1"
@@ -21,7 +21,7 @@ Lists in JSON format the Mesos-DNS version and source code URL.
 
 Lists in JSON format the Mesos-DNS configuration parameters.
 
-    $ curl http://10.190.238.173:8123/v1/config
+    curl http://10.190.238.173:8123/v1/config
     {
         "Masters":null,
         "Zk":"zk://10.207.154.85:2181/mesos",
@@ -46,7 +46,7 @@ Lists in JSON format the IP addresses that correspond to a hostname. It is the e
 
 **Note:** The HTTP interface only resolves hostnames in the Mesos domain.
 
-    $ curl http://10.190.238.173:8123/v1/hosts/nginx.marathon.mesos
+    curl http://10.190.238.173:8123/v1/hosts/nginx.marathon.mesos
     [
         {"host":"nginx.marathon.mesos.","ip":"10.249.219.155"},
         {"host":"nginx.marathon.mesos.","ip":"10.190.238.173"},

@@ -35,7 +35,7 @@ None.
 In this example, a job named `my-job` is run.
 
 ```bash
-$ dcos job run my-job
+dcos job run my-job
 ```
 
 **Tip:** You can view the job IDs with the `dcos job list` command.

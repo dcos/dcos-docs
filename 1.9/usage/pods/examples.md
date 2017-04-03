@@ -1,6 +1,6 @@
 ---
 post_title: Examples
-feature_maturity: experimental
+feature_maturity: preview
 menu_order: 30
 ---
 
@@ -100,7 +100,7 @@ The following pod definition specifies a pod with 3 containers. <!-- Validated b
       "constraints": [],
       "acceptedResourceRoles": []
     },
-    "killSelection": "YoungestFirst",
+    "killSelection": "Youngest_First",
     "unreachableStrategy": {
       "inactiveAfterSeconds": 900,
       "expungeAfterSeconds": 604800
@@ -205,7 +205,7 @@ The following pod definition specifies an ephemeral volume called `v1`. <!-- Val
       "constraints": [],
       "acceptedResourceRoles": []
     },
-    "killSelection": "YoungestFirst",
+    "killSelection": "Youngest_First",
     "unreachableStrategy": {
       "inactiveAfterSeconds": 900,
       "expungeAfterSeconds": 604800
@@ -278,7 +278,7 @@ The following pod definition specifies a virtual (user) network named `dcos`. <!
       "constraints": [],
       "acceptedResourceRoles": []
     },
-    "killSelection": "YoungestFirst",
+    "killSelection": "Youngest_First",
     "unreachableStrategy": {
       "inactiveAfterSeconds": 900,
       "expungeAfterSeconds": 604800
@@ -358,7 +358,7 @@ This pod declares a “web” endpoint that listens on port 80. <!-- Validated b
       "constraints": [],
       "acceptedResourceRoles": []
     },
-    "killSelection": "YoungestFirst",
+    "killSelection": "Youngest_First",
     "unreachableStrategy": {
       "inactiveAfterSeconds": 900,
       "expungeAfterSeconds": 604800

@@ -8,7 +8,7 @@ Add or set a DC/OS configuration properties. Here are the available properties.
 
 | **Property**  | **Description** |
 |-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| core.dcos_acs_token   | This property contains the DC/OS authentication token. When you log into the DC/OS CLI using `dcos auth login`, it stores the authentication token value locally. For more information, see the [documentation](/docs/1.8/administration/id-and-access-mgt/iam-api/). |
+| core.dcos_acs_token   | This property contains the DC/OS authentication token. When you log into the DC/OS CLI using `dcos auth login`, it stores the authentication token value locally. For more information, see the [documentation](/docs/1.9/administration/id-and-access-mgt/iam-api/). |
 | core.dcos_url         | This property contains the public master IP of your DC/OS cluster.|
 | core.mesos_master_url | This property specifies the Mesos master URL.|
 | core.pagination       | This property indicates whether to paginate output. |
@@ -47,7 +47,7 @@ None.
 In this example, the public master IP of the cluster is set to `http://www.yourcloud.com`.
 
 ```bash
-$ dcos config set core.dcos_url http://www.yourcloud.com
+dcos config set core.dcos_url http://www.yourcloud.com
 ```
 
 Here is the output:
@@ -61,7 +61,7 @@ Here is the output:
 In this example, the verify SSL certificates for HTTPS is set to `true`.
 
 ``bash
-$ dcos config set core.ssl_verify true
+dcos config set core.ssl_verify true
 ```
 
 Here is the output:

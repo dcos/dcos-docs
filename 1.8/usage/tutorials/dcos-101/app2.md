@@ -40,7 +40,7 @@ We want to deploy this app natively, i.e., not relying on Docker (which is third
        1. Check the total number of keys using app1: `dcos task log app1`
        2. Check redis directly
           * SSH into node where redis is running: `dcos node ssh --master-proxy --mesos-id=$(dcos task  redis --json |  jq -r '.[] | .slave_id')`
-          * NOTE: This requires you to have the ssh-key required to connect to the machines added to your local ssh agent (e.g., via ssh-add my_public_key). Check the [documentation](https://dcos.io/docs/1.8/administration/access-node/sshcluster/) for further details.
+          * NOTE: This requires you to have the ssh-key required to connect to the machines added to your local ssh agent (e.g., via ssh-add my_public_key). Check the [documentation](/docs/1.8/administration/access-node/sshcluster/) for further details.
        * Because redis is running in a docker container, we need to list all docker containers docker ps to get the *ContainerID*.
          * Connect to a bash session to the running container: `sudo docker exec -i -t CONTAINER_ID  /bin/bash`
          * Start the redis CLI: `redis-cli`
@@ -52,9 +52,9 @@ We want to deploy this app natively, i.e., not relying on Docker (which is third
 # Deep Dive
 We have now deployed apps in two different ways: using Docker (app1) and natively (app2).
 Let us explore the differences in some more detail.
-DC/OS uses [containerizers](https://dcos.io/docs/1.8/usage/containerizers/) to run tasks in containers. Running tasks in containers offers a number of benefits, including the ability to isolate tasks from one another and control task resources programmatically. DC/OS supports the Mesos containerizer types DC/OS Universal container runtime and Docker containerizer.
+DC/OS uses [containerizers](/docs/1.8/usage/containerizers/) to run tasks in containers. Running tasks in containers offers a number of benefits, including the ability to isolate tasks from one another and control task resources programmatically. DC/OS supports the Mesos containerizer types DC/OS Universal container runtime and Docker containerizer.
 
 For our first app, we actually used a docker container image to package app1's depencies (remember: never rely on depencies being installed on an agent!) and then used the Docker containerizer to execute it. As the Docker containerizer internally uses the [docker runtime](https://docs.docker.com/engine/userguide/intro/), we effectively used the docker runtime.
 
 For our second app, we did not have any depencies and hence could rely on the default DC/OS Universal container runtime. Internally, both runtimes use the same OS features for isolation, namely [cgroups](https://en.wikipedia.org/wiki/Cgroups) and [namespaces](https://en.wikipedia.org/wiki/Linux_namespaces).
-This actually makes it possible to use the DC/OS Universal container runtime for running docker images. Check the [DC/OS Universal container runtime](https://dcos.io/docs/1.8/usage/containerizers/) documentation for details.
+This actually makes it possible to use the DC/OS Universal container runtime for running docker images. Check the [DC/OS Universal container runtime](/docs/1.8/usage/containerizers/) documentation for details.

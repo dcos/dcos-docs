@@ -23,7 +23,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - You must have access to copies of the config files used with DC/OS 1.8: `config.yaml` and `ip-detect`.
 - You must be using systemd 218 or newer to maintain task state.
 - All hosts (masters and agents) must be able to communicate with all other hosts on all ports, for both TCP and UDP.
-- In CentOS or RedHat, install IP sets with this command (used in some IP detect scripts): `$ sudo yum install -y ipset`
+- In CentOS or RedHat, install IP sets with this command (used in some IP detect scripts): `sudo yum install -y ipset`
 - You must be familiar with using `systemctl` and `journalctl` command line tools to review and monitor service status. Troubleshooting notes can be found at the end of this [document](#troubleshooting).
 - You must be familiar with the [Advanced DC/OS Installation Guide][advanced-install].
 - You should take a snapshot of ZooKeeper prior to upgrading. Marathon supports rollbacks, but does not support downgrades.
@@ -53,7 +53,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
     1.  Download the file `dcos_generate_config.sh`.
     1.  Generate the installation files. Replace `<installed_cluster_version>` in the below command with the DC/OS version currently running on the cluster you intend to upgrade, for example `1.8.8`.
         ```bash
-        $ dcos_generate_config.sh --generate-node-upgrade-script <installed_cluster_version>
+        dcos_generate_config.sh --generate-node-upgrade-script <installed_cluster_version>
         ```
     1.  The command in the previous step will produce a URL in the last line of its output, prefixed with `Node upgrade script URL:`. Record this URL for use in later steps. It will be referred to in this document as the "Node upgrade script URL".
     1.  Run the [nginx][advanced-install] container to serve the installation files.
@@ -64,9 +64,15 @@ Proceed with upgrading every master node one-at-a-time in any order using the fo
 
 1.  Download and run the node upgrade script:
 
+    ```bash
+    curl -O <Node upgrade script URL>
+    sudo bash ./dcos_node_upgrade.sh
     ```
-    $ curl -O <Node upgrade script URL>
-    $ sudo bash ./dcos_node_upgrade.sh
+
+1.  Verify that the upgrade script succeeded and exited with the status code `0`:
+    ```bash
+    echo $?
+    0
     ```
 
 1.  Validate the upgrade:
@@ -82,9 +88,15 @@ Proceed with upgrading every agent in any order. Agent upgrades can be paralleli
 ### On all DC/OS Agents:
 
 1.  Download and run the node upgrade script:
+    ```bash
+    curl -O <Node upgrade script URL>
+    sudo bash dcos_node_upgrade.sh
     ```
-    $ curl -O <Node upgrade script URL>
-    $ sudo bash dcos_node_upgrade.sh
+
+1.  Verify that the upgrade script succeeded and exited with the status code `0`:
+    ```bash
+    echo $?
+    0
     ```
 
 1.  Validate the upgrade:
@@ -98,25 +110,25 @@ The following commands should provide insight into upgrade issues:
 
 ### On All Cluster Nodes
 
-```
-$ sudo journalctl -u dcos-download
-$ sudo journalctl -u dcos-spartan
-$ sudo systemctl | grep dcos
+```bash
+sudo journalctl -u dcos-download
+sudo journalctl -u dcos-spartan
+sudo systemctl | grep dcos
 ```
 
 ### On DC/OS Masters
 
-```
-$ sudo journalctl -u dcos-exhibitor
-$ less /var/lib/dcos/exhibitor/zookeeper/zookeeper.out
-$ sudo journalctl -u dcos-mesos-dns
-$ sudo journalctl -u dcos-mesos-master
+```bash
+sudo journalctl -u dcos-exhibitor
+less /var/lib/dcos/exhibitor/zookeeper/zookeeper.out
+sudo journalctl -u dcos-mesos-dns
+sudo journalctl -u dcos-mesos-master
 ```
 
 ### On DC/OS Agents
 
-```
-$ sudo journalctl -u dcos-mesos-slave
+```bash
+sudo journalctl -u dcos-mesos-slave
 ```
 
 ## Notes:

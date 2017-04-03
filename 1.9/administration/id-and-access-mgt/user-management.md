@@ -37,7 +37,7 @@ To manage users:
     *   To log out of the DC/OS CLI, enter the this command:
 
         ```bash
-        $ dcos config unset core.dcos_acs_token
+        dcos config unset core.dcos_acs_token
         Removed [core.dcos_acs_token]
         ```
 

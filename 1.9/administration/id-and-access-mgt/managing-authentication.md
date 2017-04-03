@@ -17,11 +17,11 @@ To manage users:
 
 1.  Launch the DC/OS web interface and log in with your username (Google, GitHub, and Microsoft) and password.
 
-2.  Click on the **System** -> **Organization** tab and choose your action.
+2.  Click on the **Organization** tab and choose your action.
 
     ### Add users
 
-    From the **Users** tab, click **New User** and fill in the new user email address. New users are automatically sent an email notifying them of access to DC/OS.
+    From the **Users** tab, click the new user icon (**+**) and fill in the new user email address. New users are automatically sent an email notifying them of access to DC/OS.
 
     **Tip:** Any user with access to DC/OS can invite more users. Each DC/OS user is an administrator, there is no explicit concept of privileges with DC/OS.
 
@@ -45,7 +45,7 @@ To manage users:
     *   To log out of the DC/OS CLI, enter this command:
 
         ```bash
-        $ dcos config unset core.dcos_acs_token
+        dcos config unset core.dcos_acs_token
         Removed [core.dcos_acs_token]
         ```
 
@@ -60,7 +60,7 @@ The DC/OS CLI stores the token in a configuration file in the `.dcos` directory 
 1.  From a terminal prompt, use the following command to authenticate to your cluster.
 
     ```bash
-    $ dcos auth login
+    dcos auth login
     ```
 
     Here is an example of the output:
@@ -98,7 +98,7 @@ The DC/OS CLI stores the token in a configuration file in the `.dcos` directory 
 To log out, run this command:
 
 ```bash
-$ dcos auth logout
+dcos auth logout
 ```
 
 ## Debugging
@@ -106,8 +106,8 @@ $ dcos auth logout
 To debug authentication problems, check the Admin Router and dcos-oauth logs on the masters using the following commands.
 
 ```bash
-$ sudo journalctl -u dcos-adminrouter.service
-$ sudo journalctl -u dcos-oauth.service
+sudo journalctl -u dcos-adminrouter.service
+sudo journalctl -u dcos-oauth.service
 ```
 
 ## Authentication opt-out

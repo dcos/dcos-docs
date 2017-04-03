@@ -17,7 +17,7 @@ You can obtain your HTTP API token using DC/OS CLI. When you log into the DC/OS 
 Logging into the DC/OS CLI causes your HTTP API token to be written to a configuration file. Type the following command to confirm that this write succeeded and view your HTTP API token.
 
 ```bash
-$ dcos config show core.dcos_acs_token
+dcos config show core.dcos_acs_token
 ```
 
 # Passing your HTTP API token to DC/OS endpoints
@@ -33,11 +33,11 @@ When using cURL, you can use the following bash `$(dcos config show core.dcos_ac
 The following full command shows how to authenticate to the Marathon API using cURL.
 
 ```bash
-$ curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/service/marathon/v2/apps
+curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/service/marathon/v2/apps
 ```
 
 The following full command shows how to authenticate to the Mesos API using cURL.
 
 ```bash
-$ curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/mesos/master/state.json
+curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/mesos/master/state.json
 ```

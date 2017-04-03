@@ -37,15 +37,15 @@ In the screenshots below, we are using Kibana hosted by [logz.io][2], but your K
 
 For example, you can type `framework:*` into the Search field. This will show all of the events where the `framework` field is defined:
 
-![Logstash Example](../img/logstash-framework-exists.png)
+![Logstash Example](/docs/1.9/administration/logging/aggregating/img/logstash-framework-exists.png)
 
 Click the disclosure triangle next to one of these events to view the details. This will show all of the fields extracted from the task log file path:
 
-![Logstash Example2](../img/logstash-fields.png)
+![Logstash Example2](/docs/1.9/administration/logging/aggregating/img/logstash-fields.png)
 
 Finally, let's search for all of the events that reference the framework ID of the event shown in the screenshot above, but that do not contain the chosen `framework` field. This will show only non-task results:
 
-![Logstash Framework Search](../img/logstash-framework-search.png)
+![Logstash Framework Search](/docs/1.9/administration/logging/aggregating/img/logstash-framework-search.png)
 
 # <a name="templates"></a>Template Examples
 

@@ -40,7 +40,7 @@ In this example, a job history is shown.
 1.  List the jobs and find the ID:
 
     ```bash
-    $ dcos job list
+    dcos job list
     ```
     
     Here is the output:
@@ -54,7 +54,7 @@ In this example, a job history is shown.
 1.  View the job history for `my-scheduled-job`:
 
     ```bash
-    $ dcos job history my-scheduled-job
+    dcos job history my-scheduled-job
     ```
     
     Here is the output:

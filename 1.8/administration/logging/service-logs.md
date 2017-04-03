@@ -20,7 +20,7 @@ Let’s say that you’ve got a service misbehaving. For some reason, it is cont
 If you’ve created a DC/OS service named `service` and would like to see stdout for every instance of that in real time, you can run the following:
 
 ```
-$ dcos task log --follow service
+dcos task log --follow service
 ```
 
 For more advanced usage, you can check out the CLI documentation:

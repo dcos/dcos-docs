@@ -36,7 +36,7 @@ None.
 In this example, a job named `my-job` is removed.
 
 ```bash
-$ dcos job remove my-job
+dcos job remove my-job
 ```
 
 **Tip:** You can view the job IDs with the `dcos job list` command.

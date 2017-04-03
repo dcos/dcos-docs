@@ -1,6 +1,5 @@
 ---
-post_title: Installing DC/OS
-nav_title: Installing
+post_title: Creating a Cluster
 menu_order: 1
 ---
 

@@ -12,7 +12,11 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 ## Create and Run a Simple Service from the DC/OS Web Interface
 
 1. Click the **Services** tab of the DC/OS web interface, then click the **RUN A SERVICE**.
-1. Click **Single Container** and enter a name for your service in the **SERVICE ID** field. In the **Command** field, enter `sleep 10`.
+1. Click **Single Container**.
+    
+   1. In the **SERVICE ID** field, enter a name for your service. 
+   1. In the **Command** field, enter `sleep 10`.
+   1. In the **Container Image** field, enter a container image to use.
 1. Click **REVIEW & RUN**.
 
     ![Create a service in the DC/OS UI](/docs/1.9/usage/tutorials/img/deploy-svs-ui.png)
@@ -53,12 +57,12 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 
 1. Run the service with the following command.
     ```bash
-    $ dcos marathon app add my-app-cli.json
+    dcos marathon app add my-app-cli.json
     ```
 
 1. Run the following command to verify that your service is running:
     ```bash
-    $ dcos marathon app list
+    dcos marathon app list
     ```
     You can also click the name of your service in the **Services** view of the DC/OS web interface to see it running and monitor health.
 
@@ -118,6 +122,6 @@ This tutorial shows how to create and deploy a simple one-command service and a 
     ```
 1. Run the following command to verify that your service is running:
     ```bash
-    $ dcos marathon app list
+    dcos marathon app list
     ```
 1. In the **Services** tab of the DC/OS web interface, click the name of your service, then choose on of the task instances. Click **Logs**, then toggle to the **Output (stdout)** view to see the output of the service.

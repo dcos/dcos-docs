@@ -66,7 +66,7 @@ In this tutorial you will learn how to:
 Install a Kafka cluster with 3 brokers using the DC/OS CLI:
 
 ```bash
-$ dcos package install kafka
+dcos package install kafka
 ```
 
 While the DC/OS command line interface (CLI) is immediately available, it takes a few minutes for the Kafka service to start.
@@ -85,21 +85,21 @@ To start a minimal cluster with a single broker, create a JSON options file name
 ```
 Install the Kafka cluster:
 ```bash
-$ dcos package install kafka --options=kafka-minimal.json
+dcos package install kafka --options=kafka-minimal.json
 ```
 
 ## Topic management
 
 ### Add a topic:
 ```bash
-$ dcos kafka topic create topic1 --partitions 1 --replication 1
+dcos kafka topic create topic1 --partitions 1 --replication 1
 ```
 
 ## Produce and consume messages
 
 ### List Kafka client endpoints
 ```bash
-$ dcos kafka connection
+dcos kafka connection
 {
     "address": [
         "10.0.0.211:9843"
@@ -117,9 +117,9 @@ will be different from cluster to cluster, since these services are dynamically 
 
 ### Produce a message
 ```bash
-$ dcos node ssh --master-proxy --leader
+dcos node ssh --master-proxy --leader
 
-core@ip-10-0-6-153 ~ $ docker run -it mesosphere/kafka-client
+core@ip-10-0-6-153 ~ docker run -it mesosphere/kafka-client
 
 root@7d0aed75e582:/bin# echo "Hello, World." | ./kafka-console-producer.sh --broker-list KAFKA_ADDRESS:PORT --topic topic1
 ```
@@ -142,7 +142,7 @@ Return to the DC/OS CLI environment (exit the Docker container with CTRL-D, exit
 another CTRL-D).
 
 ```bash
-$ dcos package uninstall --app-id=kafka kafka
+dcos package uninstall --app-id=kafka kafka
 ```
 
 Then, use the [framework cleaner](/docs/1.7/usage/managing-services/uninstall/#framework-cleaner) script to remove your Kafka instance from ZooKeeper and to destroy all data associated with it. The script requires several arguments, the values for which are derived from your service name:
@@ -153,6 +153,6 @@ Then, use the [framework cleaner](/docs/1.7/usage/managing-services/uninstall/#f
 
 ## Further resources
 
-- [DC/OS Kafka Official Documentation](http://docs.mesosphere.com/1.7/usage/service-guides/kafka)
+- [DC/OS Kafka Official Documentation](http://docs.mesosphere.com/service-docs/kafka)
 
 - <a name=api-reference></a>[Kafka API Reference](https://kafka.apache.org/documentation.html)

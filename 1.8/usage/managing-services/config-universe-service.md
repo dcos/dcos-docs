@@ -12,7 +12,7 @@ This topic describes how to use the DC/OS CLI to configure services. You can als
     For example, to view the Marathon config.json file:
 
     ```bash
-    $ dcos package describe --config marathon
+    dcos package describe --config marathon
     ```
     
     The output should look similar to this:
@@ -45,7 +45,7 @@ This topic describes how to use the DC/OS CLI to configure services. You can als
 2.  Create a JSON configuration file with your customizations. You can choose an arbitrary name, but you might want to choose a pattern like `<package-name>-config.json`. For example, `marathon-config.json`.
 
     ```bash
-    $ nano marathon-config.json
+    nano marathon-config.json
     ```
 
     For example, to change the number of Marathon CPU shares to 3 and memory allocation to 2048:
@@ -61,7 +61,7 @@ This topic describes how to use the DC/OS CLI to configure services. You can als
 4.  From the DC/OS CLI, install the DC/OS service with your custom options file specified. For example, to install Marathon with the custom options:
 
     ```bash
-    $ dcos package install --options=marathon-config.json marathon
+    dcos package install --options=marathon-config.json marathon
     ```
 
 For more information, see the [dcos package](/docs/1.8/usage/cli/command-reference/#dcospackage) documentation.
