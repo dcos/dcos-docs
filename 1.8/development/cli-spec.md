@@ -229,7 +229,7 @@ The same [packaging format and repository][11] is used for both DC/OS Services a
 
 
 
-[1]: /docs/1.8/usage/developing-services/service-requirements-spec/
+[1]: /docs/1.8/development/service-requirements-spec/
 [2]: https://github.com/mesosphere/spark-build 
 [3]: https://github.com/mesosphere/dcos-helloworld
 [4]: http://www.pyinstaller.org/
@@ -239,4 +239,4 @@ The same [packaging format and repository][11] is used for both DC/OS Services a
 [8]: https://github.com/dcos/dcos-cli
 [9]: https://github.com/mesosphere/universe/blob/version-3.x/README.md
 [10]: https://github.com/mesosphere/universe/blob/version-3.x/README.md#resourcejson
-[11]: https://github.com/mesosphere/universe/blob/version-1.x/README.md
+[11]: https://github.com/mesosphere/universe/blob/version-3.x/README.md

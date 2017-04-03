@@ -167,8 +167,8 @@ ALL properties that are used in the `marathon.json` file that are not in a condi
  [1]: https://github.com/mesosphere/universe/blob/version-2.x/repo/packages/C/chronos/0/package.json#L2
  [2]: https://github.com/mesosphere/universe/blob/version-2.x/repo/packages/C/chronos/0/config.json#L98
  [3]: https://github.com/mesosphere/universe/tree/version-1.x/repo/packages/M/marathon/0
- [4]: https://github.com/mesosphere/universe/blob/version-1.x/repo/packages/S/spark/2/command.json
+ [4]: https://github.com/mesosphere/universe/blob/version-3.x/repo/packages/S/spark/2/command.json
  [5]: https://github.com/mesosphere/universe#resourcejson
  [6]: https://mesosphere.github.io/marathon/docs/health-checks.html
  [7]: /docs/1.8/overview/architecture/components/
- [8]: https://github.com/mesosphere/universe/blob/version-1.x/repo/packages/M/marathon/4/marathon.json#L10-L12
+ [8]: https://github.com/mesosphere/universe/blob/version-3.x/repo/packages/M/marathon/4/marathon.json#L10-L12

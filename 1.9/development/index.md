@@ -9,13 +9,13 @@ The Mesosphere Datacenter Operating System (DC/OS) provides the optimal user exp
 
 # <a name="universe"></a>Package Repositories
 
-The DC/OS Universe contains all of the services that are installable DC/OS. For more information on DC/OS Universe, see the [GitHub Universe repository(https://github.com/mesosphere/universe).
+The DC/OS Universe contains all of the services that are installable DC/OS. For more information on DC/OS Universe, see the [GitHub Universe repository](https://github.com/mesosphere/universe).
 
-All services in the package repositories are required to meet a certain standard as defined by Mesosphere. For details on submitting a DC/OS service, see [Contributing a package](http://mesosphere.github.io/universe/#publish-a-package-1).
+All services in the package repositories are required to meet a certain standard as defined by Mesosphere. For details on submitting a DC/OS service, see [Contributing a package](/docs/1.9/development/create-package/).
 
 # <a name="adminrouter"></a>Admin Router and web interface integration
 
-By default, a DC/OS service is deployed on a [private agent node](/1.9/overview/concepts/#private-agent-node). To allow configuration control or monitoring of a service by a user, the admin router proxies calls on the master node to the service in a private node on the cluster. The HTTP service endpoint requires relative paths for artifacts and resources. The service endpoint can provide a web interface, a RESTful endpoint, or both. When creating a DC/OS CLI subcommand it is common to have a RESTful endpoint to communicate with the scheduler service.
+By default, a DC/OS service is deployed on a [private agent node](/docs/1.9/overview/concepts/#private-agent-node). To allow configuration control or monitoring of a service by a user, the admin router proxies calls on the master node to the service in a private node on the cluster. The HTTP service endpoint requires relative paths for artifacts and resources. The service endpoint can provide a web interface, a RESTful endpoint, or both. When creating a DC/OS CLI subcommand it is common to have a RESTful endpoint to communicate with the scheduler service.
 
 The integration to the admin router is automatic when a framework scheduler registers a `webui_url` during the registration process with the Mesos master. There are a couple of limitations:
 
