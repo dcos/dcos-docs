@@ -33,7 +33,7 @@ The DC/OS CLI provides a convenient way to deploy applications on your DC/OS clu
 Deploying ArangoDB via the DC/OS CLI is as easy as:
 
 ```bash
-$ dcos package install arangodb3
+dcos package install arangodb3
 ```
 
 This command installs the `arangodb3` subcommand and starts an instance of the ArangoDB service with its default configuration under its standard name, "arangodb3" via Marathon.
@@ -63,9 +63,9 @@ To connect to ArangoDB from the inside deploy the [ArangoDB Mesos HAProxy](https
 Clone the repository and start the proxy:
 
 ```bash
-$ git clone https://github.com/arangodb/arangodb-mesos-haproxy
-$ cd arangodb-mesos-haproxy
-$ dcos marathon app add marathon.json
+git clone https://github.com/arangodb/arangodb-mesos-haproxy
+cd arangodb-mesos-haproxy
+dcos marathon app add marathon.json
 ```
 
 To make your proxy highly available or scale it, you can simply add a few more instances via the Marathon UI.
@@ -78,7 +78,7 @@ Use the following commands to shut down and delete your ArangoDB service and the
 command line tool:
 
 ```bash
-$ dcos arangodb3 uninstall; dcos package uninstall arangodb3
+dcos arangodb3 uninstall; dcos package uninstall arangodb3
 ```
 
 The first command uses the `arangodb` subcommand to gracefully shut down and
@@ -94,14 +94,14 @@ There are a number of configuration options, which can be specified in the follo
 way:
 
 ```bash
-$ dcos package install --config=<JSON_FILE> arangodb
+dcos package install --config=<JSON_FILE> arangodb
 ```
 
 where `JSON_FILE` is the path to a JSON file. For a list of possible
 attribute values and their documentation see
 
 ```bash
-$ dcos package describe --config arangodb
+dcos package describe --config arangodb
 ```
 
 ### Further Information

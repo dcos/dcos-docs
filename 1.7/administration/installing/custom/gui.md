@@ -26,13 +26,13 @@ The DC/OS installation creates these folders:
 1.  Download the [DC/OS installer][1] to your bootstrap node.
 
     ```bash
-    $ curl -O https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/dcos_generate_config.sh
+    curl -O https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/dcos_generate_config.sh
     ```
 
 1.  From your terminal, start the DC/OS GUI installer with this command.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --web
+    sudo bash dcos_generate_config.sh --web
     ```
 
     Here is an example of the output.
@@ -46,7 +46,7 @@ The DC/OS installation creates these folders:
     **Tip:** You can add the verbose (`-v`) flag to see the debug output:
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --web -v
+    sudo bash dcos_generate_config.sh --web -v
     ```
 
 2.  Launch the DC/OS web installer in your browser at: `http://<bootstrap-node-public-ip>:9000`.
@@ -126,15 +126,15 @@ It is recommended that you save your DC/OS installer file immediately after inst
 
     ```bash
     # <Ctrl-C> to exit installer
-    $ cd genconf/serve
-    $ sudo tar cf dcos-install.tar *
+    cd genconf/serve
+    sudo tar cf dcos-install.tar *
     ```
 
 1.  Copy the `dcos-install.tar` file to another location for backup. For example, you can use Secure Copy (scp) to copy `dcos-install.tar` to your home directory:
 
     ```bash
-    $ exit
-    $ scp -i $username@$node-ip:~/genconf/serve/dcos-install.tar ~
+    exit
+    scp -i $username@$node-ip:~/genconf/serve/dcos-install.tar ~
     ```
 
 ## Next Steps

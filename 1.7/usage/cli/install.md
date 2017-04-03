@@ -30,7 +30,7 @@ The easiest way to install the DC/OS CLI is by clicking the signpost icon in the
 1.  Install **virtualenv**:
 
     ```bash
-    $ sudo pip install virtualenv
+    sudo pip install virtualenv
     ```
 
     **Tip:** On some older Python versions, you might receive an "Insecure Platform" warning, but you can safely ignore this. For more information, see <a href="https://virtualenv.pypa.io/en/latest/installation.html" target="_blank">https://virtualenv.pypa.io/en/latest/installation.html</a>.
@@ -38,25 +38,25 @@ The easiest way to install the DC/OS CLI is by clicking the signpost icon in the
 2.  From the command line, create a new directory named `dcos` and change your working directory to it.
 
     ```bash
-    $ mkdir dcos && cd dcos
+    mkdir dcos && cd dcos
     ```
 
 3.  Download the DC/OS CLI install script to your new directory:
 
     ```bash
-    $ curl -O https://downloads.dcos.io/dcos-cli/install.sh
+    curl -O https://downloads.dcos.io/dcos-cli/install.sh
     ```
 
 4.  Run the DC/OS CLI install script, where `<installdir>` is the DC/OS installation directory and `<hosturl>` is the hostname of your master node prefixed with `http://`:
 
     ```bash
-    $ bash install.sh <install_dir> http://<hosturl>
+    bash install.sh <install_dir> http://<hosturl>
     ```
 
     For example, if the hostname of your AWS master node is `dcos-ab-1234.us-west-2.elb.amazonaws.com`:
 
     ```bash
-    $ bash install.sh . http://dcos-ab-1234.us-west-2.elb.amazonaws.com
+    bash install.sh . http://dcos-ab-1234.us-west-2.elb.amazonaws.com
     ```
 
 5.  Follow the on-screen DC/OS CLI instructions. You can ignore any Python "Insecure Platform" warnings.
@@ -64,7 +64,7 @@ The easiest way to install the DC/OS CLI is by clicking the signpost icon in the
 6.  Authenticate your CLI with your master node and set the auth token, run the below command on bootstrap instance:
 
     ```bash
-    $ dcos auth login
+    dcos auth login
     ```
 
     You will be provided an URL and prompted to enter the authentication token. Visit the URL to get your authentication token.
@@ -235,7 +235,7 @@ Pip is included with Python, but you must upgrade pip for it to work properly wi
 1. Authenticate your CLI with your master node and set the auth token, run the below command on bootstrap instance:
 
     ```powershell
-    $ dcos auth login
+    dcos auth login
     ```
 
     You will be provided an URL and prompted to enter the authentication token. Visit the URL to get your authentication token.

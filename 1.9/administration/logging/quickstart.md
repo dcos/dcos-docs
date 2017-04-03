@@ -2,7 +2,7 @@
 post_title: Quick Start
 menu_order: 0
 post_excerpt: ""
-feature_maturity: experimental
+feature_maturity: preview
 enterprise: 'no'
 ---
 
@@ -27,13 +27,13 @@ Deploy a sample Marathon app for use in this quick start guide.
 1.  Deploy the app with this CLI command:
     
     ```bash
-    $ dcos marathon app add test-log.json
+    dcos marathon app add test-log.json
     ```
 
 1.  Verify that the app has been successfully deployed and note task ID:
 
     ```bash
-    $ dcos task test-log
+    dcos task test-log
     ```
     
     The output should resemble:
@@ -50,7 +50,7 @@ You can access the Mesos stderr and stdout logs natively through the DC/OS CLI `
 1.  Run this command to view the stdout logs, where `<task_id>` is the task ID:
 
     ```bash
-    $ dcos task log <task_id>
+    dcos task log <task_id>
     ```
     
     The output should resemble:
@@ -62,7 +62,7 @@ You can access the Mesos stderr and stdout logs natively through the DC/OS CLI `
 1.  Run this command to follow the logs, where `<task_id>` is the task ID:
 
     ```bash
-    $ dcos task log --follow <task_id>
+    dcos task log --follow <task_id>
     ```
     
     This will create a running stream of logs similar to this:
@@ -75,7 +75,7 @@ You can access the Mesos stderr and stdout logs natively through the DC/OS CLI `
 1.  Run this command to get last 5 log entries:
  
     ```bash
-    $ dcos task log <task_id> --lines=5
+    dcos task log <task_id> --lines=5
     ```
     
     The output should resemble:
@@ -95,7 +95,7 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
 1.  Run this command to view the leading Mesos master logs:
 
     ```bash
-    $ dcos node log --leader --lines 3 
+    dcos node log --leader --lines 3 
     ```
     
     The output should resemble:
@@ -109,7 +109,7 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
 1.  Run this command to view the Mesos agent logs, where node ID (`<node_id>`) is specified:
 
     ```bash
-    $ dcos node log --mesos-id=<node_id> --lines 3
+    dcos node log --mesos-id=<node_id> --lines 3
     ```
     
     **Tip:** Run `dcos task` to identify which node is running your app, followed by `dcos node` to get the node ID.
@@ -127,7 +127,7 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
     -   Leader node:
     
         ```bash
-        $ dcos node list-components --leader
+        dcos node list-components --leader
         ```
  
         The output should resemble:
@@ -146,10 +146,10 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
         ...
         ```
     
-    -  Agent node, where your node ID (`<node-id>`) is specified:
+    -  Agent node, where your node ID (`<mesos-id>`) is specified:
     
        ```bash
-       $ dcos node list-components --mesos-id=<node-id>
+       dcos node list-components --mesos-id=<mesos-id>
        ```
        
        The output should resemble:
@@ -170,7 +170,7 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
 1.  Run this command to view the leading master component log for DC/OS components. In this example, the Marathon component logs are queried:
 
     ```bash
-    $ dcos node log --leader --component dcos-marathon.service
+    dcos node log --leader --component dcos-marathon.service
     ```
     
     The output should resemble:
@@ -180,4 +180,6 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
     Thu Dec 15 00:34:08 2016 ip-10-0-6-165.us-west-2.compute.internal java [2541] [2016-12-15 00:34:08,121] INFO  Received status update for task test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd: TASK_RUNNING (Reconciliation: Latest task state) (mesosphere.marathon.MarathonScheduler$$EnhancerByGuice$$28056dde:Thread-297)
     ...
     ```
+    
+For examples using the logging API, see the [documentation](/docs/1.9/administration/logging/logging-api/).
     

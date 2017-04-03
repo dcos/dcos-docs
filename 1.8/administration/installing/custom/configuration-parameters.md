@@ -75,7 +75,7 @@ This option specifies that Mesos agents are used to discover the masters by givi
 
 *   `master_discovery: master_http_loadbalancer` This option specifies that the set of masters has an HTTP load balancer in front of them. The agent nodes will know the address of the load balancer. They use the load balancer to access Exhibitor on the masters to get the full list of master IPs. If you specify `master_http_load_balancer`, you must also specify these parameters:
 
-    *   **exhibitor_address** This required parameter specifies the location (preferably an IP address) of the load balancer in front of the masters. The load balancer must accept traffic on ports 8080, 5050, 80, and 443; and forward it to the same ports on the master (for example, 8080 on lb -> 8080 on one master, 5050 on lb -> 5050 on one master). The master should forward any new connections via round robin, and should avoid machines that do not respond to requests on port 5050 to ensure the master is up.
+    *  **exhibitor_address** This required parameter specifies the location (preferably an IP address) of the load balancer in front of the masters. The load balancer must accept traffic on ports 80, 443, 2181, 5050, 8080, 8181. The traffic must also be forwarded to the same ports on the master. For example, Mesos port 5050 on the load balancer should forward to port 5050 on the master. The master should forward any new connections via round robin, and should avoid machines that do not respond to requests on Mesos port 5050 to ensure the master is up.
     *  **num_masters**
        This required parameter specifies the number of Mesos masters in your DC/OS cluster. It cannot be changed later. The number of masters behind the load balancer must never be greater than this number, though it can be fewer during failures.
 
@@ -157,9 +157,9 @@ This parameter specifies whether to enable the DC/OS proxy.
 *  `use_proxy: 'false'` Do not configure DC/OS [components](/docs/1.8/overview/components/) to use a custom proxy. This is the default value.
 *  `use_proxy: 'true'` Configure DC/OS [components](/docs/1.8/overview/components/) to use a custom proxy. If you specify `use_proxy: 'true'`, you can also specify these parameters:
     
-    *  `http_proxy: <your_http_proxy>` This parameter specifies the HTTP proxy.
-    *  `https_proxy: <your_https_proxy>` This parameter specifies the HTTPS proxy.
-    *  `no_proxy: - <ip-address>` This parameter specifies YAML nested list (-) of addresses to exclude from the proxy.
+    *  `http_proxy: http://<user>:<pass>@<proxy_host>:<http_proxy_port>` This parameter specifies the HTTP proxy.
+    *  `https_proxy: https://<user>:<pass>@<proxy_host>:<https_proxy_port>` This parameter specifies the HTTPS proxy.
+    *  `no_proxy: - .<(sub)domain>` This parameter specifies YAML nested list (-) of addresses to exclude from the proxy.
     
     **Important:** 
     
@@ -364,10 +364,11 @@ ssh_user: <username>
     ssh_port: 22
     ssh_user: centos
     use_proxy: 'true'
-    http_proxy: http://<your_http_proxy>/
-    https_proxy: https://<your_https_proxy>/
+    http_proxy: http://<proxy_host>:<http_proxy_port>
+    https_proxy: https://<proxy_host>:<https_proxy_port>
     no_proxy:
-    - '*.int.example.com'
+    - 'foo.bar.com'
+    - '.baz.com'
 ```
 
  [1]: https://en.wikipedia.org/wiki/YAML

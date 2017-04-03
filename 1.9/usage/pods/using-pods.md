@@ -1,10 +1,10 @@
 ---
 post_title: Using Pods
-feature_maturity: experimental
+feature_maturity: preview
 menu_order: 20
 ---
 
-You can create and manage your pods via the DC/OS CLI or via the `/v2/pods/` endpoint of the [Marathon REST API](http://mesosphere.github.io/marathon/docs/generated/api.html).
+You can create and manage your pods via the DC/OS CLI or via the `/v2/pods/` endpoint of the [Marathon REST API](/docs/1.9/usage/managing-services/rest-api/).
 
 # Using the Pods CLI
 
@@ -20,19 +20,19 @@ The following commands are available in the pods CLI:
 
 To add a pod, first create a JSON pod definition. Then, run the following command:
 ```bash
-$ dcos marathon pod add <pod-json-file>
+dcos marathon pod add <pod-json-file>
 ```
 
 ## List Pods
 List pods and the number of containers they have with the following command:
 ```bash
-$ dcos marathon pod list
+dcos marathon pod list
 ```
 
 ## Remove a Pod
 Remove a pod with the following command:
 ```bash
-$ dcos marathon pod remove <pod-id>
+dcos marathon pod remove <pod-id>
 ```
 
 If the pod is currently deploying, you will not be able to remove the pod. To remove the pod anyway, run the command with the `--force` flag.
@@ -40,7 +40,7 @@ If the pod is currently deploying, you will not be able to remove the pod. To re
 ## Show Pod JSON
 To see the pod definition, run the following command:
 ```bash
-$ dcos marathon pod show <pod-id>
+dcos marathon pod show <pod-id>
 ```
 You can use the `show` command to read data about the pod programmatically.
 
@@ -48,7 +48,7 @@ You can use the `show` command to read data about the pod programmatically.
 To update a pod, first modify the JSON definition for the pod, then run the following command: 
 
 ```bash
-$ dcos marathon pod update <pod-id> < <new-pod-definition>
+dcos marathon pod update <pod-id> < <new-pod-definition>
 ```
 
 If the pod is currently deploying, you will not be able to update the pod. To update the pod anyway, run the command with the `--force` flag.
@@ -58,7 +58,7 @@ If the pod is currently deploying, you will not be able to update the pod. To up
 ## Create
 
 ```bash
- $ curl -X POST -H "Content-type: application/json" -d@<mypod>.json http://<ip>:<port>/v2/pods
+ curl -X POST -H "Content-type: application/json" -d@<mypod>.json http://<ip>:<port>/v2/pods
 ```
 
 Sample response:

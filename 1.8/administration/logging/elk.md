@@ -1,7 +1,6 @@
 ---
 post_title: Log Management in DC/OS with ELK
 menu_order: 1
-enterprise: 'no'
 ---
 
 You can pipe system and application logs from the nodes in a DC/OS cluster to your existing ElasticSearch, Logstash, and Kibana (ELK) server. This document describes how to store all unfiltered logs directly on ElasticSearch, and then perform filtering and specialized querying on ElasticSearch directly. The Filebeat output from each node is sent directly to a centralized ElasticSearch instance, without using Logstash. If you're interested in using Logstash for log processing or parsing, consult the [Filebeat][2] and [Logstash][8] documentation.
@@ -21,25 +20,25 @@ For all nodes in your DC/OS cluster:
 1.  Install Elastic's [Filebeat][2]. Installers are available for most major platforms.
 
     ```bash
-    $ curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.0.0-x86_64.rpm
-    $ sudo rpm -vi filebeat-5.0.0-x86_64.rpm
+    curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.0.0-x86_64.rpm
+    sudo rpm -vi filebeat-5.0.0-x86_64.rpm
     ```
 
 1.  Create the `/var/log/dcos` directory:
 
     ```bash
-    $ sudo mkdir -p /var/log/dcos
+    sudo mkdir -p /var/log/dcos
     ```
 1.  Move the default Filebeat configuration file to a backup copy:
 
     ```bash
-    $ sudo mv /etc/filebeat/filebeat.yml /etc/filebeat/filebeat.yml.BAK
+    sudo mv /etc/filebeat/filebeat.yml /etc/filebeat/filebeat.yml.BAK
     ```
     
 1.  Populate a new `filebeat.yml` configuration file, including an additional input entry for the file `/var/log/dcos/dcos.log`. The additional log file will be used to capture the DC/OS logs in a later step. Remember to substitute the variables `$ELK_HOSTNAME` and `$ELK_PORT` below for the actual values of the host and port where your ElasticSearch is listening on.
 
     ```bash
-    $ sudo tee /etc/filebeat/filebeat.yml <<-EOF 
+    sudo tee /etc/filebeat/filebeat.yml <<-EOF 
     filebeat.prospectors:
     - input_type: log
       paths:
@@ -57,12 +56,12 @@ For all nodes in your DC/OS cluster:
 
 For each Master node in your DC/OS cluster:
 
-1.  Create a script that will parse the output of the DC/OS master `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
+1.  Create a script that will parse the output of the DC/OS master `journalctl` logs and funnel them all to `/var/log/dcos/dcos.log`.
 
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
     ```bash
-    $ sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF 
+    sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF 
     [Unit]
     Description=DCOS journalctl parser to filebeat
     Wants=filebeat.service
@@ -117,12 +116,12 @@ For each Master node in your DC/OS cluster:
 
 For each Agent node in your DC/OS cluster:
 
-1.  Create a script that will parse the output of the DC/OS agent `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
+1.  Create a script that will parse the output of the DC/OS agent `journalctl` logs and funnel them all to `/var/log/dcos/dcos.log`.
 
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
     ```bash
-    $ sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF 
+    sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF 
     [Unit]
     Description=DCOS journalctl parser to filebeat
     Wants=filebeat.service
@@ -168,12 +167,12 @@ For each Agent node in your DC/OS cluster:
 1.  For all nodes, start and enable the Filebeat log parsing services created above:
 
     ```bash
-    $ sudo chmod 0755 /etc/systemd/system/dcos-journalctl-filebeat.service
-    $ sudo systemctl daemon-reload
-    $ sudo systemctl start dcos-journalctl-filebeat.service
-    $ sudo chkconfig dcos-journalctl-filebeat.service on
-    $ sudo systemctl start filebeat
-    $ sudo chkconfig filebeat on
+    sudo chmod 0755 /etc/systemd/system/dcos-journalctl-filebeat.service
+    sudo systemctl daemon-reload
+    sudo systemctl start dcos-journalctl-filebeat.service
+    sudo chkconfig dcos-journalctl-filebeat.service on
+    sudo systemctl start filebeat
+    sudo chkconfig filebeat on
     ```
 
 # <a name="all"></a>Step 3: ELK Node Notes

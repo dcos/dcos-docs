@@ -154,7 +154,7 @@ A Marathon service consists of zero or more containerized service instances. Eac
     - Marathon pod instances map 1 to many with tasks.
 - Service instances are restarted as a new Mesos Task when they exit prematurely.
 - Service instances may be re-scheduled onto another agent node if they exit prematurely and the agent is down or does not have enough resources any more.
-- Services may be installed directly via the [DC/OS API (Marathon)](http://mesosphere.github.io/marathon/docs/rest-api.html) or indirectly via the [DC/OS Package Manager (Cosmos)](#package-manager) from a [package repository](#dcos-package-repository) like [Mesosphere Universe](#mesosphere-universe). The [DC/OS GUI](#dcos-gui) and [DC/OS CLI](#dcos-cli) may be used to interact with the DC/OS Package Manager (Cosmos) more easily.
+- Services can be installed directly via the [DC/OS API (Marathon)](/docs/1.9/usage/managing-services/rest-api/) or indirectly via the [DC/OS Package Manager (Cosmos)](#package-manager) from a [package repository](#dcos-package-repository) like [Mesosphere Universe](#mesosphere-universe). The [DC/OS GUI](#dcos-gui) and [DC/OS CLI](#dcos-cli) may be used to interact with the DC/OS Package Manager (Cosmos) more easily.
 - A Marathon service may be a [DC/OS scheduler](#dcos-scheduler), but not all services are schedulers.
 - A Marathon service is an abstraction around Marathon service instances which are an abstraction around Mesos tasks. Other schedulers (e.g. DC/OS Jobs (Metronome), Jenkins) have their own names for abstractions around Mesos tasks.
 
@@ -222,7 +222,7 @@ A DC/OS component is a DC/OS system service that is distributed with DC/OS.
 - Components may be deployed in a high availability configuration.
 - Most components run on the master nodes, but some (e.g. mesos-agent) run on the agent nodes.
 
-Examples: Mesos, Marathon, Mesos-DNS, Bouncer, Admin Router, DC/OS Package Manager (Cosmos), Minuteman, History Service, etc.
+Examples: Mesos, Marathon, Mesos-DNS, Bouncer, Admin Router, DC/OS Package Manager (Cosmos), History Service, etc.
 
 ### <a name="dcos-package"></a>Package
 
@@ -348,7 +348,7 @@ A Mesos resource offer provides a set of unallocated resources (e.g. cpu, disk, 
 
 ### <a name="mesos-containerizer"></a>Containerizer
 
-A Mesos containerizer is a containerization and resource isolation abstraction around a specific container runtime, namely the [Docker Runtime](#mesos-docker-runtime) and [Mesos Universal Container Runtime](#mesos-universal-container-runtime).
+A containerizer is a containerization and resource isolation abstraction around a specific container runtime, namely the [Docker Runtime](#mesos-docker-runtime) and [Mesos Universal Container Runtime](#mesos-universal-container-runtime).
 
 #### <a name="mesos-universal-container-runtime"></a>Mesos Universal Container Runtime
 

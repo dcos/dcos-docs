@@ -1,6 +1,6 @@
 ---
 post_title: Technical Overview
-feature_maturity: experimental
+feature_maturity: preview
 menu_order: 10
 ---
 
@@ -13,7 +13,7 @@ You configure a pod via a pod definition, which is similar to a Marathon applica
 - You must specify an endpoint (not a port number) in order for other applications to communicate with your pod.
 - Pods have a separate REST API.
 - Pods support only Mesos-level health checks.
-You can create and manage pods with the DC/OS CLI or via the /v2/pods/ endpoint of the [Marathon REST API](http://mesosphere.github.io/marathon/docs/generated/api.html).
+You can create and manage pods with the DC/OS CLI or via the /v2/pods/ endpoint of the [Marathon REST API](/docs/1.9/usage/managing-services/rest-api/).
 
 # Networking
 Marathon pods only support the [DC/OS Universal container runtime](/docs/1.9/usage/containerizers/), which supports multiple image formats, including Docker.
@@ -34,7 +34,7 @@ Containers within a pod share ephemeral storage. Volumes are declared at the pod
  History is permanently tied to `pod_id`. If you delete a pod and then reuse the ID, even if the details of the pod are different, the new pod will have the previous history (such as version information).
 
 # Pod Definitions
-Pods are configured via a JSON pod definition, which is similar to a Marathon [application definition](/docs/1.9/usage/marathon/application-basics/). You must declare the resources required by each container in the pod because Mesos, not Marathon, determines how and when to perform isolation for all resources requested by a pod. See the [Examples](#examples) section for complete pod definitions.
+Pods are configured via a JSON pod definition, which is similar to a Marathon [application definition](/docs/1.9/usage/managing-services/application-basics/). You must declare the resources required by each container in the pod because Mesos, not Marathon, determines how and when to perform isolation for all resources requested by a pod. See the [Examples](#examples) section for complete pod definitions.
 
 ## Executor Resources
 

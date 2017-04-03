@@ -100,13 +100,13 @@ You'll notice that we're creating a volume for postgres to use for its data. Eve
 
 
 ```
-$ dcos marathon app add https://dcos.io/docs/1.7/usage/tutorials/marathon/stateful-services/postgres.marathon.json
+dcos marathon app add https://dcos.io/docs/1.7/usage/tutorials/marathon/stateful-services/postgres.marathon.json
 ```
 
 One the service has been scheduled and the docker container has downloaded, postgres will become healthy and be ready to use. You can see this by checking out what tasks are running on your cluster:
 
 ```
-$ dcos marathon task list
+dcos marathon task list
 APP        HEALTHY          STARTED              HOST     ID
 /postgres    True   2016-04-13T17:25:08.301Z  10.0.1.223  postgres.f2419e31-018a-11e6-b721-0261677b407a
 ```
@@ -116,13 +116,13 @@ APP        HEALTHY          STARTED              HOST     ID
 Now, stop the service:
 
 ```
-$ dcos marathon app stop postgres
+dcos marathon app stop postgres
 ```
 
 This command scales the `instances` count down to 0 and kills all running tasks. If you inspect the tasks list again, you will notice that the task is still there, however, containing the information about which agent it was placed on and which persistent volume it had attached, but without a `startedAt` value:
 
 ```
-$ dcos marathon task list
+dcos marathon task list
 APP        HEALTHY  STARTED     HOST     ID
 /postgres    True     N/A    10.0.1.223  postgres.f2419e31-018a-11e6-b721-0261677b407a
 ```
@@ -132,7 +132,7 @@ APP        HEALTHY  STARTED     HOST     ID
 Start the stateful service again:
 
 ```
-$ dcos marathon app start postgres
+dcos marathon app start postgres
 ```
 
 The metadata of the previous `postgres` task is used to launch a new task that takes over the reservations and volumes of the previously stopped service. Inspect the running task again by repeating the command from the previous step. You will see that the same `persistenceId` is used and the running service task is using the same data as the previous one.
@@ -142,7 +142,7 @@ The metadata of the previous `postgres` task is used to launch a new task that t
 In order to restore the state of your cluster as it was before installing the stateful service, you delete the service:
 
 ```
-$ dcos marathon app remove postgres
+dcos marathon app remove postgres
 ```
 
 ## Appendix

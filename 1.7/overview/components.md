@@ -54,7 +54,7 @@ The erlang port mapper is designed to support our internal layer 4 load balancer
 
 
 ## Exhibitor Service
-Exhibitor is a project from [netflix](https://github.com/Netflix/exhibitor) that allows us to manage and automate the deployment of ZooKeeper.
+[Exhibitor](https://github.com/soabase/exhibitor) is a project originally from Netflix that allows us to manage and automate the deployment of ZooKeeper.
 
 
 ## Generate resolv.conf (gen-resolvconf) Service

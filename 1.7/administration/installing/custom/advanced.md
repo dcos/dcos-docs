@@ -29,7 +29,7 @@ The DC/OS installation creates these folders:
 1.  Create a directory named `genconf` on your bootstrap node and navigate to it.
 
     ```bash
-    $ mkdir -p genconf
+    mkdir -p genconf
     ```
 
 1.  Create a configuration file and save as `genconf/config.yaml`.
@@ -148,13 +148,13 @@ To install DC/OS:
 1.  Download the [DC/OS installer][4].
 
     ```bash
-    $ curl -O https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/dcos_generate_config.sh
+    curl -O https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/dcos_generate_config.sh
     ```
 
 1.  From the bootstrap node, run the DC/OS installer shell script to generate a customized DC/OS build file. The setup script extracts a Docker container that uses the generic DC/OS install files to create customized DC/OS build files for your cluster. The build files are output to `./genconf/serve/`.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh
+    sudo bash dcos_generate_config.sh
     ```
 
     At this point your directory structure should resemble:
@@ -170,7 +170,7 @@ To install DC/OS:
 1.  <a name="nginx"></a>From your home directory, run this command to host the DC/OS install package through an NGINX Docker container. For `<your-port>`, specify the port value that is used in the `bootstrap_url`.
 
     ```bash
-    $ sudo docker run -d -p <your-port>:80 -v $PWD/genconf/serve:/usr/share/nginx/html:ro nginx
+    sudo docker run -d -p <your-port>:80 -v $PWD/genconf/serve:/usr/share/nginx/html:ro nginx
     ```
 
 1.  Run these commands on each of your master nodes in succession to install DC/OS using your custom build file.
@@ -180,25 +180,25 @@ To install DC/OS:
     1.  SSH to your master nodes:
 
         ```bash
-        $ ssh <master-ip>
+        ssh <master-ip>
         ```
 
     2.  Make a new directory and navigate to it:
 
         ```bash
-        $ mkdir /tmp/dcos && cd /tmp/dcos
+        mkdir /tmp/dcos && cd /tmp/dcos
         ```
 
     3.  Download the DC/OS installer from the NGINX Docker container, where `<bootstrap-ip>` and `<your_port>` are specified in `bootstrap_url`:
 
         ```bash
-        $ curl -O http://<bootstrap-ip>:<your_port>/dcos_install.sh
+        curl -O http://<bootstrap-ip>:<your_port>/dcos_install.sh
         ```
 
     4.  Run this command to install DC/OS on your master nodes:
 
         ```bash
-        $ sudo bash dcos_install.sh master
+        sudo bash dcos_install.sh master
         ```
 
 1.  Run these commands on each of your agent nodes to install DC/OS using your custom build file.
@@ -206,19 +206,19 @@ To install DC/OS:
     1.  SSH to your agent nodes:
 
         ```bash
-        $ ssh <agent-ip>
+        ssh <agent-ip>
         ```
 
     2.  Make a new directory and navigate to it:
 
         ```bash
-        $ mkdir /tmp/dcos && cd /tmp/dcos
+        mkdir /tmp/dcos && cd /tmp/dcos
         ```
 
     3.  Download the DC/OS installer from the NGINX Docker container, where `<bootstrap-ip>` and `<your_port>` are specified in `bootstrap_url`:
 
         ```bash
-        $ curl -O http://<bootstrap-ip>:<your_port>/dcos_install.sh
+        curl -O http://<bootstrap-ip>:<your_port>/dcos_install.sh
         ```
 
     4.  Run this command to install DC/OS on your agent nodes. You must designate your agent nodes as [public][6] or [private][7].
@@ -226,13 +226,13 @@ To install DC/OS:
         *  Private agent nodes:
 
             ```bash
-            $ sudo bash dcos_install.sh slave
+            sudo bash dcos_install.sh slave
             ```
 
         *  Public agent nodes:
 
            ```bash
-           $ sudo bash dcos_install.sh slave_public
+           sudo bash dcos_install.sh slave_public
            ```
 
 1.  Monitor Exhibitor and wait for it to converge at `http://<master-ip>:8181/exhibitor/v1/ui/index.html`.

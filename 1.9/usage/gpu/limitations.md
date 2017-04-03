@@ -1,6 +1,6 @@
 ---
 post_title: Limitations and Further Reading
-feature_maturity: experimental
+feature_maturity: preview
 menu_order: 3
 ---
 

@@ -9,15 +9,15 @@ menu_order: 000
 The general syntax for installing a service with the CLI follows. 
 
 ```bash
-$ dcos package install [--options=<config-file-name>.json] <servicename>
+dcos package install [--options=<config-file-name>.json] <servicename>
 ```
 
-Use the optional `--options` flag to specify the name of the customized JSON file you created in [advanced configuration](/docs/1.8/usage/managing-services/config/).
+Use the optional `--options` flag to specify the name of the customized JSON file you created in [advanced configuration](/docs/1.8/usage/managing-services/config-universe-service/).
 
 For example, you would use the following command to install Chronos with the default parameters.
     
 ```bash
-$ dcos package install chronos
+dcos package install chronos
 ```
     
 ## Installing a service using the UI
@@ -31,7 +31,7 @@ From the DC/OS UI you can install services from the **Services** or **Universe**
 
 2.  Choose your package and click **Install package**. 
 
-3.  Confirm your installation or choose [**Advanced Installation**](/docs/1.8/usage/managing-services/config/) to include a custom configuration.
+3.  Confirm your installation or choose [**Advanced Installation**](/docs/1.8/usage/managing-services/config-universe-service/) to include a custom configuration.
 
 ### Services tab
 
@@ -44,7 +44,7 @@ From the DC/OS UI you can install services from the **Services** or **Universe**
 ### CLI
 
 ```bash
-$ dcos package list
+dcos package list
 ```
 
 ### Web UI

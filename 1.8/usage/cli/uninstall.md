@@ -14,13 +14,13 @@ You can uninstall the CLI with these commands for your operating system.
 1.  Delete the hidden `.dcos` directory. This will delete the configuration files for your DC/OS services.
 
     ```bash
-    $ rm -rf ~/.dcos
+    rm -rf ~/.dcos
     ```
     
 1.  Delete the `dcos` executable.  By default, this file is located in `/usr/local/bin/dcos`.
 
     ```bash
-    $ rm -rf /usr/local/bin/dcos
+    rm -rf /usr/local/bin/dcos
     ```
 
 ## <a name="windows"></a>Windows

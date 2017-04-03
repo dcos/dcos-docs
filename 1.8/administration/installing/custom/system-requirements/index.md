@@ -86,7 +86,7 @@ Here are the agent node hardware requirements.
 *   On RHEL 7 and CentOS 7, firewalld must be stopped and disabled. It is a known <a href="https://github.com/docker/docker/issues/16137" target="_blank">Docker issue</a> that firewalld interacts poorly with Docker. For more information, see the <a href="https://github.com/docker/docker/blob/v1.6.2/docs/sources/installation/centos.md#firewalld" target="_blank">Docker CentOS firewalld</a> documentation.
 
     ```bash
-    $ sudo systemctl stop firewalld && sudo systemctl disable firewalld
+    sudo systemctl stop firewalld && sudo systemctl disable firewalld
     ```
 *   DC/OS is installed to `/opt/mesosphere`. Make sure that `/opt/mesosphere` exists on a partition that is not on an LVM Logical Volume or shared storage.
 *   The Mesos master and agent persistent information of the cluster is stored in the `/var/lib/mesos` directory.
@@ -142,7 +142,7 @@ Docker must be installed on all bootstrap and cluster nodes. The supported versi
 Each Linux distribution requires Docker to be installed in a specific way:
 
 *   **CentOS** - [Install Docker from Docker's yum repository][2].
-*   **RHEL** - Install Docker by using a subscription channel. For more information, see <a href="https://access.redhat.com/articles/881893" target="_blank">Docker Formatted Container Images on Red Hat Systems</a>. <!-- $ curl -sSL https://get.docker.com | sudo sh -->
+*   **RHEL** - Install Docker by using a subscription channel. For more information, see <a href="https://access.redhat.com/articles/881893" target="_blank">Docker Formatted Container Images on Red Hat Systems</a>. <!-- curl -sSL https://get.docker.com | sudo sh -->
 *   **CoreOS** - Comes with Docker pre-installed and pre-configured.
 
 For more more information, see Docker's <a href="http://docs.docker.com/engine/installation/" target="_blank">distribution-specific installation instructions</a>.
@@ -164,9 +164,9 @@ Alternatively, you can SSH as the root user.
 Network Time Protocol (NTP) must be enabled on all nodes for clock synchronization. By default, during DC/OS startup you will receive an error if this is not enabled. You can check if NTP is enabled by running one of these commands, depending on your OS and configuration:
 
 ```bash
-$ ntptime
-$ adjtimex -p
-$ timedatectl
+ntptime
+adjtimex -p
+timedatectl
 ```
 
 ## Bootstrap node
@@ -187,7 +187,7 @@ Download and save the [DC/OS setup file][3] to your bootstrap node. This file is
 For advanced install only, install the Docker Nginx image with this command:
 
 ```bash
-$ sudo docker pull nginx
+sudo docker pull nginx
 ```
 
 ## Cluster nodes
@@ -201,7 +201,7 @@ You must have the <a href="http://www.info-zip.org/UnZip.html" target="_blank">U
 To install these utilities on CentOS7 and RHEL7:
 
 ```bash
-$ sudo yum install -y tar xz unzip curl ipset
+sudo yum install -y tar xz unzip curl ipset
 ```
 
 
@@ -214,7 +214,7 @@ On each of your cluster nodes, use the following command to:
 *   Reboot your cluster for the changes to take affect</p>
 
     ```bash
-    $ sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config &&
+    sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config &&
       sudo groupadd nogroup &&
       sudo reboot
     ```

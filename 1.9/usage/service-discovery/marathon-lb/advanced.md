@@ -50,7 +50,7 @@ To specify a global template:
 
 4.  Launch the new Marathon-LB:
 
-        $ dcos package install --options=options.json marathon-lb
+        dcos package install --options=options.json marathon-lb
 
     Your customized Marathon-LB HAProxy instance will now be running with the new template. [A full list of the templates available can be found here][2].
 
@@ -119,11 +119,11 @@ To illustrate how to use the metrics, we will use them to create an [implementat
 
 For a given app, we can measure its performance in terms of requests per second for a given set of resources. If the app is stateless and scales horizontally, we can then scale the number of app instances proportionally to the number of requests per second averaged over N intervals. The autoscale script polls the HAProxy stats endpoint and automatically scales app instances based on the incoming requests.
 
-![image04](../img/image04.png)
+![image04](/docs/1.9/usage/service-discovery/marathon-lb/img/image04.png)
 
 The script takes the current RPS (requests per second) and divides that number by the target RPS per app instance. The result of this fraction is the number of app instances required (or rather, the ceiling of that fraction is the instances required).
 
-![image00](../img/image00.png)
+![image00](/docs/1.9/usage/service-discovery/marathon-lb/img/image00.png)
 
 To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
@@ -133,7 +133,7 @@ To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
 1.  Begin by running marathon-lb-autoscale. The JSON app definition [can be found here][7]. Save the file and launch it on Marathon:
 
-        $ dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/2ca7e10b985b2ce9f8ee/raw/66cbcbe171afc95f8ef49b70034f2842bfdb0aca/marathon-lb-autoscale.json
+        dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/2ca7e10b985b2ce9f8ee/raw/66cbcbe171afc95f8ef49b70034f2842bfdb0aca/marathon-lb-autoscale.json
 
     The JSON app definition passes 2 important arguments to the tool: `--target-rps` tells marathon-lb-autoscale identifies the target RPS and `--apps` is a comma-separated list of the Marathon apps and service ports to monitor, concatenated with `_`. Each app could expose multiple service ports to the load balancer if configured to do so, and marathon-lb-autoscale will scale the app to meet the greatest common denominator for the number of required instances.
 
@@ -148,21 +148,21 @@ To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
 2.  Launch your NGINX test instance. The JSON app definition [can be found here][8]. Save the file, and launch with:
 
-        $ dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/84d0ab8ac057aaacba05/raw/d028fa9477d30b723b140065748e43f8fd974a84/nginx.json
+        dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/84d0ab8ac057aaacba05/raw/d028fa9477d30b723b140065748e43f8fd974a84/nginx.json
 
 3.  Launch siege, a tool for generating HTTP request traffic. The JSON app definition [can be found here][9]. Save the file, and launch with:
 
-        $ dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/fe3fb0c13c19a96c362e/raw/32280a39e1a8a6fe2286d746b0c07329fedcb722/siege.json
+        dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/fe3fb0c13c19a96c362e/raw/32280a39e1a8a6fe2286d746b0c07329fedcb722/siege.json
 
     Now, if you check the HAProxy status page, you should see requests hitting the NGINX instance:
 
-    ![image02](../img/image02-800x508.png)
+    ![image02](/docs/1.9/usage/service-discovery/marathon-lb/img/image02-800x508.png)
 
     Under the “Session rate” section, you can see there are currently about 54 requests per second on the NGINX fronted.
 
 4.  Scale the siege app so that we generate a large number of HTTP requests:
 
-        $ dcos marathon app update /siege instances=15
+        dcos marathon app update /siege instances=15
 
     After a few minutes you will see that the NGINX app has been automatically scaled up to serve the increased traffic.
 

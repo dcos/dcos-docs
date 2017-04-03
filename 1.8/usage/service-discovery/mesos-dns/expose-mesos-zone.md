@@ -22,9 +22,9 @@ In the example, the cryptographic cluster ID `yor6tqhiag39y6cjkdd4w9uzo45qhku6ra
     };
     ```
 
-    1.  Replace the master IP (`<Master-IP>`) with a semicolon separated list of your own master IPs. 
-    
-    1.  Replace the example cryptographic cluster ID with your own.
+1.  Replace the master IP (`<Master-IP>`) with a semicolon separated list of your own master IPs. 
+
+1.  Replace the example cryptographic cluster ID with your own.
 
 
 

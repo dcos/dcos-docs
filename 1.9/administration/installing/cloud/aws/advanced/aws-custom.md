@@ -36,7 +36,7 @@ The custom templates are created from the DC/OS advanced installer.
 1.  Create a directory named `genconf` in the home directory of your node and navigate to it.
     
     ```bash
-    $ mkdir -p genconf
+    mkdir -p genconf
     ```
 1.  Create a configuration file in the `genconf` directory and save as `config.yaml`. This configuration file specifies your AWS credentials and the S3 location to store the generated artifacts. These are the required parameters:
 
@@ -54,7 +54,7 @@ The custom templates are created from the DC/OS advanced installer.
 1.  Run the DC/OS installer script with the AWS argument specified. This command creates and uploads a custom build of the DC/OS artifacts and templates to the specified S3 bucket.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --aws-cloudformation
+    sudo bash dcos_generate_config.sh --aws-cloudformation
     ```
 
      The root URL for this bucket location is printed at the end of this step. You should see a message like this:

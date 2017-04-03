@@ -14,7 +14,7 @@ menu_order: 000
 1.  From the DC/OS CLI, enter this command:
 
     ```bash
-    $ dcos package install marathon-lb
+    dcos package install marathon-lb
     ```
     
     **Tip:** You can also install from the DC/OS [GUI](/docs/1.8/usage/webinterface/). 
@@ -25,7 +25,7 @@ menu_order: 000
 1.  From the DC/OS CLI, view the available Marathon-LB config options:
 
     ```bash
-    $ dcos package describe --config marathon-lb
+    dcos package describe --config marathon-lb
     ```
     
     The output should look similar to this:
@@ -64,7 +64,7 @@ menu_order: 000
 4.  From the DC/OS CLI, install Marathon-LB with your custom options file specified. 
 
     ```bash
-    $ dcos package install --options=<filename>.json marathon-lb
+    dcos package install --options=<filename>.json marathon-lb
     ```
 
 ## Next steps

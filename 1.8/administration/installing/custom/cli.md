@@ -28,7 +28,7 @@ The DC/OS installation creates these folders:
     <td>Contains copies of the units in `/etc/systemd/system/dcos.target.wants`. They must be at the top folder as well as inside `dcos.target.wants`.</td>
   </tr>
   <tr>
-    <td><code>/var/lib/zookeeper</code></td>
+    <td><code>/var/lib/dcos/exhibitor/zookeeper</code></td>
     <td>Contains the [ZooKeeper](/docs/1.8/overview/concepts/#zookeeper) data.</td>
   </tr>
   <tr>
@@ -47,12 +47,15 @@ The DC/OS installation creates these folders:
 
 **Important:** Changes to `/opt/mesosphere` are unsupported. They can lead to unpredictable behavior in DC/OS and prevent upgrades.
 
+## Prerequisites
+Your cluster must meet the software and hardware [requirements](/docs/1.8/administration/installing/custom/system-requirements/).
+
 # Configure your cluster
 
 1. Create a directory named `genconf` on your bootstrap node.
 
     ```bash
-    $ mkdir -p genconf
+    mkdir -p genconf
     ```
 
 2. Create a `ip-detect` script
@@ -165,16 +168,17 @@ The DC/OS installation creates these folders:
     ssh_user: <username>
     # A custom proxy is optional. For details see the config documentation.
     use_proxy: 'true'
-    http_proxy: http://<your_http_proxy>/
-    https_proxy: https://<your_https_proxy>/
+    http_proxy: http://<user>:<pass>@<proxy_host>:<http_proxy_port>
+    https_proxy: https://<user>:<pass>@<proxy_host>:<https_proxy_port>
     no_proxy: 
-    - '*.int.example.com' 
+    - 'foo.bar.com'
+    - '.baz.com'
     ```
 
 3.  Copy your private SSH key to `genconf/ssh_key`. For more information, see the [ssh_key_path][6] parameter.
 
     ```bash
-    $ cp <path-to-key> genconf/ssh_key && chmod 0600 genconf/ssh_key
+    cp <path-to-key> genconf/ssh_key && chmod 0600 genconf/ssh_key
     ```
 
 
@@ -182,9 +186,9 @@ The DC/OS installation creates these folders:
 
 In this step you create a custom DC/OS build file on your bootstrap node and then install DC/OS across your cluster nodes with SSH. With this installation method you create a bootstrap server that uses your SSH key and connects to every node to automate the deployment.
 
-**Tip:**
+**Important:**
 
-- You can view all of the automated command line installer options with the `dcos_generate_config.sh --help` flag.
+- Do not install DC/OS until you have these items working: ip-detect script, DNS, and NTP everywhere. For help with troubleshooting, see the [documentation](/docs/1.8/administration/installing/custom/troubleshooting/).
 - If something goes wrong and you want to rerun your setup, use these cluster [cleanup instructions][7].
 
 To install DC/OS:
@@ -192,13 +196,15 @@ To install DC/OS:
 1.  Download the [DC/OS installer][5] to your root directory.
 
     ```bash
-    $ curl -O https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+    curl -O https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
     ```
 
 1.  From your home directory, run the DC/OS installer shell script on your bootstrapping master nodes to generate a customized DC/OS build. The setup script extracts a Docker container that uses the generic DC/OS install files to create customized DC/OS build files for your cluster. The build files are output to `./genconf/serve/`.
 
+    **Tip:** You can view all of the automated command line installer options with the `dcos_generate_config.sh --help` flag.
+
     ```bash
-    $ sudo bash dcos_generate_config.sh --genconf
+    sudo bash dcos_generate_config.sh --genconf
     ```
 
     Here is an example of the output.
@@ -228,7 +234,7 @@ To install DC/OS:
 2.  <a name="two"></a>Install the cluster prerequisites, including system updates, compression utilities (UnZip, GNU tar, and XZ Utils), and cluster permissions. For a full list of cluster prerequisites, see this [documentation][4].
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --install-prereqs
+    sudo bash dcos_generate_config.sh --install-prereqs
     ```
 
     Here is an example of the output.
@@ -247,7 +253,7 @@ To install DC/OS:
 3.  Run a preflight script to validate that your cluster is installable.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --preflight
+    sudo bash dcos_generate_config.sh --preflight
     ```
 
     Here is an example of the output.
@@ -270,7 +276,7 @@ To install DC/OS:
 4.  Install DC/OS on your cluster.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --deploy
+    sudo bash dcos_generate_config.sh --deploy
     ```
 
     Here is an example of the output.
@@ -295,7 +301,7 @@ To install DC/OS:
 5.  Run the DC/OS diagnostic script to verify that services are up and running.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --postflight
+    sudo bash dcos_generate_config.sh --postflight
     ```
 
     Here is an example of the output.
@@ -336,15 +342,15 @@ It is recommended that you save your DC/OS installer file immediately after inst
 
     ```bash
     # <Ctrl-C> to exit installer
-    $ cd genconf/serve
-    $ sudo tar cf dcos-install.tar *
+    cd genconf/serve
+    sudo tar cf dcos-install.tar *
     ```
 
 1.  Copy the `dcos-install.tar` file to another location for backup. For example, you can use Secure Copy (scp) to copy `dcos-install.tar` to your home directory:
 
     ```bash
-    $ exit
-    $ scp -i $username@$node-ip:~/genconf/serve/dcos-install.tar ~
+    exit
+    scp -i $username@$node-ip:~/genconf/serve/dcos-install.tar ~
     ```
 
 # Next Steps
@@ -368,7 +374,7 @@ After DC/OS is installed and deployed across your cluster, you can add more agen
 2.  Run the installation steps beginning with [installing the cluster][4] prerequisites:
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --install-prereqs
+    sudo bash dcos_generate_config.sh --install-prereqs
     ```
 
     **Important:** You can ignore the errors that are shown. For example, during the `--preflight` you may see this error:

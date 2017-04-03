@@ -14,7 +14,7 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
 
 1.  Install Marathon-LB.
 
-        $ dcos package install marathon-lb
+        dcos package install marathon-lb
 
     To check that Marathon-LB is working, [find the IP for your public node][3] and navigate to `http://<public agent ip>:9090/haproxy?stats`. You willl see a statistics report page like this:
 
@@ -35,7 +35,7 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
 
     Next, run the install command with the new options:
 
-        $ dcos package install --options=options.json marathon-lb
+        dcos package install --options=options.json marathon-lb
 
 3.  Now there are 2 load balancers: an internal load balancer and an external one, which was installed along with Marathon-LB. Launch an external version of NGINX to demonstrate the features. Launch this app on DC/OS by pasting the JSON below into a file called `nginx-external.json`.
 
@@ -71,7 +71,7 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
 
     Run the following command to add the app:
 
-        $ dcos marathon app add nginx-external.json
+        dcos marathon app add nginx-external.json
 
     The application definition includes a special label with the key `HAPROXY_GROUP`. This label tells Marathon-LB whether or not to expose the application. The external Marathon-LB was started with the `--group` parameter set to `external`, which is the default.
 
@@ -155,10 +155,10 @@ To demonstrate Marathon-LB, you can boot a DC/OS cluster on AWS to run an intern
 
     `curl`-ing the endpoints:
 
-        $ curl http://marathon-lb.marathon.mesos:10000/
-        $ curl http://marathon-lb-internal.marathon.mesos:10001/
-        $ curl http://marathon-lb.marathon.mesos:10002/
-        $ curl http://marathon-lb-internal.marathon.mesos:10002/
+        curl http://marathon-lb.marathon.mesos:10000/
+        curl http://marathon-lb-internal.marathon.mesos:10001/
+        curl http://marathon-lb.marathon.mesos:10002/
+        curl http://marathon-lb-internal.marathon.mesos:10002/
 
     Each of these should return the NGINX ‘Welcome’ page:
 

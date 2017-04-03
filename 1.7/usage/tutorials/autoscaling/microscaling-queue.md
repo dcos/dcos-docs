@@ -68,13 +68,13 @@ After the storage account has been created, navigate to Settings -> Access Keys 
 We have prepared some scripts to configure and start the four apps in Marathon. Go to a terminal on your local machine and get these scripts with the following command.
 
 ``` bash
-$ git clone http://github.com/microscaling/queue-demo
+git clone http://github.com/microscaling/queue-demo
 ```
 
 Move into the queue-demo directory.
 
 ``` bash
-$ cd queue-demo
+cd queue-demo
 ```
 
 # Run the microscaling install script
@@ -82,15 +82,15 @@ $ cd queue-demo
 Set up the following environment variables 
 
 ``` bash
-$ export AZURE_STORAGE_ACCOUNT_NAME=<storage account name>
-$ export AZURE_STORAGE_ACCOUNT_KEY=<storage account key>
-$ export AZURE_STORAGE_QUEUE_NAME=<queue name>
-$ export MSS_USER_ID=<user ID>
-$ export MSS_MARATHON_API=http://localhost/marathon
+export AZURE_STORAGE_ACCOUNT_NAME=<storage account name>
+export AZURE_STORAGE_ACCOUNT_KEY=<storage account key>
+export AZURE_STORAGE_QUEUE_NAME=<queue name>
+export MSS_USER_ID=<user ID>
+export MSS_MARATHON_API=http://localhost/marathon
 ```
 You're now ready to run the demo: 
 ``` bash
-$ ./marathon-install
+./marathon-install
 ```
 
 This script starts all four tasks. You can view these in the Marathon web UI.  
@@ -110,7 +110,7 @@ You can use the Marathon UI to scale the number of Producer tasks up or down, an
 You can use the `marathon-uninstall` command to remove the demo apps from your cluster. (This command requires the `MSS_MARATHON_API` environment variable to be set as above.)
 
 ``` bash
-$ ./marathon-uninstall
+./marathon-uninstall
 ```
 
 ## Delete the Azure Resources

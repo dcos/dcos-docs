@@ -12,7 +12,7 @@ DC/OS agent nodes can be designated as [public](/docs/1.7/overview/concepts/#pub
     For example, with advanced installation you can designate an agent node with this command:
 
     ```bash
-    $ sudo bash dcos_install.sh slave_public
+    sudo bash dcos_install.sh slave_public
     ```
 
     For example, with the AWS cloud installation, you can specify a public agent node with the `PublicSlaveInstanceCount` box:
@@ -46,7 +46,7 @@ DC/OS agent nodes can be designated as [public](/docs/1.7/overview/concepts/#pub
 1.  Add the your app to Marathon by using this command:
 
     ```bash
-    $ dcos marathon app add myApp.json
+    dcos marathon app add myApp.json
     ```
 
     If this is added successfully, there is no output.
@@ -54,7 +54,7 @@ DC/OS agent nodes can be designated as [public](/docs/1.7/overview/concepts/#pub
 1.  Verify that the app is added:
 
     ```bash
-    $ dcos marathon app list
+    dcos marathon app list
     ID      MEM  CPUS  TASKS  HEALTH  DEPLOYMENT  CONTAINER  CMD
     /myApp   64  0.1    0/1    ---      scale       DOCKER   None
     ```

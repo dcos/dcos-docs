@@ -22,10 +22,10 @@ Periodially, `marathon-autoscale.py` will monitor the aggregate CPU and memory u
 
 SSH to the system where you will run `marathon-autoscale.py` and install it.
 
-1.  SSH to the node where you will run `marathon-autoscale.py`, where node ID (`<node-id>`) is the node where you want to run the app.
+1.  SSH to the node where you will run `marathon-autoscale.py`, where node ID (`<mesos-id>`) is the node where you want to run the app.
     
     ```bash
-    $ dcos node ssh --master-proxy --mesos-id=<node-id>
+    dcos node ssh --master-proxy --mesos-id=<mesos-id>
     ```
     
     **Tip:** Run `dcos node` to get the available node IDs.
@@ -33,7 +33,7 @@ SSH to the system where you will run `marathon-autoscale.py` and install it.
 1.  Clone the [autoscale][13] GitHub repository to your node.
 
     ```bash
-    $ git clone https://github.com/mesosphere/marathon-autoscale.git
+    git clone https://github.com/mesosphere/marathon-autoscale.git
     ```
 
 # Run the Autoscale App
@@ -41,13 +41,13 @@ SSH to the system where you will run `marathon-autoscale.py` and install it.
 1.  Navigate to the `marathon-autoscale` repository:
 
     ```bash
-    $ cd marathon-autoscale
+    cd marathon-autoscale
     ```
     
 1.  Enter this command to run the application:
 
     ```bash
-    $ python marathon-autoscale.py
+    python marathon-autoscale.py
     ```
 
     You will be prompted for the following parameters:

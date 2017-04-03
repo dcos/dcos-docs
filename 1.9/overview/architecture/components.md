@@ -34,6 +34,7 @@ DC/OS provides a way to view and operate a large number of individual machine-le
   <ul>
     <li><a href="http://mesos.apache.org/">Documentation</a></li>
     <li><a href="https://github.com/apache/mesos">Source</a></li>
+    <li><a href="https://mesos.apache.org/documentation/latest/endpoints/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -69,6 +70,7 @@ DC/OS provides a way to view and operate a large number of individual machine-le
   <ul>
     <li><a href="https://github.com/soabase/exhibitor/wiki">Documentation</a></li>
     <li><a href="https://github.com/dcos/exhibitor">Source</a></li>
+    <li><a href="https://github.com/soabase/exhibitor/wiki/REST-Introduction">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -135,7 +137,7 @@ DC/OS includes built-in orchestration of the most commonly used high level conta
 <div data-role="collapsible">
 <h2>Marathon</h2>
 <div>
-<p><strong>Description:</strong> Marathon orchestrates long-lived containerized services (apps and pods).</p>
+<p><strong>Description:</strong> Marathon orchestrates long-running containerized services (apps and pods).</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -145,8 +147,10 @@ DC/OS includes built-in orchestration of the most commonly used high level conta
 <p>
   <strong>See Also:</strong>
   <ul>
-    <li><a href="https://mesosphere.github.io/marathon/">Documentation</a></li>
+    <li><a href="https://mesosphere.github.io/marathon/">Website</a></li>
+    <li><a href="/docs/1.9/usage/managing-services/">Documentation</a></li>
     <li><a href="https://github.com/mesosphere/marathon">Source</a></li>
+    <li><a href="/docs/1.9/usage/managing-services/rest-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -169,6 +173,7 @@ DC/OS includes built-in orchestration of the most commonly used high level conta
   <ul>
     <li><a href="/docs/1.9/usage/jobs/">Documentation</a></li>
     <li><a href="https://github.com/dcos/metronome">Source</a></li>
+    <li><a href="https://dcos.github.io/metronome/docs/generated/api.html">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -257,6 +262,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/3dt">Source</a></li>
+    <li><a href="/docs/1.9/administration/monitoring/#system-health-http-api-endpoint">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -280,6 +286,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/dcos-log">Source</a></li>
+    <li><a href="/docs/1.9/administration/logging/logging-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -326,6 +333,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/dcos-metrics">Source</a></li>
+    <li><a href="/docs/1.9/administration/monitoring/metrics/metrics-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -365,6 +373,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/dcos/tree/master/packages/dcos-history/extra">Source</a></li>
+    <li><a href="https://github.com/dcos/dcos/tree/master/packages/dcos-history/extra#api">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -376,7 +385,9 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
 In a world where machines are are given numbers instead of names, tasks are scheduled automatically, dependencies are declaratively defined, and services run in distributed sets, network administration also needs to be elevated from plugging in cables to configuring software-defined networks. To accomplish this, DC/OS includes a fleet of networking components for routing, proxying, name resolution, virtual IPs, load balancing, and distributed reconfiguration.
 
 <div data-role="collapsible">
+<a name="admin-router"></a>
 <h2>Admin Router</h2>
+
 <div>
 <p><strong>Description:</strong> Admin Router exposes a unified control plane proxy for components and services using <a href="https://www.nginx.com/">NGINX</a>. Admin Router Agent proxies node-specific health, logs, metrics, and package management internal endpoints.</p>
 <p>
@@ -414,6 +425,7 @@ In a world where machines are are given numbers instead of names, tasks are sche
   <ul>
     <li><a href="http://mesosphere.github.io/mesos-dns/">Documentation</a></li>
     <li><a href="https://github.com/mesosphere/mesos-dns">Source</a></li>
+    <li><a href="/docs/1.9/usage/service-discovery/mesos-dns/http-interface/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -462,6 +474,7 @@ In a world where machines are are given numbers instead of names, tasks are sche
 </div>
 </div>
 
+<a name="minuteman"></a>
 <div data-role="collapsible">
 <h2>Minuteman</h2>
 <div>
@@ -469,7 +482,7 @@ In a world where machines are are given numbers instead of names, tasks are sche
 <p>
   <strong>System Service(s):</strong>
   <ul>
-    <li><code class="nowrap">dcos-minuteman.service</code></li>
+    <li>N/A - Included in <a href="#navstar">Navstar</a></li>
   </ul>
 </p>
 <p>
@@ -482,6 +495,7 @@ In a world where machines are are given numbers instead of names, tasks are sche
 </div>
 </div>
 
+<a name="navstar"></a>
 <div data-role="collapsible">
 <h2>Navstar</h2>
 <div>
@@ -543,6 +557,7 @@ Just as machine operating systems need package management to install, upgrade, c
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/cosmos">Source</a></li>
+    <li><a href="/docs/1.9/usage/managing-services/package-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -565,6 +580,7 @@ Just as machine operating systems need package management to install, upgrade, c
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/dcos/tree/master/pkgpanda">Source</a></li>
+    <li><a href="/docs/1.9/administration/component-management/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -589,6 +605,7 @@ Identity management in DC/OS is delegated to external identity providers, taking
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/dcos-oauth">Source</a></li>
+    <li><a href="/docs/1.9/administration/id-and-access-mgt/iam-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -650,7 +667,7 @@ To see a list of the systemd components running on any particular node, list the
 ## Master Node
 
 ```
-[vagrant@m1 ~]$ ls /etc/systemd/system/dcos.target.wants/
+[vagrant@m1 ~]ls /etc/systemd/system/dcos.target.wants/
 dcos-3dt.service                 dcos-mesos-dns.service
 dcos-adminrouter-reload.service  dcos-mesos-master.service
 dcos-adminrouter-reload.timer    dcos-metrics-master.service
@@ -671,7 +688,7 @@ dcos-marathon.service
 ## Private Agent Node
 
 ```
-[vagrant@a1 ~]$ ls /etc/systemd/system/dcos.target.wants/
+[vagrant@a1 ~]ls /etc/systemd/system/dcos.target.wants/
 dcos-3dt.service                       dcos-logrotate-agent.timer
 dcos-3dt.socket                        dcos-mesos-slave.service
 dcos-adminrouter-agent-reload.service  dcos-metrics-agent.service
@@ -690,7 +707,7 @@ dcos-logrotate-agent.service
 ## Public Agent Node
 
 ```
-[vagrant@p1 ~]$ ls /etc/systemd/system/dcos.target.wants/
+[vagrant@p1 ~]ls /etc/systemd/system/dcos.target.wants/
 dcos-3dt.service                       dcos-logrotate-agent.timer
 dcos-3dt.socket                        dcos-mesos-slave-public.service
 dcos-adminrouter-agent-reload.service  dcos-metrics-agent.service

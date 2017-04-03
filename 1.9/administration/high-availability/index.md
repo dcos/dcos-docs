@@ -1,5 +1,5 @@
 ---
-post_title: High-Availibility
+post_title: High-Availability
 feature_maturity: preview
 menu_order: 3.1
 ---
@@ -45,7 +45,7 @@ Marathon can be run in HA mode, which allows running multiple Marathon instances
 
 #### ZooKeeper
 
-ZooKeeper is used by numerous services in DC/OS to provide consistency. ZooKeeper can be used as a distributed locking service, a state store, and a messaging system. ZooKeeper uses [Paxos-like](https://en.wikipedia.org/wiki/Paxos_(computer_science&#41;) log replication and a leader/follower architecture to maintain consistency across multiple ZooKeeper instances. For a more detailed explanation of how ZooKeeper works, check out the [ZooKeeper internals document](https://zookeeper.apache.org/doc/r3.4.8/zookeeperInternals.html).
+ZooKeeper is used by numerous services in DC/OS to provide consistency. ZooKeeper can be used as a distributed locking service, a state store, and a messaging system. ZooKeeper uses [Paxos-like](https://en.wikipedia.org/wiki/Paxos_%28computer_science%29) log replication and a leader/follower architecture to maintain consistency across multiple ZooKeeper instances. For a more detailed explanation of how ZooKeeper works, check out the [ZooKeeper internals document](https://zookeeper.apache.org/doc/r3.4.8/zookeeperInternals.html).
 
 ## Fault Domain Isolation
 Fault domain isolation is an important part of building HA systems. To correctly handle failure scenarios, systems must be distributed across fault domains to survive outages. There are different types of fault domains, a few examples of which are:
@@ -65,7 +65,7 @@ HA services should be decoupled, with responsibilities divided amongst services.
 
 Single points of failure come in many forms. For example, a service like ZooKeeper can become a single point of failure when every service in your system shares one ZooKeeper cluster. You can reduce risks by running multiple ZooKeeper clusters for separate services. There's an Exhibitor [Universe package](https://github.com/mesosphere/exhibitor-dcos) that makes this easy.
 
-Other common single points of failure include: 
+Other common single points of failure include:
 
 - Single database instances (like a MySQL)
 - One-off services
@@ -79,7 +79,7 @@ Fast failure detection comes in many forms. Services like ZooKeeper can be used 
 
 When failures do occur, failover [should be as fast as possible](https://en.wikipedia.org/wiki/Fail-fast). Fast failover can be achieved by:
 
- * Using an HA load balancer like [Marathon-LB](/docs/1.9/usage/service-discovery/marathon-lb/), or [Minuteman](/docs/1.9/usage/service-discovery/load-balancing-vips/) for internal layer 4 load balancing.
+ * Using an HA load balancer like [Marathon-LB](/docs/1.9/usage/service-discovery/marathon-lb/), or the internal [Layer 4 load balancer](/docs/1.9/usage/service-discovery/load-balancing-vips/).
  * Building apps in accordance with the [12-factor app](http://12factor.net/) manifesto.
  * Following REST best-practices when building services: in particular, avoiding storing client state on the server between requests.
 

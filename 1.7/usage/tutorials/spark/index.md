@@ -23,7 +23,7 @@ of how to launch a Spark job to using Spark interactively with [Apache Zeppelin]
 Assuming you have a DC/OS cluster up and running, the first step is to install Spark. The minimum cluster size recommended for this tutorial is at least three nodes with 2 CPUs and 2 GB of RAM available, each:
 
 ```bash
-$ dcos package install spark
+dcos package install spark
 Note that the Apache Spark DC/OS Service is beta and there may be bugs, incomplete features, incorrect documentation or other discrepancies.
 We recommend a minimum of two nodes with at least 2 CPU and 2GB of RAM available for the Spark Service and running a Spark job.
 Note: The Spark CLI may take up to 5min to download depending on your connection.
@@ -40,7 +40,7 @@ The Apache Spark DC/OS Service has been successfully installed!
 While the DC/OS command line interface (CLI) is immediately available it takes a few minutes until Spark is actually running in the cluster. Let's first check the DC/OS CLI and its new subcommand `spark`:
 
 ```bash
-$ dcos spark
+dcos spark
 Usage:
     dcos spark --help
     dcos spark --info
@@ -73,7 +73,7 @@ Now that you've set up Spark, it's time to launch your first Spark job. We will 
 Also, note that when you execute the `dcos spark run` command the first time, DC/OS downloads the necessary assets to your local machine and that can take (depending on your connection) some 10 mins or more.
 
 ```bash
-$ dcos spark run --submit-args='-Dspark.mesos.coarse=true --driver-cores 1 --driver-memory 1024M --class org.apache.spark.examples.SparkPi https://downloads.mesosphere.com/spark/assets/spark-examples_2.10-1.4.0-SNAPSHOT.jar 30'
+dcos spark run --submit-args='-Dspark.mesos.coarse=true --driver-cores 1 --driver-memory 1024M --class org.apache.spark.examples.SparkPi https://downloads.mesosphere.com/spark/assets/spark-examples_2.10-1.4.0-SNAPSHOT.jar 30'
 Spark distribution spark-1.6.0 not found locally.
 It looks like this is your first time running Spark!
 Downloading http://downloads.mesosphere.io.s3.amazonaws.com/spark/assets/spark-1.6.0.tgz...
@@ -89,7 +89,7 @@ Note the submission id in the last line, above (in my case `driver-2016031006492
 Alternatively, you can use the CLI to verify the job status:
 
 ```bash
-$ dcos spark status driver-20160310064921-0001
+dcos spark status driver-20160310064921-0001
 Submission ID: driver-20160310064921-0001
 Driver state: FINISHED
 Last status: task_id {
@@ -110,12 +110,12 @@ source: SOURCE_EXECUTOR
 Now let's run the same job again and use `dcos spark log` to watch the execution on the CLI. While this is probably not that useful for very short-running batch jobs, it's beneficial for long-running jobs as well as Spark Streaming jobs:
 
 ```bash
-$ dcos spark run --submit-args='-Dspark.mesos.coarse=true --driver-cores 1 --driver-memory 1024M --class org.apache.spark.examples.SparkPi https://downloads.mesosphere.com/spark/assets/spark-examples_2.10-1.4.0-SNAPSHOT.jar 30'
+dcos spark run --submit-args='-Dspark.mesos.coarse=true --driver-cores 1 --driver-memory 1024M --class org.apache.spark.examples.SparkPi https://downloads.mesosphere.com/spark/assets/spark-examples_2.10-1.4.0-SNAPSHOT.jar 30'
 Run job succeeded. Submission id: driver-20160310070130-0002
 ```
 
 ```bash
-$ dcos spark log driver-20160310070130-0002
+dcos spark log driver-20160310070130-0002
 --container="mesos-1854723e-1060-4b28-a0df-1d21f2d18fea-S2.7e81a48a-bbc1-489a-b499-34f7131b5a35" --docker="docker" --docker_socket="/var/run/docker.sock" --help="false" --initialize_driver_logging="true" --launcher_dir="/opt/mesosphere/packages/mesos--be838ff64133ce38545b7d06f43c6348e5963188/libexec/mesos" --logbufsecs="0" --logging_level="INFO" --mapped_directory="/mnt/mesos/sandbox" --quiet="false" --sandbox_directory="/var/lib/mesos/slave/slaves/1854723e-1060-4b28-a0df-1d21f2d18fea-S2/frameworks/1854723e-1060-4b28-a0df-1d21f2d18fea-0001/executors/driver-20160310070130-0002/runs/7e81a48a-bbc1-489a-b499-34f7131b5a35" --stop_timeout="0ns"
 --container="mesos-1854723e-1060-4b28-a0df-1d21f2d18fea-S2.7e81a48a-bbc1-489a-b499-34f7131b5a35" --docker="docker" --docker_socket="/var/run/docker.sock" --help="false" --initialize_driver_logging="true" --launcher_dir="/opt/mesosphere/packages/mesos--be838ff64133ce38545b7d06f43c6348e5963188/libexec/mesos" --logbufsecs="0" --logging_level="INFO" --mapped_directory="/mnt/mesos/sandbox" --quiet="false" --sandbox_directory="/var/lib/mesos/slave/slaves/1854723e-1060-4b28-a0df-1d21f2d18fea-S2/frameworks/1854723e-1060-4b28-a0df-1d21f2d18fea-0001/executors/driver-20160310070130-0002/runs/7e81a48a-bbc1-489a-b499-34f7131b5a35" --stop_timeout="0ns"
 Registered docker executor on 10.0.2.157
@@ -138,7 +138,7 @@ The following section will show you how to launch Zeppelin on a public node. Thi
 To launch Zeppelin on a public node, create a JSON file `options.json` with the following content:
 
 ```bash
-$ cat options.json
+cat options.json
 {
   "zeppelin": {
     "role": "slave_public"
@@ -149,7 +149,7 @@ $ cat options.json
 Then, you can install Zeppelin like so:
 
 ```bash
-$ dcos package install --options=options.json zeppelin
+dcos package install --options=options.json zeppelin
 Installing Marathon app for package [zeppelin] version [0.5.6]
 Zeppelin has been successfully installed!
 Note that the service is experimental and there may be bugs, incomplete features, incorrect documentation or other discrepancies.
@@ -162,14 +162,14 @@ After this, you should see Zeppelin running via the DC/OS dashboard (by clicking
 Since Zeppelin is launched, as all long-running applications, via Marathon you need to look up the port it has been scheduled on first. You will want the first (lower) port that you can either glean from the Marathon UI or via the following commands using the DC/OS CLI (ignore the IPs shown below, these are just the cluster-internal ones):
 
 ```bash
-$ dcos marathon task list
+dcos marathon task list
 APP        HEALTHY          STARTED              HOST     ID
 /spark       True   2016-03-11T08:36:15.291Z  10.0.3.213  spark.30fb27f8-e764-11e5-957c-024211f85596
 /zeppelin    True   2016-03-11T10:28:28.343Z  10.0.4.239  zeppelin.cac2fe3a-e773-11e5-957c-024211f85596
 ```
 
 ```bash
-$ dcos marathon task show zeppelin.cac2fe3a-e773-11e5-957c-024211f85596
+dcos marathon task show zeppelin.cac2fe3a-e773-11e5-957c-024211f85596
 {
   "appId": "/zeppelin",
   "healthCheckResults": [
@@ -210,7 +210,7 @@ To get started with Zeppelin, check out the Zeppelin [docs](http://zeppelin.incu
 
 **Further resources**:
 
-- [DC/OS Spark Official Documentation](http://docs.mesosphere.com/1.7/usage/service-guides/spark)
+- [DC/OS Spark Official Documentation](http://docs.mesosphere.com/service-docs/spark)
 - [Mesos-specific](https://spark.apache.org/docs/latest/running-on-mesos.html#configuration) configuration options for Spark
 - [Mesos run modes](https://spark.apache.org/docs/latest/running-on-mesos.html#mesos-run-modes) for Spark
 - A gentle introduction into [Spark on Mesos](http://www.slideshare.net/Typesafe_Inc/how-to-deploy-apache-spark-to-mesosdcos) by Lightbend
