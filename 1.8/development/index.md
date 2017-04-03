@@ -54,13 +54,13 @@ You can provide public access to your service through the admin router or by dep
 
 # DC/OS service structure
 
-Each DC/OS service can contain `config.json`, `marathon.json`, `package.json`, and `resource.json` files that are used to create a package that installed on a DC/OS cluster.
+Each DC/OS service in the Universe repo is comprised of JSON configuration files. These files are used create the packages that are installed on DC/OS.
 
-|                        | Description                                                                                              | Required |
+| Filename               | Description                                                                                              | Required |
 |------------------------|----------------------------------------------------------------------------------------------------------|----------|
-| config.json            | Specifies the supported configuration properties, represented as a JSON-schema.                          | No       |
-| marathon.json.mustache | Specifies a mustache template that creates a Marathon app definition capable of running your service.    | No       |
-| package.json           | Specifies the high level metadata about the package.                                                     | Yes      |
-| resource.json          | Specifies all of the required externally hosted resources (e.g. Docker images, HTTP objects and images). | No       |
+| `config.json`            | Specifies the supported configuration properties, represented as a JSON-schema.                          | No       |
+| `marathon.json.mustache` | Specifies a mustache template that creates a Marathon app definition capable of running your service.    | No       |
+| `package.json`          | Specifies the high level metadata about the package.                                                     | Yes      |
+| `resource.json`          | Specifies all of the required externally hosted resources (e.g. Docker images, HTTP objects and images). | No       |
 
 For more information, see the Creating a Package section of the [Universe README](https://github.com/mesosphere/universe#creating-a-package).
