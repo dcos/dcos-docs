@@ -36,8 +36,8 @@ For example, this command searches for big data packages:
 
 ```bash
 dcos package search "big data"
-NAME VERSION FRAMEWORK SOURCE DESCRIPTION
-spark 1.4.0-SNAPSHOT True https://github.com/mesosphere/universe/archive/version-3.x.zip Spark is a fast and general cluster computing system for Big Data
+NAME   VERSION        SELECTED  FRAMEWORK  DESCRIPTION                                                                       
+spark  1.0.9-2.1.0-1  True      False      Spark is a fast and general cluster computing system for Big Data.  Documenta...
 ```
 
 ## <a name="adding"></a>Adding a Repository
