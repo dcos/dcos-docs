@@ -19,7 +19,7 @@ The DC/OS CLI is open and extensible: anyone can create a new subcommand and mak
 
 For example, the Spark DC/OS Service provides [CLI extensions for working with Spark][2]. When installed, you can type the following command to run Spark jobs in the datacenter and query their status:
 
-    $ dcos spark [parameters]
+    dcos spark [parameters]
 
 
 ## How to create a new DC/OS CLI subcommand
@@ -32,8 +32,8 @@ DC/OS CLI subcommands:
 ### Example: Hello World
 The [Hello World example][3] implements a new subcommand called **helloworld**:
 
-    $ dcos package install helloworld --cli
-    $ dcos helloworld
+    dcos package install helloworld --cli
+    dcos helloworld
 
 ### How the DC/OS CLI discovers subcommands
 When the `dcos` command is run, it searches the current shell’s PATH for executables with names that are prefixed with `dcos-` in the `~/.dcos/subcommands` directory.
@@ -63,7 +63,7 @@ foo = [ "bar", "baz" ]
 
 You can make changes to the configuration file by using the `dcos config` command. For example, to change the marathon.host value:
 
-    $ dcos config set marathon.host localhost
+    dcos config set marathon.host localhost
 
 ### Standard flags
 You must assign a standard set of flags to each DC/OS CLI subcommand, described below:
@@ -82,12 +82,12 @@ The `--info` flag shows a short, one-line description of the function of your su
 Example from the Spark CLI:
 
 ```
-$ dcos spark --info
+dcos spark --info
 Run and manage Spark jobs
 ```
 
 ```
-$ dcos help | grep spark
+dcos help | grep spark
       spark        Run and manage Spark jobs
 ```
 
@@ -98,7 +98,7 @@ For example, Spark v1.2.1 might be installed on DC/OS, whereas the local spark D
 
 An example from the Marathon CLI:
 
-    $ dcos marathon --version
+    dcos marathon --version
     dcos-marathon version 0.1.0
 
 #### --help and -h
@@ -107,7 +107,7 @@ The  `--help` and `-h` flags both show the detailed usage for your subcommand.
 An example from the Marathon CLI:
 
 ```
-$ dcos marathon --help
+dcos marathon --help
 Deploy and manage applications on the DC/OS
 
 
@@ -160,7 +160,7 @@ When your Marathon CLI subcommand is passed the `--config-schema` flag, it MUST 
 Here’s an example from the Marathon CLI:
 
 ```
-$ dcos marathon --config-schema
+dcos marathon --config-schema
 {
   "$schema": "http://json-schema.org/schema#",
   "additionalProperties": false,

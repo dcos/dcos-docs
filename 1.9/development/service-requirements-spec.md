@@ -38,7 +38,7 @@ If the service isn’t running because it is missing license information, that f
 
 A DC/OS user can uninstall your service with this command:
 
-    $ dcos package uninstall <service name>
+    dcos package uninstall <service name>
     
 
 # Packaging
@@ -47,7 +47,7 @@ A DC/OS user can uninstall your service with this command:
 
 A DC/OS user must be able to install your service by running this command:
 
-    $ dcos package install <service name>
+    dcos package install <service name>
     
 
 For this to work, the metadata for your service must be registered in the Mesosphere Universe package repository. The metadata format is defined in the <a href="https://github.com/mesosphere/universe#mesosphere-universe-" target="_blank">Universe repository README</a>.

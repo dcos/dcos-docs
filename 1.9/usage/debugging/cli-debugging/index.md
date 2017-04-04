@@ -73,7 +73,7 @@ If you do not currently have a service or pod that is stuck in deployment, you c
 The `dcos marathon debug list` command shows you all services that are in a waiting state. This enables you to see only the services that are not running.
 
 ```bash
-$ dcos marathon debug list
+dcos marathon debug list
 
 ID            SINCE                     INSTANCES TO LAUNCH  WAITING  PROCESSED OFFERS  UNUSED OFFERS  LAST UNUSED OFFER         LAST USED OFFER           
 /mem-app      2017-02-28T19:08:59.547Z  3                    True     13                13             2017-02-28T19:09:35.607Z  ---                       
@@ -94,7 +94,7 @@ This output can quickly show you which services or pods are stuck in deployment 
 Once you know which services or pods are stuck in deployment, use the `dcos marathon debug summary /<app-id>|/<pod-id>` command to learn more about a particular stuck service or pod.
 
 ```bash
-$ dcos marathon debug summary /mem-app
+dcos marathon debug summary /mem-app
 
 RESOURCE     REQUESTED                 MATCHED  PERCENTAGE  
 ROLE         [*]                       1 / 2    50.00%      
@@ -112,7 +112,7 @@ The output of the command shows the resources, what the service or pod requested
 The `dcos marathon debug details /<app-id>|/<pod-id>` command lets you learn exactly how your service or pod definition should be changed.
 
 ```bash
-$ dcos marathon debug details /mem-app
+dcos marathon debug details /mem-app
 
 HOSTNAME    ROLE  CONSTRAINTS  CPUS  MEM  DISK  PORTS  RECEIVED                  
 10.0.0.193   ok        ok       ok    -    ok     ok   2017-02-28T23:25:11.912Z  

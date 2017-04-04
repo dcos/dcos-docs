@@ -63,12 +63,12 @@ Draining nodes by using terminate signal, SIGUSR1, is easy to integrate with aut
     -  **Private agent**
     
        ```bash
-       $ sudo sh -c 'systemctl kill -s SIGUSR1 dcos-mesos-slave && systemctl stop dcos-mesos-slave
+       sudo sh -c 'systemctl kill -s SIGUSR1 dcos-mesos-slave && systemctl stop dcos-mesos-slave
        ```
     -  **Public agent**
     
        ```bash
-       $ ⁠⁠⁠⁠sudo sh -c 'systemctl kill -s SIGUSR1 dcos-mesos-slave-public && systemctl stop dcos-mesos-slave-public
+       ⁠⁠⁠⁠sudo sh -c 'systemctl kill -s SIGUSR1 dcos-mesos-slave-public && systemctl stop dcos-mesos-slave-public
        ```
 
 1.  Perform your maintenance.
@@ -82,7 +82,7 @@ Draining nodes by using terminate signal, SIGUSR1, is easy to integrate with aut
     1.  Remove the `latest` metadata pointer on the agent node:
     
         ```bash
-        $ ⁠⁠⁠⁠sudo rm /var/lib/mesos/slave/meta/slaves/latest
+        ⁠⁠⁠⁠sudo rm /var/lib/mesos/slave/meta/slaves/latest
         ```
         
     1.  Start your agents with the newly configured attributes and resource specification⁠⁠.
@@ -90,10 +90,10 @@ Draining nodes by using terminate signal, SIGUSR1, is easy to integrate with aut
         -  **Private agent**
         
             ```bash
-            $ sudo systemctl start dcos-mesos-slave
+            sudo systemctl start dcos-mesos-slave
             ```
         -  **Public agent**
         
             ```bash
-            $ sudo systemctl start dcos-mesos-slave-public
+            sudo systemctl start dcos-mesos-slave-public
             ```

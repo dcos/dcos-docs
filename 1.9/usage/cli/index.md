@@ -104,13 +104,13 @@ dcos config set core.mesos_master_url 52.34.160.132:5050
 **pagination** Indicates whether to paginate output. By default this is set to `True`. For example, to set to false:
 
 ```bash
-$ dcos config set core.pagination False
+dcos config set core.pagination False
 ``` 
 
 **reporting** Indicates whether to report usage events to Mesosphere. By default this is set to `True`. For example, to set to false:
 
 ```bash
-$ dcos config set core.reporting False
+dcos config set core.reporting False
 ```
     
 **ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `False`. For example, to set to true:
