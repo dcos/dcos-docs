@@ -66,4 +66,4 @@ Each DC/OS service in the Universe repo is comprised of JSON configuration files
 | `package.json`           | Specifies the high level metadata about the package.                                                     | Yes      |
 | `resource.json`          | Specifies all of the required externally hosted resources (e.g. Docker images, HTTP objects and images). | No       |
 
-For more information, see the Creating a Package section of the [Universe README](https://github.com/mesosphere/universe#creating-a-package).
+For more information, see [Creating a Universe Package](/docs/1.9/development/create-package/).
