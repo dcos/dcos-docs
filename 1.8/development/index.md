@@ -19,7 +19,7 @@ By default, a DC/OS service is deployed on a [private agent node](/docs/1.8/over
 
 The integration to the admin router is automatic when a framework scheduler registers a `webui_url` during the registration process with the Mesos master. There are a couple of limitations:
 
-*   The URL must NOT end with a backslash (/). For example, this is good `internal.dcos.host.name:10000`, and this is bad `internal.dcos.host.name:10000/`.
+*   The URL must NOT end with a forward slash (/). For example, this is good `internal.dcos.host.name:10000`, and this is bad `internal.dcos.host.name:10000/`.
 *   DC/OS supports 1 URL and port.
 
 When the `webui_url` is provided, the service is listed on the DC/OS web interface as a service with a link. That link is the admin router proxy URL name that is based on a naming convention of: `/service/<service_name>`. For example, `<dcos_host>/service/unicorn` is the proxy to the `webui_url`. If you provide a web interface, it will be integrated with the DC/OS web interface and users can click the link for quick access to your service.
@@ -28,9 +28,9 @@ Service health check information is provided from the DC/OS service tab when:
 
 *   There are service health checks defined in the `marathon.json` file. For example:
 
-``json
+```json
 "healthChecks": [
-{
+    {
   "path": "/",
   "portIndex": 1,
   "protocol": "HTTP",
@@ -38,6 +38,8 @@ Service health check information is provided from the DC/OS service tab when:
   "intervalSeconds": 60,
   "timeoutSeconds": 10,
   "maxConsecutiveFailures": 3
+    }
+]
 ```
 
 *   The `framework-name` property in the `marathon.json` file is valid. For example:
