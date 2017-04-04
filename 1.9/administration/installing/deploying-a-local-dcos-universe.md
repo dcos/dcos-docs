@@ -263,7 +263,7 @@ To install your own set of packages you must build a customized local Universe D
     ```
 
  [1]: https://downloads.mesosphere.com/universe/public/local-universe.tar.gz
- [2]: https://raw.githubusercontent.com/mesosphere/universe/version-2.x/local/dcos-local-universe-http.service
- [3]: https://raw.githubusercontent.com/mesosphere/universe/version-2.x/local/dcos-local-universe-registry.service
+ [2]: https://raw.githubusercontent.com/mesosphere/universe/version-3.x/local/dcos-local-universe-http.service
+ [3]: https://raw.githubusercontent.com/mesosphere/universe/version-3.x/local/dcos-local-universe-registry.service
  [4]: #build
  [5]: #default

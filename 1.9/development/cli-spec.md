@@ -239,4 +239,4 @@ The same [packaging format and repository][11] is used for both DC/OS Services a
 [8]: https://github.com/dcos/dcos-cli
 [9]: https://github.com/mesosphere/universe/blob/version-3.x/README.md
 [10]: https://github.com/mesosphere/universe/blob/version-3.x/README.md#resourcejson
-[11]: https://github.com/mesosphere/universe/blob/version-1.x/README.md
+[11]: https://github.com/mesosphere/universe/blob/version-3.x/README.md

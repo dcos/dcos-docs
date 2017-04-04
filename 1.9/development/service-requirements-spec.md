@@ -54,7 +54,7 @@ For this to work, the metadata for your service must be registered in the Mesosp
 
 ### 04. Service SHOULD have a simple lowercase service name.
 
-The name of the service is the name provided in Universe. That name should be a simple name without reference to Mesos or DC/OS. For example, the HDFS-Mesos framework is listed in the universe as `hdfs`. This name should also be the first level property of the <a href="https://github.com/mesosphere/universe/blob/version-2.x/repo/packages/H/hdfs/0/config.json#L4" target="_blank">config.json</a> file.
+The name of the service is the name provided in Universe. That name should be a simple name without reference to Mesos or DC/OS. For example, the HDFS-Mesos framework is listed in the universe as `hdfs`. This name should also be the first level property of the <a href="https://github.com/mesosphere/universe/blob/version-3.x/repo/packages/H/hdfs/0/config.json#L4" target="_blank">config.json</a> file.
 
 ### 05. Service package MUST include a Marathon deployment descriptor file.
 
@@ -75,9 +75,9 @@ Any components that are dynamically configured, for example the Mesos master or 
 
 The `framework-name` property is required. The `framework-name` property:
 
-*   MUST be a second-level property under the service property. For example, see the HDFS <a href="https://github.com/mesosphere/universe/blob/version-2.x/repo/packages/H/hdfs/1/config.json#L11-L15" target="_blank">config.json</a> file.
+*   MUST be a second-level property under the service property. For example, see the HDFS <a href="https://github.com/mesosphere/universe/blob/version-3.x/repo/packages/H/hdfs/1/config.json#L11-L15" target="_blank">config.json</a> file.
 *   MUST default to the service name.
-*   SHOULD be used as the `app-id` in the `marathon.json` file. For example, see the Spark <a href="https://github.com/mesosphere/universe/blob/version-2.x/repo/packages/S/spark/2/marathon.json.mustache#L2" target="_blank">marathon.json.mustache</a> file.
+*   SHOULD be used as the `app-id` in the `marathon.json` file. For example, see the Spark <a href="https://github.com/mesosphere/universe/blob/version-3.x/repo/packages/S/spark/2/marathon.json.mustache#L2" target="_blank">marathon.json.mustache</a> file.
 
 ### 08. All URIs used by the scheduler and executor MUST be specified in config.json.
 
@@ -164,11 +164,11 @@ Any property that is used by the `marathon.json` file that is required MUST be s
 
 ALL properties that are used in the `marathon.json` file that are not in a conditional block must be defined as required.
 
- [1]: https://github.com/mesosphere/universe/blob/version-2.x/repo/packages/C/chronos/0/package.json#L2
- [2]: https://github.com/mesosphere/universe/blob/version-2.x/repo/packages/C/chronos/0/config.json#L98
- [3]: https://github.com/mesosphere/universe/tree/version-1.x/repo/packages/M/marathon/0
- [4]: https://github.com/mesosphere/universe/blob/version-1.x/repo/packages/S/spark/2/command.json
+ [1]: https://github.com/mesosphere/universe/blob/version-3.x/repo/packages/C/chronos/0/package.json#L2
+ [2]: https://github.com/mesosphere/universe/blob/version-3.x/repo/packages/C/chronos/0/config.json#L98
+ [3]: https://github.com/mesosphere/universe/tree/version-3.x/repo/packages/M/marathon/0
+ [4]: https://github.com/mesosphere/universe/blob/version-3.x/repo/packages/S/spark/2/command.json
  [5]: https://github.com/mesosphere/universe#resourcejson
  [6]: https://mesosphere.github.io/marathon/docs/health-checks.html
  [7]: /docs/1.9/overview/architecture/components/
- [8]: https://github.com/mesosphere/universe/blob/version-1.x/repo/packages/M/marathon/4/marathon.json#L10-L12
+ [8]: https://github.com/mesosphere/universe/blob/version-3.x/repo/packages/M/marathon/4/marathon.json#L10-L12
