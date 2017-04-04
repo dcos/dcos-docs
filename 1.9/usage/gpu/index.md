@@ -5,7 +5,7 @@ feature_maturity: preview
 menu_order: 75 
 ---
 
-Once your cluster is [configured to support GPUs](/docs/1.9/administration/gpu/), add the `gpus` parameter to your [Marathon application definition](/docs/1.9/usage/managing-services/application-basics/).
+Once your cluster is [configured to support GPUs](/docs/1.9/administration/gpu/), add the `gpus` parameter to your [Marathon application definition](/docs/1.9/usage/managing-services/creating-services/).
 
 # Examples
 

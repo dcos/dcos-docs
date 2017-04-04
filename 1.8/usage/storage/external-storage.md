@@ -201,7 +201,7 @@ The default implicit volume size is 16 GB. If you are using the Mesos containeri
  [3]: /docs/1.8/administration/installing/custom/advanced/
  [4]: https://rexray.readthedocs.io/en/v0.3.3/user-guide/config/
  [5]: http://rexray.readthedocs.io/en/v0.3.3/user-guide/storage-providers/
- [6]: https://mesosphere.github.io/marathon/docs/application-basics.html
+ [6]: https://mesosphere.github.io/marathon/docs/creating-services.html
  [7]: https://rexray.readthedocs.io/en/v0.3.3/user-guide/config/#data-directories
  [8]: #implicit-vol
  [9]: https://rexray.readthedocs.io/en/v0.3.3/user-guide/schedulers/

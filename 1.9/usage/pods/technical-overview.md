@@ -34,7 +34,7 @@ Containers within a pod share ephemeral storage. Volumes are declared at the pod
  History is permanently tied to `pod_id`. If you delete a pod and then reuse the ID, even if the details of the pod are different, the new pod will have the previous history (such as version information).
 
 # Pod Definitions
-Pods are configured via a JSON pod definition, which is similar to a Marathon [application definition](/docs/1.9/usage/managing-services/application-basics/). You must declare the resources required by each container in the pod because Mesos, not Marathon, determines how and when to perform isolation for all resources requested by a pod. See the [Examples](#examples) section for complete pod definitions.
+Pods are configured via a JSON pod definition, which is similar to a Marathon [application definition](/docs/1.9/usage/managing-services/creating-services/). You must declare the resources required by each container in the pod because Mesos, not Marathon, determines how and when to perform isolation for all resources requested by a pod. See the [Examples](#examples) section for complete pod definitions.
 
 ## Executor Resources
 

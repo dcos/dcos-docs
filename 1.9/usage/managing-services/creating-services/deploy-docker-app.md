@@ -147,7 +147,7 @@ In this tutorial, a custom Docker app is created and added to Marathon.
 
     You should see the following message in your browser: 
     
-    ![Hello Brave World](/docs/1.9/usage/managing-services/application-basics/img/helloworld.png)
+    ![Hello Brave World](/docs/1.9/usage/managing-services/creating-services/img/helloworld.png)
     
 # Next steps
 

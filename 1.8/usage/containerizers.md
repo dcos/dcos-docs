@@ -22,7 +22,7 @@ The Universal container runtime offers the following advantages:
 
 ## Provisioning Docker Containers with the Mesos Containerizer
 
-To run Docker containers with the Universal container runtime, specify the container type `MESOS` and a `docker` object in your [Marathon application definition](http://mesosphere.github.io/marathon/docs/application-basics.html).
+To run Docker containers with the Universal container runtime, specify the container type `MESOS` and a `docker` object in your [Marathon application definition](/docs/1.8/usage/managing-services/creating-services/).
 
 The Mesos containerizer provides a `credential`, with a `principal` and an optional `secret` field to authenticate when downloading the Docker image.
 
@@ -66,4 +66,4 @@ Use the Docker containerizer if you need specific features of the Docker package
 }
 ```
 * [Learn more about launching Docker containers on Marathon](http://mesosphere.github.io/marathon/docs/native-docker.html).
-* [Follow a Docker app tutorial](/docs/1.8/usage/managing-services/application-basics/deploy-docker-app/).
+* [Follow a Docker app tutorial](/docs/1.8/usage/managing-services/creating-services/deploy-docker-app/).

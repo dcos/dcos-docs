@@ -5,7 +5,7 @@ menu_order: 0
 
 # How Offer Matching Works
 
-DC/OS services or pods may fail to deploy because the Mesos resource offers are unable to match the resources requests coming from the service or pods [Marathon application definitions](/docs/1.9/usage/managing-services/application-basics/).
+DC/OS services or pods may fail to deploy because the Mesos resource offers are unable to match the resources requests coming from the service or pods [Marathon application definitions](/docs/1.9/usage/managing-services/creating-services/).
 
 Here is an overview of the offer matching process.
 

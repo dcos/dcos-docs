@@ -1,9 +1,11 @@
 ---
-post_title: Application Basics
+post_title: Creating Services
 menu_order: 001.2
 ---
 
 A Marathon application typically represents a long-running service that has many instances running on multiple hosts. An application instance is called a *task*. The *application definition* describes everything needed to start and maintain the tasks. A Marathon application definition creates a DC/OS _service_.
+
+
 
 # Deploying Hello Marathon: An Inline Shell Script
 
@@ -131,7 +133,7 @@ Paste the following JSON into a file named `basic-3.json`.
 }
 ```
 
-Use the Marathon REST API to deploy the app `basic-3` from the DC/OS CLI. Refer to the [documentation](/docs/1.9/administration/id-and-access-mgt/iam-api/) to learn more about the API token required in the command below.
+Use the Marathon REST API to deploy the app `basic-3` from the DC/OS CLI. Refer to the [documentation](/docs/1.8/administration/id-and-access-mgt/iam-api/) to learn more about the API token required in the command below.
 
 ```sh
  curl -H "Authorization: token=$(dcos config show core.dcos_acs_token)" -X POST <master-IP>/service/marathon/v2/apps -d @basic-3.json -H "Content-type: application/json"
