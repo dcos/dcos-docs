@@ -229,7 +229,7 @@ The same [packaging format and repository][11] is used for both DC/OS Services a
 
 
 
-[1]: /docs/1.9/usage/developing-services/service-requirements-spec/
+[1]: /docs/1.9/development/service-requirements-spec/
 [2]: https://github.com/mesosphere/spark-build 
 [3]: https://github.com/mesosphere/dcos-helloworld
 [4]: http://www.pyinstaller.org/
