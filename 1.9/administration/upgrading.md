@@ -33,9 +33,9 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 
 ## Supported upgrade paths
 
-- From 1.8 stable to 1.9 stable.
-- From 1.9.x to 1.9.(x+1).
-- From 1.9.x to 1.9.x. This is useful for making configuration changes.
+- From the latest GA version of 1.8 to the latest GA version of 1.9. For example, if 1.8.8 is the latest and 1.9.0 is the latest, this upgrade would be supported.
+- From any 1.9 release to the next. For example, an upgrade from 1.9.1 to 1.9.2 would be supported.
+- From any 1.9 release to an identical 1.9 release. For example, an upgrade from 1.9.0 to 1.9.0 would be supported. This is useful for making configuration changes.
 
 ## Instructions
 
