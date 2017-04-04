@@ -31,11 +31,11 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
   - In 1.8 this can be found in the lower left corner of the DC/OS UI when screen is maximized.
   - In 1.9 this can be found under the Cluster menu.
 
-## Supported Upgrade Paths
+## Supported upgrade paths
 
-- 1.8.latest => 1.9.latest
-- 1.9.x => 1.9.(x+1)
-- 1.9.x => 1.9.x (for configuration changes)
+- From 1.8 stable to 1.9 stable.
+- From 1.9.x to 1.9.(x+1).
+- From 1.9.x to 1.9.x. This is useful for making configuration changes.
 
 ## Instructions
 
