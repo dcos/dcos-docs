@@ -1,8 +1,9 @@
 ---
-post_title: Uninstalling on Amazon Web Services
+post_title: Uninstalling DC/OS on AWS EC2
+nav_title: Uninstalling
 menu_order: 300
 ---
-You can uninstall DC/OS from AWS with these instructions.
+You can uninstall DC/OS running on AWS EC2 with these instructions.
 
 **You will continue to be charged AWS fees if:**
 

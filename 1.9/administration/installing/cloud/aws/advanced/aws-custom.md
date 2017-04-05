@@ -12,7 +12,7 @@ The custom templates are created from the DC/OS advanced installer.
 
 * A node that meets custom installer bootstrap node [system requirements](/docs/1.9/administration/installing/custom/system-requirements/).
 * Advanced template [system requirements](/docs/1.9/administration/installing/cloud/aws/advanced/system-requirements/).
-* An Amazon S3 bucket with read-write access.
+* An AWS S3 bucket with read-write access.
     * The S3 bucket must have a bucket policy that allows the launched AWS instances to download the files from the s3 bucket. Here is a sample policy that allows anyone to download:
     
       ```json
@@ -65,9 +65,9 @@ The custom templates are created from the DC/OS advanced installer.
 1.  Go to [S3](https://console.aws.amazon.com/s3/home) and navigate to your S3 bucket shown above in `<path-to-directory>`.
     
     1.  Select **cloudformation** and then select the zen template for the number of desired masters. For example, select **el7-zen-1.json** for a single master configuration. 
-    1.  Right-click and select **Properties**, and then copy the Amazon S3 template URL.
+    1.  Right-click and select **Properties**, and then copy the AWS S3 template URL.
 1.  Go to [CloudFormation](https://console.aws.amazon.com/cloudformation/home) and click **Create Stack**.
-1.  On the **Select Template** page, specify the Amazon S3 template URL path to your Zen template. For example, `https://s3-us-west-2.amazonaws.com/user-aws/templates/config_id/14222z9104081387447be59e178438749d154w3g/cloudformation/el7-zen-1.json`.
+1.  On the **Select Template** page, specify the AWS S3 template URL path to your Zen template. For example, `https://s3-us-west-2.amazonaws.com/user-aws/templates/config_id/14222z9104081387447be59e178438749d154w3g/cloudformation/el7-zen-1.json`.
 1.  Complete your installation by following [these instructions](/docs/1.9/administration/installing/cloud/aws/advanced/quickstart/).
 
 ### Template reference

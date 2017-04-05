@@ -1,14 +1,15 @@
 ---
 post_title: Running DC/OS on AWS EC2 Basic
 nav_title: AWS EC2 Basic
+nav_title: AWS
 menu_order: 0
 ---
 
-You can create a DC/OS cluster for Amazon Web Services (AWS) using the <a href="https://downloads.dcos.io/dcos/EarlyAccess/aws.html" target="_blank">DC/OS templates for AWS CloudFormation</a>.
+You can create a DC/OS cluster for Amazon Web Services (AWS) using the <a href="https://downloads.dcos.io/dcos/stable/aws.html" target="_blank">DC/OS templates for AWS CloudFormation</a>.
 
 These instructions provide a basic AWS CloudFormation template that creates a DC/OS cluster that is suitable for demonstrations and POCs. This is the fastest way to get started with the DC/OS templates for AWS CloudFormation.
 
-For a complete set of DC/OS configuration options, see the [Advanced AWS Install Guide](/docs/1.9/administration/installing/cloud/aws/advanced/).
+For a complete set of DC/OS configuration options, see the [Advanced AWS Install Guide](/docs/1.8/administration/installing/cloud/aws/advanced/).
 
 # System requirements
 
@@ -17,8 +18,8 @@ For a complete set of DC/OS configuration options, see the [Advanced AWS Install
 An AWS EC2 <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.xlarge</a> instance.  Selecting smaller-sized VMs is not recommended, and selecting fewer VMs will likely cause certain resource-intensive services, such as distributed datastores, to not work properly.
 
 *   You have the option of 1 or 3 Mesos master nodes.
-*   5 [private](/docs/1.9/overview/concepts/#private) Mesos agent nodes is the template default.
-*   1 [public](/docs/1.9/overview/concepts/#public) Mesos agent node is the template default. By default, ports are closed and health checks are configured for [Marathon-LB](/docs/1.9/usage/service-discovery/marathon-lb/). Ports 80 and 443 are configured for the AWS Elastic Load Balancer.
+*   5 [private](/docs/1.8/overview/concepts/#private) Mesos agent nodes is the default.
+*   1 [public](/docs/1.8/overview/concepts/#public) Mesos agent node is the default.
 
 ## Software
 
@@ -32,7 +33,7 @@ Depending on the DC/OS services that you install, you might have to modify the D
 **Prerequisite:**
 You must have an AWS EC2 Key Pair for the same region as your cluster. Key pairs cannot be shared across regions. The AWS key pair uses public-key cryptography to provide secure login to your AWS cluster. For more information about creating an AWS EC2 Key Pair, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair" target="_blank">documentation</a>.
 
-1.  Launch the <a href="https://downloads.dcos.io/dcos/EarlyAccess/aws.html" target="_blank">DC/OS template</a> on CloudFormation and select the region and number of masters (1 or 3). You must have a key pair for your selected region.
+1.  Launch the <a href="https://downloads.dcos.io/dcos/stable/aws.html" target="_blank">DC/OS template</a> on CloudFormation and select the region and number of masters (1 or 3). You must have a key pair for your selected region.
 
 2.  On the **Select Template** page, accept the defaults and click **Next**.
 
@@ -75,11 +76,11 @@ Launch the DC/OS web interface by entering the Mesos Master hostname:
 
     ![Monitor stack creation](../img/dcos-aws-step3a.png)
 
-    ![DC/OS dashboard](/docs/1.9/usage/img/dcos-gui.png)
+    ![DC/OS dashboard](../img/ui-dashboard.gif)
 
-1.  Click the dropdown menu on the upper-left side to install the DC/OS [Command-Line Interface (CLI)][2]. You must install the CLI to administer your DC/OS cluster.
+1.  Click the dropup menu on the lower-left side to install the DC/OS [Command-Line Interface (CLI)][2]. You must install the CLI to administer your DC/OS cluster.
 
-    ![install CLI](/docs/1.9/usage/cli/img/install-cli-terminal.png)
+    ![install CLI](../img/ui-dashboard-install-cli.gif)
 
 
 # Next steps
@@ -88,9 +89,9 @@ Launch the DC/OS web interface by entering the Mesos Master hostname:
 - [Using your cluster][3]
 - [Scaling considerations][4]
 
- [1]: /docs/1.9/administration/managing-aws/
- [2]: /docs/1.9/usage/cli/install/
- [3]: /docs/1.9/usage/
+ [1]: /docs/1.8/administration/managing-aws/
+ [2]: /docs/1.8/usage/cli/install/
+ [3]: /docs/1.8/usage/
  [4]: https://aws.amazon.com/autoscaling/
- [10]: /docs/1.9/administration/id-and-access-mgt/user-management/
+ [10]: /docs/1.8/administration/id-and-access-mgt/user-management/
 

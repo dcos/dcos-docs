@@ -24,19 +24,6 @@ The [infrastructure](/docs/1.8/administration/installing/cloud/aws/advanced/temp
 ## <a name="zen"></a>Zen
 The Zen templates orchestrate the individual component templates.
 
-**CoreOS**
-
-- [zen-1.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-zen-1.json)
-- [zen-3.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-zen-3.json)
-- [zen-5.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-zen-5.json)
-- [zen-7.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-zen-7.json)
-
-**CentOS:**
-
-- [zen-1.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-zen-1.json)
-- [zen-3.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-zen-3.json)
-- [zen-5.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-zen-5.json)
-- [zen-7.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-zen-7.json)
 
 <table class="table">
   <tr>
@@ -98,15 +85,6 @@ The Zen templates orchestrate the individual component templates.
 
 The private agent template creates agents which are then attached to a DC/OS cluster as a part of an AutoScalingGroup. To configure the template, specify the VPC, subnet, and master DNS address for the DC/OS cluster to join.
 
-**CoreOS**
-
-- [advanced-priv-agent.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-advanced-priv-agent.json)
-
-**CentOS:**
-
-- [advanced-priv-agent.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-advanced-priv-agent.json)
-
-
 <table class="table">
   <tr>
     <th>Parameter Name</th>
@@ -144,14 +122,6 @@ The private agent template creates agents which are then attached to a DC/OS clu
 
 The public agent template creates agents which are then attached to a DC/OS cluster as a part of an AutoScalingGroup. To configure the template, specify the VPC, subnet, and master DNS address for the DC/OS cluster to join.
 
-**CoreOS**
-
-- [advanced-pub-agent.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-advanced-pub-agent.json)
-
-**CentOS:**
-
-- [advanced-pub-agent.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-advanced-pub-agent.json)
-
 <table class="table">
   <tr>
     <th>Parameter Name</th>
@@ -186,21 +156,6 @@ The public agent template creates agents which are then attached to a DC/OS clus
 ## <a name="master"></a>Master
 
 The master templates create masters, on top of the infrastructure stack already created.
-
-**CoreOS**
-
-- [advanced-master-1.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-advanced-master-1.json)
-- [advanced-master-3.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-advanced-master-3.json)
-- [advanced-master-5.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-advanced-master-5.json)
-- [advanced-master-7.json](https://downloads.dcos.io/dcos/stable/cloudformation/coreos-advanced-master-7.json)
-
-**CentOS:**
-
-- [advanced-master-1.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-advanced-master-1.json)
-- [advanced-master-3.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-advanced-master-3.json)
-- [advanced-master-5.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-advanced-master-5.json)
-- [advanced-master-7.json](https://downloads.dcos.io/dcos/stable/cloudformation/el7-advanced-master-7.json)
-
 
 <table class="table">
   <tr>
@@ -251,7 +206,7 @@ The master templates create masters, on top of the infrastructure stack already 
 
 ## <a name="infrastructure"></a>Infrastructure
 
-The infrastructure template ([infra.json](https://downloads.dcos.io/dcos/stable/cloudformation/infra.json)) defines, and creates, a DC/OS specific infrastructure that works well with a VPC already created. This is the lowest building block of a DC/OS cluster and the components created in this stack are consumed by the dependent templates (master and agents).
+The infrastructure template `infra.json`defines, and creates, a DC/OS specific infrastructure that works well with a VPC already created. This is the lowest building block of a DC/OS cluster and the components created in this stack are consumed by the dependent templates (master and agents).
 
 <table class="table">
   <tr>

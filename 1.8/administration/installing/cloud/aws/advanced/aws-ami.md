@@ -5,7 +5,7 @@ feature_maturity: preview
 menu_order: 101
 ---
 
-You can use customized [Amazon Machine Images (AMI)](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) based on CentOS 7 or CoreOS to launch DC/OS with the advanced templates. 
+You can use customized [AWS Machine Images (AMI)](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) based on CentOS 7 or CoreOS to launch DC/OS with the advanced templates. 
 
 - A custom AMI can be used to integrate DC/OS installation with your own in-house configuration management tools.
 - A custom AMI can be used if you want kernel or driver customization.
