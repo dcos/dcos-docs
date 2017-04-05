@@ -1,7 +1,6 @@
 ---
 post_title: Running DC/OS on AWS EC2 Basic
 nav_title: AWS EC2 Basic
-nav_title: AWS
 menu_order: 0
 ---
 

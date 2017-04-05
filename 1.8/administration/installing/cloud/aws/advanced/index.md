@@ -10,7 +10,7 @@ The advanced AWS CloudFormation templates bring power and flexibility to creatin
  
 The templates are used together in conjunction to create a DC/OS cluster. The templates are driven by parameters that AWS CloudFormation uses to create each stack.  
 
-# Prerequisites
+## Prerequisites
 
 ### Hardware
 
@@ -20,11 +20,11 @@ An AWS EC2 <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.xlar
 
 - An AWS account with root [IAM](https://aws.amazon.com/iam/) privileges. Advanced privileges are required to install the advanced templates. Contact your AWS admin for more information.
 - An AWS EC2 Key Pair for the same region as your cluster. Key pairs cannot be shared across regions. The AWS key pair uses public-key cryptography to provide secure login to your AWS cluster. For more information about creating an AWS EC2 Key Pair, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair" target="_blank">documentation</a>.
-- AWS [Command Line Interface](https://aws.amazon.com/cli/)
+- AWS [Command Line Interface](https://aws.amazon.com/cli/).
 - The CLI JSON processor [jq](https://github.com/stedolan/jq/wiki/Installation)
 * A node that meets the bootstrap node [system requirements](/docs/1.8/administration/installing/custom/system-requirements/).
 * An AWS S3 bucket with read-write access.
-    * The S3 bucket must have a bucket policy that allows the launched AWS instances to download the files from the s3 bucket. Here is a sample policy that allows anyone to download:
+    * The S3 bucket must have a bucket policy that allows the launched AWS instances to download the files from the S3 bucket. Here is a sample policy that allows anyone to download:
     
       ```json
       {
@@ -40,7 +40,7 @@ An AWS EC2 <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.xlar
         ]
       }
       ```
-      For more information about s3 bucket polices, see the [AWS Documentation](http://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html).
+      For more information about S3 bucket polices, see the [AWS Documentation](http://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html).
 
 # Create your templates
 
@@ -80,7 +80,7 @@ An AWS EC2 <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.xlar
 1.  Go to [CloudFormation](https://console.aws.amazon.com/cloudformation/home) and click **Create Stack**.
 1.  On the **Select Template** page, specify the AWS S3 template URL path to your Zen template. For example, `https://s3-us-west-2.amazonaws.com/user-aws/templates/config_id/14222z9104081387447be59e178438749d154w3g/cloudformation/el7-zen-1.json`.
 
-# Create your dependencies
+# Create your template dependencies
 
 Use this script to create the template dependencies. These dependencies will be used as input to create your stack in CloudFormation.
 
@@ -143,7 +143,7 @@ Use this script to create the template dependencies. These dependencies will be 
 
     Use these dependency values as input to create your stack in CloudFormation in the next steps.
 
-# <a name="launch"></a>Launch the DC/OS advanced template on CloudFormation
+# <a name="launch"></a>Launch the templates on CloudFormation
 
 1.  Go to [CloudFormation](https://console.aws.amazon.com/cloudformation/home) and click **Create Stack**.
 1.  On the **Select Template** page, upload the [Zen](/docs/1.8/administration/installing/cloud/aws/advanced/template-reference/#zen) template (e.g. `https://s3-us-west-2.amazonaws.com/dcos/templates/dcos/config_id/6a7451f6dec/cloudformation/el7-zen-1.json`) from your workstation and click **Next**.

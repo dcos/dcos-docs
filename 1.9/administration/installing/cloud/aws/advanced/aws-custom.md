@@ -13,7 +13,7 @@ The custom templates are created from the DC/OS advanced installer.
 * A node that meets custom installer bootstrap node [system requirements](/docs/1.9/administration/installing/custom/system-requirements/).
 * Advanced template [system requirements](/docs/1.9/administration/installing/cloud/aws/advanced/system-requirements/).
 * An AWS S3 bucket with read-write access.
-    * The S3 bucket must have a bucket policy that allows the launched AWS instances to download the files from the s3 bucket. Here is a sample policy that allows anyone to download:
+    * The S3 bucket must have a bucket policy that allows the launched AWS instances to download the files from the S3 bucket. Here is a sample policy that allows anyone to download:
     
       ```json
       {
@@ -29,7 +29,7 @@ The custom templates are created from the DC/OS advanced installer.
         ]
       }
       ```
-      For more information about s3 bucket polices, see the [AWS Documentation](http://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html).
+      For more information about S3 bucket polices, see the [AWS Documentation](http://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html).
       
 
 1.  Download the [dcos_generate_config.sh](https://dcos.io/releases/) to your bootstrap node.
