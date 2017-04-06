@@ -5,14 +5,14 @@ menu_order: 0
 
 These instructions explain how to set up an SSH connection to your DC/OS cluster from an outside network. If you are on the same network as your cluster or connected by using VPN, you can instead use the `dcos node ssh` command. For more information, see the [dcos node section][1] of the CLI reference.
 
-*   [SSH to your DC/OS cluster on Unix/Linux (OS X, Ubuntu, etc)][2]
+*   [SSH to your DC/OS cluster on Unix/Linux (macOS, Ubuntu, etc)][2]
 *   [SSH to your DC/OS cluster on Windows][3]
 
 **Requirements:**
 
 *   An unencrypted SSH key that can be used to authenticate with the cluster nodes over SSH. Encrypted SSH keys are not supported.
 
-### <a name="unix"></a>SSH to your DC/OS cluster on Unix/Linux (OS X, Ubuntu, etc)
+### <a name="unix"></a>SSH to your DC/OS cluster on Unix/Linux (macOS, Ubuntu, etc)
 
 1.  Change the permissions on the `.pem` file to owner read/write by using the `chmod` command.
 

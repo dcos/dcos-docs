@@ -33,7 +33,7 @@ This tutorial demonstrates how you can build a complete IoT pipeline on DC/OS in
 *  [DC/OS CLI](/docs/1.9/usage/cli/install/) installed.
 *  The public IP address of your public agent node. After you have installed DC/OS with a public agent node declared, you can [navigate to the public IP address][9] of your public agent node.
 *   Git:
-    *   **OS X:** Get the installer from [Git downloads](http://git-scm.com/download/mac).
+    *   **macOS:** Get the installer from [Git downloads](http://git-scm.com/download/mac).
     *   **Unix/Linux:** See these [installation instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 # Install the DC/OS services you'll need

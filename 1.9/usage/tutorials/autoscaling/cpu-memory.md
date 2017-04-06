@@ -15,7 +15,7 @@ Periodially, `marathon-autoscale.py` will monitor the aggregate CPU and memory u
 *   A service running on Marathon that you'd like to autoscale.
 *   Python 3
 *   Git:
-    *   **OS X:** Get the installer from [Git downloads](http://git-scm.com/download/mac).
+    *   **macOS:** Get the installer from [Git downloads](http://git-scm.com/download/mac).
     *   **Unix/Linux:** See these [installation instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 # Install the Autoscale App on a Node

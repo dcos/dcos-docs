@@ -8,7 +8,7 @@ The recommended method to install the DC/OS CLI is from the DC/OS web interface.
 
 # Installing CLI from the web interface
 
-1.  Click **Install CLI** from the top-left panel of the DC/OS web interface.
+1.  Click **Install CLI** from the top-left corner of the DC/OS web interface.
 
     ![CLI install UI](/docs/1.9/usage/cli/img/install-cli.png)
     
@@ -19,7 +19,7 @@ The recommended method to install the DC/OS CLI is from the DC/OS web interface.
 # <a name="manual"></a>Manually installing the CLI
 
 *   [Installing the DC/OS CLI on Linux](#linux)
-*   [Installing the DC/OS CLI on OS X](#osx)
+*   [Installing the DC/OS CLI on macOS](#osx)
 *   [Installing the DC/OS CLI on Windows](#windows)
 
 ## <a name="linux"></a>Installing on Linux
@@ -41,36 +41,41 @@ The recommended method to install the DC/OS CLI is from the DC/OS web interface.
 
     **Important:** The CLI must be installed on a system that is external to your DC/OS cluster.
 
+1.  Move the the CLI binary to your local bin directory.
+
+    ```bash
+    sudo mv dcos /usr/local/bin 
+    ```
+
 1.  Make the CLI binary executable.
 
     ```bash
-    chmod +x dcos
+    chmod +x /usr/local/bin/dcos
     ```
 
-1.  Point the CLI to your DC/OS master node. In this example, `http://example.com` is the master node IP address.
+1.  Point the CLI to your DC/OS cluster URL. In this example, `http://example.com` is the master node IP address.
 
     ```bash
-    ./dcos config set core.dcos_url http://example.com
+    dcos config set core.dcos_url http://example.com
     ```
 
 1.  Authenticate your CLI with your master node and set the auth token:
 
     ```bash
-    ./dcos auth login
+    dcos auth login
     ```
 
     Follow the instructions in the DC/OS CLI. For more information about security, see the [documentation](/docs/1.9/administration/id-and-access-mgt/).
 
     Your CLI should now be authenticated with your cluster! Enter `dcos` to get started.
 
-## <a name="osx"></a>Installing on OS X
+## <a name="osx"></a>Installing on macOS
 
 ### Prerequisites
 
 *   A system external to your DC/OS cluster that you can install the CLI.
 *   Network access from the external system to your DC/OS cluster.
 *   A command-line environment, such as Terminal.
-*   cURL: Installed by default on OS X
 
 ### Installing the DC/OS CLI
 
@@ -82,24 +87,25 @@ The recommended method to install the DC/OS CLI is from the DC/OS web interface.
 
     **Important:** The CLI must be installed on a system that is external to your DC/OS cluster.
 
-1.  **Mac OS X and Linux:** Make the CLI binary executable.
+1.  Make the CLI binary executable.
 
     ```bash
     chmod +x dcos
     ```
-    **Tip:** If your system is unable to find the executable, you may need to re-open the command prompt or add the installation directory to your PATH environment variable manually.
     
 1.  Point the CLI to your DC/OS master node. In this example, `http://example.com` is the master node IP address.
 
     ```bash
-    ./dcos config set core.dcos_url http://example.com
+    dcos config set core.dcos_url http://example.com
     ```
 
-1.  Authenticate your CLI with your master node and set the auth token:
+1.  Authenticate your CLI with your master node and set the auth token.
 
     ```bash
     dcos auth login
     ```
+
+    **Tip:** If your system is unable to find the executable, you may need to re-open the command prompt or add the installation directory to your PATH environment variable manually.
 
     Follow the instructions in the DC/OS CLI. For more information about security, see the [documentation](/docs/1.9/administration/id-and-access-mgt/).
 

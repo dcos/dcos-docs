@@ -6,10 +6,10 @@ menu_order: 1
 
 **Important:** DC/OS 1.8 introduces binary CLIs for Linux, Windows, and Mac. The install script is replaced with a simple binary CLI. The 1.8 CLI is compatible with DC/OS 1.6.1 forward. For more information, see the [documentation](/docs/1.7/usage/cli/install/).
 
-*   [Installing the DC/OS CLI on Unix, Linux, and OS X][1]
+*   [Installing the DC/OS CLI on Unix, Linux, and macOS][1]
 *   [Installing the DC/OS CLI on Windows][2]
 
-# <a name="linux"></a>Installing on Unix, Linux, and OS X
+# <a name="linux"></a>Installing on Unix, Linux, and macOS
 
 The easiest way to install the DC/OS CLI is by clicking the signpost icon in the lower left corner of the DC/OS web interface. Or, you can manually install the CLI by following these instructions.
 
@@ -18,11 +18,11 @@ The easiest way to install the DC/OS CLI is by clicking the signpost icon in the
 *   A system external to your DC/OS cluster that you can install the CLI
 *   Network access from the external system to your DC/OS cluster
 *   A command-line environment, such as Terminal
-*   cURL: Installed by default on OS X and most Linux distributions.
-*   Python 2.7.x or 3.4.x: Installed by default on OS X and most Linux distributions. (Python 3.5.x will not work.)
+*   cURL: Installed by default on macOS and most Linux distributions.
+*   Python 2.7.x or 3.4.x: Installed by default on macOS and most Linux distributions. (Python 3.5.x will not work.)
 *   Pip: See the <a href="https://pip.pypa.io/en/stable/installing.html#install-pip" target="_blank">installation documentation</a>.
 *   Git:
-    *   **OS X:** Get the installer from [Git downloads][3].
+    *   **macOS:** Get the installer from [Git downloads][3].
     *   **Unix/Linux:** See these <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank">installation instructions</a>.
 
 #### Installing the DC/OS CLI

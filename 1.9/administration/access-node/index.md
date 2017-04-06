@@ -1,5 +1,5 @@
 ---
-post_title: Accessing Your Cluster
+post_title: Accessing the Cluster
 menu_order: 5
 ---
 

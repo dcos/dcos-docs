@@ -6,10 +6,10 @@ menu_order: 4
 
 You can uninstall the CLI with these commands for your operating system.
 
-- [Unix, Linux, and OS X](#unixlinuxosx)
+- [Unix, Linux, and macOS](#unixlinuxosx)
 - [Windows](#windows)
 
-## <a name="unixlinuxosx"></a>Unix, Linux, and OS X
+## <a name="unixlinuxosx"></a>Unix, Linux, and macOS
 
 1.  Delete the hidden `.dcos` directory. This will delete the configuration files for your DC/OS services.
 
