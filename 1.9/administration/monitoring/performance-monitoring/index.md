@@ -95,7 +95,7 @@ If these metrics increase, something is probably wrong.
 
 *   Check the Marathon App Health API [endpoint][3] for critical applications API endpoint.
 *   Check for agents being shut down: 
-    *   Tail /var/log/mesos warning logs and watch for `Shutting down`
+    *   Tail `/var/log/mesos` warning logs and watch for `Shutting down`
     *   Mesos endpoint that indicates how many agents have been shut down increases
 *   Check for mesos masters having short uptimes, which is exposed in Mesos metrics.
 *   Change mom-marathon-service logging level from `WARN` to `INFO`.
