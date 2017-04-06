@@ -24,7 +24,7 @@ This is the recommend method to building your own AMI.
     - Verify that you can build and deploy an AMI using these scripts as-is, without modification. 
     - An AMI must be deployed to every region where a cluster will be launched. The DC/OS Packer build script [create_dcos_ami.sh](https://github.com/dcos/dcos/blob/master/cloud_images/centos7/create_dcos_ami.sh) can deploy the AMI to multiple regions by setting the environment variable `DEPLOY_REGIONS` before running the script.
 
-1.  Launch the DC/OS advanced template using the AWS CloudFormation web console and specify the DC/OS cloud_images AMI. Verify that the cluster launched successfully. For more information, see the QuickStart [documentation](/docs/1.9/administration/installing/cloud/aws/advanced/quickstart/#launch).
+1.  Launch the DC/OS advanced template using the AWS CloudFormation web console and specify the DC/OS cloud_images AMI. Verify that the cluster launched successfully. For more information, see the QuickStart [documentation](/docs/1.9/administration/installing/cloud/aws/advanced/#launch).
 
 ## Modify the DC/OS cloud_images AMI for your environment
 
