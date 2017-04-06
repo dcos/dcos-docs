@@ -215,9 +215,9 @@ The package entry contains a file named [resource.json][10] that contains links 
 
 When the end user runs `dcos package install spark --cli`:
 
-1. The package entry for Spark is retrieved from the repository,
-2. The `resource.json` file is parsed to find the CLI resources
-3. The executable for the user’s platform is downloaded
+1. The package entry for Spark is retrieved from the repository.
+2. The `resource.json` file is parsed to find the CLI resources.
+3. The executable for the user’s platform is downloaded.
 
 ## How to install a new CLI subcommand
 
