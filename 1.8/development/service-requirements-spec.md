@@ -9,7 +9,7 @@ This document is intended for a developer creating a Mesosphere DC/OS Service. I
 
 The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="https://www.ietf.org/rfc/rfc2119.txt" target="_blank">RFC 2119</a>.
 
-By completing the requirements below, you can integrate with DC/OS and have your Service certified by Mesosphere.
+By completing the requirements below, you can integrate with DC/OS and have your service certified by Mesosphere.
 
 ## Terminology
 
