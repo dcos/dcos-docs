@@ -1,5 +1,6 @@
 ---
-post_title: Quick Start
+post_title: Metrics Quick Start
+nav_title: Quick Start
 menu_order: 0
 feature_maturity: preview
 ---
