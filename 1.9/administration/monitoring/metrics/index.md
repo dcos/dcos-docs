@@ -13,7 +13,7 @@ DC/OS provides these types of metrics:
   * **Container:** metrics about cgroup allocations from tasks running in Mesos or Docker containerizers. 
   * **Application:** metrics about a specific application running inside the DC/OS Universal [container runtime](/docs/1.9/usage/containerizers/).
 
-The [metrics HTTP API](/docs/1.9/monitoring/metrics/metrics-api/) exposes these areas. 
+The [Metrics API](/docs/1.9/monitoring/metrics/metrics-api/) exposes these areas. 
 
 All three metrics layers are aggregated by a collector which is shipped as part of the DC/OS distribution. This enables metrics to run on every host in the cluster. It is the main entry point to the metrics ecosystem, aggregating metrics sent to it by the Metrics Mesos module, or gathering host and container level metrics on the box which is runs. 
 
@@ -34,4 +34,4 @@ Per-container metrics tags enable you to arbitrarily group metrics, for example 
 
 DC/OS applications will discover the endpoint via an environment variable (`STATSD_UDP_HOST` or `STATSD_UDP_PORT`). Applications leverage this StatsD interface to send custom profiling metrics to the system.
 
-For more information on which metrics are collected, see the Metrics [reference](/docs/1.9/administration/monitoring/metrics/reference/).
+For more information on which metrics are collected, see the Metrics [Reference](/docs/1.9/administration/monitoring/metrics/reference/).

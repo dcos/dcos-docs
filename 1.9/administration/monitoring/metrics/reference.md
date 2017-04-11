@@ -1,6 +1,5 @@
 ---
-post_title: Metrics Statistics Reference
-nav_title: Statistics Reference
+post_title: Metrics Reference
 feature_maturity: preview
 menu_order: 2
 ---
