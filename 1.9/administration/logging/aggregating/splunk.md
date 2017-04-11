@@ -41,7 +41,6 @@ For each Master node in your DC/OS cluster:
             -u dcos-cfn-signal.service          \
             -u dcos-metronome.service           \
             -u dcos-cosmos.service              \
-            -u dcos-minuteman.service           \
             -u dcos-download.service            \
             -u dcos-navstar.service             \
             -u dcos-epmd.service                \
@@ -84,7 +83,6 @@ For each agent node in your DC/OS cluster:
                 -u dcos-logrotate.service               \
                 -u dcos-mesos-slave.service             \
                 -u dcos-mesos-slave-public.service      \
-                -u dcos-minuteman.service               \
                 -u dcos-spartan.service                 \
                 -u dcos-spartan-watchdog.service        \
                 -u dcos-vol-discovery-priv-agent.service

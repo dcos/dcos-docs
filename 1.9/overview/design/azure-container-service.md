@@ -126,7 +126,6 @@ The following list shows the components used by DC/OS itself. You'll note that t
 - mesos-dns
 - mesos-metrics-module
 - mesos-modules-private
-- minuteman
 - ncurses
 - networking_api
 - openssl
