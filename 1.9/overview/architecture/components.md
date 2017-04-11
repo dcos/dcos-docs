@@ -316,6 +316,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
 </div>
 
 <div data-role="collapsible">
+<a name="dcos-metrics"></a>
 <h2>DC/OS Metrics</h2>
 <div>
 <p><strong><em>NEW IN 1.9.0</em></strong></p>
