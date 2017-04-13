@@ -8,29 +8,25 @@ You can use the Metrics API to periodically poll for data about your cluster, ho
 
 The Metrics API is backed by the [DC/OS Metrics component](/docs/1.9/overview/architecture/components/#dcos-metrics), which runs on all nodes in the cluster.
 
-
-
 ## Routes
 
-Access to the Metrics API is proxied through the Admin Router on each node.
+From within the cluster, you can access by using this path, where `<resource-path>` is Metrics API resource path. This method requires [SSH access](/docs/1.9/administration/access-node/sshcluster/) to your cluster.
 
-* From within the cluster, you can access by using this path, where `<resource-path>` is Metrics API resource path. This method requires [SSH access](/docs/1.9/administration/access-node/sshcluster/) to your cluster.
+```bash
+http://localhost:61001/system/v1/metrics/v0/<resource-path>
+```
 
-  ```bash
-  http://localhost:61001/system/v1/metrics/v0/<resource-path>
-  ```
+For example, to view host-level metrics, run this command from your agent node:
 
-  For example, to view host-level metrics, run this command from your agent node:
-  
-  ```bash
-  curl -s http://localhost:61001/system/v1/metrics/v0/node | jq
-  ```
+```bash
+curl -s http://localhost:61001/system/v1/metrics/v0/node | jq
+```
 
-* From outside of the cluster, you can access by using this path, where `<resource-path>` is Metrics API resource path.
+From outside of the cluster, you can access by using this path, where `<resource-path>` is Metrics API resource path.
 
-  ```bash
-  http://<cluster-url>/system/v1/agent/{agent_id}/metrics/v0/<resource-path>
-  ```
+```bash
+http://<cluster-url>/system/v1/agent/{agent_id}/metrics/v0/<resource-path>
+```
 
 For more examples, see the Metrics [Quick Start Guide](/docs/1.9/administration/monitoring/metrics/quickstart/).
 

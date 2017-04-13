@@ -68,8 +68,8 @@ The following per-container resource utilization metrics are collected.
    
 | Metric            | Description                  |
 |-------------------|------------------------------|
-| cpus_limit    | The number of CPUs allocated. |
-| cpus_system_time_secs    | Total CPU time spent in kernal mode in seconds. |
+| cpus_limit    | The number of CPU shares allocated. |
+| cpus_system_time_secs    | Total CPU time spent in kernel mode in seconds. |
 | cpus_throttled_time_secs    | Total time, in seconds, that CPU was throttled. |
 | cpus_user_time_secs    | Total CPU time spent in user mode. |
 
