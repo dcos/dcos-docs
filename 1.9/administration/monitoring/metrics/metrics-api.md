@@ -10,7 +10,7 @@ The Metrics API is backed by the [DC/OS Metrics component](/docs/1.9/overview/ar
 
 ## Routes
 
-From within the cluster, you can access by using this path, where `<resource-path>` is Metrics API resource path. This method requires [SSH access](/docs/1.9/administration/access-node/sshcluster/) to your cluster.
+From within the cluster, you can access by using this path, where `<resource-path>` is the Metrics API resource path. This method requires [SSH access](/docs/1.9/administration/access-node/sshcluster/) to your cluster.
 
 ```bash
 http://localhost:61001/system/v1/metrics/v0/<resource-path>
@@ -22,7 +22,7 @@ For example, to view host-level metrics, run this command from your agent node:
 curl -s http://localhost:61001/system/v1/metrics/v0/node | jq
 ```
 
-From outside of the cluster, you can access by using this path, where `<resource-path>` is Metrics API resource path.
+From outside of the cluster, you can access by using this path, where `<resource-path>` is the Metrics API resource path.
 
 ```bash
 http://<cluster-url>/system/v1/agent/{agent_id}/metrics/v0/<resource-path>
