@@ -13,7 +13,7 @@ You configure a pod via a pod definition, which is similar to a Marathon applica
 - You must specify an endpoint (not a port number) in order for other applications to communicate with your pod.
 - Pods have a separate REST API.
 - Pods support only Mesos-level health checks.
-You can create and manage pods with the DC/OS CLI or via the /v2/pods/ endpoint of the [Marathon REST API](/docs/1.9/usage/managing-services/rest-api/).
+You can create and manage pods with the DC/OS CLI or via the /v2/pods/ endpoint of the [Marathon REST API](/docs/1.9/usage/managing-services/marathon-api/).
 
 # Networking
 Marathon pods only support the [DC/OS Universal container runtime](/docs/1.9/usage/containerizers/), which supports multiple image formats, including Docker.

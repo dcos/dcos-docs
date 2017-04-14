@@ -150,7 +150,7 @@ DC/OS includes built-in orchestration of the most commonly used high level conta
     <li><a href="https://mesosphere.github.io/marathon/">Website</a></li>
     <li><a href="/docs/1.9/usage/managing-services/">Documentation</a></li>
     <li><a href="https://github.com/mesosphere/marathon">Source</a></li>
-    <li><a href="/docs/1.9/usage/managing-services/rest-api/">API Reference</a></li>
+    <li><a href="/docs/1.9/usage/managing-services/marathon-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
