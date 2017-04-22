@@ -39,6 +39,7 @@ Use these features at your own risk. We might add, change, or delete any functio
 ### Quality
 
 * Limited or no functional test
+* Limited or no performance testing
 * Limited or no system test
 * Limited or no Mesosphere dogfooding
 
@@ -56,6 +57,7 @@ We might add, change, or delete any functionality.
 ### Quality
 
 * Robust functional test
+* Limited or no performance testing
 * Limited or no system test
 * Limited or no Mesosphere dogfooding
 
