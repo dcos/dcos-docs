@@ -76,8 +76,9 @@ Figure 2 describes the software architecture that we plan to implement to realiz
 
 ### DC/OS modules for Mesos
 
-**Code:** https://github.com/dcos/mesos-overlay-modules.git
-To configure the underlying DC/OS overlay we need an entity that can allocate subnets to each agent. The entity also needs to configure linux bridges to launch Mesos and Docker containers in their own subnets. Further, the VTEP on each Agent needs to be allocated IP addresses and MAC addresses and the Agent routing table needs to be configured with the correct routes to allow containers to communicate over the DC/OS overlay. 
+**Code:** https://github.com/dcos/dcos-mesos-modules/tree/master/overlay
+
+To configure the underlying DC/OS overlay we need an entity that can allocate subnets to each agent. The entity also needs to configure linux bridges to launch Mesos and Docker containers in their own subnets. Further, the VTEP on each Agent needs to be allocated IP addresses and MAC addresses and the Agent routing table needs to be configured with the correct routes to allow containers to communicate over the DC/OS overlay.
 
 We plan to achieve all the above requirements for the DC/OS overlay by having two Mesos modules, a master DC/OS module and an Agent DC/OS module. We list the responsibilities of both these modules below:
 
@@ -109,23 +110,27 @@ The master overlay module will be responsible for allocating the subnet, the VTE
 
 Once DC/OS module retrieves the subnet information from the master DC/OS module, it performs the following operations to allow _MesosContainerizer_ and _DockerContainerizer_ to launch containers on the overlay: 
 
-For _MesosContainerizer_ the DC/OS module can generate a CNI config at a specified location. The CNI config will have the bridge information and IPAM information for the network/cni isolator to configure containers on the **m-<virtual network name>** bridge.  
+For _MesosContainerizer_ the DC/OS module can generate a CNI config at a specified location. The CNI config will have the bridge information and IPAM information for the network/cni isolator to configure containers on the `m-<virtual network name>` bridge.  
 
-For _DockerContainerizer_ the DC/OS module, after retrieving the subnet, will create a “docker network” with the canonical name **“d-<virtual network name>”**. It will do so using the following docker command:
-''''docker network create \
+For _DockerContainerizer_ the DC/OS module, after retrieving the subnet, will create a `docker network` with the canonical name `d-<virtual network name>`. It will do so using the following docker command:
+```sh
+docker network create \
 --driver=bridge \
 --subnet=<CIDR> \
 --opt=com.docker.network.bridge.name=d-<virtual network name>
 --opt=com.docker.network.bridge.enable_ip_masquerade=false
 --opt=com.docker.network.driver.mtu=<overlay MTU>
-<virtual network name>''''
+<virtual network name>
+```
 
 **NOTE:** The assumption for _DockerContainerizer_ to work with the DC/OS overlay is that the host is running Docker v1.11 or greater.
-**NOTE:** The default <overlay MTU> = 1420 bytes.
+
+**NOTE:** The default `<overlay MTU>` = 1420 bytes.
 
 ### Virtual Network Service: Overlay Orchestration
 
-**Code:**https://github.com/dcos/navstar.git
+**Code:** https://github.com/dcos/navstar.git
+
 Virtual Network Service is the overlay orchestrator service running on each agent which is responsible for the following functionality. It is a system which contains non-realtime components of the DC/OS overlay, as well as other networking-related chunks of DC/OS. The Virtual Network Service running on each agent is responsible for the following functionality:
 
 - Talking to the agent overlay module and learning the subnet, VTEP IP and MAC address allocated to the agent.

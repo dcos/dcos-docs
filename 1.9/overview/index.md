@@ -1,6 +1,6 @@
 ---
 post_title: Overview
-menu_order: 1
+menu_order: 020
 ---
 
 The overview topics help you get started and learn the DC/OS fundamentals.

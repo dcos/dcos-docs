@@ -8,15 +8,15 @@ This section describes the management of processes in a DC/OS cluster, from the 
 
 At a high level, this interaction takes place between the DC/OS components when a user launches a process. Communication occurs between the different layers, such as the user interacting with the scheduler, and within a layer, for example, a master communicating with agents.
 
-![Concept of distributed process management in DC/OS](../img/dcos-architecture-distributed-process-management-concept.png)
+![Concept of distributed process management in DC/OS](/docs/1.9/img/dcos-architecture-distributed-process-management-concept.png)
 
 Here is an example, using the Marathon service and a user launching a container based on a Docker image:
 
-![Example of distributed process management in DC/OS](../img/dcos-architecture-distributed-process-management-example.png)
+![Example of distributed process management in DC/OS](/docs/1.9/img/dcos-architecture-distributed-process-management-example.png)
 
 The chronological interaction between the above components looks like this. Notice that Executors and Task are folded into one block since in practice this is often the case:
 
-![Sequence diagram for distributed process management in DC/OS](../img/dcos-architecture-distributed-process-management-seq-diagram.png)
+![Sequence diagram for distributed process management in DC/OS](/docs/1.9/img/dcos-architecture-distributed-process-management-seq-diagram.png)
 
 In detail, here are the steps:
 
@@ -42,7 +42,7 @@ In detail, here are the steps:
 </tr>
 <tr>
 <td>4</td>
-<td>Client initiates process launch. For example, this could be a user creating a Marathon app via the DC/OS <a href="/docs/1.9/usage/webinterface">Services</a> tab or via the HTTP endpoint <code>/v2/app</code>.</td>
+<td>Client initiates process launch. For example, this could be a user creating a Marathon app via the DC/OS <a href="/docs/1.9/gui/">Services</a> tab or via the HTTP endpoint <code>/v2/app</code>.</td>
 </tr>
 <tr>
 <td>5</td>
@@ -79,5 +79,5 @@ In detail, here are the steps:
 </tbody>
 </table>
 
-[auth]: /docs/1.9/administration/id-and-access-mgt/
+[auth]: /docs/1.9/security/
 [components]: /docs/1.9/overview/architecture/components/

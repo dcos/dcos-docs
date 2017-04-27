@@ -6,7 +6,7 @@ menu_order: 4
 
 DC/OS is composed of many open source microservice components meticulously tuned and configured to work together.
 
-![DC/OS Components](/docs/1.9/overview/architecture/img/dcos-components-1.9.png)
+![DC/OS Components](/docs/1.9/img/dcos-components-1.9.png)
 
 From the top, DC/OS is a batteries-included container platform that handles container orchestration, package management, and security.
 
@@ -90,7 +90,7 @@ DC/OS provides a way to view and operate a large number of individual machine-le
 <p>
   <strong>See Also:</strong>
   <ul>
-    <li><a href="/docs/1.9/administration/installing/">Documentation</a></li>
+    <li><a href="/docs/1.9/installing/">Documentation</a></li>
     <li><a href="https://github.com/dcos/dcos">Source</a></li>
   </ul>
 </p>
@@ -105,7 +105,7 @@ DC/OS provides a way to view and operate a large number of individual machine-le
 <p>
   <strong>See Also:</strong>
   <ul>
-    <li><a href="/docs/1.9/usage/webinterface/">Documentation</a></li>
+    <li><a href="/docs/1.9/gui/">Documentation</a></li>
     <li><a href="https://github.com/dcos/dcos-ui">Source</a></li>
   </ul>
 </p>
@@ -120,7 +120,7 @@ DC/OS provides a way to view and operate a large number of individual machine-le
 <p>
   <strong>See Also:</strong>
   <ul>
-    <li><a href="/docs/1.9/usage/cli/">Documentation</a></li>
+    <li><a href="/docs/1.9/cli/">Documentation</a></li>
     <li><a href="https://github.com/dcos/dcos-cli">Source</a></li>
   </ul>
 </p>
@@ -148,9 +148,9 @@ DC/OS includes built-in orchestration of the most commonly used high level conta
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://mesosphere.github.io/marathon/">Website</a></li>
-    <li><a href="/docs/1.9/usage/managing-services/">Documentation</a></li>
+    <li><a href="/docs/1.9/deploying-services/">Documentation</a></li>
     <li><a href="https://github.com/mesosphere/marathon">Source</a></li>
-    <li><a href="/docs/1.9/usage/managing-services/marathon-api/">API Reference</a></li>
+    <li><a href="/docs/1.9/deploying-services/marathon-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -171,7 +171,7 @@ DC/OS includes built-in orchestration of the most commonly used high level conta
 <p>
   <strong>See Also:</strong>
   <ul>
-    <li><a href="/docs/1.9/usage/jobs/">Documentation</a></li>
+    <li><a href="/docs/1.9/deploying-jobs/">Documentation</a></li>
     <li><a href="https://github.com/dcos/metronome">Source</a></li>
     <li><a href="https://dcos.github.io/metronome/docs/generated/api.html">API Reference</a></li>
   </ul>
@@ -262,7 +262,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/3dt">Source</a></li>
-    <li><a href="/docs/1.9/administration/monitoring/#system-health-http-api-endpoint">API Reference</a></li>
+    <li><a href="/docs/1.9/monitoring/#system-health-http-api-endpoint">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -286,7 +286,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/dcos-log">Source</a></li>
-    <li><a href="/docs/1.9/administration/logging/logging-api/">API Reference</a></li>
+    <li><a href="/docs/1.9/monitoring/logging/logging-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -334,7 +334,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/dcos-metrics">Source</a></li>
-    <li><a href="/docs/1.9/administration/monitoring/metrics/metrics-api/">API Reference</a></li>
+    <li><a href="/docs/1.9/metrics/metrics-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -343,7 +343,7 @@ No software runs perfectly, especially not the first time. Distribute tasks acro
 <div data-role="collapsible">
 <h2>DC/OS Signal</h2>
 <div>
-<p><strong>Description:</strong> The DC/OS Signal service reports cluster telemetry and analytics to help improve DC/OS. Administrators can <a href="/docs/1.9/administration/installing/opt-out/#telemetry">opt-out of telemetry</a> at install time.</p>
+<p><strong>Description:</strong> The DC/OS Signal service reports cluster telemetry and analytics to help improve DC/OS. Administrators can <a href="/docs/1.9/installing/opt-out/#telemetry">opt-out of telemetry</a> at install time.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -426,7 +426,7 @@ In a world where machines are are given numbers instead of names, tasks are sche
   <ul>
     <li><a href="http://mesosphere.github.io/mesos-dns/">Documentation</a></li>
     <li><a href="https://github.com/mesosphere/mesos-dns">Source</a></li>
-    <li><a href="/docs/1.9/usage/service-discovery/mesos-dns/http-interface/">API Reference</a></li>
+    <li><a href="/docs/1.9/networking/mesos-dns/http-interface/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -489,7 +489,7 @@ In a world where machines are are given numbers instead of names, tasks are sche
 <p>
   <strong>See Also:</strong>
   <ul>
-    <li><a href="/docs/1.9/usage/service-discovery/load-balancing-vips/">Documentation</a></li>
+    <li><a href="/docs/1.9/networking/load-balancing-vips/">Documentation</a></li>
     <li><a href="https://github.com/dcos/minuteman">Source</a></li>
   </ul>
 </p>
@@ -547,7 +547,7 @@ Just as machine operating systems need package management to install, upgrade, c
 <div data-role="collapsible">
 <h2>DC/OS Package Manager (Cosmos)</h2>
 <div>
-<p><strong>Description:</strong> DC/OS Package Manager (Cosmos) installs and manages DC/OS packages from <a href="/docs/1.9/usage/repo/">DC/OS package repositories</a>, such as the <a href="https://github.com/mesosphere/universe">Mesosphere Universe</a>.</p>
+<p><strong>Description:</strong> DC/OS Package Manager (Cosmos) installs and manages DC/OS packages from <a href="/docs/1.9/administering-clusters/repo/">DC/OS package repositories</a>, such as the <a href="https://github.com/mesosphere/universe">Mesosphere Universe</a>.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
@@ -558,7 +558,7 @@ Just as machine operating systems need package management to install, upgrade, c
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/cosmos">Source</a></li>
-    <li><a href="/docs/1.9/usage/managing-services/package-api/">API Reference</a></li>
+    <li><a href="/docs/1.9/deploying-services/package-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -581,7 +581,7 @@ Just as machine operating systems need package management to install, upgrade, c
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/dcos/tree/master/pkgpanda">Source</a></li>
-    <li><a href="/docs/1.9/administration/component-management/">API Reference</a></li>
+    <li><a href="/docs/1.9/administering-clusters/component-management/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -606,7 +606,7 @@ Identity management in DC/OS is delegated to external identity providers, taking
   <strong>See Also:</strong>
   <ul>
     <li><a href="https://github.com/dcos/dcos-oauth">Source</a></li>
-    <li><a href="/docs/1.9/administration/id-and-access-mgt/iam-api/">API Reference</a></li>
+    <li><a href="/docs/1.9/security/iam-api/">API Reference</a></li>
   </ul>
 </p>
 </div>
@@ -642,7 +642,7 @@ DC/OS provides multiple different ways to provision and allocate disk space and 
 
 The **Cluster ID service** was removed in DC/OS 1.9.0. The universally unique identifier (UUID) for each cluster is now generated by the DC/OS Setup service.
 
-The **Mesos Persistent Volume Discovery service** was removed in DC/OS 1.9.0. Detection of [mounted disk resources](/docs/1.9/administration/storage/mount-disk-resources/) is now handled by the DC/OS Setup service.
+The **Mesos Persistent Volume Discovery service** was removed in DC/OS 1.9.0. Detection of [mounted disk resources](/docs/1.9/storage/mount-disk-resources/) is now handled by the DC/OS Setup service.
 
 
 # Sockets and Timers

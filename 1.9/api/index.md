@@ -1,7 +1,7 @@
 ---
 post_title: DC/OS API Reference
 nav_title: API Reference
-menu_order: 4
+menu_order: 150
 ---
 
 The DC/OS API is a collection of routes backed by [DC/OS components](/docs/1.9/overview/architecture/components/) that are made available through an API gateway called the [Admin Router](/docs/1.9/overview/architecture/components/#admin-router).
@@ -78,7 +78,7 @@ To determine which method to use, see the specific backend component's API refer
 
 Some routes are unauthenticated, but most require an authentication token.
 
-For details on how to obtain and use an authentication token, see [Authentication HTTP API Endpoint](/docs/1.9/administration/id-and-access-mgt/iam-api/).
+For details on how to obtain and use an authentication token, see [Authentication HTTP API Endpoint](/docs/1.9/security/iam-api/).
 
 
 ## Route Topology
@@ -96,4 +96,4 @@ Other routes, like component management, are for internal use only.
 
   See [Agent Routes](/docs/1.9/api/agent-routes/) for a list of routes available on agent nodes.
 
-![DC/OS API Routing](/docs/1.9/api/img/dcos-api-routing.png)
+![DC/OS API Routing](/docs/1.9/img/dcos-api-routing.png)

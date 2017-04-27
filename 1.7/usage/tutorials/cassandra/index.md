@@ -146,13 +146,13 @@ core@ip-10-0-6-153 ~ $
 You are now inside your DC/OS cluster and can connect to the Cassandra cluster directly. Connect to the cluster using the cqlsh client:
 
 ```bash
-core@ip-10-0-6-153 ~ docker run cassandra:2.2.5 cqlsh <HOST>
+core@ip-10-0-6-153 ~ docker run -it cassandra:3.10 cqlsh <HOST>
 ```
 
-Replace `<HOST>` with the actual host, which that we retrieved by running `dcos cassandra connection`, above:
+Replace `<HOST>` with the actual host, which we retrieved by running `dcos cassandra connection`, above:
 
 ```bash
-core@ip-10-0-6-153 ~ docker run -ti cassandra:2.2.5 cqlsh 10.0.2.66
+core@ip-10-0-6-153 ~ docker run -it cassandra:3.10 cqlsh 10.0.2.66
 cqlsh>
 ```
 

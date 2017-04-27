@@ -6,7 +6,7 @@ menu_order: 2
 
 DC/OS is a platform for running distributed containerized software, like apps, jobs, and services. As a platform, DC/OS is distinct from and agnostic to the infrastructure layer. This means that the infrastructure may consist of virtual or physical hardware as long as it provides compute, storage, and networking.
 
-![DC/OS Architecture Layers](/docs/1.9/overview/architecture/img/dcos-architecture-layers.png)
+![DC/OS Architecture Layers](/docs/1.9/img/dcos-architecture-layers.png)
 
 ## Software Layer
 
@@ -41,8 +41,8 @@ For more information, see [Components](/docs/1.9/overview/architecture/component
 
 At the infrastructure layer, DC/OS can be installed on public clouds, private clouds, or on-premises hardware. Some of these install targets have automated provisioning tools, but almost any infrastructure can be used, as long as it includes multiple x86 machines on a shared IPv4 network.
 
-For more information, see [Installing](/docs/1.9/administration/installing/).
+For more information, see [Installing](/docs/1.9/installing/).
 
 ## External Components
 
-In addition to the software that runs in the datacenter, DC/OS includes and integrates with several external components: the [GUI](/docs/1.9/usage/webinterface/), [CLI](/docs/1.9/usage/cli/), [package repository](/docs/1.9/usage/repo/), and [container registry](/docs/1.9/overview/concepts/#container-registry).
+In addition to the software that runs in the datacenter, DC/OS includes and integrates with several external components: the [GUI](/docs/1.9/gui/), [CLI](/docs/1.9/cli/), [package repository](/docs/1.9/administering-clusters/repo/), and [container registry](/docs/1.9/overview/concepts/#container-registry).

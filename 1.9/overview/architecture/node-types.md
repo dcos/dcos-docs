@@ -8,7 +8,7 @@ A DC/OS node is a virtual or physical machine on which DC/OS components run. DC/
 
 A DC/OS cluster is composed of three types of nodes: masters, private agents, and public agents.
 
-![DC/OS Node Types](/docs/1.9/overview/architecture/img/dcos-node-types.png)
+![DC/OS Node Types](/docs/1.9/img/dcos-node-types.png)
 
 
 ## Master Nodes
@@ -72,8 +72,8 @@ Because these resources are undifferentiated, most tasks are scheduled on privat
 
 For more on master and agent node components, see [Components](/docs/1.9/overview/architecture/components/).
 
-For more on security, see [Securing Your Cluster](/docs/1.9/administration/securing-your-cluster/).
+For more on security, see [Securing Your Cluster](/docs/1.9/administering-clusters/).
 
-For more on scaling your cluster, see [Adding Agent Nodes](/docs/1.9/administration/installing/custom/add-a-node/).
+For more on scaling your cluster, see [Adding Agent Nodes](/docs/1.9/administering-clusters/add-a-node/).
 
-For more on configuring public nodes, see [Converting Agent Node Types](/docs/1.9/administration/installing/custom/convert-agent-type/).
+For more on configuring public nodes, see [Converting Agent Node Types](/docs/1.9/administering-clusters/convert-agent-type/).

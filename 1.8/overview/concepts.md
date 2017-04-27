@@ -336,7 +336,7 @@ For more information about framework schedulers and executors, see the [Applicat
 
 A Mesos role is a group of Mesos Frameworks that share reserved resources, persistent volumes, and quota. These frameworks are also grouped together in Mesos' hierarchical Dominant Resource Fairness (DRF) share calculations.
 
-- Roles are often confused as groups of resources, because of they way they can be statically configured on the agents. The assignment is actually the inverse: resources are assigned to roles.
+- Roles are often confused as groups of resources, because of the way they can be statically configured on the agents. The assignment is actually the inverse: resources are assigned to roles.
 - Role resource allocation can be configured statically on the Mesos agent or changed at runtime using the Mesos API.
 
 ### <a name="mesos-resource-offer"></a>Resource Offer
