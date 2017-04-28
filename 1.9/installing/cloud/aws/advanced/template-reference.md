@@ -22,7 +22,7 @@ The [infrastructure](/docs/1.9/installing/cloud/aws/advanced/template-reference/
 
 
 ## <a name="zen"></a>Zen
-The Zen templates orchestrate the individual component templates.
+The Zen templates (e.g. `el7-zen-1.json`) orchestrate the individual component templates.
 
 <table class="table">
   <tr>
