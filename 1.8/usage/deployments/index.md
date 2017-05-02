@@ -3,7 +3,7 @@ post_title: Deployments
 menu_order: 5
 ---
 
-Every change in the definition of applications or group in DC/OS is performed as a Marathon deployment. A [deployment](/1.8/usage/marathon/rest-api/#!/deployments/V2Deployments) is a set of actions, including:
+Every change in the definition of applications or groups in DC/OS is performed as a Marathon deployment. A [deployment](/1.8/usage/marathon/rest-api/#!/deployments/V2Deployments) is a set of actions, including:
 
 - Start
 - Stop
@@ -24,10 +24,10 @@ In this example, the application `app` is dependent on the application `db`.
 
 Here is the deployment order:
 
-- Starting : if `db` and `app` are added to the system, `db` is started first and then app
-- Stopping : if `db` and `app` are removed from the system, `app` is removed first and then `db`
+- Starting : if `db` and `app` are added to the system, `db` is started first and then app.
+- Stopping : if `db` and `app` are removed from the system, `app` is removed first and then `db`.
 - Upgrade : See [Rolling Restarts](#rolling).
-- Scaling : if `db` and `app` are scaled, `db` is scaled first and then `app`
+- Scaling : if `db` and `app` are scaled, `db` is scaled first and then `app`.
 
 # <a name="rolling"></a>Rolling Upgrades
  
