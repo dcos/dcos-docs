@@ -8,13 +8,13 @@ You can leverage several integration points when creating a DC/OS Service. The s
 
 # <a name="adminrouter"></a>Admin Router
 
-When a DC/OS Service is installed and run on DC/OS, the service is generally deployed on a [private agent node][3]. In order to allow users to access a running instance of the service, Admin Router can function as a reverse proxy for the DC/OS Service.
+When a DC/OS Service is installed and run on DC/OS, the service is generally deployed on a [private agent node][3]. To allow users to access a running instance of the service, Admin Router can function as a reverse proxy for the DC/OS Service.
 
-Admin Router currently supports only one reverse proxy destination.
+The Admin Router currently supports only one reverse proxy destination.
 
 ## Service Endpoints
 
-Admin Router allows marathon tasks to define custom service UI and HTTP endpoints, which are made available as `/service/<service-name>`. Set the following marathon task labels to enable this:
+The Admin Router allows Marathon tasks to define custom service UI and HTTP endpoints, which are made available as `/service/<service-name>`. Set the following Marathon task labels to enable this:
 
 ```
 "labels": {
@@ -32,13 +32,13 @@ We recommend having only a single task setting these labels for a given service 
 
 Since the paths to resources for clients connecting to Admin Router will differ from those paths the service actually has, ensure the service is configured to run behind a proxy. This often means relative paths are preferred to absolute paths. In particular, resources expected to be used by a UI should be verified to work through a proxy.
 
-Tasks running in nested [marathon app groups](https://mesosphere.github.io/marathon/docs/application-groups.html) will be available only using their service name (i.e., `/service/<service-name>`), not by the marathon app group name (i.e., `/service/app-group/<service-name>`).
+Tasks running in nested [Marathon app groups](https://mesosphere.github.io/marathon/docs/application-groups.html) will be available only using their service name (i.e., `/service/<service-name>`), not by the Marathon app group name (i.e., `/service/app-group/<service-name>`).
 
 # <a name="dcos-ui"></a>DC/OS UI
 
 Service health check information can be surfaced in the DC/OS services UI tab by:
 
-1. Defining one or more healthChecks in the Service's Marathon template, for example:
+1. Defining one or more [healthChecks](/docs/1.9/deploying-services/creating-services/healthchecks/) in the service's Marathon template, for example:
 
         "healthChecks": [
             {
@@ -66,9 +66,9 @@ Service health check information can be surfaced in the DC/OS services UI tab by
 
 # <a name="cli-subcommand"></a>CLI Subcommand
 
-If you would like to publish a DC/OS CLI subcommand for use with your service, it is common to have the subcommand communicate with the running service by sending HTTP requests through Admin Router to the service.
+If you are publishing a DC/OS CLI subcommand for use with your service, the subcommand should communicate with the running service by sending HTTP requests through Admin Router to the service.
 
-See [dcos-helloworld][6] for an example on how to develop a CLI Subcommand.
+See [dcos-helloworld][6] for an example on how to develop a CLI subcommand.
 
 [3]: /docs/1.9/administering-clusters/
 [6]: https://github.com/mesosphere/dcos-helloworld

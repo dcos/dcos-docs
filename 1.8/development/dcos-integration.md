@@ -8,13 +8,13 @@ You can leverage several integration points when creating a DC/OS Service. The s
 
 # <a name="adminrouter"></a>Admin Router
 
-When a DC/OS Service is installed and run on DC/OS, the service is generally deployed on a [private agent node][3]. In order to allow users to access a running instance of the service, Admin Router can function as a reverse proxy for the DC/OS Service.
+When a DC/OS Service is installed and run on DC/OS, the service is generally deployed on a [private agent node][3]. To allow user access to a service, the Admin Router can function as a reverse proxy for the DC/OS service.
 
-Admin Router currently supports only one reverse proxy destination.
+The Admin Router currently supports only one reverse proxy destination.
 
 ## Service Endpoints
 
-Admin Router allows marathon tasks to define custom service UI and HTTP endpoints, which are made available as `/service/<service-name>`. Set the following marathon task labels to enable this:
+The Admin Router allows Marathon tasks to define custom service UI and HTTP endpoints, which are made available as `/service/<service-name>`. Set the following Marathon task labels to enable this:
 
 ```
 "labels": {
@@ -26,13 +26,13 @@ Admin Router allows marathon tasks to define custom service UI and HTTP endpoint
 
 In this case, `http://<dcos-cluster>/service/<service-name>` would be forwarded to the host running the task using the first port allocated to the task.
 
-In order for the forwarding to work reliably across task failures, we recommend co-locating the endpoints with the task. This way, if the task is restarted on another host and with different ports, Admin Router will pick up the new labels and update the routing. **Note:** Due to caching, there can be an up to 30-second delay before the new routing is working.
+To enable the forwarding to work reliably across task failures, we recommend co-locating the endpoints with the task. This way, if the task is restarted on another host and with different ports, Admin Router will pick up the new labels and update the routing. **Note:** Due to caching, there can be an up to 30-second delay before the new routing is working.
 
 We recommend having only a single task setting these labels for a given service name. If multiple task instances have the same service name label, Admin Router will pick one of the task instances deterministically, but this might make debugging issues more difficult.
 
 Since the paths to resources for clients connecting to Admin Router will differ from those paths the service actually has, ensure the service is configured to run behind a proxy. This often means relative paths are preferred to absolute paths. In particular, resources expected to be used by a UI should be verified to work through a proxy.
 
-Tasks running in nested [marathon app groups](https://mesosphere.github.io/marathon/docs/application-groups.html) will be available only using their service name (i.e., `/service/<service-name>`), not by the marathon app group name (i.e., `/service/app-group/<service-name>`).
+Tasks running in nested [Marathon app groups](https://mesosphere.github.io/marathon/docs/application-groups.html) will be available only using their service name (i.e., `/service/<service-name>`), not by the Marathon app group name (i.e., `/service/app-group/<service-name>`).
 
 # <a name="dcos-ui"></a>DC/OS UI
 
