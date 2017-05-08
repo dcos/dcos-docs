@@ -5,7 +5,7 @@ feature_maturity: preview
 menu_order: 20
 ---
 
-# <a name="create-job"></a>Create a Simple Job
+# <a name="create-job"></a>Creating a Simple Job
 
 This JSON creates a simple job with no schedule.
 
@@ -62,10 +62,8 @@ This JSON creates a simple job with no schedule.
     ```bash
     dcos job add <my-scheduled-job>.json
     ```
-   
-<a name="schedule-with-api"></a>
 
-# Create a Job and Associate a Schedule
+# <a name="schedule-with-api"></a>Creating a Job and Associating a Schedule
 
 1. Add a job without a schedule using the [instructions above](#create-job).
 
