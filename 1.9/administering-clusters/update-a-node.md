@@ -63,12 +63,12 @@ Draining nodes by using terminate signal, SIGUSR1, is easy to integrate with aut
     -  **Private agent**
     
        ```bash
-       sudo sh -c 'systemctl kill -s SIGUSR1 dcos-mesos-slave && systemctl stop dcos-mesos-slave
+       sudo sh -c 'systemctl kill -s SIGUSR1 dcos-mesos-slave && systemctl stop dcos-mesos-slave'
        ```
     -  **Public agent**
     
        ```bash
-       ⁠⁠⁠⁠sudo sh -c 'systemctl kill -s SIGUSR1 dcos-mesos-slave-public && systemctl stop dcos-mesos-slave-public
+       ⁠⁠⁠⁠sudo sh -c 'systemctl kill -s SIGUSR1 dcos-mesos-slave-public && systemctl stop dcos-mesos-slave-public'
        ```
 
 1.  Perform your maintenance.
@@ -97,3 +97,9 @@ Draining nodes by using terminate signal, SIGUSR1, is easy to integrate with aut
             ```bash
             sudo systemctl start dcos-mesos-slave-public
             ```
+            
+        **Tip:** You can check the status with this command:
+        
+        ```bash
+        sudo systemctl status dcos-mesos-slave
+        ```
