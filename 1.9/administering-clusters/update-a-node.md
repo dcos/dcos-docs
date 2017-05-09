@@ -76,7 +76,7 @@ Draining nodes by using terminate signal, SIGUSR1, is easy to integrate with aut
     1.  Reload the systemd configuration.
     
         ```bash
-        $﻿⁠⁠⁠⁠ sudo systemctl daemon-reload
+        ﻿⁠⁠sudo systemctl daemon-reload
         ```
         
     1.  Remove the `latest` metadata pointer on the agent node:
