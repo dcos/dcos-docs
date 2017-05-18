@@ -3,15 +3,17 @@ post_title: Using Virtual IP Addresses
 feature_maturity: preview
 menu_order: 10
 ---
-DC/OS can map traffic from a single Virtual IP (VIP) to multiple IP addresses and ports. DC/OS VIPs are **name-based**, which means clients connect with a service address instead of an IP address. DC/OS automatically generates name-based VIPs that do not collide with IP VIPs, so you don’t have to worry about collisions. This feature allows name-based VIPs to be created automatically when the service is installed.
+DC/OS can map traffic from a single Virtual IP (VIP) to multiple IP addresses and ports. DC/OS VIPs are **name-based**, which means clients connect with a service address instead of an IP address. 
 
-A named VIP contains 3 components:
+DC/OS automatically generates name-based VIPs that do not collide with IP VIPs, so you don’t have to worry about collisions. This feature allows name-based VIPs to be created automatically when the service is installed.
+
+A named VIP contains these components:
 
  * Private virtual IP address
  * Port (a port which the service is available on)
  * Service name
 
-You can assign a VIP to your application from the DC/OS web interface. The values you enter when you deploy a new service are translated into these Marathon application definition entries:
+You can assign a VIP to your application from the DC/OS GUI. The values you enter when you deploy a new service are translated into these Marathon application definition entries:
 
 - `portDefininitions` if not using Docker containers
 - `portMappings` if using Docker containers
@@ -28,14 +30,14 @@ VIPs follow this naming convention:
 
 ## Create a VIP:
 
-1.  From the DC/OS [web interface](/docs/1.9/gui/), click on the **Services** tab and either click your service name or click **RUN A SERVICE** to create a new service.
+1.  From the DC/OS [GUI](/docs/1.9/gui/), click on the **Services** tab and either click your service name or click **RUN A SERVICE** to create a new service.
 
     *   Select the **Networking** tab.
     *   To edit an existing application, click **Edit**. You can then select the **Networking** menu option.
 
 2.  Check the **Load Balanced** checkbox, then fill in the **LB Port**, **Name**, and **Protocol** fields. As you fill in these fields, the service addresses that Marathon sets up will appear at the bottom of the screen. You can assign multiple VIPs to your app by clicking **+ Add an endpoint**.
 
-    **Tip:** Toggle to **JSON Mode** to in the DC/OS web interface to edit the JSON directly and to see the application definition you have created.
+    **Tip:** Toggle to **JSON Mode** to in the DC/OS GUI to edit the JSON directly and to see the application definition you have created.
 
     The resulting JSON includes a `portDefinitions` field with the VIP you specified:
     
@@ -65,7 +67,7 @@ VIPs follow this naming convention:
     dcos marathon app add <service-name>.json
     ```
     
-* Whether your application definition requires `portMappings` or `portDefinitions` depends on whether you are using BRIDGE or HOST networking. If you create your service in the DC/OS web interface, the appropriate field is selected for you. For more information on port configuration, see the [Marathon ports documentation][1].
+* Whether your application definition requires `portMappings` or `portDefinitions` depends on whether you are using BRIDGE or HOST networking. If you create your service in the DC/OS GUI, the appropriate field is selected for you. For more information on port configuration, see the [Marathon ports documentation][1].
 
 ## Using VIPs with DC/OS Services
 

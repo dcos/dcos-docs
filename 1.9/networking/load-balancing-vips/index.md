@@ -4,10 +4,10 @@ nav_title: Load Balancing and VIPs
 menu_order: 00
 ---
 
-DC/OS comes with an east-west load balancer that's meant to be used to enable multi-tier microservices architectures. It acts as a TCP Layer 4 load balancer, and it's tightly integrated with the kernel. 
+DC/OS comes with an east-west load balancer that enables multi-tier microservices architectures. It acts as a TCP Layer 4 load balancer, and it's tightly integrated with the kernel. 
 
 ## Usage
-You can use the layer 4 load balancer by assigning a [VIP from the DC/OS web interface](/docs/1.9/networking/load-balancing-vips/virtual-ip-addresses/). Alternatively, if you're using something other than Marathon, you can create a label on the [port](https://github.com/apache/mesos/blob/b18f5bf48fda12bce9c2ac8e762a08f537ffb41d/include/mesos/mesos.proto#L1813) protocol buffer while launching a task on Mesos. This label's key must be in the format `VIP_$IDX`, where `$IDX` is replaced by a number, starting from 0. Once you create a task, or a set of tasks with a VIP, they will automatically become available to all nodes in the cluster, including the masters.
+You can use the layer 4 load balancer by assigning a [VIP from the DC/OS GUI](/docs/1.9/networking/load-balancing-vips/virtual-ip-addresses/). Alternatively, if you're using something other than Marathon, you can create a label on the [port](https://github.com/apache/mesos/blob/b18f5bf48fda12bce9c2ac8e762a08f537ffb41d/include/mesos/mesos.proto#L1813) protocol buffer while launching a task on Mesos. This label's key must be in the format `VIP_$IDX`, where `$IDX` is replaced by a number, starting from 0. Once you create a task, or a set of tasks with a VIP, they will automatically become available to all nodes in the cluster, including the masters.
 
 ### Details
 When you launch a set of tasks with these labels, DC/OS distributes them to all of the nodes in the cluster. All of the nodes in the cluster act as decision makers in the load balancing process. A process runs on all the agents that the kernel consults when packets are recognized with this destination address. This process keeps track of availability and reachability of these tasks to attempt to send requests to the right backends.
@@ -15,16 +15,22 @@ When you launch a set of tasks with these labels, DC/OS distributes them to all 
 ### Recommendations
 
 #### Caveats
-1. Do not firewall traffic between the nodes.
-2. Do not change `ip_local_port_range`.
-3. You must have the `ipset` package installed.
-4. You must use a supported [operating system](/docs/1.9/installing/custom/system-requirements/).
+- Do not firewall traffic between the nodes.
+- Do not change `ip_local_port_range`.
+- You must have the `ipset` package installed.
+- You must use a supported [operating system](/docs/1.9/installing/custom/system-requirements/).
 
 #### Persistent Connections
-It is recommended when you use our VIPs you keep long-running, persistent connections. The reason behind this is that you can very quickly fill up the TCP socket table if you do not. The default local port range on Linux allows source connections from 32768 to 61000. This allows 28232 connections to be established between a given source IP and a destination address, port pair. TCP connections must go through the time wait state prior to being reclaimed. The Linux kernel's default TCP time wait period is 120 seconds. Given this, you would exhaust the connection table by only making 235 new connections / sec.
+It is recommended that you keep long-running persistent connections, otherwise, you can quickly fill up the TCP socket table. The default local port range on Linux allows source connections from 32768 to 61000. This allows 28232 connections to be established between a given source IP and a destination address and port pair. TCP connections must go through the time wait state prior to being reclaimed. The Linux kernel's default TCP time wait period is 120 seconds. Without persistent connections, you would exhaust the connection table by only making 235 new connections per second.
 
 #### Health checks
-We also recommend taking advantage of Mesos health checks. Mesos health checks are surfaced to the load balancing layer. **Marathon** only converts **command** health checks to Mesos health checks. You can simulate HTTP health checks via a command similar to `test "$(curl -4 -w '%{http_code}' -s http://localhost:${PORT0}/|cut -f1 -d" ")" == 200`. This ensures the HTTP status code returned is 200. It also assumes your application binds to localhost. The `${PORT0}` is set as a variable by Marathon. We do not recommend using TCP health checks as they can be misleading as to the liveness of a service.
+It is recommended that you use Mesos health checks. Mesos health checks are surfaced to the load balancing layer. Marathon only converts **command** [health checks](/docs/1.9/deploying-services/creating-services/health-checks/) to Mesos health checks. You can simulate HTTP health checks via a command similar to:
+ 
+ ```bash
+ test "$(curl -4 -w '%{http_code}' -s http://localhost:${PORT0}/|cut -f1 -d" ")" == 200
+ ```
+ 
+ This ensures the HTTP status code returned is 200. It also assumes your application binds to localhost. The `${PORT0}` is set as a variable by Marathon. You should not use TCP health checks because they may provide misleading information about the liveness of a service.
 
 **Important:** Docker container command health checks are run inside the Docker container. For example, if cURL is used to check NGINX, the NGINX container must have cURL installed, or the container must mount `/opt/mesosphere` in RW mode.
 
@@ -32,7 +38,7 @@ We also recommend taking advantage of Mesos health checks. Mesos health checks a
 If you would like to run a demo, you can configure a Marathon app as mentioned above, and use the URI `https://s3.amazonaws.com/sargun-mesosphere/linux-amd64`, as well as the command `chmod 755 linux-amd64 && ./linux-amd64 -listener=:${PORT0} -say-string=version1` to execute it. You can then test it by hitting the application with the command: `curl http://1.2.3.4:5000`. This app exposes an HTTP API. This HTTP API answers with the PID, hostname, and the 'say-string' that's specified in the app definition. In addition, it exposes a long-running endpoint at `http://1.2.3.4:5000/stream`, which will continue to stream until the connection is terminated. The code for the application is available here: `https://github.com/mesosphere/helloworld`.
 
 #### Exposing it to the outside
-Prior to this, you had to run a complex proxy that would reconfigure based on the tasks running on the cluster. Fortunately, you no longer need to do this. Instead, you can have an incredible simple HAProxy configuration like so:
+You can create an HAProxy configuration like this:
 
 ```
 defaults
@@ -88,10 +94,10 @@ You must have the command ipset installed. If you do not, you may see an error l
 15:15:59.731 [error] Unknown response: {ok,"iptables v1.4.21: Set minuteman doesn't exist.\n\nTry `iptables -h' or 'iptables --help' for more information.\n"}
 ```
 ### Ports
-The ports 61420, and 61421 must be open for the load balancer to work correctly. Because the load balancer maintains a partial mesh, it needs to ensure that connectivity between nodes is unhindered.
+The ports 61420 and 61421 must be open for the load balancer to work correctly. Because the load balancer maintains a partial mesh, it needs to ensure that connectivity between nodes is unhindered.
 
 ### Connection table exhaustion
-If you begin to see the behaviour as described earlier where the connection table is being exhausted, you'll see various errors in the logs. You can set two sysctls to alleviate this issue, but it doesn't come without caveats.
+If you begin to see the behavior as described earlier where the connection table is being exhausted, you'll see various errors in the logs. You can set two sysctls to alleviate this issue, but it doesn't come without caveats.
 
 1. `net.netfilter.nf_conntrack_tcp_timeout_time_wait=0` -- You can set this to 0, but the time_wait state may break connection tracking for other applications
 1. `net.ipv4.tcp_tw_reuse=1` -- This sysctl can be dangerous and break firewalls, as well as NAT implementations. Although, if the firewall properly implements tracking TCP timestamps, it'll be okay. *Do not* set the `net.ipv4.tcp_tw_recycle` sysctl as it is RFC non-compliant and will break firewall connection tracking.
@@ -99,7 +105,7 @@ If you begin to see the behaviour as described earlier where the connection tabl
 More information about these sysctls can be found here: [https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt](https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt).
 
 ## Debugging
-The load balancer exposes a few endpoints on every node in the DC/OS cluster that can be used for gathering statistics. The URI for these metrics are: `http://localhost:61421/metrics`. This includes data about the backends, and the dataplane runtime.
+The load balancer exposes a few endpoints on every node in the DC/OS cluster that can be used for gathering statistics. The URI for these metrics are: `http://localhost:61421/metrics`. This includes data about the backends and the dataplane runtime.
 
 ## Implementation
 The local process polls the master node roughly every 5 seconds. The master node caches this for 5 seconds as well, bounding the propagation time for an update to roughly 11 seconds. Although this is the case for new VIPs, it is not the case for failed nodes.
