@@ -24,79 +24,70 @@ VIPs follow this naming convention:
 <service-name>.marathon.l4lb.thisdcos.directory:<port>
 ```
 
-## Prerequisite:
+### Prerequisite
 
 *   A pool of VIP addresses that are unique to your application.
 
-## Create a VIP:
+## Creating a VIP
 
-1.  From the DC/OS [GUI](/docs/1.9/gui/), click on the **Services** tab and either click your service name or click **RUN A SERVICE** to create a new service.
-
-    *   Select the **Networking** tab.
-    *   To edit an existing application, click **Edit**. You can then select the **Networking** menu option.
-
-2.  Check the **Load Balanced** checkbox, then fill in the **LB Port**, **Name**, and **Protocol** fields. As you fill in these fields, the service addresses that Marathon sets up will appear at the bottom of the screen. You can assign multiple VIPs to your app by clicking **+ Add an endpoint**.
-
-    **Tip:** Toggle to **JSON Mode** to in the DC/OS GUI to edit the JSON directly and to see the application definition you have created.
-
-    The resulting JSON includes a `portDefinitions` field with the VIP you specified:
+1.  From the DC/OS [GUI](/docs/1.9/gui/), click on the **Services** then **RUN A SERVICE**.
+    1.  From the **Networking** tab, select  **NETWORK TYPE** > **Virtual Network: dcos**.
+    2.  Expand **ADD SERVICE ENDPOINT** and provide responses for:
     
-    ```json
-    {
-      "id": "/my-service",
-      "cmd": "sleep 10",
-      "cpus": 1,
-      "portDefinitions": [
-        {
-          "protocol": "tcp",
-          "port": 5555,
-          "labels": {
-            "VIP_0": "/my-service:5555"
-          },
-          "name": "my-vip"
-        }
-      ]
-    }
-    ```
+        -  **CONTAINER PORT**
+        -  **SERVICE ENDPOINT NAME**
+        -  **PORT MAPPING**
+        -  **LOAD BALANCED SERVICE ADDRESS**
+        
+        As you fill in these fields, the service addresses that Marathon sets up will appear at the bottom of the screen. You can assign multiple VIPs to your app by clicking **ADD SERVICE ENDPOINT**.
+        
+        ![VIP service definition](/1.9/img/vip-service-definition.png)
 
-    In the example above, clients can access the service at `my-service.marathon.l4lb.thisdcos.directory:5555`.
+        In the example above, clients can access the service at `my-service.marathon.l4lb.thisdcos.directory:5555`.
+        
+    1.  Click **REVIEW & RUN** and **RUN SERVICE**.
     
-    Alternatively, you can create a service with a VIP from the DC/OS CLI. Create a file with your application definition JSON, then launch the service on DC/OS:
+You can click on the **Networking** tab to view networking details for your service.
+
+![VIP output](/1.9/img/vip-service-definition-output.png)
     
-    ```bash
-    dcos marathon app add <service-name>.json
-    ```
-    
-* Whether your application definition requires `portMappings` or `portDefinitions` depends on whether you are using BRIDGE or HOST networking. If you create your service in the DC/OS GUI, the appropriate field is selected for you. For more information on port configuration, see the [Marathon ports documentation][1].
+For more information on port configuration, see the [Marathon ports documentation](/docs/1.9/deploying-services/service-ports/).
 
 ## Using VIPs with DC/OS Services
 
-Certain DC/OS services, such as Kafka, automatically create VIPs when you install them. The naming convention is: `broker.<service.name>.l4lb.thisdcos.directory:9092`.
+Some DC/OS services, for example [Kafka](/service-docs/kafka/), automatically create VIPs when you install them. The naming convention is: `broker.<service.name>.l4lb.thisdcos.directory:9092`.
 
-To view the VIP for Kafka, run `dcos kafka connection` from the DC/OS CLI. 
+Follow these steps to view the VIP for Kafka.
 
-```bash
-dcos kafka connection
-```
-Here is a sample response:
+### Via the GUI
 
-```json
-{
-    "address": [
-        "10.0.0.211:9843",
-        "10.0.0.217:10056",
-        "10.0.0.214:9689"
-    ],
-    "dns": [
-        "broker-0.kafka.mesos:9843",
-        "broker-1.kafka.mesos:10056",
-        "broker-2.kafka.mesos:9689"
-    ],
-    "vip": "broker.kafka.l4lb.thisdcos.directory:9092",
-    "zookeeper": "master.mesos:2181/dcos-service-kafka"
-}
-```
+1.  Click **Networking** > **Networks** and select **dcos**.
+1.  Select your task to view details. 
 
+    ![](/1.9/img/vip-service-details.png)
+
+### Via the CLI
+
+**Prerequisite:** The Kafka service and CLI must be [installed](https://docs.mesosphere.com/service-docs/kafka/). 
+
+1.  Run this command: 
+
+    ```bash
+    dcos kafka connection
+    ```
+    
+    The output should resemble:
+    
+    ```json
+    {
+      "address": [
+        "10.0.2.199:9918"
+      ],
+      "zookeeper": "master.mesos:2181/dcos-service-kafka",
+      "dns": [
+        "broker-0.kafka.mesos:9918"
+      ],
+      "vip": "broker.kafka.l4lb.thisdcos.directory:9092"
+    }
+    ```
 You can use this VIP to address any one of the Kafka brokers in the cluster.
-
- [1]: /docs/1.9/deploying-services/service-ports/
