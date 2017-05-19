@@ -17,7 +17,7 @@ dcos marathon app kill <app-id> [OPTION]
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `--host=<host>`   |             | The hostname that is running app. |
-| `--scale`   |             | Scale the app down after performing the the operation.  |
+| `--scale`   |             | Scale the app down after performing the operation.  |
 
 # Positional arguments
 

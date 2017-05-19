@@ -70,7 +70,7 @@ By default, the DC/OS command line stores its configuration files in a directory
 
 The configuration settings are stored in the `dcos.toml` file. You can modify these settings with the `dcos config` command.
 
-**dcos_url** The the public master IP of your DC/OS installation. This is set by default during installation. For example:
+**dcos_url** The public master IP of your DC/OS installation. This is set by default during installation. For example:
 
     dcos config set core.dcos_url 52.36.102.191
     

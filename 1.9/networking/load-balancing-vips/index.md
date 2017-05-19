@@ -118,7 +118,7 @@ The load balancing algorithm is adapted from *The Power of Two Choices in Random
 
 The simple algorithm maintains an EWMA of latencies for a given backend at connection time. It also maintains a set of consecutive failures, and when they happened. If a backend observes enough consecutive failures in a short period of time (<5m) it is considered to be unavailable. A failure is classified as three way handshake failing to occur.
 
-The primary way the algorithm works is that it iterates over the backends and finds those that we assume are available after taking the the historical failures as well as the group failure detector. It then takes two random nodes from the most available bucket.
+The primary way the algorithm works is that it iterates over the backends and finds those that we assume are available after taking the historical failures as well as the group failure detector. It then takes two random nodes from the most available bucket.
 
 The probabilistic failure detector randomly chooses backends and checks whether or not the group failure detector considers the agent to be alive. It will continue to do this until it either finds 2 backends that are in the ideal bucket, or until 20 lookups happen. If the prior case happens, it'll choose one at random. If the latter case happens it'll choose one of the 20 at random.
 

@@ -81,7 +81,7 @@ The `framework-name` property is required. The `framework-name` property:
 
 ### 08. All URIs used by the scheduler and executor MUST be specified in config.json.
 
-All URIs that are used by the service MUST be specified in the `config.json` file. Any URL that is accessed by the service must be overridable and specified in the the `config.json` file, including:
+All URIs that are used by the service MUST be specified in the `config.json` file. Any URL that is accessed by the service must be overridable and specified in the `config.json` file, including:
 
 *   URLs required in the `marathon.json` file
 *   URLs that retrieve the executor (if not supplied by the scheduler)

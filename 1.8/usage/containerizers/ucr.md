@@ -47,7 +47,7 @@ The Mesos containerizer provides a `credential`, with a `principal` and an optio
 # Limitations
 - The UCR is considered [experimental](/docs/1.8/overview/feature-maturity/) in DC/OS 1.8.
 
-- In DC/OS 1.8, you can only specify the UCR via a JSON service definition, not from the the DC/OS web interface. DC/OS 1.9 allows you to specify the UCR from the web interface.
+- In DC/OS 1.8, you can only specify the UCR via a JSON service definition, not from the DC/OS web interface. DC/OS 1.9 allows you to specify the UCR from the web interface.
 
 # Further Reading
 - [View the Mesos docs for the UCR](http://mesos.apache.org/documentation/latest/containerizer/#Mesos).

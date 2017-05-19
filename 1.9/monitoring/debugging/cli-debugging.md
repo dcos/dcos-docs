@@ -84,7 +84,7 @@ The output of the command shows:
 - How many instances of the service or pod are waiting to launch.
 - How many Mesos resource offers have been processed.
 - How many Mesos resource offers are unused
-- The the time when the user created or updated the service or pod.
+- The time when the user created or updated the service or pod.
 
 This output can quickly show you which services or pods are stuck in deployment and how long they have been stuck.
 

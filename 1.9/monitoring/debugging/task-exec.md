@@ -25,7 +25,7 @@ You can execute this command in the following modes.
 <!-- Fork a Process Inside a Mesos Container, stream its output (OSS) -->
 <!-- Support Optional Stream of STDIN to Forked Process (OSS) -->
 <!-- Support Optional Pseudo-Teletype for Forked Process (OSS) -->
-<!-- Secure the the Debugging API with Fine Grained Auth (Enterprise) -->
+<!-- Secure the Debugging API with Fine Grained Auth (Enterprise) -->
 
 For more information, see: the [Command reference](/docs/1.9/cli/command-reference/).
 
