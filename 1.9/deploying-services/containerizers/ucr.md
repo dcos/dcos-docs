@@ -20,9 +20,15 @@ The Universal Container Runtime offers the following advantages:
 
 1. In the **Container Image** field, enter your container image.
 
+**Note:** If your service needs to [pull Docker images from a private registry](/docs/1.9/deploying-services/private-docker-registry/), you must specify the [`cluster_docker_credentials_path` in your `config.yaml` file before cluster installation](/docs/1.9/installing/custom/configuration-parameters/#cluster_docker_credentials).
+
 # Provision Containers with the Universal Container Runtime from the DC/OS CLI
 
-To provision containers with the UCR from the DC/OS CLI, specify the container type `MESOS` and a the appropriate object in your [Marathon application definition](/docs/1.9/deploying-services/creating-services/). Here, we specify a Docker container with the `docker` object.
+To provision containers with the UCR from the DC/OS CLI, specify the container type `MESOS` and a the appropriate object in your [Marathon application definition](/docs/1.9/deploying-services/creating-services/).
+
+**Note:** If your service needs to [pull Docker images from a private registry](/docs/1.9/deploying-services/private-docker-registry/), you must specify the [`cluster_docker_credentials_path` in your `config.yaml` file before cluster installation](/docs/1.9/installing/custom/configuration-parameters/#cluster_docker_credentials).
+
+Here, we specify a Docker container with the `docker` object.
 
 The Mesos containerizer provides a `credential`, with a `principal` and an optional `secret` field to authenticate when downloading the Docker image.
 
