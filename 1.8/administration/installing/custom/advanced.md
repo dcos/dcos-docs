@@ -97,7 +97,7 @@ Your cluster must meet the software and hardware [requirements](/docs/1.8/admini
 
     **Important:** The IP address of a node must not change after DC/OS is installed on the node. For example, the IP address must not change when a node is rebooted or if the DHCP lease is renewed. If the IP address of a node does change, the node must be wiped and reinstalled.
 
-    Create an IP detection script for your environment and save as `genconf/ip-detect`. This script needs to be `UTF-8` encoded and have a valid [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) line. You can use the examples below.
+    Create an IP detect script for your environment and save as `genconf/ip-detect`. This script needs to be `UTF-8` encoded and have a valid [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) line. You can use the examples below.
 
     *   #### Use the AWS Metadata Server
 
@@ -128,7 +128,7 @@ Your cluster must meet the software and hardware [requirements](/docs/1.8/admini
 
         This method discovers the IP address of a particular interface of the node.
 
-        If you have multiple generations of hardware with different internals, the interface names can change between hosts. The IP detection script must account for the interface name changes. The example script could also be confused if you attach multiple IP addresses to a single interface, or do complex Linux networking, etc.
+        If you have multiple generations of hardware with different internals, the interface names can change between hosts. The IP detect script must account for the interface name changes. The example script could also be confused if you attach multiple IP addresses to a single interface, or do complex Linux networking, etc.
 
         ```bash
         #!/usr/bin/env bash
