@@ -12,7 +12,7 @@ Add or set a DC/OS configuration properties. Here are the available properties.
 | core.dcos_url         | This property contains the public master IP of your DC/OS cluster.|
 | core.mesos_master_url | This property specifies the Mesos master URL.|
 | core.pagination       | This property indicates whether to paginate output. |
-| core.ssl_verify       | This property specifies whether to verify SSL certificates for HTTPS (`true`) or set the path to the SSL certificates (`false`). |
+| core.ssl_verify       | This property Indicates whether to verify SSL certificates or set the path to the SSL certificates. |
 | core.timeout          | This property specifies the request timeout in seconds, with a minimum value of 1 second. By default this is set to 5 seconds.  |
 
 

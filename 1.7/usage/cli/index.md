@@ -90,7 +90,7 @@ The configuration settings are stored in the `dcos.toml` file. You can modify th
     dcos config set core.reporting False
     
 
-**ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `False`. For example, to set to true:
+**ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `True`. For example, to set to true:
 
     dcos config set core.ssl_verify True
     
