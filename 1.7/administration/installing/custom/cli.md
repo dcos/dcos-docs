@@ -28,7 +28,7 @@ The DC/OS installation creates these folders:
     mkdir -p genconf
     ```
 
-2. Create a `ip-detect` script
+2. Create an `ip-detect` script.
 
     In this step you create an IP detect script to broadcast the IP address of each node across the cluster. Each node in a DC/OS cluster has a unique IP address that is used to communicate between nodes in the cluster. The IP detect script prints the unique IPv4 address of a node to STDOUT each time DC/OS is started on the node.
 
