@@ -90,9 +90,9 @@ The configuration settings are stored in the `dcos.toml` file. You can modify th
     dcos config set core.reporting False
     
 
-**ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `True`. For example, to set to true:
+**ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `True`. For example, to set to false:
 
-    dcos config set core.ssl_verify True
+    dcos config set core.ssl_verify False
     
 
 **timeout** Request timeout in seconds, with a minimum value of 1 second. By default this is set to 5 seconds. For example, to set to 3 seconds:

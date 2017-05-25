@@ -12,7 +12,7 @@ Add or set a DC/OS configuration properties. Here are the available properties.
 | core.dcos_url         | This property contains the public master IP of your DC/OS cluster.|
 | core.mesos_master_url | This property specifies the Mesos master URL.|
 | core.pagination       | This property indicates whether to paginate output. |
-| core.ssl_verify       | This property Indicates whether to verify SSL certificates or set the path to the SSL certificates. |
+| core.ssl_verify       | This property indicates whether to verify SSL certificates or set the path to the SSL certificates. |
 | core.timeout          | This property specifies the request timeout in seconds, with a minimum value of 1 second. By default this is set to 5 seconds.  |
 
 
@@ -61,7 +61,7 @@ Here is the output:
 In this example, the verify SSL certificates for HTTPS is set to `true`.
 
 ```bash
-dcos config set core.ssl_verify true
+dcos config set core.ssl_verify False
 ```
 
 Here is the output:

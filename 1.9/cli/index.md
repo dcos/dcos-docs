@@ -107,10 +107,10 @@ dcos config set core.pagination False
 ``` 
  
 #### ssl_verify
-Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `True`. For example, to set to true:
+Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `True`. For example, to set to false:
 
 ```bash
-dcos config set core.ssl_verify True
+dcos config set core.ssl_verify False
 ```
 
 #### timeout
