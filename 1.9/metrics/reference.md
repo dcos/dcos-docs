@@ -77,8 +77,8 @@ The following per-container resource utilization metrics are collected.
    
 | Metric            | Description                  |
 |-------------------|------------------------------|
-| disk_limit_bytes    | Hard memory limit for disk in bytes. |
-| disk_used_bytes    | Hard memory used in bytes.  |
+| disk_limit_bytes    | Hard capacity limit for disk in bytes. |
+| disk_used_bytes    | Hard capacity used in bytes.  |
    
 ### Memory info
    <!-- https://github.com/apache/mesos/blob/1.0.1/include/mesos/v1/mesos.proto -->
