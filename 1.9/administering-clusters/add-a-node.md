@@ -6,7 +6,7 @@ menu_order: 800
 
 You can add agent nodes to an existing DC/OS cluster. 
 
-Agent nodes are designated as [public](/docs/1.9/overview/concepts/#public) or [private](/docs/1.9/overview/concepts/#private) during installation. By default, they are designated as private during [GUI][1] or [CLI][2] installation.
+Agent nodes are designated as [public](/docs/1.9/overview/concepts/#public-agent-node) or [private](/docs/1.9/overview/concepts/#private) during installation. By default, they are designated as private during [GUI][1] or [CLI][2] installation.
 
 ### Prerequisites:
 

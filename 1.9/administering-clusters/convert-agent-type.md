@@ -6,7 +6,7 @@ menu_order: 700
 
 You can convert agent nodes to public or private for an existing DC/OS cluster. 
 
-Agent nodes are designated as [public](/docs/1.9/overview/concepts/#public) or [private](/docs/1.9/overview/concepts/#private) during installation. By default, they are designated as private during [GUI][1] or [CLI][2] installation.
+Agent nodes are designated as [public](/docs/1.9/overview/concepts/#public-agent-node) or [private](/docs/1.9/overview/concepts/#private) during installation. By default, they are designated as private during [GUI][1] or [CLI][2] installation.
 
 ### Prerequisites:
 These steps must be performed on a machine that is configured as a DC/OS node. Any tasks that are running on the node will be terminated during this conversion process.

@@ -300,7 +300,7 @@ To install DC/OS:
 [1]: /docs/1.9/installing/custom/configuration-parameters/
 [2]: /docs/1.9/cli/install/
 [4]: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
-[6]: /docs/1.9/overview/concepts/#public
+[6]: /docs/1.9/overview/concepts/#public-agent-node
 [7]: /docs/1.9/overview/concepts/#private
 [8]: /docs/1.9/installing/custom/uninstall/
 [9]: /docs/1.9/installing/troubleshooting/

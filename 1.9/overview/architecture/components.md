@@ -20,7 +20,7 @@ DC/OS provides a way to view and operate a large number of individual machine-le
 <div data-role="collapsible">
 <h2 id="apache-mesos">Apache Mesos</h2>
 <div>
-<p><strong>Description:</strong> Mesos manages resources and tasks as a distributed systems kernel. Mesos Master exposes scheduler, executor, and operator interfaces to facilitate cluster management. Mesos Agent manages individual executors, tasks, and resources on each <a href="/docs/1.9/overview/concepts/#dcos-agent-node">DC/OS agent node</a>. Mesos Agent Public is a Mesos Agent configured to run on <a href="/docs/1.9/overview/concepts/#public-agent-node">DC/OS public agent nodes</a>.</p>
+<p><strong>Description:</strong> Mesos manages resources and tasks as a distributed systems kernel. Mesos Master exposes scheduler, executor, and operator interfaces to facilitate cluster management. Mesos Agent manages individual executors, tasks, and resources on each <a href="/docs/1.9/overview/concepts/#dcos-agent-node">DC/OS agent node</a>. Mesos Agent Public is a Mesos Agent configured to run on <a href="/docs/1.9/overview/concepts/#public-agent-node-agent-node">DC/OS public agent nodes</a>.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
