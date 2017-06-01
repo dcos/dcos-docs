@@ -11,5 +11,5 @@ fi
 
 cd tmp/website
 git pull origin develop
-docker run -it -p 3000:3000 -p 3001:3001 -v $PWD:/website -v $PWD/../..:/dcos-docs \
+docker run --privileged -it -p 3000:3000 -p 3001:3001 -v $PWD:/website -v $PWD/../..:/dcos-docs \
   docs-runner:latest /dcos-docs/scripts/run-server.sh
