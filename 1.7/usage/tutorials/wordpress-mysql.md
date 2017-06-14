@@ -18,7 +18,7 @@ Thanks to **VIPs** you are only required to specify a virtual address for the da
 This feature solves 3 of the hardest problems involved in running a service-oriented architecture: 
 
  - Finding where the service is running in the datacenter.
- - Determining which instance to send traffic to in order to avoid overloading any particular one.
+ - Determining which instance to send traffic to to avoid overloading any particular one.
  - Gracefully handling failures to these instances when they happen.
 
 You are now going to see how easy it is to make use of this feature in DC/OS.

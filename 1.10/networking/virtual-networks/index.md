@@ -53,7 +53,7 @@ Terminology:
 # Limitations
 * The DC/OS virtual network does not allow services to reserve IP addresses that result in ephemeral addresses for containers across multiple incarnations on the virtual network. This restriction ensures that a given client connects to the correct service.
 
-  [VIPs (virtual IP addresses)](/docs/1.10/networking/load-balancing-vips/) are built in to DC/OS and offer a clean way of allocating static addresses to services. If you are using virtual networks, you should use VIPs to access your services in order to support cached DNS requests and static IP addresses.
+  [VIPs (virtual IP addresses)](/docs/1.10/networking/load-balancing-vips/) are built in to DC/OS and offer a clean way of allocating static addresses to services. If you are using virtual networks, you should use VIPs to access your services to support cached DNS requests and static IP addresses.
 
 * The limitation on the total number of containers on the virtual network is the same as the number of IP addresses available on the overlay subnet. However, the limitation on the number of containers on an agent depends on the subnet (which will be a subset of the overlay subnet) allocated to the agent. For a given agent subnet, half the address space is allocated to the `MesosContainerizer` and the other half is allocated to the `DockerContainerizer`.
 

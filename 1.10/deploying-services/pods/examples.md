@@ -311,7 +311,7 @@ The example below shows a pod, `test-pod`, with three containers, `healthtask1`,
 | `labels`                      | object   | Pod metadata as key/value pairs.                                                                                               |
 | `environment`                 | object   | Environment variables at the pod level. All pod containers will inherit these environment variables. Must be capitalized.      |
 | `secrets`                     | object   | The fully qualified path to the secret in the store.                                                                           |
-| `scheduling`                  | object   | Defines exponential backoff behavior for faulty apps in order to prevent sandboxes from filling up.                            |
+| `scheduling`                  | object   | Defines exponential backoff behavior for faulty apps to prevent sandboxes from filling up.                            |
 | `scheduling.backoff`               | number   | Initial backoff (seconds) applied when a launched instance fails (default: 1).                                                 |
 | `scheduling.backoffFactor`         | number   | Factor applied to current backoff to determine the new backoff (default: 1.15).                                                |
 | `scheduling.maxLaunchDelay`        | number   | Maximum backoff (seconds) applied when subsequent failures are detected (default: 3600).                                       |
