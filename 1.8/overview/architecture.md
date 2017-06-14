@@ -118,7 +118,7 @@ In detail, here are the steps:
 <tbody>
 <tr>
 <td>1</td>
-<td>Client/Scheduler init: the Client needs to know how to connect to the Scheduler in order to launch a process, for example via Mesos-DNS or DC/OS CLI.</td>
+<td>Client/Scheduler init: the Client needs to know how to connect to the Scheduler to launch a process, for example via Mesos-DNS or DC/OS CLI.</td>
 </tr>
 <tr>
 <td>2</td>

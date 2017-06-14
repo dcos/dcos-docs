@@ -183,7 +183,7 @@ DC/OS overlay uses a replicated log to persist the virtual network state across 
 **Note:** The overlay replicated log is different from the [master's replicated log](http://mesos.apache.org/documentation/latest/replicated-log-internals/), which is stored at /var/lib/mesos/master/replicated_log. Removing the *overlay* replicated log will have no effect on the master's recovery semantics.
 
 ## iptables
-The virtual networks install IPMASQ rules in order to allow containers to talk outside the virtual network. When you delete or replace virtual networks, you must remove the rules associated with the previous virtual networks. To remove the IPMASQ rules associated with each overlay, remove the IPMASQ rule from the POSTROUTING change of the NAT table that corresponds to the virtual networks subnet. Remove these rules on each agent node.
+The virtual networks install IPMASQ rules to allow containers to talk outside the virtual network. When you delete or replace virtual networks, you must remove the rules associated with the previous virtual networks. To remove the IPMASQ rules associated with each overlay, remove the IPMASQ rule from the POSTROUTING change of the NAT table that corresponds to the virtual networks subnet. Remove these rules on each agent node.
 
 <a name="replace"></a>
 # Replacing or Adding New Virtual Networks
