@@ -30,14 +30,14 @@ Also, to access nodes in the DC/OS cluster you will need `ssh` installed and con
 
 To install DC/OS 1.9 on Azure, use the [Azure Resource Manager templates](https://downloads.dcos.io/dcos/stable/azure.html) provided.
 
+Some notes of the template configuration is below,
+
+- Choose `East US` as the Location, because some resources of the template may not available in other location.
+- Set `Oauth Enabled` to true if you want to sign in the DC/OS Dashboard through OAuth.
+- Fill up the `Agent Endpoint DNS Name Prefix` and `Master Endpoint DNS Name Prefix`.
+- Enter your `Ssh RSA Public Key`.
 
 ## Step 2: Accessing DC/OS
-
-Because of security considerations, the DC/OS cluster in Azure is locked down by default. You must set an inbound security rule and an inbound NAT rule.
-
-Or, set oauthEnabled=true at deploy time ??
-
-TODO
 
 First, look up `MASTERFQDN` in the outputs of the deployment. To find that, click on the link under `Last deployment` (which is `4/15/2016 (Succeeded)` here) and you should see this:
 
@@ -47,9 +47,74 @@ Click on the latest deployment and copy the value of `MASTERFQDN` in the `Output
 
 ![Deployment output](/docs/1.9/img/dcos-azure-marketplace-step2b.png)
 
-Use the value of `MASTERFQDN` you found in the `Outputs` section in the previous step and access http://$MASTERFQDN in your website.
+Use the value of `MASTERFQDN` you found in the `Outputs` section in the previous step, and we will use it in the following step.
 
-Note that the following commands can be used to run the DC/OS CLI directly on the master node:
+Because of security considerations, you can not visit the DC/OS Dashboard in Azure directly by default. Here, we provide two ways to work around. Please find your case below,
+
+### Case 1:
+
+In order to visit the the DC/OS Dashboard, we will need to access the TCP port 80 or 443 of the master node. You can add an inbound security rule and an inbound NAT rule.
+
+Find the network security group resource of the master node,
+
+![Resource - Master Node Network Security Group](/docs/1.9/img/dcos-azure-step2case1a.png)
+
+Click on the "Inbound security rules" tab on the left side,
+
+![Inbound Security Rules](/docs/1.9/img/dcos-azure-step2case1b.png)
+
+Add an inbound security rule.
+
+![Add Inbound Security Rules](/docs/1.9/img/dcos-azure-step2case1c.png)
+
+Find the load balancer resource of the master node,
+
+![Resource - Master Node Load balancer](/docs/1.9/img/dcos-azure-step2case1d.png)
+
+Click on the "Inbound NAT rules" tab on the left side,
+
+![Inbound NAT Rules](/docs/1.9/img/dcos-azure-step2case1e.png)
+
+Add an inbound NAT rule.
+
+![Add Inbound NAT Rules](/docs/1.9/img/dcos-azure-step2case1f.png)
+
+Now you can visit `http://$MASTERFQDN` and view the DC/OS Dashboard.
+
+### Case 2: Using ssh tunnel
+
+In this case, we need to setup a ssh tunnel, to forward TCP port 80 of the master node on the azure to the 8000 port of your local machine.
+
+Use the value of `MASTERFQDN` you found in the previous step and paste it in the following command:
+
+```bash
+ssh azureuser@$MASTERFQDN -L 8000:localhost:80
+```
+
+For example, in my case:
+
+```bash
+ssh azureuser@dcosmaster.westus.cloudapp.azure.com -L 8000:localhost:80
+```
+
+Now you can visit `http://localhost:8000` on your local machine and view the DC/OS Dashboard.
+
+![DC/OS dashboard](/docs/1.9/img/dcos-gui.png)
+
+#### Caveats
+
+Some caveats around SSH access:
+
+- For connections to `http://localhost:8000` to work, the SSH command must be run on your local machine, and not inside a Virtual Machine.
+- In the example above, port `8000` is assumed to be available on your local machine.
+- The SSH commands shown only work on Mac or Linux. For Windows use [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) with a similar port-forwarding configuration, see also [How to Use SSH with Windows on Azure](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-ssh-from-windows/).
+- If you want to learn more about SSH key generation check out this [GitHub tutorial](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
+
+The DC/OS UI will not show the correct IP address or CLI install commands when connected by using an SSH tunnel.
+
+## Run DC/OS CLI
+
+The following commands can be used to run the DC/OS CLI directly on the master node:
 
 ```bash
 # Connect to master node with ssh
