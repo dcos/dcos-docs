@@ -46,13 +46,13 @@ Click on the latest deployment and copy the value of `MASTERFQDN` in the `Output
 Use the value of `MASTERFQDN` you found in the `Outputs` section in the previous step and paste it in the following command:
 
 ```bash
-ssh azureuser@$MASTERFQDN -p 2200 -L 8000:localhost:80
+ssh azureuser@$MASTERFQDN -L 8000:localhost:80
 ```
 
 For example, in my case:
 
 ```bash
-ssh azureuser@dcosmaster.westus.cloudapp.azure.com -p 2200 -L 8000:localhost:80
+ssh azureuser@dcosmaster.westus.cloudapp.azure.com -L 8000:localhost:80
 ```
 
 Now you can visit `http://localhost:8000` on your local machine and view the DC/OS Dashboard.
@@ -74,7 +74,7 @@ Note that the following commands can be used to run the DC/OS CLI directly on th
 
 ```bash
 # Connect to master node with ssh
-ssh -p2200 azureuser@$MASTERFQDN -L 8000:localhost:80
+ssh azureuser@$MASTERFQDN -L 8000:localhost:80
 
 # Install CLI on the master node and configure with http://localhost
 curl https://downloads.dcos.io/binaries/cli/linux/x86-64/dcos-1.9/dcos -o dcos && 
