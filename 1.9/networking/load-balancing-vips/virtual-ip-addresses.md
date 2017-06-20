@@ -1,6 +1,5 @@
 ---
 post_title: Using Virtual IP Addresses
-feature_maturity: preview
 menu_order: 10
 ---
 DC/OS can map traffic from a single Virtual IP (VIP) to multiple IP addresses and ports. DC/OS VIPs are **name-based**, which means clients connect with a service address instead of an IP address. 
@@ -91,3 +90,12 @@ Follow these steps to view the VIP for Kafka.
     }
     ```
 You can use this VIP to address any one of the Kafka brokers in the cluster.
+
+
+## FAQs
+
+### Connections seem to close at random times
+
+This behavior is often experienced with applications that have long lived connections, such as databases (e.g. PostgreSQL). To fix, try turning on keepalives. The keepalive can be an application specific mechanism like a heartbeat, or something in the protocol like a TCP keepalive. A keepalive is required because a load balancer cannot differentiate between idle or dead connections as no packets are sent in either case. The default timeout depends on the kernel configuration, but is usually 5 minutes.
+
+ [1]: /docs/1.9/deploying-services/service-ports/

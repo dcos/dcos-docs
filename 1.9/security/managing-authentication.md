@@ -113,7 +113,7 @@ sudo journalctl -u dcos-oauth.service
 ## Authentication opt-out
 
 If you are doing an [advanced installation](/docs/1.9/installing/custom/advanced/), you can opt out of
-Auth0-based authentication by adding this parameter to your configuration file (`genconf/config.yaml`). For more information, see the configuration [documentation](/docs/1.9/installing/custom/configuration-parameters/).
+Auth0-based authentication by adding this parameter to your configuration file (`genconf/config.yaml`). For more information, see the configuration [documentation](/docs/1.9/installing/custom/configuration/configuration-parameters/).
 
 ```yaml
 oauth_enabled: 'false'

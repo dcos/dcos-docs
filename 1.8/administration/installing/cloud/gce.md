@@ -10,6 +10,8 @@ You can configure a DC/OS cluster on Google Compute Engine (GCE) by using these 
 - [Install the DC/OS GCE scripts](#install)
 - [Configure parameters](#configure)
 
+**Important:** Upgrades are not supported with this installation method.
+
 ## Prerequisites
 - Google Cloud Console account
 

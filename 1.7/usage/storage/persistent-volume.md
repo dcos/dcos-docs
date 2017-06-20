@@ -38,7 +38,7 @@ Configure a persistent volume with the following options:
 - `mode`: The access mode of the volume. Currently, `"RW"` is the only possible value and will let your application read from and write to the volume.
 - `persistent.size`: The size of the persistent volume in MiBs.
 
-You also need to set the `residency` node in order to tell Marathon to setup a stateful application. Currently, the only valid option for this is:
+You also need to set the `residency` node to tell Marathon to setup a stateful application. Currently, the only valid option for this is:
 
 ```json
 "residency": {
@@ -79,14 +79,14 @@ For a complete example, see the [Running stateful MySQL on Marathon](#stateful-s
 
 When you scale your app down, the volumes associated with the terminated instances are detached but all resources are still reserved. At this point, you may delete the tasks via the Marathon REST API, which will free reserved resources and destroy the persistent volumes.
 
-Since all the resources your application needs are still reserved when a volume is detached, you may wish to destroy detached volumes in order to allow other applications and frameworks to use the resources. You may wish to leave them in the detached state, however, if you think you will be scaling your app up again; the data on the volume will still be there.
+Since all the resources your application needs are still reserved when a volume is detached, you may wish to destroy detached volumes to allow other applications and frameworks to use the resources. You may wish to leave them in the detached state, however, if you think you will be scaling your app up again; the data on the volume will still be there.
 
 **Note:** If your app is destroyed, any associated volumes and reserved resources will also be deleted.
 **Note:** Mesos will currently not remove the data but might do so in the future.
 
 # Upgrading/restarting stateful applications
 
-The default `UpgradeStrategy` for a stateful application is a `minimumHealthCapacity` of `0.5` and a `maximumOverCapacity` of `0`. If you override this default, your definition must stay below these values in order to pass validation. The `UpgradeStrategy` must stay below these values because Marathon needs to be able to kill old tasks before starting new ones so that the new versions can take over reservations and volumes and Marathon cannot create additional tasks (as a `maximumOverCapacity > 0` would induce) in order to prevent additional volume creation.
+The default `UpgradeStrategy` for a stateful application is a `minimumHealthCapacity` of `0.5` and a `maximumOverCapacity` of `0`. If you override this default, your definition must stay below these values to pass validation. The `UpgradeStrategy` must stay below these values because Marathon needs to be able to kill old tasks before starting new ones so that the new versions can take over reservations and volumes and Marathon cannot create additional tasks (as a `maximumOverCapacity > 0` would induce) to prevent additional volume creation.
 
 **Note:** For a stateful application, Marathon will never start more instances than specified in the `UpgradeStrategy`, and will kill old instances rather than create new ones during an upgrade or restart.
 
@@ -105,7 +105,7 @@ For example, if you scale down from 5 to 3 instances, you will see 2 tasks in th
 - the application is deleted (in which case volumes of all its tasks are destroyed, and all reservations are deleted).
 - you explicitly delete one or more suspended tasks with a `wipe=true` flag.
 
-If reserving resources or creating persistent volumes fails, the created task will timeout after the configured `task_reservation_timeout` (default: 20 seconds) and a new reservation attempt will be made. In case a task is `LOST` (because its agent is disconnected or crashed), the reservations and volumes will not timeout and you need to manually delete and wipe the task in order to let Marathon launch a new one.
+If reserving resources or creating persistent volumes fails, the created task will timeout after the configured `task_reservation_timeout` (default: 20 seconds) and a new reservation attempt will be made. In case a task is `LOST` (because its agent is disconnected or crashed), the reservations and volumes will not timeout and you need to manually delete and wipe the task to let Marathon launch a new one.
 
 # Potential Pitfalls
 
@@ -273,7 +273,7 @@ The complete JSON application definition reads as follows:
 
 ## Inspecting and deleting suspended stateful tasks
 
-In order to destroy and clean up persistent volumes and free the reserved resources associated with a task, perform 2 steps:
+To destroy and clean up persistent volumes and free the reserved resources associated with a task, perform 2 steps:
 
 1. Locate the agent containing the persistent volume and remove the data inside it.
 1. Send an HTTP DELETE request to Marathon that includes the `wipe=true` flag.

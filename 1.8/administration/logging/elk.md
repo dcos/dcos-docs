@@ -169,10 +169,10 @@ For each Agent node in your DC/OS cluster:
     ```bash
     sudo chmod 0755 /etc/systemd/system/dcos-journalctl-filebeat.service
     sudo systemctl daemon-reload
+    sudo systemctl enable dcos-journalctl-filebeat.service
     sudo systemctl start dcos-journalctl-filebeat.service
-    sudo chkconfig dcos-journalctl-filebeat.service on
+    sudo systemctl enable filebeat
     sudo systemctl start filebeat
-    sudo chkconfig filebeat on
     ```
 
 # <a name="all"></a>Step 3: ELK Node Notes

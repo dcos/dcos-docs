@@ -31,7 +31,7 @@ Check the **Run on a Schedule** to reveal the following fields.
 * **Starting Deadline** - This is the time, in seconds, to start the job if it misses scheduled time for any reason. Missed jobs executions will be counted as failed ones.
 
 ### **Docker Container** Tab
-* **Image** - Enter the the Docker image you will use to specify the action of your job, if you are using one.
+* **Image** - Enter the Docker image you will use to specify the action of your job, if you are using one.
 
 ### **Labels**
 **Label Name** and **Label Value** - Attach metadata to your jobs so you can filter them. [Learn more about labels](/docs/1.9/tutorials/task-labels/).

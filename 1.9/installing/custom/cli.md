@@ -8,6 +8,8 @@ The automated CLI installer provides a guided installation of DC/OS from the com
 
 This installation method uses a bootstrap node to administer the DC/OS installation across your cluster. The bootstrap node uses an SSH key to connect to each node in your cluster to automate the DC/OS installation.
 
+**Important:** Upgrades are not supported with this installation method.
+
 The DC/OS installation creates these folders:
 
 <table class="table">
@@ -58,13 +60,16 @@ Your cluster must meet the software and hardware [requirements](/docs/1.9/instal
     mkdir -p genconf
     ```
 
-2. Create a `ip-detect` script
+2. Create an `ip-detect` script.
 
-    In this step you create an IP detect script to broadcast the IP address of each node across the cluster. Each node in a DC/OS cluster has a unique IP address that is used to communicate between nodes in the cluster. The IP detect script prints the unique IPv4 address of a node to STDOUT each time DC/OS is started on the node.
+    In this step, an IP detect script is created. This script reports the IP address of each node across the cluster. Each node in a DC/OS cluster has a unique IP address that is used to communicate between nodes in the cluster. The IP detect script prints the unique IPv4 address of a node to STDOUT each time DC/OS is started on the node.
 
-    **Important:** The IP address of a node must not change after DC/OS is installed on the node. For example, the IP address must not change when a node is rebooted or if the DHCP lease is renewed. If the IP address of a node does change, the node must be [wiped and reinstalled][7].
+    **Important:** 
+    
+    - The IP address of a node must not change after DC/OS is installed on the node. For example, the IP address should not change when a node is rebooted or if the DHCP lease is renewed. If the IP address of a node does change, the node must be [wiped and reinstalled](/docs/1.9/installing/custom/uninstall/).
+    - The script must return the same IP address as specified in the `config.yaml`. For example, if the private master IP is specified as `10.2.30.4` in the `config.yaml`, your script should return this same value when run on the master. 
 
-    Create an IP detection script for your environment and save as `genconf/ip-detect`. This script needs to be `UTF-8` encoded and have a valid [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) line. You can use the examples below.
+    Create an IP detect script for your environment and save as `genconf/ip-detect`. This script needs to be `UTF-8` encoded and have a valid [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) line. You can use the examples below.
 
     *   #### Use the AWS Metadata Server
 
@@ -95,7 +100,7 @@ Your cluster must meet the software and hardware [requirements](/docs/1.9/instal
 
         This method discovers the IP address of a particular interface of the node.
 
-        If you have multiple generations of hardware with different internals, the interface names can change between hosts. The IP detection script must account for the interface name changes. The example script could also be confused if you attach multiple IP addresses to a single interface, or do complex Linux networking, etc.
+        If you have multiple generations of hardware with different internals, the interface names can change between hosts. The IP detect script must account for the interface name changes. The example script could also be confused if you attach multiple IP addresses to a single interface, or do complex Linux networking, etc.
 
         ```bash
         #!/usr/bin/env bash
@@ -138,7 +143,7 @@ Your cluster must meet the software and hardware [requirements](/docs/1.9/instal
 
     In this step you create a YAML configuration file that is customized for your environment. DC/OS uses this configuration file during installation to generate your cluster installation files.
 
-    You can use this template to get started. This template specifies 3 masters, 5 [private](/docs/1.9/overview/concepts/#private) agents, 1 [public](/docs/1.9/overview/concepts/#public) agent, a custom proxy, and SSH configuration specified. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][6].
+    You can use this template to get started. This template specifies 3 masters, 5 [private](/docs/1.9/overview/concepts/#private) agents, 1 [public](/docs/1.9/overview/concepts/#public-agent-node) agent, a custom proxy, and SSH configuration specified. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][6].
 
     **Tip:** If Google DNS is not available in your country, you can replace the Google DNS servers `8.8.8.8` and `8.8.4.4` with your local DNS servers.
 
@@ -389,7 +394,7 @@ After DC/OS is installed and deployed across your cluster, you can add more agen
  [2]: /docs/1.9/cli/install/
  [4]: /docs/1.9/installing/custom/system-requirements/
  [5]: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
- [6]: /docs/1.9/installing/custom/configuration-parameters/
+ [6]: /docs/1.9/installing/custom/configuration/configuration-parameters/
  [7]: /docs/1.9/installing/custom/uninstall/
  [9]: /docs/1.9/installing/troubleshooting/
  [10]: /docs/1.9/security/user-management/

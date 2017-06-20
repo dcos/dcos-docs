@@ -18,11 +18,11 @@ When creating DC/OS Service there are several integration points that can be lev
 
 ### <a name="adminrouter"></a>Admin Router
 
-When a DC/OS Service is installed and ran on DC/OS, the service is generally deployed on a [private agent node][3]. In order to allow users to access a running instance of the service, Admin Router can functions as a reverse proxy for the DC/OS Service.
+When a DC/OS Service is installed and ran on DC/OS, the service is generally deployed on a [private agent node][3]. To allow users to access a running instance of the service, Admin Router can functions as a reverse proxy for the DC/OS Service.
 
 Admin Router currently supports only one reverse proxy destination.
 
-In order to allow Admin Router to function as a reverse proxy for the DC/OS Service one of the following methods should be used
+To allow Admin Router to function as a reverse proxy for the DC/OS Service one of the following methods should be used
 
 #### Framework Web UI URL
 

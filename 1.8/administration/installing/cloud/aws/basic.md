@@ -10,6 +10,8 @@ These instructions provide a basic AWS CloudFormation template that creates a DC
 
 For a complete set of DC/OS configuration options, see the [Advanced AWS Install Guide](/docs/1.8/administration/installing/cloud/aws/advanced/).
 
+**Important:** Upgrades are not supported with this installation method.
+
 # System requirements
 
 ## Hardware

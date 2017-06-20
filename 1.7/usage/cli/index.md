@@ -70,7 +70,7 @@ By default, the DC/OS command line stores its configuration files in a directory
 
 The configuration settings are stored in the `dcos.toml` file. You can modify these settings with the `dcos config` command.
 
-**dcos_url** The the public master IP of your DC/OS installation. This is set by default during installation. For example:
+**dcos_url** The public master IP of your DC/OS installation. This is set by default during installation. For example:
 
     dcos config set core.dcos_url 52.36.102.191
     
@@ -90,9 +90,9 @@ The configuration settings are stored in the `dcos.toml` file. You can modify th
     dcos config set core.reporting False
     
 
-**ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `False`. For example, to set to true:
+**ssl_verify** Indicates whether to verify SSL certs for HTTPS or path to certs. By default this is set to `True`. For example, to set to false:
 
-    dcos config set core.ssl_verify True
+    dcos config set core.ssl_verify False
     
 
 **timeout** Request timeout in seconds, with a minimum value of 1 second. By default this is set to 5 seconds. For example, to set to 3 seconds:

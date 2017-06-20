@@ -10,6 +10,8 @@ The advanced AWS CloudFormation templates bring power and flexibility to creatin
  
 The templates are used together in conjunction to create a DC/OS cluster. The templates are driven by parameters that AWS CloudFormation uses to create each stack.  
 
+**Important:** Upgrades are not supported with this installation method.
+
 ## Prerequisites
 
 ### Hardware

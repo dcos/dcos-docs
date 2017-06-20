@@ -8,11 +8,11 @@ An operating system abstracts resources such as CPU, RAM, and networking and pro
 
 To simplify the understanding of DC/OS, we will reuse the Linux terminology for kernel and user space. The kernel space is a protected area that is not accessible to users and involves low-level operations such as resource allocation, security, and process isolation. The user space is where the user applications and higher order services live, for example the GUI of your OS.
 
-## 100,000 ft view
+## High level overview
 
 The DC/OS kernel space is comprised of Mesos masters and Mesos agents. The user space includes System Components such as Mesos-DNS, Distributed DNS Proxy, and services such as Marathon or Spark. The user space also includes processes that are managed by the services, for example a Marathon application.
 
-![DC/OS architecture 100,000ft view](../img/dcos-architecture-100000ft.png)
+![DC/OS architecture high level overview](../img/dcos-architecture-100000ft.png)
 
 Before we dive into the details of the interaction between different DC/OS components, let's define the terminology used.
 
@@ -110,7 +110,7 @@ In detail, here are the steps:
 
 | Step | Description |
 | ---- | ----------- |
-| 1    | Client/Scheduler init: the Client needs to know how to connect to the Scheduler in order to launch a process, for example via Mesos-DNS or DC/OS CLI. |
+| 1    | Client/Scheduler init: the Client needs to know how to connect to the Scheduler to launch a process, for example via Mesos-DNS or DC/OS CLI. |
 | 2    | Mesos master sends resource offer to Scheduler: the resource offers are based on cluster resources managed through agents and the [DRF](https://www.cs.berkeley.edu/~alig/papers/drf.pdf) algorithm in Mesos master.|
 | 3    | Scheduler declines resource offers because no process requests from Clients are pending. As long as no clients have initiated a process, the scheduler will reject offers from the master. |
 | 4    | Client initiates process launch. For example, this could be a user creating a Marathon app via the UI or via the HTTP endpoint `/v2/app`. |

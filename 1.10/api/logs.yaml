@@ -1,0 +1,231 @@
+swagger: '2.0'
+
+info:
+  version: "0.0.1"
+  title: DC/OS Log API
+  description: >
+    The first version of the DC/OS Log API.
+    Note that the endpoints in this spec are all *service-specific*. dcos-log
+    is designed to be put behind Admin Router, which provides security for these
+    endpoints. Therefore, on a DC/OS cluster, the final URL to query will resemble:
+    `http://{cluster-url}/system/v1/agent/{agent-id}/logs/v1/{resource-path}`
+    For more information, see
+    [DC/OS Logging](http://dcos.io/docs/latest/monitoring/logging/) or
+    the [DC/OS Log Source](https://github.com/dcos/dcos-log).
+basePath: "/v1"
+parameters:
+  filter:
+    name: filter
+    in: query
+    description: >
+      Colon separated filter parameter.
+      For example "_SYSTEMD_UNIT:dcos-log.service"
+    required: false
+    type: string
+  limit:
+    name: limit
+    in: query
+    description: Limit number of log entries.
+    required: false
+    type: integer
+  skip_next:
+    name: skip_next
+    in: query
+    description: Move cursor position forward.
+    required: false
+    type: integer
+  skip_prev:
+    name: skip_prev
+    in: query
+    description: Move cursor position backward.
+    required: false
+    type: integer
+  cursor:
+    name: cursor
+    in: query
+    description: Move current cursor to provided cursor position.
+    required: false
+    type: string
+  read_reverse:
+    name: read_reverse
+    in: query
+    description: Read the journal entries in reverse. The default value is false.
+    required: false
+    type: boolean
+  postfix:
+    name: postfix
+    in: query
+    description: Set file name.
+    required: false
+    type: string
+paths:
+  /range/:
+    get:
+      description: |
+        Gets a range of logs from the beggining of the journal.
+      tags:
+        - range
+      parameters:
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/skip_next"
+        - $ref: "#/parameters/skip_prev"
+        - $ref: "#/parameters/cursor"
+        - $ref: "#/parameters/read_reverse"
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            title: logs Entries
+            type: string
+        204:
+          description: No logs found.
+        401:
+          description: Not authorized.
+        500:
+          description: Internal server error.
+  /range/download:
+    get:
+      description: |
+        Download compressed logs.
+      tags:
+        - range
+      parameters:
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/skip_next"
+        - $ref: "#/parameters/skip_prev"
+        - $ref: "#/parameters/cursor"
+        - $ref: "#/parameters/read_reverse"
+        - $ref: "#/parameters/postfix"
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            title: logs Entries
+            type: string
+        204:
+          description: No logs found.
+        401:
+          description: Not authorized.
+        500:
+          description: Internal server error.
+  /range/framework/<framework_id>/executor/<executor_id>/container/<container_id>:
+    get:
+      description: |
+        Gets a range of task logs.
+      tags:
+        - range
+      parameters:
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/skip_next"
+        - $ref: "#/parameters/skip_prev"
+        - $ref: "#/parameters/cursor"
+        - $ref: "#/parameters/read_reverse"
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            title: logs Entries
+            type: string
+        204:
+          description: No logs found.
+        401:
+          description: Not authorized.
+        500:
+          description: Internal server error.
+  /range/framework/<framework_id>/executor/<executor_id>/container/<container_id>/download:
+    get:
+      description: |
+        Download compressed task logs.
+      tags:
+        - range
+      parameters:
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/skip_next"
+        - $ref: "#/parameters/skip_prev"
+        - $ref: "#/parameters/cursor"
+        - $ref: "#/parameters/read_reverse"
+        - $ref: "#/parameters/postfix"
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            title: logs Entries
+            type: string
+        204:
+          description: No logs found.
+        401:
+          description: Not authorized.
+        500:
+          description: Internal server error.
+  /stream/:
+    get:
+      description: |
+        Stream the log entries back to client with Server-Sent-Events.
+      tags:
+        - stream
+      parameters:
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/skip_next"
+        - $ref: "#/parameters/skip_prev"
+        - $ref: "#/parameters/cursor"
+        - $ref: "#/parameters/read_reverse"
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            title: logs Entries
+            type: string
+        401:
+          description: Not authorized.
+        500:
+          description: Internal server error.
+  /stream/framework/<framework_id>/executor/<executor_id>/container/<container_id>:
+    get:
+      description: |
+        Stream the task log entries back to client with Server-Sent-Events.
+      tags:
+        - stream
+      parameters:
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/skip_next"
+        - $ref: "#/parameters/skip_prev"
+        - $ref: "#/parameters/cursor"
+        - $ref: "#/parameters/read_reverse"
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            title: logs Entries
+            type: string
+        401:
+          description: Not authorized.
+        500:
+          description: Internal server error.
+  /fields/<field>:
+    get:
+      description: |
+        Get all available unique values for a given field.
+      tags:
+        - fields
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            title: response with available fields
+            type: array
+            items:
+              type: string
+        204:
+          description: No content.
+        400:
+          description: Bad request, field not found.
+        401:
+          description: Not authorized.
+        500:
+          description: Internal server error.

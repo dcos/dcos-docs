@@ -139,7 +139,7 @@ The metadata of the previous `postgres` task is used to launch a new task that t
 
 ## Cleanup
 
-In order to restore the state of your cluster as it was before installing the stateful service, you delete the service:
+To restore the state of your cluster as it was before installing the stateful service, you delete the service:
 
 ```
 dcos marathon app remove postgres

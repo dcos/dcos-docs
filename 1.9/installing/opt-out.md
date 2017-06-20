@@ -31,6 +31,6 @@ Note that if you’ve already installed your cluster and would like to disable t
 
 [1]: /docs/1.9/installing/custom/cli/
 [2]: /docs/1.9/installing/custom/advanced/
-[3]: /docs/1.9/installing/custom/configuration-parameters/
-[4]: /docs/1.9/installing/custom/configuration-parameters/
+[3]: /docs/1.9/installing/custom/configuration/configuration-parameters/
+[4]: /docs/1.9/installing/custom/configuration/configuration-parameters/
 

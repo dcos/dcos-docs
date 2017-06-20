@@ -19,7 +19,7 @@ menu_order: 400
       
     ## DNS resolvers
       
-    You must have working DNS resolvers, specified in your [config.yaml](/docs/1.9/installing/custom/configuration-parameters/#resolvers) file. It is recommended that you have forward and reverse lookups for FQDNs, short hostnames, and IP addresses. It is possible for DC/OS to function in environments without valid DNS support, but the following _must_ work to support DC/OS services, including Spark:
+    You must have working DNS resolvers, specified in your [config.yaml](/docs/1.9/installing/custom/configuration/configuration-parameters/#resolvers) file. It is recommended that you have forward and reverse lookups for FQDNs, short hostnames, and IP addresses. It is possible for DC/OS to function in environments without valid DNS support, but the following _must_ work to support DC/OS services, including Spark:
     
     - `hostname -f` returns the FQDN
     - `hostname -s` returns the short hostname
@@ -322,9 +322,9 @@ DC/OS uses ZooKeeper, a high-performance coordination service to manage the inst
     ```
 
 
- [1]: /docs/1.9/installing/custom/configuration-parameters/#scrollNav-5
+ [1]: /docs/1.9/installing/custom/configuration/configuration-parameters/#scrollNav-5
  [2]: https://open.mesosphere.com/reference/mesos-master/
- [3]: /docs/1.9/installing/custom/configuration-parameters/#scrollNav-7
+ [3]: /docs/1.9/installing/custom/configuration/configuration-parameters/#scrollNav-7
  [4]: /docs/1.9/overview/architecture/#boot
  [5]: /docs/1.9/installing/custom/configuration-parameters
  [6]: /docs/1.9/administering-clusters/sshcluster/

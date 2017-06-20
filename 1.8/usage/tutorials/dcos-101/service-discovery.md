@@ -31,7 +31,7 @@ In this section, we will learn about DC/OS service discovery by exploring the di
 
   The response tells us that the host for the `redis.marathon.mesos` is 10.0.0.43.
 
-  The A record only contains information about the host. In order to connect to the service, we also need to know the port. Use the following dig command to access the Service locator (SRV) DNS record, which also provides port information: `dig srv _redis._tcp.marathon.mesos`.
+  The A record only contains information about the host. To connect to the service, we also need to know the port. Use the following dig command to access the Service locator (SRV) DNS record, which also provides port information: `dig srv _redis._tcp.marathon.mesos`.
   The answer should look similar to this response:
 
   ```

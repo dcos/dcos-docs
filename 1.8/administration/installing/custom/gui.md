@@ -8,6 +8,8 @@ The automated GUI installer provides a simple graphical interface that guides yo
 
 This installation method uses a bootstrap node to administer the DC/OS installation across your cluster. The bootstrap node uses an SSH key to connect to each node in your cluster to automate the DC/OS installation.
 
+**Important:** Upgrades are not supported with this installation method.
+
 The DC/OS installation creates these folders:
 
 <table class="table">

@@ -3,7 +3,7 @@ post_title: Exposing a Service
 menu_order: 005
 ---
 
-DC/OS agent nodes can be designated as [public](/docs/1.9/overview/concepts/#public) or [private](/docs/1.9/overview/concepts/#private) during [installation](/docs/1.9/installing/). Public agent nodes provide access from outside of the cluster via infrastructure networking to your DC/OS services. By default, services are launched on private agent nodes and are not accessible from outside the cluster.
+DC/OS agent nodes can be designated as [public](/docs/1.9/overview/concepts/#public-agent-node) or [private](/docs/1.9/overview/concepts/#private) during [installation](/docs/1.9/installing/). Public agent nodes provide access from outside of the cluster via infrastructure networking to your DC/OS services. By default, services are launched on private agent nodes and are not accessible from outside the cluster.
  
 To launch a service on a public node, you must create a Marathon app definition with the `"acceptedResourceRoles":["slave_public"]` parameter specified and configure an edge load balancer and service discovery mechanism.
 

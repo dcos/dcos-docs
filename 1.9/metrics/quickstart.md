@@ -57,9 +57,7 @@ The metrics component is natively integrated with DC/OS and no additional setup 
          HOSTNAME       IP                         ID                    
         10.0.0.193  10.0.0.193  7749eada-4974-44f3-aad9-42e2fc6aedaf-S1  
         ```
-
-1.  View metrics.         
-
+        
 1.  View metrics. 
 
     -   **Metrics for all containers running on a host**

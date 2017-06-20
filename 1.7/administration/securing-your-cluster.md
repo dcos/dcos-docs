@@ -33,7 +33,7 @@ ranges are permitted to access the admin zone.
 
 By default, Admin Router will permit unencrypted HTTP traffic. This is not
 considered secure, and you must provide a valid TLS certificate and redirect
-all HTTP traffic to HTTPS in order to properly secure access to your cluster.
+all HTTP traffic to HTTPS to properly secure access to your cluster.
 
 Once you have a valid TLS certificate, install the certificate on each master.
 Copy the certificate and private key to a well known location, such as under

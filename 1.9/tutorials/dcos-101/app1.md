@@ -3,10 +3,11 @@ post_title: Deploying First Application
 menu_order: 3
 ---
 
-
 # Prerequisites
 * A [running DC/OS cluster](/docs/1.9/tutorials/dcos-101/cli/) with [the DC/OS CLI installed](/docs/1.9/tutorials/dcos-101/cli/).
 * [redis](/docs/1.9/tutorials/dcos-101/redis-package/) deployed and running in your cluster.
+
+<table class="table" bgcolor="#E6E6E6"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Disclaimer:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided solely on a "as is" basis and without warranty. Do not use in a production environment. This is a referential example meant to illustrate how this solution could be done with DC/OS. Before using a similar solution in your environment, you would need to adapt, validate, and test.</td> </tr> </table>
 
 # Objective
 You now have a working persistence layer -redis- running in your cluster.

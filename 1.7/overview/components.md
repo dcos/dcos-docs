@@ -4,9 +4,9 @@ nav_title: Components
 menu_order: 4
 ---
 
-What are the core DC/OS components?
+The Core DC/OS components
 <!--more-->
-By components, we're referring to the services which work together to bring the DC/OS ecosystem alive. The core component is of course [Apache Mesos](http://mesos.apache.org/) but the DC/OS is actually made of of *many* more services than just this.
+DC/OS components are the services which work together to bring the DC/OS ecosystem alive. While the core component is of course [Apache Mesos](http://mesos.apache.org/), DC/OS is actually made of of *many* more services than just this.
 
 If you log into any host in the DC/OS cluster, you can view the currently running services by inspecting `/etc/systemd/system/dcos.target.wants/`.
 

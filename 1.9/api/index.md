@@ -4,12 +4,35 @@ nav_title: API Reference
 menu_order: 150
 ---
 
-The DC/OS API is a collection of routes backed by [DC/OS components](/docs/1.9/overview/architecture/components/) that are made available through an API gateway called the [Admin Router](/docs/1.9/overview/architecture/components/#admin-router).
+The DC/OS API is a collection of routes backed by [DC/OS components](/docs/1.9/overview/architecture/components/) that are made available through an API gateway called [Admin Router](/docs/1.9/overview/architecture/components/#admin-router).
+
+<!-- Use html img for horizontal centering -->
+<img src="/docs/1.9/img/dcos-api-routing.png" alt="DC/OS API Routing" style="display:block;margin:0 auto"/>
 
 
-# Admin Router
+# API Gateway
 
-Admin Router is an API gateway built on top of NGINX.
+Admin Router is an API gateway built on top of NGINX with the following goals:
+
+- Present a unified control plane for the DC/OS API
+- Proxy API requests to component services on master and agent nodes
+- Enforce user authentication
+- Serve up the DC/OS GUI
+
+Admin Router runs on each DC/OS node in one of two configurations:
+
+- **Admin Router Master** exposes the [Master Routes](/docs/1.9/api/master-routes/).
+
+  This configuration runs on each master node and serves as the primary API gateway for interaction with DC/OS components.
+
+- **Admin Router Agent** exposes the [Agent Routes](/docs/1.9/api/agent-routes/).
+
+  This configuration runs on each agent node and provides routes for monitoring, debugging, and administration.
+
+  Some agent routes, like logs and metrics, are proxied through the master Admin Router to allow external access.
+Other routes, like component management, are for internal use only.
+
+# Route Types
 
 Admin Router exposes several types of routes:
 
@@ -19,22 +42,29 @@ Admin Router exposes several types of routes:
 - **Redirect Routes** redirect to another URL.
 - **Rewrite Routes** translate routes into other routes.
 
-Admin Router uses these route types to accomplish these primary goals:
-
-- Present a unified control plane for the DC/OS API
-- Proxy API requests to component services on master and agent nodes
-- Enforce user authentication
-- Serve up the DC/OS GUI
-
 
 # Cluster Access
 
 To determine the URL of your cluster, see [Cluster Access](/docs/1.9/api/access/).
 
 
+# Versioning
+
+Sections of the DC/OS API are versioned by component, route, or resource.
+
+For details on the versioning mechanisms, see [Versioning](/docs/1.9/api/versioning/).
+
+
+# Authentication
+
+Some routes are unauthenticated, but most require an authentication token.
+
+For details on how to obtain and use an authentication token, see [Authentication HTTP API Endpoint](/docs/1.9/security/iam-api/).
+
+
 # Route Usage
 
-- To determine the full URL of a API resource through a **proxy route**, join the cluster URL, route path, and backend component resource path.
+- To determine the full URL of a API resource through a **proxy route**, join the cluster URL, route, and backend component resource path.
 
     ```
     <cluster-url>/<route>/<resource-path>
@@ -61,35 +91,3 @@ To determine the URL of your cluster, see [Cluster Access](/docs/1.9/api/access/
 - **Rewrite and redirect routes** may pass through one or more other URLs or routes before returning a resource. So for those routes, follow the chain of URLs and routes to find the endpoint. The resource path will depend on the final endpoint.
 
     Most rewrites and redirects terminate in another DC/OS API route, with the notable exception of `/login`, which uses OpenID Connect to authorize with an external identity provider and then redirects back to the DC/OS API.
-
-
-# Versioning
-
-Sections of the DC/OS API are versioned by component, route, or resource.
-
-For details on the versioning mechanisms, see [Versioning](/docs/1.9/api/versioning/).
-
-
-# Authentication
-
-Some routes are unauthenticated, but most require an authentication token.
-
-For details on how to obtain and use an authentication token, see [Authentication HTTP API Endpoint](/docs/1.9/security/iam-api/).
-
-
-# Route Topology
-
-There are two varieties of Admin Router:
-
-- **Admin Router Master** runs on each master node and serves as the primary API gateway for interaction with DC/OS components.
-
-  See [Master Routes](/docs/1.9/api/master-routes/) for a list of routes available on master nodes.
-
-- **Admin Router Agent** runs on each agent node and provides routes for monitoring, debugging, and administration.
-
-  Some agent routes, like logs and metrics, are proxied through the master Admin Router to allow external access.
-Other routes, like component management, are for internal use only.
-
-  See [Agent Routes](/docs/1.9/api/agent-routes/) for a list of routes available on agent nodes.
-
-![DC/OS API Routing](/docs/1.9/img/dcos-api-routing.png)

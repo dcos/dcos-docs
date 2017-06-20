@@ -1,7 +1,7 @@
 ---
 post_title: dcos service log
 menu_order: 0
---- 
+---
 
 # Description
 Print the service logs.

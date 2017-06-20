@@ -131,11 +131,11 @@ Connect to the leader and start the script:
 
 1. Open an SSH session to the cluster leader.
 
-        your-machinedcos node ssh --master-proxy --leader
+        your-machine$ dcos node ssh --master-proxy --leader
 
 1. Run the `mesosphere/janitor` image with the role, principal, and zookeeper nodes that were configured for your service:
 
-        leaderdocker run mesosphere/janitor /janitor.py -r sample-role -p sample-principal -z sample-zk
+        leader$ docker run mesosphere/janitor /janitor.py -r sample-role -p sample-principal -z sample-zk
 
 ### Running from Marathon
 
@@ -165,21 +165,21 @@ To view the script's outcome, go to Mesos (`http://your-cluster.com/mesos`) and 
 
     # Determine id of agent which ran the Docker task. This is an example:
     
-    your-machinedcos node ssh --master-proxy --mesos-id=c62affd0-ce56-413b-85e7-32e510a7e131-S3
+    your-machine$ dcos node ssh --master-proxy --mesos-id=c62affd0-ce56-413b-85e7-32e510a7e131-S3
     
-    agent-nodedocker ps -a
+    agent-node$ docker ps -a
     CONTAINER ID        IMAGE                       COMMAND             ...
     828ee17b5fd3        mesosphere/janitor:latest   /bin/sh -c /janito  ...
     
-    agent-nodedocker logs 828ee17b5fd3
+    agent-node$ docker logs 828ee17b5fd3
     
 ### Sample result
 
 Here's an example of the output for a successful run for a Cassandra installation:
 
-    your-machinedcos node ssh --master-proxy --leader
+    your-machine$ dcos node ssh --master-proxy --leader
 
-    leader-nodedocker run mesosphere/janitor /janitor.py -r cassandra_role -p cassandra_principal -z cassandra
+    leader-node$ docker run mesosphere/janitor /janitor.py -r cassandra_role -p cassandra_principal -z cassandra
     [... docker download ...]
     Master: http://leader.mesos:5050/master/ Exhibitor: http://leader.mesos:8181/ Role: cassandra_role Principal: cassandra_principal ZK Path: cassandra
     

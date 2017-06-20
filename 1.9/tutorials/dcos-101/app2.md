@@ -8,6 +8,8 @@ menu_order: 5
 * A [running DC/OS cluster](/docs/1.9/tutorials/dcos-101/cli/) with [the DC/OS CLI installed](/docs/1.9/tutorials/dcos-101/cli/).
 * [app1](/docs/1.9/tutorials/dcos-101/app1/) deployed and running in your cluster.
 
+<table class="table" bgcolor="#E6E6E6"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Disclaimer:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided solely on a "as is" basis and without warranty. Do not use in a production environment. This is a referential example meant to illustrate how this solution could be done with DC/OS. Before using a similar solution in your environment, you would need to adapt, validate, and test.</td> </tr> </table>
+
 # Objective
 You already deployed an app which is running internally in your cluster (i.e., it is not targeted to users directly). Next, you will deploy an app which provides a web GUI to users.
 You want to deploy this app natively, i.e., not relying on Docker (which is third-party dependency and hence adds complexity).
@@ -40,7 +42,7 @@ You want to deploy this app natively, i.e., not relying on Docker (which is thir
        1. Check the total number of keys using app1: `dcos task log app1`
        2. Check redis directly
           * SSH into node where redis is running: `dcos node ssh --master-proxy --mesos-id=$(dcos task  redis --json |  jq -r '.[] | .slave_id')`
-          * NOTE: This requires you to have the ssh-key required to connect to the machines added to your local SSH agent (e.g., via ssh-add my_public_key). Check the [documentation](/docs/1.9/administration/access-node/sshcluster/) for further details.
+          * NOTE: This requires you to have the ssh-key required to connect to the machines added to your local SSH agent (e.g., via ssh-add my_public_key). Check the [documentation](/docs/1.9/administering-clusters/sshcluster/) for further details.
        * Because redis is running in a Docker container, you need to list all Docker containers using the `docker ps` command to get the *ContainerID*.
          * Connect to a bash session to the running container: `sudo docker exec -i -t CONTAINER_ID  /bin/bash`
          * Start the redis CLI: `redis-cli`

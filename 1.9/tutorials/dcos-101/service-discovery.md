@@ -8,6 +8,8 @@ menu_order: 4
 * A [running DC/OS cluster](/docs/1.9/tutorials/dcos-101/cli/) with [the DC/OS CLI installed](/docs/1.9/tutorials/dcos-101/cli/).
 * [app1](/docs/1.9/tutorials/dcos-101/app1/) deployed and running in your cluster.
 
+<table class="table" bgcolor="#E6E6E6"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Disclaimer:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided solely on a "as is" basis and without warranty. Do not use in a production environment. This is a referential example meant to illustrate how this solution could be done with DC/OS. Before using a similar solution in your environment, you would need to adapt, validate, and test.</td> </tr> </table>
+
 # Objective
 Your application in the previous part used `redis.marathon.l4lb.thisdcos.directory:6379` as the address for connecting to redis. As redis might be running on any agent in the cluster (and furthermore on different ports), how does this address link to the actual running redis instance?
 In this section, you will learn about DC/OS service discovery by exploring the different options for service discovery for apps in DC/OS.

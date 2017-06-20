@@ -1,7 +1,7 @@
 ---
 post_title: Creating and Running a Service
 nav_title: Running a Service
-menu_order: 3
+menu_order: 400
 ---
 
 This tutorial shows how to create and deploy a simple one-command service and a containerized service using both the DC/OS web interface and the CLI.
@@ -34,7 +34,7 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 
 ## Create and Run a Simple Service from the DC/OS CLI
 
-1. Create a JSON file called `my-app-cli.json` with the following contents:
+1.  Create a JSON file called `my-app-cli.json` with the following contents:
 
     ```json
     {
@@ -62,36 +62,40 @@ This tutorial shows how to create and deploy a simple one-command service and a 
     }
     ```
 
-1. Run the service with the following command.
+1.  Run the service with the following command.
+
     ```bash
     dcos marathon app add my-app-cli.json
     ```
 
-1. Run the following command to verify that your service is running:
+1.  Run the following command to verify that your service is running:
+    
     ```bash
     dcos marathon app list
     ```
+    
     You can also click the name of your service in the **Services** view of the DC/OS web interface to see it running and monitor health.
 
 ## Create and Run a Containerized Service from the DC/OS Web Interface
 
-1. Go to the `hello-dcos` page of the [Mesosphere Docker Hub repository](https://hub.docker.com/r/mesosphere/hello-dcos/tags/) and note down the latest image tag.
-1. Click the **Services** tab of the DC/OS web interface, then click the **RUN A SERVICE**.
-1. Click **Single Container** and enter a name for your service in the **SERVICE ID** field.
-1. Click the **Container Settings** tab and enter the following in the **Container Image** field: `mesosphere/hello-dcos:<image-tag>`. Replace `<image-tag>` with the tag you copied in step 1.
+1.  Go to the `hello-dcos` page of the [Mesosphere Docker Hub repository](https://hub.docker.com/r/mesosphere/hello-dcos/tags/) and note down the latest image tag.
+1.  Click the **Services** tab of the DC/OS web interface, then click the **RUN A SERVICE**.
+1.  Click **Single Container** and enter a name for your service in the **SERVICE ID** field.
+1.  Click the **Container Settings** tab and enter the following in the **Container Image** field: `mesosphere/hello-dcos:<image-tag>`. Replace `<image-tag>` with the tag you copied in step 1.
 
     ![Containerized service in the DC/OS UI](/docs/1.9/img/deploy-container-ui.png)
 
-1. Click **Deploy**.
-1. In the **Services** tab, click the name of your service, then choose on of the task instances. Click **Logs**, then toggle to the **STDERR** and **STDOUT** to see the output of the service.
+1.  Click **Deploy**.
+1.  In the **Services** tab, click the name of your service, then choose on of the task instances. Click **Logs**, then toggle to the **STDERR** and **STDOUT** to see the output of the service.
 
     ![Running containerized service in the DC/OS UI](/docs/1.9/img/container-running-ui.png)
 
 ## Create and Run a Containerized Service from the DC/OS CLI
 
-1. Go to the `hello-dcos` page of the [Mesosphere Docker Hub repository](https://hub.docker.com/r/mesosphere/hello-dcos/tags/) and note down the latest image tag.
-1. Create a JSON file called `hello-dcos-cli.json` with the following contents. Replace `<image-tag>` in the `docker:image` field with the tag you copied in step 1.
-    ```
+1.  Go to the `hello-dcos` page of the [Mesosphere Docker Hub repository](https://hub.docker.com/r/mesosphere/hello-dcos/tags/) and note down the latest image tag.
+1.  Create a JSON file called `hello-dcos-cli.json` with the following contents. Replace `<image-tag>` in the `docker:image` field with the tag you copied in step 1.
+    
+    ```json
     {
       "id": "/hello-dcos-cli",
       "instances": 1,
@@ -123,12 +127,17 @@ This tutorial shows how to create and deploy a simple one-command service and a 
       "requirePorts": false
     }
     ```
-1. Run the service with the following command.
+    
+1.  Run the service with the following command.
+    
     ```bash
     dcos marathon app hello-dcos-cli.json
     ```
-1. Run the following command to verify that your service is running:
+
+1.  Run the following command to verify that your service is running:
+    
     ```bash
     dcos marathon app list
     ```
-1. In the **Services** tab of the DC/OS web interface, click the name of your service, then choose on of the task instances. Click **Logs**, then toggle to the **Output (stdout)** view to see the output of the service.
+
+1.  In the **Services** tab of the DC/OS web interface, click the name of your service, then choose on of the task instances. Click **Logs**, then toggle to the **Output (stdout)** view to see the output of the service.

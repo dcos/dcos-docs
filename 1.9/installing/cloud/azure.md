@@ -8,6 +8,8 @@ This document explains how to install DC/OS 1.9 using the Azure Resource Manager
 
 TIP: To get support on Azure Marketplace-related questions, join the Azure Marketplace [Slack community](http://join.marketplace.azure.com).
 
+**Important:** Upgrades are not supported with this installation method.
+
 # System requirements
 
 ## Hardware
@@ -26,7 +28,7 @@ Also, to access nodes in the DC/OS cluster you will need `ssh` installed and con
 
 ## Step 1: Deploying the template
 
-To install DC/OS 1.9 on Azure, use the [Azure Resource Manager templates](https://downloads.dcos.io/dcos/EarlyAccess/azure.html) provided.
+To install DC/OS 1.9 on Azure, use the [Azure Resource Manager templates](https://downloads.dcos.io/dcos/stable/azure.html) provided.
 
 
 ## Step 2: Accessing DC/OS
@@ -74,14 +76,12 @@ Note that the following commands can be used to run the DC/OS CLI directly on th
 # Connect to master node with ssh
 ssh -p2200 azureuser@$MASTERFQDN -L 8000:localhost:80
 
-# Install virtualenv
-sudo apt-get -y install virtualenv
-
 # Install CLI on the master node and configure with http://localhost
-mkdir -p dcos && cd dcos &&
-curl -O https://downloads.dcos.io/dcos-cli/install-optout.sh && \
-   bash ./install-optout.sh . http://localhost && \
-   source ./bin/env-setup
+curl https://downloads.dcos.io/binaries/cli/linux/x86-64/dcos-1.9/dcos -o dcos && 
+sudo mv dcos /usr/local/bin && 
+sudo chmod +x /usr/local/bin/dcos && 
+dcos config set core.dcos_url http://localhost && 
+dcos
 
 # Now you can use the DC/OS CLI:
 dcos package search

@@ -1,10 +1,11 @@
 ---
 post_title: Building an IoT Pipeline
-menu_order: 0
+menu_order: 100
 ---
 
-
 In this tutorial, a containerized Ruby on Rails app named Tweeter in installed and deployed using DC/OS. Tweeter is an app similar to Twitter that you can use to post 140-character messages to the internet. Then, you use Zeppelin to perform real-time analytics on the data created by Tweeter.
+
+<table class="table" bgcolor="#E6E6E6"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Disclaimer:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided solely on a "as is" basis and without warranty. Do not use in a production environment. This is a referential example meant to illustrate how this solution could be done with DC/OS. Before using a similar solution in your environment, you would need to adapt, validate, and test.</td> </tr> </table>
 
 Tweeter:
 

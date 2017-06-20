@@ -6,6 +6,8 @@ menu_order: 2
 
 This tutorial walks through setting up a microscaling demonstration from [Microscaling Systems][2] on a DC/OS cluster. 
 
+<table class="table" bgcolor="#E6E6E6"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Disclaimer:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided solely on a "as is" basis and without warranty. Do not use in a production environment. This is a referential example meant to illustrate how this solution could be done with DC/OS. Before using a similar solution in your environment, you would need to adapt, validate, and test.</td> </tr> </table>
+
 [Microscaling][1] adjusts the balance of tasks running within your compute cluster. 
 This allows your infrastructure to automatically reallocate 
 resources from lower to higher priority tasks, reacting within seconds to a change in demand. 

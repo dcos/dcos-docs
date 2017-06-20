@@ -229,7 +229,7 @@ menu_order: 5
         --max-count=<max-count>
             Maximum number of entries to fetch and return.
         --scale
-            Scale the app down after performing the the operation.
+            Scale the app down after performing the operation.
         --version
             Print version information.
     
@@ -381,7 +381,7 @@ By default, `dcos node ssh` connects to the private IP of the node, which is onl
         --cli
             Command line only.
         --config
-            Print the the configurable properties for the `marathon.json` and
+            Print the configurable properties for the `marathon.json` and
             `command.json` files.
         --index=<index>
             The numerical position in the package repository list. Package

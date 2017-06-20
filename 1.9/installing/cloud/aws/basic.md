@@ -10,6 +10,8 @@ These instructions provide a basic AWS CloudFormation template that creates a DC
 
 For a complete set of DC/OS configuration options, see the [Advanced AWS Install Guide](/docs/1.9/installing/cloud/aws/advanced/).
 
+**Important:** Upgrades are not supported with this installation method.
+
 # System requirements
 
 ## Hardware
@@ -18,7 +20,7 @@ An AWS EC2 <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.xlar
 
 *   You have the option of 1 or 3 Mesos master nodes.
 *   5 [private](/docs/1.9/overview/concepts/#private) Mesos agent nodes is the template default.
-*   1 [public](/docs/1.9/overview/concepts/#public) Mesos agent node is the template default. By default, ports are closed and health checks are configured for [Marathon-LB](/docs/1.9/networking/marathon-lb/). Ports 80 and 443 are configured for the AWS Elastic Load Balancer.
+*   1 [public](/docs/1.9/overview/concepts/#public-agent-node) Mesos agent node is the template default. By default, ports are closed and health checks are configured for [Marathon-LB](/docs/1.9/networking/marathon-lb/). Ports 80 and 443 are configured for the AWS Elastic Load Balancer.
 
 ## Software
 

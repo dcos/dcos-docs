@@ -11,6 +11,8 @@ The advanced AWS CloudFormation templates bring power and flexibility to creatin
  
 The templates are used together in conjunction to create a DC/OS cluster. The templates are driven by parameters that AWS CloudFormation uses to create each stack.  
 
+**Important:** Upgrades are not supported with this installation method.
+
 ## Prerequisites
 
 ### Hardware
@@ -61,7 +63,7 @@ An AWS EC2 <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.xlar
     aws_template_storage_secret_access_key: <your-secret-access_key>
     ```
     
-    For parameters descriptions and configuration examples, see the [documentation](/docs/1.9/installing/custom/configuration-parameters/).
+    For parameters descriptions and configuration examples, see the [documentation](/docs/1.9/installing/custom/configuration/configuration-parameters/).
     
 1.  Run the DC/OS installer script with the AWS argument specified. This command creates and uploads a custom build of the DC/OS artifacts and templates to the specified S3 bucket.
 

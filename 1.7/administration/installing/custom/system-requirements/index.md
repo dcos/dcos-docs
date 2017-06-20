@@ -6,7 +6,7 @@ menu_order: 000
 
 # Hardware Prerequisites
 
-You must have a single bootstrap node, Mesos master nodes, and Mesos agent nodes.
+You must have a single bootstrap node, an odd number of Mesos master nodes, and any number Mesos of agent nodes.
 
 ## Bootstrap node
 
@@ -23,6 +23,8 @@ You must have a single bootstrap node, Mesos master nodes, and Mesos agent nodes
 The cluster nodes are designated Mesos masters and agents during installation.
 
 ### Master nodes
+
+You must have an odd number of master nodes.
 
 Here are the master node hardware requirements.
 

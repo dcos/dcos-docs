@@ -6,6 +6,8 @@ menu_order: 1
 
 Welcome to part 1 of the DC/OS 101 Tutorial.
 
+<table class="table" bgcolor="#E6E6E6"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Disclaimer:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided solely on a "as is" basis and without warranty. Do not use in a production environment. This is a referential example meant to illustrate how this solution could be done with DC/OS. Before using a similar solution in your environment, you would need to adapt, validate, and test.</td> </tr> </table>
+
 # Prerequisites
 To get started with this tutorial, you should have access to a running DC/OS cluster with at least a single master node and 3 agent nodes (of which one is a public agent node). If you don't have these requirements set up, please follow the [setup instructions](/docs/1.9/installing/) for various cloud providers, on-premise, or vagrant setups.
 If you are unsure which option to choose, then we recommend using the <a href="https://downloads.dcos.io/dcos/stable/aws.html" target="_blank">AWS templates</a>.
@@ -20,7 +22,7 @@ By the end of this section you will have installed the DC/OS CLI and used it to 
   * Install the DC/OS CLI
     * Follow the steps [here](/docs/1.9/cli/install/) or the `Install CLI` instruction in the lower left corner of the DC/OS GUI.
     * Make sure you are authorized to connect to your cluster by running `dcos auth login`. This is necessary to prevent access from unauthorized people to your cluster.
-    * You can also add/invite friends and co-workers to your cluster. See [user management documentation](/docs/1.9/administration/id-and-access-mgt/user-management/) for details
+    * You can also add/invite friends and co-workers to your cluster. See [user management documentation](/docs/1.9/security/user-management/) for details
 
   * Explore the cluster:
       * Check the running services with `dcos service`. Unless you already installed additional services, there should be two services running on your cluster: Marathon (basically the DC/OS init system) and metronome (basically the DC/OS cron scheduler).
@@ -37,7 +39,7 @@ You have already encountered several DC/OS components (including Mesos, Marathon
 But what other components make up DC/OS?
 
 ## DC/OS components
-Here are the DC/OS components that are relevant to this tutorial. A full description of all components can be found in the [documentation](/docs/1.9/overview/components/).
+Here are the DC/OS components that are relevant to this tutorial. A full description of all components can be found in the [documentation](/docs/1.9/overview/architecture/components/).
 * [Marathon](/docs/1.9/overview/architecture/components/#marathon) starts and monitors DC/OS applications and services.
 * Apache [Mesos](/docs/1.9/overview/architecture/components/#apache-mesos) is the kernel of DC/OS and responsible for low-level task maintenance.
 * [Mesos DNS](/docs/1.9/overview/architecture/components/#mesos-dns) provides service discovery within the cluster.

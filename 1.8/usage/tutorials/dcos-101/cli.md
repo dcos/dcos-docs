@@ -7,7 +7,7 @@ menu_order: 1
 Welcome to part 1 of the DC/OS 101 Tutorial.
 
 # Prerequisites
-In order to get started with this tutorial, you should have access to a running DC/OS OSS cluster with at least a single master node and 3 agent nodes (of which one is a public agent node). If you don't have these requirements set up, please follow the [setup instructions](https://dcos.io/install/) for various cloud providers, on-premise, or vagrant setups.
+To get started with this tutorial, you should have access to a running DC/OS OSS cluster with at least a single master node and 3 agent nodes (of which one is a public agent node). If you don't have these requirements set up, please follow the [setup instructions](https://dcos.io/install/) for various cloud providers, on-premise, or vagrant setups.
 If you are unsure which option to choose, then we would recommend using the <a href="https://downloads.dcos.io/dcos/stable/aws.html" target="_blank">AWS templates</a>.
 
 **Note**: For this tutorial a setup with a single master node is suffcient, but for running production workloads you should have multiple master nodes.

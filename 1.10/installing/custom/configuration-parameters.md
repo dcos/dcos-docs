@@ -15,7 +15,7 @@ These configuration parameters are specified in [YAML][1] format in your config.
 # <a name="cluster-setup"></a>Cluster Setup
 
 ### agent_list
-This parameter specifies a YAML nested list (`-`) of IPv4 addresses to your [private agent](/docs/1.9/overview/concepts/#private) host names.
+This parameter specifies a YAML nested list (`-`) of IPv4 addresses to your [private agent](/docs/1.10/overview/concepts/#private) host names.
 
 ### bootstrap_url
 This required parameter specifies the URI path for the DC/OS installer to store the customized DC/OS build files. If you are using the automated DC/OS installer, you should specify `bootstrap_url: file:///opt/dcos_install_tmp` unless you have moved the installer assets. By default the automated DC/OS installer places the build files in `file:///opt/dcos_install_tmp`.
@@ -62,29 +62,6 @@ specified.
 * **package_storage_uri**
   This parameter specifies where to permanently store DC/OS packages. The value must be a file URL,
   for example, `file:///var/lib/dcos/cosmos/packages`.
-
-### dns_bind_ip_blacklist
-This parameter specifies a list of IP addresses that DC/OS DNS resolvers cannot bind to.
-
-### dns_forward_zones
-This parameter specifies a nested list of DNS zones, IP addresses and ports that configure custom forwarding behavior of DNS queries. A DNS zone is mapped to a set of DNS resolvers.
-
-A sample definition is as follows:
-```
-dns_forward_zones:
-- - "a.contoso.com"
-  - - - "1.1.1.1"
-      - 53
-    - - "2.2.2.2"
-      - 53
-- - "b.contoso.com"
-  - - - "3.3.3.3"
-      - 53
-    - - "4.4.4.4"
-      - 53
-```
-
-In the above example, a DNS query to `myapp.a.contoso.com` will be directed to `1.1.1.1:53` or `2.2.2.2:53`. Likewise, a DNS query to `myapp.b.contoso.com` will be directed to `3.3.3.3:53` or `4.4.4.4:53`.
 
 ### exhibitor_storage_backend
 This parameter specifies the type of storage backend to use for Exhibitor. You can use internal DC/OS storage (`static`) or specify an external storage system (`zookeeper`, `aws_s3`, and `azure`) for configuring and orchestrating ZooKeeper with Exhibitor on the master nodes. Exhibitor automatically configures your ZooKeeper installation on the master nodes during your DC/OS installation.
@@ -145,7 +122,7 @@ This option specifies that Mesos agents are used to discover the masters by givi
 *Note*: On platforms like AWS where internal IPs are allocated dynamically, you should not use a static master list. If a master instance were to terminate for any reason, it could lead to cluster instability.
 
 ### <a name="public-agent"></a>public_agent_list
-This parameter specifies a YAML nested list (`-`) of IPv4 addresses to your [public agent](/docs/1.9/overview/concepts/#public) host names.
+This parameter specifies a YAML nested list (`-`) of IPv4 addresses to your [public agent](/docs/1.10/overview/concepts/#public-agent-node) host names.
 
 ### <a name="platform"></a>platform
 This parameter specifies the infrastructure platform. The value is optional, free-form with no content validation, and used for telemetry only. Please supply an appropriate value to help inform DC/OS platform prioritization decisions. Example values: `aws`, `azure`, `oneview`, `openstack`, `vsphere`, `vagrant-virtualbox`, `onprem` (default).
@@ -156,7 +133,7 @@ This parameter specifies the infrastructure platform. The value is optional, fre
 
 This parameter specifies whether to enable DC/OS virtual networks.
 
-**Important:** Virtual networks require minimum Docker version 1.11. If you are using Docker 1.10 or earlier, you must specify `dcos_overlay_enable: 'false'`. For more information, see the [system requirements](/docs/1.9/installing/custom/system-requirements/).
+**Important:** Virtual networks require minimum Docker version 1.11. If you are using Docker 1.10 or earlier, you must specify `dcos_overlay_enable: 'false'`. For more information, see the [system requirements](/docs/1.10/installing/custom/system-requirements/).
 
 *  `dcos_overlay_enable: 'false'` Do not enable the DC/OS virtual network.
 *  `dcos_overlay_enable: 'true'` Enable the DC/OS virtual network. This is the default value. When the virtual network is enabled you can also specify the following parameters:
@@ -184,11 +161,11 @@ This parameter specifies whether to enable DC/OS virtual networks.
             
             **Important:** The last 3 bytes must be `00`.
         *  __overlays__
-            *  `name` This parameter specifies the canonical name (see [limitations](/docs/1.9/networking/virtual-networks/) for constraints on naming virtual networks).
+            *  `name` This parameter specifies the canonical name (see [limitations](/docs/1.10/networking/virtual-networks/) for constraints on naming virtual networks).
             *  `subnet` This parameter specifies the subnet that is allocated to the virtual network.
             *  `prefix` This parameter specifies the size of the subnet that is allocated to each agent and thus defines the number of agents on which the overlay can run. The size of the subnet is carved from the overlay subnet.
 
- For more information see the [example](#overlay) and [documentation](/docs/1.9/networking/virtual-networks/).
+ For more information see the [example](#overlay) and [documentation](/docs/1.10/networking/virtual-networks/).
 
 ### <a name="dns-search"></a>dns_search
 This parameter specifies a space-separated list of domains that are tried when an unqualified domain is entered (e.g. domain searches that do not contain &#8216;.&#8217;). The Linux implementation of `/etc/resolv.conf` restricts the maximum number of domains to 6 and the maximum number of characters the setting can have to 256. For more information, see <a href="http://man7.org/linux/man-pages/man5/resolv.conf.5.html">man /etc/resolv.conf</a>.
@@ -212,16 +189,39 @@ This required parameter specifies a YAML nested list (`-`) of DNS resolvers for 
     - 8.8.4.4
     - 8.8.8.8
     ```
--  If you do not have a DNS infrastructure and do not have access to internet DNS servers, you can specify `resolvers: []`. By specifying this setting, all requests to non-`.mesos` will return an error. For more information, see the Mesos-DNS [documentation](/docs/1.9/networking/mesos-dns/).
+-  If you do not have a DNS infrastructure and do not have access to internet DNS servers, you can specify `resolvers: []`. By specifying this setting, all requests to non-`.mesos` will return an error. For more information, see the Mesos-DNS [documentation](/docs/1.10/networking/mesos-dns/).
 
 **Caution:** If you set the `resolvers` parameter incorrectly, you will permanently damage your configuration and have to reinstall DC/OS.
+
+### dns_bind_ip_blacklist
+This parameter specifies a list of IP addresses that DC/OS DNS resolvers cannot bind to.
+
+### dns_forward_zones
+This parameter specifies a nested list of DNS zones, IP addresses and ports that configure custom forwarding behavior of DNS queries. A DNS zone is mapped to a set of DNS resolvers.
+
+A sample definition is as follows:
+```
+dns_forward_zones:
+- - "a.contoso.com"
+  - - - "1.1.1.1"
+      - 53
+    - - "2.2.2.2"
+      - 53
+- - "b.contoso.com"
+  - - - "3.3.3.3"
+      - 53
+    - - "4.4.4.4"
+      - 53
+```
+
+In the above example, a DNS query to `myapp.a.contoso.com` will be directed to `1.1.1.1:53` or `2.2.2.2:53`. Likewise, a DNS query to `myapp.b.contoso.com` will be directed to `3.3.3.3:53` or `4.4.4.4:53`.
 
 ### use_proxy
 
 This parameter specifies whether to enable the DC/OS proxy. 
 
-*  `use_proxy: 'false'` Do not configure DC/OS [components](/docs/1.9/overview/architecture/components/) to use a custom proxy. This is the default value.
-*  `use_proxy: 'true'` Configure DC/OS [components](/docs/1.9/overview/architecture/components/) to use a custom proxy. If you specify `use_proxy: 'true'`, you can also specify these parameters:
+*  `use_proxy: 'false'` Do not configure DC/OS [components](/docs/1.10/overview/architecture/components/) to use a custom proxy. This is the default value.
+*  `use_proxy: 'true'` Configure DC/OS [components](/docs/1.10/overview/architecture/components/) to use a custom proxy. If you specify `use_proxy: 'true'`, you can also specify these parameters:
     **Important:** The specified proxies must be resolvable from the provided list of [resolvers](#resolvers).
     *  `http_proxy: http://<user>:<pass>@<proxy_host>:<http_proxy_port>` This parameter specifies the HTTP proxy.
     *  `https_proxy: https://<user>:<pass>@<proxy_host>:<https_proxy_port>` This parameter specifies the HTTPS proxy.
@@ -245,8 +245,8 @@ This parameter specifies the amount of time to wait before removing stale Docker
 ### <a name="enable-docker-gc"></a>enable_docker_gc
 This parameter specifies whether to run the [docker-gc](https://github.com/spotify/docker-gc#excluding-images-from-garbage-collection) script, a simple Docker container and image garbage collection script, once every hour to clean up stray Docker containers. You can configure the runtime behavior by using the `/etc/` config. For more information, see the [documentation](https://github.com/spotify/docker-gc#excluding-images-from-garbage-collection)
 
-*  `enable_docker_gc: 'true'` Run the docker-gc scripts once every hour. This is the default value for [cloud](/docs/1.9/installing/cloud/) template installations.
-*  `enable_docker_gc: 'false'` Do not run the docker-gc scripts once every hour. This is the default value for [custom](/docs/1.9/installing/custom/) installations.
+*  `enable_docker_gc: 'true'` Run the docker-gc scripts once every hour. This is the default value for [cloud](/docs/1.10/installing/cloud/) template installations.
+*  `enable_docker_gc: 'false'` Do not run the docker-gc scripts once every hour. This is the default value for [custom](/docs/1.10/installing/custom/) installations.
 
 ### <a name="gc-delay"></a>gc_delay
 This parameter specifies the maximum amount of time to wait before cleaning up the executor directories. It is recommended that you accept the default value of 2 days.

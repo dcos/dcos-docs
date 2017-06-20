@@ -46,7 +46,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
     **Important:**
 
     *  You cannot change the `exhibitor_zk_backend` setting during an upgrade.
-    *  The syntax of the DC/OS 1.9 `config.yaml` differs from that of DC/OS 1.8. For a detailed description of the 1.9 `config.yaml` syntax and parameters, see the [documentation](/docs/1.9/installing/custom/configuration-parameters/).
+    *  The syntax of the DC/OS 1.9 `config.yaml` differs from that of DC/OS 1.8. For a detailed description of the 1.9 `config.yaml` syntax and parameters, see the [documentation](/docs/1.9/installing/custom/configuration/configuration-parameters/).
 
 1.  After you have converted your 1.8 `config.yaml` into the 1.9 `config.yaml` format, you can build your installer package:
 

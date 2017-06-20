@@ -11,9 +11,9 @@ You can use [virtual addresses (VIPs)](/docs/1.8/usage/service-discovery/load-ba
 
 *hostPort*: A _host port_ specifies a port on the host to bind to. When used with `BRIDGE` or `USER` mode networking, you specify a _port mapping_ from a _host port_ to a _container port_. In `HOST` networking, requested ports are _host ports_ by default. Note that only _host ports_ are made available to a task through environment variables.
 
-*BRIDGE networking*: used by Docker applications that specify `BRIDGE` mode networking. In this mode, container ports (a port within the container) are mapped to host ports (a port on the host machine). In this mode, applications bind to the specified ports within the container and Docker networking binds to the specified ports on the host.
+*BRIDGE networking*: used by Docker applications that specify `BRIDGE` mode networking. In this mode, container ports are mapped to host ports. In this mode, applications bind to the specified ports within the container and Docker networking binds to the specified ports on the host.
 
-*USER networking*: used by Docker applications that specify `USER` mode networking. In this mode, container ports (a port within the container) are mapped to host ports (a port on the host machine). In this mode, applications bind to the specified ports within the container and Docker networking binds to the specified ports on the host. `USER` network mode is expected to be useful when integrating with "user-defined" Docker networks. In the Mesos world such networks are often made accessible via CNI plugins used in concert with a Mesos CNI network isolator.
+*USER networking*: used by Docker applications that specify `USER` mode networking. In this mode, container ports are mapped to host ports. In this mode, applications bind to the specified ports within the container and Docker networking binds to the specified ports on the host. `USER` network mode is expected to be useful when integrating with "user-defined" Docker networks. In the Mesos world such networks are often made accessible via CNI plugins used in concert with a Mesos CNI network isolator.
 
 *HOST networking*: used by non-Docker Marathon applications and Docker applications that use `HOST` mode networking. In this mode, applications bind directly to one or more ports on the host machine.
 

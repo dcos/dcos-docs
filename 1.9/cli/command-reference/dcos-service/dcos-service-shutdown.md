@@ -1,7 +1,7 @@
 ---
 post_title: dcos service shutdown
 menu_order: 1
---- 
+---
 
 # Description
 Shutdown a service.

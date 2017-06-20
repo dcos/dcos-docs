@@ -1,7 +1,7 @@
 ---
 post_title: dcos service
 menu_order: 8
---- 
+---
 
 # Description
 Manage DC/OS services.

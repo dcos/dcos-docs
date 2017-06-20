@@ -19,7 +19,7 @@ Anyone who wants to deploy a distributed multi-model database on DC/OS. Beginner
 
 **Scope**:
 
-This tutorial covers the basics in order to get you started with ArangoDB on DC/OS.
+This tutorial covers the basics to get you started with ArangoDB on DC/OS.
 
 ## Prerequisites
 

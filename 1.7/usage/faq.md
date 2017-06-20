@@ -34,13 +34,13 @@ A comprehensive overview of a few common service discovery implementations is av
 
 This is not currently supported. 
 
-## How to add Mesos roles for a node in order to dedicate this node for some apps?
+## How to add Mesos roles for a node to dedicate this node for some apps?
 
 Please review this link on [the Mesosphere Knowledge Base][4].
 
 ## How can I upload files to Spark driver/executor?
 
-Here is the example of a command you should launch in order to make it work:
+Here is the example of a command you should launch to make it work:
 
 
     dcos spark run --submit-args='--conf spark.mesos.uris=https://path/to/pi.conf --class JavaSparkPiConf https://path/to/sparkPi_without_config_file.jar /mnt/mesos/sandbox/pi.conf'

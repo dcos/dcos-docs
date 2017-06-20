@@ -91,13 +91,16 @@ Your cluster must meet the software and hardware [requirements](/docs/1.9/instal
     - '.baz.com'
     ```
 
-2. Create a `ip-detect` script
+2.  Create an `ip-detect` script.
 
-    In this step you create an IP detect script to broadcast the IP address of each node across the cluster. Each node in a DC/OS cluster has a unique IP address that is used to communicate between nodes in the cluster. The IP detect script prints the unique IPv4 address of a node to STDOUT each time DC/OS is started on the node.
+    In this step, an IP detect script is created. This script reports the IP address of each node across the cluster. Each node in a DC/OS cluster has a unique IP address that is used to communicate between nodes in the cluster. The IP detect script prints the unique IPv4 address of a node to STDOUT each time DC/OS is started on the node.
 
-    **Important:** The IP address of a node must not change after DC/OS is installed on the node. For example, the IP address must not change when a node is rebooted or if the DHCP lease is renewed. If the IP address of a node does change, the node must be wiped and reinstalled.
+    **Important:** 
+    
+    - The IP address of a node must not change after DC/OS is installed on the node. For example, the IP address should not change when a node is rebooted or if the DHCP lease is renewed. If the IP address of a node does change, the node must be [wiped and reinstalled](/docs/1.9/installing/custom/uninstall/).
+    - The script must return the same IP address as specified in the `config.yaml`. For example, if the private master IP is specified as `10.2.30.4` in the `config.yaml`, your script should return this same value when run on the master. 
 
-    Create an IP detection script for your environment and save as `genconf/ip-detect`. This script needs to be `UTF-8` encoded and have a valid [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) line. You can use the examples below.
+    Create an IP detect script for your environment and save as `genconf/ip-detect`. This script must be `UTF-8` encoded and have a valid [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) line. You can use the examples below.
 
     *   #### Use the AWS Metadata Server
 
@@ -128,7 +131,7 @@ Your cluster must meet the software and hardware [requirements](/docs/1.9/instal
 
         This method discovers the IP address of a particular interface of the node.
 
-        If you have multiple generations of hardware with different internals, the interface names can change between hosts. The IP detection script must account for the interface name changes. The example script could also be confused if you attach multiple IP addresses to a single interface, or do complex Linux networking, etc.
+        If you have multiple generations of hardware with different internals, the interface names can change between hosts. The IP detect script must account for the interface name changes. The example script could also be confused if you attach multiple IP addresses to a single interface, or do complex Linux networking, etc.
 
         ```bash
         #!/usr/bin/env bash
@@ -294,10 +297,10 @@ To install DC/OS:
 - [Troubleshooting DC/OS installation][9]
 - [Uninstalling DC/OS][8]
 
-[1]: /docs/1.9/installing/custom/configuration-parameters/
+[1]: /docs/1.9/installing/custom/configuration/configuration-parameters/
 [2]: /docs/1.9/cli/install/
 [4]: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
-[6]: /docs/1.9/overview/concepts/#public
+[6]: /docs/1.9/overview/concepts/#public-agent-node
 [7]: /docs/1.9/overview/concepts/#private
 [8]: /docs/1.9/installing/custom/uninstall/
 [9]: /docs/1.9/installing/troubleshooting/
