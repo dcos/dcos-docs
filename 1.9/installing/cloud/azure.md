@@ -74,7 +74,7 @@ Note that the following commands can be used to run the DC/OS CLI directly on th
 
 ```bash
 # Connect to master node with ssh
-ssh azureuser@$MASTERFQDN -L 8000:localhost:80
+ssh azureuser@$MASTERFQDN
 
 # Install CLI on the master node and configure with http://localhost
 curl https://downloads.dcos.io/binaries/cli/linux/x86-64/dcos-1.9/dcos -o dcos && 
