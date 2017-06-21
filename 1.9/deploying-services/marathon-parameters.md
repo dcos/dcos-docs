@@ -144,6 +144,7 @@ An array of required port resources on the host. The portDefinitions array serve
 Each port value is exposed to the instance via environment variables `$PORT0`, `$PORT1`, etc. Ports assigned to running instances are also available via the task resource.
 
 **Recommendations:**
+
 - Configure ports assignment for Docker containers for `BRIDGE` and `USER` networking in `container.docker.portMappings`.
 - If you use the Mesos Containerizer, pass zeros as port values to generate one or more arbitrary free ports for each application instance.
 
