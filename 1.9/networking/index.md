@@ -11,8 +11,8 @@ Allows containers to run on any type of IP-based virtual networks, which each co
 # DNS-Based Service Discovery
 DC/OS includes highly available, distributed, DNS-based service discovery. The service discovery mechanism in DC/OS contains these components:
 
-- A centralized component called [Mesos DNS](/docs/1.9/overview/networking/service-discovery/mesos-dns/), which runs on every master.
-- A distributed component called [Spartan](/docs/1.9/overview/networking/service-discovery/spartan/) that runs on every agent. 
+- A centralized component called Mesos DNS, which runs on every master.
+- A distributed component called Spartan that runs on every agent. 
 
 ## Mesos DNS
 Mesos DNS is a centralized, replicated, DNS server that runs on every master. Every task started by DC/OS gets a well known DNS name. This provides a replicated, highly available DNS service on each of the masters. Every instance of Mesos DNS polls the leading Mesos master and generates a fully qualified domain name (FQDN) for every service running in DC/OS with the domain `*.mesos`.  
@@ -25,7 +25,7 @@ Spartan acts as a DNS masquerade for Mesos DNS on each agent. The Spartan instan
 - DNS server cache service for local services
 
 
-The Spartan instance on each agent also acts a DNS server for any service that is load-balanced using the DC/OS internal load balancer called [minuteman](/docs/1.9/overview/networking/service-discovery/mesos-dns/). Any service that is load balanced by minuteman gets a [virtual-ip-address (VIP)](/docs/1.9/overview/networking/service-discovery/mesos-dns/) and an FQDN in the `"*.l4lb.thisdcos.directory"` domain. The FQDN allocated to a load-balanced service is then stored in Spartan. All Spartans instances exchange the records they have discovered locally from minuteman by using GOSSIP. This provides a highly available distributed DNS service for any task that is load balanced by minuteman.
+The Spartan instance on each agent also acts a DNS server for any service that is load-balanced using the DC/OS internal load balancer called [minuteman](/docs/1.9/networking/mesos-dns/). Any service that is load balanced by minuteman gets a [virtual-ip-address (VIP)](/docs/1.9/networking/mesos-dns/) and an FQDN in the `"*.l4lb.thisdcos.directory"` domain. The FQDN allocated to a load-balanced service is then stored in Spartan. All Spartans instances exchange the records they have discovered locally from minuteman by using GOSSIP. This provides a highly available distributed DNS service for any task that is load balanced by minuteman.
 
 # Load Balancing
 East-west load balancing is provided by the Minuteman component. North-south load balancing is provided by Marathon LB.
@@ -44,10 +44,3 @@ Marathon LB is based on HAProxy, a rapid proxy and north-south load balancer. HA
 
 - Use Marathon LB as your edge load balancer (LB) and service discovery mechanism.
 - Use Marathon LB as an internal LB and service discovery mechanism, with a separate HA load balancer for routing public traffic in.
-
-
-(/docs/1.9/overview/networking/service-discovery/mesos-dns/): /docs/1.9/networking/load-balancing-vips/virtual-ip-addresses/
-(/docs/1.9/overview/networking/service-discovery/spartan/): /docs/1.9/networking/load-balancing-vips/
-[3]: /docs/1.9/networking/Marathon LB/
-[4]: /docs/1.9/networking/mesos-dns/
-[5]: /docs/1.9/networking/mesos-dns/service-naming/
