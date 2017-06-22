@@ -1,10 +1,21 @@
 ---
-post_title: Advanced Features
+post_title: Marathon LB Reference
 menu_order: 300
 ---
 ## HAProxy configuration
 
 Marathon-LB works by automatically generating configuration for HAProxy and then reloading HAProxy as needed. Marathon-LB generates the HAProxy configuration based on application data available from the Marathon REST API. It can also subscribe to the [Marathon Event Bus][10] for real-time updates. When an application starts, stops, relocates or has any change in health status, Marathon-LB will automatically regenerate the HAProxy configuration and reload HAProxy.
+
+
+| Components                | Host:Port/URI/                             |
+|---------------------------|--------------------------------------------|
+| Statistics                | `<public-node>:9090/haproxy?stats`         |
+| Statistics CSV            | `<public-node>:9090/haproxy?stats;csv`     |
+| Health check              | `<public-node>:9090/_haproxy_health_check` |
+| Configuration file view   | `<public-node>:9090/_haproxy_getconfig`    |
+| Get vHost to backend map  | `<public-node>:9090/_haproxy_getvhostmap`  |
+| Get app ID to backend map | `<public-node>:9090/_haproxy_getappmap`    |
+| Reload configuration      | `<public-node>:9090/_mlb_signal/hup*`      |
 
 ## Templates
 

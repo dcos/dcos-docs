@@ -3,7 +3,7 @@ post_title: Load Balancing and Virtual IPs (VIPs)
 menu_order: 00
 ---
 
-DC/OS provides an east-west load balancer that enables multi-tier microservices architectures. It acts as a TCP layer 4 load balancer, and it's tightly integrated with the Mesos kernel. The features include:
+DC/OS provides an east-west load balancer (minuteman) that enables multi-tier microservices architectures. It acts as a TCP layer 4 load balancer, and it's tightly integrated with the Mesos kernel. The features include:
 
 - Included with DC/OS by default 
 - Distributed load balancing of applications
@@ -11,7 +11,6 @@ DC/OS provides an east-west load balancer that enables multi-tier microservices 
 - User specifies a virtual IP in Marathon application
 - Respects health checks
 - Requires maintenance of virtual IP to service mappings
-
 
 You can use the layer 4 load balancer by assigning a [VIP](/docs/1.9/networking/load-balancing-vips/virtual-ip-addresses/) in your app definition. After you create a task, or a set of tasks with a VIP, they will automatically become available to all nodes in the cluster, including the masters.
 
@@ -22,7 +21,6 @@ When you launch a set of tasks DC/OS distributes them to all of the nodes in the
 -  Do not firewall traffic between the nodes (allow all TCP/UDP).
 -  Do not change `ip_local_port_range`.
 -  You must use a supported [operating system](/docs/1.9/installing/custom/system-requirements/).
-
 
 #### Persistent Connections
 Keep long-running persistent connections, otherwise, you can quickly fill up the TCP socket table. The default local port range on Linux allows source connections from 32768 to 61000. This allows 28232 connections to be established between a given source IP and a destination address and port pair. TCP connections must go through the time wait state prior to being reclaimed. The Linux kernel's default TCP time wait period is 120 seconds. Without persistent connections, you would exhaust the connection table by only making 235 new connections per second.
