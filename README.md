@@ -18,44 +18,55 @@ This page provides instructions on how to contribute to the DC/OS documentation.
 
 ## <a name="making"></a>Making your contribution
 
-1. Search [JIRA](https://jira.mesosphere.com/) to review the currently open issues and make sure that no one is already working on your issue. If you find an open issue that is unassigned that you want to work, you can assign it to yourself! If you don’t see an issue related to yours, [create a new issue](https://jira.mesosphere.com/secure/CreateIssue!default.jspa), select documentation as the component, and assign it to yourself.
+### Overview
 
-  <img src="/images/2017-03-13_JIRA_screen_cap.png"/>
+1. Create a [fork](https://help.github.com/articles/fork-a-repo/).
+1. Clone your forked repo locally (e.g. `git clone git@github.com:<your-username>/dcos-docs.git`).
+1. Create a branch (.e.g. `git checkout -b <your-name>/<your-branch-name>`
+1. Make your changes.
+1. Commit your changes (e.g. `git commit -am "These are my changes"`).
+1. Push your changes upstream (e.g. `git push origin <your-name>/<your-branch-name>`).
+1. Submit a [pull request](https://help.github.com/articles/using-pull-requests/) to `dcos-docs-enterprise`.
 
-1. If this is your first contribution [Fork](https://help.github.com/articles/fork-a-repo/) the [dcos-docs](https://github.com/dcos/dcos-docs) repo. (Once you’ve forked the repo, that fork stays associated with your GitHub account. If you try to fork it again GitHub will remind you that you already have a fork.)
+### Detailed
 
-1. Create a local repository, or if you already have one make sure it is up to date.
+1.  Search [JIRA](https://jira.mesosphere.com/) to review the currently open issues and make sure that no one is already working on your issue. If you find an open issue that is unassigned that you want to work, you can assign it to yourself! If you don’t see an issue related to yours, [create a new issue](https://jira.mesosphere.com/secure/CreateIssue!default.jspa), select documentation as the component, and assign it to yourself.
 
-  - If this is your first contribution, go to your terminal, navigate to the directory where you keep your Git projects, and clone your fork of the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
+    <img src="/images/2017-03-13_JIRA_screen_cap.png"/>
 
+1.  If this is your first contribution [Fork](https://help.github.com/articles/fork-a-repo/) the [dcos-docs](https://github.com/dcos/dcos-docs) repo. (Once you’ve forked the repo, that fork stays associated with your GitHub account. If you try to fork it again GitHub will remind you that you already have a fork.)
+
+1.  Create a local repository, or if you already have one make sure it is up to date.
+
+    - If this is your first contribution, go to your terminal, navigate to the directory where you keep your Git projects, and clone your fork of the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
 
       ```bash
       git clone https://github.com/<your-user-name>/dcos-docs
       ```
 
-  - If this isn't your first contribution check out the master branch
+    - If this isn't your first contribution check out the master branch
 
-        ```bash
-        git checkout master
-        ```
+      ```bash
+       git checkout master
+       ```
 
-      and update it by following these [instructions](https://help.github.com/articles/syncing-a-fork/).
+       and update it by following these [instructions](https://help.github.com/articles/syncing-a-fork/).
 
-1. Create a new branch of your local repository using your JIRA number as the name. This way other contributors can find the JIRA issue that descirbes the goal of your contribution.
+1.  Create a new branch of your local repository using your JIRA number as the name. This way other contributors can find the JIRA issue that descirbes the goal of your contribution.
 
     ```bash
     git checkout -b dcos-nnn
     ```
 
-1. Create your content.
+1.  Create your content.
 
-  - In most cases you should be able to create your content within the existing directory structure.
-  - If you're not sure how to add formatting, take a look at [dcos.io/docs](dcos.io/docs/) for examples.
-  - Be sure you follow the style and formatting guidelines in the [next section](#styling).
-  - Don't forget to update your post's metadata if necessary, including the required metadata `post_title` and optional `nav_title` and `menu_order`. Where applicable, add the optional `feature_maturity` label. Description of various feature maturity phases can be found [here](dcos.io/docs/overview/feature-maturity/).
-
-  The metadata should be at the very top of the post's file, and look something like this:
-
+    - In most cases you should be able to create your content within the existing directory structure.
+    - If you're not sure how to add formatting, take a look at [dcos.io/docs](dcos.io/docs/) for examples.
+    - Be sure you follow the style and formatting guidelines in the [next section](#styling).
+    - Don't forget to update your post's metadata if necessary, including the required metadata `post_title` and optional `nav_title` and `menu_order`. Where applicable, add the optional `feature_maturity` label. Description of various feature maturity phases can be found [here](dcos.io/docs/overview/feature-maturity/).
+    
+    The metadata should be at the very top of the post's file, and look something like this:
+    
     ```
     ---
     post_title: This is how you update the documentation
@@ -66,34 +77,32 @@ This page provides instructions on how to contribute to the DC/OS documentation.
     The rest of your document's text will go here, underneath the second set of dashes.
     ```    
 
-  - Don't forget to save your changes
+1.  When you're happy with your improvements, build a local copy of the website by following these [instructions](#test-local) to make sure that everything looks good, and that nothing is broken.
 
-1. When you're happy with your improvements, build a local copy of the website by following these [instructions](#test-local) to make sure that everything looks good, and that nothing is broken.
+1.  Push your changes into the feature branch of your remote repository on github.com.
 
-1. Push your changes into the feature branch of your remote repository on github.com.
+    1. First, add your changes (this gets them ready to be included in your commit).
 
-  1. First, add your changes (this gets them ready to be included in your commit).
+       ```bash
+       git add .
+       ```
 
-    ```bash
-    git add .
-    ```
+    1. Next commit the changes you made to your local branch, and add a useful message so that everyone knows what you've changed.
 
-  1. Next commit the changes you made to your local branch, and add a useful message so that everyone knows what you've changed.
+       ```bash
+       git commit -m "Addresses issue DCOS-nnn. More useful stuff here"
+       ```
 
-    ```bash
-    git commit -m "Addresses issue DCOS-nnn. More useful stuff here"
-    ```
+    1. Finally push your changes up to your remote branch on GitHub, so that you can open a pull request.
 
-  1. Finally push your changes up to your remote branch on GitHub, so that you can open a pull request.
+       ```bash
+       git push origin dcos-nnn
+       ```
 
-    ```bash
-    git push origin dcos-nnn
-    ```
+1.  Submit a [pull request](https://help.github.com/articles/using-pull-requests/) against the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
 
-1. Submit a [pull request](https://help.github.com/articles/using-pull-requests/) against the [dcos-docs](https://github.com/dcos/dcos-docs) repo.
-
-  - Don't forget to add a link to this PR in your [JIRA issue](https://jira.mesosphere.com/).
-  - Community managers will test drive and validate contributions that include hands-on instructions, and they'll probably ask for improvements or modifications by commenting on your PR. If you agree with their changes make them in your local repo and repeat steps 5-7 above, or feel free to continue the discussion.
+    - Don't forget to add a link to this PR in your [JIRA issue](https://jira.mesosphere.com/).
+    - Community managers will test drive and validate contributions that include hands-on instructions, and they'll probably ask for improvements or modifications by commenting on your PR. If you agree with their changes make them in your local repo and repeat steps 5-7 above, or feel free to continue the discussion.
 
 ## <a name="styling"></a>Styling and formatting your contribution
 
