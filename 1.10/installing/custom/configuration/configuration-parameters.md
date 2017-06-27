@@ -176,7 +176,7 @@ Specifies custom installation checks that are added to the default check configu
     - `cmd` - Specify an array of health check command strings.
     - `timeout` - Specify how long to wait, in seconds, before assuming the check failed. A check that times out is assumed to have a status of `3 (UNKNOWN)`.
     
-For more information on how these custom checks are used, see the [Node and Cluster Health Check](/docs/1.10/installing/custom/node-cluster-health-check/) documentation.
+For more information on how these custom checks are used, see the [examples](/docs/1.10/installing/custom/configuration/examples/#custom-checks) and [Node and Cluster Health Check](/docs/1.10/installing/custom/node-cluster-health-check/) documentation.
 
 ### dcos_audit_logging (Enterprise DC/OS Only)
 
