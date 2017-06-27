@@ -126,7 +126,7 @@ You can use the following options to further configure the Docker credentials:
     *  `cluster_docker_credentials_enabled: 'true'` Pass the Mesos `--docker_config` option to Mesos. It will point to a file that contains the provided `cluster_docker_credentials` data.
     *  `cluster_docker_credentials_enabled: 'false'` Do not pass the Mesos `--docker_config` option to Mesos. 
     
-For more information, see the [examples](#docker-credentials).
+For more information, see the [examples](/docs/1.9/installing/custom/configuration/examples/#docker-credentials).
 
 ### cluster_docker_registry_url
 The custom URL that Mesos uses to pull Docker images from. If set, it will configure the Mesos' `--docker_registry` flag to the specified URL. This changes the default URL Mesos uses for pulling Docker images. By default `https://registry-1.docker.io` is used.
@@ -203,7 +203,7 @@ Indicates whether to enable DC/OS virtual networks.
             *  `subnet` The subnet that is allocated to the virtual network.
             *  `prefix` The size of the subnet that is allocated to each agent and thus defines the number of agents on which the overlay can run. The size of the subnet is carved from the overlay subnet.
 
- For more information, see the [example](#overlay) and [documentation](/docs/1.9/networking/virtual-networks/).
+ For more information, see the [example](/docs/1.9/installing/custom/configuration/examples/#overlay) and [documentation](/docs/1.9/networking/virtual-networks/).
  
 ### dns_search
 A space-separated list of domains that are tried when an unqualified domain is entered (e.g., domain searches that do not contain &#8216;.&#8217;). The Linux implementation of `/etc/resolv.conf` restricts the maximum number of domains to 6 and the maximum number of characters the setting can have to 256. For more information, see [man /etc/resolv.conf](http://man7.org/linux/man-pages/man5/resolv.conf.5.html).
@@ -396,7 +396,7 @@ Indicates whether to enable the DC/OS proxy.
 
 *  `use_proxy: 'false'` Do not configure DC/OS [components](/docs/1.9/overview/architecture/components/) to use a custom proxy. This is the default value.
 *  `use_proxy: 'true'` Configure DC/OS [components](/docs/1.9/overview/architecture/components/) to use a custom proxy. If you specify `use_proxy: 'true'`, you can also specify these parameters:
-    **Important:** The specified proxies must be resolvable from the provided list of [resolvers](#resolvers).
+    **Important:** The specified proxies must be resolvable from the provided list of [resolvers](/docs/1.9/installing/custom/configuration/examples/#resolvers).
     *  `http_proxy: http://<user>:<pass>@<proxy_host>:<http_proxy_port>` The HTTP proxy.
     *  `https_proxy: https://<user>:<pass>@<proxy_host>:<https_proxy_port>` The HTTPS proxy.
     *  `no_proxy: - .<(sub)domain>` A YAML nested list (-) of addresses to exclude from the proxy.

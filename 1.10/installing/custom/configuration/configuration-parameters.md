@@ -20,6 +20,7 @@ This topic provides all available configuration parameters. Except where explici
 | [cluster_docker_registry_url](#cluster_docker_registry_url)            | The custom URL that Mesos uses to pull Docker images from.                                                                         |
 | [cluster_name](#cluster_name)                           | The name of your cluster.                                                                                                        |
 | [cosmos_config](#cosmos_config)                          | The dictionary of packaging configuration to pass to the [DC/OS Package Manager (Cosmos)](https://github.com/dcos/cosmos).         |
+| [custom_checks](#custom_checks)                          |  |
 | [exhibitor_storage_backend](#exhibitor_storage_backend)                          | The type of storage backend to use for Exhibitor.          |
 | [ip_detect_public_filename](#ip_detect_public_filename)       | The IP detect file to use in your cluster.  |
 | [master_discovery](#master_discovery)                          | (Required) The Mesos master discovery method.         |
@@ -126,7 +127,7 @@ You can use the following options to further configure the Docker credentials:
     *  `cluster_docker_credentials_enabled: 'true'` Pass the Mesos `--docker_config` option to Mesos. It will point to a file that contains the provided `cluster_docker_credentials` data.
     *  `cluster_docker_credentials_enabled: 'false'` Do not pass the Mesos `--docker_config` option to Mesos. 
     
-For more information, see the [examples](#docker-credentials).
+For more information, see the [examples](/docs/1.10/installing/custom/configuration/examples/#docker-credentials).
 
 ### cluster_docker_registry_url
 The custom URL that Mesos uses to pull Docker images from. If set, it will configure the Mesos' `--docker_registry` flag to the specified URL. This changes the default URL Mesos uses for pulling Docker images. By default `https://registry-1.docker.io` is used.
@@ -158,6 +159,25 @@ ab1c23de-45f6-7g8h-9012-i345j6k7lm8n
 
 For more information, see the [security documentation](https://docs.mesosphere.com/1.10/security/).
   
+### custom_checks
+Specifies custom installation checks that are added to the default check configuration process. The configuration is used by the [DC/OS Diagnostics component](/docs/1.10/overview/architecture/components/#dcos-diagnostics) to perform pre and post-flight installation checks. These custom checks are run alongside the default pre and post-flight checks during installation.
+
+- `cluster_checks` - This group of parameters specifies the health checks across the DC/OS cluster.
+
+    - `<check-name>` - The custom name of your health check. 
+    - `description` - Specify a description of the check.
+    - `cmd` - Specify an array of health check command strings.
+    - `timeout` - Specify how long to wait, in seconds, before assuming the check failed. A check that times out is assumed to have a status of `3 (UNKNOWN)`.
+    
+- `node_checks` - This group of parameters specifies node health checks.
+
+    - `<check-name>` - The custom name of your health check. 
+    - `description` - Specify a description of the check.
+    - `cmd` - Specify an array of health check command strings.
+    - `timeout` - Specify how long to wait, in seconds, before assuming the check failed. A check that times out is assumed to have a status of `3 (UNKNOWN)`.
+    
+For more information on how these custom checks are used, see the [Node and Cluster Health Check](/docs/1.10/installing/custom/node-cluster-health-check/) documentation.
+
 ### dcos_audit_logging (Enterprise DC/OS Only)
 
 Indicates whether security decisions (authentication, authorization) are logged for Mesos, Marathon, and Jobs.
@@ -203,7 +223,7 @@ Indicates whether to enable DC/OS virtual networks.
             *  `subnet` The subnet that is allocated to the virtual network.
             *  `prefix` The size of the subnet that is allocated to each agent and thus defines the number of agents on which the overlay can run. The size of the subnet is carved from the overlay subnet.
 
- For more information, see the [example](#overlay) and [documentation](/docs/1.10/networking/virtual-networks/).
+ For more information, see the [example](/docs/1.10/installing/custom/configuration/examples/#overlay) and [documentation](/docs/1.10/networking/virtual-networks/).
  
 ### dns_search
 A space-separated list of domains that are tried when an unqualified domain is entered (e.g., domain searches that do not contain &#8216;.&#8217;). The Linux implementation of `/etc/resolv.conf` restricts the maximum number of domains to 6 and the maximum number of characters the setting can have to 256. For more information, see [man /etc/resolv.conf](http://man7.org/linux/man-pages/man5/resolv.conf.5.html).
@@ -396,12 +416,12 @@ Indicates whether to enable the DC/OS proxy.
 
 *  `use_proxy: 'false'` Do not configure DC/OS [components](/docs/1.10/overview/architecture/components/) to use a custom proxy. This is the default value.
 *  `use_proxy: 'true'` Configure DC/OS [components](/docs/1.10/overview/architecture/components/) to use a custom proxy. If you specify `use_proxy: 'true'`, you can also specify these parameters:
-    **Important:** The specified proxies must be resolvable from the provided list of [resolvers](#resolvers).
+    **Important:** The specified proxies must be resolvable from the provided list of [resolvers](/docs/1.10/installing/custom/configuration/examples/#resolvers).
     *  `http_proxy: http://<user>:<pass>@<proxy_host>:<http_proxy_port>` The HTTP proxy.
     *  `https_proxy: https://<user>:<pass>@<proxy_host>:<https_proxy_port>` The HTTPS proxy.
     *  `no_proxy: - .<(sub)domain>` A YAML nested list (-) of addresses to exclude from the proxy.
 
-For more information, see the [examples](#http-proxy).
+For more information, see the [examples](/docs/1.10/installing/custom/configuration/examples/#http-proxy).
 
 **Important:** You should also configure an HTTP proxy for [Docker](https://docs.docker.com/engine/admin/systemd/#/http-proxy). 
 
