@@ -160,7 +160,7 @@ ab1c23de-45f6-7g8h-9012-i345j6k7lm8n
 For more information, see the [security documentation](https://docs.mesosphere.com/1.10/security/).
   
 ### custom_checks
-Specifies custom installation checks that are added to the default check configuration process. The configuration is used by the [DC/OS Diagnostics component](/docs/1.10/overview/architecture/components/#dcos-diagnostics) to perform pre and post-flight installation checks. These custom checks are run alongside the default pre and post-flight checks during installation.
+Specifies custom installation checks that are added to the default check configuration process. The configuration is used by the [DC/OS Diagnostics component](/docs/1.10/overview/architecture/components/#dcos-diagnostics) to perform installation and upgrade checks. These custom checks are run alongside the default pre and post-flight checks during installation and upgrade.
 
 - `cluster_checks` - This group of parameters specifies the health checks across the DC/OS cluster.
 

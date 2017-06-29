@@ -12,19 +12,31 @@ Cluster checks report the health status of the entire DC/OS cluster. Cluster che
 - Does ZooKeeper have quorum?
 - Can a framework register with Mesos and run a task?
 
-You can discover which cluster checks have been defined by SSHing to your cluster node and running this command: `dcos-diagnostics check cluster --list`.
+You can discover which cluster checks have been defined by SSHing to your cluster node and running this command: `/opt/mesosphere/bin/dcos-shell dcos-diagnostics check cluster --list`.
 
 ## Node Checks
 Node checks report the status of individual nodes after installation. Node checks can be run post-installation by connecting to an individual node via SSH. 
 
-You can view which node checks have been defined by SSHing to your cluster node and running this command: `dcos-diagnostics check node-poststart --list`.
+You can view which node checks have been defined by SSHing to your cluster node and running this command: `/opt/mesosphere/bin/dcos-shell dcos-diagnostics check node-poststart --list`.
 
-# Defining Custom Health Checks
-Custom health checks must be defined before installation in the DC/OS installation configuration file. If you want to modify the configuration file after installation, you must follow the [DC/OS upgrade process](/docs/1.10/installing/upgrading/).
+# Creating Custom Health Checks
+Define your custom health checks in the `custom_checks` configuration parameter. You can reference any executable on the filesystem. If it's an absolute path (e.g., if you have an executable in `/usr/bin/`), you can go specify it directly in the `cmd`. If reference an executable by name without an absolute path (e.g., `echo` instead of `/usr/bin/echo`), the system will look for it by using this search path, and use the first executable that it finds: `/opt/mesosphere/bin:/usr/bin:/bin:/sbin`. 
 
-Define your custom health checks in the `custom_checks` configuration parameter. For a description of this parameter and examples, see the [configuration parameter documentation](/docs/1.10/installing/custom/configuration/configuration-parameters/#custom_checks).
+A custom health check must report its status as one of the exit codes shown in the table below. Optionally the checks can output a human-readable message to stderr or stdout.
 
-# Running Health Checks
+| Code         | Status   | Description                                       |
+|--------------|----------|---------------------------------------------------|
+| 0            | OK       | Check passed. No investigation needed.            |
+| 1            | WARNING  | Check passed, but investigation may be necessary. |
+| 2            | CRITICAL | Check failed. Investigate if unexpected.          |
+| 3 or greater | UNKNOWN  | Status cannot be determined. Investigate.         |
+
+# Specifying Custom Health Checks
+Custom health checks must be specified in the DC/OS installation configuration file, before installing DC/OS. If you want to modify the configuration file after installation, you must follow the [DC/OS upgrade process](/docs/1.10/installing/upgrading/).
+
+For a description of this parameter and examples, see the [configuration parameter documentation](/docs/1.10/installing/custom/configuration/configuration-parameters/#custom_checks).
+
+# Running Custom Health Checks
 After you have defined custom health checks, you can run these commands from your cluster node.
 
 **Prerequisites:**
@@ -76,6 +88,37 @@ After you have defined custom health checks, you can run these commands from you
       },
       ...
     ```
+    
+1.  Run checks with the check name (`<checkname>`) specified.
+
+    ```bash
+    /opt/mesosphere/bin/dcos-shell dcos-diagnostics check node-poststart <checkname>
+    ```
+    
+    For example, to run the `component_agent` check.
+    
+    ```bash
+    /opt/mesosphere/bin/dcos-shell dcos-diagnostics check node-poststart component_agent
+    ```   
+     
+    The output should resemble:
+    
+    ```bash
+    {
+      “status”: 2,
+      “checks”: {
+        “component_agent”: {
+          “status”: 2,
+          “output”: “”
+        },
+        “exhibitor”: {
+          “status”: 0,
+          “output”: “”
+        }
+      }
+    }
+    ```
+    
     
 # Examples
 

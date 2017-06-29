@@ -388,7 +388,7 @@ custom_checks:
       master-mounts:
         description: Local mounts on masters are present
         cmd:
-     - “check_mounts”
+          - “check_mounts”
           - "--role"
           - "master"
         roles:
