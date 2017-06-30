@@ -14,7 +14,7 @@ DC/OS includes a set of predefined builtin health checks for DC/OS core componen
 - The Mesos agent has registered with the masters.
 
 # Custom Health Checks
-Custom checks are checks written by a user and specified when installing DC/OS in the config.yaml file. Custom checks should be written for non-core DC/OS components. Health checks for DC/OS core components are included out-of-the-box as [predefined health checks](#predefined-health-checks). For example, you can write custom health checks for:
+Custom checks are checks written by a user and specified when installing DC/OS in the `config.yaml` file. Custom checks should be written for non-core DC/OS components. Health checks for DC/OS core components are included out-of-the-box as [predefined health checks](#predefined-health-checks). For example, you can write custom health checks for:
 
 -  The DC/OS service is healthy
 -  The local mounts on nodes are healthy 
