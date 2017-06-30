@@ -246,7 +246,7 @@ master_list:
 - <master-private-ip-3>
 resolvers:
 # You probably do not want to use these values since they point to public DNS servers.
-# Instead use values that are more specific to your particular infrastructure.
+# Instead, use values that are more specific to your particular infrastructure.
 - 8.8.4.4
 - 8.8.8.8
 ssh_port: 22
