@@ -3,14 +3,15 @@ post_title: Load Balancing and Virtual IPs (VIPs)
 menu_order: 00
 ---
 
-DC/OS provides an east-west load balancer (minuteman) that enables multi-tier microservices architectures. It acts as a TCP layer 4 load balancer, and it's tightly integrated with the Mesos kernel. The features include:
+DC/OS provides an east-west load balancer (minuteman) that enables multi-tier microservices architectures. It acts as a TCP layer 4 load balancer, and leverages load-balancing features within the Linux kernel to achieve near line-rate throughputs and latency. The features include:
 
 - Included with DC/OS by default 
 - Distributed load balancing of applications
 - Facilitates east-west communication within the cluster
-- User specifies a virtual IP in Marathon application
+- User specifies an FQDN address to the DC/OS service
 - Respects health checks
 - Requires maintenance of virtual IP to service mappings
+- Automatically allocates virtual IPs to service FQDN
 
 You can use the layer 4 load balancer by assigning a [VIP](/docs/1.9/networking/load-balancing-vips/virtual-ip-addresses/) in your app definition. After you create a task, or a set of tasks with a VIP, they will automatically become available to all nodes in the cluster, including the masters.
 
