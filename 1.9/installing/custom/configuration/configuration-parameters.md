@@ -9,7 +9,7 @@ This topic provides all available configuration parameters. Except where explici
 
 | Parameter                              | Description                                                                                                                                               |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [agent_list](#agent_list)                             | A YAML nested list (`-`) of IPv4 addresses to your [private agent](/1.9/overview/concepts/#private-agent-node) host names.                  |
+| [agent_list](#agent_list)                             | A YAML nested list (`-`) of IPv4 addresses to your [private agent](/docs/1.9/overview/concepts/#private-agent-node) host names.                  |
 | [aws_template_storage_bucket](#aws_template_storage_bucket)            | The name of your S3 bucket.                                                                                                      |
 | [aws_template_storage_bucket_path](#aws_template_storage_bucket_path)       | The S3 bucket storage path.                                                                                                      |
 | [aws_template_upload](#aws_template_upload)                    | Indicates whether to automatically upload the customized advanced templates to your S3 bucket.                                             |
@@ -21,6 +21,7 @@ This topic provides all available configuration parameters. Except where explici
 | [cluster_name](#cluster_name)                           | The name of your cluster.                                                                                                        |
 | [cosmos_config](#cosmos_config)                          | The dictionary of packaging configuration to pass to the [DC/OS Package Manager (Cosmos)](https://github.com/dcos/cosmos).         |
 | [exhibitor_storage_backend](#exhibitor_storage_backend)                          | The type of storage backend to use for Exhibitor.          |
+| [ip_detect_public_filename](#ip_detect_public_filename)       | The IP detect file to use in your cluster.  |
 | [master_discovery](#master_discovery)                          | (Required) The Mesos master discovery method.         |
 | [public_agent_list](#public_agent_list)                          | A YAML nested list (-) of IPv4 addresses to your [public agent](/docs/1.9/overview/concepts/#public-agent-node) host names.        |
 | [platform](#platform)                          | The infrastructure platform.      |
@@ -125,7 +126,7 @@ You can use the following options to further configure the Docker credentials:
     *  `cluster_docker_credentials_enabled: 'true'` Pass the Mesos `--docker_config` option to Mesos. It will point to a file that contains the provided `cluster_docker_credentials` data.
     *  `cluster_docker_credentials_enabled: 'false'` Do not pass the Mesos `--docker_config` option to Mesos. 
     
-For more information, see the [examples](#docker-credentials).
+For more information, see the [examples](/docs/1.9/installing/custom/configuration/examples/#docker-credentials).
 
 ### cluster_docker_registry_url
 The custom URL that Mesos uses to pull Docker images from. If set, it will configure the Mesos' `--docker_registry` flag to the specified URL. This changes the default URL Mesos uses for pulling Docker images. By default `https://registry-1.docker.io` is used.
@@ -202,7 +203,7 @@ Indicates whether to enable DC/OS virtual networks.
             *  `subnet` The subnet that is allocated to the virtual network.
             *  `prefix` The size of the subnet that is allocated to each agent and thus defines the number of agents on which the overlay can run. The size of the subnet is carved from the overlay subnet.
 
- For more information, see the [example](#overlay) and [documentation](/docs/1.9/networking/virtual-networks/).
+ For more information, see the [example](/docs/1.9/installing/custom/configuration/examples/#overlay) and [documentation](/docs/1.9/networking/virtual-networks/).
  
 ### dns_search
 A space-separated list of domains that are tried when an unqualified domain is entered (e.g., domain searches that do not contain &#8216;.&#8217;). The Linux implementation of `/etc/resolv.conf` restricts the maximum number of domains to 6 and the maximum number of characters the setting can have to 256. For more information, see [man /etc/resolv.conf](http://man7.org/linux/man-pages/man5/resolv.conf.5.html).
@@ -266,6 +267,16 @@ The type of storage backend to use for Exhibitor. You can use internal DC/OS sto
 
 ### gc_delay
 The maximum amount of time to wait before cleaning up the executor directories. It is recommended that you accept the default value of 2 days.
+
+### ip_detect_public_filename
+The path to a file (`/genconf/ip-detect-public`) on your bootstrap node that contains a shell script to map internal IPs to a public IP. For example:
+
+```bash
+#!/bin/sh
+set -o nounset -o errexit
+
+curl -fsSL https://ipinfo.io/ip
+```
 
 ### log_directory
 The path to the installer host logs from the SSH processes. By default this is set to `/genconf/logs`. In most cases this should not be changed because `/genconf` is local to the container that is running the installer, and is a mounted volume.
@@ -385,7 +396,7 @@ Indicates whether to enable the DC/OS proxy.
 
 *  `use_proxy: 'false'` Do not configure DC/OS [components](/docs/1.9/overview/architecture/components/) to use a custom proxy. This is the default value.
 *  `use_proxy: 'true'` Configure DC/OS [components](/docs/1.9/overview/architecture/components/) to use a custom proxy. If you specify `use_proxy: 'true'`, you can also specify these parameters:
-    **Important:** The specified proxies must be resolvable from the provided list of [resolvers](#resolvers).
+    **Important:** The specified proxies must be resolvable from the provided list of [resolvers](/docs/1.9/installing/custom/configuration/examples/#resolvers).
     *  `http_proxy: http://<user>:<pass>@<proxy_host>:<http_proxy_port>` The HTTP proxy.
     *  `https_proxy: https://<user>:<pass>@<proxy_host>:<https_proxy_port>` The HTTPS proxy.
     *  `no_proxy: - .<(sub)domain>` A YAML nested list (-) of addresses to exclude from the proxy.

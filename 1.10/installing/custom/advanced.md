@@ -67,22 +67,36 @@ Your cluster must meet the software and hardware [requirements](/docs/1.10/insta
 
     You can use this template to get started. This template specifies three Mesos masters, three ZooKeeper instances for Exhibitor storage, static master discovery list, internal storage backend for Exhibitor, a custom proxy, and Google DNS resolvers. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][1].
 
-    **Tip:** If Google DNS is not available in your country, you can replace the Google DNS servers `8.8.8.8` and `8.8.4.4` with your local DNS servers.
+    **Tips:** 
+    
+    - If Google DNS is not available in your country, you can replace the Google DNS servers `8.8.8.8` and `8.8.4.4` with your local DNS servers.
+    - If you specify `master_discovery: static`, you must also create a script to map internal IPs to public IPs on your bootstrap node (e.g., `/genconf/ip-detect-public`). This script is then referenced in `ip_detect_public_filename: <path-to-ip-script>`.
 
     ```yaml
     ---
-    bootstrap_url: http://<bootstrap_ip>:<your_port>
-    cluster_name: '<cluster-name>'
+    agent_list:
+    - <agent-private-ip-1>
+    - <agent-private-ip-2>
+    - <agent-private-ip-3>
+    - <agent-private-ip-4>
+    - <agent-private-ip-5>
+    # Use this bootstrap_url value unless you have moved the DC/OS installer assets.
+    bootstrap_url: file:///opt/dcos_install_tmp
+    cluster_name: <cluster-name>
     exhibitor_storage_backend: static
-    ip_detect_filename: /genconf/ip-detect
     master_discovery: static
+    ip_detect_public_filename: <path-to-ip-script>
     master_list:
     - <master-private-ip-1>
     - <master-private-ip-2>
     - <master-private-ip-3>
+    public_agent_list:
+    - <public-agent-private-ip>
     resolvers:
     - 8.8.4.4
     - 8.8.8.8
+    ssh_port: 22
+    ssh_user: <username>
     use_proxy: 'true'
     http_proxy: http://<proxy_host>:<http_proxy_port>
     https_proxy: https://<proxy_host>:<https_proxy_port>

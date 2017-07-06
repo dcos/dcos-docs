@@ -9,18 +9,22 @@ Add an application.
 # Usage
 
 ```bash
-dcos marathon app add <app-resource> [OPTION]
+dcos marathon app update <app-id> [OPTION]
 ```
 
 # Options
 
-None.
+| Name, shorthand | Default | Description |
+|---------|-------------|-------------|
+| `--force`   |             | Disable checks in Marathon during updates. |
 
 # Positional arguments
 
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
-| `<app-resource>`   |             |  Path to a file or HTTP(S) URL that contains the app's JSON definition. If omitted, the definition is read from stdin. For a detailed description see the [documentation](/docs/1.10/deploying-services/marathon-api/). |
+| `<app-id>`   |             |  The application ID. |
+| `<properties>`   |             |  List of one or more JSON object properties, separated by a space. The list must be formatted as `<key>=<value>`. For example, `cpus=2.0 mem=308`. If omitted, properties are read from a JSON object provided on stdin. |
+
 
 # Parent command
 

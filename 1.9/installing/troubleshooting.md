@@ -326,7 +326,7 @@ DC/OS uses ZooKeeper, a high-performance coordination service to manage the inst
  [2]: https://open.mesosphere.com/reference/mesos-master/
  [3]: /docs/1.9/installing/custom/configuration/configuration-parameters/#scrollNav-7
  [4]: /docs/1.9/overview/architecture/#boot
- [5]: /docs/1.9/installing/custom/configuration-parameters
+ [5]: /docs/1.9/installing/custom/configuration/configuration-parameters/
  [6]: /docs/1.9/administering-clusters/sshcluster/
  [7]: /docs/1.9/gui/
 

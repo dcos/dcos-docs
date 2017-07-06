@@ -145,7 +145,10 @@ Your cluster must meet the software and hardware [requirements](/docs/1.9/instal
 
     You can use this template to get started. This template specifies 3 masters, 5 [private](/docs/1.9/overview/concepts/#private) agents, 1 [public](/docs/1.9/overview/concepts/#public-agent-node) agent, a custom proxy, and SSH configuration specified. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][6].
 
-    **Tip:** If Google DNS is not available in your country, you can replace the Google DNS servers `8.8.8.8` and `8.8.4.4` with your local DNS servers.
+    **Tips:** 
+    
+    - If Google DNS is not available in your country, you can replace the Google DNS servers `8.8.8.8` and `8.8.4.4` with your local DNS servers.
+    - If you specify `master_discovery: static`, you must also create a script to map internal IPs to public IPs on your bootstrap node (e.g., `/genconf/ip-detect-public`). This script is then referenced in `ip_detect_public_filename: <path-to-ip-script>`.
 
     ```yaml
     ---
@@ -160,6 +163,7 @@ Your cluster must meet the software and hardware [requirements](/docs/1.9/instal
     cluster_name: <cluster-name>
     exhibitor_storage_backend: static
     master_discovery: static
+    ip_detect_public_filename: <path-to-ip-script>
     master_list:
     - <master-private-ip-1>
     - <master-private-ip-2>

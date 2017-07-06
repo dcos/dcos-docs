@@ -37,6 +37,26 @@ staged_package_storage_uri: <temp-path-to-files>
 package_storage_uri: <permanent-path-to-files>
 # Enterprise DC/OS Only
 customer_key: <customer-key>
+custom_checks:
+  cluster_checks:
+    custom-check-1:
+      description: Foobar cluster service is healthy
+      cmd:
+        - echo
+        - hello
+      timeout: 1s
+  node_checks:
+    checks:
+      custom-check-2:
+        description: Foobar node service is healthy
+        cmd:
+          - echo
+          - hello
+        timeout: 1s
+        roles:
+          - agent
+    poststart:
+      - custom-check-2
 dcos_overlay_enable: `<true|false>`
 dcos_overlay_config_attempts: <num-failed-attempts>
 dcos_overlay_mtu: <mtu>
@@ -226,7 +246,7 @@ master_list:
 - <master-private-ip-3>
 resolvers:
 # You probably do not want to use these values since they point to public DNS servers.
-# Instead use values that are more specific to your particular infrastructure.
+# Instead, use values that are more specific to your particular infrastructure.
 - 8.8.4.4
 - 8.8.8.8
 ssh_port: 22
@@ -328,5 +348,60 @@ ssh_user: centos
 cosmos_config:
   staged_package_storage_uri: file:///var/lib/dcos/cosmos/staged-packages
   package_storage_uri: file:///var/lib/dcos/cosmos/packages
+```
+
+## <a name="custom-checks"></a>DC/OS cluster with one master, an Exhibitor/ZooKeeper managed internally, three private agents, Google DNS, and custom health checks defined for:
+ 
+- A user Marathon instance (`user-marathon-on-marathon`) 
+- Local mounts on masters (`master-mounts`)
+- Local mounts on agents (`agent-mounts`)
+
+```yaml
+agent_list:
+- <agent-private-ip-1>
+- <agent-private-ip-2>
+- <agent-private-ip-3>
+# Use this bootstrap_url value unless you have moved the DC/OS installer assets.
+bootstrap_url: file:///opt/dcos_install_tmp
+cluster_name: <cluster-name>
+master_discovery: static
+master_list:
+- <master-private-ip-1>
+resolvers:
+# You probably do not want to use these values since they point to public DNS servers.
+# Instead use values that are more specific to your particular infrastructure.
+- 8.8.4.4
+- 8.8.8.8
+ssh_port: 22
+ssh_user: centos
+custom_checks:
+  cluster_checks:
+    user-marathon-on-marathon:
+      description: The user Marathon-on-Marathon is healthy
+      cmd:
+        - "check_marathon"
+        - "--location"
+        - "user-marathon.marathon.mesos"
+      timeout: 5s
+  node_checks:
+    checks:
+      master-mounts:
+        description: Local mounts on masters are present
+        cmd:
+          - “check_mounts”
+          - "--role"
+          - "master"
+        roles:
+          - master
+        timeout: 5s
+      agent-mounts:
+        description: Local mounts on agents are present
+        cmd:
+          - “check_mounts”
+          - "--role"
+          - "agent"
+        roles:
+          - agent
+        timeout: 5s
 ```
 

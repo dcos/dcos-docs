@@ -50,7 +50,7 @@ Some parameters are dependent on others. These dependent parameters are ignored 
 
 | Parameter                              | Description                                                                                                                                               |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [agent_list](/docs/1.9/installing/custom/configuration/configuration-parameters/#agent_list)      | This parameter specifies a YAML nested list (`-`) of IPv4 addresses to your [private agent](/1.9/overview/concepts/#private-agent-node) host names.                  |
+| [agent_list](/docs/1.9/installing/custom/configuration/configuration-parameters/#agent_list)      | This parameter specifies a YAML nested list (`-`) of IPv4 addresses to your [private agent](/docs/1.9/overview/concepts/#private-agent-node) host names.                  |
 | [bootstrap_url](/docs/1.9/installing/custom/configuration/configuration-parameters/#bootstrap_url)                          | This required parameter specifies the URI path for the DC/OS installer to store the customized DC/OS build files.                                         |
 | [cluster_name](/docs/1.9/installing/custom/configuration/configuration-parameters/#cluster_name)                           | This parameter specifies the name of your cluster.    |
 | [customer_key](/docs/1.9/installing/custom/configuration/configuration-parameters/#customer_key)                  | (Enterprise DC/OS Only) This parameter specifies the Enterprise DC/OS customer key.   |

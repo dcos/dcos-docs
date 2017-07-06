@@ -30,4 +30,4 @@ To specify the Docker containerizer from the DC/OS CLI, add the following parame
 ```
 
 - [Follow a Docker app tutorial](/docs/1.10/deploying-services/creating-services/deploy-docker-app/).
-- [View the Mesos docs for the Docker containerizer](http://mesos.apache.org/documentation/latest/containerizer/#Docker).
+- [View the Mesos docs for the Docker containerizer](http://mesos.apache.org/documentation/latest/docker-containerizer/).

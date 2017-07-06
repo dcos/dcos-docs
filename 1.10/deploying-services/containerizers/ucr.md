@@ -16,15 +16,21 @@ The Universal Container Runtime offers the following advantages:
 
 # Provision Containers with the Universal Container Runtime from the DC/OS Web Interface
 
+## Prerequisite
+If your service [pulls Docker images from a private registry](/docs/1.10/deploying-services/private-docker-registry/), you must specify the [`cluster_docker_credentials_path` in your `config.yaml`](/docs/1.10/installing/custom/configuration/configuration-parameters/#cluster_docker_credentials) file before installing DC/OS.
+
 1. Specify the UCR from the web interface. Go to **Services**  > **Run a Service** > **Single Container** > **More Settings**. In the **Container Runtime** section, choose the **Universal Container Runtime** radio button.
 
 1. In the **Container Image** field, enter your container image.
 
 # Provision Containers with the Universal Container Runtime from the DC/OS CLI
 
-To provision containers with the UCR from the DC/OS CLI, specify the container type `MESOS` and a the appropriate object in your [Marathon application definition](/docs/1.10/deploying-services/creating-services/). Here, we specify a Docker container with the `docker` object.
+## Prerequisite
+If your service [pulls Docker images from a private registry](/docs/1.10/deploying-services/private-docker-registry/), you must specify the [`cluster_docker_credentials_path` in your `config.yaml`](/docs/1.10/installing/custom/configuration/configuration-parameters/#cluster_docker_credentials) file before installing DC/OS.
 
-The Mesos containerizer provides a `credential`, with a `principal` and an optional `secret` field to authenticate when downloading the Docker image.
+1. Specify the container type `MESOS` and a the appropriate object in your [Marathon application definition](/docs/1.10/deploying-services/creating-services/). Here, we specify a Docker container with the `docker` object.
+
+The Mesos containerizer provides a `credential` with a `principal` and an optional `secret` field to authenticate when downloading the Docker image.
 
 ```json
 {  
@@ -55,4 +61,4 @@ The Mesos containerizer provides a `credential`, with a `principal` and an optio
 - The UCR does not support the following: runtime privileges, Docker options, force pull, named ports, numbered ports, bridge networking, port mapping, private registries with container authentication.
 
 # Further Reading
-- [View the Mesos docs for the UCR](http://mesos.apache.org/documentation/latest/containerizer/#Mesos).
+- [View the Mesos docs for the UCR](http://mesos.apache.org/documentation/latest/container-image/).

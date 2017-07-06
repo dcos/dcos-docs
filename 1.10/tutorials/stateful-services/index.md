@@ -6,7 +6,7 @@ menu_order: 500
 
 A stateful service acts on persistent data. Simple, stateless services run in an empty sandbox each time they are launched. In contrast, stateful services make use of persistent volumes that reside on agents in a cluster until explicitly destroyed.
 
-<table class="table" bgcolor="#E6E6E6"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Disclaimer:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided solely on a "as is" basis and without warranty. Do not use in a production environment. This is a referential example meant to illustrate how this solution could be done with DC/OS. Before using a similar solution in your environment, you would need to adapt, validate, and test.</td> </tr> </table>
+<table class="table" bgcolor="#FAFAFA"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Important:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided without warranty of any kind. The purpose of this tutorial is to demonstrate capabilities, and may not be suited for use in a production environment. Before using a similar solution in your environment, you must adapt, validate, and test.</td> </tr> </table>
 
 These persistent volumes are mounted into a task's Mesos sandbox and are therefore continuously accessible to a service. DC/OS creates persistent volumes for each task and all resources required to run the task are dynamically reserved. That way, DC/OS ensures that a service can be relaunched and can reuse its data when needed. This is useful for databases, caches, and other data-aware services.
 

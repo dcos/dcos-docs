@@ -5,6 +5,8 @@ menu_order: 600
 
 The DC/OS configuration parameters are specified in YAML format in a config.yaml file. This file is stored on your [bootstrap node](/docs/1.10/installing/custom/system-requirements/#bootstrap-node) and is used during DC/OS installation to generate a customized DC/OS build.
 
+**Important:** If you want to modify the configuration file after installation, you must follow the [DC/OS upgrade process](/docs/1.10/installing/upgrading/). 
+
 # Format
 
 ## Key-value pairs
@@ -50,7 +52,7 @@ Some parameters are dependent on others. These dependent parameters are ignored 
 
 | Parameter                              | Description                                                                                                                                               |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [agent_list](/docs/1.10/installing/custom/configuration/configuration-parameters/#agent_list)      | This parameter specifies a YAML nested list (`-`) of IPv4 addresses to your [private agent](/1.10/overview/concepts/#private-agent-node) host names.                  |
+| [agent_list](/docs/1.10/installing/custom/configuration/configuration-parameters/#agent_list)      | This parameter specifies a YAML nested list (`-`) of IPv4 addresses to your [private agent](/docs/1.10/overview/concepts/#private-agent-node) host names.                  |
 | [bootstrap_url](/docs/1.10/installing/custom/configuration/configuration-parameters/#bootstrap_url)                          | This required parameter specifies the URI path for the DC/OS installer to store the customized DC/OS build files.                                         |
 | [cluster_name](/docs/1.10/installing/custom/configuration/configuration-parameters/#cluster_name)                           | This parameter specifies the name of your cluster.    |
 | [customer_key](/docs/1.10/installing/custom/configuration/configuration-parameters/#customer_key)                  | (Enterprise DC/OS Only) This parameter specifies the Enterprise DC/OS customer key.   |
