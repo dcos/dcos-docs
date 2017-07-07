@@ -255,7 +255,7 @@ To install your own set of packages you must build a customized local Universe D
 4.  Build `mesosphere/universe` image and compress it to the `local-universe.tar.gz` file:
 
     ```bash
-    sudo make local-universe
+    sudo make DCOS_VERSION=1.10 local-universe
     ```
 
 5.  Perform all of the steps as described in [Installing the default Universe packages][5] section, except step 27. Replace the command in step 27 with the following.

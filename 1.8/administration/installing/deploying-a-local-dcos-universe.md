@@ -17,9 +17,7 @@ You can install and run DC/OS services on a datacenter without internet access w
 
 # <a name="default"></a>Installing the default Universe packages
 
-1.  [SSH](/docs/1.8/administration/access-node/sshcluster/) to the master nodes and download the [local-universe][1] container to each of your masters.
-
-    **Tip:** The `local-universe.tar.gz` file size is 2 GB or more.
+1.  Since DC/OS 1.8 is not the latest release, you will need to build your own local Universe image. Follow [these instructions][4], skipping step 3.
 
 2.  Load the container into the local Docker instance on each of your master nodes:
 
@@ -122,7 +120,7 @@ To install your own set of packages you must build a customized local Universe D
 4.  Build `mesosphere/universe` image and compress it to the `local-universe.tar.gz` file:
 
     ```bash
-    sudo make local-universe
+    sudo make DCOS_VERSION=1.8 local-universe
     ```
 
 5.  Perform steps from 2 to 7 of [Installing the default Universe packages][5] section, except step 6. Run the following command instead:
