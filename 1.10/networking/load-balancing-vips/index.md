@@ -13,7 +13,7 @@ DC/OS provides an east-west load balancer (minuteman) that enables multi-tier mi
 
 You can use the layer 4 load balancer by assigning a [VIP](/docs/1.10/networking/load-balancing-vips/virtual-ip-addresses/) in your app definition. After you create a task, or a set of tasks with a VIP, they will automatically become available to all nodes in the cluster, including the masters.
 
-When you launch a set of tasks, DC/OS distributes them to a set of nodes in the cluster. The minuteman instance running on each of the cluster agents coordinates the load balancing decisions. The Mesos kernel consults the minuteman instance on each agent when packets are recognized with this destination address. Minuteman tracks the availability and reachability of these tasks and attempts to send requests to the right backends.
+When you launch a set of tasks, DC/OS distributes them to a set of nodes in the cluster. The Minuteman instance running on each of the cluster agents coordinates the load balancing decisions. Minuteman on each agent programs the IPVS module within the Linux kernel with entries for all the tasks associated with a given service. This allows the Linux kernel to make load-balancing decisions at near line-rate speeds. Minuteman tracks the availability and reachability of these tasks and keeps the IPVS database up-to-date with all of the healthy backends, which means the Linux kernel can select a live backend for each request that it load balances.
 
 ### Requirements
 
