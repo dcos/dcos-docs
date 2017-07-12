@@ -6,7 +6,11 @@ menu_order: 070
 DC/OS provides a number of tools out of the box ranging from basic network connectivity between containers, to more advanced network features such as load balancing and service discovery. 
 
 # IP Per Container
-Allows containers to run on any type of IP-based virtual networks, which each container having its own network namespace.
+Allows containers to run on any type of IP-based virtual networks, with each container having its own network namespace.
+
+DC/OS supports IP per container for the Universal container runtime (UCR) by using the Container network interface (CNI). DC/OS supports IP per container for the Docker container runtime by using the Container network model (CNM).
+
+DC/OS provides an out-of-the box virtual networking solution for IP per container called DC/OS overlay that works both with UCR and Docker container runtimes. For more information, see the [Containerizer documentation](/docs/1.10/deploying-services/containerizers/).
 
 # DNS-Based Service Discovery
 DC/OS includes highly available, distributed, DNS-based service discovery. The service discovery mechanism in DC/OS contains these components:
@@ -15,7 +19,7 @@ DC/OS includes highly available, distributed, DNS-based service discovery. The s
 - A distributed component called Spartan that runs on every agent. 
 
 ## Mesos DNS
-Mesos DNS is a centralized, replicated, DNS server that runs on every master. Every task started by DC/OS gets a well known DNS name. This provides a replicated, highly available DNS service on each of the masters. Every instance of Mesos DNS polls the leading Mesos master and generates a fully qualified domain name (FQDN) for every service running in DC/OS with the domain `*.mesos`.  
+Mesos DNS is a centralized, replicated, DNS server that runs on every master. Every task started by DC/OS gets a well known DNS name. This provides a replicated, highly available DNS service on each of the masters. Every instance of Mesos DNS polls the leading Mesos master and generates a fully qualified domain name (FQDN) for every service running in DC/OS with the domain `*.mesos`.  For more information, see the [Mesos DNS documentation](/docs/1.10/networking/mesos-dns/).
 
 ## DNS Forwarder (Spartan)
 Spartan acts as a DNS masquerade for Mesos DNS on each agent. The Spartan instance on each agent is configured to listen to three different local interfaces on the agent and the nameservers on the agent are set to these three interfaces. This allows containers to perform up to three retries on a DNS request. To provide a highly available DNS service, Spartan forwards each request it receives to the different Mesos DNS instances which are running on each master.

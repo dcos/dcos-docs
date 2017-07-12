@@ -5,17 +5,15 @@ menu_order: 00
 
 DC/OS provides an east-west load balancer (minuteman) that enables multi-tier microservices architectures. It acts as a TCP layer 4 load balancer, and leverages load-balancing features within the Linux kernel to achieve near line-rate throughputs and latency. The features include:
 
-- Included with DC/OS by default 
 - Distributed load balancing of applications
 - Facilitates east-west communication within the cluster
 - User specifies an FQDN address to the DC/OS service
 - Respects health checks
-- Requires maintenance of virtual IP to service mappings
 - Automatically allocates virtual IPs to service FQDN
 
 You can use the layer 4 load balancer by assigning a [VIP](/docs/1.9/networking/load-balancing-vips/virtual-ip-addresses/) in your app definition. After you create a task, or a set of tasks with a VIP, they will automatically become available to all nodes in the cluster, including the masters.
 
-When you launch a set of tasks DC/OS distributes them to all of the nodes in the cluster. All of the nodes in the cluster act as decision makers in the load balancing process. A process runs on all the agents that the kernel consults when packets are recognized with this destination address. This process keeps track of availability and reachability of these tasks to attempt to send requests to the right backends.
+When you launch a set of tasks, DC/OS distributes them to a set of nodes in the cluster. The minuteman instance running on each of the cluster agents coordinates the load balancing decisions. The Mesos kernel consults the minuteman instance on each agent when packets are recognized with this destination address. Minuteman tracks the availability and reachability of these tasks and attempts to send requests to the right backends.
 
 ### Requirements
 
@@ -39,7 +37,7 @@ Use Mesos health checks. Mesos health checks are surfaced to the load balancing 
 
 ## Troubleshooting
 
-### IP Overlay
+### DC/OS Overlay Virtual Network
 Problems can arise if the VIP address that you specified is used elsewhere in the network. Although the VIP is a 3-tuple, it is best to ensure that the IP dedicated to the VIP is only in use by the load balancing software and isn't in use at all in your network. Therefore, you should choose IPs from the RFC1918 range.
 
 ### Ports
