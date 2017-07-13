@@ -435,7 +435,9 @@ Indicates whether to enable the DC/OS proxy.
     **Important:** The specified proxies must be resolvable from the provided list of [resolvers](/docs/1.10/installing/custom/configuration/examples/#resolvers).
     *  `http_proxy: http://<user>:<pass>@<proxy_host>:<http_proxy_port>` The HTTP proxy.
     *  `https_proxy: https://<user>:<pass>@<proxy_host>:<https_proxy_port>` The HTTPS proxy.
-    *  `no_proxy: - .<(sub)domain>` A YAML nested list (-) of addresses to exclude from the proxy.
+    *  `no_proxy`: - A YAML nested list (`-`) of subdomains to exclude from forwarding to the `https_proxy`. If the address matches one of these strings, or the host is within the domain of one of these strings, transactions with that node are not proxied. For example, the `no_proxy` list can be a list of internal IP addresses and Mesos DNS entries. 
+    
+        **Important:** Wildcards charachters (`*`) are not supported. 
 
 For more information, see the [examples](/docs/1.10/installing/custom/configuration/examples/#http-proxy).
 
