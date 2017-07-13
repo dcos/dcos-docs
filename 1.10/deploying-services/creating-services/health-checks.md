@@ -1,23 +1,23 @@
 ---
-post_title: Marathon Health Checks
+post_title: Health Checks
 menu_order: 1
 ---
 
 You can define health checks for your DC/OS services. Health checks are defined on a per application basis, and are run against that application's tasks.
 
-Marathon health checks perform periodic checks on the containers distributed across a cluster to make sure they’re up and responding. If a container is down for any reason, Marathon will detect this and stop sending traffic to the container and try to restart it.
+Health checks perform periodic checks on the containers distributed across a cluster to make sure they’re up and responding. If a container is down for any reason, Marathon will detect this and stop sending traffic to the container and try to restart it.
 
-Health checks begin immediately when a task is launched. By default, health checks are run using the Marathon scheduler. Health checks with the Marathon scheduler only support the COMMAND protocol and each app is limited to a single health check.
+Health checks begin immediately when a task is launched. They are locally executed by Mesos on the agent running the corresponding task and thus test reachability from the Mesos executor. Health checks are performed as close to the task as possible, so they are are not affected by networking failures. Health checks delegated to the agents running the tasks, so the number of tasks that can be health checked can scale horizontally with the number of agents in the cluster.
 
 - The default health check leverages Mesos' knowledge of the task state `TASK_RUNNING => healthy`.
-- Marathon provides a `health` member of the task resource via the [REST API](/docs/1.10/deploying-services/marathon-api/) that you can add to your application definition.
+- Marathon provides a `health` member of the task resource via the [REST API](/docs/1.10/deploying-services/marathon-api/) that you can add to your service definition.
 
 A health check is considered passing if both of these conditions are met:
- 
+
 - The HTTP response code is between 200 and 399 inclusive
 - The response is received within the `timeoutSeconds` period. If a task fails more than `maxConsecutiveFailures` health checks consecutively, that task is killed.
 
-You can define health checks in your JSON application definition or by using the DC/OS GUI **Services** tab. 
+You can define health checks in your JSON application definition or by using the DC/OS GUI **Services** tab.
 
 You can also define custom commands to be executed for health. These can be defined in your Dockerfile, for example:
 
@@ -27,6 +27,15 @@ You can also define custom commands to be executed for health. These can be defi
   "command": { "value": “source ./myHealthCheck.sh” }
 }
 ```
+
+# Health check protocols
+
+DC/OS supports the following health check protocols:
+
+- `MESOS_HTTP`
+- `MESOS_HTTPS`
+- `MESOS_TCP`
+- `COMMAND`
 
 # Health check options
 When creating a service, you can configure JSON health checks in the DC/OS GUI or directly as JSON. This table shows the equivalent GUI fields and JSON options.
@@ -51,7 +60,7 @@ For example, here is the health check specified as JSON in an application defini
     "maxConsecutiveFailures": 0,
     "path": "/admin/healthcheck",
     "portIndex": 0,
-    "protocol": "HTTP",
+    "protocol": "MESOS_HTTP",
     "timeoutSeconds": 5
   }
 ```
