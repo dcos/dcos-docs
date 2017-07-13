@@ -76,7 +76,7 @@ You can also specify label values in the `labels` parameter of your job definiti
 Then, deploy from the DC/OS CLI:
 
 ```bash
-dcos marathon job add <myjob>.json
+dcos job add <myjob>.json
 ```
 
 # Displaying Label Information
