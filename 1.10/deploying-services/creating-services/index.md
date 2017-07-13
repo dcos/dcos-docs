@@ -51,7 +51,7 @@ Before we dive into this topic, let's have a look at an example:
 
 The example above executes the `cmd`, downloads the resource `https://example.com/app/cool-script.sh` (via Mesos), and makes it available in the service instance's Mesos sandbox. You can verify that it has been downloaded by visiting the DC/OS web interface and clicking on an instance of `basic-1`, then on the **Files** tab. You should find `cool-script.sh` there.
 
-**Note:** As of Mesos v0.22 and above, the fetcher code does not make downloaded files executable by default. In the example above, `cmd` first makes the file executable.
+**Note:** The fetcher does not make dowloaded files executable by default. In the example above, `cmd` first makes the file executable.
 
 As already mentioned above, Marathon also [knows how to handle](https://github.com/mesosphere/marathon/blob/master/src/main/scala/mesosphere/mesos/TaskBuilder.scala) application resources that reside in archives. Currently, Marathon will (via Mesos and before executing the `cmd`) first attempt to unpack/extract resources with the following file extensions:
 
