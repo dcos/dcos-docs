@@ -3,7 +3,6 @@ post_title: DC/OS Ports
 menu_order: 4
 post_excerpt: ""
 feature_maturity: ""
-enterprise: 'yes'
 ---
 
 This topic lists the ports that are required to launch DC/OS. Additional ports may be required to launch the individual DC/OS services.

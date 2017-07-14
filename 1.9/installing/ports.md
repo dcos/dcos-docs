@@ -3,7 +3,6 @@ post_title: DC/OS Ports
 menu_order: 5
 post_excerpt: ""
 feature_maturity: ""
-enterprise: 'yes'
 ---
 
 [DC/OS components](/docs/1.9/overview/architecture/components/) listen on multiple ports on each node. These ports must be available for installation to succeed.
