@@ -41,10 +41,10 @@ DC/OS provides a way to view and operate a large number of individual machine-le
 </div>
 
 <div data-role="collapsible">
-<h2 id="apache-zookeeper">Apache Zookeeper</h2>
+<h2 id="apache-zookeeper">Apache ZooKeeper</h2>
 <div>
-<p><strong>Description:</strong> Zookeeper provides consistent, highly available, distributed key-value storage for configuration, synchronization, name registration, and cluster state storage.</p>
-<p><strong>System Service(s):</strong> N/A - Zookeeper is supervised by Exhibitor.</p>
+<p><strong>Description:</strong> ZooKeeper provides consistent, highly available, distributed key-value storage for configuration, synchronization, name registration, and cluster state storage.</p>
+<p><strong>System Service(s):</strong> N/A - ZooKeeper is supervised by Exhibitor.</p>
 <p>
   <strong>See Also:</strong>
   <ul>
@@ -58,7 +58,7 @@ DC/OS provides a way to view and operate a large number of individual machine-le
 <div data-role="collapsible">
 <h2 id="exhibitor">Exhibitor</h2>
 <div>
-<p><strong>Description:</strong> Exhibitor supervises Zookeeper and provides a management web interface.</p>
+<p><strong>Description:</strong> Exhibitor supervises ZooKeeper and provides a management web interface.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>

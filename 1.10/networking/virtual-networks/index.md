@@ -5,7 +5,7 @@ feature_maturity: preview
 menu_order: 04
 ---
 
-The DC/OS virtual network feature is an out-of-the-box virtual networking solution that provides an ip-per-container for Mesos and Docker containers alike. The DC/OS virtual network uses CNI (Container Network Interface) for the [Mesos Containerizer](http://mesos.apache.org/documentation/latest/mesos-containerizer/) and Docker libnetwork for the [Docker Containerizer](http://mesos.apache.org/documentation/latest/docker-containerizer/).
+The DC/OS virtual network feature is an out-of-the-box virtual networking solution that provides an IP-per-container for Mesos and Docker containers alike. The DC/OS virtual network uses CNI (Container Network Interface) for the [Mesos Containerizer](http://mesos.apache.org/documentation/latest/mesos-containerizer/) and Docker libnetwork for the [Docker Containerizer](http://mesos.apache.org/documentation/latest/docker-containerizer/).
 
 DC/OS virtual networks allow containers launched through the Mesos Containerizer or Docker Containerizer to co-exist on the same IP network, allocating each container its own unique IP address. DC/OS virtual networks offer the following advantages:
 
