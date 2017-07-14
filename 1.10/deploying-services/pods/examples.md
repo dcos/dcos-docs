@@ -8,38 +8,34 @@ This topic provides usage examples for pods.
 
 # Annotated simple pod definition
 
-This pod, named `simple-pod` has a single container, `simpletask1`. The container pulls down an image (`python:3.5.2-alpine`) and runs a command.
+This pod, named `simple-pod` has a single container, `simpletask1`. The container pulls down an image (`python:3.5.2-alpine`) and runs a command. <!-- validated by suzanne 6/23/17 -->
 
-```
+```json
 {
-  "id": "/simple-pod",
-  "labels": {},
-  "environment": {},
-  "containers": [
-    {
-      "name": "simpletask1",
-      "exec": {
-        "command": {
-          "shell": "env && sleep 10000"
-        }
-      },
-      "resources": {
-        "cpus": 0.1,
-        "mem": 32
-      },
-      "image": {
-        "kind": "DOCKER",
-        "id": "python:3.5.2-alpine"
-      },
-      "artifacts": [],
-      "labels": {}
-    }
-  ],
-  "networks": [
-    {
-      "mode": "host"
-    }
-  ]
+   "id":"/simple-pod",
+   "containers":[
+      {
+         "name":"simpletask1",
+         "exec":{
+            "command":{
+               "shell":"env && sleep 10000"
+            }
+         },
+         "resources":{
+            "cpus":0.1,
+            "mem":32
+         },
+         "image":{
+            "kind":"DOCKER",
+            "id":"python:3.5.2-alpine"
+         }
+      }
+   ],
+   "networks":[
+      {
+         "mode":"host"
+      }
+   ]
 }
 ```
 
@@ -84,7 +80,7 @@ This pod, named `simple-pod` has a single container, `simpletask1`. The containe
 | `containers.volumeMounts.name`               | string  | Name of the shared volume (must be a valid volume defined at the pod layer).                               |
 | `containers.volumeMounts.mountPath`          | string  | Container path to mount volume.                                                                            |
 | `containers.endpoints`              | array   | Array of objects.                                                                                          |
-| `ontainers.endpoints.name`               | string  | Unique name of port.                                                                                       |
+| `containers.endpoints.name`               | string  | Unique name of port.                                                                                       |
 | `containers.endpoints.containerPort`      | number  | The container point the container task is listening on. Required if network mode is `container`.           |
 | `containers.endpoints.hostPort`           | number  | Mapped port on host. If set to `0`, Marathon dynamically allocates the port.                                 |
 | `containers.endpoints.protocol`           | array   | Protocol of port (`tcp` or `http`).                                                                        |
@@ -96,212 +92,224 @@ The example below shows a pod, `test-pod`, with three containers, `healthtask1`,
 
 ```
 {
-    "id": "/test-pod",
-    "labels": {
-      "pod_label": "pod"
-    },
-    "environment": {
-      "POD_ENV": "pod"
-    },
-    "containers": [
+   "id":"/test-pod",
+   "labels":{
+      "pod_label":"pod"
+   },
+   "environment":{
+      "POD_ENV":"pod"
+   },
+   "containers":[
       {
-        "name": "healthtask1",
-        "exec": {
-          "command": {
-            "shell": "./read-write-server.py 8080 mount1/test-file.txt"
-          }
-        },
-        "resources": {
-          "cpus": 0.1,
-          "mem": 32,
-          "disk": 32,
-          "gpus": 0
-        },
-        "endpoints": [
-          {
-            "name": "httpendpoint",
-            "containerPort": 8080,
-            "hostPort": 0,
-            "protocol": [
-              "tcp"
-            ],
-            "labels": {
-              "ep1_label": "ep1"          
+         "name":"healthtask1",
+         "exec":{
+            "command":{
+               "shell":"./read-write-server.py 8080 mount1/test-file.txt"
             }
-          }
-        ],
-        "image": {
-          "kind": "DOCKER",
-          "id": "python:3.5.2-alpine"
-        },
-        "environment": {
-          "C1_ENV": "c1"       
-        },
-        "healthCheck": {
-          "http": {
-            "endpoint": "httpendpoint",
-            "path": "/ping",
-            "scheme": "HTTP"
-          },
-          "gracePeriodSeconds": 30,
-          "intervalSeconds": 5,
-          "maxConsecutiveFailures": 3,
-          "timeoutSeconds": 3,
-          "delaySeconds": 2
-        },
-        "volumeMounts": [
-          {
-            "name": "sharedvolume",
-            "mountPath": "mount1"
-          }
-        ],
-        "artifacts": [
-          {
-            "uri": "https://s3-us-west-2.amazonaws.com/mesos-soak-cluster/read-write-server.py",
-            "extract": false,
-            "executable": true,
-            "cache": true,
-            "destPath": "read-write-server.py"
-          }
-        ],
-        "labels": {
-          "c1_label": "c1"
-        }
-      },
-      {
-        "name": "healthtask2",
-        "exec": {
-          "command": {
-            "shell": "./read-write-server.py 8081 mount2/test-file.txt"
-          }
-        },
-        "resources": {
-          "cpus": 0.1,
-          "mem": 32,
-          "disk": 32,
-          "gpus": 0
-        },
-        "endpoints": [
-          {
-            "name": "httpendpoint2",
-            "containerPort": 8081,
-            "hostPort": 0,
-            "protocol": [
-              "tcp"
-            ],
-            "labels": {
-              "ep2_label": "ep2"
+         },
+         "resources":{
+            "cpus":0.1,
+            "mem":32,
+            "disk":32,
+            "gpus":0
+         },
+         "endpoints":[
+            {
+               "name":"httpendpoint",
+               "containerPort":8080,
+               "hostPort":0,
+               "protocol":[
+                  "tcp"
+               ],
+               "labels":{
+                  "ep1_label":"ep1"
+               }
             }
-          }
-        ],
-        "image": {
-          "kind": "DOCKER",
-          "id": "python:3.5.2-alpine"
-        },
-        "environment": {
-          "C2_ENV": "c2"
-        },
-        "healthCheck": {
-          "http": {
-            "endpoint": "httpendpoint2",
-            "path": "/ping",
-            "scheme": "HTTP"
-          },
-          "gracePeriodSeconds": 30,
-          "intervalSeconds": 5,
-          "maxConsecutiveFailures": 3,
-          "timeoutSeconds": 3,
-          "delaySeconds": 2
-        },
-        "volumeMounts": [
-          {
-            "name": "sharedvolume",
-            "mountPath": "mount2"
-          }
-        ],
-        "artifacts": [
-          {
-            "uri": "https://s3-us-west-2.amazonaws.com/mesos-soak-cluster/read-write-server.py",
-            "extract": false,
-            "executable": true,
-            "cache": true,
-            "destPath": "read-write-server.py"
-          }
-        ],
-        "labels": {
-          "c2_label": "c2"
-        }
+         ],
+         "image":{
+            "kind":"DOCKER",
+            "id":"python:3.5.2-alpine"
+         },
+         "environment":{
+            "C1_ENV":"c1"
+         },
+         "healthCheck":{
+            "http":{
+               "endpoint":"httpendpoint",
+               "path":"/ping",
+               "scheme":"HTTP"
+            },
+            "gracePeriodSeconds":30,
+            "intervalSeconds":5,
+            "maxConsecutiveFailures":3,
+            "timeoutSeconds":3,
+            "delaySeconds":2
+         },
+         "volumeMounts":[
+            {
+               "name":"sharedvolume",
+               "mountPath":"mount1"
+            }
+         ],
+         "artifacts":[
+            {
+               "uri":"https://s3-us-west-2.amazonaws.com/mesos-soak-cluster/read-write-server.py",
+               "extract":false,
+               "executable":true,
+               "cache":true,
+               "destPath":"read-write-server.py"
+            }
+         ],
+         "labels":{
+            "c1_label":"c1"
+         }
       },
       {
-        "name": "clienttask",
-        "exec": {
-          "command": {
-            "shell": "while true; do sleep 5 && curl -X GET localhost:8080/write && curl -X GET localhost:8081/read; done"
-          }
-        },
-        "resources": {
-          "cpus": 0.1,
-          "mem": 32,
-          "disk": 32,
-          "gpus": 0
-        },
-        "endpoints": [],
-        "environment": {
-          "C3_ENV": "c3"
-        },
-        "volumeMounts": [],
-        "artifacts": [],
-        "labels": {
-          "c3_label": "c3"
-        }
-      }
-    ],
-    "secrets": {},
-    "volumes": [
+         "name":"healthtask2",
+         "exec":{
+            "command":{
+               "shell":"./read-write-server.py 8081 mount2/test-file.txt"
+            }
+         },
+         "resources":{
+            "cpus":0.1,
+            "mem":32,
+            "disk":32,
+            "gpus":0
+         },
+         "endpoints":[
+            {
+               "name":"httpendpoint2",
+               "containerPort":8081,
+               "hostPort":0,
+               "protocol":[
+                  "tcp"
+               ],
+               "labels":{
+                  "ep2_label":"ep2"
+               }
+            }
+         ],
+         "image":{
+            "kind":"DOCKER",
+            "id":"python:3.5.2-alpine"
+         },
+         "environment":{
+            "C2_ENV":"c2"
+         },
+         "healthCheck":{
+            "http":{
+               "endpoint":"httpendpoint2",
+               "path":"/ping",
+               "scheme":"HTTP"
+            },
+            "gracePeriodSeconds":30,
+            "intervalSeconds":5,
+            "maxConsecutiveFailures":3,
+            "timeoutSeconds":3,
+            "delaySeconds":2
+         },
+         "volumeMounts":[
+            {
+               "name":"sharedvolume",
+               "mountPath":"mount2"
+            }
+         ],
+         "artifacts":[
+            {
+               "uri":"https://s3-us-west-2.amazonaws.com/mesos-soak-cluster/read-write-server.py",
+               "extract":false,
+               "executable":true,
+               "cache":true,
+               "destPath":"read-write-server.py"
+            }
+         ],
+         "labels":{
+            "c2_label":"c2"
+         }
+      },
       {
-        "name": "sharedvolume"
+         "name":"clienttask",
+         "exec":{
+            "command":{
+               "shell":"while true; do sleep 5 && curl -X GET localhost:8080/write && curl -X GET localhost:8081/read; done"
+            }
+         },
+         "resources":{
+            "cpus":0.1,
+            "mem":32,
+            "disk":32,
+            "gpus":0
+         },
+         "endpoints":[
+
+         ],
+         "environment":{
+            "C3_ENV":"c3"
+         },
+         "volumeMounts":[
+
+         ],
+         "artifacts":[
+
+         ],
+         "labels":{
+            "c3_label":"c3"
+         }
       }
-    ],
-    "networks": [
+   ],
+   "secrets":{
+
+   },
+   "volumes":[
       {
-        "name": "dcos",
-        "mode": "container",
-        "labels": {
-          "net_label": "net"
-        }
+         "name":"sharedvolume"
       }
-    ],
-    "scaling": {
-      "kind": "fixed",
-      "instances": 1,
-      "maxInstances": null
-    },
-    "scheduling": {
-      "backoff": {
-        "backoff": 1,
-        "backoffFactor": 1.15,
-        "maxLaunchDelay": 3600
-      },
-      "upgrade": {
-        "minimumHealthCapacity": 1,
-        "maximumOverCapacity": 1
-      },
-      "placement": {
-        "constraints": [],
-        "acceptedResourceRoles": []
-      },
-      "killSelection": "YOUNGEST_FIRST",
-      "unreachableStrategy": {
-        "inactiveAfterSeconds": 900,
-        "expungeAfterSeconds": 604800
+   ],
+   "networks":[
+      {
+         "name":"dcos",
+         "mode":"container",
+         "labels":{
+            "net_label":"net"
+         }
       }
-    },
-    "executorResources": {
-      "cpus": 0.1,
-      "mem": 32,
-      "disk": 10
-    }
-  }
+   ],
+   "scaling":{
+      "kind":"fixed",
+      "instances":1,
+      "maxInstances":null
+   },
+   "scheduling":{
+      "backoff":{
+         "backoff":1,
+         "backoffFactor":1.15,
+         "maxLaunchDelay":3600
+      },
+      "upgrade":{
+         "minimumHealthCapacity":1,
+         "maximumOverCapacity":1
+      },
+      "placement":{
+         "constraints":[
+
+         ],
+         "acceptedResourceRoles":[
+
+         ]
+      },
+      "killSelection":"YOUNGEST_FIRST",
+      "unreachableStrategy":{
+         "inactiveAfterSeconds":900,
+         "expungeAfterSeconds":604800
+      }
+   },
+   "executorResources":{
+      "cpus":0.1,
+      "mem":32,
+      "disk":10
+   }
+}
 ```
 
 ## Additional pod fields
@@ -355,124 +363,98 @@ The example below shows a pod, `test-pod`, with three containers, `healthtask1`,
 
 # A pod with multiple containers
 
-The following pod definition specifies a pod with 3 containers. <!-- Validated by Joel 1/3/17 -->
+The following pod definition specifies a pod with 3 containers. <!-- Validated by suzanne 6-23-17 -->
 
 ```json
 {
-  "id": "/pod-with-multiple-containers",
-  "labels": {},
-  "version": "2017-01-03T18:21:19.31Z",
-  "environment": {},
-  "containers": [
-    {
-      "name": "sleep1",
-      "exec": {
-        "command": {
-          "shell": "sleep 1000"
-        }
+   "id":"/pod-with-multiple-containers",
+   "version":"2017-01-03T18:21:19.31Z",
+   "containers":[
+      {
+         "name":"sleep1",
+         "exec":{
+            "command":{
+               "shell":"sleep 1000"
+            }
+         },
+         "resources":{
+            "cpus":0.01,
+            "mem":32,
+            "disk":0,
+            "gpus":0
+         }
       },
-      "resources": {
-        "cpus": 0.01,
-        "mem": 32,
-        "disk": 0,
-        "gpus": 0
+      {
+         "name":"sleep2",
+         "exec":{
+            "command":{
+               "shell":"sleep 1000"
+            }
+         },
+         "resources":{
+            "cpus":0.01,
+            "mem":32,
+            "disk":0,
+            "gpus":0
+         }
       },
-      "endpoints": [],
-      "environment": {},
-      "volumeMounts": [],
-      "artifacts": [],
-      "labels": {}
-    },
-    {
-      "name": "sleep2",
-      "exec": {
-        "command": {
-          "shell": "sleep 1000"
-        }
+      {
+         "name":"sleep3",
+         "exec":{
+            "command":{
+               "shell":"sleep 1000"
+            }
+         },
+         "resources":{
+            "cpus":0.01,
+            "mem":32,
+            "disk":0,
+            "gpus":0
+         }
+      }
+   ],
+   "networks":[
+      {
+         "mode":"host"
+      }
+   ],
+   "scaling":{
+      "kind":"fixed",
+      "instances":10,
+      "maxInstances":null
+   },
+   "scheduling":{
+      "backoff":{
+         "backoff":1,
+         "backoffFactor":1.15,
+         "maxLaunchDelay":3600
       },
-      "resources": {
-        "cpus": 0.01,
-        "mem": 32,
-        "disk": 0,
-        "gpus": 0
+      "upgrade":{
+         "minimumHealthCapacity":1,
+         "maximumOverCapacity":1
       },
-      "endpoints": [],
-      "environment": {},
-      "volumeMounts": [],
-      "artifacts": [],
-      "labels": {}
-    },
-    {
-      "name": "sleep3",
-      "exec": {
-        "command": {
-          "shell": "sleep 1000"
-        }
-      },
-      "resources": {
-        "cpus": 0.01,
-        "mem": 32,
-        "disk": 0,
-        "gpus": 0
-      },
-      "endpoints": [],
-      "environment": {},
-      "volumeMounts": [],
-      "artifacts": [],
-      "labels": {}
-    }
-  ],
-  "secrets": {},
-  "volumes": [],
-  "networks": [
-    {
-      "mode": "host",
-      "labels": {}
-    }
-  ],
-  "scaling": {
-    "kind": "fixed",
-    "instances": 10,
-    "maxInstances": null
-  },
-  "scheduling": {
-    "backoff": {
-      "backoff": 1,
-      "backoffFactor": 1.15,
-      "maxLaunchDelay": 3600
-    },
-    "upgrade": {
-      "minimumHealthCapacity": 1,
-      "maximumOverCapacity": 1
-    },
-    "placement": {
-      "constraints": [],
-      "acceptedResourceRoles": []
-    },
-    "killSelection": "Youngest_First",
-    "unreachableStrategy": {
-      "inactiveAfterSeconds": 900,
-      "expungeAfterSeconds": 604800
-    }
-  },
-  "executorResources": {
-    "cpus": 0.1,
-    "mem": 32,
-    "disk": 10
-  }
+      "killSelection":"Youngest_First",
+      "unreachableStrategy":{
+         "inactiveAfterSeconds":900,
+         "expungeAfterSeconds":604800
+      }
+   },
+   "executorResources":{
+      "cpus":0.1,
+      "mem":32,
+      "disk":10
+   }
 }
 ```
 
 # A Pod that Uses Ephemeral Volumes
 
-The following pod definition specifies an ephemeral volume called `v1`. <!-- Validated by Joel 1/3/17 -->
+The following pod definition specifies an ephemeral volume called `v1`. <!-- Validated by suzanne 6-23-17 -->
 
 ```json
 {
   "id": "/with-ephemeral-vol",
-  "labels": {},
   "version": "2017-01-03T17:36:39.389Z",
-  "environment": {},
   "containers": [
     {
       "name": "ct1",
@@ -487,16 +469,12 @@ The following pod definition specifies an ephemeral volume called `v1`. <!-- Val
         "disk": 0,
         "gpus": 0
       },
-      "endpoints": [],
-      "environment": {},
       "volumeMounts": [
         {
           "name": "v1",
           "mountPath": "jdef-v1"
         }
-      ],
-      "artifacts": [],
-      "labels": {}
+      ]
     },
     {
       "name": "ct2",
@@ -511,19 +489,14 @@ The following pod definition specifies an ephemeral volume called `v1`. <!-- Val
         "disk": 0,
         "gpus": 0
       },
-      "endpoints": [],
-      "environment": {},
       "volumeMounts": [
         {
           "name": "v1",
           "mountPath": "etc"
         }
-      ],
-      "artifacts": [],
-      "labels": {}
+      ]
     }
   ],
-  "secrets": {},
   "volumes": [
     {
       "name": "v1"
@@ -531,8 +504,7 @@ The following pod definition specifies an ephemeral volume called `v1`. <!-- Val
   ],
   "networks": [
     {
-      "mode": "host",
-      "labels": {}
+      "mode": "host"
     }
   ],
   "scaling": {
@@ -549,10 +521,6 @@ The following pod definition specifies an ephemeral volume called `v1`. <!-- Val
     "upgrade": {
       "minimumHealthCapacity": 1,
       "maximumOverCapacity": 1
-    },
-    "placement": {
-      "constraints": [],
-      "acceptedResourceRoles": []
     },
     "killSelection": "Youngest_First",
     "unreachableStrategy": {
@@ -570,156 +538,118 @@ The following pod definition specifies an ephemeral volume called `v1`. <!-- Val
 
 ## IP-per-Pod Networking
 
-The following pod definition specifies a virtual (user) network named `dcos`. <!-- Validated by Joel 1/3/17 -->
+The following pod definition specifies a virtual (user) network named `dcos`. The `networks:mode:container` field creates the virtual network. The `name` field is optional. If you have installed DC/OS using [our AWS templates](/docs/1.10/installing/cloud/aws/), the default virtual network name is `dcos`. <!-- Validated by suzanne 6-23-17 -->
 
 ```json
 {
-  "id": "/pod-with-virtual-network",
-  "labels": {},
-  "version": "2017-01-03T18:17:11.237Z",
-  "environment": {},
-  "containers": [
-    {
-      "name": "sleep1",
-      "exec": {
-        "command": {
-          "shell": "sleep 1000"
-        }
-      },
-      "resources": {
-        "cpus": 0.1,
-        "mem": 32,
-        "disk": 0,
-        "gpus": 0
-      },
-      "endpoints": [],
-      "environment": {},
-      "volumeMounts": [],
-      "artifacts": [],
-      "labels": {}
-    }
-  ],
-  "secrets": {},
-  "volumes": [],
-  "networks": [
-    {
-      "name": "dcos",
-      "mode": "container",
-      "labels": {}
-    }
-  ],
-  "scaling": {
-    "kind": "fixed",
-    "instances": 1,
-    "maxInstances": null
-  },
-  "scheduling": {
-    "backoff": {
-      "backoff": 1,
-      "backoffFactor": 1.15,
-      "maxLaunchDelay": 3600
-    },
-    "upgrade": {
-      "minimumHealthCapacity": 1,
-      "maximumOverCapacity": 1
-    },
-    "placement": {
-      "constraints": [],
-      "acceptedResourceRoles": []
-    },
-    "killSelection": "Youngest_First",
-    "unreachableStrategy": {
-      "inactiveAfterSeconds": 900,
-      "expungeAfterSeconds": 604800
-    }
-  },
-  "executorResources": {
-    "cpus": 0.1,
-    "mem": 32,
-    "disk": 10
-  }
+   "id":"/pod-with-virtual-network",
+   "scaling":{
+      "kind":"fixed",
+      "instances":1
+   },
+   "containers":[
+      {
+         "name":"sleep1",
+         "exec":{
+            "command":{
+               "shell":"sleep 1000"
+            }
+         },
+         "resources":{
+            "cpus":0.1,
+            "mem":32
+         }
+      }
+   ],
+   "networks":[
+      {
+         "mode":"container",
+         "name":"dcos"
+      }
+   ]
 }
 ```
 
-This pod declares a “web” endpoint that listens on port 80. <!-- Validated by Joel 1/3/17 -->
+This pod declares a “web” endpoint that listens on port 80. <!-- Validated by suzanne 6-23-17 -->
 
 ```json
 {
-  "id": "/pod-with-endpoint",
-  "labels": {},
-  "version": "2017-01-03T18:18:45.632Z",
-  "environment": {},
-  "containers": [
-    {
-      "name": "sleep1",
-      "exec": {
-        "command": {
-          "shell": "sleep 1000"
-        }
-      },
-      "resources": {
-        "cpus": 0.1,
-        "mem": 32,
-        "disk": 0,
-        "gpus": 0
-      },
-      "endpoints": [
-        {
-          "name": "web",
-          "containerPort": 80,
-          "protocol": [
-            "http"
-          ],
-          "labels": {}
-        }
-      ],
-      "environment": {},
-      "volumeMounts": [],
-      "artifacts": [],
-      "labels": {}
-    }
-  ],
-  "secrets": {},
-  "volumes": [],
-  "networks": [
-    {
-      "name": "dcos",
-      "mode": "container",
-      "labels": {}
-    }
-  ],
-  "scaling": {
-    "kind": "fixed",
-    "instances": 1,
-    "maxInstances": null
-  },
-  "scheduling": {
-    "backoff": {
-      "backoff": 1,
-      "backoffFactor": 1.15,
-      "maxLaunchDelay": 3600
-    },
-    "upgrade": {
-      "minimumHealthCapacity": 1,
-      "maximumOverCapacity": 1
-    },
-    "placement": {
-      "constraints": [],
-      "acceptedResourceRoles": []
-    },
-    "killSelection": "Youngest_First",
-    "unreachableStrategy": {
-      "inactiveAfterSeconds": 900,
-      "expungeAfterSeconds": 604800
-    }
-  },
-  "executorResources": {
-    "cpus": 0.1,
-    "mem": 32,
-    "disk": 10
-  }
+   "id":"/pod-with-endpoint",
+   "containers":[
+      {
+         "name":"simple-docker",
+         "resources":{
+            "cpus":1,
+            "mem":128,
+            "disk":0,
+            "gpus":0
+         },
+         "image":{
+            "kind":"DOCKER",
+            "id":"nginx"
+         },
+         "endpoints":[
+            {
+               "name":"web",
+               "containerPort":80,
+               "protocol":[
+                  "http"
+               ]
+            }
+         ]
+      }
+   ],
+   "networks":[
+      {
+         "mode":"container"
+      }
+   ]
 }
 ```
+
+This pod adds a healthcheck that references the `web` endpoint.  Mesos will execute an HTTP request against `<container_ip>:80`. The health check will pass if Mesos receives an HTTP 200 response.
+<!-- validated by suzanne 6-23-17 -->
+```json
+{
+   "id":"/pod-with-healthcheck",
+   "containers":[
+      {
+         "name":"simple-docker",
+         "resources":{
+            "cpus":1,
+            "mem":128,
+            "disk":0,
+            "gpus":0
+         },
+         "image":{
+            "kind":"DOCKER",
+            "id":"nginx"
+         },
+         "endpoints":[
+            {
+               "name":"web",
+               "containerPort":80,
+               "protocol":[
+                  "http"
+               ]
+            }
+         ],
+         "healthCheck":{
+            "http":{
+               "endpoint":"web",
+               "path":"/"
+            }
+         }
+      }
+   ],
+   "networks":[
+      {
+         "mode":"container"
+      }
+   ]
+}
+```
+
 
 # Complete Pod
 The following pod definition can serve as a reference to create more complicated pods.

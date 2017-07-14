@@ -45,7 +45,7 @@ dcos marathon pod show <pod-id>
 You can use the `show` command to read data about the pod programmatically.
 
 ## Update Pod
-To update a pod, first modify the JSON definition for the pod, then run the following command: 
+To update a pod, first modify the JSON definition for the pod, then run the following command:
 
 ```bash
 dcos marathon pod update <pod-id> < <new-pod-definition>
@@ -53,7 +53,7 @@ dcos marathon pod update <pod-id> < <new-pod-definition>
 
 If the pod is currently deploying, you will not be able to update the pod. To update the pod anyway, run the command with the `--force` flag.
 
-# Using the REST API 
+# Using the REST API
 
 ## Create
 

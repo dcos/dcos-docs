@@ -21,7 +21,6 @@ auth_cookie_secure_flag: `<true|false>`
 bootstrap_url: <path-to-installer>
 # Enterprise DC/OS Only
 bouncer_expiration_auth_token_days: `<time>`
-check_time: '<true|false>'
 cluster_docker_credentials:
   auths:
     '<path-to-credentials>':

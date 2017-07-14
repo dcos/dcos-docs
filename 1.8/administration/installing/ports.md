@@ -56,7 +56,7 @@ This topic lists the ports that are required to launch DC/OS. Additional ports m
 | 9090 | DC/OS Jobs (Metronome) | `dcos-metronome.service`|
 |  9990 | Package service (`dcos-cosmos.service`) |  
 |  8888 | DC/OS Certificate Authority (`dcos-ca.service`) (Enterprise DC/OS Only) | <!-- Enterprise -->   
-|  15055 | History Service (`dcos-history-service.service`) |  
+|  15055 | History Service (`dcos-history-service.service`) | 
 | 15101 | Marathon libprocess | `dcos-marathon.service` |
 | 15201 | DC/OS Jobs (Metronome) libprocess | `dcos-metronome.service`|
 |  62500 | Network Metrics Aggregator (`dcos-networking_api.service`) (Enterprise DC/OS Only) | <!-- Enterprise -->
