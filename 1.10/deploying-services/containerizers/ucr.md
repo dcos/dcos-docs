@@ -5,7 +5,7 @@ feature_maturity: preview
 menu_order: 10
 ---
 
-The [Universal Container Runtime](http://mesos.apache.org/documentation/latest/container-image)(UCR) extends the Mesos containerizer to support provisioning [Docker](https://docker.com/) container images ([AppC](https://github.com/appc/spec) coming soon). This means that you can use both the Mesos containerizer and other container image types in DC/OS. You can still use the Docker container runtime directly with DC/OS, but the Universal Container Runtime supports running Docker images without depending on the Docker Engine, which allows for better integration with Mesos.
+The [Universal Container Runtime](http://mesos.apache.org/documentation/latest/container-image) (UCR) extends the Mesos containerizer to support provisioning [Docker](https://docker.com/) container images ([AppC](https://github.com/appc/spec) coming soon). This means that you can use both the Mesos containerizer and other container image types in DC/OS. You can still use the Docker container runtime directly with DC/OS, but the Universal Container Runtime supports running Docker images without depending on the Docker Engine, which allows for better integration with Mesos.
 
 The Universal Container Runtime offers the following advantages:
 
@@ -30,20 +30,24 @@ If your service [pulls Docker images from a private registry](/docs/1.10/deployi
 
 1. Specify the container type `MESOS` and a the appropriate object in your [Marathon application definition](/docs/1.10/deploying-services/creating-services/). Here, we specify a Docker container with the `docker` object.
 
-The Mesos containerizer provides a `credential` with a `principal` and an optional `secret` field to authenticate when downloading the Docker image.
+The UCR provides an optional `pullConfig` parameter to enable you to [authenticate to a private Docker registry](/docs/1.10/deploying-services/private-docker-registry/).
 
 ```json
 {  
    "id":"mesos-docker",
    "container":{  
-      "docker":{  
-         "image":"mesosphere/inky",
-         "credential":{  
-            "principal":"<my-principal>",
-            "secret":"<my-secret>"
-         }
+      "docker": {
+          "image": "mesosphere/inky",
+          "pullConfig": {
+            "secret": "pullConfigSecret"
+          }
       },
       "type":"MESOS"
+   },
+   "secrets": {
+        "pullConfigSecret": {
+          "source": "/mesos-docker/pullConfig"
+        }
    },
    "args":[  
       "<my-arg>"

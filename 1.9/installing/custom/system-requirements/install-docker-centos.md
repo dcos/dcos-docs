@@ -20,14 +20,6 @@ In addition to the general [Docker requirements and recommendations for DC/OS][1
   mkfs -t xfs -n ftype=1 /dev/sdc1
   ```
 
-* If you are using Docker 1.12 or Docker 1.13, you must add `MountFlags=private` in `/etc/systemd/system/docker.service.d/execstart.conf` and then restart the Docker daemon with this command:
-
-```bash
-systemctl daemon-reload
-systemctl restart docker
-```
-
-
 # Instructions
 
 The following instructions demonstrate how to use Docker with OverlayFS on CentOS 7.

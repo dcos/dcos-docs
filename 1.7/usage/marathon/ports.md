@@ -4,7 +4,7 @@ nav_title: Ports
 menu_order: 10
 ---
 
-Port configuration for applications in Marathon can be confusing and there is [an outstanding issue](https://github.com/mesosphere/marathon/issues/670) to redesign the ports API. This page attempts to explain more clearly how they work.
+
 
 You can use [virtual addresses (VIPs)](/docs/1.7/usage/service-discovery/virtual-ip-addresses/) to make ports management easier. VIPs simplify inter-app communication and implement a reliable service-oriented architecture. VIPs map traffic from a single virtual address to multiple IP addresses and ports.
 

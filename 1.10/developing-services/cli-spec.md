@@ -8,7 +8,7 @@ enterprise: 'yes'
 
 This document is intended for a developer creating new DC/OS CLI commands.
 
-See also the [DC/OS Service Specification][1].
+See also the [Universe Getting Started][1].
 
 ## The DC/OS CLI
 You can [install](/docs/1.10/cli/install/) the DC/OS Command Line Interface (CLI) locally on your machine. The DC/OS CLI communicates with the DC/OS cluster, running either on-premise or with a cloud provider.
@@ -229,7 +229,7 @@ The same [packaging format and repository][11] is used for both DC/OS Services a
 
 
 
-[1]: /docs/1.10/developing-services/service-requirements-spec/
+[1]: https://github.com/mesosphere/universe/blob/version-3.x/docs/tutorial/GetStarted.md
 [2]: https://github.com/mesosphere/spark-build 
 [3]: https://github.com/mesosphere/dcos-helloworld
 [4]: http://www.pyinstaller.org/

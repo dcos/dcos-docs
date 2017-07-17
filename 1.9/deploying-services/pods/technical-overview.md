@@ -17,7 +17,7 @@ You configure a pod via a pod definition, which is similar to a Marathon applica
 # Networking
 Marathon pods only support the [DC/OS Universal container runtime](/docs/1.9/deploying-services/containerizers/), which supports multiple image formats, including Docker.
 
-The Universal container runtime simplifies networking by allowing the containers of each pod instance to share a network namespace and communicate over localhost. If you specify a container network without a name in a pod definition, it will be assigned to the default network.
+The Universal container runtime simplifies networking by allowing the containers of each pod instance to share a network namespace and communicate over a VLAN or private network. If you specify a container network without a name in a pod definition, it will be assigned to the default network. If you have installed DC/OS using [our AWS templates](/docs/1.9/installing/cloud/aws/), the default network is `dcos`.
 
 If other applications need to communicate with your pod, specify an endpoint in your pod definition. Other applications will communicate with your pod by addressing those endpoints. See [the Examples section](/docs/1.9/deploying-services/pods/examples/) for more information.
 
@@ -151,6 +151,7 @@ The following JSON specifies a Docker image for a pod:
 
 # Limitations
 
+- Pods are not supported in Enterprise DC/OS [strict security mode](https://docs.mesosphere.com/1.9/security/#security-modes).
 - Only Mesos-based health checks are currently supported.
 - Readiness checks are not supported.
 - Service ports are not supported.

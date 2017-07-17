@@ -131,7 +131,7 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 1.  Run the service with the following command.
     
     ```bash
-    dcos marathon app hello-dcos-cli.json
+    dcos marathon app add hello-dcos-cli.json
     ```
 
 1.  Run the following command to verify that your service is running:
