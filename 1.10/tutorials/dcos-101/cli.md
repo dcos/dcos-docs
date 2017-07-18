@@ -45,5 +45,5 @@ Here are the DC/OS components that are relevant to this tutorial. A full descrip
 * [Mesos DNS](/docs/1.10/overview/architecture/components/#mesos-dns) provides service discovery within the cluster.
 * [Minuteman](/docs/1.10/overview/architecture/components/#minuteman) is the internal layer 4 load balancer.
 * [Admin Router](/docs/1.10/overview/architecture/components/#admin-router) is an open source NGINX configuration that provides central authentication and proxy to DC/OS services.
-* [Universe](/docs/1.10/overview/architecture/components/#dcos-package-manager) is the package repository that holds the DC/OS services (e.g., Apache Spark of Apache Cassandra) that you can install on your cluster directly from the DC/OS GUI and CLI.
+* [Universe](/docs/1.10/overview/architecture/components/#dcos-package-manager) is the package repository that holds the DC/OS services (e.g. Apache Spark or Apache Cassandra) that you can install on your cluster directly from the DC/OS GUI and CLI.
 
