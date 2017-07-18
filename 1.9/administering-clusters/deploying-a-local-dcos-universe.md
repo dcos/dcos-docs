@@ -17,7 +17,7 @@ You can install and run DC/OS services on a datacenter without internet access w
 
 # <a name="default"></a>Installing the default Universe packages
 
-1. Since DC/OS 1.9 is not the latest release, you will need to build your own local Universe image. Follow [these instructions][4], skipping step 3.
+1. Because DC/OS 1.9 is not the latest release, you will need to build your own local Universe image. Follow [these instructions][4], skipping step 3.
 
 1.  Use [secure copy](https://linux.die.net/man/1/scp) to transfer the Universe and registry files to a master node. Replace `<master-IP>` with the public IP address of a master before issuing the following commands.
 

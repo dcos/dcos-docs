@@ -17,7 +17,7 @@ You can install and run DC/OS services on a datacenter without internet access w
 
 # <a name="default"></a>Installing the default Universe packages
 
-1.  Since DC/OS 1.8 is not the latest release, you will need to build your own local Universe image. Follow [these instructions][4], skipping step 3.
+1.  Because DC/OS 1.8 is not the latest release, you will need to build your own local Universe image. Follow [these instructions][4], skipping step 3.
 
 2.  Load the container into the local Docker instance on each of your master nodes:
 
