@@ -138,16 +138,44 @@ Pick one of the below methods to build your changes, integrated with the rest of
 ### Automated build
 This method builds and launches a Docker container. For more information, see this [PR](https://github.com/dcos/dcos-docs/pull/532).
 
-#### Prerequisite
+#### Prerequisites
 
 Latest version of [Docker](https://docs.docker.com/engine/installation/) installed and running.
 
+Make command installed.
+
 #### Building
 
-1. Run `sudo make`.
+1. Run `make`
+
+ - *Linux*
+
+    Running docker commands as a normal user in Linux requires a manual installation step to add the user to the docker group.
+
+    If your user is already in the docker group :
+
+    ```bash
+    make
+    ```
+    
+    If your user is not in the docker group :
+
+    ```bash
+    sudo make
+    ```
+
+  - *MacOS*
+
+	On MacOS users can run docker commands by default
+	
+    ```bash
+    make
+    ```
+
 
     **Tip:** This can take up to 15 minutes to complete.
-1. Visit [localhost](http://localhost:3000)
+
+2. Visit [localhost:3000](http://localhost:3000)
 
 #### Troubleshooting
 
@@ -173,7 +201,7 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       brew install ruby
       ```
 
-1.  [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+2.  [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
   -  *CentOS*
 
@@ -187,9 +215,11 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       brew install git
       ```
 
-1.  Install EPEL repo, [Node](https://docs.npmjs.com/getting-started/installing-node), and NPM.
+3.  Install [Node](https://docs.npmjs.com/getting-started/installing-node), and NPM.
 
   -  *CentOS*
+
+      On CentOS we need to add the epel-release repo before we can install Node and NPM
 
       ```bash
       sudo yum install -y epel-release && sudo yum install -y nodejs && sudo yum install -y npm && npm update
@@ -203,7 +233,7 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       npm update
       ```
 
-1.  nvm 6.3.1
+4.  nvm 6.3.1
 
   -  *CentOS*
 
@@ -219,7 +249,7 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       nvm install 6.3.1 && nvm alias default 6.3.1
       ```
 
-1.  [Gulp](http://gulpjs.com/)
+5.  [Gulp](http://gulpjs.com/)
 
   -  *CentOS*
 
@@ -233,19 +263,19 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       npm install --global gulp-cli
       ```
 
-1. Clone the dcos-website repo.
+6. Clone the dcos-website repo.
 
   ```bash
   git clone https://github.com/dcos/dcos-website
   ```
 
-1. Check out the develop branch of `dcos-website`.
+7. Check out the develop branch of `dcos-website`.
 
   ```bash
   git checkout develop
   ```
 
-1. Initialize the `dcos-docs` submodule with the content from the upstream master.
+8. Initialize the `dcos-docs` submodule with the content from the upstream master.
 
   ```bash
   git submodule update --init --recursive
