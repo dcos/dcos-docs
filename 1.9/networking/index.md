@@ -10,7 +10,7 @@ Allows containers to run on any type of IP-based virtual networks, with each con
 
 DC/OS supports IP per container for the Universal container runtime (UCR) by using the Container network interface (CNI). DC/OS supports IP per container for the Docker container runtime by using the Container network model (CNM).
 
-DC/OS provides an out-of-the box virtual networking solution for IP per container called DC/OS overlay that works both with UCR and Docker container runtimes. For more information, see the [Containerizer documentation](/docs/1.9/deploying-services/containerizers/).
+DC/OS provides an out-of-the box virtual networking solution for IP per container called DC/OS overlay that works both with UCR and Docker container runtimes. The DC/OS overlay uses the CNI/CNM support in Mesos to provide IP per container.For more information, see the [Containerizer documentation](/docs/1.9/deploying-services/containerizers/).
 
 # DNS-Based Service Discovery
 DC/OS includes highly available, distributed, DNS-based service discovery. The service discovery mechanism in DC/OS contains these components:
