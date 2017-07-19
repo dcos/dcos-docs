@@ -4,10 +4,10 @@ feature_maturity: preview
 menu_order: 04
 ---
 
-DC/OS supports Container Networking Interface (CNI) compatible virtual networking solutions, including [Calico](https://github.com/dcos/examples/tree/master/calico) and Contrail. DC/OS also provides a native virtual networking solution called DC/OS Overlay. 
+DC/OS supports Container Networking Interface (CNI)-compatible virtual networking solutions, including [Calico](https://github.com/dcos/examples/tree/master/calico) and Contrail. DC/OS also provides a native virtual networking solution called DC/OS Overlay. 
 
 # DC/OS Overlay
-DC/OS Overlay provides an ip-per-container for Mesos and Docker containers alike. DC/OS Overlay uses CNI (Container Network Interface) for the [Mesos Containerizer](http://mesos.apache.org/documentation/latest/containerizer/#Mesos) and Docker libnetwork for the [Docker Containerizer](http://mesos.apache.org/documentation/latest/containerizer/#Docker).
+DC/OS Overlay provides an IP per container for Mesos and Docker containers alike. DC/OS Overlay uses CNI (Container Network Interface) for the [Mesos Containerizer](http://mesos.apache.org/documentation/latest/containerizer/#Mesos) and Docker libnetwork for the [Docker Containerizer](http://mesos.apache.org/documentation/latest/containerizer/#Docker).
 
 DC/OS Overlay allows containers launched through the Mesos Containerizer or Docker Containerizer to co-exist on the same IP network, allocating each container its own unique IP address. DC/OS Overlay offers the following advantages:
 
