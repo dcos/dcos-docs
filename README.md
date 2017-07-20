@@ -175,7 +175,7 @@ Make command installed.
 
     **Tip:** This can take up to 15 minutes to complete.
 
-2. Visit [localhost:3000](http://localhost:3000)
+1. Visit [localhost:3000](http://localhost:3000)
 
 #### Troubleshooting
 
@@ -201,7 +201,7 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       brew install ruby
       ```
 
-2.  [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+1.  [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
   -  *CentOS*
 
@@ -215,7 +215,7 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       brew install git
       ```
 
-3.  Install [Node](https://docs.npmjs.com/getting-started/installing-node), and NPM.
+1.  Install [Node](https://docs.npmjs.com/getting-started/installing-node), and NPM.
 
   -  *CentOS*
 
@@ -233,7 +233,7 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       npm update
       ```
 
-4.  nvm 6.3.1
+1.  nvm 6.3.1
 
   -  *CentOS*
 
@@ -249,7 +249,7 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       nvm install 6.3.1 && nvm alias default 6.3.1
       ```
 
-5.  [Gulp](http://gulpjs.com/)
+1.  [Gulp](http://gulpjs.com/)
 
   -  *CentOS*
 
@@ -263,19 +263,19 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
       npm install --global gulp-cli
       ```
 
-6. Clone the dcos-website repo.
+1. Clone the dcos-website repo.
 
   ```bash
   git clone https://github.com/dcos/dcos-website
   ```
 
-7. Check out the develop branch of `dcos-website`.
+1. Check out the develop branch of `dcos-website`.
 
   ```bash
   git checkout develop
   ```
 
-8. Initialize the `dcos-docs` submodule with the content from the upstream master.
+1. Initialize the `dcos-docs` submodule with the content from the upstream master.
 
   ```bash
   git submodule update --init --recursive
