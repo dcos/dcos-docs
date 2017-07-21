@@ -76,7 +76,7 @@ You can run these commands from your cluster node to invoke custom or predefined
     {
       "clock_sync": {
         "description": "System clock is in sync.",
-        "full_cmd": [
+        "cmd": [
           "/opt/mesosphere/bin/dcos-checks",
           "time"
         ],
@@ -84,7 +84,7 @@ You can run these commands from your cluster node to invoke custom or predefined
       },
       "components_agent": {
         "description": "All DC/OS components are healthy",
-        "full_cmd": [
+        "cmd": [
           "/opt/mesosphere/bin/dcos-checks",
           "--role",
           "agent",
