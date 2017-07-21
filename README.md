@@ -168,9 +168,9 @@ Make command installed.
 
 	On MacOS users can run docker commands by default
 	
-    	```bash
-    	make
-    	```
+   	```bash
+   	make
+   	```
 
    **Tip:** This can take up to 15 minutes to complete.
 
@@ -192,13 +192,13 @@ We've implemented the [dcos-docs](https://github.com/dcos/dcos-docs) repo as a [
 
      	```bash
      	sudo yum install -y ruby
-	```
+    	```
 
     -  *MacOS using [Homebrew](http://brew.sh/)*
 
-      	```bash
+    	```bash
       	brew install ruby
-      	```
+    	```
 
 1.  [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
