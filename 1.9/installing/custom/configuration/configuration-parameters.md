@@ -49,6 +49,7 @@ This topic provides all available configuration parameters. Except where explici
 | [gc_delay](#gc_delay)            | The maximum amount of time to wait before cleaning up the executor directories.                                                                                                                                                           |
 | [log_directory](#log_directory)       | The path to the installer host logs from the SSH processes.                                                                                                                                                                               |
 | [process_timeout](#process_timeout)     | The allowable amount of time, in seconds, for an action to begin after the process forks.                                                                                                                                                 |
+| [mesos_max_completed_tasks_per_framework](#mesos_max_completed_tasks_per_framework)     | The number of completed tasks for each framework that the Mesos master will retain in memory.                                                                                               |
 
 # Security and Authentication
 
@@ -321,6 +322,9 @@ Indicates whether the master DNS port is open. An open master DNS port listens p
 
 *  `'master_dns_bindall': 'true'` The master DNS port is open. This is the default value.
 *  `'master_dns_bindall': 'false'` The master DNS port is closed.
+
+### mesos_max_completed_tasks_per_framework
+The number of completed tasks for each framework that the Mesos master will retain in memory. In clusters with a large number of long-running frameworks, retaining too many completed tasks can cause memory issues on the master. If this parameter is not specified, the default Mesos value of 1000 is used.
 
 ### oauth_enabled (DC/OS Only)
 Indicates whether to enable authentication for your cluster. <!-- DC/OS auth -->
