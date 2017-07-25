@@ -255,7 +255,7 @@ The [Docker Runtime](#mesos-docker-runtime) and [Mesos Container Runtime](#mesos
 
 ### <a name="cloud-template"></a>Cloud Template
 
-A cloud template is an infrastructure-specific method of decoratively describing a DC/OS cluster.
+A cloud template is an infrastructure-specific method of declaratively describing a DC/OS cluster.
 
 For more information, see [Cloud Installation Options](/docs/1.10/installing/cloud/).
 

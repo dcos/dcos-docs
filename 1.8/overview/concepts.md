@@ -252,7 +252,7 @@ For more information, see the [Universe repository](https://github.com/mesospher
 
 ### <a name="cloud-template"></a>Cloud Template
 
-A cloud template is an infrastructure-specific method of decoratively describing a DC/OS cluster.
+A cloud template is an infrastructure-specific method of declaratively describing a DC/OS cluster.
 
 For more information, see [Cloud Installation Options](/docs/1.8/administration/installing/cloud/).
 
