@@ -240,8 +240,8 @@ To install your own set of packages you must build a customized local Universe D
     sudo make base
     ```
 
-3.  Build `mesosphere/universe` Docker image and compress it to the `local-universe.tar.gz` file.
-Specify a comma-separated list of package names and version using the `DCOS_PACKAGE_INCLUDE`
+3.  Build the `mesosphere/universe` Docker image and compress it to the `local-universe.tar.gz`
+file. Specify a comma-separated list of package names and versions using the `DCOS_PACKAGE_INCLUDE`
 variable. To minimize the container size and download time, you can select only what you need. If
 you do not use the `DCOS_PACKAGE_INCLUDE` variable, all *selected* Universe packages will be
 included. To view which packages are selected, click on the **Universe** tab in the DC/OS web
