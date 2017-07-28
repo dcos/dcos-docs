@@ -14,7 +14,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - Virtual networks require minimum Docker version 1.11. For more information, see the [documentation](/docs/1.10/networking/virtual-networks/).
 - The DC/OS UI and APIs may be inconsistent or unavailable while masters are being upgraded. Avoid using them until all masters have been upgraded and have rejoined the cluster. You can monitor the health of a master during an upgrade by watching Exhibitor on port 8181.
 - Task history in the Mesos UI will not persist through the upgrade.
-- <!-- caveat about Marathon-lb -->
+- The latest version of Marathon-LB is required for 1.10. Before upgrading to 1.10, uninstall your existing Marathon-LB package and reinstall the updated version.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - In CentOS or RedHat, install IP sets with this command (used in some IP detect scripts): `sudo yum install -y ipset`
 - You must be familiar with using `systemctl` and `journalctl` command line tools to review and monitor service status. Troubleshooting notes can be found at the end of this [document](#troubleshooting).
 - You must be familiar with the [Advanced DC/OS Installation Guide][advanced-install].
-- You should take a snapshot of ZooKeeper prior to upgrading. Marathon supports rollbacks, but does not support downgrades. <!-- more info needed here -->
+- You should take a snapshot of ZooKeeper prior to upgrading. Marathon supports rollbacks, but does not support downgrades.
 - The full DC/OS version string that you are upgrading from.
   - In 1.9, this can be found under the **Cluster** tab.
   - In 1.10, this can be found under the **Overview** tab.
