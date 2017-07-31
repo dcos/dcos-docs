@@ -10,7 +10,7 @@ The Datadog metrics plugin for DC/OS supports sending metrics from the DC/OS met
 
 ## Build the plugin
 
-**Prerequisite:** 
+**Prerequisite:**
 
 - DC/OS is [installed](/docs/1.10/installing/)
 - [Go programming environment](https://golang.org/doc/install) <!-- dcos-metrics must be run from within the go directory -->
@@ -23,7 +23,7 @@ The Datadog metrics plugin for DC/OS supports sending metrics from the DC/OS met
    ```bash
    git clone git@github.com:dcos/dcos-metrics
    ```
-   
+
 1. Navigate to the `dcos-metrics` repository and run the build command:
 
    ```bash
@@ -47,7 +47,7 @@ The Datadog metrics plugin for DC/OS supports sending metrics from the DC/OS met
 
 Install the `datadog` package in DC/OS:
 
-1.  Go to the **Universe** tab of the DC/OS GUI and find the **Datadog** package. 
+1.  Go to the **Catalog** tab of the DC/OS GUI and find the **Datadog** package.
     ![datadog package](/docs/1.10/img/datadog-package.png)
 1.  Click **INSTALL PACKAGE** -> **ADVANCED INSTALLATION** and enter [your Datadog API_KEY](https://app.datadoghq.com/account/settings#api).
 1.  Click **REVIEW AND INSTALL** to complete your installation.
@@ -73,32 +73,32 @@ As a stopgap during testing, you may be able to manually run the Datadog plugin 
 ## Install the DC/OS Datadog metrics plugin
 When you're happy with the test results, you'll need to install the plugin into your cluster. For each host in your cluster, transfer your binary for the plugin and then add a systemd unit to manage the service. This unit differs slightly between agent and master hosts.
 
-### Create a Valid Auth Token for DC/OS
+### Create a valid auth token for DC/OS
 Follow the instructions based on whether you are using Enterprise or open source DC/OS:
 
 - [Enterprise DC/OS](https://docs.mesosphere.com/1.10/security/service-auth/custom-service-auth/)
-- [Open source DC/OS](https://dcos.io/docs/administration/id-and-access-mgt/managing-authentication/) 
+- [Open source DC/OS](https://dcos.io/docs/administration/id-and-access-mgt/managing-authentication/)
 
 You will use this auth token below.
 
-### Deploy the Metrics Plugin to Every Cluster Host
+### Deploy the metrics plugin to every cluster host
 
 1.  Copy the Datadog plugin from a local host to your remote host (`my.host:/usr/bin`):
 
     ```bash
     scp dcos-metrics-datadog-plugin-1.0.0-rc7 my.host:/usr/bin
     ```
-    
-    
-1.  [SSH to your master node](/docs/1.10/administering-clusters/sshcluster/) and assign permissions to the plugin. 
+
+
+1.  [SSH to your master node](/docs/1.10/administering-clusters/sshcluster/) and assign permissions to the plugin.
 
     ```bash
     dcos node ssh --master-proxy --leader
     chmod 0755 /usr/bin/dcos-metrics-datadog-plugin-1.0.0-rc7
     ```
 
-### Master Systemd Unit
-Create a master systemd unit file on your master node and save as `/etc/systemd/system/dcos-metrics-datadog-plugin.service`. 
+### Master systemd unit
+Create a master systemd unit file on your master node and save as `/etc/systemd/system/dcos-metrics-datadog-plugin.service`.
 
 ```
 [Unit]
@@ -108,7 +108,7 @@ Description=DC/OS Datadog Metrics Plugin (master)
 ExecStart=/usr/bin/dcos-metrics-datadog-plugin-1.0.0rc7 -dcos-role master -metrics-port 80 -auth-token <MY_AUTH_TOKEN>
 ```
 
-### Agent Systemd Unit
+### Agent systemd unit
 Add an agent systemd unit file on your master node and save as `/etc/systemd/system/dcos-metrics-datadog-plugin.service`.
 
 ```
@@ -121,16 +121,16 @@ ExecStart=/usr/bin/dcos-metrics-datadog-plugin-1.0.0rc7 -dcos-role agent -auth-t
 
 *Note:* This plugin runs on the agent Admin Router port `:61001` by default, so the port is not passed as it was in the master version of the service.
 
-### Enable, Start, and Verify
+### Enable, start, and verify
 
 1.  Enable and start the Datadog plugin.
 
     ```bash
     systemctl enable dcos-metrics-datadog-plugin && systemctl start dcos-metrics-datadog-plugin
     ```
-    
+
 1.  View the system logs and verify that everything is okay.
-    
+
     ```bash
     journalctl -u dcos-metrics-datadog-plugin
     ```

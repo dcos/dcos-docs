@@ -7,7 +7,7 @@ feature_maturity: preview
 
 You can install and run DC/OS services on a datacenter without internet access with a local [Universe](https://github.com/mesosphere/universe). You can install a local Universe that includes the default packages (easiest), or select your own set of local Universe packages (advanced).
 
-**Prerequisites:** 
+**Prerequisites:**
 
 - [DC/OS CLI installed](/docs/1.10/cli/install/).
 
@@ -34,19 +34,19 @@ You can install and run DC/OS services on a datacenter without internet access w
     scp dcos-local-universe-http.service core@<master-IP>:~
     scp dcos-local-universe-registry.service core@<master-IP>:~
     ```
-   
+
 1.  [SSH](/docs/1.10/administering-clusters/sshcluster/) into the master using the following command. Replace `<master-IP>` with the IP address used in the previous commands.
 
     ```bash
-    ssh -A core@<master-IP> 
+    ssh -A core@<master-IP>
     ```
-     
+
 1.  Confirm that the files were successfully copied.
 
     ```
     ls
     ```
-     
+
 1.  You should see the following files listed.
 
     ```
@@ -59,7 +59,7 @@ You can install and run DC/OS services on a datacenter without internet access w
     sudo mv dcos-local-universe-registry.service /etc/systemd/system/
     sudo mv dcos-local-universe-http.service /etc/systemd/system/
     ```
-     
+
 1.  Confirm that the files were successfully copied into `/etc/systemd/system/`.
 
     ```bash
@@ -71,61 +71,61 @@ You can install and run DC/OS services on a datacenter without internet access w
     ```bash
     docker load < local-universe.tar.gz
     ```
-     
+
     **Tip:** This may take some time to complete.
-     
+
 1.  Restart the systemd daemon.
 
     ```bash
     sudo systemctl daemon-reload
     ```
-     
+
 1.  Enable and start the `dcos-local-universe-http` and `dcos-local-universe-registry` services.
 
     ```bash
     systemctl enable dcos-local-universe-http
     systemctl enable dcos-local-universe-registry
-    sudo systemctl start dcos-local-universe-http     
+    sudo systemctl start dcos-local-universe-http
     sudo systemctl start dcos-local-universe-registry
     ```
-     
+
 1.  Use the following commands to confirm that the services are now up and running.
 
     ```bash
     sudo systemctl status dcos-local-universe-http
     sudo systemctl status dcos-local-universe-registry
     ```
-     
+
 1.  If you only have one master, skip to step 25. If you have multiple masters, continue to the next step.
 
 1.  Use the following command to discover the private IP addresses of all of your masters. Identify the private IP address of the master you are SSHed into right now from the list.
 
-    **Tip:** It will match the path shown after `core@ip-` in your prompt, where the hyphens become periods. 
+    **Tip:** It will match the path shown after `core@ip-` in your prompt, where the hyphens become periods.
 
     ```
     host master.mesos
     ```
-     
-1.  Use [secure copy](https://linux.die.net/man/1/scp) to transfer the Universe and registry files to one of the other masters. Replace `<master-IP>` with the IP address of the other master. 
+
+1.  Use [secure copy](https://linux.die.net/man/1/scp) to transfer the Universe and registry files to one of the other masters. Replace `<master-IP>` with the IP address of the other master.
 
     ```bash
     scp local-universe.tar.gz core@<master-IP>:~
     scp /etc/systemd/system/dcos-local-universe-registry.service core@<master-IP>:~
     scp /etc/systemd/system/dcos-local-universe-http.service core@<master-IP>:~
     ```
-     
+
 1.  [SSH](/docs/1.10/administering-clusters/sshcluster/) into the master that you just copied these files to.
 
     ```bash
     ssh -A core@<master_IP>
     ```
-     
+
 1.  Confirm that the files were successfully copied.
 
     ```
     ls
     ```
-     
+
 1.  You should see the following files listed.
 
     ```
@@ -138,7 +138,7 @@ You can install and run DC/OS services on a datacenter without internet access w
     sudo mv dcos-local-universe-registry.service /etc/systemd/system/
     sudo mv dcos-local-universe-http.service /etc/systemd/system/
     ```
-     
+
 1.  Confirm that the files were successfully copied into `/etc/systemd/system/`.
 
     ```bash
@@ -150,22 +150,22 @@ You can install and run DC/OS services on a datacenter without internet access w
     ```
     docker load < local-universe.tar.gz
     ```
-     
+
     **Tip:** This may take some time to complete.
-     
+
 1.  Restart the Docker daemon.
 
     ```bash
     sudo systemctl daemon-reload
     ```
-     
+
 1.  Start the `dcos-local-universe-http` and `dcos-local-universe-registry` services.
 
     ```bash
     sudo systemctl start dcos-local-universe-http
     sudo systemctl start dcos-local-universe-registry
     ```
-     
+
 1.  Use the following commands to confirm that the services are now up and running.
 
     ```bash
@@ -176,7 +176,7 @@ You can install and run DC/OS services on a datacenter without internet access w
 1.  Repeat steps 14 through 23 until you have completed this procedure for all of your masters. Then continue to the next step.
 
 1.  Close the SSH session by typing `exit` or open a new terminal prompt tab.
-     
+
      **Tip:** You may have to exit more than one SSH session if you have multiple masters.
 
 1.  (Optional) Use the following command to remove the references to the default Universe from your cluster. If you want to leave the default Universe in place and just add the local Universe as an additional repository, you can skip to the next step.
@@ -184,9 +184,9 @@ You can install and run DC/OS services on a datacenter without internet access w
     ```bash
     dcos package repo remove Universe
     ```
-     
+
     **Tip:** You can also remove the references to the default Universe repository from **Settings** > **Repositories** in the DC/OS web interface.
-     
+
 1.  Use the following command to add a reference to the new local Universes that you added to each master.
 
     ```bash
@@ -198,7 +198,7 @@ You can install and run DC/OS services on a datacenter without internet access w
     ```bash
     dcos node ssh --master-proxy --mesos-id=<mesos-id>
     ```
-     
+
 1.  Use the following commands to download a copy of the DC/OS certificate locally and set it as trusted.
 
     ```bash
@@ -206,10 +206,10 @@ You can install and run DC/OS services on a datacenter without internet access w
     sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
     sudo systemctl restart docker
     ```
-     
+
 1.  Close the SSH session by typing `exit` or open a new terminal prompt tab. Repeat steps 28 and 29 on each agent node.
 
-1.  To verify your success, log into the DC/OS web interface and open the **Universe** > **Packages** tab. You should see a list of selected packages. Go ahead and try to install one of the packages. 
+1.  To verify your success, log into the DC/OS web interface and click the **Catalog** tab. You should see a list of selected packages. Go ahead and try to install one of the packages.
 
 
 
@@ -250,7 +250,7 @@ To install your own set of packages you must build a customized local Universe D
 file. Specify a comma-separated list of package names and versions using the `DCOS_PACKAGE_INCLUDE`
 variable. To minimize the container size and download time, you can select only what you need. If
 you do not use the `DCOS_PACKAGE_INCLUDE` variable, all *selected* Universe packages will be
-included. To view which packages are selected, click on the **Catalog** tab in the DC/OS web
+included. To view which packages are selected, click the **Catalog** tab in the DC/OS web
 interface.
 
     ```bash

@@ -4,7 +4,7 @@ nav_title: Uninstalling
 menu_order: 007
 ---
 
-Services can be uninstalled from either the web interface or the CLI. If a Universe service has any reserved resources, you also need to run the framework cleaner script. The [framework cleaner script](#framework-cleaner) removes the service instance from ZooKeeper, along with any data associated with it.   
+Services can be uninstalled from either the web interface or the CLI. If a Universe service has any reserved resources, you also need to run the framework cleaner script. The [framework cleaner script](#framework-cleaner) removes the service instance from ZooKeeper, along with any data associated with it.
 
 # Uninstalling Universe services
 
@@ -24,11 +24,11 @@ dcos package uninstall chronos
 
 ## Web interface
 
-From the DC/OS web interface you can uninstall services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.10/administering-clusters/repo/). The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
+From the DC/OS web interface you can uninstall services from the **Services** or **Catalog** tab. The Catalog tab shows all of the available DC/OS services from package [repositories](/docs/1.10/administering-clusters/repo/). The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
 
-### Universe tab
+### Catalog tab
 
-1.  Navigate to the **Universe > Packages** page in the DC/OS [web interface](/docs/1.10/gui/#universe).
+1.  Navigate to the **Catalog** page in the DC/OS [web interface](/docs/1.10/gui/#catalog).
 2.  Click on the **Installed** tab to see your installed services.
 3.  Hover your cursor over the name of the package you wish to uninstall and you will see a red "Uninstall" link to the right. Click this link to uninstall the package.
 
@@ -36,7 +36,7 @@ From the DC/OS web interface you can uninstall services from the **Services** or
 
 1.  Navigate to the [**Services**](/docs/1.10/gui/#services) tab in the DC/OS web interface.
 1.  Select your application and click the toggle to **Destroy**.
-    
+
     ![Destroy app](/docs/1.10/img/app-destroy.png)
 
 ## Troubleshooting
@@ -101,26 +101,26 @@ The script takes the following flags:
 
 These are some examples of default configurations (these will vary depending on selected task name, etc):
 
-* Cassandra default: 
+* Cassandra default:
 
   ```bash
   docker run mesosphere/janitor /janitor.py -r cassandra-role -p cassandra-principal -z dcos-service-cassandra
   ```
-  
-* HDFS default: 
+
+* HDFS default:
 
   ```bash
   docker run mesosphere/janitor /janitor.py -r hdfs-role -p hdfs-principal -z dcos-service-hdfs
   ```
-  
-* Kafka default: 
+
+* Kafka default:
 
   ```bash
   docker run mesosphere/janitor /janitor.py -r kafka-role -p kafka-principal -z dcos-service-kafka
   ```
-  
-* Custom values: 
-  
+
+* Custom values:
+
   ```bash
   docker run mesosphere/janitor /janitor.py -r <custom_role> -p <custom_principal> -z dcos-service-<custom_service_name>
   ```
@@ -156,7 +156,7 @@ From the DC/OS [**Services**](/docs/1.10/gui/) tab, use the JSON editor to add t
         "type": "DOCKER"
       }
     }
-    
+
 When the framework cleaner has completed its work, it will automatically remove itself from Marathon to ensure that it's only run once. This removal will often result in a `TASK_KILLED` or even a `TASK_FAILED` outcome for the janitor task, even if it finished successfully. The janitor task will also quickly disappear from both the Services and Dashboard tab.
 
 ### Verifying the outcome
@@ -164,15 +164,15 @@ When the framework cleaner has completed its work, it will automatically remove 
 To view the script's outcome, go to Mesos (`http://your-cluster.com/mesos`) and look at the task's `stdout` content. If `stdout` lacks content, run the following command manually:
 
     # Determine id of agent which ran the Docker task. This is an example:
-    
+
     your-machine$ dcos node ssh --master-proxy --mesos-id=c62affd0-ce56-413b-85e7-32e510a7e131-S3
-    
+
     agent-node$ docker ps -a
     CONTAINER ID        IMAGE                       COMMAND             ...
     828ee17b5fd3        mesosphere/janitor:latest   /bin/sh -c /janito  ...
-    
+
     agent-node$ docker logs 828ee17b5fd3
-    
+
 ### Sample result
 
 Here's an example of the output for a successful run for a Cassandra installation:
@@ -182,30 +182,30 @@ Here's an example of the output for a successful run for a Cassandra installatio
     leader-node$ docker run mesosphere/janitor /janitor.py -r cassandra_role -p cassandra_principal -z cassandra
     [... docker download ...]
     Master: http://leader.mesos:5050/master/ Exhibitor: http://leader.mesos:8181/ Role: cassandra_role Principal: cassandra_principal ZK Path: cassandra
-    
+
     Destroying volumes...
     Mesos version: 0.28.1 => 28
     Found 1 volume(s) for role 'cassandra_role' on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S5, deleting...
-    200 
+    200
     Found 1 volume(s) for role 'cassandra_role' on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S4, deleting...
-    200 
+    200
     No reserved resources for any role on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S3
     No reserved resources for any role on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S2
     Found 1 volume(s) for role 'cassandra_role' on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S1, deleting...
-    200 
+    200
     No reserved resources for role 'cassandra_role' on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S0. Known roles are: [slave_public]
-    
+
     Unreserving resources...
     Found 4 resource(s) for role 'cassandra_role' on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S5, deleting...
-    200 
+    200
     Found 4 resource(s) for role 'cassandra_role' on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S4, deleting...
-    200 
+    200
     No reserved resources for any role on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S3
     No reserved resources for any role on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S2
     Found 4 resource(s) for role 'cassandra_role' on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S1, deleting...
-    200 
+    200
     No reserved resources for role 'cassandra_role' on slave 3ce447e3-2894-4c61-bd0f-be97e4d99ee9-S0. Known roles are: [slave_public]
-    
+
     Deleting zk node...
     Successfully deleted znode 'cassandra' (code=200), if znode existed.
     Cleanup completed successfully.
