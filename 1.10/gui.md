@@ -20,11 +20,11 @@ The dashboard is the home page of the DC/OS web interface and provides an overvi
 
 *   The Disk Allocation panel provides a graph of the current percentage of available disk space that is being used by your cluster.
 
-*   The Services Health panel provides an overview of the health of your services. Each service provides a health check, run at intervals. This indicator shows the current status according to that health check. A maximum of 5 services are displayed, sorted by priority of the most unhealthy. You can click the View All N Services button for detailed information and a complete list of your services.
+*   The Services Health panel provides an overview of the health of your services. Each service provides a health check, run at intervals. This indicator shows the current status according to that health check. A maximum of 5 services are displayed, sorted by priority of the most unhealthy. You can click the **View All <number> Services** button for detailed information and a complete list of your services.
 
 *   The Tasks panel provides the current number of tasks that are staged and running.
 
-*   The Component Health panel provides an overview of the health of your component. Each component provides a health check, run at intervals. This indicator shows the current status according to that health check. A maximum of 5 components are displayed, sorted by priority of the most unhealthy. You can click the View All N Components button for detailed information and a complete list of your components.
+*   The Component Health panel provides an overview of the health of your component. Each component provides a health check, run at intervals. This indicator shows the current status according to that health check. A maximum of 5 components are displayed, sorted by priority of the most unhealthy. You can click the **View All <number> Components** button for detailed information and a complete list of your components.
 
 *   The Nodes panel provides a view of the nodes in your cluster.
 
@@ -32,9 +32,9 @@ The dashboard is the home page of the DC/OS web interface and provides an overvi
 
 The Services tab provides a full-featured interface to the native DC/OS Marathon instance. This Services tab provides a comprehensive view of all of the services that you are running. You can filter services by health, status, or service name.
 
-![Services](/docs/1.10/img/tweeter-services6.png)
+![Services](/docs/1.10/img/dcos-services.png)
 
-By default all of your services are displayed, sorted by service name. You can also sort the services by health status, CPU, memory, or disk space allocated.
+By default, all of your services are displayed, sorted by service name. You can also sort the services by health status, CPU, memory, or disk space allocated.
 
 *   **NAME** The DC/OS service name.
 *   **STATUS** The [Marathon health check][3] status for the service.
