@@ -4,7 +4,7 @@ nav_title: Uninstalling
 menu_order: 007
 ---
 
-Services can be uninstalled from either the web interface or the CLI. If a Universe service has any reserved resources, you also need to run the framework cleaner script. The [framework cleaner script](#framework-cleaner) removes the service instance from ZooKeeper, along with any data associated with it.
+Services can be uninstalled from the CLI. If a Universe service has any reserved resources, you also need to run the framework cleaner script. The [framework cleaner script](#framework-cleaner) removes the service instance from ZooKeeper, along with any data associated with it.
 
 # Uninstalling Universe services
 
@@ -24,20 +24,13 @@ dcos package uninstall chronos
 
 ## Web interface
 
-From the DC/OS web interface you can uninstall services from the **Services** or **Catalog** tab. The Catalog tab shows all of the available DC/OS services from package [repositories](/docs/1.10/administering-clusters/repo/). The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
-
-### Catalog tab
-
-1.  Navigate to the **Catalog** page in the DC/OS [web interface](/docs/1.10/gui/#catalog).
-2.  Click on the **Installed** tab to see your installed services.
-3.  Hover your cursor over the name of the package you wish to uninstall and you will see a red "Uninstall" link to the right. Click this link to uninstall the package.
-
-### Services tab
+From the DC/OS web interface you can uninstall services from the **Services** tab. The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
 
 1.  Navigate to the [**Services**](/docs/1.10/gui/#services) tab in the DC/OS web interface.
-1.  Select your application and click the toggle to **Destroy**.
+1.  Select your service, click the vertical ellipsis at the far right, and select **Delete**.
 
-    ![Destroy app](/docs/1.10/img/app-destroy.png)
+    ![Destroy app](/docs/1.10/img/service-delete.png)
+1.  Copy and run the displayed command.
 
 ## Troubleshooting
 
