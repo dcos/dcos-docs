@@ -52,7 +52,7 @@ Add the `ipAddress.networkName` parameter to your service definition. `networkNa
 
 ## Using the [Docker Containerizer](/docs/1.10/deploying-services/containerizers/docker-containerizer/)
 
-Add the `network.name` and `network.mode` parameters to your service definition. `name` must match the `name` parameter of the configuration file in the previous step. In our current example, it is `dcos`.
+Add the `networks.name` and `networks.mode` parameters to your service definition. `name` must match the `name` parameter of the configuration file in the previous step. In our current example, it is `dcos`.
 
 ```
 "networks": [
