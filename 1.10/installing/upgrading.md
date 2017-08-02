@@ -22,7 +22,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 ## Prerequisites
 
 - Mesos, Mesos Frameworks, Marathon, Docker, and all running tasks in the cluster should be stable and in a known healthy state.
-- For Mesos compatibility reasons, we recommend upgrading any running Marathon-on-Marathon instances on DC/OS 1.9 to Marathon version 1.3.5 before upgrading to DC/OS 1.9. <!-- is this still the recommended marathon version for 1.10? -->
+- For Mesos compatibility reasons, we recommend upgrading any running Marathon-on-Marathon instances on DC/OS 1.9 to Marathon version 1.5 before upgrading to DC/OS 1.10. <!-- is this correct? -->
 - You must have access to copies of the config files used with DC/OS 1.10: `config.yaml` and `ip-detect`.
 - You must be using systemd 218 or newer to maintain task state.
 - All hosts (masters and agents) must be able to communicate with all other hosts on all ports, for both TCP and UDP.
