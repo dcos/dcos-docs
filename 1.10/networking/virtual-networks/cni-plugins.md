@@ -42,7 +42,7 @@ Add a reference to the CNI in your service definition.
 
 ## Using the [Universal Container Runtime (UCR)](/docs/1.10/deploying-services/containerizers/ucr/)
 
-Add the `ipAddress.networkName` parameter to your service definition, where `networkName` is the name of the network you added as the `name` parameter of the configuration file you added to each of your agent nodes in the previous step.
+Add the `ipAddress.networkName` parameter to your service definition. `networkName` must match the `name` parameter of the configuration file in the previous step. In our current example, it is `dcos`.
 
 ```
 "ipAddress": {
@@ -52,4 +52,12 @@ Add the `ipAddress.networkName` parameter to your service definition, where `net
 
 ## Using the [Docker Containerizer](/docs/1.10/deploying-services/containerizers/docker-containerizer/)
 
-Add the `network.name` and `network.mode` parameters to your service definition, where `name` is the name of the network you added as the `name` parameter of the configuration file you added to each of your agent nodes in the previous step.
+Add the `network.name` and `network.mode` parameters to your service definition. `name` must match the `name` parameter of the configuration file in the previous step. In our current example, it is `dcos`.
+
+```
+"networks": [
+    {
+      "name": "dcos",
+      "mode": "container"
+    }
+```
