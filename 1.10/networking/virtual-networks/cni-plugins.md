@@ -36,7 +36,7 @@ Add your plugin and configuration file to each agent on your cluster. Consult th
    ```
    The `type` parameter specifies the name of the plugin. Here, the plugin name is `bridge`. The `name` parameter is the name of the network, which you will also use later in your service definition.
 
-# Configuring your service to Use a CNI Plugin
+# Configuring your Service to Use a CNI Plugin
 
 Add a reference to the CNI in your service definition.
 
