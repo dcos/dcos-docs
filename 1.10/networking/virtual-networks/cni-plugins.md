@@ -1,4 +1,5 @@
 ---
+post_title: CNI Plugin Support
 nav_title: CNI Plugin Support
 feature_maturity: preview
 menu_order: 30
