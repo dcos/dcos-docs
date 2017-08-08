@@ -135,8 +135,8 @@ Alternatively, you can SSH as the root user.
 
 Time synchronization is a core requirement of DC/OS. There are various methods
 of ensuring time sync. NTP is the typical approach on bare-metal.
-Many cloud providers use hypervisors which push time
-down to the VM guest operating systems. In certain circumstances hypervisor
+Many cloud providers use hypervisors, which push time
+down to the VM guest operating systems. In certain circumstances, hypervisor
 time-sync may conflict with NTP.
 
 You must understand how to properly configure time synchronization for your
@@ -144,8 +144,8 @@ environment. When in doubt, enable NTP and check using `/opt/mesosphere/bin/chec
 
 #### Enable Check Time
 
-There is an `ENABLE_CHECK_TIME` environment variable that needs to be set
-so that `/opt/mesosphere/bin/check-time` will function. It's recommended
+You must set the `ENABLE_CHECK_TIME` environment variable in order for
+ `/opt/mesosphere/bin/check-time` to function. It's recommended
 that you enable this globally. e.g. on CoreOS an entry in `/etc/profile.env`
 of `export ENABLE_CHECK_TIME=true` with set the appropriate variable.
 
