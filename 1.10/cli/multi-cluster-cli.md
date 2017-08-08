@@ -4,32 +4,29 @@ nav_title: Multiple Clusters
 menu_order: 3.1
 ---
 
-You can connect the CLI to multiple DC/OS clusters at the same time by using the `DCOS_CONFIG` environment variable. With this variable you can specify a terminal-specific CLI configurations. 
+You can connect the CLI to multiple DC/OS clusters at the same time by using the `dcos cluster` command. 
 
-This variable only affects the terminal you are currently connected to. After you end the terminal session, the configuration is removed and your default configuration remains.
+To connect to a cluster, run this command with your cluster name (`<name>`) specified: 
 
-**Recommendation:** Make a back up of your default CLI configuration file (`dcos.toml`) before connecting to multiple clusters. By default, this file is located in `/<home-directory>/.dcos/dcos.toml`. You can use this file as a template for additional configurations.
+```bash
+dcos cluster attach <name>
+```
 
-1.  Create a cluster configuration file and save to a unique location (e.g., `/dcos-config/dcos-alice.toml`). The file type must be `.toml`.
+**Tips:** 
 
-    **Tip:** You can use the default configuration file (`dcos.toml`) as a template.
+-  You can view all configured clusters with the `dcos cluster list` command. The attached cluster will have an asterisk (`*`) by its cluster ID. To view only the attached cluster run the `dcos cluster list --attached` command. In this example, the cluster ID `cf96739f-f800-42ea-95d7-d60acc689194` is connected:
 
-1.  Open a terminal and run this command to connect a cluster, with the path to your cluster configuration specified (`path/to/dcos/config`):
+   ```bash
+        NAME                   CLUSTER ID               VERSION                                       URL                                        
+    dcosprod     5f7fb957-6daf-446e-8689-0b5b476b2d39     N/A    https://dcosclust-elasticl-eosy64z9zduk-926805990.us-west-2.elb.amazonaws.com   
+   dcosdev*      cf96739f-f800-42ea-95d7-d60acc689194     N/A    https://dcosclust-elasticl-5m650j1mo8cc-1644521530.us-west-2.elb.amazonaws.com 
+    dcostest     d112e8cd-9918-4660-a3f8-95953723de09     N/A    https://dcosclust-elasticl-1kjl0p9j0rc0p-374529426.us-west-2.elb.amazonaws.com 
+   ```
 
-    ```bash
-    export DCOS_CONFIG=path/to/dcos/config
-    ```
-    
-    For example, to connect to a cluster config located in `/<home-directory>/dcos-config/dcos-alice.toml` run this command:
-    
-    ```bash
-    export DCOS_CONFIG=~./dcos-config/dcos-alice.toml
-    ```
+-  You can rename your cluster with this `dcos cluster rename <old-name> <new-name>` command. For example, to rename your cluster from `dcosdev` to `dcoslive`:
 
-1.  To disconnect from a cluster, close the terminal session or run this command:
-
-    ```bash
-    unset DCOS_CONFIG
-    ```
+   ```bash
+   dcos cluster rename dcosdev dcoslive
+   ```
     
    

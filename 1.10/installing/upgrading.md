@@ -3,24 +3,27 @@ post_title: Upgrading
 menu_order: 3.1
 ---
 
+<table class="table" bgcolor="#FAFAFA"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Important:</b> Upgrade is not supported for the 1.10 Beta 1 release. The Beta 2 release will support upgrade.</td> </tr> </table>
+
 ## Summary
 
-This document provides instructions for upgrading a DC/OS cluster from version 1.8 to 1.9. If this upgrade is performed on a supported OS with all prerequisites fulfilled, this upgrade _should_ preserve the state of running tasks on the cluster.  This document reuses portions of the [Advanced DC/OS Installation Guide][advanced-install].
+This document provides instructions for upgrading a DC/OS cluster from version 1.9 to 1.10. If this upgrade is performed on a supported OS with all prerequisites fulfilled, this upgrade _should_ preserve the state of running tasks on the cluster.  This document reuses portions of the [Advanced DC/OS Installation Guide][advanced-install].
 
 **Important:**
 
 - Review the [release notes](https://dcos.io/releases/) before upgrading DC/OS.
 - The Advanced Installation method is the _only_ recommended upgrade path for DC/OS. It is recommended that you familiarize yourself with the [Advanced DC/OS Installation Guide][advanced-install] before proceeding.
-- The [VIP features](/docs/1.10/networking/load-balancing-vips/virtual-ip-addresses/), added in DC/OS 1.8, require that ports 32768 - 65535 are open between all agent and master nodes for both TCP and UDP.
 - Virtual networks require minimum Docker version 1.11. For more information, see the [documentation](/docs/1.10/networking/virtual-networks/).
 - The DC/OS UI and APIs may be inconsistent or unavailable while masters are being upgraded. Avoid using them until all masters have been upgraded and have rejoined the cluster. You can monitor the health of a master during an upgrade by watching Exhibitor on port 8181.
 - Task history in the Mesos UI will not persist through the upgrade.
+- The latest version of Marathon-LB is required for 1.10. Before upgrading to 1.10, uninstall your existing Marathon-LB package and reinstall the updated version.
+- DC/OS 1.10 upgrades REX-Ray from v03.3. to v0.9.0 and therefore the REX-Ray configuration format has changed. If you have specified custom REX-Ray configuration in the `rexray_config` parameter of your `config.yaml` file, change the parameter to `rexray_config_preset: aws`.
 
 ## Prerequisites
 
-- Mesos, Mesos Frameworks, Marathon, Docker and all running tasks in the cluster should be stable and in a known healthy state.
-- For Mesos compatibility reasons, we recommend upgrading any running Marathon-on-Marathon instances on DC/OS 1.8 to Marathon version 1.3.5 before upgrading to DC/OS 1.9.
-- You must have access to copies of the config files used with DC/OS 1.8: `config.yaml` and `ip-detect`.
+- Mesos, Mesos Frameworks, Marathon, Docker, and all running tasks in the cluster should be stable and in a known healthy state.
+- For Mesos compatibility reasons, we recommend upgrading any running Marathon-on-Marathon instances on DC/OS 1.9 to Marathon version 1.5 before upgrading to DC/OS 1.10. <!-- is this correct? -->
+- You must have access to copies of the config files used with DC/OS 1.10: `config.yaml` and `ip-detect`.
 - You must be using systemd 218 or newer to maintain task state.
 - All hosts (masters and agents) must be able to communicate with all other hosts on all ports, for both TCP and UDP.
 - In CentOS or RedHat, install IP sets with this command (used in some IP detect scripts): `sudo yum install -y ipset`
@@ -28,35 +31,35 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - You must be familiar with the [Advanced DC/OS Installation Guide][advanced-install].
 - You should take a snapshot of ZooKeeper prior to upgrading. Marathon supports rollbacks, but does not support downgrades.
 - The full DC/OS version string that you are upgrading from.
-  - In 1.8 this can be found in the lower left corner of the DC/OS UI when screen is maximized.
-  - In 1.9 this can be found under the Cluster menu.
+  - In 1.9, this can be found under the **Cluster** tab.
+  - In 1.10, this can be found under the **Overview** tab.
 
 ## Supported upgrade paths
 
-- From the latest GA version of 1.8 to the latest GA version of 1.9. For example, if 1.8.8 is the latest and 1.9.0 is the latest, this upgrade would be supported.
-- From any 1.9 release to the next. For example, an upgrade from 1.9.1 to 1.9.2 would be supported.
-- From any 1.9 release to an identical 1.9 release. For example, an upgrade from 1.9.0 to 1.9.0 would be supported. This is useful for making configuration changes.
-
+- From the latest GA version of 1.9 to the latest GA version of 1.10. For example, if 1.9.2 is the latest and 1.10.0 is the latest, this upgrade would be supported.
+- From any 1.10 release to the next. For example, an upgrade from 1.10.1 to 1.10.2 would be supported.
+- From any 1.10 release to an identical 1.10 release. For example, an upgrade from 1.10.0 to 1.10.0 would be supported. This is useful for making configuration changes.
+<!-- stopped here -->
 ## Instructions
 
 ### Bootstrap Nodes
 
-1.  Copy and update the DC/OS 1.8 `config.yaml` and `ip-detect` files to a new, clean folder on your bootstrap node.
+1.  Copy and update the DC/OS 1.9 `config.yaml` and `ip-detect` files to a new, clean folder on your bootstrap node.
 
     **Important:**
 
     *  You cannot change the `exhibitor_zk_backend` setting during an upgrade.
-    *  The syntax of the DC/OS 1.9 `config.yaml` differs from that of DC/OS 1.8. For a detailed description of the 1.9 `config.yaml` syntax and parameters, see the [documentation](/docs/1.10/installing/custom/configuration/configuration-parameters/).
+    *  The syntax of the DC/OS 1.10 `config.yaml` differs from that of DC/OS 1.9. <!-- is this still true for 1.9 to 1.10? -->For a detailed description of the 1.10 `config.yaml` syntax and parameters, see the [documentation](/docs/1.10/installing/custom/configuration/configuration-parameters/).
 
-1.  After you have converted your 1.8 `config.yaml` into the 1.9 `config.yaml` format, you can build your installer package:
+1.  After you have converted your 1.9 `config.yaml` into the 1.10 `config.yaml` format, you can build your installer package:
 
     1.  Download the file `dcos_generate_config.sh`.
-    1.  Generate the installation files. Replace `<installed_cluster_version>` in the below command with the DC/OS version currently running on the cluster you intend to upgrade, for example `1.8.8`.
+    1.  Generate the installation files. Replace `<installed_cluster_version>` in the below command with the DC/OS version currently running on the cluster you intend to upgrade, for example `1.9.2`.
         ```bash
         dcos_generate_config.sh --generate-node-upgrade-script <installed_cluster_version>
         ```
     1.  The command in the previous step will produce a URL in the last line of its output, prefixed with `Node upgrade script URL:`. Record this URL for use in later steps. It will be referred to in this document as the "Node upgrade script URL".
-    1.  Run the [nginx][advanced-install] container to serve the installation files.
+    1.  Run the [nginx][advanced-install] container to serve the installation files. <!-- ?? -->
 
 ### DC/OS Masters
 
@@ -78,12 +81,11 @@ Proceed with upgrading every master node one-at-a-time in any order using the fo
 1.  Validate the upgrade:
 
     - Monitor the Exhibitor UI to confirm that the Master rejoins the ZooKeeper quorum successfully (the status indicator will turn green).  The Exhibitor UI is available at `http://<dcos_master>:8181/`.
-    - Verify that `curl http://<dcos_master_private_ip>:5050/metrics/snapshot` has the metric `registrar/log/recovered` with a value of `1`.
     - Verify that `http://<dcos_master>/mesos` indicates that the upgraded master is running Mesos 1.2.0.
 
 ### DC/OS Agents
 
-Proceed with upgrading every agent in any order. Agent upgrades can be parallelized with a few caveats. During an upgrade the Mesos agent will go offline briefly (tasks will continue to run) and load on the Master nodes will increase slightly and proportional to the number of Agents rejoining the cluster. For maximum service availability it is recommended to upgrade Agents one at a time and only perform parallel upgrades if the larger upgrade batch size has been well tested with the same workload.
+Proceed with upgrading every agent in any order. Agent upgrades can be parallelized with a few caveats. During an upgrade the Mesos agent will go offline briefly (tasks will continue to run) and load on the Master nodes will increase slightly and proportional to the number of Agents rejoining the cluster. For maximum service availability, upgrade Agents one at a time and only perform parallel upgrades if the larger upgrade batch size has been well-tested with the same workload.
 
 ### On all DC/OS Agents:
 
@@ -101,7 +103,6 @@ Proceed with upgrading every agent in any order. Agent upgrades can be paralleli
 
 1.  Validate the upgrade:
 
-    - Verify that `curl http://<dcos_agent_private_ip>:5051/metrics/snapshot` has the metric `slave/registered` with a value of `1`.
     - Monitor the Mesos UI to verify that the upgraded node rejoins the DC/OS cluster and that tasks are reconciled (`http://<dcos_master>/mesos`).
 
 ## <a name="troubleshooting"></a>Troubleshooting Recommendations
@@ -133,6 +134,6 @@ sudo journalctl -u dcos-mesos-slave
 
 ## Notes:
 
-- Packages available in the DC/OS 1.9 Universe are newer than those in the DC/OS 1.8 Universe. Services are not automatically upgraded when DC/OS 1.9 is installed because not all DC/OS services have upgrade paths that will preserve existing state.
+- Packages available in the DC/OS 1.10 Universe are newer than those in the DC/OS 1.9 Universe. Services are not automatically upgraded when DC/OS 1.10 is installed because not all DC/OS services have upgrade paths that will preserve existing state.
 
 [advanced-install]: /docs/1.10/installing/custom/advanced/

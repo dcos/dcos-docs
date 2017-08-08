@@ -3,10 +3,10 @@ post_title: Installing Services
 nav_title: Installing
 menu_order: 000
 ---
- 
+
 ## Installing a service using the CLI
 
-The general syntax for installing a service with the CLI follows. 
+The general syntax for installing a service with the CLI follows.
 
 ```bash
 dcos package install [--options=<config-file-name>.json] <servicename>
@@ -15,25 +15,25 @@ dcos package install [--options=<config-file-name>.json] <servicename>
 Use the optional `--options` flag to specify the name of the customized JSON file you created in [advanced configuration](/docs/1.10/deploying-services/config-universe-service/).
 
 For example, you would use the following command to install Chronos with the default parameters.
-    
+
 ```bash
 dcos package install chronos
 ```
-    
+
 ## Installing a service using the GUI
 
-From the DC/OS GUI you can install services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.10/administering-clusters/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
+From the DC/OS GUI you can install services from the **Services** or **Catalog** tab. The Catalog tab shows all of the available DC/OS services from package [repositories](/docs/1.10/administering-clusters/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
 
 
-### Universe tab
+### Catalog tab
 
-1.  Navigate to the [**Universe > Packages**](/docs/1.10/gui/#universe) page in the DC/OS GUI.
+1.  Navigate to the [**Catalog**](/docs/1.10/gui/#catalog) tab in the DC/OS GUI.
 
-    ![universe](/docs/1.10/img/ui-dashboard-universe.gif)
+    ![universe](/docs/1.10/img/ui-dashboard-catalog.png)
 
-2.  Choose your package and click **INSTALL PACKAGE**. 
-
-3.  Confirm your installation or choose [**ADVANCED INSTALLATION**](/docs/1.10/deploying-services/config-universe-service/).
+2.  Click a package. Do one of the following:
+    - Click **DEPLOY**.
+    - Click [**CONFIGURE**](/docs/1.10/deploying-services/config-universe-service/), customize, then click **REVIEW AND DEPLOY**.
 
 ### Services tab
 

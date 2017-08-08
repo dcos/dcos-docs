@@ -386,8 +386,8 @@ The number of completed tasks for each framework that the Mesos master will reta
 ### oauth_enabled (DC/OS Only)
 Indicates whether to enable authentication for your cluster. <!-- DC/OS auth -->
 
-- `oauth_enabled: 'true'` Enable authentication for your cluster. This is the default value.
-- `oauth_enabled: 'false'` Disable authentication for your cluster.
+- `oauth_enabled: true` Enable authentication for your cluster. This is the default value.
+- `oauth_enabled: false` Disable authentication for your cluster.
 
 If you’ve already installed your cluster and would like to disable this in-place, you can go through an upgrade with the same parameter set.
 
