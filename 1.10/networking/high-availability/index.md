@@ -1,10 +1,11 @@
 ---
 post_title: High-Availability
-feature_maturity: preview
 menu_order: 05
 ---
 
 This document discusses the high availability (HA) features in DC/OS and best practices for building HA applications on DC/OS.
+
+DC/OS multiple zone (multi-AZ) configuration support is [preview](/docs/1.10/overview/feature-maturity/#preview) and multiple region configuration support is [experimental](/docs/1.10/overview/feature-maturity/#experimental).
 
 # Terminology
 
