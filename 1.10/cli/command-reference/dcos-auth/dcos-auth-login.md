@@ -23,7 +23,7 @@ dcos auth login [OPTION]
 |  `--password-file=<password_file>`  |  | The path to a file that contains the password for login. |
 |  `--password=<password>`  |            | The password for login. This is insecure.  |
 |  `--private-key=<key_path>`  |         | The path to a file that contains the private key.  |
-|  `--provider=<provider_id>`  |         | The authentication provider to use for login.  |
+|  `--provider=<provider_id>`  |         | (Enterprise DC/OS Only) The authentication provider to use for login.  |
 |  `--username=<username>`  |            | The username for login. |
 
 ## SSL options
