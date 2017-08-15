@@ -11,7 +11,7 @@ As of version 1.10, DC/OS works with any type of CNI network. Use CNI to allow y
 
 Add your plugin and configuration file to each agent on your cluster. Consult the [CNI specification](https://github.com/containernetworking/cni/blob/master/SPEC.md) to learn more about CNI plugins and configuration.
 
-1. Add your plugin file to the `opt/mesosphere/active/cni/` directory.
+1. Add your plugin file to the `/opt/mesosphere/active/cni/` directory.
 
 1. Add your configuration file to the `/opt/mesosphere/etc/dcos/network/cni/` directory.
    A typical configuration file looks like this.
@@ -39,9 +39,7 @@ Add your plugin and configuration file to each agent on your cluster. Consult th
 
 # Configuring your Service to Use a CNI Plugin
 
-Add a reference to the CNI in your service definition.
-
-## Using the [Universal Container Runtime (UCR)](/docs/1.10/deploying-services/containerizers/ucr/)
+**Note:** Your service must use the [Universal Container Runtime (UCR)](/docs/1.10/deploying-services/containerizers/ucr/).
 
 Add the `ipAddress.networkName` parameter to your service definition. `networkName` must match the `name` parameter of the configuration file in the previous step. In our current example, it is `dcos`.
 
@@ -49,16 +47,4 @@ Add the `ipAddress.networkName` parameter to your service definition. `networkNa
 "ipAddress": {
         "networkName": "dcos"
 }
-```
-
-## Using the [Docker Containerizer](/docs/1.10/deploying-services/containerizers/docker-containerizer/)
-
-Add the `networks.name` and `networks.mode` parameters to your service definition. `name` must match the `name` parameter of the configuration file in the previous step. In our current example, it is `dcos`.
-
-```
-"networks": [
-    {
-      "name": "dcos",
-      "mode": "container"
-    }
 ```
