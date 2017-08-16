@@ -1,15 +1,16 @@
 ---
-post_title: High-Availability
-feature_maturity: preview
+post_title: High Availability
 menu_order: 05
 ---
 
 This document discusses the high availability (HA) features in DC/OS and best practices for building HA applications on DC/OS.
 
+DC/OS multiple zone (multi-AZ) configuration support is [preview](/docs/1.9/overview/feature-maturity/#preview) and multiple region configuration support is [experimental](/docs/1.9/overview/feature-maturity/#experimental).
+
 # Terminology
 
 ## Zone
-A zone is a failure domain that has isolated power, networking, and connectivity. Typically, a zone is a single data center or independent fault domain on-premise, or managed by a cloud provider. For example, AWS Availability Zones or GCP Zones. Servers within a zone are connected via high bandwidth (e.g. 1-10+ Gbps), low latency (up to 1 ms), and low cost links.
+A zone is a failure domain that has isolated power, networking, and connectivity. Typically, a zone is a single data center or independent fault domain on-premise, or managed by a cloud provider. For example, AWS availability zones or GCP zones. Servers within a zone are connected via high bandwidth (e.g. 1-10+ Gbps), low latency (up to 1 ms), and low cost links.
 
 ## Region
 A region is a geographical region, such as a metro area, that consists of one or more zones. Zones within a region are connected via high bandwidth (e.g. [1-4 Gbps](https://blog.serverdensity.com/network-performance-aws-google-rackspace-softlayer/)), low latency (up to 10 ms), low cost links. Regions are typically connected through public internet via variable bandwidth (e.g. [10-100 Mbps](https://cloudharmony.com/speedtest-for-aws)) and latency ([100-500 ms](https://www.concurrencylabs.com/blog/choose-your-aws-region-wisely/)) links.
@@ -37,7 +38,7 @@ In DC/OS, a number of components follow the leader/follower pattern. We'll discu
 
 #### Mesos
 
-Mesos can be run in high availability mode, which requires running 3 or 5 masters. When run in HA mode, one master is elected as the leader, while the other masters are followers. Each master has a replicated log which contains some state about the cluster. The leading master is elected by using ZooKeeper to perform leader election. For more detail on this, see the [Mesos HA documentation](https://mesos.apache.org/documentation/latest/high-availability/).
+Mesos can be run in HA mode, which requires running 3 or 5 masters. When run in HA mode, one master is elected as the leader, while the other masters are followers. Each master has a replicated log which contains some state about the cluster. The leading master is elected by using ZooKeeper to perform leader election. For more detail on this, see the [Mesos HA documentation](https://mesos.apache.org/documentation/latest/high-availability/).
 
 #### Marathon
 
