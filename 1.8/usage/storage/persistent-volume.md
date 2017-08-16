@@ -113,8 +113,8 @@ When a task that used persistent volumes has terminated, its metadata will be ke
 
 For example, if you scale down from 5 to 3 instances, you will see 2 tasks in the `Waiting` state along with the information about the persistent volumes the tasks were using as well as about the agents on which they are placed. Marathon will not unreserve those resources and will not destroy the volumes. When you scale up again, Marathon will attempt to launch tasks that use those existing reservations and volumes as soon as it gets a Mesos offer containing the labeled resources. Marathon will only schedule unreserve/destroy operations when:
 
-- the application is deleted (in which case volumes of all its tasks are destroyed, and all reservations are deleted).
-- you explicitly delete one or more suspended tasks with a `wipe=true` flag.
+- The application is deleted (in which case volumes of all its tasks are destroyed, and all reservations are deleted).
+- You explicitly delete one or more suspended tasks with a `wipe=true` flag.
 
 If reserving resources or creating persistent volumes fails, the created task will timeout after the configured `task_reservation_timeout` (default: 20 seconds) and a new reservation attempt will be made. In case a task is `LOST` (because its agent is disconnected or crashed), the reservations and volumes will not timeout and you need to manually delete and wipe the task to let Marathon launch a new one.
 
@@ -151,7 +151,7 @@ The temporary Mesos sandbox is still the target for the `stdout` and `stderr` lo
 
 ## Running stateful PostgreSQL on Marathon
 
-A model app definition for PostgreSQL on Marathon would look like this. Note that we set the postgres data folder to `pgdata` which is relative to the Mesos sandbox (as contained in the `$MESOS_SANDBOX` variable). This enables us to set up a persistent volume with a containerPath of `pgdata`. This path is is not nested and relative to the sandbox as required:
+A model app definition for PostgreSQL on Marathon would look like this. Note that we set the PostgreSQL data folder to `pgdata` which is relative to the Mesos sandbox (as contained in the `$MESOS_SANDBOX` variable). This enables us to set up a persistent volume with a containerPath of `pgdata`. This path is is not nested and relative to the sandbox as required:
 
 ```json
 {
@@ -302,7 +302,7 @@ response:
 }
 ```
 
-**Note: ** A running task will show `stagedAt`, `startedAt` and `version` in addition to the information provided above.
+**Note:** A running task will show `stagedAt`, `startedAt`, and `version` in addition to the information provided above.
 
 You can then
 
