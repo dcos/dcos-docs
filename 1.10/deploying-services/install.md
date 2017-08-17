@@ -56,4 +56,4 @@ Go to the **Services** tab and confirm that the service is running. For more inf
 
 ![Services](/docs/1.10/img/tweeter-services6.png)
 
-**Tip:** Some services from the "Community Packages" section of the Universe will not show up in the DC/OS service listing. For these, inspect the service's Marathon app in the Marathon GUI to verify that the service is running and healthy.
+**Tip:** Some services from the **Community Services** section of the Catalog will not show up in the DC/OS service listing. For these, inspect the service's Marathon app in the Marathon GUI to verify that the service is running and healthy.
