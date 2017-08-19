@@ -22,14 +22,16 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 ## Prerequisites
 
 - Mesos, Mesos Frameworks, Marathon, Docker, and all running tasks in the cluster should be stable and in a known healthy state.
-- For Mesos compatibility reasons, we recommend upgrading any running Marathon-on-Marathon instances on DC/OS 1.9 to Marathon version 1.5 before upgrading to DC/OS 1.10. <!-- is this correct? -->
+- For Mesos compatibility reasons, we recommend upgrading any running Marathon-on-Marathon instances on DC/OS 1.9 to Marathon version 1.5 before upgrading to DC/OS 1.10.
 - You must have access to copies of the config files used with DC/OS 1.10: `config.yaml` and `ip-detect`.
 - You must be using systemd 218 or newer to maintain task state.
 - All hosts (masters and agents) must be able to communicate with all other hosts on all ports, for both TCP and UDP.
 - In CentOS or RedHat, install IP sets with this command (used in some IP detect scripts): `sudo yum install -y ipset`
 - You must be familiar with using `systemctl` and `journalctl` command line tools to review and monitor service status. Troubleshooting notes can be found at the end of this [document](#troubleshooting).
 - You must be familiar with the [Advanced DC/OS Installation Guide][advanced-install].
-- You should take a snapshot of ZooKeeper prior to upgrading. Marathon supports rollbacks, but does not support downgrades.
+- Take a snapshot of ZooKeeper prior to upgrading. Marathon supports rollbacks, but does not support downgrades.
+- Ensure that Marathon event subscribers are disabled before beginning the upgrade. Leave them disabled after completing the upgrade, as this feature is now deprecated.
+- Verify that all Marathon application constraints are valid before beginning the upgrade.  Use this [script](https://github.com/mesosphere/public-support-tools/blob/master/check-constraints.py) to check if your constraints are valid.
 - The full DC/OS version string that you are upgrading from.
   - In 1.9, this can be found under the **Cluster** tab.
   - In 1.10, this can be found under the **Overview** tab.
@@ -39,7 +41,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - From the latest GA version of 1.9 to the latest GA version of 1.10. For example, if 1.9.2 is the latest and 1.10.0 is the latest, this upgrade would be supported.
 - From any 1.10 release to the next. For example, an upgrade from 1.10.1 to 1.10.2 would be supported.
 - From any 1.10 release to an identical 1.10 release. For example, an upgrade from 1.10.0 to 1.10.0 would be supported. This is useful for making configuration changes.
-<!-- stopped here -->
+
 ## Instructions
 
 ### Bootstrap Nodes
@@ -50,6 +52,8 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 
     *  You cannot change the `exhibitor_zk_backend` setting during an upgrade.
     *  The syntax of the DC/OS 1.10 `config.yaml` differs from that of DC/OS 1.9. <!-- is this still true for 1.9 to 1.10? -->For a detailed description of the 1.10 `config.yaml` syntax and parameters, see the [documentation](/docs/1.10/installing/custom/configuration/configuration-parameters/).
+
+1.  After updating the format of the `config.yaml`, compare the old `config.yaml` and new `config.yaml`.  Verify that there are no differences in pathways or configurations. Changing these while upgrading can lead to catastrophic cluster failures.
 
 1.  After you have converted your 1.9 `config.yaml` into the 1.10 `config.yaml` format, you can build your installer package:
 
