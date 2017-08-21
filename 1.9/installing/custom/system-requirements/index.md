@@ -9,9 +9,9 @@ You must have a single bootstrap node, an odd number of Mesos master nodes, and 
 
 ## Bootstrap node
 
-1 node with 2 Cores, 16 GB RAM, 60 GB HDD. This is the node where DC/OS installation is run. This bootstrap node must also have:
+1 node with 2 cores, 16 GB RAM, 60 GB HDD. This is the node where DC/OS installation is run. This bootstrap node must also have:
 
-*   A High-availability (HA) TCP/Layer 3 load balancer, such as HAProxy, to balance the following TCP ports to all master nodes: 80, 443, 8080, 8181, 2181, 5050.
+*   A high-availability (HA) TCP/Layer 3 load balancer, such as HAProxy, to balance the following TCP ports to all master nodes: 80, 443, 8080, 8181, 2181, 5050.
 *  An unencrypted SSH key that can be used to authenticate with the cluster nodes over SSH. Encrypted SSH keys are not supported.
 
 **Important:** The bootstrap node must be separate from your cluster nodes.
@@ -64,7 +64,7 @@ The agent nodes must also have:
     ```bash
     sudo systemctl stop firewalld && sudo systemctl disable firewalld
     ```
-*   DC/OS is installed to `/opt/mesosphere`. Make sure that `/opt/mesosphere` exists on a partition that is not on an LVM Logical Volume or shared storage.
+*   DC/OS is installed to `/opt/mesosphere`. `/opt/mesosphere` cannot be on a partition that is on an LVM logical volume or shared storage.
 *   The Mesos master and agent persistent information of the cluster is stored in the `/var/lib/mesos` directory.
     
     **Important:** Do not remotely mount `/var/lib/mesos` or the Docker storage directory (by default `/var/lib/docker`).
