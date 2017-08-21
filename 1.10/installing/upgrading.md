@@ -35,6 +35,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - The full DC/OS version string that you are upgrading from.
   - In 1.9, this can be found under the **Cluster** tab.
   - In 1.10, this can be found under the **Overview** tab.
+- Optional: You can add custom [node and cluster healthchecks] (/docs/1.10/installing/custom/node-cluster-health-check/#custom-health-checks) to your `config.yaml`.
 
 ## Supported upgrade paths
 
@@ -119,6 +120,13 @@ The following commands should provide insight into upgrade issues:
 sudo journalctl -u dcos-download
 sudo journalctl -u dcos-spartan
 sudo systemctl | grep dcos
+```
+
+If your upgrade fails because of a [custom node or cluster check](/1.10/administering-clusters/backup-and-restore/), run these commands for more details:
+
+```bash
+dcos-diagnostics check node-poststart
+dcos-diagnostics check cluster
 ```
 
 ### On DC/OS Masters
