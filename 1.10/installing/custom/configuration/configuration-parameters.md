@@ -28,7 +28,7 @@ This topic provides all available configuration parameters. Except where explici
 | [master_discovery](#master_discovery)                                 | (Required) The Mesos master discovery method.         |
 | [platform](#platform)                                                 | The infrastructure platform. |
 | [public_agent_list](#public_agent_list)                               | A YAML nested list (`-`) of IPv4 addresses to your [public agent](/docs/1.10/overview/concepts/#public-agent-node) host names.  |
-| [rexray_config](#rexray_config)                                       | The [REX-Ray](https://rexray.readthedocs.org/en/v0.3.2/user-guide/config/) configuration method for enabling external persistent volumes in Marathon. You cannot specify both `rexray_config` and `rexray_config_preset`.|
+| [rexray_config](#rexray_config)                                       | The [REX-Ray](https://rexray.readthedocs.io/en/v0.9.0/user-guide/config/) configuration method for enabling external persistent volumes in Marathon. You cannot specify both `rexray_config` and `rexray_config_preset`.|
 | [rexray_config_preset](#rexray_config_preset) | If you run DC/OS on AWS setting this parameter to `aws`, sets the `rexray_config` parameter to a sensible default REX-Ray configuration that is bundled with DC/OS itself. You cannot specify both `rexray_config` and `rexray_config_preset`. |
 
 # Networking
@@ -419,24 +419,25 @@ A YAML nested list (`-`) of DNS resolvers for your DC/OS cluster nodes. You can 
 **Caution:** If you set the `resolvers` parameter incorrectly, you will permanently damage your configuration and have to reinstall DC/OS.
 
 ### rexray_config
-The <a href="https://rexray.readthedocs.org/en/v0.3.2/user-guide/config/" target="_blank">REX-Ray</a> configuration for enabling external persistent volumes in Marathon. REX-Ray is a storage orchestration engine. The following is an example configuration.
+The <a href="https://rexray.readthedocs.io/en/v0.9.0/user-guide/config/" target="_blank">REX-Ray</a> configuration for enabling external persistent volumes in Marathon. REX-Ray is a storage orchestration engine. The following is an example configuration.
 
-    rexray: 
-      loglevel: info 
-      service: ebs
-    libstorage:
-      integration:
-        volume:
-          operations:
-            unmount:
-              ignoreusedcount: true
-      server:
-        tasks:
-          logTimeout: 5m
+    rexray_config:
+        rexray: 
+          loglevel: info 
+          service: ebs
+        libstorage:
+          integration:
+            volume:
+              operations:
+                unmount:
+                  ignoreusedcount: true
+          server:
+            tasks:
+              logTimeout: 5m
 
 See the external persistent volumes [documentation](/docs/1.10/storage/external-storage/) for information on how to create your configuration.
 
-If the `rexray_config` parameter is provided, its contents are used verbatim for REX-Ray's configuration. This lets you define completely custom REX-Ray configurations which integrate with various [external storage providers](https://rexray.readthedocs.io/en/stable/user-guide/storage-providers/). However, if you upgrade your cluster to a version that includes an updated version of REX-Ray, you must ensure that your `rexray_config` parameter is compatible with the newer version of REX-Ray.
+If the `rexray_config` parameter is provided, its contents are used verbatim for REX-Ray's configuration. This lets you define completely custom REX-Ray configurations which integrate with various [external storage providers]( https://rexray.readthedocs.io/en/v0.9.0/user-guide/storage-providers/). However, if you upgrade your cluster to a version that includes an updated version of REX-Ray, you must ensure that your `rexray_config` parameter is compatible with the newer version of REX-Ray.
 
 
 ### rexray_config_preset
