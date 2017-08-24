@@ -15,12 +15,11 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 1. Click **Single Container**.
     
    1. In the **SERVICE ID** field, enter a name for your service. 
-   1. In the **Command** field, enter `sleep 10`.
+   1. In the **COMMAND** field, enter `sleep 10`.
    1. Click **MORE SETTINGS** and choose your container runtime.
       
-      -  **DOCKER ENGINE** Use this option if you require specific features of the Docker package. If you select this option, you must specify a Docker container image in the **Container Image** field. For example, you can specify the `Alpine` [Docker image](https://hub.docker.com/_/alpine/).
-      -  **MESOS RUNTIME** Use this option if you prefer the original Mesos container runtime. It does not support Docker containers. 
-      -  **UNIVERSAL CONTAINER RUNTIME** Use this option if you are using Pods or GPUs. This option also supports Docker images without depending on the Docker Engine. If you select this option, you can optionally specify a Docker container image in the **Container Image** field. For example, you can specify the `Alpine` [Docker image](https://hub.docker.com/_/alpine/).
+      -  **DOCKER ENGINE** Use this option if you require specific features of the Docker package. If you select this option, you must specify a Docker container image in the **CONTAINER IMAGE** field. For example, you can specify the `Alpine` [Docker image](https://hub.docker.com/_/alpine/).
+      -  **MESOS RUNTIME**  Universal Container Runtime (UCR) using native Mesos engine. Supports Docker file format, multiple containers (Pods) and GPU resources. If you select this option, you can optionally specify a Docker container image in the **CONTAINER IMAGE** field. For example, you can specify the `Alpine` [Docker image](https://hub.docker.com/_/alpine/).
       
       For more information, see the containerizer [documentation](/docs/1.10/deploying-services/containerizers/).
       
@@ -28,7 +27,7 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 
     ![Create a service in the DC/OS UI](/docs/1.10/img/deploy-svs-ui.png)
 
-1. That's it! Click the name of your service in the **Services** view to see it running and monitor health.
+1. Click the name of your service in the **Services** view to see it running and monitor health.
 
     ![Running service in the DC/OS UI](/docs/1.10/img/svc-running-ui.png)
 
@@ -81,11 +80,11 @@ This tutorial shows how to create and deploy a simple one-command service and a 
 1.  Go to the `hello-dcos` page of the [Mesosphere Docker Hub repository](https://hub.docker.com/r/mesosphere/hello-dcos/tags/) and note down the latest image tag.
 1.  Click the **Services** tab of the DC/OS web interface, then click the **RUN A SERVICE**.
 1.  Click **Single Container** and enter a name for your service in the **SERVICE ID** field.
-1.  Click the **Container Settings** tab and enter the following in the **Container Image** field: `mesosphere/hello-dcos:<image-tag>`. Replace `<image-tag>` with the tag you copied in step 1.
+1.  Click the **Container Settings** tab and enter the following in the **CONTAINER IMAGE** field: `mesosphere/hello-dcos:<image-tag>`. Replace `<image-tag>` with the tag you copied in step 1.
 
     ![Containerized service in the DC/OS UI](/docs/1.10/img/deploy-container-ui.png)
 
-1.  Click **Deploy**.
+1.  Click **REVIEW & RUN**.
 1.  In the **Services** tab, click the name of your service, then choose on of the task instances. Click **Logs**, then toggle to the **STDERR** and **STDOUT** to see the output of the service.
 
     ![Running containerized service in the DC/OS UI](/docs/1.10/img/container-running-ui.png)

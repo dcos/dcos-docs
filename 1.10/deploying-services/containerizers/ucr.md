@@ -5,7 +5,11 @@ feature_maturity: preview
 menu_order: 10
 ---
 
-The [Universal Container Runtime](http://mesos.apache.org/documentation/latest/container-image) (UCR) extends the Mesos containerizer to support provisioning [Docker](https://docker.com/) container images. This means that you can use both the Mesos containerizer and other container image types in DC/OS. You can still use the Docker container runtime directly with DC/OS, but the Universal Container Runtime supports running Docker images without depending on the Docker Engine, which allows for better integration with Mesos.
+The [Universal Container Runtime](http://mesos.apache.org/documentation/latest/container-image) (UCR) extends the Mesos containerizer to support provisioning [Docker](https://docker.com/) container images. This means that you can use both the Mesos containerizer and other container image types in DC/OS. You can still use the Docker container runtime directly with DC/OS, but the Universal Container Runtime supports running Docker images without depending on the Docker Engine, which 
+
+- Reduces dependencies.
+- Reduces service downtime (upgrading or restarting Docker kills all running containers on a node).
+- Improves on the fly upgradability.
 
 The Universal Container Runtime offers the following advantages:
 
@@ -19,9 +23,12 @@ The Universal Container Runtime offers the following advantages:
 ## Prerequisite
 If your service [pulls Docker images from a private registry](/docs/1.10/deploying-services/private-docker-registry/), you must specify the [`cluster_docker_credentials_path` in your `config.yaml`](/docs/1.10/installing/custom/configuration/configuration-parameters/#cluster_docker_credentials) file before installing DC/OS.
 
+1. Enter the service ID.
+
+1. In the **CONTAINER IMAGE** field, optionally enter a container image. Otherwise, enter a command in the **COMMAND** field. 
+
 1. Specify the UCR from the web interface. Go to **Services**  > **Run a Service** > **Single Container** > **More Settings**. In the **Container Runtime** section, choose the **MESOS RUNTIME** radio button.
 
-1. In the **Container Image** field, enter your container image.
 
 # Provision Containers with the Universal Container Runtime from the DC/OS CLI
 
