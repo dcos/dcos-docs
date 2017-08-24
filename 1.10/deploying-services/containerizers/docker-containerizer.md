@@ -7,7 +7,7 @@ Use the Docker containerizer if you need specific features of the Docker package
 
 # Specify the Docker Containerizer from the DC/OS Web Interface
 
-To specify the Docker Containerizer from the web interface, go to **Services**  > **Run a Service** > **Single Container** > **More Settings**. In the **Container Runtime** section, choose the **Docker Engine** radio button.
+To specify the Docker Containerizer from the web interface, go to **Services**  > **Run a Service** > **Single Container** > **More Settings**. In the **Container Runtime** section, choose the **DOCKER ENGINE** radio button.
 
 # Specify the Docker Containerizer from the DC/CLI
 
