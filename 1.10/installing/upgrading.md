@@ -3,7 +3,8 @@ post_title: Upgrading
 menu_order: 3.1
 ---
 
-<table class="table" bgcolor="#FAFAFA"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Important:</b> Upgrade is not supported for the 1.10 Beta 1 release. The Beta 2 release will support upgrade.</td> </tr> </table>
+<table class="table" bgcolor="#FAFAFA"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Important:</b> Upgrade is not supported for the 1.10 Beta 1 release
+at this time.</td> </tr> </table>
 
 ## Summary
 
