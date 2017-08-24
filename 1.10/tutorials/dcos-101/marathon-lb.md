@@ -1,5 +1,5 @@
 ---
-post_title: Exposing Apps using Edge Router
+post_title: Exposing Apps Publicly
 nav_title: Exposing Apps Publicly
 menu_order: 6
 ---
