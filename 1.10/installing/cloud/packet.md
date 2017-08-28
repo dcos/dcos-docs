@@ -24,9 +24,9 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Packe
 
 ## Prerequisites:
 
-- [Packet API Key](https://help.packet.net/technical/api/how-to-use-the-packet-api)
+- [Packet API Key](https://help.packet.net/quick-start/api-integrations)
 
-- [Packet Project ID](https://help.packet.net/technical/api/how-to-use-the-packet-api)
+- [Packet Project ID](https://help.packet.net/quick-start/api-integrations)
 
 - [Terraform by Hashicorp](https://www.terraform.io/intro/getting-started/install.html)
 
