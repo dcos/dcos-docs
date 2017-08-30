@@ -46,4 +46,4 @@ Example user space schedulers:
 - The Cassandra scheduler provides **Cassandra nodes**, which run as lifecycle managed Cassandra nodes.
 - The Spark scheduler (dispatcher) provides **Spark jobs**, which are themselves schedulers for Spark tasks.
 
-For a full list of installable schedulers (and other packages), see the [Mesosphere Universe package list](http://universe.dcos.io/#/).
+For a full list of installable schedulers (and other packages), see the [Mesosphere Universe package list](https://universe.dcos.io/#/).
