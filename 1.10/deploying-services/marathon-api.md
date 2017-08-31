@@ -9,7 +9,7 @@ The Marathon API is backed by the [Marathon component](/docs/1.10/overview/archi
 
 One of the Marathon instances is elected as leader, while the rest are hot backups in case of failure. All API requests must go through the Marathon leader. To enforce this, Admin Router proxies requests from any master node to the Marathon leader.
 
-For more information about using Marathon, see [Managing Services](/docs/1.10/deploying-services/).
+For more information about using Marathon, see [Deploying Services and Pods](/docs/1.10/deploying-services/).
 
 
 ## Routes
