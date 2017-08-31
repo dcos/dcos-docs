@@ -1,67 +1,76 @@
 ---
 nav_title: Universal Container Runtime
-post_title: Universal Container Runtime (UCR)
+post_title: Universal Container Runtime
 feature_maturity: preview
 menu_order: 10
 ---
 
-The [Universal Container Runtime](http://mesos.apache.org/documentation/latest/container-image) (UCR) extends the Mesos containerizer to support provisioning [Docker](https://docker.com/) container images. This means that you can use both the Mesos containerizer and other container image types in DC/OS. You can still use the Docker container runtime directly with DC/OS, but the Universal Container Runtime supports running Docker images without depending on the Docker Engine, which 
+The [Universal Container Runtime (UCR)](http://mesos.apache.org/documentation/latest/container-image) launches Mesos containers from binary executables and extends the Mesos container runtime to support provisioning [Docker](https://docker.com/) container images. The UCR has many [advantages](/docs/1.10/deploying-services/containerizers/) over the Docker Engine for running Docker images.  Use the Docker Engine only if you need specific [ features](/docs/1.10/deploying-services/containerizers/#containerizer-runtime-features) of the Docker package. 
 
-- Reduces dependencies.
-- Reduces service downtime (upgrading or restarting Docker kills all running containers on a node).
-- Improves on the fly upgradability.
+# Provision a container with the UCR from the DC/OS web interface
 
-The Universal Container Runtime offers the following advantages:
+1. Click the **Services** tab of the DC/OS web interface, then click **RUN A SERVICE**.
 
-* **Removes your dependency on the Docker daemon**: With previous versions of Docker, if the Docker daemon was not responsive, a restart to the daemon caused all containers to stop on the host. In addition, Docker must be installed on each of your agent nodes to use the Docker containerizer. This means that to use the Docker containerizer you need to upgrade Docker on the agent nodes each time a new version of Docker comes out.
-* The UCR is more stable and allows deployment at scale.
-* The UCR offers features not available in the Docker containerizer, such as GPU and CNI support.
-* The UCR allows you to take advantage of continuing innovation within both the Mesos and DC/OS, including features such as IP per container, strict container isolation, and more.
-
-# Provision Containers with the Universal Container Runtime from the DC/OS Web Interface
-
-## Prerequisite
-If your service [pulls Docker images from a private registry](/docs/1.10/deploying-services/private-docker-registry/), you must specify the [`cluster_docker_credentials_path` in your `config.yaml`](/docs/1.10/installing/custom/configuration/configuration-parameters/#cluster_docker_credentials) file before installing DC/OS.
+1. Click **Single Container**.
 
 1. Enter the service ID.
 
 1. In the **CONTAINER IMAGE** field, optionally enter a container image. Otherwise, enter a command in the **COMMAND** field. 
 
-1. Specify the UCR from the web interface. Go to **Services**  > **Run a Service** > **Single Container** > **More Settings**. In the **Container Runtime** section, choose the **MESOS RUNTIME** radio button.
+1. Specify the UCR. Click **MORE SETTINGS**. In the **Container Runtime** section, choose the **MESOS RUNTIME** radio button.
+
+1. Click **REVIEW & RUN**.
 
 
-# Provision Containers with the Universal Container Runtime from the DC/OS CLI
+# Provision a container with the UCR from the DC/OS CLI
 
-## Prerequisite
-If your service [pulls Docker images from a private registry](/docs/1.10/deploying-services/private-docker-registry/), you must specify the [`cluster_docker_credentials_path` in your `config.yaml`](/docs/1.10/installing/custom/configuration/configuration-parameters/#cluster_docker_credentials) file before installing DC/OS.
-
-1. Specify the container type `MESOS` and a the appropriate object in your [Marathon application definition](/docs/1.10/deploying-services/creating-services/). Here, we specify a Docker container with the `docker` object.
-
-The UCR provides an optional `pullConfig` parameter to enable you to [authenticate to a private Docker registry](/docs/1.10/deploying-services/private-docker-registry/).
+1. In your [Marathon application definition](/docs/1.10/deploying-services/creating-services/#deploying-a-simple-docker-based-application-with-the-rest-api), set the `container.type` parameter to `MESOS`. Here, we specify a Docker container with the `docker` object. The UCR provides an optional `pullConfig` parameter to enable you to [authenticate to a private Docker registry](/docs/1.10/deploying-services/private-docker-registry/).
 
 ```json
-{  
-   "id":"mesos-docker",
-   "container":{  
-      "docker": {
-          "image": "mesosphere/inky",
-          "pullConfig": {
+{
+  "id": "/nginx-bridge",
+  "container": {
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/nginx2:1024"
+        },
+        "protocol": "tcp",
+        "servicePort": 10000,
+        "name": "webport"
+      }
+    ],
+    "type": "MESOS",
+    "volumes": [],
+    "docker": {
+        "image": "nginx",
+        "forcePullImage": false,
+        "pullConfig": {
             "secret": "pullConfigSecret"
-          }
-      },
-      "type":"MESOS"
-   },
-   "secrets": {
-        "pullConfigSecret": {
-          "source": "/mesos-docker/pullConfig"
+        },
+        "parameters": []
         }
-   },
-   "args":[  
-      "<my-arg>"
-   ],
-   "cpus":0.2,
-   "mem":16.0,
-   "instances":1
+    },
+    "secrets": {
+      "pullConfigSecret": {
+        "source": "/mesos-docker/pullConfig"
+      }
+    },
+    "args":[  
+    "<my-arg>"
+    ],
+    "cpus": 0.5,
+    "disk": 0,
+    "instances": 1,
+    "mem": 128,
+    "networks": [
+      {
+      "mode": "container/bridge"
+      }
+    ],
+    "requirePorts": false
 }
 ```
 
@@ -69,7 +78,7 @@ The UCR provides an optional `pullConfig` parameter to enable you to [authentica
 
 # Limitations
 - The UCR is a [preview](/docs/1.10/overview/feature-maturity/) feature in DC/OS 1.10.
-- The UCR does not support the following: runtime privileges, Docker options, force pull, named ports, numbered ports, bridge networking, port mapping, private registries with container authentication.
+- The UCR does not support the following: runtime privileges, Docker options, private registries with container authentication.
 
 # Further Reading
 - [View the Mesos docs for the UCR](http://mesos.apache.org/documentation/latest/container-image/).

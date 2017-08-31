@@ -37,7 +37,7 @@ DC/OS is made up of many open source components, several of which existed before
 - [Package Manager](#dcos-package-manager)
 - [Package Registry](#dcos-package-registry)
 - [Mesosphere Universe](#mesosphere-universe)
-- [Container-Registry](#container-registry)
+- [Container Registry](#container-registry)
 - [Cloud Template](#cloud-template)
 
 ### <a name="dcos"></a>DC/OS
@@ -274,8 +274,8 @@ The following terms are contextually correct when talking about Apache Mesos, bu
 - [Role](#mesos-role)
 - [Resource Offer](#mesos-resource-offer)
 - [Containerizer](#mesos-containerizer)
-  - [Mesos Universal Container Runtime](#mesos-universal-container-runtime)
-  - [Docker Runtime](#mesos-docker-runtime)
+  - [Universal Container Runtime](#mesos-universal-container-runtime)
+  - [Docker Containerizer](#mesos-docker-containerizer)
 - [Exhibitor &amp; ZooKeeper](#mesos-exhibitor-zookeeper)
 - [Mesos\-DNS](#mesos-dns)
 
@@ -337,7 +337,7 @@ For more information about framework schedulers and executors, see the [Applicat
 
 ### <a name="mesos-role"></a>Role
 
-A Mesos role is a group of Mesos Frameworks that share reserved resources, persistent volumes, and quota. These frameworks are also grouped together in Mesos' hierarchical Dominant Resource Fairness (DRF) share calculations.
+A Mesos role is a group of Mesos frameworks that share reserved resources, persistent volumes, and quota. These frameworks are also grouped together in Mesos' hierarchical Dominant Resource Fairness (DRF) share calculations.
 
 - Roles are often confused as groups of resources, because of the way they can be statically configured on the agents. The assignment is actually the inverse: resources are assigned to roles.
 - Role resource allocation can be configured statically on the Mesos agent or changed at runtime using the Mesos API.
@@ -348,15 +348,15 @@ A Mesos resource offer provides a set of unallocated resources (e.g. cpu, disk, 
 
 ### <a name="mesos-containerizer"></a>Containerizer
 
-A containerizer is a containerization and resource isolation abstraction around a specific container runtime, namely the [Docker Runtime](#mesos-docker-runtime) and [Mesos Universal Container Runtime](#mesos-universal-container-runtime).
+A containerizer provides a containerization and resource isolation abstraction around a specific container runtime. The supported runtimes are the Docker Engine and Universal Container Runtime.
 
-#### <a name="mesos-universal-container-runtime"></a>Mesos Universal Container Runtime
+#### <a name="mesos-containerizer-docker-engine"></a>Docker Engine
 
-The Mesos Universal Container Runtime is a containerizer that supports traditional Mesos containers around binary executables and also Mesos containers launched from Docker images. Containers managed by the Mesos Universal Container Runtime do not use [Docker-Engine](https://www.docker.com/products/docker-engine), even if launched from a Docker image.
+The [Docker Engine](https://www.docker.com/products/docker-engine) launches Docker containers from Docker images.
 
-#### <a name="mesos-docker-runtime"></a>Docker Runtime
+#### <a name="mesos-containerizer-universal-container-runtime"></a>Universal Container Runtime
 
-The Docker Runtime is a containerizer that supports launching Docker containers from Docker images with [Docker-Engine](https://www.docker.com/products/docker-engine).
+The Universal Container Runtime launches Mesos containers from binary executables and Docker images. Mesos containers managed by the Universal Container Runtime do not use Docker Engine, even if launched from a Docker image.
 
 ### <a name="mesos-exhibitor-zookeeper"></a>Exhibitor &amp; ZooKeeper
 
