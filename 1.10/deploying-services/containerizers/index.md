@@ -5,29 +5,29 @@ menu_order: 40
 
 A containerizer provides a containerization and resource isolation abstraction around a specific container runtime. DC/OS containerizers support the following container runtimes:
 
-- [Universal Container Runtime (UCR)](/docs/1.10/deploying-services/containerizers/ucr/).
+- [Universal Container Runtime](/docs/1.10/deploying-services/containerizers/ucr/).
 - [Docker Engine](/docs/1.10/deploying-services/containerizers/docker-containerizer/).
 
-You can use the Docker Engine directly with DC/OS, but the Universal Container Runtime:
+The Universal Container Runtime (UCR) has the following advantages:
 
-* **Removes your dependency on the Docker Engine**: If the Docker Engine is not responsive, a restart to the engine causes all containers on the host to stop. In addition, Docker must be installed on each of your agent nodes to use the Docker Engine and you must upgrade Docker on the agent nodes each time a new version of Docker is released.
+* Removes your dependency on the Docker Engine. If the Docker Engine is not responsive, restarting the Engine causes all containers on the host to stop. In addition, Docker must be installed on each of your agent nodes and you must upgrade Docker on the agent nodes each time a new version of Docker is released.
 * Is more stable and allows deployment at scale.
-* Offers features not available in the Docker engine, such as GPU and CNI support.
-* Allows you to take advantage of continuing innovation within both the Mesos and DC/OS, including features such as IP per container, strict container isolation, and more. Refer to the [features matrix](#containerizer-runtime-features) for details.
+* Offers features not available in the Docker Engine, such as GPU and CNI support.
+* Allows you to take advantage of continuing innovation within both the Mesos and DC/OS, including features such as IP per container, strict container isolation, and more. Refer to the [features matrix](#container-runtime-features) for details.
 
 In summary, using the UCR instead of the Docker Engine:
 
-- Reduces dependencies.
 - Reduces service downtime.
 - Improves on the fly upgradability.
+- Increases cluster stability.
 
-# Containerizer Runtime Features
+# Container Runtime Features
 
-The tables below enumerate the features available with each of the supported containerizer runtimes, which products support the features, and where the feature can be configured.
+The tables below enumerate the features available with each of the supported container runtimes, which products support the features, and where the feature can be configured.
 
 ## DC/OS Features
 
-| Feature                                 | UCR         | Docker       | Comments |
+| Feature                                 | UCR         | Docker    | Comments |
 | --------------------------------------- | ----------- | --------- | -------- |
 | **Command**                             | Yes         | Yes       |          |
 | **Container Images**                    | Yes         | Yes       |          |

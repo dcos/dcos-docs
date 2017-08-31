@@ -3,7 +3,7 @@ post_title: Docker Engine
 menu_order: 20
 ---
 
-The [Docker Engine](https://www.docker.com/products/docker-engine) launches Docker containers from Docker images. Use the Docker Engine if you need features[ features](/docs/1.10/deploying-services/containerizers/#containerizer-runtime-features) of the Docker package. Otherwise, consider using the [Universal Container Runtime](/docs/1.10/deploying-services/containerizers/ucr).
+The [Docker Engine](https://www.docker.com/products/docker-engine) launches Docker containers from Docker images. Use the Docker Engine if you need features[ features](/docs/1.10/deploying-services/containerizers/#container-runtime-features) of the Docker runtime. Otherwise, consider using the [Universal Container Runtime](/docs/1.10/deploying-services/containerizers/ucr).
 
 # Provision a container with the Docker Engine from the DC/OS web interface
 
@@ -38,7 +38,7 @@ In your [Marathon application definition](/docs/1.10/deploying-services/creating
 }
 ```
 
-**Important:** If you leave the `args` field empty, the default entry point will be the launch command for the container. If your container does not have a default entry point, you must specify a command in the `args` field. If you do not, your service will fail to deploy.
+**Important:**   The default entry point is the launch command for the container. If the entry point accepts arguments, you can specify them in the `args` field. If there is no default entry point, you must specify a command in the `cmd` field. It is invalid to supply both `cmd` and `args` for the same app.
 
 For examples, see [Deploying a Docker-based Service](/docs/1.10/deploying-services/creating-services/deploy-docker-app/).
 
