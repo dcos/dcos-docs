@@ -1,0 +1,195 @@
+swagger: "2.0"
+info:
+  version: 0.0.0
+  title: 'DC/OS Metrics API'
+
+basePath: '/metrics/v0/'
+tags:
+  - name: ping
+    description: proxy health check
+  - name: node
+    description: host metrics
+  - name: containers
+    description: container metrics
+parameters:
+  container-id:
+    name: id
+    in: path
+    description: "The ID of the container"
+    type: string
+    required: true
+  metric-id:
+    name: metric-id
+    in: path
+    description: "The ID of the metric"
+    required: true
+    type: string
+
+paths:
+  "/ping":
+    get:
+      tags:
+        - ping
+      description: "Basic health check for load balancers and reverse proxies."
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Ping"
+
+  "/node":
+    get:
+      tags:
+        - node
+      description: "Node metrics (CPU, memory, local filesystems, networks, etc)."
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/MetricsMessage"
+        400:
+          description: "Error: no values found in store"
+
+  "/containers":
+    get:
+      tags:
+        - containers
+      summary: "An array of container IDs running on the node."
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Containers"
+        400:
+          description: "Error: no values found in store"
+        500:
+          description: "Error: got unsupported message type"
+
+  "/containers/{id}":
+    get:
+      tags:
+        - containers
+      description: "Resource allocation and usage for the given container ID."
+      parameters:
+        - $ref: "#/parameters/container-id"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/MetricsMessage"
+        204:
+          description: "Error: no values found in store"
+
+
+  "/containers/{id}/app":
+    get:
+      tags:
+        - containers
+      description: >
+        Application-level metrics from the container (shipped in StatsD format using the listener available at `STATSD_UDP_HOST` and `STATSD_UDP_PORT`)"
+      parameters:
+        - $ref: "#/parameters/container-id"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/MetricsMessage"
+        204:
+          description: "Error: no values found in store"
+
+  "/containers/{id}/app/{metric-id}":
+    get:
+      tags:
+        - containers
+      description: >
+        Similar to `/v0/containers/{id}/app` but only contains datapoints for a single metric ID.
+      parameters:
+        - $ref: "#/parameters/container-id"
+        - $ref: "#/parameters/metric-id"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/MetricsMessage"
+        204:
+          description: "Error: no values found in store"
+        500:
+          description: "Error: got unsupported message type"
+
+############################################################################
+# Definitions                                                              #
+############################################################################
+definitions:
+  Containers:
+    type: array
+    description: "A top-level list of container IDs"
+    items:
+      type: string
+
+  MetricsMessage:
+    type: object
+    description: ""
+    properties:
+      datapoints:
+        $ref: "#/definitions/Datapoints"
+      dimensions:
+        $ref: "#/definitions/Dimensions"
+
+  Datapoints:
+    type: array
+    description: ""
+    items:
+      $ref: "#/definitions/Datapoint"
+
+  Datapoint:
+    type: object
+    description: ""
+    properties:
+      name:
+        type: string
+      value:
+        type: number
+      unit:
+        type: string
+      timestamp:
+        type: string
+
+  Dimensions:
+    type: object
+    description: "Metadata about the cluster, node, and/or container. Note: not all fields are present for all request types."
+    properties:
+      mesos_id:
+        type: string
+      cluster_id:
+        type: string
+      container_id:
+        type: string
+      executor_id:
+        type: string
+      framework_name:
+        type: string
+      framework_id:
+        type: string
+      framework_principal:
+        type: string
+      framework_role:
+        type: string
+      hostname:
+        type: string
+      labels:
+        type: object
+        description: "User-provided key-value pairs"
+        properties:
+          key:
+            type: string
+          value:
+            type: string
+
+  Ping:
+    type: object
+    description: "A basic health check."
+    properties:
+      ok:
+        type: boolean
+      timestamp:
+        type: string
