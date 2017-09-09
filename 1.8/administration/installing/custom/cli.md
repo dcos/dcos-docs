@@ -198,7 +198,7 @@ To install DC/OS:
 1.  Download the [DC/OS installer][5] to your root directory.
 
     ```bash
-    curl -O https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+    curl -O https://downloads.dcos.io/dcos/stable/1.8.9/dcos_generate_config.sh
     ```
 
 1.  From your home directory, run the DC/OS installer shell script on your bootstrapping master nodes to generate a customized DC/OS build. The setup script extracts a Docker container that uses the generic DC/OS install files to create customized DC/OS build files for your cluster. The build files are output to `./genconf/serve/`.
@@ -392,7 +392,7 @@ After DC/OS is installed and deployed across your cluster, you can add more agen
 
  [2]: /docs/1.8/usage/cli/install/
  [4]: /docs/1.8/administration/installing/custom/system-requirements/
- [5]: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+ [5]: https://downloads.dcos.io/dcos/stable/1.8.9/dcos_generate_config.sh
  [6]: /docs/1.8/administration/installing/custom/configuration-parameters/
  [7]: /docs/1.8/administration/installing/custom/uninstall/
  [8]: /docs/1.8/usage/

@@ -34,7 +34,7 @@ Depending on the DC/OS services that you install, you might have to modify the D
 **Prerequisite:**
 You must have an AWS EC2 Key Pair for the same region as your cluster. Key pairs cannot be shared across regions. The AWS key pair uses public-key cryptography to provide secure login to your AWS cluster. For more information about creating an AWS EC2 Key Pair, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair" target="_blank">documentation</a>.
 
-1.  Launch the <a href="https://downloads.dcos.io/dcos/stable/aws.html" target="_blank">DC/OS template</a> on CloudFormation and select the region and number of masters (1 or 3). You must have a key pair for your selected region.
+1.  Launch the <a href="https://downloads.dcos.io/dcos/stable/1.8.9/aws.html" target="_blank">DC/OS template</a> on CloudFormation and select the region and number of masters (1 or 3). You must have a key pair for your selected region.
 
 2.  On the **Select Template** page, accept the defaults and click **Next**.
 
