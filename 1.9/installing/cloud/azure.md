@@ -28,7 +28,7 @@ Also, to access nodes in the DC/OS cluster you will need `ssh` installed and con
 
 ## Step 1: Deploying the template
 
-To install DC/OS 1.9 on Azure, use the [Azure Resource Manager templates](https://downloads.dcos.io/dcos/stable/1.9.2/azure.html) provided.
+To install DC/OS 1.9 on Azure, use the [Azure Resource Manager templates](https://downloads.dcos.io/dcos/stable/1.9.4/azure.html) provided.
 
 
 ## Step 2: Accessing DC/OS

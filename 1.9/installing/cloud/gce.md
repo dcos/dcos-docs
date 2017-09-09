@@ -147,7 +147,7 @@ You must create the RSA public/private keypairs to allow passwordless logins via
     cd dcos-gce
     ```
 
-1.  Review and customize the `dcos_gce/group_vars/all`. You should review `project`, `subnet`, `login_name`, `bootstrap_public_ip`, and `zone`. To install DC/OS v1.9.0  ensure dcos_installer_download_path = "https://downloads.dcos.io/dcos/stable/commit/0ce03387884523f02624d3fb56c7fbe2e06e181b/{{ dcos_installer_filename }}"
+1.  Review and customize the `dcos_gce/group_vars/all`. You should review `project`, `subnet`, `login_name`, `bootstrap_public_ip`, and `zone`. To install DC/OS v1.9.4  ensure dcos_installer_download_path = "https://downloads.dcos.io/dcos/stable/1.9.4/{{ dcos_installer_filename }}"
 
 1.  Insert following into `~/.ansible.cfg` to stop host key checking.
 
@@ -269,7 +269,7 @@ Do not change this parameter. It is required by the Google Cloud SDK.
 Specify the filename for the DC/OS installer. Default `dcos_generate_config.sh`.
 
 ### dcos_installer_download_path
-Specify the location of where the DC/OS installer is available from [dcos.io](https://dcos.io). Default: `https://downloads.dcos.io/dcos/stable/{{ dcos_installer_filename }}`. The value of `{{ dcos_installer_file }}` is described above.
+Specify the location of where the DC/OS installer is available from [dcos.io](https://dcos.io). Default: `https://downloads.dcos.io/dcos/stable/1.9.4/{{ dcos_installer_filename }}`. The value of `{{ dcos_installer_file }}` is described above.
 
 ### home_directory
 Specify the home directory for your logins. Default: `/home/{{ login_name }}`. The value of `{{ login_name }}` is described above.

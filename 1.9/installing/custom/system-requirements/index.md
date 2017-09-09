@@ -205,6 +205,6 @@ You must set the `LC_ALL` and `LANG` environment variables to `en_US.utf-8`.
 
 [1]: /docs/1.9/installing/custom/cli/
 [2]: /docs/1.9/installing/custom/system-requirements/install-docker-centos/
-[3]: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+[3]: https://downloads.dcos.io/dcos/stable/1.9.4/dcos_generate_config.sh
 [4]: /docs/1.9/installing/custom/gui/
 [5]: /docs/1.9/installing/custom/advanced/
