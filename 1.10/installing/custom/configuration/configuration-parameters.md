@@ -88,7 +88,7 @@ Indicates whether to allow web browsers to send the DC/OS authentication cookie 
 *   `auth_cookie_secure_flag: true` The authentication cookie set by DC/OS will contain the [`Secure` flag](https://www.owasp.org/index.php/SecureFlag), which instructs the browser to not send the cookie over unencrypted HTTP connections. This could cause authentication to fail under the following circumstances.
 
     - If the security mode is `disabled`.
-    - If the security mode is `permissive`, the URL specifies HTTP, and the URL includes a target different from the root path (e.g., http://cluster-url.com/path/).
+    - If the security mode is `permissive`, the URL specifies HTTP, and the URL includes a target different from the root path (e.g., `http://<cluster-url>/<path>/`).
     - There are proxies in between the browser and DC/OS that terminate TLS.
 
 ### bootstrap_url
