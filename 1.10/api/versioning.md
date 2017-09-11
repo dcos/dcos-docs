@@ -18,7 +18,7 @@ For example, the [Marathon component](/docs/1.10/overview/architecture/component
 
 Components that have been specifically designed for DC/OS generally follow another versioning pattern, where the name of the component takes a back seat to the name of the feature set. These routes often include a version to make it easier to support renaming or replacing components over time.
 
-For example, the [DC/OS Diagnostics (3DT) component](/docs/1.10/overview/architecture/components/#dcos-diagnostics) serves the [System Health API](/docs/1.10/monitoring/#system-health-http-api-endpoint) under the route `/system/health/v1` and one of its resource paths is `/report`, so the full path to that resource is `/system/health/v1/report`.
+For example, the [DC/OS Diagnostics component](/docs/1.10/overview/architecture/components/#dcos-diagnostics) serves the [System Health API](/docs/1.10/monitoring/#system-health-http-api-endpoint) under the route `/system/health/v1` and one of its resource paths is `/report`, so the full path to that resource is `/system/health/v1/report`.
 
 # Resource Versioning
 

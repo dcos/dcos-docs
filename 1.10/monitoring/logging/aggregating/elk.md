@@ -35,11 +35,11 @@ For all nodes in your DC/OS cluster:
     ```bash
     sudo mv /etc/filebeat/filebeat.yml /etc/filebeat/filebeat.yml.BAK
     ```
-    
+
 1.  Populate a new `filebeat.yml` configuration file, including an additional input entry for the file `/var/log/dcos/dcos.log`. The additional log file will be used to capture the DC/OS logs in a later step. Remember to substitute the variables `$ELK_HOSTNAME` and `$ELK_PORT` below for the actual values of the host and port where your ElasticSearch is listening on.
 
     ```bash
-    sudo tee /etc/filebeat/filebeat.yml <<-EOF 
+    sudo tee /etc/filebeat/filebeat.yml <<-EOF
     filebeat.prospectors:
     - input_type: log
       paths:
@@ -62,18 +62,18 @@ For each Master node in your DC/OS cluster:
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
     ```bash
-    sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF 
+    sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF
     [Unit]
     Description=DCOS journalctl parser to filebeat
     Wants=filebeat.service
     After=filebeat.service
-    
+
     [Service]
     Restart=always
     RestartSec=5
     ExecStart=/bin/sh -c '/usr/bin/journalctl --no-tail -f \
-      -u dcos-3dt.service \
-      -u dcos-3dt.socket \
+      -u dcos-diagnostics.service \
+      -u dcos-diagnostics.socket \
       -u dcos-adminrouter-reload.service \
       -u dcos-adminrouter-reload.timer   \
       -u dcos-adminrouter.service        \
@@ -107,7 +107,7 @@ For each Master node in your DC/OS cluster:
       -u dcos-logrotate-master.service  \
       > /var/log/dcos/dcos.log 2>&1'
     ExecStartPre=/usr/bin/journalctl --vacuum-size=10M
-    
+
     [Install]
     WantedBy=multi-user.target
     EOF
@@ -122,19 +122,19 @@ For each Agent node in your DC/OS cluster:
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
     ```bash
-    sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF 
+    sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF
     [Unit]
     Description=DCOS journalctl parser to filebeat
     Wants=filebeat.service
     After=filebeat.service
-    
+
     [Service]
     Restart=always
     RestartSec=5
     ExecStart=/bin/sh -c '/usr/bin/journalctl --no-tail -f      \
-      -u dcos-3dt.service                      \
+      -u dcos-diagnostics.service                      \
       -u dcos-logrotate-agent.timer            \
-      -u dcos-3dt.socket                       \
+      -u dcos-diagnostics.socket                       \
       -u dcos-mesos-slave.service              \
       -u dcos-adminrouter-agent.service        \
       -u dcos-minuteman.service                \
@@ -157,7 +157,7 @@ For each Agent node in your DC/OS cluster:
       -u dcos-logrotate-agent.service          \
       > /var/log/dcos/dcos.log 2>&1'
     ExecStartPre=/usr/bin/journalctl --vacuum-size=10M
-    
+
     [Install]
     WantedBy=multi-user.target
     EOF
@@ -178,7 +178,7 @@ For each Agent node in your DC/OS cluster:
 
 # <a name="all"></a>Step 3: ELK Node Notes
 
-The ELK stack will receive, store, search and display information about the logs parsed by the Filebeat instances configured above for all nodes in the cluster. 
+The ELK stack will receive, store, search and display information about the logs parsed by the Filebeat instances configured above for all nodes in the cluster.
 
 **Important:** This document describes how to directly stream from Filebeat into ElasticSearch. Logstash is not used in this architecture. If you're interested in filtering, parsing and grok'ing the logs with an intermediate Logstash stage, please check the Logstash [documentation][8].
 
@@ -187,7 +187,7 @@ You must modify the default parameter values to prepare ElasticSearch to receive
 ```bash
 network.host = [IP address from the interface in your ElasticSearch node connecting to the Filebeat instances]
 ```
-    
+
 Other parameters in the file are beyond the scope of this document. For details, please check the ElasticSearch [documentation][5].
 
 

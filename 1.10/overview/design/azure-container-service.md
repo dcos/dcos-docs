@@ -95,7 +95,7 @@ The default ACS architecture looks like this:
 The following list shows the components used by DC/OS itself. You'll note that the core components center around Mesos, Marathon, Python, and so on.
 
 
-- 3dt
+- dcos-diagnostics
 - adminrouter
 - boost-system
 - boto

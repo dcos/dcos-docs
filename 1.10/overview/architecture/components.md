@@ -245,20 +245,20 @@ DC/OS supports multiple container runtimes using [Mesos' containerizer abstracti
 No software runs perfectly, especially not the first time. Distribute tasks across a cluster and the normal patterns of analyzing and debugging these services become tedious and painful. So DC/OS includes several components to help ease the pain of debugging distributed systems by aggregating, caching, and streaming logs, metrics, and cluster state metadata.
 
 <div data-role="collapsible">
-<h2 id="dcos-diagnostics">DC/OS Diagnostics (3DT)</h2>
+<h2 id="dcos-diagnostics">DC/OS Diagnostics</h2>
 <div>
-<p><strong>Description:</strong> DC/OS Diagnostics (3DT) aggregates and exposes component health. DC/OS Diagnostics is also known as DC/OS Distributed Diagnostics Tool (3DT).</p>
+<p><strong>Description:</strong> DC/OS Diagnostics aggregates and exposes component health.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
-    <li><code class="nowrap">dcos-3dt.service</code></li>
-    <li><code class="nowrap">dcos-3dt.socket</code></li>
+    <li><code class="nowrap">dcos-diagnostics.service</code></li>
+    <li><code class="nowrap">dcos-diagnostics.socket</code></li>
   </ul>
 </p>
 <p>
   <strong>See Also:</strong>
   <ul>
-    <li><a href="https://github.com/dcos/3dt">Source</a></li>
+    <li><a href="https://github.com/dcos/dcos-diagnostics">Source</a></li>
     <li><a href="/docs/1.10/monitoring/#system-health-http-api-endpoint">API Reference</a></li>
   </ul>
 </p>
@@ -649,7 +649,7 @@ To see a list of the systemd components running on any particular node, list the
 
 ```
 [vagrant@m1 ~]ls /etc/systemd/system/dcos.target.wants/
-dcos-3dt.service                 dcos-mesos-dns.service
+dcos-diagnostics.service         dcos-mesos-dns.service
 dcos-adminrouter-reload.service  dcos-mesos-master.service
 dcos-adminrouter-reload.timer    dcos-metrics-master.service
 dcos-adminrouter.service         dcos-metrics-master.socket
@@ -670,8 +670,8 @@ dcos-marathon.service
 
 ```
 [vagrant@a1 ~]ls /etc/systemd/system/dcos.target.wants/
-dcos-3dt.service                       dcos-logrotate-agent.timer
-dcos-3dt.socket                        dcos-mesos-slave.service
+dcos-diagnostics.service               dcos-logrotate-agent.timer
+dcos-diagnostics.socket                dcos-mesos-slave.service
 dcos-adminrouter-agent-reload.service  dcos-metrics-agent.service
 dcos-adminrouter-agent-reload.timer    dcos-metrics-agent.socket
 dcos-adminrouter-agent.service         dcos-navstar.service
@@ -689,8 +689,8 @@ dcos-logrotate-agent.service
 
 ```
 [vagrant@p1 ~]ls /etc/systemd/system/dcos.target.wants/
-dcos-3dt.service                       dcos-logrotate-agent.timer
-dcos-3dt.socket                        dcos-mesos-slave-public.service
+dcos-diagnostics.service               dcos-logrotate-agent.timer
+dcos-diagnostics.socket                dcos-mesos-slave-public.service
 dcos-adminrouter-agent-reload.service  dcos-metrics-agent.service
 dcos-adminrouter-agent-reload.timer    dcos-metrics-agent.socket
 dcos-adminrouter-agent.service         dcos-navstar.service

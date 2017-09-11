@@ -7,13 +7,13 @@ enterprise: 'no'
 ---
 
 
-Use this guide to get started with DC/OS logging. 
+Use this guide to get started with DC/OS logging.
 
 # Deploy a sample app
 Deploy a sample Marathon app for use in this quick start guide.
 
 1.  Create the following Marathon app definition and save as `test-log.json`.
-    
+
     ```json
     {
       "id": "/test-log",
@@ -25,7 +25,7 @@ Deploy a sample Marathon app for use in this quick start guide.
     ```
 
 1.  Deploy the app with this CLI command:
-    
+
     ```bash
     dcos marathon app add test-log.json
     ```
@@ -35,26 +35,26 @@ Deploy a sample Marathon app for use in this quick start guide.
     ```bash
     dcos task test-log
     ```
-    
+
     The output should resemble:
-    
+
     ```bash
-    NAME      HOST        USER  STATE  ID 
+    NAME      HOST        USER  STATE  ID
     test-log  10.0.1.105  root    R    test-log.e69c4b2f-c255-11e6-a451-aa711cbcaa78
     ```
 
 # View the Mesos and DC/OS logs
 
-You can access the Mesos stderr and stdout logs natively through the DC/OS CLI `dcos task log` command. In this example, a task is launched and the stderr and stdout logs from Mesos are accessed. 
-  
+You can access the Mesos stderr and stdout logs natively through the DC/OS CLI `dcos task log` command. In this example, a task is launched and the stderr and stdout logs from Mesos are accessed.
+
 1.  Run this command to view the stdout logs, where `<task_id>` is the task ID:
 
     ```bash
     dcos task log <task_id>
     ```
-    
+
     The output should resemble:
-    
+
     ```bash
     Thu Dec 15 00:49:10 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
     Thu Dec 15 00:49:11 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
@@ -64,22 +64,22 @@ You can access the Mesos stderr and stdout logs natively through the DC/OS CLI `
     ```bash
     dcos task log --follow <task_id>
     ```
-    
+
     This will create a running stream of logs similar to this:
-    
+
     ```bash
     Wed Dec 14 16:50:12 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131]: stdout
     Wed Dec 14 16:50:13 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131]: stdout
     ```
 
 1.  Run this command to get last 5 log entries:
- 
+
     ```bash
     dcos task log <task_id> --lines=5
     ```
-    
+
     The output should resemble:
-    
+
     ```bash
     Thu Dec 15 00:51:27 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
     Thu Dec 15 00:51:28 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
@@ -88,18 +88,18 @@ You can access the Mesos stderr and stdout logs natively through the DC/OS CLI `
     Thu Dec 15 00:51:31 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
     ```
 
-# View the Mesos task and system logs 
+# View the Mesos task and system logs
 
-You can view logs from tasks or the host subsystem with the `dcos node log` command. 
-    
+You can view logs from tasks or the host subsystem with the `dcos node log` command.
+
 1.  Run this command to view the leading Mesos master logs:
 
     ```bash
-    dcos node log --leader --lines 3 
+    dcos node log --leader --lines 3
     ```
-    
+
     The output should resemble:
-    
+
     ```bash
     Thu Dec 15 00:29:28 2016 ip-10-0-6-165.us-west-2.compute.internal [10530] ip-10-0-6-165.us-west-2.compute.internal nginx: 10.0.6.72 - - [15/Dec/2016:00:29:28 +0000] "GET /service/marathon/v2/groups?_timestamp=1481761768409&embed=group.groups&embed=group.apps&embed=group.pods&embed=group.apps.deployments&embed=group.apps.counts&embed=group.apps.tasks&embed=group.apps.taskStats&embed=group.apps.lastTaskFailure HTTP/1.1" 200 1941 "http://joel-logg-elasticl-m6yuis5u674t-297942863.us-west-2.elb.amazonaws.com/" "Mozilla/5.0 (Macintosh; Intel macOS 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36"
     Thu Dec 15 00:29:29 2016 ip-10-0-6-165.us-west-2.compute.internal nginx [2929] 2016/12/15 00:29:29 [notice] 10530#0: *1136 [lua] auth.lua:131: validate_jwt_or_exit(): UID from valid JWT: `email@email.io`, client: 10.0.6.72, server: dcos.*, request: "GET /system/v1/logs/v1/range/?skip_prev=3 HTTP/1.1", host: "joel-logg-elasticl-m6yuis5u674t-297942863.us-west-2.elb.amazonaws.com"
@@ -111,11 +111,11 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
     ```bash
     dcos node log --mesos-id=<node_id> --lines 3
     ```
-    
+
     **Tip:** Run `dcos task` to identify which node is running your app, followed by `dcos node` to get the node ID.
-    
+
     The output should resemble:
-    
+
     ```bash
     Thu Dec 15 00:46:18 2016 ip-10-0-1-175.us-west-2.compute.internal mesos-agent [3284] I1215 00:46:18.794333  3315 http.cpp:288] HTTP GET for /slave(1)/state from 10.0.1.175:44661 with User-Agent='Mesos-State / Host: ip-10-0-1-175, Pid: 3023'
     Thu Dec 15 00:46:20 2016 ip-10-0-1-175.us-west-2.compute.internal mesos-agent [3284] I1215 00:46:20.800422  3319 http.cpp:288] HTTP GET for /slave(1)/state from 10.0.1.175:44661 with User-Agent='Mesos-State / Host: ip-10-0-1-175, Pid: 3023'
@@ -125,15 +125,15 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
 1.  Run these commands to view a list of components running on the leader or agent node:
 
     -   Leader node:
-    
+
         ```bash
         dcos node list-components --leader
         ```
- 
+
         The output should resemble:
-        
+
         ```bash
-        dcos-3dt.service
+        dcos-diagnostics.service
         dcos-adminrouter-reload.service
         dcos-adminrouter-reload.timer
         dcos-adminrouter.service
@@ -145,18 +145,18 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
         dcos-history.service
         ...
         ```
-    
+
     -  Agent node, where your node ID (`<mesos-id>`) is specified:
-    
+
        ```bash
        dcos node list-components --mesos-id=<mesos-id>
        ```
-       
+
        The output should resemble:
-       
+
        ```bash
-       dcos-3dt.service
-       dcos-3dt.socket
+       dcos-diagnostics.service
+       dcos-diagnostics.socket
        dcos-adminrouter-agent-reload.service
        dcos-adminrouter-agent-reload.timer
        dcos-adminrouter-agent.service
@@ -166,20 +166,19 @@ You can view logs from tasks or the host subsystem with the `dcos node log` comm
        dcos-gen-resolvconf.service
        ...
        ```
-    
+
 1.  Run this command to view the leading master component log for DC/OS components. In this example, the Marathon component logs are queried:
 
     ```bash
     dcos node log --leader --component dcos-marathon.service
     ```
-    
+
     The output should resemble:
-    
+
     ```bash
     Thu Dec 15 00:34:08 2016 ip-10-0-6-165.us-west-2.compute.internal java [2541] [2016-12-15 00:34:08,121] INFO  Received status update for task test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd: TASK_RUNNING (Reconciliation: Latest task state) (mesosphere.marathon.MarathonScheduler$$EnhancerByGuice$$28056dde:Thread-296)
     Thu Dec 15 00:34:08 2016 ip-10-0-6-165.us-west-2.compute.internal java [2541] [2016-12-15 00:34:08,121] INFO  Received status update for task test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd: TASK_RUNNING (Reconciliation: Latest task state) (mesosphere.marathon.MarathonScheduler$$EnhancerByGuice$$28056dde:Thread-297)
     ...
     ```
-    
+
 For examples using the logging API, see the [documentation](/docs/1.10/monitoring/logging/logging-api/).
-    
