@@ -64,7 +64,7 @@ In this step you deploy the containerized Tweeter app to a public node.
     git clone git@github.com:mesosphere/tweeter.git
     ```
 
-2.  Add the `HAPROXY_0_VHOST` label to the `tweeter.json` Marathon app definition file. `HAPROXY_0_VHOST` exposes Nginx on the external load balancer with a virtual host. The `HAPROXY_0_VHOST` value is the hostname of your [public agent][9] node. 
+2.  Add the `HAPROXY_0_VHOST` label to the `1.8/tweeter.json` Marathon app definition file. `HAPROXY_0_VHOST` exposes Nginx on the external load balancer with a virtual host. The `HAPROXY_0_VHOST` value is the hostname of your [public agent][9] node. 
 
     **Important:** You must remove the leading `http://` and the trailing `/`. 
     
@@ -91,7 +91,7 @@ In this step you deploy the containerized Tweeter app to a public node.
 4.  Install and deploy Tweeter with this command.
     
     ```bash
-    dcos marathon app add tweeter.json
+    dcos marathon app add 1.8/tweeter.json
     ```
     
     **Tip:** The `instances` parameter in `tweeter.json` specifies the number of app instances. Use the following command to scale your app up or down:
@@ -108,9 +108,9 @@ In this step you deploy the containerized Tweeter app to a public node.
 
 # Post 100K Tweets
 
-Use the `post-tweets.json` app a large number of Shakespeare tweets from a file:
+Use the `1.8/post-tweets.json` app a large number of Shakespeare tweets from a file:
 
-        dcos marathon app add post-tweets.json
+        dcos marathon app add 1.8/post-tweets.json
     
 
 The app will post more than 100k tweets one by one, so you'll see them coming in steadily when you refresh the page. Click the **Network** tab in the DC/OS web interface to see the load balancing in action.
@@ -121,7 +121,7 @@ The post-tweets app works by streaming to the VIP `1.1.1.1:30000`. This address 
 
 Next, you'll perform real-time analytics on the stream of tweets coming in from Kafka.
 
-1.  Navigate to Zeppelin at `https://<master_ip>/service/zeppelin/`, click **Import Note** and import `tweeter-analytics.json`. Zeppelin is preconfigured to execute Spark jobs on the DC/OS cluster, so there is no further configuration or setup required. Be sure to use `https://`, not `http://`.
+1.  Navigate to Zeppelin at `https://<master_ip>/service/zeppelin/`, click **Import Note** and import `1.8/tweeter-analytics.json`. Zeppelin is preconfigured to execute Spark jobs on the DC/OS cluster, so there is no further configuration or setup required. Be sure to use `https://`, not `http://`.
     
     **Tip:** Your master IP address is the URL of the DC/OS web interface.
 

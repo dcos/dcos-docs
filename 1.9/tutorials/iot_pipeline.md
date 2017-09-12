@@ -68,7 +68,7 @@ __Tip:__ You can also install DC/OS packages from the DC/OS CLI with the [`dcos 
 
 In this step you deploy the containerized Tweeter app to a public node.
 
-1.  Navigate to the [Tweeter](https://github.com/mesosphere/tweeter/) GitHub repository and save the `/tweeter/tweeter.json` Marathon app definition file. 
+1.  Navigate to the [Tweeter](https://github.com/mesosphere/tweeter/) GitHub repository and save the `/tweeter/1.9/tweeter.json` Marathon app definition file. 
 
 1.  Add the `HAPROXY_0_VHOST` definition with the public IP address of your [public agent][9] node to your `tweeter.json` file. 
 
@@ -122,7 +122,7 @@ In this step you deploy the containerized Tweeter app to a public node.
 
 Deploy the post-tweets containerized app to see DC/OS load balancing in action. This app automatically posts a large number of tweets from Shakespeare. The app will post more than 100k tweets one by one, so you'll see them coming in steadily when you refresh the page. 
 
-1.  Navigate to the [Tweeter](https://github.com/mesosphere/tweeter/) GitHub repository and save the `tweeter/post-tweets.json` Marathon app definition file. 
+1.  Navigate to the [Tweeter](https://github.com/mesosphere/tweeter/) GitHub repository and save the `tweeter/1.9/post-tweets.json` Marathon app definition file. 
 
 1.  Deploy the `post-tweets.json` Marathon app definition file. 
 
@@ -166,7 +166,7 @@ The Tweeter app uses the service discovery and load balancer service that is ins
 
 Next, you'll perform real-time analytics on the stream of tweets coming in from Kafka.
 
-1.  Navigate to Zeppelin at `https://<master_ip>/service/zeppelin/`, click **Import Note** and import `tweeter-analytics.json`. Zeppelin is preconfigured to execute Spark jobs on the DC/OS cluster, so there is no further configuration or setup required. Be sure to use `https://`, not `http://`.
+1.  Navigate to Zeppelin at `https://<master_ip>/service/zeppelin/`, click **Import Note** and import `1.9/tweeter-analytics.json`. Zeppelin is preconfigured to execute Spark jobs on the DC/OS cluster, so there is no further configuration or setup required. Be sure to use `https://`, not `http://`.
     
     **Tip:** Your master IP address is the URL of the DC/OS web interface.
 
