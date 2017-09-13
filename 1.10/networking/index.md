@@ -1,13 +1,7 @@
 ---
 post_title: Networking
-menu_order: 70
-post_excerpt: ""
-feature_maturity: ""
-enterprise: 'no'
+menu_order: 070
 ---
-
-<!-- This source repo for this topic is https://github.com/dcos/dcos-docs -->
-
 
 DC/OS provides a number of tools out-of-the-box, ranging from basic network connectivity between containers to more advanced features, such as load balancing and service discovery. 
 
