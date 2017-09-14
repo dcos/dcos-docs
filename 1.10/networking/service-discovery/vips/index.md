@@ -1,6 +1,6 @@
 ---
-post_title: Using Virtual IP Addresses
-menu_order: 10
+post_title: Virtual IP Addresses
+menu_order: 20
 ---
 DC/OS can map traffic from a single Virtual IP (VIP) to multiple IP addresses and ports. DC/OS VIPs are **name-based**, which means clients connect with a service address instead of an IP address. 
 

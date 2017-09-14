@@ -1,5 +1,5 @@
 ---
-post_title: Load Balancing and Virtual IPs (VIPs)
+post_title: Load Balancing
 menu_order: 00
 ---
 
