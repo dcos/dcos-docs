@@ -3,7 +3,7 @@ post_title: Networking
 menu_order: 070
 ---
 
-DC/OS provides a number of tools out-of-the-box, ranging from basic network connectivity between containers to more advanced features, such as load balancing and service discovery. 
+DC/OS provides a number of tools out-of-the-box, ranging from basic network connectivity between containers to more advanced features, such as load balancing and service discovery.
 
 # IP Per Container
 Allows containers to run on any type of IP-based virtual networks, with each container having its own network namespace.
@@ -31,7 +31,7 @@ Spartan acts as a DNS masquerade for Mesos DNS on each agent. The Spartan instan
 The Spartan instance on each agent also acts as a DNS server for any service that is load balanced using the DC/OS internal load balancer called [Minuteman](/docs/1.10/networking/mesos-dns/). Any service that is load balanced by Minuteman gets a [virtual-ip-address (VIP)](/docs/1.10/networking/mesos-dns/) and an FQDN in the `"*.l4lb.thisdcos.directory"` domain. The FQDN allocated to a load-balanced service is then stored in Spartan. All Spartans instances exchange the records they have discovered locally from Minuteman by using GOSSIP. This provides a highly available distributed DNS service for any task that is load balanced by Minuteman. For more information, see the [Spartan repository](https://github.com/dcos/spartan).
 
 # Load Balancing
-East-west load balancing is provided by Minuteman. North-south load balancing is provided by [Marathon LB](/docs/1.10/networking/marathon-lb/). Marathon-LB is based on HAProxy, a rapid proxy and load balancer. It is installed as a DC/OS Universe package.
+East-west load balancing is provided by Minuteman. North-south load balancing is provided by [Marathon-LB](/docs/1.10/networking/marathon-lb/) and Edge-LB (Entprise only). Marathon-LB is based on HAProxy, a rapid proxy and load balancer. Both Marathon-LB and Edge-LB are installed as DC/OS Universe packages.
 
 ## Minuteman
 Minuteman is a distributed layer 4 virtual IP east-west load balancer that is installed by default. It provides:
@@ -40,9 +40,13 @@ Minuteman is a distributed layer 4 virtual IP east-west load balancer that is in
 - Highly available LB with no single choke point.
 - Highly scalable and tolerant to large number of host failures.
 
+## Marathon-LB
+Marathon-LB is based on HAProxy, a rapid proxy and north-south load balancer. HAProxy provides proxying and load balancing for TCP and HTTP based applications, with features such as SSL support, HTTP compression, health checking, Lua scripting and more. Marathon-LB subscribes to Marathon’s event bus and updates the HAProxy configuration in real time. Here are common Marathon-LB use cases:
 
-## Marathon LB
-Marathon LB is based on HAProxy, a rapid proxy and north-south load balancer. HAProxy provides proxying and load balancing for TCP and HTTP based applications, with features such as SSL support, HTTP compression, health checking, Lua scripting and more. Marathon LB subscribes to Marathon’s event bus and updates the HAProxy configuration in real time. Here are common Marathon LB use cases:
+- Use Marathon-LB as your edge load balancer (LB).
+- Use Marathon-LB as an internal LB and service discovery mechanism, with a separate HA load balancer for routing public traffic in.
 
-- Use Marathon LB as your edge load balancer (LB)
-- Use Marathon LB as an internal LB and service discovery mechanism, with a separate HA load balancer for routing public traffic in
+## Edge-LB
+Edge-LB proxies and load balances traffic to all services that run on DC/OS. In contrast, Marathon-LB can only work with Marathon tasks.
+
+- Use Marathon-LB as your edge load balancer (LB).
