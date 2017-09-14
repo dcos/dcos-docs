@@ -1,3 +1,5 @@
+**Note:** DC/OS documentation is in the process of being merged with Enterprise DC/OS documentation. Please avoid updates to this repo unless addressing a critical/blocking issue.
+
 # DC/OS Documentation [![Build Status](https://jenkins.mesosphere.com/service/jenkins/buildStatus/icon?job=public-dcos-docs-master)](https://jenkins.mesosphere.com/service/jenkins/job/public-dcos-docs-master)
 Documentation for the Datacenter Operating System (DC/OS)
 
