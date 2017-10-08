@@ -57,7 +57,7 @@ For all nodes in your DC/OS cluster:
 
 For each Master node in your DC/OS cluster:
 
-1.  Create a script that will parse the output of the DC/OS master `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
+1.  Create a script that will parse the output of the DC/OS master `journalctl` logs and funnel them all to `/var/log/dcos/dcos.log`.
 
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
@@ -117,7 +117,7 @@ For each Master node in your DC/OS cluster:
 
 For each Agent node in your DC/OS cluster:
 
-1.  Create a script that will parse the output of the DC/OS agent `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
+1.  Create a script that will parse the output of the DC/OS agent `journalctl` logs and funnel them all to `/var/log/dcos/dcos.log`.
 
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
