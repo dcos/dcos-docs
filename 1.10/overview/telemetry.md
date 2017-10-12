@@ -11,7 +11,7 @@ To continuously improve the DC/OS experience, a telemetry component is included 
 # <a name="core"></a>Core telemetry
 The [DC/OS Signal](/docs/1.10/overview/architecture/components/#dcos-signal) component queries the diagnostics service `/system/health/v1/report` endpoint on the leading master and sends this data to [Segment](https://segment.com/docs/) which Mesosphere then uses to track usage metrics and customer support.
 
-The information reported by DC/OS Signal comes from several components: DC/OS Diagnostics (3DT), Apache Mesos, and DC/OS Package Manager (Cosmos).
+The information reported by DC/OS Signal comes from several components: DC/OS Diagnostics, Apache Mesos, and DC/OS Package Manager (Cosmos).
 
 For each category this data is collected:
 
@@ -64,7 +64,7 @@ For each category this data is collected:
 
 ## Diagnostics
 
-This information is collected from the [DC/OS Diagnostics (3DT)](/docs/1.10/overview/architecture/components/#dcos-diagnostics) component. For every systemd unit, the following information is collected, where `<UNIT_NAME>` is component name:
+This information is collected from the [DC/OS Diagnostics](/docs/1.10/overview/architecture/components/#dcos-diagnostics) component. For every systemd unit, the following information is collected, where `<UNIT_NAME>` is component name:
 
 ```
 "health-unit-dcos-<UNIT_NAME>-total": 3, "health-unit-dcos-<UNIT_NAME>-unhealthy": 0,
@@ -102,7 +102,7 @@ This information is collected from the [Apache Mesos](/docs/1.10/overview/archit
 </tr>
 </table>
 
-    
+
 ## Package Manager
 This information is collected from the [DC/OS Package Manager (Cosmos)](/docs/1.10/overview/architecture/components/#dcos-package-manager) component.
 
@@ -113,7 +113,7 @@ This information is collected from the [DC/OS Package Manager (Cosmos)](/docs/1.
 </tr>
 <tr>
 <td>package_list</td>
-<td>Which packages are installed. For example, if you had Kafka and Spark: 
+<td>Which packages are installed. For example, if you had Kafka and Spark:
 <pre>"package_list": [
 {
 "name": "kafka"
@@ -155,10 +155,10 @@ Here is an example of the JSON telemetry report that is collected:
             "clusterId": "70b28f00-e38f-41b2-a723-aab344f535b9",
             "customerKey": "",
             "environmentVersion": "1.8",
-            "health-unit-dcos-3dt-service-total": 3,
-            "health-unit-dcos-3dt-service-unhealthy": 0,
-            "health-unit-dcos-3dt-socket-total": 2,
-            "health-unit-dcos-3dt-socket-unhealthy": 0,
+            "health-unit-dcos-diagnostics-service-total": 3,
+            "health-unit-dcos-diagnostics-service-unhealthy": 0,
+            "health-unit-dcos-diagnositcs-socket-total": 2,
+            "health-unit-dcos-diagnostics-socket-unhealthy": 0,
             "health-unit-dcos-adminrouter-agent-service-total": 2,
             "health-unit-dcos-adminrouter-agent-service-unhealthy": 0,
             "health-unit-dcos-adminrouter-reload-service-total": 3,

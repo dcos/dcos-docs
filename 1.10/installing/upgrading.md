@@ -84,7 +84,7 @@ Proceed with upgrading every master node one-at-a-time in any order using the fo
 1.  Validate the upgrade:
 
     - Monitor the Exhibitor UI to confirm that the Master rejoins the ZooKeeper quorum successfully (the status indicator will turn green).  The Exhibitor UI is available at `http://<dcos_master>:8181/`.
-    - Verify that `http://<dcos_master>/mesos` indicates that the upgraded master is running Mesos 1.2.0.
+    - Verify that `http://<dcos_master>/mesos` indicates that the upgraded master is running Mesos 1.4.0.
 
 ### DC/OS Agents
 

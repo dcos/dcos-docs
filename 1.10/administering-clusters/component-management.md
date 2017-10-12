@@ -19,7 +19,7 @@ Component packages built by the package builder are distributed as part of the D
 
 ## Component health
 
-Component health is monitored by the DC/OS Diagnostics (3DT) component. For more information about component monitoring, see [Monitoring](/docs/1.10/monitoring/).
+Component health is monitored by the DC/OS Diagnostics component. For more information about component monitoring, see [Monitoring](/docs/1.10/monitoring/).
 
 
 ## Component logs

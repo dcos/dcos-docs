@@ -6,7 +6,7 @@ menu_order: 4
 
 DC/OS is composed of many open source microservice components meticulously tuned and configured to work together.
 
-![DC/OS Components](/docs/1.10/img/dcos-components-1.9.png)
+![DC/OS Components](/docs/1.10/img/dcos-components-1.10-portrait.png)
 
 From the top, DC/OS is a batteries-included container platform that handles container orchestration, package management, and security.
 
@@ -245,20 +245,20 @@ DC/OS supports multiple container runtimes using [Mesos' containerizer abstracti
 No software runs perfectly, especially not the first time. Distribute tasks across a cluster and the normal patterns of analyzing and debugging these services become tedious and painful. So DC/OS includes several components to help ease the pain of debugging distributed systems by aggregating, caching, and streaming logs, metrics, and cluster state metadata.
 
 <div data-role="collapsible">
-<h2 id="dcos-diagnostics">DC/OS Diagnostics (3DT)</h2>
+<h2 id="dcos-diagnostics">DC/OS Diagnostics</h2>
 <div>
-<p><strong>Description:</strong> DC/OS Diagnostics (3DT) aggregates and exposes component health. DC/OS Diagnostics is also known as DC/OS Distributed Diagnostics Tool (3DT).</p>
+<p><strong>Description:</strong> DC/OS Diagnostics aggregates and exposes component health.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
-    <li><code class="nowrap">dcos-3dt.service</code></li>
-    <li><code class="nowrap">dcos-3dt.socket</code></li>
+    <li><code class="nowrap">dcos-diagnostics.service</code></li>
+    <li><code class="nowrap">dcos-diagnostics.socket</code></li>
   </ul>
 </p>
 <p>
   <strong>See Also:</strong>
   <ul>
-    <li><a href="https://github.com/dcos/3dt">Source</a></li>
+    <li><a href="https://github.com/dcos/dcos-diagnostics">Source</a></li>
     <li><a href="/docs/1.10/monitoring/#system-health-http-api-endpoint">API Reference</a></li>
   </ul>
 </p>
@@ -387,11 +387,7 @@ In a world where machines are are given numbers instead of names, tasks are sche
   <strong>System Service(s):</strong>
   <ul>
     <li><code class="nowrap">dcos-adminrouter.service</code></li>
-    <li><code class="nowrap">dcos-adminrouter-reload.service</code></li>
-    <li><code class="nowrap">dcos-adminrouter-reload.timer</code></li>
     <li><code class="nowrap">dcos-adminrouter-agent.service</code></li>
-    <li><code class="nowrap">dcos-adminrouter-agent-reload.service</code></li>
-    <li><code class="nowrap">dcos-adminrouter-agent-reload.timer</code></li>
   </ul>
 </p>
 <p>
@@ -470,12 +466,7 @@ In a world where machines are are given numbers instead of names, tasks are sche
 <div>
 <p><strong>Description:</strong> Minuteman provides distributed <a href="https://en.wikipedia.org/wiki/Transport_layer">Layer 4</a> virtual IP load balancing.</p>
 <p><strong>Note:</strong> Minuteman and Navstar run on a shared Erlang Virtual Machine which is supervised by systemd. So only Navstar appears in the systemd service list and component UI.</p>
-<p>
-  <strong>System Service(s):</strong>
-  <ul>
-    <li>N/A - Included in <a href="#navstar">Navstar</a></li>
-  </ul>
-</p>
+<p><strong>System Service(s):</strong> N/A - Included in <a href="#navstar">Navstar</a>.</p>
 <p>
   <strong>See Also:</strong>
   <ul>
@@ -558,7 +549,6 @@ Just as machine operating systems need package management to install, upgrade, c
   <strong>System Service(s):</strong>
   <ul>
     <li><code class="nowrap">dcos-pkgpanda-api.service</code></li>
-    <li><code class="nowrap">dcos-pkgpanda-api.socket</code></li>
   </ul>
 </p>
 <p>
@@ -622,9 +612,6 @@ DC/OS provides multiple different ways to provision and allocate disk space and 
 </div>
 
 
-<!-- # Legacy Component Changes -->
-
-
 # Sockets and Timers
 
 Several components are configured to use [systemd sockets](https://www.freedesktop.org/software/systemd/man/systemd.socket.html) which allows them to be started on-demand when a request comes in, rather than running continuously and consuming resources unnecessarily. While these sockets are separate [systemd units](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) they are not considered separate components.
@@ -648,58 +635,94 @@ To see a list of the systemd components running on any particular node, list the
 ## Master Node
 
 ```
-[vagrant@m1 ~]ls /etc/systemd/system/dcos.target.wants/
-dcos-3dt.service                 dcos-mesos-dns.service
-dcos-adminrouter-reload.service  dcos-mesos-master.service
-dcos-adminrouter-reload.timer    dcos-metrics-master.service
-dcos-adminrouter.service         dcos-metrics-master.socket
-dcos-cosmos.service              dcos-metronome.service
-dcos-epmd.service                dcos-navstar.service
-dcos-exhibitor.service           dcos-oauth.service
-dcos-gen-resolvconf.service      dcos-pkgpanda-api.service
-dcos-gen-resolvconf.timer        dcos-pkgpanda-api.socket
-dcos-history.service             dcos-signal.service
-dcos-log-master.service          dcos-signal.timer
-dcos-log-master.socket           dcos-spartan.service
-dcos-logrotate-master.service    dcos-spartan-watchdog.service
-dcos-logrotate-master.timer      dcos-spartan-watchdog.timer
+$ ls /etc/systemd/system/dcos.target.wants/ -1
+dcos-adminrouter.service
+dcos-cosmos.service
+dcos-diagnostics.service
+dcos-diagnostics.socket
+dcos-epmd.service
+dcos-exhibitor.service
+dcos-gen-resolvconf.service
+dcos-gen-resolvconf.timer
+dcos-history.service
+dcos-log-master.service
+dcos-log-master.socket
+dcos-logrotate-master.service
+dcos-logrotate-master.timer
 dcos-marathon.service
+dcos-mesos-dns.service
+dcos-mesos-master.service
+dcos-metrics-master.service
+dcos-metrics-master.socket
+dcos-metronome.service
+dcos-navstar.service
+dcos-oauth.service
+dcos-pkgpanda-api.service
+dcos-signal.service
+dcos-signal.timer
+dcos-spartan.service
+dcos-spartan-watchdog.service
+dcos-spartan-watchdog.timer
 ```
 
 ## Private Agent Node
 
 ```
-[vagrant@a1 ~]ls /etc/systemd/system/dcos.target.wants/
-dcos-3dt.service                       dcos-logrotate-agent.timer
-dcos-3dt.socket                        dcos-mesos-slave.service
-dcos-adminrouter-agent-reload.service  dcos-metrics-agent.service
-dcos-adminrouter-agent-reload.timer    dcos-metrics-agent.socket
-dcos-adminrouter-agent.service         dcos-navstar.service
-dcos-docker-gc.service                 dcos-pkgpanda-api.service
-dcos-docker-gc.timer                   dcos-pkgpanda-api.socket
-dcos-epmd.service                      dcos-rexray.service
-dcos-gen-resolvconf.service            dcos-signal.timer
-dcos-gen-resolvconf.timer              dcos-spartan.service
-dcos-log-agent.service                 dcos-spartan-watchdog.service
-dcos-log-agent.socket                  dcos-spartan-watchdog.timer
+$ ls /etc/systemd/system/dcos.target.wants/ -1
+dcos-adminrouter-agent.service
+dcos-diagnostics.service
+dcos-diagnostics.socket
+dcos-docker-gc.service
+dcos-docker-gc.timer
+dcos-epmd.service
+dcos-gen-resolvconf.service
+dcos-gen-resolvconf.timer
+dcos-log-agent.service
+dcos-log-agent.socket
 dcos-logrotate-agent.service
+dcos-logrotate-agent.timer
+dcos-mesos-slave.service
+dcos-metrics-agent.service
+dcos-metrics-agent.socket
+dcos-navstar.service
+dcos-pkgpanda-api.service
+dcos-rexray.service
+dcos-signal.timer
+dcos-spartan.service
+dcos-spartan-watchdog.service
+dcos-spartan-watchdog.timer
 ```
 
 ## Public Agent Node
 
 ```
-[vagrant@p1 ~]ls /etc/systemd/system/dcos.target.wants/
-dcos-3dt.service                       dcos-logrotate-agent.timer
-dcos-3dt.socket                        dcos-mesos-slave-public.service
-dcos-adminrouter-agent-reload.service  dcos-metrics-agent.service
-dcos-adminrouter-agent-reload.timer    dcos-metrics-agent.socket
-dcos-adminrouter-agent.service         dcos-navstar.service
-dcos-docker-gc.service                 dcos-pkgpanda-api.service
-dcos-docker-gc.timer                   dcos-pkgpanda-api.socket
-dcos-epmd.service                      dcos-rexray.service
-dcos-gen-resolvconf.service            dcos-signal.timer
-dcos-gen-resolvconf.timer              dcos-spartan.service
-dcos-log-agent.service                 dcos-spartan-watchdog.service
-dcos-log-agent.socket                  dcos-spartan-watchdog.timer
+$ ls /etc/systemd/system/dcos.target.wants/ -1
+dcos-adminrouter-agent.service
+dcos-diagnostics.service
+dcos-diagnostics.socket
+dcos-docker-gc.service
+dcos-docker-gc.timer
+dcos-epmd.service
+dcos-gen-resolvconf.service
+dcos-gen-resolvconf.timer
+dcos-log-agent.service
+dcos-log-agent.socket
 dcos-logrotate-agent.service
+dcos-logrotate-agent.timer
+dcos-mesos-slave-public.service
+dcos-metrics-agent.service
+dcos-metrics-agent.socket
+dcos-navstar.service
+dcos-pkgpanda-api.service
+dcos-rexray.service
+dcos-signal.timer
+dcos-spartan.service
+dcos-spartan-watchdog.service
+dcos-spartan-watchdog.timer
 ```
+
+
+# Changes Since DC/OS 1.9
+
+- [Admin Router](#admin-router) - Admin Router now performs dynamic DNS resolution. The external `dcos-adminrouter-reload` service and timer were removed.
+- [DC/OS Component Package Manager](#dcos-component-package-manager) - To avoid a race condition during DC/OS upgrades, the DC/OS Component Package Manager socket file is now managed by [gunicorn](http://gunicorn.org/) instead of systemd.

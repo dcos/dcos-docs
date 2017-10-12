@@ -28,21 +28,40 @@ Spartan acts as a DNS masquerade for Mesos DNS on each agent. The Spartan instan
 - DNS server Proxy with links to all Active/Active DNS server daemons.
 - DNS server cache service for local services.
 
-The Spartan instance on each agent also acts as a DNS server for any service that is load balanced using the DC/OS internal load balancer called [Minuteman](/docs/1.10/networking/mesos-dns/). Any service that is load balanced by Minuteman gets a [virtual-ip-address (VIP)](/docs/1.10/networking/mesos-dns/) and an FQDN in the `"*.l4lb.thisdcos.directory"` domain. The FQDN allocated to a load-balanced service is then stored in Spartan. All Spartans instances exchange the records they have discovered locally from Minuteman by using GOSSIP. This provides a highly available distributed DNS service for any task that is load balanced by Minuteman. For more information, see the [Spartan repository](https://github.com/dcos/spartan).
+The Spartan instance on each agent also acts as a DNS server for any service that is load balanced using the DC/OS internal load balancer called [Minuteman](/docs/1.10/networking/load-balancing-vips/). Any service that is load balanced by Minuteman gets a [virtual-ip-address (VIP)](/docs/1.10/networking/mesos-dns/) and an FQDN in the `"*.l4lb.thisdcos.directory"` domain. The FQDN allocated to a load-balanced service is then stored in Spartan. All Spartans instances exchange the records they have discovered locally from Minuteman by using GOSSIP. This provides a highly available distributed DNS service for any task that is load balanced by Minuteman. For more information, see the [Spartan repository](https://github.com/dcos/spartan).
 
 # Load Balancing
-East-west load balancing is provided by Minuteman. North-south load balancing is provided by [Marathon LB](/docs/1.10/networking/marathon-lb/). Marathon-LB is based on HAProxy, a rapid proxy and load balancer. It is installed as a DC/OS Universe package.
+
+DC/OS offers three load balancing options out-of-the-box:
+[Minuteman](/docs/1.10/networking/load-balancing-vips/),
+[Edge-LB](https://docs.mesosphere.com/1.10/networking/edge-lb/),
+and [Marathon-LB](/docs/1.10/networking/marathon-lb/).
+
+
+|                                    | Minuteman | Edge-LB | Marathon-LB |
+|-----                               |-----------|---------|---|
+| Open Source                        |     X     |         |      X      |
+| Enterprise                         |     X     |    X    |      X      |
+| North-South (External to Internal) |           |    X    |      X      |
+| East-West (Internal to Internal)    |     X     |    X    |      X      |
+| Layer 4 (Transport Layer)          |     X     |    X    |      X      |
+| Layer 7 (Application Layer)        |           |    X    |      X      |
+| Marathon Services                  |     X     |    X    |      X      |
+| Non-Marathon Service Tasks         |     X     |    X    |             |
+| 0 hop load balancing               |     X     |         |             |
+| No single point of failure         |     X     |         |             |
 
 ## Minuteman
-Minuteman is a distributed layer 4 virtual IP east-west load balancer that is installed by default. It provides:
-
-- Distributed load balancing of applications.
-- Highly available LB with no single choke point.
-- Highly scalable and tolerant to large number of host failures.
+Minuteman is a distributed layer 4 virtual IP east-west load balancer that is installed by default.
+It's highly scalable and highly available, offering 0 hop load balancing, no single choke point,
+and tolerance to host failures.
 
 
-## Marathon LB
-Marathon LB is based on HAProxy, a rapid proxy and north-south load balancer. HAProxy provides proxying and load balancing for TCP and HTTP based applications, with features such as SSL support, HTTP compression, health checking, Lua scripting and more. Marathon LB subscribes to Marathon’s event bus and updates the HAProxy configuration in real time. Here are common Marathon LB use cases:
+## Edge-LB
+Edge-LB builds upon on HAProxy. HAProxy provides base functionality such as load balancing for TCP and HTTP-based applications, SSL support, and health checking. In addition, Edge-LB provides first class support for zero downtime service deployment strategies, such as blue/green deployment. Edge-LB subscribes to Mesos and updates HAProxy configuration in real time.
 
-- Use Marathon LB as your edge load balancer (LB)
-- Use Marathon LB as an internal LB and service discovery mechanism, with a separate HA load balancer for routing public traffic in
+Edge-LB proxies and load balances traffic to all services that run on DC/OS. In contrast, Marathon-LB can only work with Marathon tasks. For example, if you are using Cassandra, Edge-LB can load balance the tasks launched by Cassandra.
+
+
+## Marathon-LB
+Marathon-LB is based on HAProxy, a rapid proxy and north-south load balancer. HAProxy provides proxying and load balancing for TCP and HTTP based applications, with features such as SSL support, HTTP compression, health checking, Lua scripting and more. Marathon-LB subscribes to Marathon’s event bus and updates the HAProxy configuration in real time.

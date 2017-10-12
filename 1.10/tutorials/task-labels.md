@@ -82,7 +82,7 @@ dcos job add <myjob>.json
 # Displaying Label Information
 
 
-Once your applications is deployed and started, you can filter by label from the **Services** tab of the DC/OS UI.
+Once your application is deployed and started, you can filter by label from the **Services** tab of the DC/OS UI.
 
 You can also use the Marathon HTTP API from the DC/OS CLI to query the running applications based on the label value criteria.
  

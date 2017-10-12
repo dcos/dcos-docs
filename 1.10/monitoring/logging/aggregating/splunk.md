@@ -30,7 +30,7 @@ For each Master node in your DC/OS cluster:
         #!/bin/sh
 
         exec journalctl --since=now -f          \
-            -u dcos-3dt.service                 \
+            -u dcos-diagnostics.service                 \
             -u dcos-logrotate-master.timer      \
             -u dcos-adminrouter-reload.service  \
             -u dcos-marathon.service            \

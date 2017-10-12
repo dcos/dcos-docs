@@ -251,7 +251,7 @@ For more information, see the [Universe repository](https://github.com/mesospher
 
 A container registry is a repository of pre-built container images.
 
-The [Docker Runtime](#mesos-docker-runtime) and [Mesos Container Runtime](#mesos-universal-container-runtime) can both pull and run Docker images from public or private Docker container registries.
+The [Universal Container Runtime](#mesos-containerizer-universal-container-runtime) and [Docker Engine](#mesos-containerizer-docker-runtime) can both run Docker images from public or private Docker container registries.
 
 ### <a name="cloud-template"></a>Cloud Template
 
@@ -274,8 +274,8 @@ The following terms are contextually correct when talking about Apache Mesos, bu
 - [Role](#mesos-role)
 - [Resource Offer](#mesos-resource-offer)
 - [Containerizer](#mesos-containerizer)
-  - [Universal Container Runtime](#mesos-universal-container-runtime)
-  - [Docker Containerizer](#mesos-docker-containerizer)
+  - [Universal Container Runtime](#mesos-containerizer-universal-container-runtime)
+  - [Docker Engine](#mesos-containerizer-docker-engine)
 - [Exhibitor &amp; ZooKeeper](#mesos-exhibitor-zookeeper)
 - [Mesos\-DNS](#mesos-dns)
 
@@ -348,15 +348,15 @@ A Mesos resource offer provides a set of unallocated resources (e.g. cpu, disk, 
 
 ### <a name="mesos-containerizer"></a>Containerizer
 
-A containerizer provides a containerization and resource isolation abstraction around a specific container runtime. The supported runtimes are the Docker Engine and Universal Container Runtime.
-
-#### <a name="mesos-containerizer-docker-engine"></a>Docker Engine
-
-The [Docker Engine](https://www.docker.com/products/docker-engine) launches Docker containers from Docker images.
+A containerizer provides a containerization and resource isolation abstraction around a specific container runtime. The supported runtimes are the Universal Container Runtime and Docker Engine.
 
 #### <a name="mesos-containerizer-universal-container-runtime"></a>Universal Container Runtime
 
 The Universal Container Runtime launches Mesos containers from binary executables and Docker images. Mesos containers managed by the Universal Container Runtime do not use Docker Engine, even if launched from a Docker image.
+
+#### <a name="mesos-containerizer-docker-engine"></a>Docker Engine
+
+The [Docker Engine](https://www.docker.com/products/docker-engine) launches Docker containers from Docker images.
 
 ### <a name="mesos-exhibitor-zookeeper"></a>Exhibitor &amp; ZooKeeper
 

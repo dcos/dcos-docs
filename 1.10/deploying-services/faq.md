@@ -32,7 +32,7 @@ A comprehensive overview of a few common service discovery implementations is av
 
 ## Is it possible to span my cluster over different cloud providers?
 
-This is not currently supported. For more information, see [this document](/docs/1.10/networking/high-availability/).
+This is not currently supported. For more information, see [this document](/docs/1.10/installing/high-availability/).
 
 ## How to add Mesos roles for a node to dedicate this node for some apps?
 

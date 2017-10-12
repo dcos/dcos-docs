@@ -1,5 +1,5 @@
 ---
-post_title: Marathon LB Reference
+post_title: Marathon-LB Reference
 menu_order: 300
 ---
 ## HAProxy configuration
