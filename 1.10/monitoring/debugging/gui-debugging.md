@@ -1,7 +1,7 @@
 ---
 post_title: Debugging from the DC/OS Web Interface
 feature_maturity: preview
-menu_order: 30
+menu_order: 0
 ---
 
 You can debug your service or pod from the DC/OS web interface.
