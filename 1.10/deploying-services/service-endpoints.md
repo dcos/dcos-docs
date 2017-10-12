@@ -8,7 +8,7 @@ Containerized services can be placed anywhere in the cluster. Many DC/OS service
 # Discovering endpoints
 You can find a service's endpoints, if available, from the DC/OS GUI. Click **Services**, then the name of your service. Click the **Endpoints** tab.
 
-## Discovering endpoints for certified DC/OS Services
+## Discovering endpoints for certified DC/OS services
 The following services also offer CLI commands and an API to discover endpoints: Cassandra, Confluent Kafka, DSE, Elastic, and HDFS.
 
 - CLI:
