@@ -1,6 +1,6 @@
 ---
 post_title: Configuring Your Security
-menu_order: 1
+menu_order: 0
 ---
 
 ### Using your own Auth0 account

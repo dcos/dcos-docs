@@ -1,5 +1,6 @@
 ---
 post_title: Authentication HTTP API Endpoint
+menu_order: 40
 ---
 
 You can make external calls to HTTP API endpoints in your DC/OS cluster.
@@ -28,7 +29,7 @@ DC/OS endpoints expect to find your authentication token in the `Authorization` 
 Authorization: token=<authentication-token>
 ```
 
-With cURL, you can use command substitution 
+With cURL, you can use command substitution
 to extract the token value from your configuration file. The following examples illustrate this syntax.
 
 **Sample Marathon request:**

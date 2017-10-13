@@ -1,6 +1,6 @@
 ---
 post_title: Managing Authentication
-menu_order: 1
+menu_order: 10
 ---
 
 Authentication is managed in the DC/OS web interface.
@@ -77,12 +77,12 @@ The DC/OS CLI stores the token in a configuration file in the `.dcos` directory 
 
     ![alt](/docs/1.10/img/auth-login.png)
 
-1.  Click the button that corresponds to your preferred identity provider. 
+1.  Click the button that corresponds to your preferred identity provider.
 
-1.  Provide your credentials to the identity provider if prompted. If you have already authenticated to the identity provider during your current browser session, you won't need to do so again.  
+1.  Provide your credentials to the identity provider if prompted. If you have already authenticated to the identity provider during your current browser session, you won't need to do so again.
 
     ![alt](/docs/1.10/img/auth-login-token.png)
-    
+
 1.  Click **Copy to Clipboard**.
 
 1.  Return to your terminal prompt and paste the OpenID Connect ID token value in at the prompt.
@@ -149,4 +149,3 @@ security features as well as on introducing new ones in the coming releases.
 - [Learn how to monitor a DC/OS cluster](/docs/1.10/monitoring/)
 
  [1]: https://en.wikipedia.org/wiki/STARTTLS
- 

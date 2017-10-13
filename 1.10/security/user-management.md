@@ -1,6 +1,6 @@
 ---
 post_title: User Management
-menu_order: 201
+menu_order: 30
 ---
 
 Users are granted access to DC/OS by another authorized user. A default user is automatically created by the first user that logs in to the DC/OS cluster.
