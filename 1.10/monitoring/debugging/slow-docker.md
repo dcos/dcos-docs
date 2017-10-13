@@ -9,7 +9,7 @@ If you recently upgraded to DC/OS 1.10 or configured `MESOS_CGROUPS_ENABLE_CFS=t
 
 When using Apache Mesos, you can choose to use either CPU shares or strict CPU limitations. If you use CPU shares, your task can consume more CPU cycles than initially configured in your Marathon app definition, if your host system has free CPU cycles. If you are using strict CPU limitations, your task can only consume a maximum of CPU time based on your Marathon configuration.
 
-The default Mesos configuration uses CPU shares. CFS (Completely Fair Scheduler) strict CPU limitation was introduced as a default in DC/OS a while ago, but until recently this configuration is only respected by the Mesos executor and not by the Docker executor. [MESOS-6134](https://issues.apache.org/jira/browse/MESOS-6134) was fixed in the latest Mesos release, which is also included in DC/OS 1.10.
+Completely Fair Scheduler (CFS) strict CPU limitations is the default in DC/OS, but this configuration was respected only by the Mesos executor and not by the Docker executor. The fix [MESOS-6134](https://issues.apache.org/jira/browse/MESOS-6134) in the latest Mesos release, and also included in DC/OS 1.10, removes this limitation.
 
 Your services or deployments are likely running slowly because they require more CPU cycles than they are configured to consume.
 
@@ -17,7 +17,7 @@ Your services or deployments are likely running slowly because they require more
 
 ## Increase CPU allocation
 
-If you have slow-running Docker services or deployments due to DC/OS upgrade or configuring `MESOS_CGROUPS_ENABLE_CFS=true`, increase the required CPU amount in your service definition. [From the CLI](/1.10/deploying-services/update-user-service/) or the **Services** tab of the DC/OS GUI, change the `"cpus"` property of your service definition to a higher value and test if this change solves your issues.
+If you have slow-running Docker services or deployments due to DC/OS upgrade or configuring `MESOS_CGROUPS_ENABLE_CFS=true`, increase the required CPU amount in your service definition. [From the CLI](/1.10/deploying-services/update-user-service/) or the **Services** tab of the DC/OS GUI, change the `"cpus"` property of your service definition to a higher value and test if increaded CPU allocation solves your issues.
 
 ## Change Mesos agent configuration
 
