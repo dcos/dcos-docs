@@ -74,14 +74,8 @@ Your cluster must meet the software and hardware [requirements](/docs/1.10/insta
 
     ```yaml
     ---
-    agent_list:
-    - <agent-private-ip-1>
-    - <agent-private-ip-2>
-    - <agent-private-ip-3>
-    - <agent-private-ip-4>
-    - <agent-private-ip-5>
     # Use this bootstrap_url value unless you have moved the DC/OS installer assets.
-    bootstrap_url: file:///opt/dcos_install_tmp
+    bootstrap_url: http://<bootstrap_ip>:<your_port>
     cluster_name: <cluster-name>
     exhibitor_storage_backend: static
     master_discovery: static
@@ -90,13 +84,9 @@ Your cluster must meet the software and hardware [requirements](/docs/1.10/insta
     - <master-private-ip-1>
     - <master-private-ip-2>
     - <master-private-ip-3>
-    public_agent_list:
-    - <public-agent-private-ip>
     resolvers:
     - 8.8.4.4
     - 8.8.8.8
-    ssh_port: 22
-    ssh_user: <username>
     use_proxy: 'true'
     http_proxy: http://<proxy_host>:<http_proxy_port>
     https_proxy: https://<proxy_host>:<https_proxy_port>
