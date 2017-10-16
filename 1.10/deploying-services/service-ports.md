@@ -199,7 +199,6 @@ Port mappings are specified inside the `portMappings` object for a `container`:
     "type": "DOCKER",
     "docker": {
       "image": "my-image:1.0",
-      "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 0, "hostPort": 0 },
         { "containerPort": 0, "hostPort": 0 },
@@ -218,7 +217,6 @@ Alternatively, if our process running in the container had fixed ports, we might
     "type": "DOCKER",
     "docker": {
       "image": "my-image:1.0",
-      "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 80, "hostPort": 0 },
         { "containerPort": 443, "hostPort": 0 },
@@ -239,7 +237,6 @@ You can also specify the protocol for these port mappings. The default is `tcp`:
     "type": "DOCKER",
     "docker": {
       "image": "my-image:1.0",
-      "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 80, "hostPort": 0, "protocol": "tcp" },
         { "containerPort": 443, "hostPort": 0, "protocol": "tcp" },
@@ -258,7 +255,6 @@ By default, Marathon will be creating service ports for each of these ports and 
     "type": "DOCKER",
     "docker": {
       "image": "my-image:1.0",
-      "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 80, "hostPort": 0, "protocol": "tcp", "servicePort": 2000 },
         { "containerPort": 443, "hostPort": 0, "protocol": "tcp", "servicePort": 2001 },

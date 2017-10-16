@@ -41,6 +41,9 @@ This is the DC/OS service definition JSON to start the official PostgreSQL Docke
   "cpus": 1,
   "mem": 1024,
   "instances": 1,
+  "networks": [
+      { "mode": "container/bridge" }
+  ],
   "container": {
     "type": "DOCKER",
     "volumes": [
@@ -54,7 +57,6 @@ This is the DC/OS service definition JSON to start the official PostgreSQL Docke
     ],
     "docker": {
       "image": "postgres:9.5",
-      "network": "BRIDGE",
       "portMappings": [
         {
           "containerPort": 5432,

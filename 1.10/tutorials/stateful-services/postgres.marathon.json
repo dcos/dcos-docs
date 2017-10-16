@@ -3,6 +3,9 @@
   "cpus": 1,
   "mem": 1024,
   "instances": 1,
+  "networks": [
+      { "mode": "container/bridge" }
+  ],
   "container": {
     "type": "DOCKER",
     "volumes": [
@@ -16,7 +19,6 @@
     ],
     "docker": {
       "image": "postgres:9.5",
-      "network": "BRIDGE",
       "portMappings": [
         {
           "containerPort": 5432,

@@ -87,7 +87,7 @@ When you scale your app down, the volumes associated with the terminated instanc
 
 Since all the resources your application needs are still reserved when a volume is detached, you may wish to destroy detached volumes to allow other applications and frameworks to use the resources. You may wish to leave them in the detached state, however, if you think you will be scaling your app up again; the data on the volume will still be there.
 
-**Notes:** 
+**Notes:**
 
 -  If your app is destroyed, any associated volumes and reserved resources will also be deleted.
 -  Mesos will currently not remove the data but might do so in the future.
@@ -156,6 +156,9 @@ A model app definition for PostgreSQL on Marathon would look like this. Note tha
   "cpus": 1,
   "instances": 1,
   "mem": 512,
+  "networks": [
+      { "mode": "container/bridge" }
+  ],
   "container": {
     "type": "DOCKER",
     "volumes": [
@@ -169,7 +172,6 @@ A model app definition for PostgreSQL on Marathon would look like this. Note tha
     ],
     "docker": {
       "image": "postgres:latest",
-      "network": "BRIDGE",
       "portMappings": [
         {
           "containerPort": 5432,
@@ -228,6 +230,9 @@ The complete JSON application definition reads as follows:
   "mem": 512,
   "disk": 0,
   "instances": 1,
+  "networks": [
+      { "mode": "container/bridge" }
+  ],
   "container": {
     "type": "DOCKER",
     "volumes": [
@@ -246,7 +251,6 @@ The complete JSON application definition reads as follows:
     ],
     "docker": {
       "image": "mysql",
-      "network": "BRIDGE",
       "portMappings": [
         {
           "containerPort": 3306,
@@ -286,15 +290,15 @@ http GET http://dcos/service/marathon/v2/apps/postgres/tasks
 response:
 
 {
-  "appId": "/postgres", 
-  "host": "10.0.0.168", 
-  "id": "postgres.53ab8733-fd96-11e5-8e70-76a1c19f8c3d", 
+  "appId": "/postgres",
+  "host": "10.0.0.168",
+  "id": "postgres.53ab8733-fd96-11e5-8e70-76a1c19f8c3d",
   "localVolumes": [
     {
-      "containerPath": "pgdata", 
+      "containerPath": "pgdata",
       "persistenceId": "postgres#pgdata#53ab8732-fd96-11e5-8e70-76a1c19f8c3d"
     }
-  ], 
+  ],
   "slaveId": "d935ca7e-e29d-4503-94e7-25fe9f16847c-S1"
 }
 ```
