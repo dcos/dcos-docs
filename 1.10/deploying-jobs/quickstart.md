@@ -37,7 +37,7 @@ Check the **Run on a Schedule** to reveal the following fields.
 **Label Name** and **Label Value** - Attach metadata to your jobs so you can filter them. [Learn more about labels](/docs/1.10/tutorials/task-labels/).
 
 ## Job Groups
-You add a job to a an existing job group or create one when you create the job. Use dots in your job ID to nest the job in a group. For instance, if you enter job ID `marketing.myjob`, `myjob` will be created in the `marketing` group. In DC/OS Enterprise, you can [use job groups to implement fine-grained user access](https://docs.mesosphere.com/1.10/deploying-jobs/job-groups).
+You can add a job to a an existing job group or create one when you create the job. Use dots in your job ID to nest the job in a group. For instance, if you enter job ID `marketing.myjob`, `myjob` will be created in the `marketing` group. In DC/OS Enterprise, you can [use job groups to implement fine-grained user access](https://docs.mesosphere.com/1.10/deploying-jobs/job-groups).
 
 ## Modify, View, or Remove a Job
 
