@@ -37,7 +37,7 @@ Check the **Run on a Schedule** to reveal the following fields.
 **Label Name** and **Label Value** - Attach metadata to your jobs so you can filter them. [Learn more about labels](/docs/1.10/tutorials/task-labels/).
 
 ## Job Groups
-You can add a job to a an existing job group or create one when you create the job. Use dots in your job ID to nest the job in a group. For instance, if you enter job ID `marketing.myjob`, `myjob` will be created in the `marketing` group. In DC/OS Enterprise, you can [use job groups to implement fine-grained user access](https://docs.mesosphere.com/1.10/deploying-jobs/job-groups).
+You can add a job to a an existing job group or create one when you create the job. Use dots in your job ID to nest the job in a group. For instance, if you enter job ID `marketing.myjob`, `myjob` will be created in the `marketing` group. In DC/OS Enterprise, you can [use job groups](https://docs.mesosphere.com/1.10/deploying-jobs/job-groups) to implement fine-grained user access.
 
 ## Modify, View, or Remove a Job
 
@@ -72,7 +72,7 @@ You can create and manage jobs from the DC/OS CLI using `dcos job` commands. To 
     }
     ```
 
-     **Note:** You can only assign one schedule to a job.
+   You can only assign one schedule to a job.
 
 1. Add the job:
     ```bash
@@ -81,7 +81,7 @@ You can create and manage jobs from the DC/OS CLI using `dcos job` commands. To 
 
     **Note:** You can choose any name for your job file.
 
-1. Go to the "Jobs" tab of the DC/OS web interface to verify that you have added your job, or verify from the CLI:
+1. Go to the **Jobs** tab of the DC/OS web interface to verify that you have added your job, or verify from the CLI:
     ```bash
     dcos job list
     ```
@@ -110,7 +110,7 @@ If you use the same schedule for more than one job, you can create a separate JS
     dcos job remove <job-id>
     ```
 
-1. Go to the "Jobs" tab of the DC/OS web interface to verify that you have removed your job, or verify from the CLI:
+1. Go to the **Jobs** tab of the DC/OS web interface to verify that you have removed your job, or verify from the CLI:
 
     ```
     dcos job list
@@ -118,7 +118,7 @@ If you use the same schedule for more than one job, you can create a separate JS
 
 ## Modify a Job
 
-To modify your job, by update your JSON job file, then run
+To modify your job, update your JSON job file, then run
 
 ```
 dcos job update <job-file>.json
@@ -138,7 +138,7 @@ dcos job update <job-file>.json
 
 #### Modify a Job with a Separate Schedule file
 
-Modify your `<schedule-file>.json`. Then, run one of the following commands:
+Modify `<schedule-file>.json`. Then, run one of the following commands:
 
 ```bash
 dcos job schedule add <job-id> <schedule-file>.json
