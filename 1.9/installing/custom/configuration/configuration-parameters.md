@@ -102,25 +102,21 @@ For more information, see the [security documentation](https://docs.mesosphere.c
 The dictionary of Docker credentials to pass. 
 
 - If unset, a default empty credentials file is created at `/etc/mesosphere/docker_credentials` during DC/OS install. A sysadmin can change credentials as needed. A `systemctl restart dcos-mesos-slave` or `systemctl restart dcos-mesos-slave-public` is required for changes to take effect.
-- You can also specify by using the `--docker_config` JSON [format](http://mesos.apache.org/documentation/latest/configuration/). You can write as YAML in the `config.yaml` file and it will automatically be mapped to the JSON format for you. This will store the Docker credentials in the same location as the DC/OS internal configuration (`/opt/mesosphere`). If you need to update or change the configuration, you will have to create a new DC/OS internal configuration.
+- You can also specify by using the `--docker_config` JSON [format](http://mesos.apache.org/documentation/latest/configuration/). You can write as YAML in the `config.yaml` file and it will automatically be mapped to the JSON format for you. This option stores the Docker credentials in the same location as the DC/OS internal configuration (`/opt/mesosphere`). If you need to update or change the configuration, you will have to create a new DC/OS internal configuration.
+
+**Note:** `cluster_docker_credentials` takes effect during an upgrade only when `cluster_docker_credentials_dcos_owned` is set to `'true'`.
 
 You can use the following options to further configure the Docker credentials:
 
-*  **cluster_docker_credentials_dcos_owned** Indicates whether to store the credentials file in `/opt/mesosphere` or `/etc/mesosphere/docker_credentials`. A sysadmin cannot edit `/opt/mesosphere` directly.
-
+*  `cluster_docker_credentials_dcos_owned` Whether to store the credentials file in `/opt/mesosphere` or `/etc/mesosphere/docker_credentials`. A sysadmin cannot edit `/opt/mesosphere` directly. 
     *  `cluster_docker_credentials_dcos_owned: 'true'` The credentials file is stored in `/opt/mesosphere`.
-    
-        *  **cluster_docker_credentials_write_to_etc** Indicates whether to write a cluster credentials file.
-        
+        *  `cluster_docker_credentials_write_to_etc` Whether to write a cluster credentials file. 
             *  `cluster_docker_credentials_write_to_etc: 'true'` Write a credentials file. This can be useful if overwriting your credentials file will cause problems (e.g., if it is part of a machine image or AMI). This is the default value.
             *  `cluster_docker_credentials_write_to_etc: 'false'` Do not write a credentials file.
-            
     *  `cluster_docker_credentials_dcos_owned: 'false'` The credentials file is stored in `/etc/mesosphere/docker_credentials`.
-
-*  **cluster_docker_credentials_enabled** Indicates whether to pass the Mesos `--docker_config` option to Mesos. 
-
-    *  `cluster_docker_credentials_enabled: 'true'` Pass the Mesos `--docker_config` option to Mesos. It will point to a file that contains the provided `cluster_docker_credentials` data.
-    *  `cluster_docker_credentials_enabled: 'false'` Do not pass the Mesos `--docker_config` option to Mesos. 
+*  `cluster_docker_credentials_enabled` Whether to pass the `--docker_config` option to Mesos. 
+    *  `cluster_docker_credentials_enabled: 'true'` Pass the `--docker_config` option pointing to a file that contains the provided `cluster_docker_credentials` data to Mesos.
+    *  `cluster_docker_credentials_enabled: 'false'` Do not pass the `--docker_config` option to Mesos. 
     
 For more information, see the [examples](/docs/1.9/installing/custom/configuration/examples/#docker-credentials).
 
@@ -194,7 +190,7 @@ Indicates whether to enable DC/OS virtual networks.
         *  `vtep_mac_oui` The MAC address of the interface connecting to the virtual network in the public node.
             
             **Important:** The last 3 bytes must be `00`.
-        *  __overlays__
+        *  `overlays`
             *  `name` The canonical name (see [limitations](/docs/1.9/networking/virtual-networks/) for constraints on naming virtual networks).
             *  `subnet` The subnet that is allocated to the virtual network.
             *  `prefix` The size of the subnet that is allocated to each agent and thus defines the number of agents on which the overlay can run. The size of the subnet is carved from the overlay subnet.
@@ -420,7 +416,6 @@ Indicates whether to enable the DC/OS proxy.
     *  `https_proxy: https://<user>:<pass>@<proxy_host>:<https_proxy_port>` The HTTPS proxy.
     *  `no_proxy`: A YAML nested list (`-`) of subdomains to exclude from forwarding to the `https_proxy`. If the address matches one of these strings, or the host is within the domain of one of these strings, http(s) requests to that node are not proxied. For example, the `no_proxy` list can be a list of internal IP addresses. 
     
-        **Important:** Wildcards charachters (`*`) are not supported. 
+        **Important:** Wildcards characters (`*`) are not supported. 
 
 **Important:** You should also configure an HTTP proxy for [Docker](https://docs.docker.com/engine/admin/systemd/#/http-proxy). 
-

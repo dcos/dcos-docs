@@ -26,9 +26,9 @@ cluster_docker_credentials:
     '<path-to-credentials>':
       auth: <username>
       email: <email>
-  cluster_docker_credentials_dcos_owned: <true|false>
-    cluster_docker_credentials_write_to_etc: <true|false>
-      cluster_docker_credentials_write_to_etc: <true|false>
+cluster_docker_credentials_dcos_owned: <true|false>
+  cluster_docker_credentials_write_to_etc: <true|false>
+cluster_docker_credentials_enabled: <true|false>
 cluster_docker_registry_url: <url>
 cluster_name: '<cluster-name>'
 cosmos_config:
@@ -143,7 +143,7 @@ ssh_port: '<port-number>'
 ssh_user: <username>
 ```
 
-## <a name="aws"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper backed by an AWS S3 bucket, AWS DNS, five private agents, and one public agent node
+# <a name="aws"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper backed by an AWS S3 bucket, AWS DNS, five private agents, and one public agent node
 
 ```yaml
 ---
@@ -177,7 +177,7 @@ ssh_port: '<port-number>'
 ssh_user: <username>
 ```
 
-## <a name="zk"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper backed by ZooKeeper, masters that have an HTTP load balancer in front of them, one public agent node, five private agents, and Google DNS
+# <a name="zk"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper backed by ZooKeeper, masters that have an HTTP load balancer in front of them, one public agent node, five private agents, and Google DNS
 
 ```yaml
 ---
@@ -209,7 +209,7 @@ ssh_port: '<port-number>'
 ssh_user: <username>
 ```
 
-## <a name="overlay"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper managed internally, two DC/OS virtual networks, two private agents, and Google DNS
+# <a name="overlay"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper managed internally, two DC/OS virtual networks, two private agents, and Google DNS
 
 ```yaml
 agent_list:
@@ -245,7 +245,7 @@ dcos_overlay_network:
       prefix: 24
 ```
 
-## <a name="http-proxy"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper managed internally, a custom HTTP proxy, two private agents, and Google DNS
+# <a name="http-proxy"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper managed internally, a custom HTTP proxy, two private agents, and Google DNS
 
 ```yaml
 agent_list:
@@ -274,7 +274,7 @@ no_proxy:
 - '.baz.com'
 ```
 
-## <a name="docker-credentials"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper managed internally, custom Docker credentials, two private agents, and Google DNS
+# <a name="docker-credentials"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper managed internally, custom Docker credentials, two private agents, and Google DNS
 
 ```yaml
 agent_list:
@@ -287,7 +287,8 @@ cluster_docker_credentials:
     'https://registry.example.com/v1/':
       auth: foo
       email: user@example.com
-cluster_docker_credentials_dcos_owned: false
+cluster_docker_credentials_enabled: true
+cluster_docker_credentials_dcos_owned: true
 cluster_docker_registry_url: https://registry.example.com
 cluster_name: <cluster-name>
 master_discovery: static
@@ -304,7 +305,7 @@ ssh_port: 22
 ssh_user: centos
 ```
 
-## <a name="cosmos-config"></a>DC/OS cluster with one master, an Exhibitor/ZooKeeper managed internally, three private agents, Google DNS, and DC/OS Package Manager (Cosmos) configured with persistent storage
+# <a name="cosmos-config"></a>DC/OS cluster with one master, an Exhibitor/ZooKeeper managed internally, three private agents, Google DNS, and DC/OS Package Manager (Cosmos) configured with persistent storage
 
 ```yaml
 agent_list:
@@ -328,4 +329,3 @@ cosmos_config:
   staged_package_storage_uri: file:///var/lib/dcos/cosmos/staged-packages
   package_storage_uri: file:///var/lib/dcos/cosmos/packages
 ```
-
