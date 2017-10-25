@@ -74,7 +74,6 @@ Your cluster must meet the software and hardware [requirements](/docs/1.10/insta
 
     ```yaml
     ---
-    # Use this bootstrap_url value unless you have moved the DC/OS installer assets.
     bootstrap_url: http://<bootstrap_ip>:<your_port>
     cluster_name: <cluster-name>
     exhibitor_storage_backend: static
