@@ -251,7 +251,7 @@ To demonstrate the vhost feature:
         
     **DC/OS GUI**
     
-    1.  Navigate to the **Services > Services > nginx-external** service and click edit.
+    1.  Navigate to the **Services > Services > nginx-external** service, click the vertical ellipsis at the far right, and select **Edit**.
  
     1.  Select **Environment > ADD LABEL**.
     
@@ -261,7 +261,7 @@ To demonstrate the vhost feature:
         
         **Important:** Do not include the leading `http://`trailing slash (`/`) in your public DNS name.
         
-    1.  Select **Deploy**.
+    1.  Select **REVIEW & RUN** and **RUN SERVICE**.
     
     The label `HAPROXY_0_VHOST`, instructs Marathon-LB to expose NGINX on the external load balancer with a virtual host. The `0` in the label key corresponds to the servicePort index, beginning from 0. 
 
