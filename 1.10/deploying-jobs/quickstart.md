@@ -72,7 +72,7 @@ You can create and manage jobs from the DC/OS CLI using `dcos job` commands. To 
     }
     ```
 
-   You can only assign one schedule to a job.
+   **Note:** You can assign only one schedule to a job.
 
 1. Add the job:
     ```bash
