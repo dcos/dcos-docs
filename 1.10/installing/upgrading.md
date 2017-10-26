@@ -34,6 +34,9 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
   - In 1.9, this can be found under the **Cluster** tab.
   - In 1.10, this can be found under the **Overview** tab.
 - Optional: You can add custom [node and cluster healthchecks] (/docs/1.10/installing/custom/node-cluster-health-check/#custom-health-checks) to your `config.yaml`.
+- Verify that all your masters are in a healthy state: 
+   - Check the Exhibitor UI to confirm that all masters have joined the quorum successfully (the status indicator will show green). The Exhibitor UI is available at `http://<dcos_master>:8181/`.
+   - Verify that `curl http://<dcos_master_private_ip>:5050/metrics/snapshot` has the metric `registrar/log/recovered` with a value of `1` for each master.
 
 ## Supported upgrade paths
 
