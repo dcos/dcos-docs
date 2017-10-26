@@ -42,18 +42,20 @@ You can create and manage jobs from the DC/OS CLI using `dcos job` commands. To 
         "id": "myjob",
         "description": "A job that sleeps regularly",
         "run": {
-            "cmd": "sleep 20000",
-            "cpus": 0.01,
-            "mem": 32,
-            "disk": 0
-        },
-        "schedules": {
-            "id": "sleep-schedule",
-            "enabled": true,
-            "cron": "20 0 * * *",
-            "concurrencyPolicy": "ALLOW"
-        }
-    }
+                "cmd": "sleep 20000",
+                "cpus": 0.01,
+                "mem": 32,
+                "disk": 0
+            },
+            "schedules": [
+                {
+                    "id": "sleep-schedule",
+                    "enabled": true,
+                    "cron": "20 0 * * *",
+                    "concurrencyPolicy": "ALLOW"
+            }
+        ]
+     }
     ```
  
      **Note:** You can only assign one schedule to a job.

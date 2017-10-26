@@ -16,8 +16,24 @@ To specify a global template:
 
 1.  On your local machine, create a file called `HAPROXY_HEAD` in a directory called `templates` with the contents below:
 
-        global daemon log /dev/log local0 log /dev/log local1 notice maxconn 4096 tune.ssl.default-dh-param 2048 defaults log global retries 3 maxconn 3000 timeout connect 5s timeout client 30s timeout server 30s option redispatch listen stats bind 0.0.0.0:9090 balance mode http stats enable monitor-uri /\_haproxy\_health_check
-
+        global
+          daemon
+          log /dev/log local0
+          log /dev/log local1 notice
+          maxconn 4096
+          tune.ssl.default-dh-param 2048
+        defaults
+          log global
+          retries 3
+          maxconn 3000
+          timeout connect 5s
+          timeout client 30s
+          timeout server 30s
+          option redispatch
+        listen stats
+          bind 0.0.0.0:9090
+          balance mode http
+          stats enable monitor-uri /_haproxy_health_check
     In the code above, the following items have changed from the default: `maxconn`, `timeout client`, and `timeout server`.
 
 2.  Tar or zip the file. [Here’s a handy script you can use to do this][1].
@@ -26,11 +42,15 @@ To specify a global template:
 
 3.  Augment the Marathon-LB config by saving the following JSON in a file called `options.json`:
 
-        { "marathon-lb":{ "template-url":"https://downloads.mesosphere.com/marathon/marathon-lb/templates.tgz" } }
+        {
+          "marathon-lb": {
+            "template-url":"https://downloads.mesosphere.com/marathon/marathon-lb/templates.tgz"
+          }
+        }
 
 4.  Launch the new Marathon-LB:
 
-        $ dcos package install --options=options.json marathon-lb
+        dcos package install --options=options.json marathon-lb
 
     Your customized Marathon-LB HAProxy instance will now be running with the new template. [A full list of the templates available can be found here][2].
 
@@ -113,7 +133,7 @@ To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
 1.  Begin by running marathon-lb-autoscale. The JSON app definition [can be found here][7]. Save the file and launch it on Marathon:
 
-        $ dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/2ca7e10b985b2ce9f8ee/raw/66cbcbe171afc95f8ef49b70034f2842bfdb0aca/marathon-lb-autoscale.json
+        dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/2ca7e10b985b2ce9f8ee/raw/66cbcbe171afc95f8ef49b70034f2842bfdb0aca/marathon-lb-autoscale.json
 
     The JSON app definition passes 2 important arguments to the tool: `--target-rps` tells marathon-lb-autoscale identifies the target RPS and `--apps` is a comma-separated list of the Marathon apps and service ports to monitor, concatenated with `_`. Each app could expose multiple service ports to the load balancer if configured to do so, and marathon-lb-autoscale will scale the app to meet the greatest common denominator for the number of required instances.
 
@@ -128,11 +148,11 @@ To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
 2.  Launch your NGINX test instance. The JSON app definition [can be found here][8]. Save the file, and launch with:
 
-        $ dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/84d0ab8ac057aaacba05/raw/d028fa9477d30b723b140065748e43f8fd974a84/nginx.json
+        dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/84d0ab8ac057aaacba05/raw/d028fa9477d30b723b140065748e43f8fd974a84/nginx.json
 
 3.  Launch siege, a tool for generating HTTP request traffic. The JSON app definition [can be found here][9]. Save the file, and launch with:
 
-        $ dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/fe3fb0c13c19a96c362e/raw/32280a39e1a8a6fe2286d746b0c07329fedcb722/siege.json
+        dcos marathon app add https://gist.githubusercontent.com/brndnmtthws/fe3fb0c13c19a96c362e/raw/32280a39e1a8a6fe2286d746b0c07329fedcb722/siege.json
 
     Now, if you check the HAProxy status page, you should see requests hitting the NGINX instance:
 
@@ -142,7 +162,7 @@ To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
 4.  Scale the siege app so that we generate a large number of HTTP requests:
 
-        $ dcos marathon app update /siege instances=15
+        dcos marathon app update /siege instances=15
 
     After a few minutes you will see that the NGINX app has been automatically scaled up to serve the increased traffic.
 

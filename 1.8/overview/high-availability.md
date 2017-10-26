@@ -27,7 +27,7 @@ ZooKeeper is used by numerous services in DC/OS to provide consistency. ZooKeepe
 
 # Fault Domain Isolation
 
-Fault domain isolation is an important part of building HA systems. In order to correctly handle failure scenarios, systems must be distributed across fault domains in order survive outages. There are different types of fault domains, a few examples of which are:
+Fault domain isolation is an important part of building HA systems. To correctly handle failure scenarios, systems must be distributed across fault domains in order survive outages. There are different types of fault domains, a few examples of which are:
 
  * Physical domains: this includes machine, rack, datacenter, region, availability zone,   and so on.
  * Network domains: machines within the same network may be subject  to network partitions. For example, a shared network switch may fail or have  invalid configuration.
@@ -45,7 +45,7 @@ HA services should be decoupled, with responsibilities divided amongst services.
 Single points of failure come in many forms. A service like ZooKeeper, for example, can become a single point of failure when every service in your system shares one ZooKeeper cluster. You can reduce risks by running multiple ZooKeeper clusters for separate services. With DC/OS, there's an [Exhibitor package](https://github.com/mesosphere/exhibitor-dcos) included which makes this easy:
 
 ```
-$ dcos package install exhibitor
+dcos package install exhibitor
 ```
 
 Other common single points of failure include: single database instances (like a MySQL), one-off services, and non-HA load balancers.

@@ -157,7 +157,7 @@ A Marathon service consists of zero or more containerized service instances. Eac
     - Marathon pod instances map 1 to many with tasks.
 - Service instances are restarted as a new Mesos Task when they exit prematurely.
 - Service instances may be re-scheduled onto another agent node if they exit prematurely and the agent is down or does not have enough resources any more.
-- Services may be installed directly via the [DC/OS API (Marathon)](http://mesosphere.github.io/marathon/docs/rest-api.html) or indirectly via the [DC/OS package manager (Cosmos)](#package-manager) from a [package repository](#dcos-package-repository) like [Mesosphere Universe](#mesosphere-universe). The [DC/OS GUI](#dcos-gui) and [DC/OS CLI](#dcos-cli) may be used to interact with the DC/OS package manager more easily.
+- Services may be installed directly via the [DC/OS API (Marathon)](/docs/1.8/usage/managing-services/rest-api/) or indirectly via the [DC/OS package manager (Cosmos)](#package-manager) from a [package repository](#dcos-package-repository) like [Mesosphere Universe](#mesosphere-universe). The [DC/OS GUI](#dcos-gui) and [DC/OS CLI](#dcos-cli) may be used to interact with the DC/OS package manager more easily.
 - A Marathon service may be a [DC/OS scheduler](#dcos-scheduler), but not all services are schedulers.
 - A Marathon service is an abstraction around Marathon service instances which are an abstraction around Mesos tasks. Other schedulers (e.g. Metronome, Jenkins) have their own names for abstractions around Mesos tasks.
 
@@ -209,7 +209,7 @@ A DC/OS scheduler is a Mesos scheduler that runs as a systemd service on master 
 - Some schedulers come pre-installed as DC/OS components (e.g. Marathon, Metronome).
 - Some schedulers can be installed by users as user services (e.g Kafka, Cassandra).
 - Some schedulers run as multiple service instances to provide high availability (e.g. Marathon).
-- In certain security modes within Enterprise DC/OS, a DC/OS scheduler must authenticate and be authorized using a service account in order to register with Mesos as a framework.
+- In certain security modes within Enterprise DC/OS, a DC/OS scheduler must authenticate and be authorized using a service account to register with Mesos as a framework.
 
 ### <a name="dcos-scheduler-service"></a>Scheduler Service
 
@@ -252,7 +252,7 @@ For more information, see the [Universe repository](https://github.com/mesospher
 
 ### <a name="cloud-template"></a>Cloud Template
 
-A cloud template is an infrastructure-specific method of decoratively describing a DC/OS cluster.
+A cloud template is an infrastructure-specific method of declaratively describing a DC/OS cluster.
 
 For more information, see [Cloud Installation Options](/docs/1.8/administration/installing/cloud/).
 
@@ -336,7 +336,7 @@ For more information about framework schedulers and executors, see the [Applicat
 
 A Mesos role is a group of Mesos Frameworks that share reserved resources, persistent volumes, and quota. These frameworks are also grouped together in Mesos' hierarchical Dominant Resource Fairness (DRF) share calculations.
 
-- Roles are often confused as groups of resources, because of they way they can be statically configured on the agents. The assignment is actually the inverse: resources are assigned to roles.
+- Roles are often confused as groups of resources, because of the way they can be statically configured on the agents. The assignment is actually the inverse: resources are assigned to roles.
 - Role resource allocation can be configured statically on the Mesos agent or changed at runtime using the Mesos API.
 
 ### <a name="mesos-resource-offer"></a>Resource Offer

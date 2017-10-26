@@ -62,7 +62,7 @@ Nginx is getting installed.
 To verify that our NGINX instance is up and running, we can use `dcos task` command:
 
 ```bash
-$ dcos task
+dcos task
 NAME   HOST        USER  STATE  ID
 nginx  10.0.0.161  root    R    nginx.b1e20ff3-0500-11e6-83da-8a8d57d7c81f
 ```

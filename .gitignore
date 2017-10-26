@@ -3,5 +3,6 @@
 
 # IntelliJ
 .idea
+*.iml
 tmp
 npm-debug.log

@@ -18,7 +18,7 @@ Thanks to **VIPs** you are only required to specify a virtual address for the da
 This feature solves 3 of the hardest problems involved in running a service-oriented architecture: 
 
  - Finding where the service is running in the datacenter.
- - Determining which instance to send traffic to in order to avoid overloading any particular one.
+ - Determining which instance to send traffic to to avoid overloading any particular one.
  - Gracefully handling failures to these instances when they happen.
 
 You are now going to see how easy it is to make use of this feature in DC/OS.
@@ -189,11 +189,11 @@ You can also assign a VIP to your application via the DC/OS Marathon web interfa
 - Paste your application definition into a JSON file, such as `vip-tutorial.json`.
 - Add the app to Marathon:
   ```bash
-  $ dcos marathon app add vip-tutorial.json
+  dcos marathon app add vip-tutorial.json
   ```
 - Verify that the app has been added:
   ```bash
-  $ dcos marathon app list
+  dcos marathon app list
   ```
 
 For more information on port configuration, see the [ports documentation][1].
@@ -219,4 +219,4 @@ At this address, you will be greeted by the WordPress setup page. From there, yo
 
 ## Conclusions
 
-**Note:** For the purposes of this tutorial, we haven't touched on how to ensure that the MySQL data can be persisted. Head over to the [Cassandra](/docs/1.7/usage/tutorials/cassandra) tutorial to learn how to deploy stateful applications in DC/OS.
+**Note:** For the purposes of this tutorial, we haven't touched on how to ensure that the MySQL data can be persisted. Head over to the [Cassandra](/docs/1.7/usage/tutorials/iot_pipeline/) tutorial to learn how to deploy stateful applications in DC/OS.

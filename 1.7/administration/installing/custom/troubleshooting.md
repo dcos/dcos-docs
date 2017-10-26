@@ -19,7 +19,7 @@ DC/OS uses ZooKeeper, a high-performance coordination service to manage the inst
 *   SSH to your master node and enter this command to view the logs from boot time:
 
     ```bash
-    $ journalctl -u dcos-exhibitor -b
+    journalctl -u dcos-exhibitor -b
     ```
 
     For example, here is a snippet of the Exhibitor log as it converges to a successful state:
@@ -49,7 +49,7 @@ The Mesos master process starts on the master nodes. The `mesos-master` process 
 *   SSH to your master node and enter this command to view the logs from boot time:
 
     ```bash
-    $ journalctl -u dcos-mesos-master -b
+    journalctl -u dcos-mesos-master -b
     ```
 
     For example, here is a snippet of the Mesos master log as it converges to a successful state:
@@ -69,7 +69,7 @@ Mesos-DNS is started on the DC/OS master nodes. Mesos-DNS provides service disco
 *   SSH to your master node and enter this command to view the logs from boot time:
 
     ```bash
-    $ journalctl -u dcos-mesos-dns -b
+    journalctl -u dcos-mesos-dns -b
     ```
 
     For example, here is a snippet of the Mesos-DNS log as it converges to a successful state:
@@ -98,7 +98,7 @@ DC/OS Marathon is started on the master nodes. The native Marathon instance that
 *   SSH to your master node and enter this command to view the logs from boot time:
 
     ```bash
-    $ journalctl -u dcos-marathon -b
+    journalctl -u dcos-marathon -b
     ```
 
     For example, here is a snippet of the DC/OS Marathon log as it converges to a successful state:
@@ -127,7 +127,7 @@ The Admin Router is started on the master nodes. The Admin Router provides centr
 *   SSH to your master node and enter this command to view the logs from boot time:
 
     ```bash
-    $ journalctl -u dcos-nginx -b
+    journalctl -u dcos-nginx -b
     ```
 
     For example, here is a snippet of the Admin Router log as it converges to a successful state:
@@ -151,7 +151,7 @@ gen_resolvconf is started. This is a service that helps the agent nodes locate t
 *   SSH to your master node and enter this command to view the logs from boot time:
 
     ```bash
-    $ journalctl -u dcos-gen-resolvconf -b
+    journalctl -u dcos-gen-resolvconf -b
     ```
 
     For example, here is a snippet of the gen_resolvconf log as it converges to a successful state:
@@ -182,7 +182,7 @@ Publicly accessible applications are run in the public agent node. Public agent 
 *   SSH to your agent node and enter this command to view the logs from boot time:
 
     ```bash
-    $ journalctl -u dcos-mesos-slave -b
+    journalctl -u dcos-mesos-slave -b
     ```
 
     For example, here is a snippet of the Mesos agent log as it converges to a successful state:

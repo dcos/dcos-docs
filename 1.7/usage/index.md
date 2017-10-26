@@ -3,6 +3,8 @@ post_title: Usage
 menu_order: 3
 ---
 
+The usage topics help you run programs and services on an existing DC/OS cluster.
+
 # Getting Started
 After you have [installed](/docs/1.7/administration/installing/) DC/OS and set up the CLI on your local machine, familiarize yourself with the DC/OS UI [Dashboard](/docs/1.7/usage/webinterface/) and DC/OS [CLI](/docs/1.7/usage/cli/).
 
@@ -11,7 +13,7 @@ You can then launch a production-grade, highly available, containerized NGINX we
 1.  Run this command to launch a containerized [sample](/docs/1.7/usage/nginx.json) app on DC/OS.
 
     ```bash
-    $ dcos marathon app add https://dcos.io/docs/1.7/usage/nginx.json
+    dcos marathon app add https://dcos.io/docs/1.7/usage/nginx.json
     ```
 
 1.  Go to the "Services" tab of the DC/OS Dashboard to see the NGINX web server up and running and ready to serve traffic!

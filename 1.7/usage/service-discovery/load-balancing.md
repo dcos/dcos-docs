@@ -7,7 +7,7 @@ menu_order: 2
 DC/OS comes with an east-west load balancer that's meant to be used to enable multi-tier microservices architectures. It acts as a TCP Layer 4 load balancer, and it's tightly integrated with the kernel.
 
 ## Usage
-You can use the layer 4 load balancer by specifying a VIP from the Marathon UI. The VIP must be specified in the format `IP:port`, for example: `*1.2.3.4:5000*`. Alternatively, if you're using something other than Marathon, you can create a label on the [port](https://github.com/apache/mesos/blob/b18f5bf48fda12bce9c2ac8e762a08f537ffb41d/include/mesos/mesos.proto#L1813) protocol buffer while launching a task on Mesos. This label's key must be in the format `VIP_$IDX`, where `$IDX` is replaced by a number, starting from 0. Once you create a task, or a set of tasks with a VIP, they will automatically become available to all nodes in the cluster, including the masters.
+You can use the layer 4 load balancer by specifying a VIP from the Marathon UI. The VIP must be specified in the format `IP:port`, for example: `*1.2.3.4:5000*`. Alternatively, if you're using something other than Marathon, you can create a label on the [port](https://github.com/apache/mesos/blob/b18f5bf48fda12bce9c2ac8e762a08f537ffb41d/include/mesos/mesos.proto#L1813) protocol buffer while launching a task on Mesos. This label's key must be in the format `VIP_$IDX`, where `$IDX` is replaced by a number, starting from 0. Once you create a task, or a set of tasks, with a VIP, they will automatically become available to all nodes in the cluster, including the masters.
 
 ### Details
 When you launch a set of tasks when these labels, we distribute them to all of the nodes in the cluster. All of the nodes in the cluster act as decision makers in the load balancing process. There is a process that runs on all the agents which is consulted by the kernel when packets are recognized with this destination address. This process keeps track of availability and reachability of these tasks to attempt to send requests to the right backends
@@ -116,7 +116,7 @@ The load balancing algorithm is adapted from *The Power of Two Choices in Random
 
 The simple algorithm maintains an EWMA of latencies for a given backend at connection time. It also maintains a set of consecutive failures, and when they happened. If a backend observes enough consecutive failures in a short period of time (<5m) it is considered to be unavailable. A failure is classified as three way handshake failing to occur.
 
-The primary way the algorithm works is that it iterates over the backends and finds those that we assume are available after taking the the historical failures as well as the group failure detector. It then takes two random nodes from the most available bucket.
+The primary way the algorithm works is that it iterates over the backends and finds those that we assume are available after taking the historical failures as well as the group failure detector. It then takes two random nodes from the most available bucket.
 
 The probabilistic failure detector randomly chooses backends and checks whether or not the group failure detector considers the agent to be alive. It will continue to do this until it either finds 2 backends that are in the ideal bucket, or until 20 lookups happen. If the prior case happens, it'll choose one at random. If the latter case happens it'll choose one of the 20 at random.
 

@@ -17,7 +17,7 @@ You can obtain your authentication token using the DC/OS CLI. When you log into 
 Logging into the DC/OS CLI causes your authentication token to be written to a configuration file. Type the following command to confirm that this write succeeded and view your authentication token.
 
 ```bash
-$ dcos config show core.dcos_acs_token
+dcos config show core.dcos_acs_token
 ```
 
 # Passing your authentication token to DC/OS endpoints
@@ -34,12 +34,12 @@ to extract the token value from your configuration file. The following examples 
 **Sample Marathon request:**
 
 ```bash
-$ curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/service/marathon/v2/apps
+curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/service/marathon/v2/apps
 ```
 
 **Sample Mesos request:**
 
 ```bash
-$ curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/mesos/master/state.json
+curl --header "Authorization: token=$(dcos config show core.dcos_acs_token)" http://<master-host-name>/mesos/master/state.json
 ```
 

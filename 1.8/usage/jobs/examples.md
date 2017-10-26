@@ -40,20 +40,22 @@ This JSON creates a simple job with no schedule.
 1. Create a JSON file with the following contents.
     ```
     {
-      "id": "my-scheduled-job",
-      "description": "A job that sleeps on a schedule",
-      "run": {
-        "cmd": "sleep 20000",
-        "cpus": 0.01,
-        "mem": 32,
-        "disk": 0
-      },
-      "schedules": {
-          "id": "sleep-nightly",
-          "enabled": true,
-          "cron": "20 0 * * *",
-          "concurrencyPolicy": "ALLOW"
-      }
+            "id": "my-scheduled-job",
+            "description": "A job that sleeps on a schedule",
+            "run": {
+                "cmd": "sleep 20000",
+                "cpus": 0.01,
+                "mem": 32,
+                "disk": 0
+            },
+            "schedules": [
+                {
+                    "id": "sleep-nightly",
+                    "enabled": true,
+                    "cron": "20 0 * * *",
+                    "concurrencyPolicy": "ALLOW"
+            }
+        ]
     }
     ```
 

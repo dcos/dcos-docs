@@ -59,7 +59,7 @@ Once your package is built, you can get going by running `dcos_install.sh` on ev
 
 - Downloads the package to the current host.
 - Extracts the package into `/opt/mesosphere`.
-- Activates the install by running the `pkgpanda install` command.  `pkgpanda` is a small tool that creates symlinks, installs systemd units and sets up the roles for each host (master, agent, agent_public).
+- Initiates installation using the [DC/OS Component Package Manager (Pkgpanda)](/docs/1.9/overview/architecture/components/#dcos-component-package-manager).
 
 That’s really it! Once the ZooKeeper cluster reaches quorum on the masters and Mesos comes up, every agent will join the cluster and you’ll be ready to go. We’ve kept the steps minimal to make sure they’re as reliable as possible.
 

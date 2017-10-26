@@ -35,7 +35,7 @@ Common options: -h, --help - Show this message
 
 1.  Create a JSON file
 
-        $ nano marathon-lb-autoscale.json
+        nano marathon-lb-autoscale.json
 
 2.  Paste this into the file. Edit the arguments to your your desired parameters:
 
@@ -61,11 +61,11 @@ Common options: -h, --help - Show this message
 
 3.  Add the app to Marathon
 
-        $ dcos marathon app add marathon-lb-autoscale.json
+        dcos marathon app add marathon-lb-autoscale.json
 
 4.  Verify that the app has been added:
 
-        $ dcos marathon app list
+        dcos marathon app list
 
  [1]: https://github.com/mesosphere/marathon-lb-autoscale
  [2]: /docs/1.7/administration/installing/

@@ -17,7 +17,7 @@ When a task is launched by a DC/OS service, Mesos-DNS generates an A record for 
 
 For example, other DC/OS tasks can discover the IP address for a task named `search` launched by the `marathon` service with a lookup for `search.marathon.mesos`:
 
-    $ dig search.marathon.mesos
+    dig search.marathon.mesos
 
     ; <<>> DiG 9.8.4-rpz2+rl005.12-P1 <<>> search.marathon.mesos
     ;; global options: +cmd
@@ -33,7 +33,7 @@ For example, other DC/OS tasks can discover the IP address for a task named `sea
 
 If the Mesos containerizer that launches the task provides a container IP `10.0.4.1` for the task `search.marathon.mesos`, then the lookup result is:
 
-    $ dig search.marathon.mesos
+    dig search.marathon.mesos
 
     ; <<>> DiG 9.8.4-rpz2+rl005.12-P1 <<>> search.marathon.mesos
     ;; global options: +cmd
@@ -59,7 +59,7 @@ For a task named `mytask` launched by a service named `myservice`, Mesos-DNS gen
 
 For example, other Mesos tasks can discover a task named `search` launched by the `marathon` service with a query for `_search._tcp.marathon.mesos`:
 
-    $ dig _search._tcp.marathon.mesos SRV
+    dig _search._tcp.marathon.mesos SRV
 
     ;  DiG 9.8.4-rpz2+rl005.12-P1 &lt;&lt;&gt;&gt; _search._tcp.marathon.mesos SRV
     ;; global options: +cmd

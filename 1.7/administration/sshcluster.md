@@ -5,21 +5,21 @@ menu_order: 5
 
 These instructions explain how to set up an SSH connection to your DC/OS cluster from an outside network. If you are on the same network as your cluster or connected by using VPN, you can instead use the `dcos node ssh` command. For more information, see the [dcos node section][1] of the CLI reference.
 
-*   [SSH to your DC/OS cluster on Unix/Linux (OS X, Ubuntu, etc)][2]
+*   [SSH to your DC/OS cluster on Unix/Linux (macOS, Ubuntu, etc)][2]
 *   [SSH to your DC/OS cluster on Windows][3]
 
 **Requirements:**
 
 *   During [AWS DC/OS cluster creation][4], a `.pem` file is created. You will need this `.pem` file to SSH to your cluster.
 
-### <a name="unix"></a>SSH to your DC/OS cluster on Unix/Linux (OS X, Ubuntu, etc)
+### <a name="unix"></a>SSH to your DC/OS cluster on Unix/Linux (macOS, Ubuntu, etc)
 
 1.  Change the permissions on the `.pem` file to owner read/write by using the `chmod` command.
 
     **Important:** Your `.pem` file must be located in the `~/.ssh` directory.
 
     ```bash
-    $ chmod 600 <private-key>.pem
+    chmod 600 <private-key>.pem
     ```
 
 2.  SSH into the cluster.
@@ -27,7 +27,7 @@ These instructions explain how to set up an SSH connection to your DC/OS cluster
     1.  From your terminal, add your new configuration to the `.pem` file, where `<private-key>` is your `.pem` file.
 
         ```bash
-        $ ssh-add ~/.ssh/<private-key>.pem
+        ssh-add ~/.ssh/<private-key>.pem
         Identity added: /Users/<yourdir>/.ssh/<private-key>.pem (/Users/<yourdir>/.ssh/<private-key>.pem)
         ```
 
@@ -36,13 +36,13 @@ These instructions explain how to set up an SSH connection to your DC/OS cluster
         1.  From the DC/OS CLI, enter the following command:
 
             ```bash
-            $ dcos node ssh --master-proxy --leader
+            dcos node ssh --master-proxy --leader
             ```
 
             **Tip:** The default user is `core` for CoreOS. If you are using CentOS, enter:
 
             ```bash
-            $ dcos node ssh --master-proxy --leader --user=centos
+            dcos node ssh --master-proxy --leader --user=centos
             ```
 
     *   **To SSH to an agent node:**
@@ -54,7 +54,7 @@ These instructions explain how to set up an SSH connection to your DC/OS cluster
         2.  From the DC/OS CLI, enter the following command, where `<mesos-id>` is your agent ID:
 
             ```bash
-            $ dcos node ssh --master-proxy --mesos-id=<mesos-id>
+            dcos node ssh --master-proxy --mesos-id=<mesos-id>
             ```
 
 

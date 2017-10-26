@@ -29,7 +29,7 @@ Before we dive into the details of the interaction between different DC/OS compo
 In DC/OS, the kernel space manages resource allocation and two-level scheduling across the cluster. The two types of processes in the kernel space are Mesos masters and agents:
 
 - **Mesos masters** The `mesos-master` process orchestrates tasks that are run on Mesos agents. The Mesos Master process receives resource reports from Mesos agents and distributes those resources to registered DC/OS services, such as Marathon or Spark. When a leading Mesos master fails due to a crash or goes offline for an upgrade, a standby Mesos master automatically becomes the leader without disrupting running services. ZooKeeper performs leader election.
-- **Mesos agents**: Mesos agent nodes run discrete Mesos tasks on behalf of a framework. Private agent nodes run the deployed apps and services through a non-routable network. Public agent nodes run DC/OS apps and services in a publicly accessible network. The `mesos-slave` process on a Mesos agent manages its local resources (CPU cores, RAM, etc.) and registers these resources with the Mesos masters. It also accepts schedule requests from the Mesos master and invokes an Executor to launch a Task via [containerizers](http://mesos.apache.org/documentation/latest/containerizer/):
+- **Mesos agents**: Mesos agent nodes run discrete Mesos tasks on behalf of a framework. Private agent nodes run the deployed apps and services through a non-routable network. Public agent nodes run DC/OS apps and services in a publicly accessible network. The `mesos-slave` process on a Mesos agent manages its local resources (CPU cores, RAM, etc.) and registers these resources with the Mesos masters. It also accepts schedule requests from the Mesos master and invokes an Executor to launch a Task via [containerizers](http://mesos.apache.org/documentation/latest/containerizers/):
   - The Mesos containerizer provides lightweight containerization and resource isolation of executors using Linux-specific functionality such as cgroups and namespaces.
   - The Docker containerizer provides support for launching tasks that contain Docker images.
 
@@ -64,7 +64,7 @@ On each master node the following happens, in chronological order:
 1. The Distributed DNS Proxy runs on all master and agent nodes, and forwards DNS lookups to Mesos-DNS.
 1. DC/OS Marathon is launched and starts on every master node.
 1. DC/OS Marathon connects to the local ZooKeeper (127.0.0.1), discovers the leading Mesos master (`leader.mesos`) and registers as a framework.
-1. Admin Router depends on the Mesos master, Mesos-DNS, and the Distributed DNS Proxy. It runs on each of the master nodes. The admin router is what serves the DC/OS UI and proxies external admin connections into the cluster.
+1. Admin Router depends on the Mesos master, Mesos-DNS, and the Distributed DNS Proxy. It runs on each of the master nodes. The Admin Router is what serves the DC/OS UI and proxies external admin connections into the cluster.
 1. DC/OS UI, Mesos UI, and Exhibitor UI become externally accessible through the Admin Router.
 1. [Auth][auth] is managed on the master nodes.
 1. The history service provides the data for the graphs in the DC/OS UI dashboard. This data is obtained from the masters.
@@ -118,7 +118,7 @@ In detail, here are the steps:
 <tbody>
 <tr>
 <td>1</td>
-<td>Client/Scheduler init: the Client needs to know how to connect to the Scheduler in order to launch a process, for example via Mesos-DNS or DC/OS CLI.</td>
+<td>Client/Scheduler init: the Client needs to know how to connect to the Scheduler to launch a process, for example via Mesos-DNS or DC/OS CLI.</td>
 </tr>
 <tr>
 <td>2</td>

@@ -25,16 +25,16 @@ The DC/OS installation creates these folders:
 1. Create a directory named `genconf` on your bootstrap node and navigate to it.
 
     ```bash
-    $ mkdir -p genconf
+    mkdir -p genconf
     ```
 
-2. Create a `ip-detect` script
+2. Create an `ip-detect` script.
 
     In this step you create an IP detect script to broadcast the IP address of each node across the cluster. Each node in a DC/OS cluster has a unique IP address that is used to communicate between nodes in the cluster. The IP detect script prints the unique IPv4 address of a node to STDOUT each time DC/OS is started on the node.
 
     **Important:** The IP address of a node must not change after DC/OS is installed on the node. For example, the IP address must not change when a node is rebooted or if the DHCP lease is renewed. If the IP address of a node does change, the node must be [wiped and reinstalled][7].
 
-    Create an IP detection script for your environment and save as `genconf/ip-detect`. You can use the examples below.
+    Create an IP detect script for your environment and save as `genconf/ip-detect`. This script needs to be `UTF-8` encoded and have a valid [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) line. You can use the examples below.
 
     *   #### Use the AWS Metadata Server
 
@@ -65,7 +65,7 @@ The DC/OS installation creates these folders:
 
         This method discovers the IP address of a particular interface of the node.
 
-        If you have multiple generations of hardware with different internals, the interface names can change between hosts. The IP detection script must account for the interface name changes. The example script could also be confused if you attach multiple IP addresses to a single interface, or do complex Linux networking, etc.
+        If you have multiple generations of hardware with different internals, the interface names can change between hosts. The IP detect script must account for the interface name changes. The example script could also be confused if you attach multiple IP addresses to a single interface, or do complex Linux networking, etc.
 
         ```bash
         #!/usr/bin/env bash
@@ -140,7 +140,7 @@ The DC/OS installation creates these folders:
 3.  Copy your private SSH key to `genconf/ssh_key`. For more information, see the [ssh_key_path][6] parameter.
 
     ```bash
-    $ cp <path-to-key> genconf/ssh_key && chmod 0600 genconf/ssh_key
+    cp <path-to-key> genconf/ssh_key && chmod 0600 genconf/ssh_key
     ```
 
 
@@ -151,7 +151,7 @@ In this step you create a custom DC/OS build file on your bootstrap node and the
 You can view all of the automated command line installer options with the `--help` flag:
 
 ```bash
-$ sudo bash dcos_generate_config.sh --help
+sudo bash dcos_generate_config.sh --help
 Running mesosphere/dcos-genconf docker with BUILD_DIR set to /home/centos/genconf
 usage:
 Install DC/OS
@@ -189,13 +189,13 @@ To install DC/OS:
 1.  Download the [DC/OS installer][5] to your root directory.
 
     ```bash
-    $ curl -O https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/dcos_generate_config.sh
+    curl -O https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/dcos_generate_config.sh
     ```
 
 1.  From your home directory, run the DC/OS installer shell script on your bootstrapping master nodes to generate a customized DC/OS build. The setup script extracts a Docker container that uses the generic DC/OS install files to create customized DC/OS build files for your cluster. The build files are output to `./genconf/serve/`.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --genconf
+    sudo bash dcos_generate_config.sh --genconf
     ```
 
     Here is an example of the output.
@@ -225,7 +225,7 @@ To install DC/OS:
 2.  <a name="two"></a>Install the cluster prerequisites, including system updates, compression utilities (UnZip, GNU tar, and XZ Utils), and cluster permissions. For a full list of cluster prerequisites, see this [documentation][4].
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --install-prereqs
+    sudo bash dcos_generate_config.sh --install-prereqs
     ```
 
     Here is an example of the output.
@@ -244,7 +244,7 @@ To install DC/OS:
 3.  Run a preflight script to validate that your cluster is installable.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --preflight
+    sudo bash dcos_generate_config.sh --preflight
     ```
 
     Here is an example of the output.
@@ -267,7 +267,7 @@ To install DC/OS:
 4.  Install DC/OS on your cluster.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --deploy
+    sudo bash dcos_generate_config.sh --deploy
     ```
 
     Here is an example of the output.
@@ -292,7 +292,7 @@ To install DC/OS:
 5.  Run the DC/OS diagnostic script to verify that services are up and running.
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --postflight
+    sudo bash dcos_generate_config.sh --postflight
     ```
 
     Here is an example of the output.
@@ -333,15 +333,15 @@ It is recommended that you save your DC/OS installer file immediately after inst
 
     ```bash
     # <Ctrl-C> to exit installer
-    $ cd genconf/serve
-    $ sudo tar cf dcos-install.tar *
+    cd genconf/serve
+    sudo tar cf dcos-install.tar *
     ```
 
 1.  Copy the `dcos-install.tar` file to another location for backup. For example, you can use Secure Copy (scp) to copy `dcos-install.tar` to your home directory:
 
     ```bash
-    $ exit
-    $ scp -i $username@$node-ip:~/genconf/serve/dcos-install.tar ~
+    exit
+    scp -i $username@$node-ip:~/genconf/serve/dcos-install.tar ~
     ```
 
 # Next Steps
@@ -365,7 +365,7 @@ After DC/OS is installed and deployed across your cluster, you can add more agen
 2.  Run the installation steps beginning with [installing the cluster][4] prerequisites:
 
     ```bash
-    $ sudo bash dcos_generate_config.sh --install-prereqs
+    sudo bash dcos_generate_config.sh --install-prereqs
     ```
 
     **Important:** You can ignore the errors that are shown. For example, during the `--preflight` you may see this error:

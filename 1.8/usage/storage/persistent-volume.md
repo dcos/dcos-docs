@@ -37,7 +37,7 @@ Configure a persistent volume with the following options:
 - `mode`: The access mode of the volume. Currently, `"RW"` is the only possible value and will let your application read from and write to the volume.
 - `persistent.size`: The size of the persistent volume in MiBs.
 
-You also need to set the `residency` node in order to tell Marathon to setup a stateful application. Currently, the only valid option for this is:
+You also need to set the `residency` node to tell Marathon to set up a stateful application. Currently, the only valid option for this is:
 
 ```json
 "residency": {
@@ -46,7 +46,7 @@ You also need to set the `residency` node in order to tell Marathon to setup a s
 ```
 
 <a name="abs-paths"></a>
-### Specifing an unsupported container path
+### Specifying an unsupported container path
 
 The value of `containerPath` must be relative to allow you to dynamically add a local persistent volume to a running container and to ensure consistency across operating systems. However, your application may require an absolute or container path, or a relative one with slashes.
 
@@ -72,21 +72,23 @@ The second volume is a persistent volume with a `containerPath` that matches the
 }
 ```
 
+**Note:** Due to an implementation detail in Mesos, this method does not work if you change the container type from DOCKER to MESOS. The behavior is corrected in subsequent versions of DC/OS.
+
 For a complete example, see the [Running stateful MySQL on Marathon](#stateful-sql) section.
 
 ## Creating a stateful application via the DC/OS Web Interface
 
 1. Create a new service via the web interface in **Services** > **Deploy Service**.
-1. Click the Volumes tab.
+1. Click the **Volumes** tab.
 1. Choose the size of the volume or volumes you will use. Be sure that you choose a volume size that will fit the needs of your application; you will not be able to modify this size after you launch your application.
 1. Specify the container path from which your application will read and write data. The container path must be non-nested and cannot contain slashes e.g. `data`, but not  `../../../etc/opt` or `/user/data/`. If your application requires such a container path, [use this configuration](#nested-paths).
-1. Click Create.
+1. Click **Create**.
 
 # Scaling stateful applications
 
 When you scale your app down, the volumes associated with the terminated instances are detached but all resources are still reserved. At this point, you may delete the tasks via the Marathon REST API, which will free reserved resources and destroy the persistent volumes.
 
-Since all the resources your application needs are still reserved when a volume is detached, you may wish to destroy detached volumes in order to allow other applications and frameworks to use the resources. You may wish to leave them in the detached state, however, if you think you will be scaling your app up again; the data on the volume will still be there.
+Since all the resources your application needs are still reserved when a volume is detached, you may wish to destroy detached volumes to allow other applications and frameworks to use the resources. You may wish to leave them in the detached state, however, if you think you will be scaling your app up again; the data on the volume will still be there.
 
 **Notes:** 
 
@@ -95,7 +97,7 @@ Since all the resources your application needs are still reserved when a volume 
 
 # Upgrading or restarting stateful applications
 
-The default `UpgradeStrategy` for a stateful application is a `minimumHealthCapacity` of `0.5` and a `maximumOverCapacity` of `0`. If you override this default, your definition must stay below these values in order to pass validation. The `UpgradeStrategy` must stay below these values because Marathon needs to be able to kill old tasks before starting new ones so that the new versions can take over reservations and volumes and Marathon cannot create additional tasks (as a `maximumOverCapacity > 0` would induce) in order to prevent additional volume creation.
+The default `UpgradeStrategy` for a stateful application is a `minimumHealthCapacity` of `0.5` and a `maximumOverCapacity` of `0`. If you override this default, your definition must stay below these values to pass validation. The `UpgradeStrategy` must stay below these values because Marathon needs to be able to kill old tasks before starting new ones so that the new versions can take over reservations and volumes and Marathon cannot create additional tasks (as a `maximumOverCapacity > 0` would induce) to prevent additional volume creation.
 
 **Note:** For a stateful application, Marathon will never start more instances than specified in the `UpgradeStrategy`, and will kill old instances rather than create new ones during an upgrade or restart.
 
@@ -111,14 +113,14 @@ When a task that used persistent volumes has terminated, its metadata will be ke
 
 For example, if you scale down from 5 to 3 instances, you will see 2 tasks in the `Waiting` state along with the information about the persistent volumes the tasks were using as well as about the agents on which they are placed. Marathon will not unreserve those resources and will not destroy the volumes. When you scale up again, Marathon will attempt to launch tasks that use those existing reservations and volumes as soon as it gets a Mesos offer containing the labeled resources. Marathon will only schedule unreserve/destroy operations when:
 
-- the application is deleted (in which case volumes of all its tasks are destroyed, and all reservations are deleted).
-- you explicitly delete one or more suspended tasks with a `wipe=true` flag.
+- The application is deleted (in which case volumes of all its tasks are destroyed, and all reservations are deleted).
+- You explicitly delete one or more suspended tasks with a `wipe=true` flag.
 
-If reserving resources or creating persistent volumes fails, the created task will timeout after the configured `task_reservation_timeout` (default: 20 seconds) and a new reservation attempt will be made. In case a task is `LOST` (because its agent is disconnected or crashed), the reservations and volumes will not timeout and you need to manually delete and wipe the task in order to let Marathon launch a new one.
+If reserving resources or creating persistent volumes fails, the created task will timeout after the configured `task_reservation_timeout` (default: 20 seconds) and a new reservation attempt will be made. In case a task is `LOST` (because its agent is disconnected or crashed), the reservations and volumes will not timeout and you need to manually delete and wipe the task to let Marathon launch a new one.
 
 # Potential Pitfalls
 
-Be aware of the following issues and limitations when using stateful applications in Marathon that make use of dynamic resevations and persistent volumes.
+Be aware of the following issues and limitations when using stateful applications in Marathon that make use of dynamic reservations and persistent volumes.
 
 ## Resource requirements
 
@@ -149,7 +151,7 @@ The temporary Mesos sandbox is still the target for the `stdout` and `stderr` lo
 
 ## Running stateful PostgreSQL on Marathon
 
-A model app definition for PostgreSQL on Marathon would look like this. Note that we set the postgres data folder to `pgdata` which is relative to the Mesos sandbox (as contained in the `$MESOS_SANDBOX` variable). This enables us to set up a persistent volume with a containerPath of `pgdata`. This path is is not nested and relative to the sandbox as required:
+A model app definition for PostgreSQL on Marathon would look like this. Note that we set the PostgreSQL data folder to `pgdata` which is relative to the Mesos sandbox (as contained in the `$MESOS_SANDBOX` variable). This enables us to set up a persistent volume with a containerPath of `pgdata`. This path is is not nested and relative to the sandbox as required:
 
 ```json
 {
@@ -198,7 +200,7 @@ A model app definition for PostgreSQL on Marathon would look like this. Note tha
 <a name="stateful-sql"></a>
 ## Running stateful MySQL on Marathon
 
-The default MySQL docker image does not allow you to change the data folder. Since we cannot define a persistent volume with an absolute nested `containerPath` like `/var/lib/mysql`, we need to configure a workaround to set up a docker mount from hostPath `mysqldata` (relative to the Mesos sandbox) to `/var/lib/mysql` (the path that MySQL attempts to read/write):
+The default MySQL Docker image does not allow you to change the data folder. Since we cannot define a persistent volume with an absolute nested `containerPath` like `/var/lib/mysql`, we need to configure a workaround to set up a docker mount from hostPath `mysqldata` (relative to the Mesos sandbox) to `/var/lib/mysql` (the path that MySQL attempts to read/write):
 
 ```json
 {
@@ -208,7 +210,7 @@ The default MySQL docker image does not allow you to change the data folder. Sin
 }
 ```
 
-In addition to that, we configure a persistent volume with a containerPath `mysqldata`, which will mount the local persistent volume as `mysqldata` into the docker container:
+In addition to that, we configure a persistent volume with a containerPath `mysqldata`, which will mount the local persistent volume as `mysqldata` into the Docker container:
 
 ```json
 {
@@ -274,15 +276,15 @@ The complete JSON application definition reads as follows:
 
 ## Inspecting and deleting suspended stateful tasks
 
-In order to destroy and clean up persistent volumes and free the reserved resources associated with a task, perform 2 steps:
+To destroy and clean up persistent volumes and free the reserved resources associated with a task, perform 2 steps:
 
 1. Locate the agent containing the persistent volume and remove the data inside it.
 1. Send an HTTP DELETE request to Marathon that includes the `wipe=true` flag.
 
-To locate the agent, inspect the Marathon UI and check out the detached volumes on the _Volumes_ tab. Or, query the `/v2/apps` endpoint, which provides information about the `host` and Mesos `slaveId`.
+To locate the agent, inspect the Marathon UI and check out the detached volumes on the **Volumes** tab. Or, query the `/v2/apps` endpoint, which provides information about the `host` and Mesos `slaveId`.
 
 ```
-$ http GET http://dcos/service/marathon/v2/apps/postgres/tasks
+http GET http://dcos/service/marathon/v2/apps/postgres/tasks
 
 response:
 
@@ -300,7 +302,7 @@ response:
 }
 ```
 
-_Note_: A running task will show `stagedAt`, `startedAt` and `version` in addition to the information provided above.
+**Note:** A running task will show `stagedAt`, `startedAt`, and `version` in addition to the information provided above.
 
 You can then
 
@@ -312,7 +314,7 @@ http DELETE http://dcos/service/marathon/v2/apps/postgres/tasks/postgres.53ab873
 
 ## View the Status of Your Application with Persistent Local Volumes
 
-After you have created your application, click the _Volumes_ tab of the application detail view to get detailed information about your app instances and associated volumes.
+After you have created your application, click the **Volumes** tab of the application detail view to get detailed information about your app instances and associated volumes.
 
 The Status column tells you if your app instance is attached to the volume or not. The app instance will read as "detached" if you have scaled down your application. Currently the only Operation Type available is read/write (RW).
 

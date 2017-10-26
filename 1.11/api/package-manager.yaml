@@ -1,0 +1,1979 @@
+swagger: '2.0'
+info:
+  version: ''
+  title: DC/OS Package and Service
+  description: ''
+paths:
+  /package/list:
+    post:
+      operationId: POST_package-list
+      description: |
+        Lists all of the running DC/OS services started from a DC/OS package.
+      consumes:
+        - application/vnd.dcos.package.list-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.list-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "appId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.list-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "definitions": {
+
+
+                  "dcosReleaseVersion": {
+                    "type": "string",
+                    "pattern": "^(?:0|[1-9][0-9]*)(?:\\.(?:0|[1-9][0-9]*))*$",
+                    "description": "A string representation of a DC/OS Release Version"
+                  },
+
+
+                  "url": {
+                    "type": "string",
+                    "allOf": [
+                      { "format": "uri" },
+                      { "pattern": "^https?://" }
+                    ]
+                  },
+
+
+                  "packageInformation": {
+                    "type": "object",
+                    "properties": {
+                      "packageDefinition": {
+                        "$ref": "#/definitions/packageDetails"
+                      },
+                      "resourceDefinition": {
+                        "$ref": "#/definitions/resource"
+                      }
+                    },
+                    "required": [
+                      "packageDefinition"
+                    ],
+                    "additionalProperties": false
+                  },
+
+
+                  "packageDetails": {
+                    "type": "object",
+                    "properties": {
+                      "packagingVersion": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "version": {
+                        "type": "string"
+                      },
+                      "maintainer": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^[^\\s]+$"
+                        }
+                      },
+                      "selected": {
+                        "type": "boolean"
+                      },
+                      "scm": {
+                        "type": "string"
+                      },
+                      "website": {
+                        "type": "string"
+                      },
+                      "framework": {
+                        "type": "boolean"
+                      },
+                      "preInstallNotes": {
+                        "type": "string"
+                      },
+                      "postInstallNotes": {
+                        "type": "string"
+                      },
+                      "postUninstallNotes": {
+                        "type": "string"
+                      },
+                      "licenses": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/license"
+                        }
+                      }
+                    },
+                    "required": [
+                      "packagingVersion",
+                      "name",
+                      "version",
+                      "maintainer",
+                      "description",
+                      "tags"
+                    ],
+                    "additionalProperties": false
+                  },
+
+
+                  "license": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "$ref": "#/definitions/url"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "url"
+                    ],
+                    "additionalProperties": false
+                  },
+
+
+                  "resource": {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "assets": {
+                        "type": "object",
+                        "properties": {
+                          "uris": {
+                            "type": "object",
+                            "additionalProperties": {
+                              "type": "string"
+                            }
+                          },
+                          "container": {
+                            "type": "object",
+                            "properties": {
+                              "docker": {
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "images": {
+                        "type": "object",
+                        "properties": {
+                          "icon-small": {
+                            "type": "string",
+                            "description": "PNG icon URL, preferably 48 by 48 pixels."
+                          },
+                          "icon-medium": {
+                            "type": "string",
+                            "description": "PNG icon URL, preferably 128 by 128 pixels."
+                          },
+                          "icon-large": {
+                            "type": "string",
+                            "description": "PNG icon URL, preferably 256 by 256 pixels."
+                          },
+                          "screenshots": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "description": "PNG screen URL, preferably 1024 by 1024 pixels."
+                            }
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+
+
+                  "installation": {
+                    "type": "object",
+                    "properties": {
+                      "appId": {
+                        "type": "string"
+                      },
+                      "packageInformation": {
+                        "$ref": "#/definitions/packageInformation"
+                      }
+                    },
+                    "required": [
+                      "appId",
+                      "packageInformation"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+
+
+                "type": "object",
+                "properties": {
+                  "packages": {
+                    "type": "array",
+                    "description": "The list of installed packages",
+                    "items": {
+                      "$ref": "#/definitions/installation"
+                    }
+                  }
+                },
+                "required": [
+                  "packages"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.list-response+json;charset=utf-8;version=v1:
+              packages:
+                - appId: /cassandra
+                  packageInformation:
+                    packageDefinition:
+                      packagingVersion: '3.0'
+                      name: cassandra
+                      version: 1.0.24-3.0.10
+                      maintainer: support@mesosphere.io
+                      description: Apache Cassandra
+                      tags:
+                        - database
+  /service/start:
+    post:
+      operationId: POST_service-start
+      description: |
+        **Experimental.** Starts a DC/OS Service from a DC/OS package.
+      consumes:
+        - application/vnd.dcos.sevice.start-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.sevice.start-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              packageName: cassandra
+              packageVersion: 1.0.24-3.0.10
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "packageVersion": {
+                    "type": "string"
+                  },
+                  "options": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                },
+                "required": [
+                  "packageName"
+                ],
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.sevice.start-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "packageVersion": {
+                    "type": "string"
+                  },
+                  "appId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "packageName",
+                  "packageVersion"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.sevice.start-response+json;charset=utf-8;version=v1:
+              packageName: cassandra
+              packageVersion: 1.0.24-3.0.10
+              appId: /cassandra
+  /package/add:
+    post:
+      operationId: POST_package-add
+      description: |
+        **Experimental.** Adds a DC/OS Package to DC/OS. To add a DC/OS package from Universe use
+        the content type _application/vnd.dcos.package.add-request+json;charset=utf-8;version=v1_.
+        To add a package by uploading the file use the content type
+        _application/vnd.dcos.universe.package+zip;version=v1_.
+      consumes:
+        - application/vnd.dcos.package.add-request+json;charset=utf-8;version=v1
+        - application/vnd.dcos.universe.package+zip;version=v1
+      produces:
+        - application/vnd.dcos.package.add-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              packageName: cassandra
+              packageVersion: 1.0.24-3.0.10
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "packageVersion": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "packageName"
+                ],
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.add-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '202':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+
+                "definitions": {
+
+
+                  "dcosReleaseVersion": {
+                    "type": "string",
+                    "pattern": "^(?:0|[1-9][0-9]*)(?:\\.(?:0|[1-9][0-9]*))*$"
+                  },
+
+                  "url": {
+                    "type": "string",
+                    "allOf": [
+                      { "format": "uri" },
+                      { "pattern": "^https?://" }
+                    ]
+                  },
+
+                  "base64String": {
+                    "type": "string",
+                    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$"
+                  },
+
+                  "cliInfo": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "contentHash": {
+                        "items": {
+                          "$ref": "#/definitions/hash"
+                        },
+                        "minItems": 1,
+                        "type": "array"
+                      },
+                      "kind": {
+                        "enum": [
+                          "executable",
+                          "zip"
+                        ],
+                        "type": "string"
+                      },
+                      "url": {
+                        "$ref": "#/definitions/url"
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "kind",
+                      "contentHash"
+                    ],
+                    "type": "object"
+                  },
+
+                  "hash": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "algo": {
+                        "enum": [
+                          "sha256"
+                        ],
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "algo",
+                      "value"
+                    ],
+                    "type": "object"
+                  },
+
+
+                  "marathon": {
+                    "type": "object",
+                    "properties": {
+                      "v2AppMustacheTemplate": {
+                        "$ref": "#/definitions/base64String"
+                      }
+                    },
+                    "required": [ "v2AppMustacheTemplate" ],
+                    "additionalProperties": false
+                  },
+
+
+
+                  "resource": {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "assets": {
+                        "type": "object",
+                        "properties": {
+                          "uris": {
+                            "type": "object",
+                            "additionalProperties": {
+                              "type": "string"
+                            }
+                          },
+                          "container": {
+                            "type": "object",
+                            "properties": {
+                              "docker": {
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "cli": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "binaries": {
+                            "additionalProperties": false,
+                            "minProperties": 1,
+                            "properties": {
+                              "darwin": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "x86-64": {
+                                    "$ref": "#/definitions/cliInfo"
+                                  }
+                                },
+                                "required": [
+                                  "x86-64"
+                                ],
+                                "type": "object"
+                              },
+                              "linux": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "x86-64": {
+                                    "$ref": "#/definitions/cliInfo"
+                                  }
+                                },
+                                "required": [
+                                  "x86-64"
+                                ],
+                                "type": "object"
+                              },
+                              "windows": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "x86-64": {
+                                    "$ref": "#/definitions/cliInfo"
+                                  }
+                                },
+                                "required": [
+                                  "x86-64"
+                                ],
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "binaries"
+                        ],
+                        "type": "object"
+                      },
+                      "images": {
+                        "type": "object",
+                        "properties": {
+                          "icon-small": {
+                            "type": "string"
+                          },
+                          "icon-medium": {
+                            "type": "string"
+                          },
+                          "icon-large": {
+                            "type": "string"
+                          },
+                          "screenshots": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+
+
+                  "config": {
+                    "$ref": "http://json-schema.org/draft-04/schema#"
+                  },
+
+
+                  "command": {
+                    "additionalProperties": false,
+                    "required": ["pip"],
+                    "properties": {
+                      "pip": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+
+                },
+
+                "type": "object",
+                "properties": {
+                  "packagingVersion": {
+                    "type": "string",
+                    "enum": ["3.0"]
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "version": {
+                    "type": "string"
+                  },
+                  "releaseVersion": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "scm": {
+                    "type": "string"
+                  },
+                  "maintainer": {
+                    "type": "string"
+                  },
+                  "website": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "framework": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "preInstallNotes": {
+                    "type": "string"
+                  },
+                  "postInstallNotes": {
+                    "type": "string"
+                  },
+                  "postUninstallNotes": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[^\\s]+$"
+                    }
+                  },
+                  "selected": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "licenses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "$ref": "#/definitions/url"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "name",
+                        "url"
+                      ]
+                    }
+                  },
+                  "minDcosReleaseVersion": {
+                    "$ref": "#/definitions/dcosReleaseVersion"
+                  },
+                  "marathon": {
+                    "$ref": "#/definitions/marathon"
+                  },
+                  "resource": {
+                    "$ref": "#/definitions/resource"
+                  },
+                  "config": {
+                    "$ref": "#/definitions/config"
+                  },
+                  "command": {
+                    "$ref": "#/definitions/command"
+                  }
+                },
+                "required": [
+                  "packagingVersion",
+                  "name",
+                  "version",
+                  "releaseVersion",
+                  "maintainer",
+                  "description",
+                  "tags"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.add-response+json;charset=utf-8;version=v1:
+              name: cassandra
+              version: 1.0.24-3.0.10
+              packagingVersion: '3.0'
+              releaseVersion: 24
+              maintainer: support@mesosphere.io
+              description: Apache Cassandra running on DC/OS
+              tags:
+                - data
+                - database
+                - nosql
+  /package/install:
+    post:
+      operationId: POST_package-install
+      description: Runs a service from a Universe package.
+      consumes:
+        - application/vnd.dcos.package.install-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.install-response+json;charset=utf-8;version=v2
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              packageName: cassandra
+              packageVersion: 1.0.24-3.0.10
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "packageVersion": {
+                    "type": "string"
+                  },
+                  "options": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "appId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "packageName"
+                ],
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.install-response+json;charset=utf-8;version=v2
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+
+                "definitions": {
+
+                  "url": {
+                    "type": "string",
+                    "allOf": [
+                      { "format": "uri" },
+                      { "pattern": "^https?://" }
+                    ]
+                  },
+
+                  "hash": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "algo": {
+                        "enum": [
+                          "sha256"
+                        ],
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "algo",
+                      "value"
+                    ],
+                    "type": "object"
+                  },
+
+                  "cliInfo": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "contentHash": {
+                        "items": {
+                          "$ref": "#/definitions/hash"
+                        },
+                        "minItems": 1,
+                        "type": "array"
+                      },
+                      "kind": {
+                        "enum": [
+                          "executable",
+                          "zip"
+                        ],
+                        "type": "string"
+                      },
+                      "url": {
+                        "$ref": "#/definitions/url"
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "kind",
+                      "contentHash"
+                    ],
+                    "type": "object"
+                  },
+
+                  "cli": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "binaries": {
+                        "additionalProperties": false,
+                        "minProperties": 1,
+                        "properties": {
+                          "darwin": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "x86-64": {
+                                "$ref": "#/definitions/cliInfo"
+                              }
+                            },
+                            "required": [
+                              "x86-64"
+                            ],
+                            "type": "object"
+                          },
+                          "linux": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "x86-64": {
+                                "$ref": "#/definitions/cliInfo"
+                              }
+                            },
+                            "required": [
+                              "x86-64"
+                            ],
+                            "type": "object"
+                          },
+                          "windows": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "x86-64": {
+                                "$ref": "#/definitions/cliInfo"
+                              }
+                            },
+                            "required": [
+                              "x86-64"
+                            ],
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "binaries"
+                    ],
+                    "type": "object"
+                  }
+                },
+
+
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "packageVersion": {
+                    "type": "string"
+                  },
+                  "appId": {
+                    "type": "string"
+                  },
+                  "postInstallNotes": {
+                    "type": "string"
+                  },
+                  "cli": {
+                    "$ref": "#/definitions/cli"
+                  }
+                },
+                "required": [
+                  "packageName",
+                  "packageVersion",
+                  "appId"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.install-response+json;charset=utf-8;version=v2:
+              packageName: cassandra
+              packageVersion: 1.0.24-3.0.10
+              appId: /cassandra
+  /package/describe:
+    post:
+      operationId: POST_package-describe
+      description: |
+        Show information about the package, including the required resources and configuration to
+        start the service, and command line extensions that are included with the package.
+      consumes:
+        - application/vnd.dcos.package.describe-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.describe-response+json;charset=utf-8;version=v2
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              packageName: cassandra
+              packageVersion: 1.0.24-3.0.10
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "packageVersion": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "packageName"
+                ],
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.describe-response+json;charset=utf-8;version=v2
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+
+                "definitions": {
+
+
+                  "dcosReleaseVersion": {
+                    "type": "string",
+                    "pattern": "^(?:0|[1-9][0-9]*)(?:\\.(?:0|[1-9][0-9]*))*$"
+                  },
+
+                  "url": {
+                    "type": "string",
+                    "allOf": [
+                      { "format": "uri" },
+                      { "pattern": "^https?://" }
+                    ]
+                  },
+
+                  "base64String": {
+                    "type": "string",
+                    "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$"
+                  },
+
+                  "cliInfo": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "contentHash": {
+                        "items": {
+                          "$ref": "#/definitions/hash"
+                        },
+                        "minItems": 1,
+                        "type": "array"
+                      },
+                      "kind": {
+                        "enum": [
+                          "executable",
+                          "zip"
+                        ],
+                        "type": "string"
+                      },
+                      "url": {
+                        "$ref": "#/definitions/url"
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "kind",
+                      "contentHash"
+                    ],
+                    "type": "object"
+                  },
+
+                  "hash": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "algo": {
+                        "enum": [
+                          "sha256"
+                        ],
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "algo",
+                      "value"
+                    ],
+                    "type": "object"
+                  },
+
+
+                  "marathon": {
+                    "type": "object",
+                    "properties": {
+                      "v2AppMustacheTemplate": {
+                        "$ref": "#/definitions/base64String"
+                      }
+                    },
+                    "required": [ "v2AppMustacheTemplate" ],
+                    "additionalProperties": false
+                  },
+
+
+
+                  "resource": {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "assets": {
+                        "type": "object",
+                        "properties": {
+                          "uris": {
+                            "type": "object",
+                            "additionalProperties": {
+                              "type": "string"
+                            }
+                          },
+                          "container": {
+                            "type": "object",
+                            "properties": {
+                              "docker": {
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "cli": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "binaries": {
+                            "additionalProperties": false,
+                            "minProperties": 1,
+                            "properties": {
+                              "darwin": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "x86-64": {
+                                    "$ref": "#/definitions/cliInfo"
+                                  }
+                                },
+                                "required": [
+                                  "x86-64"
+                                ],
+                                "type": "object"
+                              },
+                              "linux": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "x86-64": {
+                                    "$ref": "#/definitions/cliInfo"
+                                  }
+                                },
+                                "required": [
+                                  "x86-64"
+                                ],
+                                "type": "object"
+                              },
+                              "windows": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "x86-64": {
+                                    "$ref": "#/definitions/cliInfo"
+                                  }
+                                },
+                                "required": [
+                                  "x86-64"
+                                ],
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "binaries"
+                        ],
+                        "type": "object"
+                      },
+                      "images": {
+                        "type": "object",
+                        "properties": {
+                          "icon-small": {
+                            "type": "string"
+                          },
+                          "icon-medium": {
+                            "type": "string"
+                          },
+                          "icon-large": {
+                            "type": "string"
+                          },
+                          "screenshots": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+
+
+                  "config": {
+                    "$ref": "http://json-schema.org/draft-04/schema#"
+                  },
+
+
+                  "command": {
+                    "additionalProperties": false,
+                    "required": ["pip"],
+                    "properties": {
+                      "pip": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+
+                },
+
+                "type": "object",
+                "properties": {
+                  "packagingVersion": {
+                    "type": "string",
+                    "enum": ["3.0"]
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "version": {
+                    "type": "string"
+                  },
+                  "releaseVersion": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "scm": {
+                    "type": "string"
+                  },
+                  "maintainer": {
+                    "type": "string"
+                  },
+                  "website": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "framework": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "preInstallNotes": {
+                    "type": "string"
+                  },
+                  "postInstallNotes": {
+                    "type": "string"
+                  },
+                  "postUninstallNotes": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[^\\s]+$"
+                    }
+                  },
+                  "selected": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "licenses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "$ref": "#/definitions/url"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "name",
+                        "url"
+                      ]
+                    }
+                  },
+                  "minDcosReleaseVersion": {
+                    "$ref": "#/definitions/dcosReleaseVersion"
+                  },
+                  "marathon": {
+                    "$ref": "#/definitions/marathon"
+                  },
+                  "resource": {
+                    "$ref": "#/definitions/resource"
+                  },
+                  "config": {
+                    "$ref": "#/definitions/config"
+                  },
+                  "command": {
+                    "$ref": "#/definitions/command"
+                  }
+                },
+                "required": [
+                  "packagingVersion",
+                  "name",
+                  "version",
+                  "releaseVersion",
+                  "maintainer",
+                  "description",
+                  "tags"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.describe-response+json;charset=utf-8;version=v2:
+              name: cassandra
+              version: 1.0.24-3.0.10
+              packagingVersion: '3.0'
+              releaseVersion: 24
+              maintainer: support@mesosphere.io
+              description: Apache Cassandra running on DC/OS
+              tags:
+                - data
+                - database
+                - nosql
+  /capabilities:
+    get:
+      operationId: GET_capabilities
+      description: List all of the capabilities supported by DC/OS.
+      produces:
+        - application/vnd.dcos.capabilities+json;charset=utf-8;version=v1
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.capabilities+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "definitions": {
+
+                  "capability": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  }
+
+                },
+
+                "type": "object",
+                "properties": {
+                  "capabilities": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/capability"
+                    }
+                  }
+                },
+                "required": [
+                  "capabilities"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.capabilities+json;charset=utf-8;version=v1:
+              capabilities:
+                - name: PACKAGE_MANAGEMENT
+                - name: SUPPORT_CLUSTER_REPORT
+                - name: METRONOME
+                - name: LOGGING
+  /package/repository/delete:
+    post:
+      operationId: POST_package-repository-delete
+      description: Deletes a package repository (for example Universe) from DC/OS.
+      consumes:
+        - application/vnd.dcos.package.repository.delete-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.repository.delete-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              name: Local Universe
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "definitions": {
+
+                  "httpUri": {
+                    "type": "string",
+                    "allOf": [
+                      { "format": "uri" },
+                      { "pattern": "^https?://" }
+                    ]
+                  }
+
+                },
+
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "uri": {
+                    "$ref": "#/definitions/httpUri"
+                  }
+                },
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.repository.delete-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "definitions": {
+
+                  "httpUri": {
+                    "type": "string",
+                    "allOf": [
+                      { "format": "uri" },
+                      { "pattern": "^https?://" }
+                    ]
+                  },
+                  "pkgRepo": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "uri": {
+                        "$ref": "#/definitions/httpUri"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "uri"
+                    ],
+                    "additionalProperties": false
+                  }
+
+                },
+
+                "type": "object",
+                "properties": {
+                  "repositories": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/pkgRepo"
+                    }
+                  }
+                },
+                "required": [
+                  "repositories"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.repository.delete-response+json;charset=utf-8;version=v1:
+              repositories:
+                - name: Universe
+                  uri: 'https://universe.mesosphere.com/repo'
+  /package/repository/add:
+    post:
+      operationId: POST_package-repository-add
+      description: |
+        Adds a package repository (for example Universe) for use by DC/OS. To add a package
+        repository to the beginning of the list set the index to zero (0). To add a package
+        repository to the end of the list do not specify an index.
+      consumes:
+        - application/vnd.dcos.package.repository.add-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.repository.add-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              name: Local Universe
+              uri: 'http://universe.marathon.mesos:8080/repo'
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "definitions": {
+
+                  "httpUri": {
+                    "type": "string",
+                    "allOf": [
+                      { "format": "uri" },
+                      { "pattern": "^https?://" }
+                    ]
+                  }
+
+                },
+
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "uri": {
+                    "$ref": "#/definitions/httpUri"
+                  },
+                  "index": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "name",
+                  "uri"
+                ],
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.repository.add-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "definitions": {
+
+                  "httpUri": {
+                    "type": "string",
+                    "allOf": [
+                      { "format": "uri" },
+                      { "pattern": "^https?://" }
+                    ]
+                  },
+                  "pkgRepo": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "uri": {
+                        "$ref": "#/definitions/httpUri"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "uri"
+                    ],
+                    "additionalProperties": false
+                  }
+
+                },
+
+                "type": "object",
+                "properties": {
+                  "repositories": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/pkgRepo"
+                    }
+                  }
+                },
+                "required": [
+                  "repositories"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.repository.add-response+json;charset=utf-8;version=v1:
+              repositories:
+                - name: Universe
+                  uri: 'https://universe.mesosphere.com/repo'
+                - name: Local Universe
+                  uri: 'http://universe.marathon.mesos:8080/repo'
+  /package/repository/list:
+    post:
+      operationId: POST_package-repository-list
+      description: |
+        List all of the package repositories (for example Universe) used by DC/OS. The list is
+        ordered by priority; if multiple repositories contain the same package, the package
+        closest to the start of the list will be used.
+      consumes:
+        - application/vnd.dcos.package.repository.list-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.repository.list-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.repository.list-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "definitions": {
+
+                  "httpUri": {
+                    "type": "string",
+                    "allOf": [
+                      { "format": "uri" },
+                      { "pattern": "^https?://" }
+                    ]
+                  },
+                  "pkgRepo": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "uri": {
+                        "$ref": "#/definitions/httpUri"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "uri"
+                    ],
+                    "additionalProperties": false
+                  }
+
+                },
+
+                "type": "object",
+                "properties": {
+                  "repositories": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/pkgRepo"
+                    }
+                  }
+                },
+                "required": [
+                  "repositories"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.repository.list-response+json;charset=utf-8;version=v1:
+              repositories:
+                - name: Universe
+                  uri: 'https://universe.mesosphere.com/repo'
+  /package/render:
+    post:
+      operationId: POST_package-render
+      description: |
+        Generates the Marathon application definition for the package name, version, and optional
+        configuration JSON object.
+      consumes:
+        - application/vnd.dcos.package.render-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.render-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              packageName: cassandra
+              packageVersion: 1.0.24-3.0.10
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "packageVersion": {
+                    "type": "string"
+                  },
+                  "options": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "appId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "packageName"
+                ],
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.render-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "marathonJson": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                },
+                "required": [
+                  "marathonJson"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.render-response+json;charset=utf-8;version=v1:
+              marathonJson:
+                id: /cassandra
+                mem: 500
+                cpus: 1
+  /package/uninstall:
+    post:
+      operationId: POST_package-uninstall
+      description: Stops a running service that was launched from a DC/OS package.
+      consumes:
+        - application/vnd.dcos.package.uninstall-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.uninstall-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              packageName: cassandra
+              appId: /cassandra
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "appId": {
+                    "type": "string"
+                  },
+                  "all": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "packageName"
+                ],
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.uninstall-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+
+                "type": "object",
+                "properties": {
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "packageName": {
+                          "type": "string"
+                        },
+                        "appId": {
+                          "type": "string"
+                        },
+                        "packageVersion": {
+                          "type": "string"
+                        },
+                        "postUninstallNotes": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "packageName",
+                        "appId"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "results"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.uninstall-response+json;charset=utf-8;version=v1:
+              results:
+                - packageName: cassandra
+                  appId: /cassandra
+  /package/search:
+    post:
+      operationId: POST_package-search
+      description: |
+        Lists all matching packages in the repository given a partial pattern. The character \'*\'
+        can be used to match any number of characters.
+      consumes:
+        - application/vnd.dcos.package.search-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.search-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              query: database
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.search-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packages": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "currentVersion": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "framework": {
+                          "type": "boolean"
+                        },
+                        "selected": {
+                          "type": "boolean"
+                        },
+                        "images": {
+                          "type": "object",
+                          "properties": {
+                            "icon-small": {
+                              "type": "string"
+                            },
+                            "icon-medium": {
+                              "type": "string"
+                            },
+                            "icon-large": {
+                              "type": "string"
+                            },
+                            "screenshots": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "pattern": "^[^\\s]+$"
+                          }
+                        },
+                        "versions": {
+                          "type": "object",
+                          "patternProperties": {
+                            ".{1,}": { "type": "string" }
+                          },
+                          "additionalProperties": true
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "currentVersion",
+                        "versions",
+                        "description",
+                        "framework",
+                        "tags"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.search-response+json;charset=utf-8;version=v1:
+              packages:
+                - name: cassandra
+                  currentVersion: 1.0.24-3.0.10
+                  versions:
+                    1.0.24-3.0.10: '24'
+                    1.0.23-3.0.10: '23'
+                  description: Apache Cassandra
+                  framework: true
+                  tags:
+                    - database
+  /package/list-versions:
+    post:
+      operationId: POST_package-list-versions
+      description: List all of the available versions for a given package name.
+      consumes:
+        - application/vnd.dcos.package.list-versions-request+json;charset=utf-8;version=v1
+      produces:
+        - application/vnd.dcos.package.list-versions-response+json;charset=utf-8;version=v1
+      parameters:
+        - name: body
+          in: body
+          schema:
+            example:
+              packageName: cassandra
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "packageName": {
+                    "type": "string"
+                  },
+                  "includePackageVersions": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "packageName"
+                ],
+                "additionalProperties": false
+              }
+        - name: Accept
+          in: header
+          required: false
+          enum:
+            - application/vnd.dcos.package.list-versions-response+json;charset=utf-8;version=v1
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: |
+              #/definitions/{
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                  "results": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".{1,}": { "type": "string" }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "required": [
+                  "results"
+                ],
+                "additionalProperties": false
+              }
+          examples:
+            application/vnd.dcos.package.list-versions-response+json;charset=utf-8;version=v1:
+              results:
+                1.0.24-3.0.10: '24'
+                1.0.23-3.0.10: '23'
+definitions: {}

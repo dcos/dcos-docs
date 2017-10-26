@@ -1,0 +1,33 @@
+{
+  "id": "/nginx",
+  "cpus": 0.0625,
+  "mem": 128,
+  "disk": 64,
+  "container": {
+      "type": "DOCKER",
+      "docker": {
+          "image": "nginx:1.9.14",
+          "privileged": false,
+          "forcePullImage": false
+      },
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 0,
+          "servicePort": 0,
+          "protocol": "tcp"
+        }
+    ]
+  },
+  "instances": 1,
+  "portDefinitions": [
+    {
+      "port": 10008,
+      "protocol": "tcp",
+      "labels": {
+          "VIP_0": "1.1.1.1:1000"
+      }
+    }
+  ],
+  "networks": [ { "mode": "container/bridge" } ]
+}

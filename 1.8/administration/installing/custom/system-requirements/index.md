@@ -5,7 +5,7 @@ menu_order: 000
 
 # Hardware Prerequisites
 
-You must have a single bootstrap node, Mesos master nodes, and Mesos agent nodes.
+You must have a single bootstrap node, an odd number of Mesos master nodes, and any number Mesos of agent nodes.
 
 ## Bootstrap node
 
@@ -21,6 +21,8 @@ You must have a single bootstrap node, Mesos master nodes, and Mesos agent nodes
 The cluster nodes are designated Mesos masters and agents during installation.
 
 ### Master nodes
+
+You must have an odd number of master nodes.
 
 Here are the master node hardware requirements.
 
@@ -83,16 +85,10 @@ Here are the agent node hardware requirements.
   </tr>
 </table>
 
-*   Your Linux distribution must be running the latest version. You can update CentOS with this command:
-
-    ```bash
-    $ sudo yum upgrade -y
-    ```
-
 *   On RHEL 7 and CentOS 7, firewalld must be stopped and disabled. It is a known <a href="https://github.com/docker/docker/issues/16137" target="_blank">Docker issue</a> that firewalld interacts poorly with Docker. For more information, see the <a href="https://github.com/docker/docker/blob/v1.6.2/docs/sources/installation/centos.md#firewalld" target="_blank">Docker CentOS firewalld</a> documentation.
 
     ```bash
-    $ sudo systemctl stop firewalld && sudo systemctl disable firewalld
+    sudo systemctl stop firewalld && sudo systemctl disable firewalld
     ```
 *   DC/OS is installed to `/opt/mesosphere`. Make sure that `/opt/mesosphere` exists on a partition that is not on an LVM Logical Volume or shared storage.
 *   The Mesos master and agent persistent information of the cluster is stored in the `/var/lib/mesos` directory.
@@ -114,6 +110,8 @@ Here are the agent node hardware requirements.
 High speed internet access is recommended for DC/OS installation. A minimum 10 MBit per second is required for DC/OS services. The installation of some DC/OS services will fail if the artifact download time exceeds the value of MESOS_EXECUTOR_REGISTRATION_TIMEOUT within the file `/opt/mesosphere/etc/mesos-slave-common`. The default value for MESOS_EXECUTOR_REGISTRATION_TIMEOUT is 10 minutes.
 
 # Software Prerequisites
+
+**Tip:** Refer to [this shell script](https://raw.githubusercontent.com/dcos/dcos/1.8.9/cloud_images/centos7/install_prereqs.sh) for an example of how to install the software requirements for DC/OS masters and agents on a CentOS 7 host.
 
 ## All Nodes
 
@@ -148,7 +146,7 @@ Docker must be installed on all bootstrap and cluster nodes. The supported versi
 Each Linux distribution requires Docker to be installed in a specific way:
 
 *   **CentOS** - [Install Docker from Docker's yum repository][2].
-*   **RHEL** - Install Docker by using a subscription channel. For more information, see <a href="https://access.redhat.com/articles/881893" target="_blank">Docker Formatted Container Images on Red Hat Systems</a>. <!-- $ curl -sSL https://get.docker.com | sudo sh -->
+*   **RHEL** - Install Docker by using a subscription channel. For more information, see <a href="https://access.redhat.com/articles/881893" target="_blank">Docker Formatted Container Images on Red Hat Systems</a>. <!-- curl -sSL https://get.docker.com | sudo sh -->
 *   **CoreOS** - Comes with Docker pre-installed and pre-configured.
 
 For more more information, see Docker's <a href="http://docs.docker.com/engine/installation/" target="_blank">distribution-specific installation instructions</a>.
@@ -170,9 +168,9 @@ Alternatively, you can SSH as the root user.
 Network Time Protocol (NTP) must be enabled on all nodes for clock synchronization. By default, during DC/OS startup you will receive an error if this is not enabled. You can check if NTP is enabled by running one of these commands, depending on your OS and configuration:
 
 ```bash
-$ ntptime
-$ adjtimex -p
-$ timedatectl
+ntptime
+adjtimex -p
+timedatectl
 ```
 
 ## Bootstrap node
@@ -193,7 +191,7 @@ Download and save the [DC/OS setup file][3] to your bootstrap node. This file is
 For advanced install only, install the Docker Nginx image with this command:
 
 ```bash
-$ sudo docker pull nginx
+sudo docker pull nginx
 ```
 
 ## Cluster nodes
@@ -207,7 +205,7 @@ You must have the <a href="http://www.info-zip.org/UnZip.html" target="_blank">U
 To install these utilities on CentOS7 and RHEL7:
 
 ```bash
-$ sudo yum install -y tar xz unzip curl ipset
+sudo yum install -y tar xz unzip curl ipset
 ```
 
 
@@ -216,13 +214,13 @@ $ sudo yum install -y tar xz unzip curl ipset
 On each of your cluster nodes, use the following command to:
 
 *   Disable SELinux or set it to permissive mode.
-*   Add nogroup to each of your Mesos masters and agents.</li>
-*   Reboot your cluster for the changes to take affect</p>
+*   Add `nogroup` to each of your Mesos masters and agents.
+*   Reboot your cluster for the changes to take effect.
 
     ```bash
-    $ sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config &&
-      sudo groupadd nogroup &&
-      sudo reboot
+    sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config &&
+    sudo groupadd nogroup &&
+    sudo reboot
     ```
 
     **Tip:** It may take a few minutes for your node to come back online after reboot.
@@ -238,6 +236,6 @@ You must set the `LC_ALL` and `LANG` environment variables to `en_US.utf-8`.
 
 [1]: /docs/1.8/administration/installing/custom/cli/
 [2]: /docs/1.8/administration/installing/custom/system-requirements/install-docker-centos/
-[3]: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+[3]: https://downloads.dcos.io/dcos/stable/1.8.9/dcos_generate_config.sh
 [4]: /docs/1.8/administration/installing/custom/gui/
 [5]: /docs/1.8/administration/installing/custom/advanced/

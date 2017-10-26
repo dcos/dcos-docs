@@ -1,6 +1,6 @@
 ---
 post_title: Discovering Service DNS Names
-nav_tile: Discovering DNS Names
+nav_title: Discovering DNS Names
 menu_order: 1
 ---
 You can get a comprehensive list of the apps being run on your DC/OS cluster nodes.
@@ -8,20 +8,20 @@ You can get a comprehensive list of the apps being run on your DC/OS cluster nod
 **Prerequisites:** [DC/OS and DC/OS CLI][1] are installed
 
 1.  SSH into your node. For example, use this CLI command to SSH to your master:
-    
-        $ dcos node ssh --leader --master-proxy
-        
-    
+
+        dcos node ssh --leader --master-proxy
+
+
     For more information, see the SSH [documentation][2].
 
 2.  Run this command from your master node to view the node details:
-    
-        $ curl http://master.mesos:8123/v1/enumerate
-        
-    
+
+        curl http://master.mesos:8123/v1/enumerate
+
+
     In this example Kafka and Chronos are installed:
-    
-        $ curl http://master.mesos:8123/v1/enumerate
+
+        curl http://master.mesos:8123/v1/enumerate
           {
             "frameworks": [
              {

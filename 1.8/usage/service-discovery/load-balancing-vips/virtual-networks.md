@@ -56,4 +56,4 @@ The following Marathon application definition specifies a network named `dcos-1`
 }
 ```
 
-Learn more about ports and networking in [Marathon](https://mesosphere.github.io/marathon/docs/ports.html).
+Learn more about ports and networking in [Marathon](/docs/1.8/usage/managing-services/service-ports/).

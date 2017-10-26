@@ -17,14 +17,12 @@ You can install and run DC/OS services on a datacenter without internet access w
 
 # <a name="default"></a>Installing the default Universe packages
 
-1.  [SSH](/docs/1.8/administration/access-node/sshcluster/) to the master nodes and download the [local-universe][1] container to each of your masters.
-
-    **Tip:** The `local-universe.tar.gz` file size is 2 GB or more.
+1.  Because DC/OS 1.8 is not the latest release, you will need to build your own local Universe image. Follow [these instructions][4], skipping step 3.
 
 2.  Load the container into the local Docker instance on each of your master nodes:
 
     ```bash
-    $ docker load < local-universe.tar.gz
+    docker load < local-universe.tar.gz
     ```
 
 1.  Download the [dcos-local-universe-http.service][2] definition.
@@ -32,9 +30,10 @@ You can install and run DC/OS services on a datacenter without internet access w
 3.  Add the `dcos-local-universe-http.service` definition to each of your masters at `/etc/systemd/system/dcos-local-universe-http.service` and then start it.
 
     ```bash
-    $ cp dcos-local-universe-http.service /etc/systemd/system/dcos-local-universe-http.service
-    $ systemctl daemon-reload
-    $ systemctl start dcos-local-universe-http
+    cp dcos-local-universe-http.service /etc/systemd/system/dcos-local-universe-http.service
+    systemctl daemon-reload
+    systemctl enable dcos-local-universe-http
+    systemctl start dcos-local-universe-http
     ```
 
 1.  Download the [dcos-local-universe-registry.service][3] definition.
@@ -42,15 +41,16 @@ You can install and run DC/OS services on a datacenter without internet access w
 4.  Add the `dcos-local-universe-registry.service` definition to each of your masters at `/etc/systemd/system/dcos-local-universe-registry.service` and then start it.
 
     ```bash
-    $ cp dcos-local-universe-registry.service /etc/systemd/system/dcos-local-universe-registry.service
-    $ systemctl daemon-reload
-    $ systemctl start dcos-local-universe-registry
+    cp dcos-local-universe-registry.service /etc/systemd/system/dcos-local-universe-registry.service
+    systemctl daemon-reload
+    systemctl enable dcos-local-universe-registry
+    systemctl start dcos-local-universe-registry
     ```
 
 5.  Remove the DC/OS Universe repository from a host that has the DC/OS CLI installed. The Universe repository is installed by default with the CLI.
 
     ```bash
-    $ dcos package repo remove Universe
+    dcos package repo remove Universe
     ```
 
     **Tip:** You can also add or remove repositories by using the DC/OS web interface. Simply go to **System > Overview > Repositories**.
@@ -58,7 +58,7 @@ You can install and run DC/OS services on a datacenter without internet access w
 6.  Add the local repository by using the DC/OS CLI.
 
     ```bash
-    $ dcos package repo add local-universe http://master.mesos:8082/repo
+    dcos package repo add local-universe http://master.mesos:8082/repo
     ```
 
 7.  To pull from this new repository, you must setup the Docker daemon on every agent to have a valid SSL certificate. For each agent node:
@@ -68,9 +68,9 @@ You can install and run DC/OS services on a datacenter without internet access w
     1.  Run the following commands:
 
         ```bash
-        $ mkdir -p /etc/docker/certs.d/master.mesos:5000
-        $ curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
-        $ systemctl restart docker
+        mkdir -p /etc/docker/certs.d/master.mesos:5000
+        curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
+        systemctl restart docker
         ```
 
     **Tip:** You can use the instructions for insecure registries, instead of this step, however we don't recommend this.
@@ -89,7 +89,7 @@ You can install and run DC/OS services on a datacenter without internet access w
 
     By default, only the `selected` packages are bundled. If you'd like to get something else, use the build your own [instructions][4].
 
-# <a name="build"></a>Installing a selected set of Universe packages
+# <a name="build"></a>Installing your own set of Universe packages
 
 #### Prerequisites
 
@@ -101,36 +101,35 @@ To install your own set of packages you must build a customized local Universe D
 1.  Clone the Universe repository:
 
     ```bash
-    $ git clone https://github.com/mesosphere/universe.git --branch version-3.x
+    git clone https://github.com/mesosphere/universe.git --branch version-3.x
     ```
 
 2.  Build the `universe-base` image:
 
     ```bash
-    $ cd universe/docker/local-universe/
-    $ sudo make base
+    cd universe/docker/local-universe/
+    sudo make base
     ```
 
-3.  Inside the `Makefile` replace `--selected` flag with the comma-separated list of selected packages preceeded by `--include` flag. To minimize the container size and download time, you can select only what you need. If you do not modify the `Makefile` all default Universe packages will be included.
+3.  Build the `mesosphere/universe` Docker image and compress it to the `local-universe.tar.gz`
+file. Specify a comma-separated list of package names and versions using the `DCOS_PACKAGE_INCLUDE`
+variable. To minimize the container size and download time, you can select only what you need. If
+you do not use the `DCOS_PACKAGE_INCLUDE` variable, all *selected* Universe packages will be
+included. To view which packages are selected, click on the **Catalog** tab in the DC/OS web
+interface.
 
     ```bash
-    $ sed -i -e 's/--selected/--include="marathon-lb,zeppelin"/' Makefile
+    sudo make DCOS_VERSION=1.8 DCOS_PACKAGE_INCLUDE="cassandra:1.0.25-3.0.10,marathon:1.4.2" local-universe
     ```
 
-4.  Build `mesosphere/universe` image and compress it to the `local-universe.tar.gz` file:
+4.  Perform steps from 2 to 7 of [Installing the default Universe packages][5] section, except step 6. Run the following command instead:
 
     ```bash
-    $ sudo make local-universe
-    ```
-
-5.  Perform steps from 2 to 7 of [Installing the default Universe packages][5] section, except step 6. Run the following command instead:
-
-    ```bash
-    $ dcos package repo add local-universe http://master.mesos:8082/repo
+    dcos package repo add local-universe http://master.mesos:8082/repo
     ```
 
  [1]: https://downloads.mesosphere.com/universe/public/local-universe.tar.gz
- [2]: https://raw.githubusercontent.com/mesosphere/universe/version-2.x/local/dcos-local-universe-http.service
- [3]: https://raw.githubusercontent.com/mesosphere/universe/version-2.x/local/dcos-local-universe-registry.service
+ [2]: https://raw.githubusercontent.com/mesosphere/universe/version-3.x/docker/local-universe/dcos-local-universe-http.service
+ [3]: https://raw.githubusercontent.com/mesosphere/universe/version-3.x/docker/local-universe/dcos-local-universe-registry.service
  [4]: #build
  [5]: #default

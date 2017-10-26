@@ -1,0 +1,265 @@
+<div id="ngindox">
+  <div class="heading">
+    <h1>
+      <a id="routes" href="#routes" aria-hidden="true" class="toggle-route-group" data-id="routes">Routes</a>
+    </h1>
+    <span class="options"><a href="#routes" class="toggle-route-groups" data-state="visible">Show/Hide All</a> </span>
+  </div>
+  <div class="legend">
+    <div class="heading">
+      <div class="heading">
+        <h2>
+          <a id="legend" href="#legend" aria-hidden="true" class="toggle-route-group" data-id="legend">Legend</a>
+        </h2>
+      </div>
+    </div>
+    <ul>
+      <li class="route route-type-proxy">
+        <input type="checkbox" data-type="proxy" checked="checked">
+        <label class="heading"><span class="route-type toggle-route-type">Proxy</span> <span class="route-desc">retrieves resources from another address.</span> </label>
+        </input>
+      </li>
+      <li class="route route-type-file">
+        <input type="checkbox" data-type="file" checked="checked">
+        <label class="heading"><span class="route-type toggle-route-type">File</span> <span class="route-desc">retrieves static files.</span> </label>
+        </input>
+      </li>
+    </ul>
+  </div>
+  <ul class="resources">
+    <li id="resource-metadata" class="resource">
+      <div class="heading">
+        <h2>
+          <a id="metadata" href="#metadata" aria-hidden="true" class="toggle-route-group" data-id="metadata">
+            <div class="arrow arrow-right"></div>Metadata</a>
+        </h2>
+        <span class="options"><a href="#metadata" class="toggle-route-group" data-id="metadata">Show/Hide</a> </span>
+      </div>
+      <ul id="routes-metadata" class="routes">
+        <li class="route route-type-file">
+          <div class="heading">
+            <h3>
+              <span class="route-type">File</span>
+              <span class="route-path"><code>/dcos-metadata/dcos-version.json</code></span>
+            </h3>
+            <span class="route-desc">DC/OS version (unauthenticated)</span>
+          </div>
+          <div class="route-meta" style="display:none">
+            <table>
+              <tr>
+                <td>
+                  Path:
+                </td>
+                <td>
+                  <code>/opt/mesosphere/active/dcos-metadata/etc/dcos-version.json</code>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li id="resource-pkgpanda" class="resource">
+      <div class="heading">
+        <h2>
+          <a id="pkgpanda" href="#pkgpanda" aria-hidden="true" class="toggle-route-group" data-id="pkgpanda">
+            <div class="arrow arrow-right"></div>Pkgpanda</a>
+        </h2>
+        <span class="options"><a href="#pkgpanda" class="toggle-route-group" data-id="pkgpanda">Show/Hide</a> </span>
+      </div>
+      <ul id="routes-pkgpanda" class="routes">
+        <li class="route route-type-proxy">
+          <div class="heading">
+            <h3>
+              <span class="route-type">Proxy</span>
+              <span class="route-path"><code>/pkgpanda/</code></span>
+            </h3>
+            <span class="route-desc">DC/OS component package management</span>
+          </div>
+          <div class="route-meta" style="display:none">
+            <table>
+              <tr>
+                <td>
+                  Path:
+                </td>
+                <td>
+                  <code>http://$backend</code>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Server:
+                </td>
+                <td>
+                  <code>unix:/run/dcos/pkgpanda-api.sock</code>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Backend:
+                </td>
+                <td>
+                  DC/OS Component Package Manager (Pkgpanda)
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  API Reference:
+                </td>
+                <td>
+                  <a href="https://dcos.io/docs/1.10/administration/component-management/">https://dcos.io/docs/1.10/administration/component-management/</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li id="resource-system" class="resource">
+      <div class="heading">
+        <h2>
+          <a id="system" href="#system" aria-hidden="true" class="toggle-route-group" data-id="system">
+            <div class="arrow arrow-right"></div>System</a>
+        </h2>
+        <span class="options"><a href="#system" class="toggle-route-group" data-id="system">Show/Hide</a> </span>
+      </div>
+      <ul id="routes-system" class="routes">
+        <li class="route route-type-proxy">
+          <div class="heading">
+            <h3>
+              <span class="route-type">Proxy</span>
+              <span class="route-path"><code>/system/health/v1</code></span>
+            </h3>
+            <span class="route-desc">Component service status</span>
+          </div>
+          <div class="route-meta" style="display:none">
+            <table>
+              <tr>
+                <td>
+                  Path:
+                </td>
+                <td>
+                  <code>http://$backend</code>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Server:
+                </td>
+                <td>
+                  <code>unix:/run/dcos/dcos-diagnostics.sock</code>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Backend:
+                </td>
+                <td>
+                  DC/OS Diagnostics
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  API Reference:
+                </td>
+                <td>
+                  <a href="https://dcos.io/docs/1.10/administration/monitoring/#system-health-http-api-endpoint">https://dcos.io/docs/1.10/administration/monitoring/#system-health-http-api-endpoint</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </li>
+        <li class="route route-type-proxy">
+          <div class="heading">
+            <h3>
+              <span class="route-type">Proxy</span>
+              <span class="route-path"><code>/system/v1/logs/</code></span>
+            </h3>
+            <span class="route-desc">Node, component service, and container (task) logs</span>
+          </div>
+          <div class="route-meta" style="display:none">
+            <table>
+              <tr>
+                <td>
+                  Path:
+                </td>
+                <td>
+                  <code>http://$backend</code>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Server:
+                </td>
+                <td>
+                  <code>unix:/run/dcos/dcos-log.sock</code>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Backend:
+                </td>
+                <td>
+                  DC/OS Log
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  API Reference:
+                </td>
+                <td>
+                  <a href="https://dcos.io/docs/1.10/administration/logging/logging-api/">https://dcos.io/docs/1.10/administration/logging/logging-api/</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </li>
+        <li class="route route-type-proxy">
+          <div class="heading">
+            <h3>
+              <span class="route-type">Proxy</span>
+              <span class="route-path"><code>/system/v1/metrics/</code></span>
+            </h3>
+            <span class="route-desc">Node, container, and application metrics</span>
+          </div>
+          <div class="route-meta" style="display:none">
+            <table>
+              <tr>
+                <td>
+                  Path:
+                </td>
+                <td>
+                  <code>http://$backend</code>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Server:
+                </td>
+                <td>
+                  <code>unix:/run/dcos/dcos-metrics-agent.sock</code>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Backend:
+                </td>
+                <td>
+                  DC/OS Metrics
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  API Reference:
+                </td>
+                <td>
+                  <a href="https://dcos.io/docs/1.10/administration/monitoring/metrics/metrics-api/">https://dcos.io/docs/1.10/administration/monitoring/metrics/metrics-api/</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

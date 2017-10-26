@@ -16,7 +16,7 @@ You can can configure Marathon-LB with various topologies. Here are some example
 *   Use Marathon-LB strictly as an internal load balancer and service discovery mechanism.
 *   You might also want to use a combination of internal and external load balancers, with different services exposed on different load balancers.
 
-Here, we discuss the fourth option above in order to highlight the features of Marathon-LB.
+Here, we discuss the fourth option above to highlight the features of Marathon-LB.
 
 ![lb1](img/lb1.png)
 

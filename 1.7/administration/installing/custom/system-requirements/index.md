@@ -6,7 +6,7 @@ menu_order: 000
 
 # Hardware Prerequisites
 
-You must have a single bootstrap node, Mesos master nodes, and Mesos agent nodes.
+You must have a single bootstrap node, an odd number of Mesos master nodes, and any number Mesos of agent nodes.
 
 ## Bootstrap node
 
@@ -23,6 +23,8 @@ You must have a single bootstrap node, Mesos master nodes, and Mesos agent nodes
 The cluster nodes are designated Mesos masters and agents during installation.
 
 ### Master nodes
+
+You must have an odd number of master nodes.
 
 Here are the master node hardware requirements.
 
@@ -85,16 +87,10 @@ Here are the agent node hardware requirements.
   </tr>
 </table>
 
-*   Your Linux distribution must be running the latest version. You can update CentOS with this command:
-
-    ```bash
-    $ sudo yum upgrade -y
-    ```
-
 *   On RHEL 7 and CentOS 7, firewalld must be stopped and disabled. It is a known <a href="https://github.com/docker/docker/issues/16137" target="_blank">Docker issue</a> that firewalld interacts poorly with Docker. For more information, see the <a href="https://github.com/docker/docker/blob/v1.6.2/docs/sources/installation/centos.md#firewalld" target="_blank">Docker CentOS firewalld</a> documentation.
 
     ```bash
-    $ sudo systemctl stop firewalld && sudo systemctl disable firewalld
+    sudo systemctl stop firewalld && sudo systemctl disable firewalld
     ```
 *   DC/OS is installed to `/opt/mesosphere`. Make sure that `/opt/mesosphere` exists on a partition that is not on an LVM Logical Volume or shared storage.
 
@@ -144,7 +140,7 @@ Docker must be installed on all bootstrap and cluster nodes. The supported versi
 Each Linux distribution requires Docker to be installed in a specific way:
 
 *   **CentOS** - [Install Docker from Docker's yum repository][2].
-*   **RHEL** - Install Docker by using a subscription channel. For more information, see <a href="https://access.redhat.com/articles/881893" target="_blank">Docker Formatted Container Images on Red Hat Systems</a>. <!-- $ curl -sSL https://get.docker.com | sudo sh -->
+*   **RHEL** - Install Docker by using a subscription channel. For more information, see <a href="https://access.redhat.com/articles/881893" target="_blank">Docker Formatted Container Images on Red Hat Systems</a>. <!-- curl -sSL https://get.docker.com | sudo sh -->
 *   **CoreOS** - Comes with Docker pre-installed and pre-configured.
 
 For more more information, see Docker's <a href="http://docs.docker.com/engine/installation/" target="_blank">distribution-specific installation instructions</a>.
@@ -179,7 +175,7 @@ Download and save the [DC/OS setup file][3] to your bootstrap node. This file is
 For advanced install only, install the Docker NGINX image with this command:
 
 ```bash
-$ sudo docker pull nginx
+sudo docker pull nginx
 ```
 
 ## Cluster nodes
@@ -193,7 +189,7 @@ You must have the <a href="http://www.info-zip.org/UnZip.html" target="_blank">U
 To install these utilities on CentOS7 and RHEL7:
 
 ```bash
-$ sudo yum install -y tar xz unzip curl ipset
+sudo yum install -y tar xz unzip curl ipset
 ```
 
 
@@ -202,13 +198,13 @@ $ sudo yum install -y tar xz unzip curl ipset
 On each of your cluster nodes, use the following command to:
 
 *   Disable SELinux or set it to permissive mode.
-*   Add nogroup to each of your Mesos masters and agents.</li>
-*   Reboot your cluster for the changes to take affect</p>
+*   Add `nogroup` to each of your Mesos masters and agents.
+*   Reboot your cluster for the changes to take effect.
 
     ```bash
-    $ sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config &&
-      sudo groupadd nogroup &&
-      sudo reboot
+    sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config &&
+    sudo groupadd nogroup &&
+    sudo reboot
     ```
 
     **Tip:** It may take a few minutes for your node to come back online after reboot.

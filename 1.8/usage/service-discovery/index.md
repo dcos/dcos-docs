@@ -4,7 +4,7 @@ nav_title: Service Discovery
 menu_order: 60
 ---
 
-DC/OS provides a number of tools out of the box for service discovery and load balancing. Here's an overview of the options, with some general guidelines on what to use in which situations.
+DC/OS provides a number of tools out-of-the-box, ranging from basic network connectivity between containers to more advanced features, such as load balancing and service discovery. Here's an overview of the options, with some general guidelines on what to use in which situations.
 
 | Tool | Type | When should I use it? |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

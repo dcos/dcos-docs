@@ -2,13 +2,7 @@
 post_title: DC/OS Documentation
 ---
 
-Welcome to the DC/OS documentation. DC/OS is short for Datacenter Operating System, a distributed operating system using Apache Mesos as its kernel:
-
-![Local vs Distributed OS](img/comparison.png)
-
-DC/OS comes with a powerful CLI and a beautiful GUI, a package manager and many more things to run containers and big data workloads in production. Learn more about [what DC/OS offers](/docs/1.8/overview/what-is-dcos/).
-
-Now that you know what DC/OS is, [check out the installation instructions](/docs/1.8/administration/installing/)!
+Welcome to the DC/OS documentation. The DC/OS documentation can help you set up, learn about the system, and get your applications and workloads running on DC/OS.
 
 
 

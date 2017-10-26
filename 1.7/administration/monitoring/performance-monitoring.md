@@ -17,7 +17,7 @@ Marathon has a timer metric that determines how long an event has taken place. T
 
 ## Marathon metrics
 
-Marathon provides a number of [metrics][1] for monitoring. Here are the ones that are particularly useful to DC/OS.
+Marathon provides a number of [metrics][1] for monitoring. Here are the ones that are particularly useful to DC/OS. You can query the metrics HTTP endpoint in your DC/OS cluster at `<Master-Public-IP>/marathon/metrics`.
 
 **Lifetime metrics**
 
@@ -96,7 +96,7 @@ If these metrics increase, something is probably wrong.
 
 *   Check the Marathon App Health API [endpoint][3] for critical applications API endpoint.
 *   Check for agents being shut down: 
-    *   Tail /var/log/mesos warning logs and watch for `Shutting down`
+    *   Tail `/var/log/mesos` warning logs and watch for `Shutting down`
     *   Mesos endpoint that indicates how many agents have been shut down increases
 *   Check for mesos masters having short uptimes, which is exposed in Mesos metrics.
 *   Change mom-marathon-service logging level from `WARN` to `INFO`.

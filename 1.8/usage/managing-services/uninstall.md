@@ -1,36 +1,36 @@
 ---
 post_title: Uninstalling Services
 nav_title: Uninstalling
-menu_order: 004
+menu_order: 007
 ---
 
 ## About uninstalling services
 
-Services can be uninstalled from either the web interface or the CLI. If the service has any reserved resources, you also need to run the framework cleaner script. The framework cleaner script removes the service instance from ZooKeeper, along with any data associated with it.  
+Services can be uninstalled from either the web interface or the CLI. If a Universe service has any reserved resources, you also need to run the framework cleaner script. The [framework cleaner script](#framework-cleaner) removes the service instance from ZooKeeper, along with any data associated with it.  
 
-## Uninstalling a service
+# Uninstalling Universe services
 
-### Uninstalling a service using the CLI
+## CLI
 
-1.  Uninstall a datacenter service with this command:
+Uninstall a datacenter service with this command:
 
-    ```bash
-    $ dcos package uninstall <servicename>
-    ```
+```bash
+dcos package uninstall <servicename>
+```
 
-    For example, to uninstall Chronos:
+For example, to uninstall Chronos:
 
-    ```bash
-    $ dcos package uninstall chronos
-    ```
+```bash
+dcos package uninstall chronos
+```
 
-### Uninstalling a service using the UI
+## Web interface
 
-From the DC/OS UI you can uninstall services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full featured interface to the native DC/OS Marathon instance.
+From the DC/OS web interface you can uninstall services from the **Services** or **Universe** tab. The Universe tab shows all of the available DC/OS services from package [repositories](/docs/1.8/usage/repo/). The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
 
 ### Universe tab
 
-1.  Navigate to the **Universe** page in the DC/OS [UI](/docs/1.8/usage/webinterface/#universe).
+1.  Navigate to the **Universe** page in the DC/OS [web interface](/docs/1.8/usage/webinterface/#universe).
 
 2.  Click on the **Installed** tab to see your installed services.
 
@@ -38,7 +38,50 @@ From the DC/OS UI you can uninstall services from the **Services** or **Universe
 
 ### Services tab
 
-1.  Navigate to the [**Services**](/docs/1.8/usage/webinterface/#services) tab in the DC/OS UI.
+1.  Navigate to the [**Services**](/docs/1.8/usage/webinterface/#services) tab in the DC/OS web interface.
+1.  Select your application and click **Edit**, then select the **More -> Destroy**.
+
+## Troubleshooting
+
+It's possible for an uninstall to fail with the following error message:
+
+```
+Incomplete uninstall of package [chronos] due to Mesos unavailability
+```
+
+The service may be inactive and will not be shown in the DC/OS UI, but you can find it by using this CLI command:
+
+```bash
+dcos service --inactive
+NAME          HOST     ACTIVE  TASKS  CPU  MEM  DISK  ID
+chronos    10.0.6.138  False     0    0.0  0.0  0.0   7c0a7bd4-3649-4ec1-866c-5db8f2292bf2-0001
+```
+
+You can complete the uninstall by shutting down the service by using this CLI command with the service ID specified, and then run the [framework cleaner](#framework-cleaner):
+
+```bash
+dcos service shutdown 7c0a7bd4-3649-4ec1-866c-5db8f2292bf2-0001
+```
+
+# Uninstalling user-created services
+
+### CLI
+
+1.  Uninstall a user-created service with this command:
+
+    ```bash
+    dcos marathon app remove [--force] <app-id>
+    ```
+    
+    For more information, see the [command reference](/docs/1.8/usage/cli/command-reference/#dcos-marathon).
+
+### Web interface
+
+From the DC/OS web interface you can uninstall services from the **Services**. The Services tab provides a full-featured interface to the native DC/OS Marathon instance.
+
+### Services tab
+
+1.  Navigate to the [**Services**](/docs/1.8/usage/webinterface/#services) tab in the DC/OS web interface.
 1.  Select your application and click **Edit**, then select the **More -> Destroy**.
 
 ## <a name="framework-cleaner"></a>Cleaning up ZooKeeper
@@ -62,25 +105,25 @@ These are some examples of default configurations (these will vary depending on 
 * Cassandra default: 
 
   ```bash
-  $ docker run mesosphere/janitor /janitor.py -r cassandra-role -p cassandra-principal -z dcos-service-cassandra
+  docker run mesosphere/janitor /janitor.py -r cassandra-role -p cassandra-principal -z dcos-service-cassandra
   ```
   
 * HDFS default: 
 
   ```bash
-  $ docker run mesosphere/janitor /janitor.py -r hdfs-role -p hdfs-principal -z dcos-service-hdfs
+  docker run mesosphere/janitor /janitor.py -r hdfs-role -p hdfs-principal -z dcos-service-hdfs
   ```
   
 * Kafka default: 
 
   ```bash
-  $ docker run mesosphere/janitor /janitor.py -r kafka-role -p kafka-principal -z dcos-service-kafka
+  docker run mesosphere/janitor /janitor.py -r kafka-role -p kafka-principal -z dcos-service-kafka
   ```
   
 * Custom values: 
   
   ```bash
-  $ docker run mesosphere/janitor /janitor.py -r <custom_role> -p <custom_principal> -z dcos-service-<custom_service_name>
+  docker run mesosphere/janitor /janitor.py -r <custom_role> -p <custom_principal> -z dcos-service-<custom_service_name>
   ```
 
 ### Running from the DC/OS CLI

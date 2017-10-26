@@ -4,25 +4,35 @@ nav_title: DC/OS Integration
 menu_order: 20
 ---
 
-You can leverage several integration points when creating DC/OS Service. The sections below provide detailed explanations on how to integrate with each respective component.
+You can leverage several integration points when creating a DC/OS Service. The sections below explain how to integrate with each respective component.
 
 # <a name="adminrouter"></a>Admin Router
 
-When a DC/OS Service is installed and ran on DC/OS, the service is generally deployed on a [private agent node][3]. In order to allow users to access a running instance of the service, Admin Router can functions as a reverse proxy for the DC/OS Service.
+When a DC/OS Service is installed and run on DC/OS, the service is generally deployed on a [private agent node][3]. To allow user access to a service, the Admin Router can function as a reverse proxy for the DC/OS service.
 
-Admin Router currently supports only one reverse proxy destination.
+The Admin Router currently supports only one reverse proxy destination.
 
-In order to allow Admin Router to function as a reverse proxy for the DC/OS Service one of the following methods should be used
+## Service Endpoints
 
-## Framework Web UI URL
+The Admin Router allows Marathon tasks to define custom service UI and HTTP endpoints, which are made available as `/service/<service-name>`. Set the following Marathon task labels to enable this:
 
-If the DC/OS Service will register with Mesos as a framework, the `webui_url` framework property may be specified and will be used by Admin Router to proxy requests to the service.
+```
+"labels": {
+    "DCOS_SERVICE_NAME": "<service-name>",
+    "DCOS_SERVICE_PORT_INDEX": "0",
+    "DCOS_SERVICE_SCHEME": "http"
+  }
+```
 
-* The URL must NOT end with a backslash (/). For example, this is good `internal.dcos.host.name:10000`, and this is bad `internal.dcos.host.name:10000/`.
+In this case, `http://<dcos-cluster>/service/<service-name>` would be forwarded to the host running the task using the first port allocated to the task.
 
-Since the paths to resources for clients connecting to Admin Router will differ from those paths the Service actually has, ensure the Service is friendly to running behind a proxy. This often means relative paths are preferred to absolute paths. In particular, resources expected to be used by a UI should be verified to work through a proxy.
+To enable the forwarding to work reliably across task failures, we recommend co-locating the endpoints with the task. This way, if the task is restarted on another host and with different ports, Admin Router will pick up the new labels and update the routing. **Note:** Due to caching, there can be an up to 30-second delay before the new routing is working.
 
-When the `webui_url` is provided, a link to the service will be available from the DC/OS UI. The link will be generated based on a convention of: `/service/<service_name>`. For example, `<dcos_host>/service/unicorn` is the proxy to the `webui_url`.
+We recommend having only a single task setting these labels for a given service name. If multiple task instances have the same service name label, Admin Router will pick one of the task instances deterministically, but this might make debugging issues more difficult.
+
+Since the paths to resources for clients connecting to Admin Router will differ from those paths the service actually has, ensure the service is configured to run behind a proxy. This often means relative paths are preferred to absolute paths. In particular, resources expected to be used by a UI should be verified to work through a proxy.
+
+Tasks running in nested [Marathon app groups](https://mesosphere.github.io/marathon/docs/application-groups.html) will be available only using their service name (i.e., `/service/<service-name>`), not by the Marathon app group name (i.e., `/service/app-group/<service-name>`).
 
 # <a name="dcos-ui"></a>DC/OS UI
 
@@ -56,7 +66,7 @@ Service health check information can be surfaced in the DC/OS services UI tab by
 
 # <a name="cli-subcommand"></a>CLI Subcommand
 
-If you would like to publish a DC/OS CLI Subcommand for use with your service it is common to have the Subcommand communicate with the running Service by sending HTTP requests through Admin Router to the Service.
+If you would like to publish a DC/OS CLI subcommand for use with your service, it is common to have the subcommand communicate with the running service by sending HTTP requests through Admin Router to the service.
 
 See [dcos-helloworld][6] for an example on how to develop a CLI Subcommand.
 

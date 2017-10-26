@@ -26,7 +26,7 @@ You can debug more by clicking the node, where you'll be able to see the unhealt
 
 ## Health States
 
-Possible health states are unhealthy and healthy. We infer this from codes 0 and 1.
+Possible health states are unhealthy and healthy. We infer this from the system health API codes `0` and `1`.
 
 - **Healthy** All cluster nodes are healthy. The units are loaded and not in the "active" or "inactive" state.
 - **Unhealthy** One or more nodes have issues. The units are not loaded or are in the "active" or "inactive" state.
@@ -38,7 +38,7 @@ The system health API has four possible states: 0 - 3, OK; CRITICAL; WARNING; UN
 The system health endpoint is exposed at port 1050:
 
 ```bash
-$ curl <host_ip>:1050/system/health/v1
+curl <host_ip>:1050/system/health/v1
 ```
 
 ## Aggregation
@@ -46,9 +46,9 @@ $ curl <host_ip>:1050/system/health/v1
 Aggregation of the cluster health endpoints is accomplished by the same diagnostics application, but is only run on the master nodes. You can explore this API further by making a few queries to any master in your cluster:
 
 ```bash
-$ curl <master_ip>:1050/system/health/v1/units
-$ curl <master_ip>:1050/system/health/v1/nodes
-$ curl <master_ip>:1050/system/health/v1/report
+curl <master_ip>:1050/system/health/v1/units
+curl <master_ip>:1050/system/health/v1/nodes
+curl <master_ip>:1050/system/health/v1/report
 ```
 
 The DC/OS user interface uses these aggregation endpoints to generate the data you explore in the system health console.

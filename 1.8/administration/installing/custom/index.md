@@ -20,7 +20,7 @@ For those who'd like a little bit more opportunity to configure things, the CLI 
 
 # Advanced
 
-When you're ready to integrate DC/OS with your configuration management tools or create an image to roll out datacenter wide, the advanced installer is for you. This method provides you will all the flexibility you need to pick the actual installation process, every configuration option available and a simple way to consistently add agents to the cluster on a regular basis.
+When you're ready to integrate DC/OS with your configuration management tools or create an image to roll out datacenter wide, the advanced installer is for you. This method provides you with all the flexibility you need to pick the actual installation process, every configuration option available and a simple way to consistently add agents to the cluster on a regular basis.
 
 - [Advanced DC/OS Installation Guide][3]
 

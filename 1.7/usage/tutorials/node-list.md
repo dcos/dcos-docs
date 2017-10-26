@@ -8,7 +8,7 @@ You can view of all of the nodes that are used across your cluster by using the 
 -   From the CLI, enter this command to print a high-level list of nodes:
 
     ```bash
-    $ dcos node 
+    dcos node 
     ```
     
     The output will look like this:

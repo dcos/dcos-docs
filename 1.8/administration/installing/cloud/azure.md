@@ -4,9 +4,11 @@ nav_title: Azure
 menu_order: 1
 ---
 
-This document explains how to install DC/OS 1.8 through the Azure Marketplace. Alternatively, you can install DC/OS 1.8 using an [Azure Resource Manager](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/) template provided [separately here](https://downloads.dcos.io/dcos/stable/azure.html).
+This document explains how to install DC/OS 1.8 through the Azure Marketplace. Alternatively, you can install DC/OS 1.8 using an [Azure Resource Manager](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/) template provided [separately here](https://downloads.dcos.io/dcos/stable/1.8.9/azure.html).
 
 To get support on Azure Marketplace-related questions, join the Azure Marketplace [Slack community](http://join.marketplace.azure.com).
+
+**Important:** Upgrades are not supported with this installation method.
 
 # System requirements
 
@@ -69,14 +71,14 @@ Click on the latest deployment (here `mesosphere.dcosdcos-20160905094201`) and c
 Use the value of `MASTERFQDN` you found in the `Outputs` section in the previous step and paste it in the following command:
 
 ```bash
-$ ssh azureuser@$MASTERFQDN -p 2200 -L 8000:localhost:80
+ssh azureuser@$MASTERFQDN -p 2200 -L 8000:localhost:80
 ```
 
 For example, in my case:
 
 ```bash
-$ export MASTERFQDN=dcosmastersfjro3nzmohea.westus.cloudapp.azure.com
-$ ssh -p2200 azureuser@$MASTERFQDN -L 8000:localhost:80
+export MASTERFQDN=dcosmastersfjro3nzmohea.westus.cloudapp.azure.com
+ssh -p2200 azureuser@$MASTERFQDN -L 8000:localhost:80
 The authenticity of host '[dcosmastersfjro3nzmohea.westus.cloudapp.azure.com]:2200 ([23.101.195.125]:2200)' can't be established.
 ECDSA key fingerprint is SHA256:RD7nTZ4tzrKF/g4pvWvMFQk5GnCB6JqPA2MYycIoGGM.
 Are you sure you want to continue connecting (yes/no)? yes
@@ -127,10 +129,10 @@ The following commands can be used to run the DC/OS CLI directly from within the
 
 ```bash
 # Connect to master node with ssh
-$ ssh -p2200 azureuser@MASTERFQDN -L 8000:localhost:80
+ssh -p2200 azureuser@MASTERFQDN -L 8000:localhost:80
 
 # Install CLI
-azureuser@dcos-master-01234567-0:~$ curl -fLsS --retry 20 -Y 100000 -y 60 https://downloads.dcos.io/binaries/cli/linux/x86-64/dcos-1.8/dcos -o dcos &&
+azureuser@dcos-master-01234567-0:~curl -fLsS --retry 20 -Y 100000 -y 60 https://downloads.dcos.io/binaries/cli/linux/x86-64/dcos-1.8/dcos -o dcos &&
  sudo mv dcos /usr/local/bin &&
  sudo chmod +x /usr/local/bin/dcos &&
  dcos config set core.dcos_url http://localhost

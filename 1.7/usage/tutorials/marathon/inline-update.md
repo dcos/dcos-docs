@@ -13,13 +13,13 @@ The [Marathon `env` variable][2] can be updated by specifying a JSON string in a
 Specify this CLI command with the JSON string included:
 
 ```bash
-$ dcos marathon app update test-app env='{"APISERVER_PORT":"25502"}'
+dcos marathon app update test-app env='{"APISERVER_PORT":"25502"}'
 ```
 
 Now run the command below to see the result of your update:
 
 ```bash
-$ dcos marathon app show test-app | jq '.env'
+dcos marathon app show test-app | jq '.env'
 ```
 
 ## Update all Environment Variables
@@ -29,7 +29,7 @@ The [Marathon `env` variable][1] can also be updated by specifying a JSON file i
 First, save the existing environment variables to a file:
 
 ```bash
-$ dcos marathon app show test-app | jq .env >env_vars.json
+dcos marathon app show test-app | jq .env >env_vars.json
 ```
 
 The file will look like this:
@@ -47,13 +47,13 @@ Now edit the `env_vars.json` file. Make the JSON a valid object by enclosing the
 Specify this CLI command with the JSON file specified:
 
 ```bash
-$ dcos marathon app update test-app < env_vars.json
+dcos marathon app update test-app < env_vars.json
 ```
 
 View the results of your update:
 
 ```bash
-$ dcos marathon app show test-app | jq '.env'
+dcos marathon app show test-app | jq '.env'
 ```
 
  [1]: /docs/1.7/usage/cli/
