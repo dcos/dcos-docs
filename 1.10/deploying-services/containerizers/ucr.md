@@ -17,9 +17,9 @@ The [Universal Container Runtime (UCR)](http://mesos.apache.org/documentation/la
 
 1. In the **CONTAINER IMAGE** field, optionally enter a container image. Otherwise, enter a command in the **COMMAND** field. 
 
-1. Specify the UCR. Click **MORE SETTINGS**. In the **Container Runtime** section, choose the **UNIVERSAL CONTAINER RUNTIME (UCR)** radio button.
+1. Specify the UCR. Click **MORE SETTINGS**. In the **Container Runtime** section, choose the **MESOS RUNTIME** radio button.
 
-1. Click **REVIEW & RUN** and **RUN SERVICE**.
+1. Click **REVIEW & RUN**.
 
 
 # Provision a container with the UCR from the DC/OS CLI
