@@ -17,6 +17,7 @@ This topic provides all available configuration parameters. Except where explici
 | [aws_template_storage_secret_access_key](#aws_template_storage_secret_access_key) | The AWS [Secret Access Key](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html). |
 | [bootstrap_url](#bootstrap_url)                          | (Required) The URI path for the DC/OS installer to store the customized DC/OS build files.                                         |
 | [cluster_docker_credentials](#cluster_docker_credentials)             | The dictionary of Docker credentials to pass.                                                                                      |
+| [cluster_docker_credentials_enabled](#cluster_docker_credentials_enabled)   |  Whether to pass the Mesos `--docker_config` option to Mesos. |
 | [cluster_docker_registry_url](#cluster_docker_registry_url)            | The custom URL that Mesos uses to pull Docker images from.                                                                         |
 | [cluster_name](#cluster_name)                           | The name of your cluster.                                                                                                        |
 | [cosmos_config](#cosmos_config)                          | The dictionary of packaging configuration to pass to the [DC/OS Package Manager (Cosmos)](https://github.com/dcos/cosmos).         |
@@ -99,26 +100,32 @@ bouncer_expiration_auth_token_days: '0.5'
 For more information, see the [security documentation](https://docs.mesosphere.com/1.9/security/).
 
 ### cluster_docker_credentials
-The dictionary of Docker credentials to pass. 
+The dictionary of Docker credentials to pass.
 
 - If unset, a default empty credentials file is created at `/etc/mesosphere/docker_credentials` during DC/OS install. A sysadmin can change credentials as needed. A `systemctl restart dcos-mesos-slave` or `systemctl restart dcos-mesos-slave-public` is required for changes to take effect.
-- You can also specify by using the `--docker_config` JSON [format](http://mesos.apache.org/documentation/latest/configuration/). You can write as YAML in the `config.yaml` file and it will automatically be mapped to the JSON format for you. This option stores the Docker credentials in the same location as the DC/OS internal configuration (`/opt/mesosphere`). If you need to update or change the configuration, you will have to create a new DC/OS internal configuration.
+- You can also specify by using the `--docker_config` JSON [format](http://mesos.apache.org/documentation/latest/configuration/). You can write as YAML in the `config.yaml` file and it will automatically be mapped to the JSON format for you. This stores the Docker credentials in the same location as the DC/OS internal configuration (`/opt/mesosphere`). If you need to update or change the configuration, you will have to create a new DC/OS internal configuration.
 
-**Note:** `cluster_docker_credentials` takes effect during an upgrade only when `cluster_docker_credentials_dcos_owned` is set to `'true'`.
+**Note:**
+- `cluster_docker_credentials` takes effect only when [`cluster_docker_credentials_enabled`](#cluster_docker_credentials_enabled) is set to `'true'`
+- `cluster_docker_credentials` takes effect during an upgrade only when `cluster_docker_credentials_dcos_owned` is set to `'true'`.
 
 You can use the following options to further configure the Docker credentials:
 
-*  `cluster_docker_credentials_dcos_owned` Whether to store the credentials file in `/opt/mesosphere` or `/etc/mesosphere/docker_credentials`. A sysadmin cannot edit `/opt/mesosphere` directly. 
+*  `cluster_docker_credentials_dcos_owned` Indicates whether to store the credentials file in `/opt/mesosphere` or `/etc/mesosphere/docker_credentials`. A sysadmin cannot edit `/opt/mesosphere` directly.
     *  `cluster_docker_credentials_dcos_owned: 'true'` The credentials file is stored in `/opt/mesosphere`.
-        *  `cluster_docker_credentials_write_to_etc` Whether to write a cluster credentials file. 
+        *  `cluster_docker_credentials_write_to_etc` Whether to write a cluster credentials file.
             *  `cluster_docker_credentials_write_to_etc: 'true'` Write a credentials file. This can be useful if overwriting your credentials file will cause problems (e.g., if it is part of a machine image or AMI). This is the default value.
             *  `cluster_docker_credentials_write_to_etc: 'false'` Do not write a credentials file.
     *  `cluster_docker_credentials_dcos_owned: 'false'` The credentials file is stored in `/etc/mesosphere/docker_credentials`.
-*  `cluster_docker_credentials_enabled` Whether to pass the `--docker_config` option to Mesos. 
-    *  `cluster_docker_credentials_enabled: 'true'` Pass the `--docker_config` option pointing to a file that contains the provided `cluster_docker_credentials` data to Mesos.
-    *  `cluster_docker_credentials_enabled: 'false'` Do not pass the `--docker_config` option to Mesos. 
-    
-For more information, see the [examples](/docs/1.9/installing/custom/configuration/examples/#docker-credentials).
+
+For more information, see the [examples](/docs/1.10/installing/custom/configuration/examples/#docker-credentials).
+
+### cluster_docker_credentials_enabled
+Whether to pass the Mesos `--docker_config` option containing [`cluster_docker_credentials`](#cluster_docker_credentials) to Mesos.
+
+*  `cluster_docker_credentials_enabled: 'true'` Pass the Mesos `--docker_config` option to Mesos. It will point to a file that contains the provided `cluster_docker_credentials` data.
+*  `cluster_docker_credentials_enabled: 'false'` Do not pass the Mesos `--docker_config` option to Mesos.
+
 
 ### cluster_docker_registry_url
 The custom URL that Mesos uses to pull Docker images from. If set, it will configure the Mesos' `--docker_registry` flag to the specified URL. This changes the default URL Mesos uses for pulling Docker images. By default `https://registry-1.docker.io` is used.
