@@ -135,9 +135,9 @@ no_proxy:
 - '<blocked.address1.com>'
 - '<blocked.address2.com>'
 # Enterprise DC/OS Only
-zk_super_credentials: 'super:<long, random value>'
-zk_master_credentials: 'dcos-master:<long, random value>'
-zk_agent_credentials: 'dcos-agent:<long, random value>'
+zk_super_credentials: 'super:<long, random string>'
+zk_master_credentials: 'dcos-master:<long, random string>'
+zk_agent_credentials: 'dcos-agent:<long, random string>'
 ```
 
 

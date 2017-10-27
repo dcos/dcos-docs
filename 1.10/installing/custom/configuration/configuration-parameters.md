@@ -522,8 +522,8 @@ To harden clusters, Mesosphere recommends that you change the defaults of all cr
 
 ### <a id="zk-master"></a> zk_master_credentials (Enterprise DC/OS Only)
 
-Credentials used to access the credentials of services running on DC/OS Masters.
+Credentials used by bootstrapping code to access the credentials of the services that will be running on the masters.
 
 ### <a id="zk-agent"></a> zk_agent_credentials (Enterprise DC/OS Only)
 
-Credentials used to access the credentials of services that they will be running during the bootstrap process of the agent.
+Credentials used by bootstrapping code to access the credentials of the services that will be running on the agents.
