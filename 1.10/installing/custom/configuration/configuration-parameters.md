@@ -73,9 +73,9 @@ This topic provides all available configuration parameters. Except where explici
 | [superuser_password_hash](#superuser_password_hash-enterprise-dcos-only) | (Enterprise DC/OS Only) (Required) The hashed superuser password. |
 | [superuser_username](#superuser_username-enterprise-dcos-only)           | (Enterprise DC/OS Only) (Required) The user name of the superuser.|
 | [telemetry_enabled](#telemetry_enabled)                  | Indicates whether to enable sharing of anonymous data for your cluster.  |
-| zk_super_credentials            | (Enterprise DC/OS Only) The ZooKeeper superuser credentials.  |
-| zk_master_credentials          | (Enterprise DC/OS Only) The ZooKeeper master credentials.  |
-| zk_agent_credentials            | (Enterprise DC/OS Only) The ZooKeeper agent credentials.  |
+| [zk_super_credentials](#zk-super)            | (Enterprise DC/OS Only) The ZooKeeper superuser credentials.  |
+| [zk_master_credentials](#zk-master)          | (Enterprise DC/OS Only) The ZooKeeper master credentials.  |
+| [zk_agent_credentials](#zk-agent)           | (Enterprise DC/OS Only) The ZooKeeper agent credentials.  |
 
 ### agent_list
 A YAML nested list (`-`) of IPv4 addresses to your [private agent](/docs/1.10/overview/concepts/#private-agent-node) host names.
@@ -501,3 +501,29 @@ Indicates whether to enable the DC/OS proxy.
 For more information, see the [examples](/docs/1.10/installing/custom/configuration/examples/#http-proxy).
 
 **Important:** You should also configure an HTTP proxy for [Docker](https://docs.docker.com/engine/admin/systemd/#/http-proxy).
+
+### <a id="zk-superuser"></a> zk_super_credentials (Enterprise DC/OS Only)
+
+In `strict` and `permissive` clusters the information stored in ZooKeeper is protected by ACLs so that a malicious user can't connect to ZooKeeper quorum and directly modify service metadata. ACLs specify sets of IDs and permissions that are associated with those IDs. ZooKeeper supports pluggable authentication schemes and has a few built in schemes: `world`, `auth`, `digest`, `host`, `ip`. 
+
+DC/OS ZooKeeper credentials `zk_super_credentials`, `zk_master_credentials`, and `zk_agent_credentials` use `digest` authentication, which require a `<uid>:<password>` string which is then used as an ID while checking if a client can access a particular resource.
+
+`zk_super_credentials` enables access to ZooKeeper's equivalent of `root/superuser` account, which has access to all resources regardless of existing ACLs. This credential allows an operator to access all the metadata stored in the ZooKeeper quorum and is used by the DC/OS bootstrap script while initializing the cluster. Default: `'super:secret'`
+
+To harden clusters, Mesosphere recommends that you change the defaults of all credentials to long, complex values. Once set, you can verify the settings using `/opt/mesosphere/active/exhibitor/usr/zookeeper/bin/zkCli.sh` available on DC/OS Master nodes. By default, zkCli does not authenticate, so the nodes in `/dcos` tree will not be accessible. After invoking `addauth digest <zk_super_credentials>` in `zkCli`, all the nodes in ZooKeeper will be accessible, with `zk_master_credentials` and `zk_agent_credentials` providing access to a subset of them. For example:
+
+```
+[zk: localhost:2181(CONNECTED) 0] addauth digest super:secret
+[zk: localhost:2181(CONNECTED) 1] ls /dcos
+[backup, agent, RootCA, secrets, vault, CAChainInclRoot, CAChain, CACertKeyType, ca, master]
+[zk: localhost:2181(CONNECTED) 2] ls /dcos/secrets
+[core, init, system, bootstrap_user, keys]
+```
+
+### <a id="zk-master"></a> zk_master_credentials (Enterprise DC/OS Only)
+
+Credentials used to access the credentials of services running on DC/OS Masters.
+
+### <a id="zk-agent"></a> zk_agent_credentials (Enterprise DC/OS Only)
+
+Credentials used to access the credentials of services that they will be running during the bootstrap process of the agent.
