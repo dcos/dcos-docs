@@ -10,11 +10,12 @@ This topic provides all available configuration parameters. Except where explici
 | Parameter                              | Description                                                                                                                                               |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [agent_list](#agent_list)                                              | A YAML nested list (`-`) of IPv4 addresses to your [private agent](/docs/1.10/overview/concepts/#private-agent-node) host names. |
-| [aws_template_storage_bucket](#aws_template_storage_bucket)            | The name of your S3 bucket. |
-| [aws_template_storage_bucket_path](#aws_template_storage_bucket_path)  | The S3 bucket storage path. |
-| [aws_template_upload](#aws_template_upload)                            | Indicates whether to automatically upload the customized advanced templates to your S3 bucket. |
-| [aws_template_storage_access_key_id](#aws_template_storage_access_key_id)         | The AWS [access key ID](http://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). |
-| [aws_template_storage_secret_access_key](#aws_template_storage_secret_access_key) | The AWS [secret access key](http://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). |
+| aws_template_storage_access_key_id         | The [access key ID](http://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) of the account owning the AWS S3 bucket. |
+| aws_template_storage_bucket                | The name of an S3 bucket to contain [customized advanced AWS templates](/1.10/installing/cloud/aws/advanced/#create-your-templates). |
+| aws_template_storage_bucket_path           | The path to the S3 bucket. |
+| aws_template_storage_region_name           | The region containing the S3 bucket.  |
+| aws_template_storage_secret_access_key     | The [secret access key](http://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) of the account owning the AWS S3 bucket. |
+| aws_template_upload                        | Whether to upload the customized advanced AWS templates to an S3 bucket. |
 | [bootstrap_url](#bootstrap_url)                                       | (Required) The URI path for the DC/OS installer to store the customized DC/OS build files. |
 | [cluster_docker_credentials](#cluster_docker_credentials)             | The dictionary of Docker credentials to pass. |
 | [cluster_docker_registry_url](#cluster_docker_registry_url)           | The custom URL that Mesos uses to pull Docker images from. |

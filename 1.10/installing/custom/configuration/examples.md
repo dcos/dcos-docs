@@ -163,7 +163,7 @@ ssh_port: '<port-number>'
 ssh_user: <username>
 ```
 
-## <a name="aws"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper backed by an AWS S3 bucket, AWS DNS, five private agents, and one public agent node
+## <a name="aws"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper backed by an AWS S3 bucket, five private agents, and one public agent node
 
 ```yaml
 ---
@@ -403,4 +403,3 @@ custom_checks:
           - agent
         timeout: 5s
 ```
-
