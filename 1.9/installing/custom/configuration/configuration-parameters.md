@@ -25,6 +25,7 @@ This topic provides all available configuration parameters. Except where explici
 | [gpus_are_scarce](#gpus_are_scarce)        | Indicates whether to treat GPUs as a scarce resource in the cluster. |
 | [ip_detect_public_filename](#ip_detect_public_filename)       | The IP detect file to use in your cluster.  |
 | [master_discovery](#master_discovery)                          | (Required) The Mesos master discovery method.         |
+| [mesos_container_log_sink](#mesos_container_log_sink)                 | The log manager for containers (tasks). |
 | [public_agent_list](#public_agent_list)                          | A YAML nested list (-) of IPv4 addresses to your [public agent](/docs/1.9/overview/concepts/#public-agent-node) host names.        |
 | [platform](#platform)                          | The infrastructure platform.      |
 | [rexray_config](#rexray_config)                          | The [REX-Ray](https://rexray.readthedocs.org/en/v0.3.2/user-guide/config/) configuration method for enabling external persistent volumes in Marathon.    |
@@ -349,6 +350,16 @@ Indicates whether the master DNS port is open. An open master DNS port listens p
 
 *  `'master_dns_bindall': 'true'` The master DNS port is open. This is the default value.
 *  `'master_dns_bindall': 'false'` The master DNS port is closed.
+
+### mesos_container_log_sink
+
+The log manager for containers (tasks). The options are:
+
+* `'journald'` - send task logs only to journald.
+* `'logrotate'` - send task logs only to the file system (i.e. a stdout/err file).
+* `'journald+logrotate'` - Send logs to both journald and the file system.
+
+The default is `logrotate`. Due to performance issues, `journald` is not recommended. For details, see [Logging API](/1.10/monitoring/logging/logging-api/#compatibility).
 
 ### mesos_max_completed_tasks_per_framework
 The number of completed tasks for each framework that the Mesos master will retain in memory. In clusters with a large number of long-running frameworks, retaining too many completed tasks can cause memory issues on the master. If this parameter is not specified, the default Mesos value of 1000 is used.
