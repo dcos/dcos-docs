@@ -504,15 +504,15 @@ For more information, see the [examples](/docs/1.10/installing/custom/configurat
 
 ### <a id="zk-superuser"></a> zk_super_credentials (Enterprise DC/OS Only)
 
-In `strict` and `permissive` clusters the information stored in ZooKeeper is protected by ACLs so that a malicious user can't connect to ZooKeeper quorum and directly modify service metadata. ACLs specify sets of IDs and permissions that are associated with those IDs. ZooKeeper supports pluggable authentication schemes and has a few built in schemes: `world`, `auth`, `digest`, `host`, `ip`. 
+On DC/OS `strict` and `permissive` mode clusters the information stored in ZooKeeper is protected using access control lists (ACLs) so that a malicious user cannot connect to the ZooKeeper Quorum and directly modify service metadata. ACLs specify sets of resource IDs (RIDs) and actions that are associated with those IDs. ZooKeeper supports pluggable authentication schemes and has a few built in schemes: `world`, `auth`, `digest`, `host`, and `ip`. 
 
-DC/OS ZooKeeper credentials `zk_super_credentials`, `zk_master_credentials`, and `zk_agent_credentials` use `digest` authentication, which require a `<uid>:<password>` string which is then used as an ID while checking if a client can access a particular resource.
+DC/OS ZooKeeper credentials `zk_super_credentials`, `zk_master_credentials`, and `zk_agent_credentials` use `digest` authentication, which requires a `<uid>:<password>` string which is then used as an ID while checking if a client can access a particular resource.
 
-`zk_super_credentials` enables access to ZooKeeper's equivalent of `root/superuser` account, which has access to all resources regardless of existing ACLs. This credential allows an operator to access all the metadata stored in the ZooKeeper quorum and is used by the DC/OS bootstrap script while initializing the cluster. Default: `'super:secret'`
+`zk_super_credentials` enables access to ZooKeeper's equivalent of the `root/superuser` account, which has access to all resources regardless of existing ACLs. This credential allows an operator to access all the metadata stored in the ZooKeeper quorum and is used by the DC/OS bootstrap script while initializing the cluster. Default: `'super:secret'`.
 
-To harden clusters, Mesosphere recommends that you change the defaults of all credentials to long, complex values. Once set, you can verify the settings using `/opt/mesosphere/active/exhibitor/usr/zookeeper/bin/zkCli.sh` available on DC/OS Master nodes. By default, zkCli does not authenticate, so the nodes in `/dcos` tree will not be accessible. After invoking `addauth digest <zk_super_credentials>` in `zkCli`, all the nodes in ZooKeeper will be accessible, with `zk_master_credentials` and `zk_agent_credentials` providing access to a subset of them. For example:
+To harden clusters, Mesosphere recommends that you change the defaults of all credentials to long, complex values. Once set, you can verify the settings using `/opt/mesosphere/active/exhibitor/usr/zookeeper/bin/zkCli.sh` available on DC/OS master nodes. By default, `zkCli` does not authenticate, so the nodes in the `/dcos` tree will not be accessible. After invoking `addauth digest <zk_super_credentials>` in `zkCli`, all the nodes in ZooKeeper will be accessible, with `zk_master_credentials` and `zk_agent_credentials` providing access to a subset of them. For example:
 
-```
+```powershell
 [zk: localhost:2181(CONNECTED) 0] addauth digest super:secret
 [zk: localhost:2181(CONNECTED) 1] ls /dcos
 [backup, agent, RootCA, secrets, vault, CAChainInclRoot, CAChain, CACertKeyType, ca, master]
@@ -522,8 +522,8 @@ To harden clusters, Mesosphere recommends that you change the defaults of all cr
 
 ### <a id="zk-master"></a> zk_master_credentials (Enterprise DC/OS Only)
 
-Credentials used by bootstrapping code to access the credentials of the services that will be running on the masters.
+Credentials used by bootstrapping process to access the credentials of the services that will be running on the DC/OS master nodes.
 
 ### <a id="zk-agent"></a> zk_agent_credentials (Enterprise DC/OS Only)
 
-Credentials used by bootstrapping code to access the credentials of the services that will be running on the agents.
+Credentials used by bootstrapping process to access the credentials of the services that will be running on the DC/OS agent nodes.
