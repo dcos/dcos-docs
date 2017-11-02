@@ -28,7 +28,7 @@ Here are the master node hardware requirements.
 
 |             | Minimum   | Recommended |
 |-------------|-----------|-------------|
-| RHEL/CentOS | 7.2, 7.3  | 7.2, 7.3    |
+| RHEL/CentOS | 7.2, 7.3  | 7.2, 7.3, 7.4    |
 | CoreOS      | 1235.9.0  | 1235.9.0    |
 | Nodes       | 1         | 3 or 5   |
 | Processor   | 4 cores   | 4 cores     |
