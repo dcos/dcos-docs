@@ -73,7 +73,7 @@ This topic provides all available configuration parameters. Except where explici
 | [superuser_password_hash](#superuser_password_hash-enterprise-dcos-only) | (Enterprise DC/OS Only) (Required) The hashed superuser password. |
 | [superuser_username](#superuser_username-enterprise-dcos-only)           | (Enterprise DC/OS Only) (Required) The user name of the superuser.|
 | [telemetry_enabled](#telemetry_enabled)                  | Indicates whether to enable sharing of anonymous data for your cluster.  |
-| [zk_super_credentials](#zk-super)            | (Enterprise DC/OS Only) The ZooKeeper superuser credentials.  |
+| [zk_super_credentials](#zk-superuser)            | (Enterprise DC/OS Only) The ZooKeeper superuser credentials.  |
 | [zk_master_credentials](#zk-master)          | (Enterprise DC/OS Only) The ZooKeeper master credentials.  |
 | [zk_agent_credentials](#zk-agent)           | (Enterprise DC/OS Only) The ZooKeeper agent credentials.  |
 
@@ -502,7 +502,8 @@ For more information, see the [examples](/docs/1.10/installing/custom/configurat
 
 **Important:** You should also configure an HTTP proxy for [Docker](https://docs.docker.com/engine/admin/systemd/#/http-proxy).
 
-### <a id="zk-superuser"></a> zk_super_credentials (Enterprise DC/OS Only)
+<a id="zk-superuser"></a> 
+### zk_super_credentials (Enterprise DC/OS Only)
 
 On DC/OS `strict` and `permissive` mode clusters the information stored in ZooKeeper is protected using access control lists (ACLs) so that a malicious user cannot connect to the ZooKeeper Quorum and directly modify service metadata. ACLs specify sets of resource IDs (RIDs) and actions that are associated with those IDs. ZooKeeper supports pluggable authentication schemes and has a few built in schemes: `world`, `auth`, `digest`, `host`, and `ip`. 
 
@@ -519,11 +520,12 @@ To harden clusters, Mesosphere recommends that you change the defaults of all cr
 [zk: localhost:2181(CONNECTED) 2] ls /dcos/secrets
 [core, init, system, bootstrap_user, keys]
 ```
-
-### <a id="zk-master"></a> zk_master_credentials (Enterprise DC/OS Only)
+<a id="zk-master"></a> 
+### zk_master_credentials (Enterprise DC/OS Only)
 
 Credentials used by bootstrapping process to access the credentials of the services that will be running on the DC/OS master nodes.
 
-### <a id="zk-agent"></a> zk_agent_credentials (Enterprise DC/OS Only)
+<a id="zk-agent"></a> 
+### zk_agent_credentials (Enterprise DC/OS Only)
 
 Credentials used by bootstrapping process to access the credentials of the services that will be running on the DC/OS agent nodes.

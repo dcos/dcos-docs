@@ -66,9 +66,9 @@ This topic provides all available configuration parameters. Except where explici
 | [superuser_password_hash](#superuser_password_hash-enterprise-dc-os-only-)            | (Enterprise DC/OS Only) (Required) The hashed superuser password.                                                               |
 | [superuser_username](#superuser_username-enterprise-dc-os-only-)                 | (Enterprise DC/OS Only) (Required) The user name of the superuser.                                                              |
 | [telemetry_enabled](#telemetry_enabled-enterprise-dc-os-only-)                  | Indicates whether to enable sharing of anonymous data for your cluster.                                                                     |
-| [zk_super_credentials](#zk_super_credentials-enterprise-dc-os-only-)               | (Enterprise DC/OS Only) The ZooKeeper superuser credentials.                                                                  |
-| [zk_master_credentials](#zk_master_credentials-enterprise-dc-os-only-)              | (Enterprise DC/OS Only) The ZooKeeper master credentials.                                                                     |
-| [zk_agent_credentials](#zk_agent_credentials-enterprise-dc-os-only-)               | (Enterprise DC/OS Only) The ZooKeeper agent credentials.                                                                      |
+| [zk_super_credentials](#zk-superuser)            | (Enterprise DC/OS Only) The ZooKeeper superuser credentials.  |
+| [zk_master_credentials](#zk-master)          | (Enterprise DC/OS Only) The ZooKeeper master credentials.  |
+| [zk_agent_credentials](#zk-agent)           | (Enterprise DC/OS Only) The ZooKeeper agent credentials. |
 
 ### agent_list
 A YAML nested list (`-`) of IPv4 addresses to your [private agent](/docs/1.9/overview/concepts/#private-agent-node) host names.
@@ -422,4 +422,32 @@ Indicates whether to enable the DC/OS proxy.
     
         **Important:** Wildcards characters (`*`) are not supported. 
 
-**Important:** You should also configure an HTTP proxy for [Docker](https://docs.docker.com/engine/admin/systemd/#/http-proxy). 
+**Important:** You should also configure an HTTP proxy for [Docker](https://docs.docker.com/engine/admin/systemd/#/http-proxy).
+
+<a id="zk-superuser"></a> 
+### zk_super_credentials (Enterprise DC/OS Only)
+
+On DC/OS `strict` and `permissive` mode clusters the information stored in ZooKeeper is protected using access control lists (ACLs) so that a malicious user cannot connect to the ZooKeeper Quorum and directly modify service metadata. ACLs specify sets of resource IDs (RIDs) and actions that are associated with those IDs. ZooKeeper supports pluggable authentication schemes and has a few built in schemes: `world`, `auth`, `digest`, `host`, and `ip`. 
+
+DC/OS ZooKeeper credentials `zk_super_credentials`, `zk_master_credentials`, and `zk_agent_credentials` use `digest` authentication, which requires a `<uid>:<password>` string which is then used as an ID while checking if a client can access a particular resource.
+
+`zk_super_credentials` enables access to ZooKeeper's equivalent of the `root/superuser` account, which has access to all resources regardless of existing ACLs. This credential allows an operator to access all the metadata stored in the ZooKeeper quorum and is used by the DC/OS bootstrap script while initializing the cluster. Default: `'super:secret'`.
+
+To harden clusters, Mesosphere recommends that you change the defaults of all credentials to long, complex values. Once set, you can verify the settings using `/opt/mesosphere/active/exhibitor/usr/zookeeper/bin/zkCli.sh` available on DC/OS master nodes. By default, `zkCli` does not authenticate, so the nodes in the `/dcos` tree will not be accessible. After invoking `addauth digest <zk_super_credentials>` in `zkCli`, all the nodes in ZooKeeper will be accessible, with `zk_master_credentials` and `zk_agent_credentials` providing access to a subset of them. For example:
+
+```powershell
+[zk: localhost:2181(CONNECTED) 0] addauth digest super:secret
+[zk: localhost:2181(CONNECTED) 1] ls /dcos
+[backup, agent, RootCA, secrets, vault, CAChainInclRoot, CAChain, CACertKeyType, ca, master]
+[zk: localhost:2181(CONNECTED) 2] ls /dcos/secrets
+[core, init, system, bootstrap_user, keys]
+```
+<a id="zk-master"></a> 
+### zk_master_credentials (Enterprise DC/OS Only)
+
+Credentials used by bootstrapping process to access the credentials of the services that will be running on the DC/OS master nodes.
+
+<a id="zk-agent"></a> 
+### zk_agent_credentials (Enterprise DC/OS Only)
+
+Credentials used by bootstrapping process to access the credentials of the services that will be running on the DC/OS agent nodes.
