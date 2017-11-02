@@ -47,7 +47,7 @@ Here are the agent node hardware requirements.
 
 |             | Minimum   | Recommended |
 |-------------|-----------|-------------|
-| RHEL/CentOS | 7.2, 7.3  | 7.2, 7.3    |
+| RHEL/CentOS | 7.2, 7.3  | 7.2, 7.3, 7.4    |
 | CoreOS      | 1235.9.0  | 1235.9.0    |
 | Nodes       | 1         | 6 or more   |
 | Processor   | 2 cores   | 2 cores     |
