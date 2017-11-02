@@ -41,7 +41,7 @@ This topic provides all available configuration parameters. Except where explici
 | [dns_forward_zones](#dns_forward_zones)               | A nested list of DNS zones, IP addresses, and ports that configure custom forwarding behavior of DNS queries. A DNS zone is mapped to a set of DNS resolvers. |
 | [dns_search](#dns_search)                             | A space-separated list of domains that are tried when an unqualified domain is entered.  |
 | [master_dns_bindall](#master_dns_bindall)             | Indicates whether the master DNS port is open.  |
-| [mesos_dns_set_truncate_bit](#mesos_dns_set_truncate_bit)   |  Indicates whether to set the truncate bit if the message is too large to fit in the response. |
+| [mesos_dns_set_truncate_bit](#mesos_dns_set_truncate_bit)   |  Indicates whether to set the truncate bit if the response is too large to fit in a single packet. |
 | [resolvers](#resolvers)                               | A YAML nested list (`-`) of DNS resolvers for your DC/OS cluster nodes.|
 | [use_proxy](#use_proxy)                               | Indicates whether to enable the DC/OS proxy. |
 
@@ -396,7 +396,7 @@ Indicates whether the master DNS port is open. An open master DNS port listens p
 
 Indicates whether Mesos-DNS sets the truncate bit if the response is too large to fit in a single packet.  
 
-*  `mesos_dns_set_truncate_bit: 'true'`  Mesos-DNS sets the truncate bit if the response is too large to fit in a single packet and is truncated. This is the default value and is in compliance with RFC7766.
+*  `mesos_dns_set_truncate_bit: 'true'`  Mesos-DNS sets the truncate bit if the response is too large to fit in a single packet and is truncated. This is the default behavior and is in compliance with RFC7766.
 *  `mesos_dns_set_truncate_bit: 'false'`  Mesos-DNS does not set the truncate bit if the response is too large to fit in a single packet. If you know your applications crash when resolving truncated DNS responses over TCP, or for performance reasons you want to avoid receiving the complete set of DNS records in response to your DNS requests, you should set this option to `false` and note that the DNS responses you receive from Mesos-DNS may be missing entries that were silently discarded. This means that truncated DNS responses will appear complete even though they aren't and therefore won't trigger a retry over TCP. This behavior does not conform to RFC7766.
 
 For more information regarding truncated DNS responses and retrying over TCP see [RFC7766 - DNS Transport over TCP - Implementation Requirements](https://tools.ietf.org/html/rfc7766).
