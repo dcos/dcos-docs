@@ -108,25 +108,35 @@ For more information, see the [security documentation](https://docs.mesosphere.c
 
 ### ca_certificate_path (Enterprise DC/OS Only)
 
-Path to a file containing a single X.509 CA certificate in the OpenSSL PEM format. Can be a root CA certificate (“self-signed”) or an intermediate CA certificate (“cross-certificate”). If provided, this is the custom CA certificate. It is used as the signing CA certificate, i.e., the DC/OS CA will use this certificate for signing end-entity certificates (the subject of this certificate will be the issuer for certificates signed by the DC/OS CA). If not provided, the DC/OS cluster generates a unique root CA certificate during the initial bootstrap phase and uses that as the signing CA certificate. The public key associated with the custom CA certificate must be of type RSA.
+Path to a file within the `genconf` directory containing a single X.509 CA certificate in the OpenSSL PEM format. For example: `genconf/CA_cert`.
+
+Can be a _root CA certificate_ ("self-signed") or an _intermediate CA certificate_ ("cross-certificate") signed by some other certificate authority. 
+
+If provided, this is the custom CA certificate. It is used as the signing CA certificate, i.e., the DC/OS CA will use this certificate for signing end-entity certificates (the subject of this certificate will be the issuer for certificates signed by the DC/OS CA). 
+
+If not provided, the DC/OS cluster generates a unique root CA certificate during the initial bootstrap phase and uses that as the signing CA certificate. 
+
+The public key associated with the custom CA certificate must be of type RSA.
 
 
 ### ca_certificate_key_path (Enterprise DC/OS Only)
 
-Path to a file containing the private key corresponding to the custom CA certificate, encoded in the OpenSSL (PKCS#8) PEM format. **Note:** this is highly sensitive data. The configuration processor accesses this file only for configuration validation purposes, and does not copy the data. After successful configuration validation this file needs to be placed out-of-band into the file system of all DC/OS master nodes to the path `/var/lib/dcos/pki/tls/CA/private/custom_ca.key` before most DC/OS systemd units can start up. The file must be readable by the root user, and should have have 0600 permissions set.
+Path to a file within the `genconf` directory containing the private key corresponding to the custom CA certificate, encoded in the OpenSSL (PKCS#8) PEM format. For example: `genconf/CA_cert.key`.
+
+**Note:** this is highly sensitive data. The configuration processor accesses this file only for configuration validation purposes, and does not copy the data. After successful configuration validation this file needs to be placed out-of-band into the file system of all DC/OS master nodes to the path `/var/lib/dcos/pki/tls/CA/private/custom_ca.key` before most DC/OS systemd units can start up. The file must be readable by the root user, and should have have 0600 permissions set.
 
 Required if `ca_certificate_path` is specified.
 
 
 ### ca_certificate_chain_path (Enterprise DC/OS Only)
 
-Path to a file containing the complete CA certification chain required for end-entity certificate verification, in the OpenSSL PEM format.
+Path to a file within the `genconf` directory containing the complete CA certification chain required for end-entity certificate verification, in the OpenSSL PEM format. For example: `genconf/CA_cert_chain.pem`.
 
-Must be left undefined if `ca_certificate_path` points to a root CA certificate.
+Must be left undefined if `ca_certificate_path` points to a _root CA certificate_.
 
-If the custom CA certificate provided using `ca_certificate_path` is an intermediate CA certificate, this needs to contain all CA certificates comprising the complete sequence starting precisely with the CA certificate that was used to sign the custom CA certificate and ending with a root CA certificate (where issuer and subject are equivalent), yielding a gapless certification path. The order is significant and the list must contain at least one certificate.
+Required if `ca_certificate_path` is specified and if the custom CA certificate is an _intermediate CA certificate_. This needs to contain all CA certificates comprising the complete sequence starting precisely with the CA certificate that was used to sign the custom CA certificate and ending with a root CA certificate (where issuer and subject are equivalent), yielding a gapless certification path. The order is significant and the list must contain at least one certificate.
 
-Required if `ca_certificate_path` is specified and if the custom CA certificate is an intermediate CA certificate.
+
 
 ### cluster_docker_credentials
 The dictionary of Docker credentials to pass.
