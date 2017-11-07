@@ -94,7 +94,7 @@ master_list:
 master_discovery: master_http_loadbalancer
 exhibitor_address: <loadbalancer-ip>
 master_dns_bindall: `<true|false>`
-num_master: <num-of-masters>
+num_masters: <num-of-masters>
 # DC/OS only
 oauth_enabled: `<true|false>`  
 public_agent_list:
