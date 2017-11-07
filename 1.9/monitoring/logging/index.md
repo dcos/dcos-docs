@@ -6,9 +6,9 @@ menu_order: 3.4
 
 DC/OS cluster nodes generate logs that contain diagnostic and status information for DC/OS core components and DC/OS services.
 
-## Service, Task, and Node Logs
+## Service, task, and node logs
 
-The logging component provides an HTTP API (`/system/v1/logs/`), which exposes the system logs.
+The logging component provides an HTTP API `/system/v1/logs/` that exposes the system logs.
 
 You can access information about DC/OS scheduler services, like Marathon or Kafka, with the following CLI command:
 
@@ -38,7 +38,7 @@ You can download all the log files for your service from the **Services > Servic
 
 For more information, see the Service and Task Logs [quick start guide](/docs/1.9/monitoring/logging/quickstart/).
 
-## System Logs
+## System logs
 
 DC/OS components use `systemd-journald` to store their logs. To access the DC/OS core component logs, [SSH into a node][5] and run this command to see all logs:
 
@@ -52,20 +52,15 @@ You can view the logs for specific [components](/docs/1.9/overview/architecture/
 journalctl -u dcos-nginx -b
 ```
 
-You can find which components are unhealthy in the DC/OS GUI from the **Nodes** tab.
+You can find which components are unhealthy in the DC/OS GUI **Nodes** tab.
 
 ![system health](/docs/1.9/img/ui-system-health-logging.png)
 
-# Aggregation
+# Log aggregation
 
-Unfortunately, streaming logs from machines in your cluster isn’t always viable. Sometimes, you need the logs stored somewhere else as a history of what’s happened. This is where log aggregation really is required. Check out how to get it setup with some of the most common solutions:
+Streaming logs from machines in your cluster isn’t always viable. Sometimes you need a history of what's happened, which requires a method for storing and aggregating logs. These topics describe some of the most common solutions:
 
-- [ELK](/docs/1.9/monitoring/logging/aggregating/elk/)
-- [Splunk](/docs/1.9/monitoring/logging/aggregating/splunk/)
+- [Log Management with ELK](/docs/1.9/monitoring/logging/aggregating/elk/)
+- [Log Management with Splunk](/docs/1.9/monitoring/logging/aggregating/splunk/)
 
-
-[1]: /docs/1.9/monitoring/logging/quickstart/
-[2]: /docs/1.9/cli/install/
-[3]: /docs/1.9/monitoring/logging/aggregating/elk/
-[4]: /docs/1.9/monitoring/logging/aggregating/splunk/
 [5]: /docs/1.9/administering-clusters/sshcluster/

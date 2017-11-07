@@ -1,6 +1,5 @@
 ---
 post_title: Filtering Logs with ELK
-nav_title: Filtering ELK
 menu_order: 2
 ---
 The file system paths of DC/OS task logs contain information such as the agent ID, framework ID, and executor ID. You can use this information to filter the log output for specific tasks, applications, or agents.
