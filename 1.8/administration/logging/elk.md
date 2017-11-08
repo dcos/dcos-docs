@@ -104,7 +104,7 @@ For each Master node in your DC/OS cluster:
       -u dcos-spartan.service            \
       -u dcos-vault.service              \
       -u dcos-logrotate-master.service  \
-      > /var/log/dcos/dcos.log 2>&1'
+      >> /var/log/dcos/dcos.log 2>&1'
     ExecStartPre=/usr/bin/journalctl --vacuum-size=10M
     
     [Install]
@@ -154,7 +154,7 @@ For each Agent node in your DC/OS cluster:
       -u dcos-link-env.service                 \
       -u dcos-vol-discovery-priv-agent.service \
       -u dcos-logrotate-agent.service          \
-      > /var/log/dcos/dcos.log 2>&1'
+      >> /var/log/dcos/dcos.log 2>&1'
     ExecStartPre=/usr/bin/journalctl --vacuum-size=10M
     
     [Install]
@@ -189,6 +189,11 @@ network.host = [IP address from the interface in your ElasticSearch node connect
     
 Other parameters in the file are beyond the scope of this document. For details, please check the ElasticSearch [documentation][5].
 
+# <a name="all-4"></a>Step 4: All Nodes
+
+You should configure logrotate on all of your nodes to prevent the file /var/log/dcos/dcos.log growing without limit and filling up your disk.
+Your logrotate config should contain 'copytruncate' because otherwise the 'journalctl' pipe remains open and pointing to the same file even after it's been rotated.
+Note: With using 'copytruncate' there is a very small time slice between copying the file and truncating it, so some logging data might be lost - you should balance pros and cons between filling up the disk and losing some lines of logs.
 
 ### Known Issue
 
