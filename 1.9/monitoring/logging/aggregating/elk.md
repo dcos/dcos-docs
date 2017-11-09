@@ -1,20 +1,20 @@
 ---
-post_title: Log Management in DC/OS with ELK
+post_title: Log Management with ELK
 menu_order: 1
 enterprise: 'no'
 ---
 
-You can pipe system and application logs from the nodes in a DC/OS cluster to your existing ElasticSearch, Logstash, and Kibana (ELK) server. This document describes how to store all unfiltered logs directly on ElasticSearch, and then perform filtering and specialized querying on ElasticSearch directly. The Filebeat output from each node is sent directly to a centralized ElasticSearch instance, without using Logstash. If you're interested in using Logstash for log processing or parsing, consult the [Filebeat][2] and [Logstash][8] documentation.
+You can pipe system and application logs from the nodes in a DC/OS cluster to your existing Elasticsearch, Logstash, and Kibana (ELK) server. This document describes how to store all unfiltered logs directly on Elasticsearch, and then perform filtering and specialized querying on Elasticsearch directly. The Filebeat output from each node is sent directly to a centralized Elasticsearch instance, without using Logstash. If you're interested in using Logstash for log processing or parsing, see the [Filebeat][2] and [Logstash][8] documentation.
 
-**Important:** This document does not describe how to set up secure TLS communication between the Filebeat instances and ElasticSearch. For details on how to achieved this, please check the [Filebeat][2] and [ElasticSearch][5] documentation.
+**Important:** This document does not describe how to set up secure TLS communication between the Filebeat instances and Elasticsearch. For details on how to achieved this, see the [Filebeat][2] and [Elasticsearch][5] documentation.
 
 **Prerequisites**
 
 These instructions are based on CentOS 7 and might differ substantially from other Linux distributions.
 
-*   All DC/OS nodes must be able to connect to your ElasticSearch server on the port used for communication between ElasticSearch and Filebeat (9200 by default).
+*   All DC/OS nodes must be able to connect to your Elasticsearch server on the port used for communication between Elasticsearch and Filebeat (9200 by default).
 
-# <a name="all"></a>Step 1: All Nodes
+# <a name="all"></a>Step 1: All nodes
 
 For all nodes in your DC/OS cluster:
 
@@ -36,15 +36,15 @@ For all nodes in your DC/OS cluster:
     sudo mv /etc/filebeat/filebeat.yml /etc/filebeat/filebeat.yml.BAK
     ```
     
-1.  Populate a new `filebeat.yml` configuration file, including an additional input entry for the file `/var/log/dcos/dcos.log`. The additional log file will be used to capture the DC/OS logs in a later step. Remember to substitute the variables `$ELK_HOSTNAME` and `$ELK_PORT` below for the actual values of the host and port where your ElasticSearch is listening on.
+1.  Populate a new `filebeat.yml` configuration file, including an additional input entry for the file `/var/log/dcos/dcos.log`. The additional log file will be used to capture the DC/OS logs in a later step. Remember to substitute the variables `$ELK_HOSTNAME` and `$ELK_PORT` below for the actual values of the host and port where your Elasticsearch is listening on.
 
     ```bash
     sudo tee /etc/filebeat/filebeat.yml <<-EOF 
     filebeat.prospectors:
     - input_type: log
       paths:
-        - /var/lib/mesos/slave/slaves/*/frameworks/*/executors/*/runs/latest/stdout
-        - /var/lib/mesos/slave/slaves/*/frameworks/*/executors/*/runs/latest/stderr
+        - /var/lib/mesos/slave/slaves/*/frameworks/*/executors/*/runs/latest/stdout*
+        - /var/lib/mesos/slave/slaves/*/frameworks/*/executors/*/runs/latest/stderr*
         - /var/log/mesos/*.log
         - /var/log/dcos/dcos.log
     tail_files: true
@@ -53,9 +53,9 @@ For all nodes in your DC/OS cluster:
     EOF
     ```
 
-# <a name="master"></a>Step 2: Master Nodes
+# <a name="master"></a>Step 2: Master nodes
 
-For each Master node in your DC/OS cluster:
+For each master node in your DC/OS cluster:
 
 1.  Create a script that will parse the output of the DC/OS master `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
 
@@ -113,9 +113,9 @@ For each Master node in your DC/OS cluster:
     EOF
     ```
 
-# <a name="agent"></a>Step 2: Agent Nodes
+# <a name="agent"></a>Step 2: Agent nodes
 
-For each Agent node in your DC/OS cluster:
+For each agent node in your DC/OS cluster:
 
 1.  Create a script that will parse the output of the DC/OS agent `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
 
@@ -163,7 +163,7 @@ For each Agent node in your DC/OS cluster:
     EOF
     ```
 
-# <a name="all-3"></a>Step 3: All Nodes
+# <a name="all-3"></a>Step 3: All nodes
 
 1.  For all nodes, start and enable the Filebeat log parsing services created above:
 
@@ -176,28 +176,28 @@ For each Agent node in your DC/OS cluster:
     sudo systemctl enable filebeat
     ```
 
-# <a name="all"></a>Step 3: ELK Node Notes
+# <a name="all"></a>Step 3: ELK node notes
 
 The ELK stack will receive, store, search and display information about the logs parsed by the Filebeat instances configured above for all nodes in the cluster. 
 
-**Important:** This document describes how to directly stream from Filebeat into ElasticSearch. Logstash is not used in this architecture. If you're interested in filtering, parsing and grok'ing the logs with an intermediate Logstash stage, please check the Logstash [documentation][8].
+**Important:** This document describes how to directly stream from Filebeat into Elasticsearch. Logstash is not used in this architecture. If you're interested in filtering, parsing and grok'ing the logs with an intermediate Logstash stage, see the Logstash [documentation][8].
 
-You must modify the default parameter values to prepare ElasticSearch to receive information. For example, edit the ElasticSearch configuration file (typically `/etc/elasticsearch/elasticsearch.yml`):
+You must modify the default parameter values to prepare Elasticsearch to receive information. For example, edit the Elasticsearch configuration file (typically `/etc/elasticsearch/elasticsearch.yml`):
 
 ```bash
-network.host = [IP address from the interface in your ElasticSearch node connecting to the Filebeat instances]
+network.host = [IP address from the interface in your Elasticsearch node connecting to the Filebeat instances]
 ```
     
-Other parameters in the file are beyond the scope of this document. For details, please check the ElasticSearch [documentation][5].
+Other parameters in the file are beyond the scope of this document. For details, see the Elasticsearch [documentation][5].
 
 
-### Known Issue
+### Known issue
 
 The agent node Filebeat configuration expects tasks to write logs to `stdout` and `stderr`. Some DC/OS services, including Cassandra and Kafka, do not write logs to `stdout` and `stderr`. If you want to log these services, you must customize your agent node Filebeat configuration.
 
-# What's Next
+# What's next
 
-For details on how to filter your logs with ELK, see [Filtering DC/OS logs with ELK][3].
+For details on how to filter your logs with ELK, see [Filtering logs with ELK][3].
 
  [2]: https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html
  [3]: ../filter-elk/
