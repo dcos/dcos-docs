@@ -123,7 +123,7 @@ In the following example, you deploy a Docker app to DC/OS using the Marathon AP
           }
         ],
         "type": "MESOS",
-        "docker": { "image": "python:3" },
+        "docker": { "image": "python:3" }
       },
       "cpus": 0.5,
       "mem": 32,
@@ -146,7 +146,14 @@ In the following example, you deploy a Docker app to DC/OS using the Marathon AP
           }
         ],
         "type": "DOCKER",
-        "docker": { "image": "python:3" }
+        "docker": { 
+          "image": "python:3" },
+          "parameters": [
+            {
+              "key": "log-driver",
+              "value": "none"
+            } 
+          ]
       },
       "cpus": 0.5,
       "instances": 1,
