@@ -92,7 +92,7 @@ Here are the agent node hardware requirements.
     ```bash
     sudo systemctl stop firewalld && sudo systemctl disable firewalld
     ```
-*   DC/OS is installed to `/opt/mesosphere`. Make sure that `/opt/mesosphere` exists on a partition that is not on an LVM Logical Volume or shared storage.
+*   DC/OS is installed to `/opt/mesosphere`. `/opt/mesosphere` must be on the same mountpoint as `/`.  This is required because DC/OS installs systemd unit files under `/opt/mesosphere`. Systemd units all must be available to the initial RAM file system [initramfs](https://en.wikipedia.org/wiki/Initramfs).
 
 ### Port and Protocol Configuration
 
