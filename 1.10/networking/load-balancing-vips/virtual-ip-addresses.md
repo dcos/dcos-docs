@@ -72,7 +72,7 @@ Follow these steps to view the VIP for Kafka.
 1.  Run this command: 
 
     ```bash
-    dcos kafka connection
+    dcos kafka endpoints broker
     ```
     
     The output should resemble:
