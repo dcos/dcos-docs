@@ -6,7 +6,7 @@ menu_order: 3.4
 
 DC/OS cluster nodes generate logs that contain diagnostic and status information for DC/OS core components and DC/OS services.
 
-## Service, Task, and Node Logs
+## Service, task, and node logs
 
 The logging component provides an HTTP API (`/system/v1/logs/`), which exposes the system logs.
 
@@ -38,7 +38,7 @@ You can download all the log files for your service from the **Services > Servic
 
 For more information, see the Service and Task Logs [quick start guide](/docs/1.10/monitoring/logging/quickstart/).
 
-## System Logs
+## System logs
 
 DC/OS components use `systemd-journald` to store their logs. To access the DC/OS core component logs, [SSH into a node][5] and run this command to see all logs:
 
@@ -55,6 +55,21 @@ journalctl -u dcos-nginx -b
 You can find which components are unhealthy in the DC/OS GUI from the **Nodes** tab.
 
 ![system health](/docs/1.10/img/ui-system-health-logging.png)
+
+# Configuring task log rotation
+
+By default task logs can reach a maximum size of 2 MB. When a log file reaches its specified maximum size, it is renamed by appending `.<N>` to the end of the filename, where `<N>` increments each rotation. By default older log files are deleted when there are 9 files. 
+
+These rollover settings may not insufficient for apps that have high volume logs. You can configure the log size and number of retained files using the following environment variables:
+
+```
+CONTAINER_LOGGER_LOGROTATE_MAX_STDOUT_SIZE
+CONTAINER_LOGGER_LOGROTATE_MAX_STDERR_SIZE
+CONTAINER_LOGGER_LOGROTATE_STDOUT_OPTIONS
+CONTAINER_LOGGER_LOGROTATE_STDERR_OPTIONS
+```
+
+**Note:** Changing the log rotate settings is unsupported and changes are not guaranteed to be preserved on upgrade.
 
 # Aggregation
 
