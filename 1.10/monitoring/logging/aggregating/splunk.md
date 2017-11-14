@@ -2,22 +2,22 @@
 post_title: Log Management with Splunk
 menu_order: 3
 ---
-You can pipe system and application logs from a DC/OS cluster to your existing Splunk server.
+You can pipe system and application logs from a DC/OS cluster to your existing Splunk server. This document describes how to configure a Splunk universal forwarder to send output from each node to a Splunk installation. This document does not explain how to setup and configure a Splunk server.
 
-These instructions are based on CoreOS and might differ substantially from other Linux distributions. This document does not explain how to set up and configure a Splunk server.
+These instructions are based on CoreOS and might differ substantially from other Linux distributions. 
 
 **Prerequisites**
 
 *   An existing Splunk installation that can ingest data for indexing.
-*   All DC/OS nodes must be able to connect to your Splunk indexer via HTTP or HTTPS. (See Splunk's documentation for instructions on enabling HTTPS.)
+*   All DC/OS nodes must be able to connect to your Splunk indexer via HTTP or HTTPS.
 *   The `ulimit` of open files must be set to `unlimited` for your user with root access.
 
 # Step 1: All nodes
 
 For all nodes in your DC/OS cluster:
 
-1.  Install Splunk's [universal forwarder][2]. Splunk provides packages and installation instructions for most platforms.
-2.  Make sure the forwarder has the credentials it needs to send data to the indexer. See Splunk's documentation for details.
+1.  Install Splunk's [universal forwarder][2].
+2.  Make sure the forwarder has the credentials it needs to send data to the indexer.
 3.  Start the forwarder.
 
 # Step 2: Master nodes
