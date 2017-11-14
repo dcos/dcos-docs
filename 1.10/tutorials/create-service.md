@@ -19,11 +19,11 @@ This tutorial shows how to create and deploy a simple one-command service and a 
    1. Click **MORE SETTINGS** and choose your container runtime.
       
       -  **DOCKER ENGINE** Use this option if you require specific features of the Docker package. If you select this option, you must specify a Docker container image in the **CONTAINER IMAGE** field.
-      -  **MESOS RUNTIME**  Universal Container Runtime (UCR) using native Mesos engine. Supports Docker file format, multiple containers (pods), and GPU resources. If you select this option, you can optionally specify a Docker container image in the **CONTAINER IMAGE** field.
+      -  **UNIVERSAL CONTAINER RUNTIME (UCR)**  Universal Container Runtime (UCR) using native Mesos engine. Supports Docker file format, multiple containers (pods), and GPU resources. If you select this option, you can optionally specify a Docker container image in the **CONTAINER IMAGE** field.
       
       For more information, see [Using Containerizers](/docs/1.10/deploying-services/containerizers/).
       
-1. Click **REVIEW & RUN** and then **RUN SERVICE**.
+1. Click **REVIEW & RUN** and **RUN SERVICE**.
 
     ![Create a service in the DC/OS UI](/docs/1.10/img/deploy-svs-ui.png)
 

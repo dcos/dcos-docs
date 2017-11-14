@@ -32,6 +32,9 @@ Take a snapshot of ZooKeeper prior to upgrading. Marathon supports rollbacks, bu
 - The full DC/OS version string that you are upgrading from.
   - In 1.8 this can be found in the lower left corner of the DC/OS UI when screen is maximized.
   - In 1.9 this can be found under the Cluster menu.
+- Verify that all your masters are in a healthy state: 
+   - Check the Exhibitor UI to confirm that all masters have joined the quorum successfully (the status indicator will show green). The Exhibitor UI is available at `http://<dcos_master>:8181/`.
+   - Verify that `curl http://<dcos_master_private_ip>:5050/metrics/snapshot` has the metric `registrar/log/recovered` with a value of `1` for each master.
 
 ## Supported upgrade paths
 

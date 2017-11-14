@@ -17,7 +17,7 @@ The [Docker Engine](https://www.docker.com/products/docker-engine) launches Dock
 
 1. Specify the Docker containerizer. Click **MORE SETTINGS**. In the **Container Runtime** section, choose the **DOCKER ENGINE** radio button.
 
-1. Click **REVIEW & RUN**.
+1. Click **REVIEW & RUN** and **RUN SERVICE**.
 
 # Provision a container with the Docker Engine from the DC/OS CLI
 

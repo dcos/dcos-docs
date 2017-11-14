@@ -38,7 +38,6 @@ These tutorials demonstrate how to install and use DC/OS services. The tutorials
             <li><a href="https://github.com/dcos/examples/tree/master/arangodb/1.9">ArangoDB</a></li>
             </ul></td>
     <td><ul>
-        <li><a href="https://github.com/dcos/examples/tree/master/jenkins/1.9">Jenkins</a></li>
         <li><a href="https://github.com/dcos/examples/tree/master/registry/1.9">Private Docker registry</a></li>
         <li><a href="https://github.com/dcos/examples/tree/master/chronos/1.9">Chronos</a></li>
         <li><a href="https://github.com/dcos/examples/tree/master/nexus/1.9">Nexus 3</a></li>

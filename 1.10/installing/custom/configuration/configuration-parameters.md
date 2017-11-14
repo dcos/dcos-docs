@@ -10,11 +10,12 @@ This topic provides all available configuration parameters. Except where explici
 | Parameter                              | Description                                                                                                                                               |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [agent_list](#agent_list)                                              | A YAML nested list (`-`) of IPv4 addresses to your [private agent](/docs/1.10/overview/concepts/#private-agent-node) host names. |
-| [aws_template_storage_bucket](#aws_template_storage_bucket)            | The name of your S3 bucket. |
-| [aws_template_storage_bucket_path](#aws_template_storage_bucket_path)  | The S3 bucket storage path. |
-| [aws_template_upload](#aws_template_upload)                            | Indicates whether to automatically upload the customized advanced templates to your S3 bucket. |
-| [aws_template_storage_access_key_id](#aws_template_storage_access_key_id)         | The AWS [access key ID](http://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). |
-| [aws_template_storage_secret_access_key](#aws_template_storage_secret_access_key) | The AWS [secret access key](http://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). |
+| aws_template_storage_access_key_id         | The [access key ID](http://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) of the account owning the AWS S3 bucket. |
+| aws_template_storage_bucket                | The name of an S3 bucket to contain [customized advanced AWS templates](/1.10/installing/cloud/aws/advanced/#create-your-templates). |
+| aws_template_storage_bucket_path           | The path to a location within the S3 bucket to store template artifacts.
+| aws_template_storage_region_name           | The region containing the S3 bucket.  |
+| aws_template_storage_secret_access_key     | The [secret access key](http://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) of the account owning the AWS S3 bucket. |
+| aws_template_upload                        | Whether to upload the customized advanced AWS templates to an S3 bucket. |
 | [bootstrap_url](#bootstrap_url)                                       | (Required) The URI path for the DC/OS installer to store the customized DC/OS build files. |
 | [cluster_docker_credentials](#cluster_docker_credentials)             | The dictionary of Docker credentials to pass. |
 | [cluster_docker_registry_url](#cluster_docker_registry_url)           | The custom URL that Mesos uses to pull Docker images from. |
@@ -26,6 +27,7 @@ This topic provides all available configuration parameters. Except where explici
 | [gpus_are_scarce](#gpus_are_scarce)                                   | Indicates whether to treat GPUs as a scarce resource in the cluster. |
 | [ip_detect_public_filename](#ip_detect_public_filename)               | The IP detect file to use in your cluster.  |
 | [master_discovery](#master_discovery)                                 | (Required) The Mesos master discovery method.         |
+| [mesos_container_log_sink](#mesos_container_log_sink)                 | The log manager for containers (tasks). |
 | [platform](#platform)                                                 | The infrastructure platform. |
 | [public_agent_list](#public_agent_list)                               | A YAML nested list (`-`) of IPv4 addresses to your [public agent](/docs/1.10/overview/concepts/#public-agent-node) host names.  |
 | [rexray_config](#rexray_config)                                       | The [REX-Ray](https://rexray.readthedocs.io/en/v0.9.0/user-guide/config/) configuration method for enabling external persistent volumes in Marathon. You cannot specify both `rexray_config` and `rexray_config_preset`.|
@@ -40,6 +42,7 @@ This topic provides all available configuration parameters. Except where explici
 | [dns_forward_zones](#dns_forward_zones)               | A nested list of DNS zones, IP addresses, and ports that configure custom forwarding behavior of DNS queries. A DNS zone is mapped to a set of DNS resolvers. |
 | [dns_search](#dns_search)                             | A space-separated list of domains that are tried when an unqualified domain is entered.  |
 | [master_dns_bindall](#master_dns_bindall)             | Indicates whether the master DNS port is open.  |
+| [mesos_dns_set_truncate_bit](#mesos_dns_set_truncate_bit)   |  Indicates whether to set the truncate bit if the response is too large to fit in a single packet. |
 | [resolvers](#resolvers)                               | A YAML nested list (`-`) of DNS resolvers for your DC/OS cluster nodes.|
 | [use_proxy](#use_proxy)                               | Indicates whether to enable the DC/OS proxy. |
 
@@ -252,19 +255,19 @@ A nested list of DNS zones, IP addresses, and ports that configure custom forwar
 
 A sample definition is as follows:
 
- ```
- dns_forward_zones:
- - - "a.contoso.com"
-   - - - "1.1.1.1"
-       - 53
-     - - "2.2.2.2"
-       - 53
- - - "b.contoso.com"
-   - - - "3.3.3.3"
-       - 53
-     - - "4.4.4.4"
-       - 53
- ```
+```
+dns_forward_zones:
+- - "a.contoso.com"
+ - - - "1.1.1.1"
+     - 53
+   - - "2.2.2.2"
+     - 53
+- - "b.contoso.com"
+ - - - "3.3.3.3"
+     - 53
+   - - "4.4.4.4"
+     - 53
+```
 
 In the above example, a DNS query to `myapp.a.contoso.com` will be directed to `1.1.1.1:53` or `2.2.2.2:53`. Likewise, a DNS query to `myapp.b.contoso.com` will be directed to `3.3.3.3:53` or `4.4.4.4:53`.
 
@@ -389,6 +392,26 @@ Indicates whether the master DNS port is open. An open master DNS port listens p
 
 *  `master_dns_bindall: 'true'` The master DNS port is open. This is the default value.
 *  `master_dns_bindall: 'false'` The master DNS port is closed.
+
+
+### mesos_container_log_sink
+
+The log manager for containers (tasks). The options are:
+
+* `'journald'` - send task logs only to journald.
+* `'logrotate'` - send task logs only to the file system (i.e. a stdout/err file).
+* `'journald+logrotate'` - Send logs to both journald and the file system.
+
+The default is `logrotate`. Due to performance issues, `journald` is not recommended. For details, see [Logging API](/1.10/monitoring/logging/logging-api/#compatibility).
+
+### mesos_dns_set_truncate_bit
+
+Indicates whether Mesos-DNS sets the truncate bit if the response is too large to fit in a single packet.  
+
+*  `mesos_dns_set_truncate_bit: 'true'`  Mesos-DNS sets the truncate bit if the response is too large to fit in a single packet and is truncated. This is the default behavior and is in compliance with RFC7766.
+*  `mesos_dns_set_truncate_bit: 'false'`  Mesos-DNS does not set the truncate bit if the response is too large to fit in a single packet. If you know your applications crash when resolving truncated DNS responses over TCP, or for performance reasons you want to avoid receiving the complete set of DNS records in response to your DNS requests, you should set this option to `false` and note that the DNS responses you receive from Mesos-DNS may be missing entries that were silently discarded. This means that truncated DNS responses will appear complete even though they aren't and therefore won't trigger a retry over TCP. This behavior does not conform to RFC7766.
+
+For more information regarding truncated DNS responses and retrying over TCP see [RFC7766 - DNS Transport over TCP - Implementation Requirements](https://tools.ietf.org/html/rfc7766).
 
 ### mesos_max_completed_tasks_per_framework
 The number of completed tasks for each framework that the Mesos master will retain in memory. In clusters with a large number of long-running frameworks, retaining too many completed tasks can cause memory issues on the master. If this parameter is not specified, the default Mesos value of 1000 is used.

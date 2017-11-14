@@ -57,7 +57,7 @@ For all nodes in your DC/OS cluster:
 
 For each Master node in your DC/OS cluster:
 
-1.  Create a script that will parse the output of the DC/OS master `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
+1.  Create a script that will parse the output of the DC/OS master `journalctl` logs and funnel them all to `/var/log/dcos/dcos.log`.
 
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
@@ -72,8 +72,8 @@ For each Master node in your DC/OS cluster:
     Restart=always
     RestartSec=5
     ExecStart=/bin/sh -c '/usr/bin/journalctl --no-tail -f \
-      -u dcos-diagnostics.service \
-      -u dcos-diagnostics.socket \
+      -u dcos-diagnostics.service        \
+      -u dcos-diagnostics.socket         \
       -u dcos-adminrouter-reload.service \
       -u dcos-adminrouter-reload.timer   \
       -u dcos-adminrouter.service        \
@@ -104,7 +104,7 @@ For each Master node in your DC/OS cluster:
       -u dcos-spartan-watchdog.timer     \
       -u dcos-spartan.service            \
       -u dcos-vault.service              \
-      -u dcos-logrotate-master.service  \
+      -u dcos-logrotate-master.service   \
       > /var/log/dcos/dcos.log 2>&1'
     ExecStartPre=/usr/bin/journalctl --vacuum-size=10M
 
@@ -117,7 +117,7 @@ For each Master node in your DC/OS cluster:
 
 For each Agent node in your DC/OS cluster:
 
-1.  Create a script that will parse the output of the DC/OS agent `journalctl` logs and funnel them all to `/var/log/dcos/dcos/dcos.log`.
+1.  Create a script that will parse the output of the DC/OS agent `journalctl` logs and funnel them all to `/var/log/dcos/dcos.log`.
 
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
@@ -132,9 +132,9 @@ For each Agent node in your DC/OS cluster:
     Restart=always
     RestartSec=5
     ExecStart=/bin/sh -c '/usr/bin/journalctl --no-tail -f      \
-      -u dcos-diagnostics.service                      \
+      -u dcos-diagnostics.service              \
       -u dcos-logrotate-agent.timer            \
-      -u dcos-diagnostics.socket                       \
+      -u dcos-diagnostics.socket               \
       -u dcos-mesos-slave.service              \
       -u dcos-adminrouter-agent.service        \
       -u dcos-minuteman.service                \

@@ -25,39 +25,46 @@ For all nodes in your DC/OS cluster:
 
 For each Master node in your DC/OS cluster:
 
-1.  Create a script `$SPLUNK_HOME/bin/scripts/journald-master.sh` that will obtain the Mesos master logs from `journald`:
+1.  Create a script `$SPLUNK_HOME/bin/scripts/journald-master.sh` that will obtain the Mesos master logs from `journald`.
+
+      **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
         #!/bin/sh
 
-        exec journalctl --since=now -f          \
-            -u dcos-diagnostics.service                 \
-            -u dcos-logrotate-master.timer      \
-            -u dcos-adminrouter-reload.service  \
-            -u dcos-marathon.service            \
-            -u dcos-adminrouter-reload.timer    \
-            -u dcos-mesos-dns.service           \
-            -u dcos-adminrouter.service         \
-            -u dcos-mesos-master.service        \
-            -u dcos-cfn-signal.service          \
-            -u dcos-metronome.service           \
-            -u dcos-cosmos.service              \
-            -u dcos-minuteman.service           \
-            -u dcos-download.service            \
-            -u dcos-navstar.service             \
-            -u dcos-epmd.service                \
-            -u dcos-oauth.service               \
-            -u dcos-exhibitor.service           \
-            -u dcos-setup.service               \
-            -u dcos-gen-resolvconf.service      \
-            -u dcos-signal.service              \
-            -u dcos-gen-resolvconf.timer        \
-            -u dcos-signal.timer                \
-            -u dcos-history.service             \
-            -u dcos-spartan-watchdog.service    \
-            -u dcos-link-env.service            \
-            -u dcos-spartan-watchdog.timer      \
-            -u dcos-logrotate-master.service    \
-            -u dcos-spartan.service
+        exec journalctl --since=now -f     \
+        -u dcos-diagnostics.service        \
+        -u dcos-diagnostics.socket         \
+        -u dcos-adminrouter-reload.service \
+        -u dcos-adminrouter-reload.timer   \
+        -u dcos-adminrouter.service        \
+        -u dcos-bouncer.service            \
+        -u dcos-ca.service                 \
+        -u dcos-cfn-signal.service         \
+        -u dcos-cosmos.service             \
+        -u dcos-download.service           \
+        -u dcos-epmd.service               \
+        -u dcos-exhibitor.service          \
+        -u dcos-gen-resolvconf.service     \
+        -u dcos-gen-resolvconf.timer       \
+        -u dcos-history.service            \
+        -u dcos-link-env.service           \
+        -u dcos-logrotate-master.timer     \
+        -u dcos-marathon.service           \
+        -u dcos-mesos-dns.service          \
+        -u dcos-mesos-master.service       \
+        -u dcos-metronome.service          \
+        -u dcos-minuteman.service          \
+        -u dcos-navstar.service            \
+        -u dcos-networking_api.service     \
+        -u dcos-secrets.service            \
+        -u dcos-setup.service              \
+        -u dcos-signal.service             \
+        -u dcos-signal.timer               \
+        -u dcos-spartan-watchdog.service   \
+        -u dcos-spartan-watchdog.timer     \
+        -u dcos-spartan.service            \
+        -u dcos-vault.service              \
+        -u dcos-logrotate-master.service
 
 2.  Make the script executable:
 
@@ -73,21 +80,36 @@ For each Master node in your DC/OS cluster:
 
 For each agent node in your DC/OS cluster:
 
-1.  Create a script `$SPLUNK_HOME/bin/scripts/journald-agent.sh` that will obtain the Mesos agent logs from `journald`:
+1.  Create a script `$SPLUNK_HOME/bin/scripts/journald-agent.sh` that will obtain the Mesos agent logs from `journald`.
+    
+    **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
         #!/bin/sh
 
-            journalctl --since="now" -f                 \
-                -u dcos-ddt.service                     \
-                -u dcos-epmd.service                    \
-                -u dcos-gen-resolvconf.service          \
-                -u dcos-logrotate.service               \
-                -u dcos-mesos-slave.service             \
-                -u dcos-mesos-slave-public.service      \
-                -u dcos-minuteman.service               \
-                -u dcos-spartan.service                 \
-                -u dcos-spartan-watchdog.service        \
-                -u dcos-vol-discovery-priv-agent.service
+            journalctl --since="now" -f              \
+            -u dcos-diagnostics.service              \
+            -u dcos-logrotate-agent.timer            \
+            -u dcos-diagnostics.socket               \
+            -u dcos-mesos-slave.service              \
+            -u dcos-adminrouter-agent.service        \
+            -u dcos-minuteman.service                \
+            -u dcos-adminrouter-reload.service       \
+            -u dcos-navstar.service                  \
+            -u dcos-adminrouter-reload.timer         \
+            -u dcos-rexray.service                   \
+            -u dcos-cfn-signal.service               \
+            -u dcos-setup.service                    \
+            -u dcos-download.service                 \
+            -u dcos-signal.timer                     \
+            -u dcos-epmd.service                     \
+            -u dcos-spartan-watchdog.service         \
+            -u dcos-gen-resolvconf.service           \
+            -u dcos-spartan-watchdog.timer           \
+            -u dcos-gen-resolvconf.timer             \
+            -u dcos-spartan.service                  \
+            -u dcos-link-env.service                 \
+            -u dcos-vol-discovery-priv-agent.service \
+            -u dcos-logrotate-agent.service
 
 2.  Make the script executable:
 

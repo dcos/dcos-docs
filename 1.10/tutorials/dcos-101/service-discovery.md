@@ -4,11 +4,13 @@ nav_title: Service Discovery
 menu_order: 4
 ---
 
+Welcome to part 4 of the DC/OS 101 Tutorial
+
+<table class="table" bgcolor="#FAFAFA"> <tr> <td align=justify style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;">**Important:** Mesosphere does not support this tutorial, associated scripts, or commands, which are provided without warranty of any kind. The purpose of this tutorial is purely to demonstrate capabilities, and it may not be suited for use in a production environment. Before using a similar solution in your environment, you should adapt, validate, and test.</td> </tr> </table>
+
 # Prerequisites
 * A [running DC/OS cluster](/docs/1.10/tutorials/dcos-101/cli/) with [the DC/OS CLI installed](/docs/1.10/tutorials/dcos-101/cli/).
 * [app1](/docs/1.10/tutorials/dcos-101/app1/) deployed and running in your cluster.
-
-<table class="table" bgcolor="#FAFAFA"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Important:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided without warranty of any kind. The purpose of this tutorial is to demonstrate capabilities, and may not be suited for use in a production environment. Before using a similar solution in your environment, you must adapt, validate, and test.</td> </tr> </table>
 
 # Objective
 Your [app](https://raw.githubusercontent.com/joerg84/dcos-101/master/app1/app1.py) in the previous part of this tutorial used `redis.marathon.l4lb.thisdcos.directory` as the address for connecting to Redis, with port 6379. As Redis might be running on any agent in the cluster, and potentially on different ports, how does this address resolve to the actual running Redis instance?

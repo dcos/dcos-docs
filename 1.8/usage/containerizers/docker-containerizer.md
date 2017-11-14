@@ -3,7 +3,7 @@ post_title: Docker Containerizer
 menu_order: 10
 ---
 
-Use the Docker containerizer if you need specific features of the Docker package. Refer to the [features matrix](/docs/1.8/usage/containerizers/) to see if the Docker containerizer is the correct choice for your task.
+Use the Docker containerizer if you need specific features of the Docker package.
 
 To specify the Docker containerizer, add the following parameter to your Marathon application definition:
 

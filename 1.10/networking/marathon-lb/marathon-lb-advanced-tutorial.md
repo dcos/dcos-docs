@@ -20,7 +20,7 @@ In this tutorial, Marathon-LB is used as an internal and external load balancer.
 
 
 ## Deploy an internal load balancer with Marathon-LB
-Set up your internal load balancer. To do this, we must first specify some configuration options for the Marathon-LB package. 
+Set up your internal load balancer. To do this, we must first specify some configuration options for the Marathon-LB package.
 
 1.  Create a file called `marathon-lb-internal.json` with the following contents:
 
@@ -34,20 +34,20 @@ Set up your internal load balancer. To do this, we must first specify some confi
       }
     }
     ```
-    
+
     In this options file, we’re changing the name of the app instance and the name of the HAProxy group. The options file also disables the HTTP and HTTPS forwarding on ports 80 and 443 because it is not needed.
 
 1.  [Install](/docs/1.10/networking/marathon-lb/usage/) the internal Marathon-LB instance with the custom options specified.
 
-    There are now two Marathon-LB load balancers: 
-    
-    - Internal (`marathon-lb-internal`) 
-    - External (`marathon-lb`) 
+    There are now two Marathon-LB load balancers:
 
-## Deploy an external facing NGINX app    
-    
+    - Internal (`marathon-lb-internal`)
+    - External (`marathon-lb`)
+
+## Deploy an external facing NGINX app
+
 1.  Launch an external NGINX app on DC/OS.
- 
+
     1.  Copy the JSON below into a file and name it `nginx-external.json`.
 
         ```json
@@ -81,7 +81,7 @@ Set up your internal load balancer. To do this, we must first specify some confi
           }
         }
         ```
-        
+
         The application definition includes the `"HAPROXY_GROUP":"external"` label which instructs Marathon-LB to expose the application. The external Marathon-LB (`marathon-lb`) was deployed with the `--group` parameter set to `external`, which is the default.
 
     1.  Deploy the external NGINX app on DC/OS using this command:
@@ -95,24 +95,26 @@ Set up your internal load balancer. To do this, we must first specify some confi
 4.  Launch an internal NGINX app on DC/OS.
 
     1.  Copy the JSON below into a file and name it `nginx-internal.json`.
-    
+
         ```json
         {
           "id": "nginx-internal",
+          "networks": [
+            { "mode": "container/bridge" }
+          ],
           "container": {
             "type": "DOCKER",
             "docker": {
               "image": "nginx:1.7.7",
-              "network": "BRIDGE",
-              "portMappings": [
-                {
-                  "hostPort": 0,
-                  "containerPort": 80,
-                  "servicePort": 10001
-                }
-              ],
               "forcePullImage": true
-            }
+            },
+            "portMappings": [
+              {
+                "hostPort": 0,
+                "containerPort": 80,
+                "servicePort": 10001
+              }
+            ]
           },
           "instances": 1,
           "cpus": 0.1,
@@ -135,13 +137,13 @@ Set up your internal load balancer. To do this, we must first specify some confi
         ```
 
         Note that the app definition specifies the `servicePort` parameter. This parameter exposes this service on Marathon-LB. By default, port 10000 through to 10100 are reserved for Marathon-LB services, so you should begin numbering your service ports from 10000.
-        
+
     1.  Deploy the internal NGINX app on DC/OS using this command:
-    
+
         ```bash
         dcos marathon app add nginx-internal.json
         ```
-        
+
 ## Deploy an external and internal facing NGINX app
 
 4.  Launch an NGINX everywhere app on DC/OS.
@@ -151,16 +153,18 @@ Set up your internal load balancer. To do this, we must first specify some confi
         ```json
         {
           "id": "nginx-everywhere",
+          "networks": [
+            { "mode": "container/bridge" }
+          ],
           "container": {
             "type": "DOCKER",
             "docker": {
               "image": "nginx:1.7.7",
-              "network": "BRIDGE",
-              "portMappings": [
-                { "hostPort": 0, "containerPort": 80, "servicePort": 10002 }
-              ],
               "forcePullImage":true
-            }
+            },
+            "portMappings": [
+              { "hostPort": 0, "containerPort": 80, "servicePort": 10002 }
+            ]
           },
           "instances": 1,
           "cpus": 0.1,
@@ -181,13 +185,13 @@ Set up your internal load balancer. To do this, we must first specify some confi
         ```
 
         Note the `servicePort` is unique and does not overlap with the other NGINX instances. Service ports can be defined either by using port mappings (as in the examples above), or with the `ports` parameter in the Marathon app definition.
-        
+
     1.  Deploy the NGINX everywhere app on DC/OS using this command:
-            
+
         ```bash
         dcos marathon app add nginx-everywhere.json
         ```
-        
+
 ## Confirm that your apps are deployed and accessible from within cluster
 
 1.  Test the configuration by [SSHing][4] into one of the instances in the cluster (such as a master), and curl the endpoints:
@@ -213,14 +217,14 @@ An important feature of Marathon-LB is support for virtual hosts. This allows yo
 
 To demonstrate the vhost feature:
 
-1.  Find your [public agent IP](/docs/1.10/administering-clusters/locate-public-agent/). 
+1.  Find your [public agent IP](/docs/1.10/administering-clusters/locate-public-agent/).
 
 1.  Modify the external nginx app (`nginx-external.json`) to point to your public agent DNS name. You can modify your app by using the DC/OS CLI or GUI.
 
-    **DC/OS CLI** 
-        
+    **DC/OS CLI**
+
     1.  Add the `HAPROXY_0_VHOST` label to your local `nginx-external.json` file. In this example, the public DNS name is `brenden-j-publicsl-1ltlkzeh6b2g6-1145355943.us-west-2.elb.amazonaws.com`.
-    
+
         ```json
         ...
           "labels":{
@@ -230,43 +234,43 @@ To demonstrate the vhost feature:
         }
         ```
         **Important:** Do not include the leading `http://`trailing slash (`/`) in your public DNS name.
-    
+
     1.  Run this command to replace the contents of the deployed `nginx-external.json` with your modified local copy:
-   
+
         ```bash
         cat nginx-external.json | dcos marathon app update nginx-external
         ```
-   
+
         You should see output similar to this:
-   
+
         ```bash
         Created deployment 5f3e06ff-e077-48ee-afc0-745f167bc105
         ```
-        
+
     1.  Deploy the modified NGINX external app on DC/OS using this command:
-    
+
         ```bash
         dcos marathon app add nginx-external.json
         ```
-        
+
     **DC/OS GUI**
     
-    1.  Navigate to the **Services > Services > nginx-external** service and click edit.
+    1.  Navigate to the **Services > Services > nginx-external** service, click the vertical ellipsis at the far right, and select **Edit**.
  
     1.  Select **Environment > ADD LABEL**.
-    
+
     1.  Enter `HAPROXY_0_VHOST` for **KEY** and specify your public agent DNS name for **VALUE**.
-    
+
         ![Update app](/docs/1.10/img/nginx-external-gui.png)
-        
+
         **Important:** Do not include the leading `http://`trailing slash (`/`) in your public DNS name.
         
-    1.  Select **Deploy**.
+    1.  Select **REVIEW & RUN** and **RUN SERVICE**.
     
     The label `HAPROXY_0_VHOST`, instructs Marathon-LB to expose NGINX on the external load balancer with a virtual host. The `0` in the label key corresponds to the servicePort index, beginning from 0. 
 
     If you had multiple servicePort definitions, you would iterate them as 0, 1, 2, and so on. Note that if you _do_ specify a vhost, you aren't required to provide a service port, because Marathon will assign one by default.
-    
+
 
 1.  Navigate to the public agent in your browser and you should see the following:
 

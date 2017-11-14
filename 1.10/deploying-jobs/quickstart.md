@@ -1,5 +1,5 @@
 ---
-post_title: Quick Start
+post_title: Creating Jobs
 feature_maturity: preview
 menu_order: 10
 ---
@@ -36,18 +36,21 @@ Check the **Run on a Schedule** to reveal the following fields.
 ### **Labels**
 **Label Name** and **Label Value** - Attach metadata to your jobs so you can filter them. [Learn more about labels](/docs/1.10/tutorials/task-labels/).
 
+## Job Groups
+You can add a job to a an existing job group or create one when you create the job. Use dots in your job ID to nest the job in a group. For instance, if you enter job ID `marketing.myjob`, `myjob` will be created in the `marketing` group. In DC/OS Enterprise, you can [use job groups](https://docs.mesosphere.com/1.10/deploying-jobs/job-groups) to implement fine-grained user access.
+
 ## Modify, View, or Remove a Job
 
 From the **Jobs** tab, click the name of your job and then the menu on the upper right to modify or delete it. While the job is running you can click the job instance to drill down to **Details**, **Files**, and **Logs** data.
 
 # DC/OS CLI
-  
+
 You can create and manage jobs from the DC/OS CLI using `dcos job` commands. To see a full list of available commands, run `dcos job --help`.
- 
+
 ## Add a Job
- 
+
 1. Create a job file in JSON format. The `id` parameter is the job ID. You will use this ID later to manage your job.
- 
+
     ```json
     {
         "id": "myjob",
@@ -68,25 +71,25 @@ You can create and manage jobs from the DC/OS CLI using `dcos job` commands. To 
         ]
     }
     ```
- 
-     **Note:** You can only assign one schedule to a job.
- 
+
+   **Note:** You can assign only one schedule to a job.
+
 1. Add the job:
     ```bash
     dcos job add <myjob>.json
     ```
- 
+
     **Note:** You can choose any name for your job file.
- 
-1. Go to the "Jobs" tab of the DC/OS web interface to verify that you have added your job, or verify from the CLI:
+
+1. Go to the **Jobs** tab of the DC/OS web interface to verify that you have added your job, or verify from the CLI:
     ```bash
     dcos job list
     ```
- 
+
 ## Schedule-Only JSON
- 
+
 If you use the same schedule for more than one job, you can create a separate JSON file for the schedule. Use the `dcos job schedule add  <job-id> <schedule-file>` command to associate a job with the schedule.
- 
+
 ```json
 {
     "concurrencyPolicy": "ALLOW",
@@ -98,25 +101,25 @@ If you use the same schedule for more than one job, you can create a separate JS
     "timezone": "UTC"
 }
 ```
- 
+
 ## Remove a Job
- 
+
 1. Enter the following command on the DC/OS CLI:
- 
+
     ```
     dcos job remove <job-id>
     ```
- 
-1. Go to the "Jobs" tab of the DC/OS web interface to verify that you have removed your job, or verify from the CLI:
- 
+
+1. Go to the **Jobs** tab of the DC/OS web interface to verify that you have removed your job, or verify from the CLI:
+
     ```
     dcos job list
     ```
- 
+
 ## Modify a Job
- 
-To modify your job, by update your JSON job file, then run
- 
+
+To modify your job, update your JSON job file, then run
+
 ```
 dcos job update <job-file>.json
 ```
@@ -135,14 +138,14 @@ dcos job update <job-file>.json
 
 #### Modify a Job with a Separate Schedule file
 
-Modify your `<schedule-file>.json`. Then, run one of the following commands:
- 
+Modify `<schedule-file>.json`. Then, run one of the following commands:
+
 ```bash
 dcos job schedule add <job-id> <schedule-file>.json
 dcos job schedule remove <job-id> <schedule-id>
 dcos job schedule update <job-id> <schedule-file>.json
 ```
- 
+
 ## View Job Details
 
 List all jobs:
@@ -158,13 +161,13 @@ dcos job history <job-id>
 ```
 
 To view details about your job, run:
- 
+
 ```
 dcos job show <job-id>
 ```
- 
+
 To view details about your job's schedule, run:
- 
+
 ```
 dcos job schedule show <job-id>
 ```
@@ -232,5 +235,5 @@ curl -X POST -H "Authorization: token=$(dcos config show core.dcos_acs_token)" "
 The following command adds a schedule to a job:
 
 ```
-curl -X POST -H "Content-Type: application/json" -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs/<job-id>/schedules -d@/Users/<your-username>/<schedule-file>.json 
+curl -X POST -H "Content-Type: application/json" -H "Authorization: token=$(dcos config show core.dcos_acs_token)" $(dcos config show core.dcos_url)/service/metronome/v1/jobs/<job-id>/schedules -d@/Users/<your-username>/<schedule-file>.json
 ```

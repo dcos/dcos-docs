@@ -94,7 +94,7 @@ master_list:
 master_discovery: master_http_loadbalancer
 exhibitor_address: <loadbalancer-ip>
 master_dns_bindall: `<true|false>`
-num_master: <num-of-masters>
+num_masters: <num-of-masters>
 # DC/OS only
 oauth_enabled: `<true|false>`  
 public_agent_list:
@@ -163,7 +163,7 @@ ssh_port: '<port-number>'
 ssh_user: <username>
 ```
 
-## <a name="aws"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper backed by an AWS S3 bucket, AWS DNS, five private agents, and one public agent node
+## <a name="aws"></a>DC/OS cluster with three masters, an Exhibitor/ZooKeeper backed by an AWS S3 bucket, five private agents, and one public agent node
 
 ```yaml
 ---
@@ -403,4 +403,3 @@ custom_checks:
           - agent
         timeout: 5s
 ```
-

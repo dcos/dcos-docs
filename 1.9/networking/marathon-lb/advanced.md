@@ -108,6 +108,14 @@ Other options you may want to specify include enabling the [sticky option][3], [
       "HAPROXY_0_VHOST":"nginx.mesosphere.com"
     }
 
+Another option you may want to specify when using a Java app is the following sticky option:
+
+    "labels":{
+      "HAPROXY_GROUP": "external",
+      "HAPROXY_0_MODE": "http",
+      "HAPROXY_0_STICKY": true,
+      "HAPROXY_0_BACKEND_STICKY_OPTIONS": " cookie JSESSIONID prefix nocache "
+    }
 
 ## SSL Support
 
