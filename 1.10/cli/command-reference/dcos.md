@@ -4,13 +4,15 @@ menu_order: 0
 ---
 
 # Description
-Manage DC/OS environment variables.
+Command line utility for the Mesosphere Datacenter Operating System (DC/OS).
 
 # Usage
 
 ``` bash
 dcos [options] [<command>] [<args>...]
 ```
+
+Running the command without options, commands, or arguments prints the available commands.
 
 # Options
 
@@ -29,4 +31,3 @@ The severity levels are:
 * warning  Prints warning, error, and critical messages.
 * error    Prints error and critical messages.
 * critical Prints only critical messages to stderr.
-
