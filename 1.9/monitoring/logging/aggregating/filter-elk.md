@@ -12,7 +12,7 @@ The file system paths of DC/OS task logs contain information such as the agent I
 
 1.  Install [Logstash][7].
 
-1.  Create the following `dcos` pattern file in your custom patterns directory located at `$PATTERNS_DIR`:
+1.  Create the following `dcos` pattern file in your custom patterns directory, located at `$PATTERNS_DIR`:
 
     ```
     PATHELEM [^/]+

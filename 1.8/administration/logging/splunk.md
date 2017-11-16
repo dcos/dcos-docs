@@ -3,7 +3,7 @@ post_title: Log Management with Splunk
 nav_title: Splunk
 menu_order: 3
 ---
-You can pipe system and application logs from a DC/OS cluster to your existing Splunk server. This document describes how to configure a Splunk universal forwarder to send output from each node to a Splunk installation. This document does not explain how to setup and configure a Splunk server.
+You can pipe system and application logs from a DC/OS cluster to your existing Splunk server. This document describes how to configure a Splunk universal forwarder to send output from each node to a Splunk installation. This document does not explain how to set up and configure a Splunk server.
 
 These instructions are based on CoreOS and might differ substantially from other Linux distributions. 
 
