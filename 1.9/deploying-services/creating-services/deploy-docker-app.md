@@ -141,7 +141,12 @@ In this tutorial, a custom Docker app is created and added to Marathon.
     /nginx   64  0.1    0/1    ---      scale       DOCKER   None
     ```
     
-1.  If you used the [AWS CloudFormation templates](/docs/1.9/installing/cloud/aws/), you must reconfigure the health check on the public ELB to expose the app to the port specified in your app definition (e.g. port 80). 
+  1.  If you used the [AWS CloudFormation templates](/docs/1.9/installing/cloud/aws/) to expose the app to the port specified in your app definition (e.g. port 80), you must reconfigure the health check on the public ELB. 
+      1. In CloudFormation, check the checkbox next to your stack.
+      2. Click the **Resources** tab.
+      3. Search for **PublicSlaveLoadBalancer**.
+      4. Click the link in the Physical ID column.
+      5. Follow the instructions in [Update the Health Check Configuration](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html#update-health-check-config).
 
 1.  Go to your public agent to see the site running. For information about how to find your public agent IP, see the [documentation](/docs/1.9/administering-clusters/locate-public-agent/).
 
