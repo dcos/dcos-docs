@@ -21,7 +21,7 @@ For each node in your cluster, transfer your plugin binary and then add a system
    1. Assign permissions to the plugin: `chmod 0755 /opt/mesosphere/bin/dcos-metrics-datadog-standalone-plugin`.
 
 1.  On every master node:
-    1. Create the master systemd service file in `/etc/systemd/system/dcos-metrics-datadog-plugin.service`. Fill in your Datadog API key and set the `-config` option based on whether you are running DC/OS Enterprise or DC/OS open source.
+    1. Create the master systemd service file in `/etc/systemd/system/dcos-metrics-datadog-master.service`. Fill in your [Datadog API key](https://app.datadoghq.com/account/settings#api) and set the `-config` option based on whether you are running DC/OS Enterprise or DC/OS open source.
 
         ```
         [Unit]
@@ -33,10 +33,10 @@ For each node in your cluster, transfer your plugin binary and then add a system
 
     2. Reload the systemd state by running `sudo systemctl daemon-reload`.
     3. Start the systemd service with `sudo systemctl start dcos-metrics-datadog-master`.
-    4. View the system logs and verify the plugin is running with `sudo journalctl -u dcos-metrics-datadog-plugin`.
+    4. View the system logs and verify the plugin is running with `sudo journalctl -u dcos-metrics-datadog-master`.
 
 1.  On every agent node:
-    1. Create the agent systemd service file in `/etc/systemd/system/dcos-metrics-datadog-plugin.service`. Fill in your Datadog API key and set the `-config` option based on whether you are running DC/OS Enterprise or DC/OS open source.
+    1. Create the agent systemd service file in `/etc/systemd/system/dcos-metrics-datadog-agent.service`. Fill in your [Datadog API key](https://app.datadoghq.com/account/settings#api) and set the `-config` option based on whether you are running DC/OS Enterprise or DC/OS open source.
 
         ```
         [Unit]
@@ -48,4 +48,4 @@ For each node in your cluster, transfer your plugin binary and then add a system
 
     2. Reload the systemd state by running `sudo systemctl daemon-reload`.
     3. Start the systemd service with `sudo systemctl start dcos-metrics-datadog-agent`.
-    4. View the system logs and verify the plugin is running with `sudo journalctl -u dcos-metrics-datadog-plugin`.
+    4. View the system logs and verify the plugin is running with `sudo journalctl -u dcos-metrics-datadog-agent`.
