@@ -86,6 +86,8 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Digit
       Choose the DigitalOcean droplet size to use for the DC/OS Boot Server - default 4GB
 
     - dcos_cluster_name - the name of your DC/OS cluster - defaults to digitalocean-dcos
+    
+    - dcos_master_count - Number of master to deploy - defaults to 3
 
     - dcos_agent_count - Number of private agents to deploy - defaults to  4
 
