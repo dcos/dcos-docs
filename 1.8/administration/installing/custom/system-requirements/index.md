@@ -90,7 +90,8 @@ Here are the agent node hardware requirements.
     ```bash
     sudo systemctl stop firewalld && sudo systemctl disable firewalld
     ```
-*   DC/OS is installed to `/opt/mesosphere`. `/opt/mesosphere` must be on the same mountpoint as `/`.  This is required because DC/OS installs systemd unit files under `/opt/mesosphere`. Systemd units all must be available to the initial RAM file system [initramfs](https://en.wikipedia.org/wiki/Initramfs).
+
+*   DC/OS is installed to `/opt/mesosphere`. `/opt/mesosphere` must be on the same mountpoint as `/`.  This is required because DC/OS installs systemd unit files under `/opt/mesosphere`. All systemd units must be available for enumeration during the initializing of the initial ramdisk at boot. If `/opt` is on a different partition or volume, systemd will fail to discover these units during the initialization of the ramdisk and DC/OS will not automatically restart upon reboot.
 
 *   The Mesos master and agent persistent information of the cluster is stored in the `/var/lib/mesos` directory.
     
