@@ -4,19 +4,15 @@ nav_title: Developing Services
 menu_order: 160
 ---
 
-This section describes the developer-specific DC/OS components, explaining what is necessary to package and provide your own service on DC/OS.
+DC/OS includes a service packaging specification and a [repository](/docs/1.10/administering-clusters/repo/) that catalogs those packages. This section describes what is necessary to package and provide your own service on DC/OS.
 
-The Mesosphere Datacenter Operating System (DC/OS) provides the optimal user experience possible for orchestrating and managing a datacenter. If you are an Apache Mesos developer, you are already familiar with developing a framework. DC/OS extends Apache Mesos by including a web interface for health checks and monitoring, a command-line, a service packaging description, and a [repository](/docs/1.10/administering-clusters/repo/) that catalogs those packages.
-
-# <a name="universe"></a>Package Repositories
+# <a name="universe"></a>Universe package repository
 
 The DC/OS Universe contains all of the services that are installable on DC/OS. For more information on DC/OS Universe, see the [GitHub Universe repository](https://github.com/mesosphere/universe).
 
-All packaged services are required to meet a certain standard as defined by Mesosphere. For details on submitting a DC/OS service, see [Getting Started with Universe](https://github.com/mesosphere/universe/blob/version-3.x/docs/tutorial/GetStarted.md).
-
 # DC/OS service structure
 
-Each DC/OS service in the Universe repo is comprised of JSON configuration files. These files are used create the packages that are installed on DC/OS.
+Each DC/OS service in the Universe is comprised of JSON configuration files. These files are used create the packages that are installed on DC/OS.
 
 | Filename               | Description                                                                                              | Required |
 |------------------------|----------------------------------------------------------------------------------------------------------|----------|
@@ -25,4 +21,8 @@ Each DC/OS service in the Universe repo is comprised of JSON configuration files
 | `package.json`           | Specifies the high level metadata about the package.                                                     | Yes      |
 | `resource.json`          | Specifies all of the required externally hosted resources (e.g. Docker images, HTTP objects and images). | No       |
 
-For more information, see [Getting Started with Universe](https://github.com/mesosphere/universe/blob/version-3.x/docs/tutorial/GetStarted.md).
+For more information, see [Creating a DC/OS Package](https://github.com/mesosphere/universe/blob/version-3.x/docs/tutorial/GetStarted.md#step-3--creating-a-dcos-package).
+
+# Publishing a package
+
+All packaged services are required to meet a certain standard as defined by Mesosphere. For details on publishing a DC/OS service, see [Publish the package](https://github.com/mesosphere/universe/blob/version-3.x/docs/tutorial/GetStarted.md#step-5--publish-the-package).
