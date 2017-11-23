@@ -193,12 +193,26 @@ You can install and run DC/OS services on a datacenter without internet access w
     dcos node ssh --master-proxy --mesos-id=<mesos-id>
     ```
      
-1.  Use the following commands to download a copy of the DC/OS certificate locally and set it as trusted.
+1.  Use the following commands to download a copy of the DC/OS Local Universe certificate locally and set it as trusted for the docker daemon
 
     ```bash
     sudo mkdir -p /etc/docker/certs.d/master.mesos:5000
     sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
     sudo systemctl restart docker
+    ```
+
+1. Use the following commands to download a copy of the DC/OS Local Universe certificate locally and set it as trusted for the binaries shipped with DC/OS
+
+    ```bash
+    sudo curl -o /var/lib/dcos/pki/tls/certs/local-universe-ca.crt http://master.mesos:8082/certs/domain.crt
+    sudo ln -s /var/lib/dcos/pki/tls/certs/local-universe-ca.crt var/lib/dcos/pki/tls/certs/"$(openssl x509 -hash -noout -in "/var/lib/dcos/pki/tls/certs/local-universe-ca.crt")".0
+    ```
+
+1. Use the following commands to download a copy of the DC/OS Local Universe certificate locally and set it as trusted for the OS (CentOS) binaries
+
+    ```bash
+    sudo curl -o /etc/pki/ca-trust/source/anchors/local-universe-ca.crt http://master.mesos:8082/certs/domain.crt
+    sudo update-ca-trust extract
     ```
      
 1.  Close the SSH session by typing `exit` or open a new terminal prompt tab. Repeat steps 28 and 29 on each agent node.
