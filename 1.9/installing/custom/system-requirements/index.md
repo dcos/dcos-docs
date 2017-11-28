@@ -57,14 +57,24 @@ Here are the agent node hardware requirements.
 The agent nodes must also have:
 
 - A `/var` directory with 10 GB or more of free space. This directory is used by the sandbox for both [Docker and DC/OS Universal container runtime](/docs/1.9/deploying-services/containerizers/).
-- Network Access to a public Docker repository or to an internal Docker registry.
+
+- The agent's work directory, `/var/lib/mesos/slave`, should be on a separate device. This protects all the other services from a task overflowing the disk.
+
+  - To maintain backwards compatibility with frameworks written before the disk resource was introduced, by default the disk resource is not enforced.
+  - You can enable resource enforcement by inserting the environment variable MESOS_ENFORCE_CONTAINER_DISK_QUOTA=true into one of the Mesos agent extra config files (e.g. `/var/lib/dcos/mesos-slave-common`).
+  - Disk quotas are not supported by Docker tasks, so these can overflow the disk regardless of configuration.
+
+- Network access to a public Docker repository or to an internal Docker registry.
 
 *   On RHEL 7 and CentOS 7, firewalld must be stopped and disabled. It is a known <a href="https://github.com/docker/docker/issues/16137" target="_blank">Docker issue</a> that firewalld interacts poorly with Docker. For more information, see the <a href="https://github.com/docker/docker/blob/v1.6.2/docs/sources/installation/centos.md#firewalld" target="_blank">Docker CentOS firewalld</a> documentation.
 
     ```bash
     sudo systemctl stop firewalld && sudo systemctl disable firewalld
     ```
-*   DC/OS is installed to `/opt/mesosphere`. `/opt/mesosphere` cannot be on a partition that is on an LVM logical volume or shared storage.
+
+*   DC/OS is installed to `/opt/mesosphere`. `/opt/mesosphere` must be on the same mountpoint as `/`.  This is required because DC/OS installs systemd unit files under `/opt/mesosphere`. All systemd units must be available for enumeration during the initializing of the initial ramdisk at boot. If `/opt` is on a different partition or volume, systemd will fail to discover these units during the initialization of the ramdisk and DC/OS will not automatically restart upon reboot.
+
+
 *   The Mesos master and agent persistent information of the cluster is stored in the `/var/lib/mesos` directory.
 
     **Important:** Do not remotely mount `/var/lib/mesos` or the Docker storage directory (by default `/var/lib/docker`).

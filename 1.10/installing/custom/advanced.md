@@ -94,6 +94,7 @@ Your cluster must meet the software and hardware [requirements](/docs/1.10/insta
     - '.baz.com'
     ```
 
+<a id="ip-detect-script"></a>
 2.  Create an `ip-detect` script.
 
     In this step, an IP detect script is created. This script reports the IP address of each node across the cluster. Each node in a DC/OS cluster has a unique IP address that is used to communicate between nodes in the cluster. The IP detect script prints the unique IPv4 address of a node to STDOUT each time DC/OS is started on the node.

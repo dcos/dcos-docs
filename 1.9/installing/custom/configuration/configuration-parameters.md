@@ -17,6 +17,7 @@ This topic provides all available configuration parameters. Except where explici
 | [aws_template_storage_secret_access_key](#aws_template_storage_secret_access_key) | The AWS [Secret Access Key](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html). |
 | [bootstrap_url](#bootstrap_url)                          | (Required) The URI path for the DC/OS installer to store the customized DC/OS build files.                                         |
 | [cluster_docker_credentials](#cluster_docker_credentials)             | The dictionary of Docker credentials to pass.                                                                                      |
+| [cluster_docker_credentials_enabled](#cluster_docker_credentials_enabled)   |  Whether to pass the Mesos `--docker_config` option to Mesos. |
 | [cluster_docker_registry_url](#cluster_docker_registry_url)            | The custom URL that Mesos uses to pull Docker images from.                                                                         |
 | [cluster_name](#cluster_name)                           | The name of your cluster.                                                                                                        |
 | [cosmos_config](#cosmos_config)                          | The dictionary of packaging configuration to pass to the [DC/OS Package Manager (Cosmos)](https://github.com/dcos/cosmos).         |
@@ -25,6 +26,7 @@ This topic provides all available configuration parameters. Except where explici
 | [gpus_are_scarce](#gpus_are_scarce)        | Indicates whether to treat GPUs as a scarce resource in the cluster. |
 | [ip_detect_public_filename](#ip_detect_public_filename)       | The IP detect file to use in your cluster.  |
 | [master_discovery](#master_discovery)                          | (Required) The Mesos master discovery method.         |
+| [mesos_container_log_sink](#mesos_container_log_sink)                 | The log manager for containers (tasks). |
 | [public_agent_list](#public_agent_list)                          | A YAML nested list (-) of IPv4 addresses to your [public agent](/docs/1.9/overview/concepts/#public-agent-node) host names.        |
 | [platform](#platform)                          | The infrastructure platform.      |
 | [rexray_config](#rexray_config)                          | The [REX-Ray](https://rexray.readthedocs.org/en/v0.3.2/user-guide/config/) configuration method for enabling external persistent volumes in Marathon.    |
@@ -33,7 +35,8 @@ This topic provides all available configuration parameters. Except where explici
 
 | Parameter                    | Description                                                                                                                                                       |
 |------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [dcos_overlay_enable](#dcos_overlay_enable)          | This block of parameters specifies whether to enable DC/OS virtual networks.                                                                                      |
+| [dcos_overlay_enable](#dcos_overlay_enable)          | This block of parameters specifies whether to enable DC/OS virtual networks.                                                              |
+| [dns_forward_zones](#dns_forward_zones)              | A nested list of DNS zones, IP addresses, and ports that configure custom forwarding behavior of DNS queries. A DNS zone is mapped to a set of DNS resolvers. |
 | [dns_search](#dns_search)                   | A space-separated list of domains that are tried when an unqualified domain is entered.                                                  |
 | [resolvers](#resolvers)                    | A YAML nested list (`-`) of DNS resolvers for your DC/OS cluster nodes.                                                |
 | [master_dns_bindall](#master_dns_bindall)                    | Indicates whether the master DNS port is open.                                               |
@@ -99,30 +102,32 @@ bouncer_expiration_auth_token_days: '0.5'
 For more information, see the [security documentation](https://docs.mesosphere.com/1.9/security/).
 
 ### cluster_docker_credentials
-The dictionary of Docker credentials to pass. 
+The dictionary of Docker credentials to pass.
 
 - If unset, a default empty credentials file is created at `/etc/mesosphere/docker_credentials` during DC/OS install. A sysadmin can change credentials as needed. A `systemctl restart dcos-mesos-slave` or `systemctl restart dcos-mesos-slave-public` is required for changes to take effect.
-- You can also specify by using the `--docker_config` JSON [format](http://mesos.apache.org/documentation/latest/configuration/). You can write as YAML in the `config.yaml` file and it will automatically be mapped to the JSON format for you. This will store the Docker credentials in the same location as the DC/OS internal configuration (`/opt/mesosphere`). If you need to update or change the configuration, you will have to create a new DC/OS internal configuration.
+- You can also specify by using the `--docker_config` JSON [format](http://mesos.apache.org/documentation/latest/configuration/). You can write as YAML in the `config.yaml` file and it will automatically be mapped to the JSON format for you. This stores the Docker credentials in the same location as the DC/OS internal configuration (`/opt/mesosphere`). If you need to update or change the configuration, you will have to create a new DC/OS internal configuration.
+
+**Note:**
+- `cluster_docker_credentials` takes effect only when [`cluster_docker_credentials_enabled`](#cluster_docker_credentials_enabled) is set to `'true'`
+- `cluster_docker_credentials` takes effect during an upgrade only when `cluster_docker_credentials_dcos_owned` is set to `'true'`.
 
 You can use the following options to further configure the Docker credentials:
 
-*  **cluster_docker_credentials_dcos_owned** Indicates whether to store the credentials file in `/opt/mesosphere` or `/etc/mesosphere/docker_credentials`. A sysadmin cannot edit `/opt/mesosphere` directly.
-
+*  `cluster_docker_credentials_dcos_owned` Indicates whether to store the credentials file in `/opt/mesosphere` or `/etc/mesosphere/docker_credentials`. A sysadmin cannot edit `/opt/mesosphere` directly.
     *  `cluster_docker_credentials_dcos_owned: 'true'` The credentials file is stored in `/opt/mesosphere`.
-    
-        *  **cluster_docker_credentials_write_to_etc** Indicates whether to write a cluster credentials file.
-        
+        *  `cluster_docker_credentials_write_to_etc` Whether to write a cluster credentials file.
             *  `cluster_docker_credentials_write_to_etc: 'true'` Write a credentials file. This can be useful if overwriting your credentials file will cause problems (e.g., if it is part of a machine image or AMI). This is the default value.
             *  `cluster_docker_credentials_write_to_etc: 'false'` Do not write a credentials file.
-            
     *  `cluster_docker_credentials_dcos_owned: 'false'` The credentials file is stored in `/etc/mesosphere/docker_credentials`.
 
-*  **cluster_docker_credentials_enabled** Indicates whether to pass the Mesos `--docker_config` option to Mesos. 
+For more information, see the [examples](/docs/1.10/installing/custom/configuration/examples/#docker-credentials).
 
-    *  `cluster_docker_credentials_enabled: 'true'` Pass the Mesos `--docker_config` option to Mesos. It will point to a file that contains the provided `cluster_docker_credentials` data.
-    *  `cluster_docker_credentials_enabled: 'false'` Do not pass the Mesos `--docker_config` option to Mesos. 
-    
-For more information, see the [examples](/docs/1.9/installing/custom/configuration/examples/#docker-credentials).
+### cluster_docker_credentials_enabled
+Whether to pass the Mesos `--docker_config` option containing [`cluster_docker_credentials`](#cluster_docker_credentials) to Mesos.
+
+*  `cluster_docker_credentials_enabled: 'true'` Pass the Mesos `--docker_config` option to Mesos. It will point to a file that contains the provided `cluster_docker_credentials` data.
+*  `cluster_docker_credentials_enabled: 'false'` Do not pass the Mesos `--docker_config` option to Mesos.
+
 
 ### cluster_docker_registry_url
 The custom URL that Mesos uses to pull Docker images from. If set, it will configure the Mesos' `--docker_registry` flag to the specified URL. This changes the default URL Mesos uses for pulling Docker images. By default `https://registry-1.docker.io` is used.
@@ -194,12 +199,38 @@ Indicates whether to enable DC/OS virtual networks.
         *  `vtep_mac_oui` The MAC address of the interface connecting to the virtual network in the public node.
             
             **Important:** The last 3 bytes must be `00`.
-        *  __overlays__
+        *  `overlays`
             *  `name` The canonical name (see [limitations](/docs/1.9/networking/virtual-networks/) for constraints on naming virtual networks).
             *  `subnet` The subnet that is allocated to the virtual network.
             *  `prefix` The size of the subnet that is allocated to each agent and thus defines the number of agents on which the overlay can run. The size of the subnet is carved from the overlay subnet.
 
- For more information, see the [example](/docs/1.9/installing/custom/configuration/examples/#overlay) and [documentation](/docs/1.9/networking/virtual-networks/).
+For more information, see the [example](/docs/1.9/installing/custom/configuration/examples/#overlay) and [documentation](/docs/1.9/networking/virtual-networks/).
+ 
+
+### dns_forward_zones
+
+**Important:** Available for DC/OS 1.9.1 and higher.
+
+A nested list of DNS zones, IP addresses, and ports that configure custom forwarding behavior of DNS queries. A DNS zone is mapped to a set of DNS resolvers.
+
+A sample definition is as follows:
+
+```
+dns_forward_zones:
+- - "a.contoso.com"
+ - - - "1.1.1.1"
+     - 53
+   - - "2.2.2.2"
+     - 53
+- - "b.contoso.com"
+ - - - "3.3.3.3"
+     - 53
+   - - "4.4.4.4"
+     - 53
+```
+
+In the above example, a DNS query to `myapp.a.contoso.com` will be directed to `1.1.1.1:53` or `2.2.2.2:53`. Likewise, a DNS query to `myapp.b.contoso.com` will be directed to `3.3.3.3:53` or `4.4.4.4:53`.
+
  
 ### dns_search
 A space-separated list of domains that are tried when an unqualified domain is entered (e.g., domain searches that do not contain &#8216;.&#8217;). The Linux implementation of `/etc/resolv.conf` restricts the maximum number of domains to 6 and the maximum number of characters the setting can have to 256. For more information, see [man /etc/resolv.conf](http://man7.org/linux/man-pages/man5/resolv.conf.5.html).
@@ -322,6 +353,16 @@ Indicates whether the master DNS port is open. An open master DNS port listens p
 
 *  `'master_dns_bindall': 'true'` The master DNS port is open. This is the default value.
 *  `'master_dns_bindall': 'false'` The master DNS port is closed.
+
+### mesos_container_log_sink
+
+The log manager for containers (tasks). The options are:
+
+* `'journald'` - send task logs only to journald.
+* `'logrotate'` - send task logs only to the file system (i.e. a stdout/err file).
+* `'journald+logrotate'` - Send logs to both journald and the file system.
+
+The default is `logrotate`. Due to performance issues, `journald` is not recommended. For details, see [Logging API](/1.10/monitoring/logging/logging-api/#compatibility).
 
 ### mesos_max_completed_tasks_per_framework
 The number of completed tasks for each framework that the Mesos master will retain in memory. In clusters with a large number of long-running frameworks, retaining too many completed tasks can cause memory issues on the master. If this parameter is not specified, the default Mesos value of 1000 is used.

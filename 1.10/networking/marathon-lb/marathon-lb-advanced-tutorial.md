@@ -254,9 +254,9 @@ To demonstrate the vhost feature:
         ```
 
     **DC/OS GUI**
-
-    1.  Navigate to the **Services > Services > nginx-external** service and click edit.
-
+    
+    1.  Navigate to the **Services > Services > nginx-external** service, click the vertical ellipsis at the far right, and select **Edit**.
+ 
     1.  Select **Environment > ADD LABEL**.
 
     1.  Enter `HAPROXY_0_VHOST` for **KEY** and specify your public agent DNS name for **VALUE**.
@@ -264,10 +264,10 @@ To demonstrate the vhost feature:
         ![Update app](/docs/1.10/img/nginx-external-gui.png)
 
         **Important:** Do not include the leading `http://`trailing slash (`/`) in your public DNS name.
-
-    1.  Select **Deploy**.
-
-    The label `HAPROXY_0_VHOST`, instructs Marathon-LB to expose NGINX on the external load balancer with a virtual host. The `0` in the label key corresponds to the servicePort index, beginning from 0.
+        
+    1.  Select **REVIEW & RUN** and **RUN SERVICE**.
+    
+    The label `HAPROXY_0_VHOST`, instructs Marathon-LB to expose NGINX on the external load balancer with a virtual host. The `0` in the label key corresponds to the servicePort index, beginning from 0. 
 
     If you had multiple servicePort definitions, you would iterate them as 0, 1, 2, and so on. Note that if you _do_ specify a vhost, you aren't required to provide a service port, because Marathon will assign one by default.
 
