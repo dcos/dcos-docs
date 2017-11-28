@@ -211,16 +211,16 @@ You can install and run DC/OS services on a datacenter without internet access w
 
    1. Copy the certificate:
    ```
-   sudo cp /etc/docker/certs.d/master.mesos:5000/ca.crt /var/lib/dcos/pki/tls/certs/ca.crt
+   sudo cp /etc/docker/certs.d/master.mesos:5000/ca.crt /var/lib/dcos/pki/tls/certs/docker-registry-ca.crt
    ```
    1. Generate a hash:
    ```
    cd /var/lib/dcos/pki/tls/certs/
-   openssl x509 -hash -noout -in ca.crt
+   openssl x509 -hash -noout -in docker-registry-ca.crt
    ```
    1. Create a soft link:
    ```
-   sudo ln -s /var/lib/dcos/pki/tls/certs/ca.crt /var/lib/dcos/pki/tls/certs/<hash_number>.0
+   sudo ln -s /var/lib/dcos/pki/tls/certs/docker-registry-ca.crt /var/lib/dcos/pki/tls/certs/<hash_number>.0
    ```
    **Note:** You will need to create the `/pki/tls/certs` directory on the public agent.
 
