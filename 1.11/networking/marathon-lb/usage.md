@@ -6,8 +6,8 @@ menu_order: 000
 
 **Prerequisites:**
 
-- DC/OS [installed](/docs/1.10/installing/)
-- DC/OS CLI [installed](/docs/1.10/cli/install/)
+- DC/OS [installed](/docs/1.11/installing/)
+- DC/OS CLI [installed](/docs/1.11/cli/install/)
 
 # Default installation
 
@@ -17,7 +17,7 @@ menu_order: 000
     dcos package install marathon-lb
     ```
     
-    **Tip:** You can also install from the DC/OS [GUI](/docs/1.10/gui/). 
+    **Tip:** You can also install from the DC/OS [GUI](/docs/1.11/gui/). 
 
 
 # Custom installation
@@ -69,6 +69,6 @@ menu_order: 000
 
 ## Next steps
 
-- [Tutorial - Deploying a Load Balanced App with Marathon-LB](/docs/1.10/networking/marathon-lb/marathon-lb-basic-tutorial/)
-- [Tutorial - Using Marathon-LB for Internal and External Load Balancing](/docs/1.10/networking/marathon-lb/marathon-lb-advanced-tutorial/)
-- See the advanced Marathon-LB [documentation](/docs/1.10/networking/marathon-lb/advanced/).
+- [Tutorial - Deploying a Load Balanced App with Marathon-LB](/docs/1.11/networking/marathon-lb/marathon-lb-basic-tutorial/)
+- [Tutorial - Using Marathon-LB for Internal and External Load Balancing](/docs/1.11/networking/marathon-lb/marathon-lb-advanced-tutorial/)
+- See the advanced Marathon-LB [documentation](/docs/1.11/networking/marathon-lb/advanced/).

@@ -39,7 +39,7 @@ Add your plugin and configuration file to each agent on your cluster. Consult th
 
 # Configuring your Service to Use a CNI Plugin
 
-**Note:** Your service must use the [Universal Container Runtime (UCR)](/docs/1.10/deploying-services/containerizers/ucr/).
+**Note:** Your service must use the [Universal Container Runtime (UCR)](/docs/1.11/deploying-services/containerizers/ucr/).
 
 Add the `ipAddress.networkName` parameter to your service definition. `networkName` must match the `name` parameter of the configuration file in the previous step. In our current example, it is `dcos`.
 

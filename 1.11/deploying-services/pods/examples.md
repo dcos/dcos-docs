@@ -538,7 +538,7 @@ The following pod definition specifies an ephemeral volume called `v1`. <!-- Val
 
 ## IP-per-Pod Networking
 
-The following pod definition specifies a virtual (user) network named `dcos`. The `networks:mode:container` field creates the virtual network. The `name` field is optional. If you have installed DC/OS using [our AWS templates](/docs/1.10/installing/cloud/aws/), the default virtual network name is `dcos`. <!-- Validated by suzanne 6-23-17 -->
+The following pod definition specifies a virtual (user) network named `dcos`. The `networks:mode:container` field creates the virtual network. The `name` field is optional. If you have installed DC/OS using [our AWS templates](/docs/1.11/installing/cloud/aws/), the default virtual network name is `dcos`. <!-- Validated by suzanne 6-23-17 -->
 
 ```json
 {

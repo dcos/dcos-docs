@@ -7,7 +7,7 @@ menu_order: 1
 An authentication operation via the DC/OS UI proceeds as follows:
 
 1. The user opens the cluster front page URL in their browser.
-2. If the user has a valid [authentication token](/docs/1.10/security/managing-authentication#log-in-cli) cookie (checked by Admin Router)
+2. If the user has a valid [authentication token](/docs/1.11/security/managing-authentication#log-in-cli) cookie (checked by Admin Router)
    they may proceed to the cluster front page. If not, they are redirected to
    the login page.
 3. The login page in the DC/OS UI loads the login page at `dcos.auth0.com` in an iframe,
@@ -22,7 +22,7 @@ An authentication operation via the DC/OS UI proceeds as follows:
    [dcos-oauth](https://github.com/dcos/dcos-oauth) service. If the user is the
    first user accessing the cluster, an account is automatically created. Any
    subsequent users must be added by any other user in the cluster as described
-   in the [User Management](/docs/1.10/security/user-management/) page.
+   in the [User Management](/docs/1.11/security/user-management/) page.
    If the user logging into the cluster is determined to be valid, they are
    issued with a HS256-signed JWT containing a `uid` claim which is specific to
    the cluster they are logging in to.
@@ -33,7 +33,7 @@ HTTPS. Using a proxy to make this request is not currently supported.
 
 The shared secret used to sign the cluster-specific tokens with the HS256
 algorithm is generated during cluster boot and stored at
-`/var/lib/dcos/auth-token-secret` on each master node and in the
+`/var/lib/dcos/dcos-oauth/auth-token-secret` on each master node and in the
 `/dcos/auth-token-secret` znode in ZooKeeper.
 
 As noted above, to ease the setup process, DC/OS automatically adds the first

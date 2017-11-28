@@ -20,3 +20,4 @@ When you create your job, you can specify:
 * The schedule for your job, in cron format. You can also set the time zone and starting deadline.
 * An arbitrary number of labels to attach to your job.
 * Permissions for your job.
+* A group your job will belong to.

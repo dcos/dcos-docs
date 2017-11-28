@@ -23,7 +23,7 @@ If you already have the [prerequisites](#prerequisites) setup, you'll have the m
 In this demo, microscaling adjusts the balance between two tasks - one high priority and one background - based on the number of items in 
 an Azure Storage Queue. 
 
-![microscaling-queue.png](/docs/1.10/img/microscaling-queue.png)
+![microscaling-queue.png](/docs/1.11/img/microscaling-queue.png)
 
 The demo creates four Marathon apps that run as Docker containers.
 
@@ -46,7 +46,7 @@ but the demo uses an Azure Storage Queue. If you don't already have an account y
 * Navigate to New -> Data + Storage -> Storage Account.
 * Create a storage account with the following settings:
 
-![microscaling-azure-storage.png](/docs/1.10/img/microscaling-azure-storage.png)
+![microscaling-azure-storage.png](/docs/1.11/img/microscaling-azure-storage.png)
 
 * **Name** - this must be globally unique across all Azure Storage Accounts. Make a note of this - you will use this as the environment variable `AZURE_STORAGE_ACCOUNT_NAME` later. 
 * **Replication** - choose Locally-redundant storage for the queue.
@@ -59,12 +59,12 @@ After the storage account has been created, navigate to Settings -> Access Keys 
 * Go to the [Microscaling-in-a-box][10] site and sign up for an account if you don't have one already.
 * In Step 1, pick the Mesos / Marathon option
 
-![microscaling-step-1.png](/docs/1.10/img/microscaling-step-1.png)
+![microscaling-step-1.png](/docs/1.11/img/microscaling-step-1.png)
 
 * Skip through steps 2 & 3 to use the default values. 
 * Navigate to the step 4 (Run) page and find your user ID and the default value for the queue we'll be using in the demo. You will use these as the values for environment variables `MSS_USER_ID` and `AZURE_STORAGE_QUEUE_NAME` later.
 
-![microscaling-step-4.png](/docs/1.10/img/microscaling-step-4.png)
+![microscaling-step-4.png](/docs/1.11/img/microscaling-step-4.png)
 
 # Get the microscaling scripts
 
@@ -100,7 +100,7 @@ This script starts all four tasks. You can view these in the DC/OS web interface
 
 After Marathon has launched the apps, the results will start to appear in the Microscaling-in-a-Box UI. You'll see the Microscaling Engine scaling the consumer and remainder containers to maintain the target queue length.
 
-![microscaling-chart-ui.png](/docs/1.10/img/microscaling-chart-ui.png)
+![microscaling-chart-ui.png](/docs/1.11/img/microscaling-chart-ui.png)
 
 You can use the DC/OS web interface to scale the number of Producer tasks up or down and see how Microscaling reacts to keep the queue length under control. 
 
@@ -134,7 +134,7 @@ After you've finished with the demo you should delete the Azure resources so tha
 [2]: http://microscaling.com
 [3]: http://azure.microsoft.com
 [4]: https://azure.microsoft.com/en-us/pricing/free-trial/
-[5]: /docs/1.10/installing/
+[5]: /docs/1.11/installing/
 [6]: https://azure.microsoft.com/en-us/documentation/articles/container-service-deployment/
 [7]: https://github.com/Azure/azure-quickstart-templates/blob/master/101-acs-dcos/docs/SSHKeyManagement.md#create-port-80-tunnel-to-the-master
 [8]: https://www.ruby-lang.org/en/documentation/installation/

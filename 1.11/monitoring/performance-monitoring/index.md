@@ -125,4 +125,4 @@ See the Apache Mesos [documentation](http://mesos.apache.org/documentation/lates
 
  [1]: https://mesosphere.github.io/marathon/docs/metrics.html
  [2]: http://mesos.apache.org/documentation/latest/monitoring/
- [3]: /docs/1.10/deploying-services/marathon-api/#!/apps
+ [3]: /docs/1.11/deploying-services/marathon-api/#!/apps

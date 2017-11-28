@@ -4,10 +4,10 @@ nav_title: API Reference
 menu_order: 150
 ---
 
-The DC/OS API is a collection of routes backed by [DC/OS components](/docs/1.10/overview/architecture/components/) that are made available through an API gateway called [Admin Router](/docs/1.10/overview/architecture/components/#admin-router).
+The DC/OS API is a collection of routes backed by [DC/OS components](/docs/1.11/overview/architecture/components/) that are made available through an API gateway called [Admin Router](/docs/1.11/overview/architecture/components/#admin-router).
 
 <!-- Use html img for horizontal centering -->
-<img src="/docs/1.10/img/dcos-api-routing.png" alt="DC/OS API Routing" style="display:block;margin:0 auto"/>
+<img src="/docs/1.11/img/dcos-api-routing.png" alt="DC/OS API Routing" style="display:block;margin:0 auto"/>
 
 
 # API Gateway
@@ -21,11 +21,11 @@ Admin Router is an API gateway built on top of NGINX with the following goals:
 
 Admin Router runs on each DC/OS node in one of two configurations:
 
-- **Admin Router Master** exposes the [Master Routes](/docs/1.10/api/master-routes/).
+- **Admin Router Master** exposes the [Master Routes](/docs/1.11/api/master-routes/).
 
   This configuration runs on each master node and serves as the primary API gateway for interaction with DC/OS components.
 
-- **Admin Router Agent** exposes the [Agent Routes](/docs/1.10/api/agent-routes/).
+- **Admin Router Agent** exposes the [Agent Routes](/docs/1.11/api/agent-routes/).
 
   This configuration runs on each agent node and provides routes for monitoring, debugging, and administration.
 
@@ -45,21 +45,21 @@ Admin Router exposes several types of routes:
 
 # Cluster Access
 
-To determine the URL of your cluster, see [Cluster Access](/docs/1.10/api/access/).
+To determine the URL of your cluster, see [Cluster Access](/docs/1.11/api/access/).
 
 
 # Versioning
 
 Sections of the DC/OS API are versioned by component, route, or resource.
 
-For details on the versioning mechanisms, see [Versioning](/docs/1.10/api/versioning/).
+For details on the versioning mechanisms, see [Versioning](/docs/1.11/api/versioning/).
 
 
 # Authentication
 
 Some routes are unauthenticated, but most require an authentication token.
 
-For details on how to obtain and use an authentication token, see [Authentication HTTP API Endpoint](/docs/1.10/security/iam-api/).
+For details on how to obtain and use an authentication token, see [Authentication HTTP API Endpoint](/docs/1.11/security/iam-api/).
 
 
 # Route Usage

@@ -52,11 +52,11 @@ DC/OS is a [distributed operating system](https://en.wikipedia.org/wiki/Distribu
 
 ### <a name="dcos-gui"></a>DC/OS GUI
 
-The [DC/OS graphical user interface (GUI)](/docs/1.10/gui/) is an interface for remotely controlling and managing a DC/OS cluster from a web browser. The GUI is also sometimes called the DC/OS UI or DC/OS web interface.
+The [DC/OS graphical user interface (GUI)](/docs/1.11/gui/) is an interface for remotely controlling and managing a DC/OS cluster from a web browser. The GUI is also sometimes called the DC/OS UI or DC/OS web interface.
 
 ### <a name="dcos-cli"></a>DC/OS CLI
 
-The [DC/OS command line interface (CLI)](/docs/1.10/cli/) is an interface for remotely controlling and managing a DC/OS cluster from a terminal.
+The [DC/OS command line interface (CLI)](/docs/1.11/cli/) is an interface for remotely controlling and managing a DC/OS cluster from a terminal.
 
 ### <a name="dcos-cluster"></a>Cluster
 
@@ -72,7 +72,7 @@ An infrastructure network is a physical or virtual network provided by the infra
 
 #### <a name="dcos-virtual-network"></a>Virtual Network
 
-A DC/OS virtual network is specifically an virtual network internal to the cluster that connects DC/OS components and containerized tasks running on DC/OS.
+A DC/OS virtual network is specifically a virtual network internal to the cluster that connects DC/OS components and containerized tasks running on DC/OS.
 
 - The virtual network provided by DC/OS is VXLAN managed by the Virtual Network Service (Navstar).
 - Virtual networks must be configured by an administrator before being used by tasks.
@@ -99,7 +99,7 @@ A DC/OS agent node is a virtual or physical machine on which Mesos tasks are run
 - Each agent node contains multiple DC/OS components, including most notably a [Mesos agent](#mesos-agent) process.
 - Agent nodes can be [private](#private-agent-node) or [public](#public-agent-node), depending on agent and network configuration.
 
-For more information, see [Network Security](/docs/1.10/administering-clusters/) and [Adding Agent Nodes](/docs/1.10/administering-clusters/add-a-node/).
+For more information, see [Network Security](/docs/1.11/administering-clusters/) and [Adding Agent Nodes](/docs/1.11/administering-clusters/add-a-node/).
 
 ##### <a name="private-agent-node"></a>Private Agent Node
 
@@ -114,10 +114,10 @@ A private agent node is an agent node that is on a network that *does not* allow
 A public agent node is an agent node that is on a network that *does* allow ingress from outside of the cluster via the cluster’s infrastructure networking.
 
 - The Mesos agent on each public agent node is configured with the `public_ip:true` agent attribute and all of its resources allocated to the `slave_public` role.
-- Public agent nodes are used primarily for externally facing reverse proxy load balancers, like [Marathon-LB](/docs/1.10/networking/marathon-lb/).
+- Public agent nodes are used primarily for externally facing reverse proxy load balancers, like [Marathon-LB](/docs/1.11/networking/marathon-lb/).
 - Clusters generally have only a few public agent nodes, because a single load balancer can handle proxying multiple services.
 
-For more information, see [Converting Agent Node Types](/docs/1.10/administering-clusters/convert-agent-type/).
+For more information, see [Converting Agent Node Types](/docs/1.11/administering-clusters/convert-agent-type/).
 
 ### <a name="host-operating-system"></a>Host Operating System
 
@@ -132,10 +132,10 @@ A bootstrap machine is the machine on which the DC/OS installer artifacts are co
 
 - The bootstrap machine is not technically considered part of the cluster since it does not have DC/OS installed on it (this may change in the future). For most installation methods, the bootstrap node must be accessible to and from the machines in the cluster via infrastructure networking.
 - The bootstrap machine is sometimes used as a jumpbox to control SSH access into other nodes in the cluster for added security and logging.
-- One method of allowing master nodes to change IPs involves running ZooKeeper with Exhibitor on the bootstrap machine. Other alternatives include using S3, DNS, or static IPs, with various tradeoffs. For more information, see [configuring the exhibitor storage backend](/docs/1.10/installing/custom/configuration/configuration-parameters/#exhibitor_storage_backend).
-- If a bootstrap machine is not required for managing master node IP changes or as an SSH jumpbox, it can be shut down after bootstrapping and spun up on demand to [add new nodes](/docs/1.10/administering-clusters/add-a-node/) to the cluster.
+- One method of allowing master nodes to change IPs involves running ZooKeeper with Exhibitor on the bootstrap machine. Other alternatives include using S3, DNS, or static IPs, with various tradeoffs. For more information, see [configuring the exhibitor storage backend](/docs/1.11/installing/custom/configuration/configuration-parameters/#exhibitor_storage_backend).
+- If a bootstrap machine is not required for managing master node IP changes or as an SSH jumpbox, it can be shut down after bootstrapping and spun up on demand to [add new nodes](/docs/1.11/administering-clusters/add-a-node/) to the cluster.
 
-For more information, see the [system requirements](/docs/1.10/installing/custom/system-requirements/#bootstrap-node).
+For more information, see the [system requirements](/docs/1.11/installing/custom/system-requirements/#bootstrap-node).
 
 ### <a name="dcos-service"></a>Service
 
@@ -154,7 +154,7 @@ A Marathon service consists of zero or more containerized service instances. Eac
     - Marathon pod instances map 1 to many with tasks.
 - Service instances are restarted as a new Mesos Task when they exit prematurely.
 - Service instances may be re-scheduled onto another agent node if they exit prematurely and the agent is down or does not have enough resources any more.
-- Services can be installed directly via the [DC/OS API (Marathon)](/docs/1.10/deploying-services/marathon-api/) or indirectly via the [DC/OS Package Manager (Cosmos)](#package-manager) from a [package repository](#dcos-package-repository) like [Mesosphere Universe](#mesosphere-universe). The [DC/OS GUI](#dcos-gui) and [DC/OS CLI](#dcos-cli) may be used to interact with the DC/OS Package Manager (Cosmos) more easily.
+- Services can be installed directly via the [DC/OS API (Marathon)](/docs/1.11/deploying-services/marathon-api/) or indirectly via the [DC/OS Package Manager (Cosmos)](#package-manager) from a [package repository](#dcos-package-repository) like [Mesosphere Universe](#mesosphere-universe). The [DC/OS GUI](#dcos-gui) and [DC/OS CLI](#dcos-cli) may be used to interact with the DC/OS Package Manager (Cosmos) more easily.
 - A Marathon service may be a [DC/OS scheduler](#dcos-scheduler), but not all services are schedulers.
 - A Marathon service is an abstraction around Marathon service instances which are an abstraction around Mesos tasks. Other schedulers (e.g. DC/OS Jobs (Metronome), Jenkins) have their own names for abstractions around Mesos tasks.
 
@@ -251,13 +251,13 @@ For more information, see the [Universe repository](https://github.com/mesospher
 
 A container registry is a repository of pre-built container images.
 
-The [Docker Runtime](#mesos-docker-runtime) and [Mesos Container Runtime](#mesos-universal-container-runtime) can both pull and run Docker images from public or private Docker container registries.
+The [Universal Container Runtime](#mesos-containerizer-universal-container-runtime) and [Docker Engine](#mesos-containerizer-docker-runtime) can both run Docker images from public or private Docker container registries.
 
 ### <a name="cloud-template"></a>Cloud Template
 
 A cloud template is an infrastructure-specific method of declaratively describing a DC/OS cluster.
 
-For more information, see [Cloud Installation Options](/docs/1.10/installing/cloud/).
+For more information, see [Cloud Installation Options](/docs/1.11/installing/cloud/).
 
 
 # <a name="mesos-concepts"></a>Mesos Concepts
@@ -274,8 +274,8 @@ The following terms are contextually correct when talking about Apache Mesos, bu
 - [Role](#mesos-role)
 - [Resource Offer](#mesos-resource-offer)
 - [Containerizer](#mesos-containerizer)
-  - [Universal Container Runtime](#mesos-universal-container-runtime)
-  - [Docker Containerizer](#mesos-docker-containerizer)
+  - [Universal Container Runtime](#mesos-containerizer-universal-container-runtime)
+  - [Docker Engine](#mesos-containerizer-docker-engine)
 - [Exhibitor &amp; ZooKeeper](#mesos-exhibitor-zookeeper)
 - [Mesos\-DNS](#mesos-dns)
 
@@ -348,15 +348,15 @@ A Mesos resource offer provides a set of unallocated resources (e.g. cpu, disk, 
 
 ### <a name="mesos-containerizer"></a>Containerizer
 
-A containerizer provides a containerization and resource isolation abstraction around a specific container runtime. The supported runtimes are the Docker Engine and Universal Container Runtime.
-
-#### <a name="mesos-containerizer-docker-engine"></a>Docker Engine
-
-The [Docker Engine](https://www.docker.com/products/docker-engine) launches Docker containers from Docker images.
+A containerizer provides a containerization and resource isolation abstraction around a specific container runtime. The supported runtimes are the Universal Container Runtime and Docker Engine.
 
 #### <a name="mesos-containerizer-universal-container-runtime"></a>Universal Container Runtime
 
 The Universal Container Runtime launches Mesos containers from binary executables and Docker images. Mesos containers managed by the Universal Container Runtime do not use Docker Engine, even if launched from a Docker image.
+
+#### <a name="mesos-containerizer-docker-engine"></a>Docker Engine
+
+The [Docker Engine](https://www.docker.com/products/docker-engine) launches Docker containers from Docker images.
 
 ### <a name="mesos-exhibitor-zookeeper"></a>Exhibitor &amp; ZooKeeper
 
@@ -366,7 +366,7 @@ Mesos depends on ZooKeeper, a high-performance coordination service to manage th
 
 Mesos-DNS is a DC/OS component that provides service discovery within the cluster. Mesos-DNS allows applications and services that are running on Mesos to find each other by using the domain name system (DNS), similar to how services discover each other throughout the Internet.
 
-For more information, see the [Mesos-DNS documentation](/docs/1.10/networking/mesos-dns/).
+For more information, see the [Mesos-DNS documentation](/docs/1.11/networking/mesos-dns/).
 
 # <a name="marathon-concepts"></a>Marathon Concepts
 

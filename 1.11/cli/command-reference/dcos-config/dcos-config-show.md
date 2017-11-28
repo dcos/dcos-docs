@@ -4,7 +4,7 @@ menu_order: 2
 ---
 
 # Description
-Print the DC/OS configuration file contents of the currently [attached](/docs/1.10/cli/command-reference/dcos-cluster/dcos-cluster-attach/) cluster.
+Print the DC/OS configuration file contents of the currently [attached](/docs/1.11/cli/command-reference/dcos-cluster/dcos-cluster-attach/) cluster.
 
 # Usage
 
@@ -26,7 +26,7 @@ None.
 
 | Command | Description |
 |---------|-------------|
-| [dcos config](/docs/1.10/cli/command-reference/dcos-config/) |  Manage DC/OS configuration. |
+| [dcos config](/docs/1.11/cli/command-reference/dcos-config/) |  Manage DC/OS configuration. |
 
 # Examples
 

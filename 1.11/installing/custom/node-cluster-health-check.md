@@ -32,11 +32,11 @@ Custom health checks are binary files that you create and store on your filesyst
 Optionally you can configure the checks to output a human-readable message to stderr or stdout.
 
 ## Specifying Custom Health Checks
-Before installing DC/OS, you must specify custom health checks in the `custom_checks` installation configuration parameter. If you want to modify the configuration file after installation, you must follow the [DC/OS upgrade process](/docs/1.10/installing/upgrading/).
+Before installing DC/OS, you must specify custom health checks in the `custom_checks` installation configuration parameter. If you want to modify the configuration file after installation, you must follow the [DC/OS upgrade process](/docs/1.11/installing/upgrading/).
 
 If it's an absolute path (e.g., if you have an executable in `/usr/bin/`), you can specify it directly in the `cmd`. If you reference an executable by name without an absolute path (e.g., `echo` instead of `/usr/bin/echo`), the system will look for it by using this search path, and use the first executable that it finds: `/opt/mesosphere/bin:/usr/bin:/bin:/sbin`. 
 
-For a description of this parameter and examples, see the [configuration parameter documentation](/docs/1.10/installing/custom/configuration/configuration-parameters/#custom_checks).
+For a description of this parameter and examples, see the [configuration parameter documentation](/docs/1.11/installing/custom/configuration/configuration-parameters/#custom_checks).
 
 # Types of Health Checks
 
@@ -58,7 +58,7 @@ You can run these commands from your cluster node to invoke custom or predefined
 - DC/OS is installed and you are logged in with superuser permission.
 
 
-1.  [SSH to a cluster node](/docs/1.10/administering-clusters/sshcluster/).
+1.  [SSH to a cluster node](/docs/1.11/administering-clusters/sshcluster/).
 
     ```bash
     dcos node --master-proxy --mesos-id=<agent-node-id>

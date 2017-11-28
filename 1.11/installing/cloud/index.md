@@ -24,6 +24,6 @@ Not all clouds have template support, but not worry, you can still configure the
 
 - [Custom Installation Guides][3]
 
-[1]: /docs/1.10/installing/cloud/aws/
-[2]: /docs/1.10/installing/cloud/azure/
-[3]: /docs/1.10/installing/custom/
+[1]: /docs/1.11/installing/cloud/aws/
+[2]: /docs/1.11/installing/cloud/azure/
+[3]: /docs/1.11/installing/custom/

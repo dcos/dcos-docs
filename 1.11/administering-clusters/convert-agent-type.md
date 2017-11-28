@@ -6,13 +6,13 @@ menu_order: 700
 
 You can convert agent nodes to public or private for an existing DC/OS cluster. 
 
-Agent nodes are designated as [public](/docs/1.10/overview/concepts/#public-agent-node) or [private](/docs/1.10/overview/concepts/#private) during installation. By default, they are designated as private during [GUI][1] or [CLI][2] installation.
+Agent nodes are designated as [public](/docs/1.11/overview/concepts/#public-agent-node) or [private](/docs/1.11/overview/concepts/#private) during installation. By default, they are designated as private during [GUI][1] or [CLI][2] installation.
 
 ### Prerequisites:
 These steps must be performed on a machine that is configured as a DC/OS node. Any tasks that are running on the node will be terminated during this conversion process.
 
-*   DC/OS is installed using the [custom](/docs/1.10/installing/custom/) installation method and you have deployed at least one [master](/docs/1.10/overview/concepts/#master) and one [private](/docs/1.10/overview/concepts/#private) agent node.
-*   The archived DC/OS installer file (`dcos-install.tar`) from your [installation](/docs/1.10/installing/custom/gui/#backup).     
+*   DC/OS is installed using the [custom](/docs/1.11/installing/custom/) installation method and you have deployed at least one [master](/docs/1.11/overview/concepts/#master) and one [private](/docs/1.11/overview/concepts/#private) agent node.
+*   The archived DC/OS installer file (`dcos-install.tar`) from your [installation](/docs/1.11/installing/custom/gui/#backup).     
 *   The CLI JSON processor [jq](https://github.com/stedolan/jq/wiki/Installation).
 *   SSH installed and configured. This is required for accessing nodes in the DC/OS cluster.
 
@@ -36,7 +36,8 @@ You can determine the node type by running this command from the DC/OS CLI.
 1.  Uninstall DC/OS on the agent node.
 
     ```bash
-    sudo -i /opt/mesosphere/bin/pkgpanda uninstall
+    sudo /opt/mesosphere/bin/dcos-shell
+    sudo -i pkgpanda uninstall
     sudo systemctl stop dcos-mesos-slave
     sudo systemctl disable dcos-mesos-slave
     ```
@@ -51,10 +52,10 @@ You can determine the node type by running this command from the DC/OS CLI.
 
     ```bash
     sudo reboot
-    ```        
+    ```
 
 ### Install DC/OS and convert agent node
-Copy the archived DC/OS installer file (`dcos-install.tar`) to the node that that is being converted. This archive is created during the GUI or CLI [installation](/docs/1.10/installing/custom/gui/#backup) method.
+Copy the archived DC/OS installer file (`dcos-install.tar`) to the node that that is being converted. This archive is created during the GUI or CLI [installation](/docs/1.11/installing/custom/gui/#backup) method.
 
 1.  Copy the files to your agent node. For example, you can use Secure Copy (scp) to copy `dcos-install.tar` to your home directory:
 
@@ -94,5 +95,5 @@ Copy the archived DC/OS installer file (`dcos-install.tar`) to the node that tha
     sudo bash /opt/dcos_install_tmp/dcos_install.sh slave_public
     ```
 
- [1]: /docs/1.10/installing/custom/gui/
- [2]: /docs/1.10/installing/custom/cli/
+ [1]: /docs/1.11/installing/custom/gui/
+ [2]: /docs/1.11/installing/custom/cli/

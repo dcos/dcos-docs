@@ -31,7 +31,7 @@ The DC/OS installation creates these folders:
   </tr>
   <tr>
     <td><code>/var/lib/dcos/exhibitor/zookeeper</code></td>
-    <td>Contains the [ZooKeeper](/docs/1.10/overview/concepts/#zookeeper) data.</td>
+    <td>Contains the [ZooKeeper](/docs/1.11/overview/concepts/#zookeeper) data.</td>
   </tr>
   <tr>
     <td><code>/var/lib/docker</code></td>
@@ -50,7 +50,7 @@ The DC/OS installation creates these folders:
 **Important:** Changes to `/opt/mesosphere` are unsupported. They can lead to unpredictable behavior in DC/OS and prevent upgrades.
 
 ## Prerequisites
-Your cluster must meet the software and hardware [requirements](/docs/1.10/installing/custom/system-requirements/).
+Your cluster must meet the software and hardware [requirements](/docs/1.11/installing/custom/system-requirements/).
 
 # Configure your cluster
 
@@ -66,7 +66,7 @@ Your cluster must meet the software and hardware [requirements](/docs/1.10/insta
 
     **Important:** 
     
-    - The IP address of a node must not change after DC/OS is installed on the node. For example, the IP address should not change when a node is rebooted or if the DHCP lease is renewed. If the IP address of a node does change, the node must be [wiped and reinstalled](/docs/1.10/installing/custom/uninstall/).
+    - The IP address of a node must not change after DC/OS is installed on the node. For example, the IP address should not change when a node is rebooted or if the DHCP lease is renewed. If the IP address of a node does change, the node must be [wiped and reinstalled](/docs/1.11/installing/custom/uninstall/).
     - The script must return the same IP address as specified in the `config.yaml`. For example, if the private master IP is specified as `10.2.30.4` in the `config.yaml`, your script should return this same value when run on the master. 
 
     Create an IP detect script for your environment and save as `genconf/ip-detect`. This script needs to be `UTF-8` encoded and have a valid [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) line. You can use the examples below.
@@ -143,7 +143,7 @@ Your cluster must meet the software and hardware [requirements](/docs/1.10/insta
 
     In this step you create a YAML configuration file that is customized for your environment. DC/OS uses this configuration file during installation to generate your cluster installation files.
 
-    You can use this template to get started. This template specifies 3 masters, 5 [private](/docs/1.10/overview/concepts/#private) agents, 1 [public](/docs/1.10/overview/concepts/#public-agent-node) agent, a custom proxy, and SSH configuration specified. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][6].
+    You can use this template to get started. This template specifies 3 masters, 5 [private](/docs/1.11/overview/concepts/#private) agents, 1 [public](/docs/1.11/overview/concepts/#public-agent-node) agent, a custom proxy, and SSH configuration specified. If your servers are installed with a domain name in your `/etc/resolv.conf`, you should add `dns_search` to your `config.yaml` file. For parameters descriptions and configuration examples, see the [documentation][6].
 
     **Tips:** 
         
@@ -196,7 +196,7 @@ In this step you create a custom DC/OS build file on your bootstrap node and the
 
 **Important:**
 
-- Do not install DC/OS until you have these items working: ip-detect script, DNS, and NTP everywhere. For help with troubleshooting, see the [documentation](/docs/1.10/installing/troubleshooting/).
+- Do not install DC/OS until you have these items working: ip-detect script, DNS, and NTP everywhere. For help with troubleshooting, see the [documentation](/docs/1.11/installing/troubleshooting/).
 - If something goes wrong and you want to rerun your setup, use these cluster [cleanup instructions][7].
 
 To install DC/OS:
@@ -329,19 +329,19 @@ To install DC/OS:
 
 6.  Monitor Exhibitor and wait for it to converge at `http://<master-public-ip>:8181/exhibitor/v1/ui/index.html`.
 
-    __Tip:__ If you encounter errors such as `Time is marked as bad`, `adjtimex`, or `Time not in sync` during Post-Flight, verify that Network Time Protocol (NTP) is enabled on all nodes. For more information, see the [system requirements](/docs/1.10/installing/custom/system-requirements/#port-and-protocol).
+    __Tip:__ If you encounter errors such as `Time is marked as bad`, `adjtimex`, or `Time not in sync` during Post-Flight, verify that Network Time Protocol (NTP) is enabled on all nodes. For more information, see the [system requirements](/docs/1.11/installing/custom/system-requirements/#port-and-protocol).
 
-    ![alt text](/docs/1.10/img/chef-zk-status.png)
+    ![alt text](/docs/1.11/img/chef-zk-status.png)
 
     When the status icons are green, you can access the DC/OS web interface.
 
 7.  Launch the DC/OS web interface at `http://<public-master-ip>/` and login. If this doesn't work, take a look at the [troubleshooting docs][9]
 
-    ![alt text](/docs/1.10/img/ui-installer-login.gif)
+    ![alt text](/docs/1.11/img/ui-installer-login.gif)
 
     You are done!
 
-    ![DC/OS dashboard](/docs/1.10/img/dcos-gui.png)
+    ![DC/OS dashboard](/docs/1.11/img/dcos-gui.png)
 
 # <a name="backup"></a>(Optional) Backup your DC/OS installer files
 It is recommended that you save your DC/OS installer file immediately after installation completes and before you start using DC/OS. These installer files can be used to add more agent nodes to your cluster, including the [public agent][4] node.
@@ -395,11 +395,11 @@ After DC/OS is installed and deployed across your cluster, you can add more agen
     18:17:14:: ====> 10.10.0.160:22 FAILED
     ```
 
- [2]: /docs/1.10/cli/install/
- [4]: /docs/1.10/installing/custom/system-requirements/
+ [2]: /docs/1.11/cli/install/
+ [4]: /docs/1.11/installing/custom/system-requirements/
  [5]: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
- [6]: /docs/1.10/installing/custom/configuration/configuration-parameters/
- [7]: /docs/1.10/installing/custom/uninstall/
- [9]: /docs/1.10/installing/troubleshooting/
- [10]: /docs/1.10/security/user-management/
- [11]: /docs/1.10/administering-clusters/convert-agent-type/
+ [6]: /docs/1.11/installing/custom/configuration/configuration-parameters/
+ [7]: /docs/1.11/installing/custom/uninstall/
+ [9]: /docs/1.11/installing/troubleshooting/
+ [10]: /docs/1.11/security/user-management/
+ [11]: /docs/1.11/administering-clusters/convert-agent-type/

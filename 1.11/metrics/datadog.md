@@ -12,7 +12,7 @@ The Datadog metrics plugin for DC/OS supports sending metrics from the DC/OS met
 
 **Prerequisite:**
 
-- DC/OS is [installed](/docs/1.10/installing/)
+- DC/OS is [installed](/docs/1.11/installing/)
 - [Go programming environment](https://golang.org/doc/install) <!-- dcos-metrics must be run from within the go directory -->
 -  Git:
    -  **macOS:** Get the installer from [Git downloads](http://git-scm.com/download/mac).
@@ -49,7 +49,7 @@ The Datadog metrics plugin for DC/OS supports sending metrics from the DC/OS met
 Install the `datadog` package in DC/OS:
 
 1.  Go to the **Catalog** tab of the DC/OS GUI and find the **Datadog** package.
-    ![datadog package](/docs/1.10/img/datadog-package.png)
+    ![datadog package](/docs/1.11/img/datadog-package.png)
 1.  Click **INSTALL PACKAGE** -> **ADVANCED INSTALLATION** and enter [your Datadog API_KEY](https://app.datadoghq.com/account/settings#api).
 1.  Click **REVIEW AND INSTALL** to complete your installation.
 
@@ -77,7 +77,7 @@ When you're happy with the test results, you'll need to install the plugin into 
 ### Create a valid auth token for DC/OS
 Follow the instructions based on whether you are using Enterprise or open source DC/OS:
 
-- [Enterprise DC/OS](https://docs.mesosphere.com/1.10/security/service-auth/custom-service-auth/)
+- [Enterprise DC/OS](https://docs.mesosphere.com/1.11/security/service-auth/custom-service-auth/)
 - [Open source DC/OS](/docs/1.11/security/managing-authentication/)
 
 You will use this auth token below.
@@ -91,7 +91,7 @@ You will use this auth token below.
     ```
 
 
-1.  [SSH to your master node](/docs/1.10/administering-clusters/sshcluster/) and assign permissions to the plugin.
+1.  [SSH to your master node](/docs/1.11/administering-clusters/sshcluster/) and assign permissions to the plugin.
 
     ```bash
     dcos node ssh --master-proxy --leader

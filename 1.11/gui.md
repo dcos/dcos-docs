@@ -12,7 +12,7 @@ Additionally, there is a User Menu on the upper-left side of the web interface t
 
 The dashboard is the home page of the DC/OS web interface and provides an overview of your DC/OS cluster.
 
-![Dashboard](/docs/1.10/img/dcos-gui.png)
+![Dashboard](/docs/1.11/img/dcos-gui.png)
 
 *   The CPU Allocation panel provides a graph of the current percentage of available general compute units that are being used by your cluster.
 
@@ -32,7 +32,7 @@ The dashboard is the home page of the DC/OS web interface and provides an overvi
 
 The Services tab provides a full-featured interface to the native DC/OS Marathon instance. This Services tab provides a comprehensive view of all of the services that you are running. You can filter services by health, status, or service name.
 
-![Services](/docs/1.10/img/dcos-services.png)
+![Services](/docs/1.11/img/dcos-services.png)
 
 By default, all of your services are displayed, sorted by service name. You can also sort the services by health status, CPU, memory, or disk space allocated.
 
@@ -44,61 +44,61 @@ By default, all of your services are displayed, sorted by service name. You can 
 
 Click the service name to opens the Instances panel, which provides CPU, memory, and disk usage graphs and lists all tasks using the service. Click a task listed on the Instances panel to see detailed information about the task’s CPU, memory, and disk usage and the task’s files and directory tree.
 
-For services with a web interface, hover over the service name and click ![open service](/docs/1.10/img/open-service.png) to view it.
+For services with a web interface, hover over the service name and click ![open service](/docs/1.11/img/open-service.png) to view it.
 
 **Tip:** You can access the Mesos web interface at `<hostname>/mesos`.
 
 # <a name="jobs"></a>Jobs
 
-The Jobs tab provides native support for creating and administering scheduled jobs. You can set up jobs with a schedule in cron format. For more information, see the [documentation](/docs/1.10/deploying-jobs/).
+The Jobs tab provides native support for creating and administering scheduled jobs. You can set up jobs with a schedule in cron format. For more information, see the [documentation](/docs/1.11/deploying-jobs/).
 
-![Jobs](/docs/1.10/img/dcos-jobs.png)
+![Jobs](/docs/1.11/img/dcos-jobs.png)
 
 # <a name="catalog"></a>Catalog
 
-The Catalog tab shows all of the available DC/OS services from package [repositories](/docs/1.10/administering-clusters/repo/). You can install packages from the DC/OS Universe with a single click. The packages can be installed with defaults or customized directly in the web interface.
+The Catalog tab shows all of the available DC/OS services from package [repositories](/docs/1.11/administering-clusters/repo/). You can install packages from the DC/OS Universe with a single click. The packages can be installed with defaults or customized directly in the web interface.
 
-![Catalog](/docs/1.10/img/ui-dashboard-catalog.png)
+![Catalog](/docs/1.11/img/ui-dashboard-catalog.png)
 
 # <a name="nodes"></a>Nodes
 
 The Nodes tab provides a comprehensive view of all of the nodes that are used across your cluster. You can view a graph that shows the allocation percentage rate for CPU, memory, or disk.
 
-![Nodes](/docs/1.10/img/dcos-nodes.png)
+![Nodes](/docs/1.11/img/dcos-nodes.png)
 
 By default all of your nodes are displayed in **List** view, sorted by hostname. You can filter nodes by service type or hostname. You can also sort the nodes by number of tasks or percentage of CPU, memory, or disk space allocated.
 
 You can switch to **Grid** view to see a "donuts" percentage visualization.
 
-![Nodes](/docs/1.10/img/dcos-donuts.png)
+![Nodes](/docs/1.11/img/dcos-donuts.png)
 
 Clicking on a node opens the Nodes side panel, which provides CPU, memory, and disk usage graphs and lists all tasks on the node. Use the dropdown or a custom filter to sort tasks and click on details for more information. Click on a task listed on the Nodes side panel to see detailed information about the task’s CPU, memory, and disk usage and the task’s files and directory tree.
 
 # <a name="network"></a>Networking
 
-The Network tab provides information for troubleshooting your virtual networks. You can see which containers are on which network and see their IP addresses. For more information, see the [documentation](/docs/1.10/networking/virtual-networks/ip-per-container/).
+The Network tab provides information for troubleshooting your virtual networks. You can see which containers are on which network and see their IP addresses. For more information, see the [documentation](/docs/1.11/networking/virtual-networks/ip-per-container/).
 
-![Network](/docs/1.10/img/ui-dashboard-network.png)
+![Network](/docs/1.11/img/ui-dashboard-network.png)
 
 # <a name="system"></a>Overview
 View the cluster details from the **Overview** tab.
 
-![Overview](/docs/1.10/img/overview.png)
+![Overview](/docs/1.11/img/overview.png)
 
 # Components
 View the system health of your DC/OS components from the **Components** tab.
 
-![Components](/docs/1.10/img/component-system-view.png)
+![Components](/docs/1.11/img/component-system-view.png)
 
 # Settings
 Manage your DC/OS package repositories from the **Settings** tab.
 
-![Settings](/docs/1.10/img/package-repositories.png)
+![Settings](/docs/1.11/img/package-repositories.png)
 
 # Organization
 Manage user access from the **Organization** tab.
 
-![Organization](/docs/1.10/img/organization.png)
+![Organization](/docs/1.11/img/organization.png)
 
 
 [3]: https://mesosphere.github.io/marathon/docs/health-checks.html

@@ -5,7 +5,7 @@ menu_order: 05
 
 This document discusses the high availability (HA) features in DC/OS and best practices for building HA applications on DC/OS.
 
-DC/OS multiple zone (multi-AZ) configuration support is [preview](/docs/1.10/overview/feature-maturity/#preview) and multiple region configuration support is [experimental](/docs/1.10/overview/feature-maturity/#experimental).
+DC/OS multiple zone (multi-AZ) configuration support is [preview](/docs/1.11/overview/feature-maturity/#preview) and multiple region configuration support is [experimental](/docs/1.11/overview/feature-maturity/#experimental).
 
 # Terminology
 
@@ -54,7 +54,7 @@ Fault domain isolation is an important part of building HA systems. To correctly
  * Physical domains: this includes machine, rack, datacenter, region, and availability zone.
  * Network domains: machines within the same network may be subject to network partitions. For example, a shared network switch may fail or have invalid configuration.
 
-For more information, see the [multi-zone](/docs/1.10/networking/high-availability/multi-zone/) and [multi-region](/docs/1.10/networking/high-availability/multi-region/) documentation.
+For more information, see the [multi-zone](/docs/1.11/installing/high-availability/multi-zone/) and [multi-region](/docs/1.11/installing/high-availability/multi-region/) documentation.
 
 For applications which require HA, they should also be distributed across fault domains. With Marathon, this can be accomplished by using the [`UNIQUE`  and `GROUP_BY` constraints operator](https://mesosphere.github.io/marathon/docs/constraints.html).
 
@@ -80,7 +80,7 @@ Fast failure detection comes in many forms. Services like ZooKeeper can be used 
 
 When failures do occur, failover [should be as fast as possible](https://en.wikipedia.org/wiki/Fail-fast). Fast failover can be achieved by:
 
- * Using an HA load balancer like [Marathon-LB](/docs/1.10/networking/marathon-lb/), or the internal [Layer 4 load balancer](/docs/1.10/networking/load-balancing-vips/).
+ * Using an HA load balancer like [Marathon-LB](/docs/1.11/networking/marathon-lb/), or the internal [Layer 4 load balancer](/docs/1.11/networking/load-balancing-vips/).
  * Building apps in accordance with the [12-factor app](http://12factor.net/) manifesto.
  * Following REST best-practices when building services: in particular, avoiding storing client state on the server between requests.
 

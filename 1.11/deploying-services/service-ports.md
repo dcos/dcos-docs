@@ -3,7 +3,7 @@ post_title: Service Ports
 menu_order: 003.3
 ---
 
-You can use [virtual addresses (VIPs)](/docs/1.10/networking/load-balancing-vips/virtual-ip-addresses/) to make ports management easier. VIPs simplify inter-app communication and implement a reliable service-oriented architecture. VIPs map traffic from a single virtual address to multiple IP addresses and ports.
+You can use [virtual addresses (VIPs)](/docs/1.11/networking/load-balancing-vips/virtual-ip-addresses/) to make ports management easier. VIPs simplify inter-app communication and implement a reliable service-oriented architecture. VIPs map traffic from a single virtual address to multiple IP addresses and ports.
 
 # Definitions
 
@@ -195,18 +195,20 @@ Port mappings are similar to passing -p into the Docker command line and specify
 Port mappings are specified inside the `portMappings` object for a `container`:
 
 ```json
-  "container": {
-    "type": "DOCKER",
-    "docker": {
-      "image": "my-image:1.0",
-      "network": "BRIDGE",
-      "portMappings": [
-        { "containerPort": 0, "hostPort": 0 },
-        { "containerPort": 0, "hostPort": 0 },
-        { "containerPort": 0, "hostPort": 0 }
-      ]
-    }
+"networks": [
+      { "mode": "container/bridge" }
+],
+"container": {
+  "type": "DOCKER",
+  "docker": {
+    "image": "my-image:1.0",
   },
+  "portMappings": [
+    { "containerPort": 0, "hostPort": 0 },
+    { "containerPort": 0, "hostPort": 0 },
+    { "containerPort": 0, "hostPort": 0 }
+  ]
+}
 ```
 
 In this example, we specify 3 mappings. A value of 0 will ask Marathon to randomly assign a value for `hostPort`. In this case, setting `containerPort` to 0 will cause it to have the same value as `hostPort`. These values are available inside the container as `$PORT0`, `$PORT1` and `$PORT2` respectively.
@@ -214,18 +216,20 @@ In this example, we specify 3 mappings. A value of 0 will ask Marathon to random
 Alternatively, if our process running in the container had fixed ports, we might do something like the following:
 
 ```json
-  "container": {
-    "type": "DOCKER",
-    "docker": {
-      "image": "my-image:1.0",
-      "network": "BRIDGE",
-      "portMappings": [
-        { "containerPort": 80, "hostPort": 0 },
-        { "containerPort": 443, "hostPort": 0 },
-        { "containerPort": 4000, "hostPort": 0 }
-      ]
-    }
+"networks": [
+      { "mode": "container/bridge" }
+],
+"container": {
+  "type": "DOCKER",
+  "docker": {
+    "image": "my-image:1.0"
   },
+  "portMappings": [
+    { "containerPort": 80, "hostPort": 0 },
+    { "containerPort": 443, "hostPort": 0 },
+    { "containerPort": 4000, "hostPort": 0 }
+  ]
+}
 ```
 
 In this case, Marathon will randomly allocate host ports and map these to ports `80`, `443` and `4000` respectively. It's important to note that the `$PORT` variables refer to the host ports. In this case, `$PORT0` will be set to the value of `hostPort` for the first mapping and so on.
@@ -235,18 +239,20 @@ In this case, Marathon will randomly allocate host ports and map these to ports 
 You can also specify the protocol for these port mappings. The default is `tcp`:
 
 ```json
-  "container": {
-    "type": "DOCKER",
-    "docker": {
-      "image": "my-image:1.0",
-      "network": "BRIDGE",
-      "portMappings": [
-        { "containerPort": 80, "hostPort": 0, "protocol": "tcp" },
-        { "containerPort": 443, "hostPort": 0, "protocol": "tcp" },
-        { "containerPort": 4000, "hostPort": 0, "protocol": "udp" }
-      ]
-    }
+"networks": [
+  { "mode": "container/bridge" }
+],
+"container": {
+  "type": "DOCKER",
+  "docker": {
+    "image": "my-image:1.0"
   },
+  "portMappings": [
+    { "containerPort": 80, "hostPort": 0, "protocol": "tcp" },
+    { "containerPort": 443, "hostPort": 0, "protocol": "tcp" },
+    { "containerPort": 4000, "hostPort": 0, "protocol": "udp" }
+  ]
+}
 ```
 
 #### Specifying Service Ports
@@ -254,18 +260,20 @@ You can also specify the protocol for these port mappings. The default is `tcp`:
 By default, Marathon will be creating service ports for each of these ports and assigning them random values. Service ports are used by service discovery solutions and it is often desirable to set these to well known values. You can do this by setting a `servicePort` for each mapping:
 
 ```json
-  "container": {
-    "type": "DOCKER",
-    "docker": {
-      "image": "my-image:1.0",
-      "network": "BRIDGE",
-      "portMappings": [
-        { "containerPort": 80, "hostPort": 0, "protocol": "tcp", "servicePort": 2000 },
-        { "containerPort": 443, "hostPort": 0, "protocol": "tcp", "servicePort": 2001 },
-        { "containerPort": 4000, "hostPort": 0, "protocol": "udp", "servicePort": 3000 }
-      ]
-    }
+"networks": [
+  { "mode": "container/bridge" }
+],
+"container": {
+  "type": "DOCKER",
+  "docker": {
+    "image": "my-image:1.0"
   },
+  "portMappings": [
+    { "containerPort": 80, "hostPort": 0, "protocol": "tcp", "servicePort": 2000 },
+    { "containerPort": 443, "hostPort": 0, "protocol": "tcp", "servicePort": 2001 },
+    { "containerPort": 4000, "hostPort": 0, "protocol": "udp", "servicePort": 3000 }
+  ]
+}
 ```
 
 In this example, the host ports `$PORT0`, `$PORT1` and `$PORT3` remain randomly assigned. However, the service ports for this application are now `2001`, `2002` and `3000`. An external proxy, like HAProxy, should be configured to route from the service ports to the host ports.

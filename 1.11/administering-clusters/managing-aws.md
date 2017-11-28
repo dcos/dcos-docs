@@ -20,7 +20,7 @@ Your new machines will take a few minutes to initialize; you can watch them in t
 
 <!-- ## Upgrading
 
-See the upgrade [documentation](/docs/1.10/installing/cloud/aws/upgrading/). -->
+See the upgrade [documentation](/docs/1.11/installing/cloud/aws/upgrading/). -->
 
- [2]: /docs/1.10/installing/cloud/aws/
+ [2]: /docs/1.11/installing/cloud/aws/
  [3]: https://console.aws.amazon.com/cloudformation/home

@@ -5,19 +5,19 @@ feature_maturity: preview
 ---
 
 
-You can install and run DC/OS services on a datacenter without internet access with a local [Universe](https://github.com/mesosphere/universe). You can install a local Universe that includes the default packages (easiest), or select your own set of local Universe packages (advanced).
+You can install and run DC/OS services on a datacenter without internet access with a local [Universe](https://github.com/mesosphere/universe). You can deploy a local Universe that includes all Certified packages (easiest), or a local Universe that includes selected packages (advanced).
 
 **Prerequisites:**
 
-- [DC/OS CLI installed](/docs/1.10/cli/install/).
+- [DC/OS CLI installed](/docs/1.11/cli/install/).
 
-- Logged into the DC/OS CLI via `dcos auth login`. On Enterprise DC/OS, you must be logged in as a user with the `dcos:superuser` permission.
+- Logged into the DC/OS CLI. On Enterprise DC/OS, you must be logged in as a user with the `dcos:superuser` permission.
 
 **Note:** As the Universe tarball is over two gigabytes in size it may take some time to download it to your local drive and upload it to each master.
 
-# <a name="default"></a>Installing the default Universe packages
+# <a name="certified"></a>Deploying a local Universe containing Certified Universe packages
 
-1.  From a terminal prompt, use the following cURL commands to download the local Universe and its service definitions onto your local drive.
+1.  From a terminal prompt, use the following commands to download the local Universe and its service definitions onto your local drive.
 
     ```bash
     curl -v https://downloads.mesosphere.com/universe/public/local-universe.tar.gz -o local-universe.tar.gz
@@ -25,7 +25,7 @@ You can install and run DC/OS services on a datacenter without internet access w
     curl -v https://raw.githubusercontent.com/mesosphere/universe/version-3.x/docker/local-universe/dcos-local-universe-registry.service -o dcos-local-universe-registry.service
     ```
 
-1.  Use [secure copy](https://linux.die.net/man/1/scp) to transfer the Universe and registry files to a master node. Replace `<master-IP>` with the public IP address of a master before issuing the following commands.
+1.  Use [secure copy](https://linux.die.net/man/1/scp) to transfer the Universe and registry files to a master node, replacing `<master-IP>` with the public IP address of a master before issuing the following commands.
 
      **Tip:** You can find the public IP address of a master in the top left corner of the DC/OS web interface.
 
@@ -35,7 +35,7 @@ You can install and run DC/OS services on a datacenter without internet access w
     scp dcos-local-universe-registry.service core@<master-IP>:~
     ```
 
-1.  [SSH](/docs/1.10/administering-clusters/sshcluster/) into the master using the following command. Replace `<master-IP>` with the IP address used in the previous commands.
+1.  [SSH](/docs/1.11/administering-clusters/sshcluster/) into the master using the following command. Replace `<master-IP>` with the IP address used in the previous commands.
 
     ```bash
     ssh -A core@<master-IP>
@@ -63,7 +63,7 @@ You can install and run DC/OS services on a datacenter without internet access w
 1.  Confirm that the files were successfully copied into `/etc/systemd/system/`.
 
     ```bash
-    ls -la /etc/systemd/system/
+    ls -la /etc/systemd/system/dcos-local-universe-*
     ```
 
 1.  Load the Universe into the local Docker instance.
@@ -83,8 +83,8 @@ You can install and run DC/OS services on a datacenter without internet access w
 1.  Enable and start the `dcos-local-universe-http` and `dcos-local-universe-registry` services.
 
     ```bash
-    systemctl enable dcos-local-universe-http
-    systemctl enable dcos-local-universe-registry
+    sudo systemctl enable dcos-local-universe-http
+    sudo systemctl enable dcos-local-universe-registry
     sudo systemctl start dcos-local-universe-http
     sudo systemctl start dcos-local-universe-registry
     ```
@@ -114,7 +114,7 @@ You can install and run DC/OS services on a datacenter without internet access w
     scp /etc/systemd/system/dcos-local-universe-http.service core@<master-IP>:~
     ```
 
-1.  [SSH](/docs/1.10/administering-clusters/sshcluster/) into the master that you just copied these files to.
+1.  [SSH](/docs/1.11/administering-clusters/sshcluster/) into the master that you just copied these files to.
 
     ```bash
     ssh -A core@<master_IP>
@@ -142,7 +142,7 @@ You can install and run DC/OS services on a datacenter without internet access w
 1.  Confirm that the files were successfully copied into `/etc/systemd/system/`.
 
     ```bash
-    ls -la /etc/systemd/system/
+    ls -la /etc/systemd/system/dcos-local-universe-*
     ```
 
 1.  Load the Universe into the local Docker instance.
@@ -175,25 +175,25 @@ You can install and run DC/OS services on a datacenter without internet access w
 
 1.  Repeat steps 14 through 23 until you have completed this procedure for all of your masters. Then continue to the next step.
 
-1.  Close the SSH session by typing `exit` or open a new terminal prompt tab.
+1.  Close the SSH session by typing `exit` or open a new terminal prompt.
 
      **Tip:** You may have to exit more than one SSH session if you have multiple masters.
 
-1.  (Optional) Use the following command to remove the references to the default Universe from your cluster. If you want to leave the default Universe in place and just add the local Universe as an additional repository, you can skip to the next step.
+1.  (Optional) Use the following command to remove the references to the default Universe from your cluster. If you want to leave the default Universe in place and just add the local Universe as an additional repository, skip to the next step.
 
     ```bash
     dcos package repo remove Universe
     ```
 
-    **Tip:** You can also remove the references to the default Universe repository from **Settings** > **Repositories** in the DC/OS web interface.
+    **Tip:** You can also remove the references to the default Universe repository from **Settings** > **Package Repositories** in the DC/OS web interface.
 
-1.  Use the following command to add a reference to the new local Universes that you added to each master.
+1.  Use the following command to add a reference to the local Universes that you added to each master.
 
     ```bash
     dcos package repo add local-universe http://master.mesos:8082/repo
     ```
 
-1.  [SSH into one of your agent nodes.](/docs/1.10/administering-clusters/sshcluster/)
+1.  [SSH into one of your agent nodes.](/docs/1.11/administering-clusters/sshcluster/)
 
     ```bash
     dcos node ssh --master-proxy --mesos-id=<mesos-id>
@@ -207,9 +207,26 @@ You can install and run DC/OS services on a datacenter without internet access w
     sudo systemctl restart docker
     ```
 
-1.  Close the SSH session by typing `exit` or open a new terminal prompt tab. Repeat steps 28 and 29 on each agent node.
+1. Configure the Apache Mesos fetcher to trust the downloaded Docker certificate.
 
-1.  To verify your success, log into the DC/OS web interface and click the **Catalog** tab. You should see a list of selected packages. Go ahead and try to install one of the packages.
+   1. Copy the certificate:
+   ```
+   sudo cp /etc/docker/certs.d/master.mesos:5000/ca.crt /var/lib/dcos/pki/tls/certs/docker-registry-ca.crt
+   ```
+   1. Generate a hash:
+   ```
+   cd /var/lib/dcos/pki/tls/certs/
+   openssl x509 -hash -noout -in docker-registry-ca.crt
+   ```
+   1. Create a soft link:
+   ```
+   sudo ln -s /var/lib/dcos/pki/tls/certs/docker-registry-ca.crt /var/lib/dcos/pki/tls/certs/<hash_number>.0
+   ```
+   **Note:** You will need to create the `/pki/tls/certs` directory on the public agent.
+
+1.  Close the SSH session by typing `exit` or open a new terminal prompt. Repeat steps 28-30 on each agent node.
+
+1.  To verify your success, log into the DC/OS web interface and click the **Catalog** tab. You should see a list of Certified packages. Install one of the packages.
 
 
 
@@ -225,13 +242,13 @@ You can install and run DC/OS services on a datacenter without internet access w
 
 *   **I don't see the package I was looking for**
 
-    By default, only the `selected` packages are bundled. If you'd like to get something else, use the build your own [instructions][4].
+    By default, only Certified packages are bundled. If you'd like to get something else, use the instructions in the next section.
 
-# <a name="build"></a>Installing your own set of Universe packages
+# <a name="build"></a>Deploying a local Universe containing selected packages
 
 **Prerequisite:** [Git](https://git-scm.com/). On Unix/Linux, see these <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank">installation instructions</a>.
 
-To install your own set of packages you must build a customized local Universe Docker image.
+To deploy a local Universe containing your own set of packages you must build a customized local Universe Docker image.
 
 1.  Clone the Universe repository:
 
@@ -249,22 +266,18 @@ To install your own set of packages you must build a customized local Universe D
 3.  Build the `mesosphere/universe` Docker image and compress it to the `local-universe.tar.gz`
 file. Specify a comma-separated list of package names and versions using the `DCOS_PACKAGE_INCLUDE`
 variable. To minimize the container size and download time, you can select only what you need. If
-you do not use the `DCOS_PACKAGE_INCLUDE` variable, all *selected* Universe packages will be
-included. To view which packages are selected, click the **Catalog** tab in the DC/OS web
+you do not use the `DCOS_PACKAGE_INCLUDE` variable, all Certified Universe packages are
+included. To view which packages are Certified, click the **Catalog** tab in the DC/OS web
 interface.
 
     ```bash
     sudo make DCOS_VERSION=1.10 DCOS_PACKAGE_INCLUDE="cassandra:1.0.25-3.0.10,marathon:1.4.2" local-universe
     ```
 
-4.  Perform all of the steps as described in [Installing the default Universe packages][5] section, except step 27. Replace the command in step 27 with the following.
+4.  Perform all of the steps as described in [Deploying a local Universe containing Certified Universe packages][5], except step 27. Replace the command in step 27 with the following.
 
     ```bash
     dcos package repo add local-universe http://master.mesos:8082/repo
     ```
 
- [1]: https://downloads.mesosphere.com/universe/public/local-universe.tar.gz
- [2]: https://raw.githubusercontent.com/mesosphere/universe/version-3.x/local/dcos-local-universe-http.service
- [3]: https://raw.githubusercontent.com/mesosphere/universe/version-3.x/local/dcos-local-universe-registry.service
- [4]: #build
- [5]: #default
+ [5]: #certified

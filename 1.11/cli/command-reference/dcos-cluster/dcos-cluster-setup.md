@@ -41,7 +41,7 @@ If you do not specify one of the SSL options `--insecure`, `--no-check`, or `--c
 
 | Command | Description |
 |---------|-------------|
-| [dcos cluster](/docs/1.10/cli/command-reference/dcos-cluster/) | Manage DC/OS clusters. |
+| [dcos cluster](/docs/1.11/cli/command-reference/dcos-cluster/) | Manage DC/OS clusters. |
 
 # Examples
-For examples, see the [Connecting to Multiple Clusters](/docs/1.10/cli/multi-cluster-cli/) documentation.
+For examples, see the [Connecting to Multiple Clusters](/docs/1.11/cli/multi-cluster-cli/) documentation.
