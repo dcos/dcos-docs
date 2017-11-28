@@ -6,13 +6,13 @@ menu_order: 6
 
 During installation, the DC/OS component services are all started in parallel but initialize and become responsive in a relatively consistent sequence because of interdependencies.
 
-The DC/OS Diagnostics (3DT) service monitors component service and node health. A node is marked as healthy when all its component services are healthy.
+The DC/OS Diagnostics service monitors component service and node health. A node is marked as healthy when all its component services are healthy.
 
 ## Master nodes
 
 The following is the boot sequence of DC/OS component services on each master node.
 
-1. DC/OS Diagnostics (3DT) starts
+1. DC/OS Diagnostics starts
     1. Polls systemd for component status
     1. Reports node unhealthy until all components (systemd services) are healthy
     1. Reports cluster unhealthy until all master nodes are healthy
@@ -48,7 +48,7 @@ The following is the boot sequence of DC/OS component services on each master no
 
 The following is the boot sequence of DC/OS components on each agent node.
 
-1. DC/OS Diagnostics (3DT) starts
+1. DC/OS Diagnostics starts
     1. Polls systemd for component status
     1. Reports node unhealthy until all components (systemd services) are healthy
 1. Mesos Agent starts
@@ -91,4 +91,4 @@ The following is the boot sequence of a DC/OS scheduler service.
 
 ### More Information
 
-For more information about tasks and services, see [Distributed Process Management](/docs/1.10/overview/architecture/distributed-process-management/).
+For more information about tasks and services, see [Distributed Process Management](/docs/1.11/overview/architecture/distributed-process-management/).

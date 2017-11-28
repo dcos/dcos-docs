@@ -7,7 +7,7 @@ menu_order: 200
 The advanced AWS CloudFormation templates bring power and flexibility to creating and extending DC/OS clusters. With these templates you can choose from the complete set of DC/OS configuration options.
  
  - Instantiate a complete DC/OS cluster on an existing VPC/Subnet combination.
- - Extend and update existing DC/OS clusters by adding more [agent](/docs/1.10/overview/concepts/#agent) nodes. 
+ - Extend and update existing DC/OS clusters by adding more [agent](/docs/1.11/overview/concepts/#agent) nodes. 
  
 The templates are used together in conjunction to create a DC/OS cluster. The templates are driven by parameters that AWS CloudFormation uses to create each stack.  
 
@@ -25,7 +25,7 @@ An AWS EC2 <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.xlar
 - An AWS EC2 Key Pair for the same region as your cluster. Key pairs cannot be shared across regions. The AWS key pair uses public-key cryptography to provide secure login to your AWS cluster. For more information about creating an AWS EC2 Key Pair, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair" target="_blank">documentation</a>.
 - AWS [Command Line Interface](https://aws.amazon.com/cli/).
 - The CLI JSON processor [jq](https://github.com/stedolan/jq/wiki/Installation)
-* A node that meets the bootstrap node [system requirements](/docs/1.10/installing/custom/system-requirements/).
+* A node that meets the bootstrap node [system requirements](/docs/1.11/installing/custom/system-requirements/).
 * An AWS S3 bucket with read-write access.
     * The S3 bucket must have a bucket policy that allows the launched AWS instances to download the files from the S3 bucket. Here is a sample policy that allows anyone to download:
     
@@ -63,7 +63,7 @@ An AWS EC2 <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.xlar
     aws_template_storage_secret_access_key: <your-secret-access_key>
     ```
     
-    For parameters descriptions and configuration examples, see the [documentation](/docs/1.10/installing/custom/configuration/configuration-parameters/).
+    For parameters descriptions and configuration examples, see the [documentation](/docs/1.11/installing/custom/configuration/configuration-parameters/).
     
 1.  Run the DC/OS installer script with the AWS argument specified. This command creates and uploads a custom build of the DC/OS artifacts and templates to the specified S3 bucket.
 
@@ -149,13 +149,13 @@ Use the `zen.sh` script to create the Zen template dependencies. These dependenc
 ## <a name="launch"></a>Launch the DC/OS advanced template on CloudFormation
 
 1.  Go to [CloudFormation](https://console.aws.amazon.com/cloudformation/home) and click **Create Stack**.
-1.  On the **Select Template** page, upload the [Zen](/docs/1.10/installing/cloud/aws/advanced/template-reference/#zen) template (e.g. `https://s3-us-west-2.amazonaws.com/dcos/templates/dcos/config_id/6a7451f6dec/cloudformation/el7-zen-1.json`) from your workstation and click **Next**.
+1.  On the **Select Template** page, upload the [Zen](/docs/1.11/installing/cloud/aws/advanced/template-reference/#zen) template (e.g. `https://s3-us-west-2.amazonaws.com/dcos/templates/dcos/config_id/6a7451f6dec/cloudformation/el7-zen-1.json`) from your workstation and click **Next**.
 1.  On the **Specify Details** page, specify these values and and click **Next**.
 
-    ![AWS UI](/docs/1.10/img/aws-advanced-1.png)
+    ![AWS UI](/docs/1.11/img/aws-advanced-1.png)
 
     *  **Stack name** Specify the cluster name.
-    *  **CustomAMI** Optional: Specify the AMI ID. For more information, see [Installing Using a Custom AMI](/docs/1.10/installing/cloud/aws/advanced/aws-ami).
+    *  **CustomAMI** Optional: Specify the AMI ID. For more information, see [Installing Using a Custom AMI](/docs/1.11/installing/cloud/aws/advanced/aws-ami).
     *  **InternetGateway** Specify the `InternetGatewayID` output value from the `zen.sh` script. The Internet Gateway ID must be attached to the VPC. This Internet Gateway will be used by all nodes for outgoing internet access.
     *  **KeyName** Specify your AWS EC2 Key Pair.
     *  **MasterInstanceType** Specify the AWS EC2 instance type. The <a href="https://aws.amazon.com/ec2/pricing/" target="_blank">m3.xlarge</a> instance type is recommended.
@@ -181,7 +181,7 @@ In CloudFormation you should see:
 
 *  The cluster stack spins up over a period of 15 to 20 minutes. You will have a stack created for each of these, where `<stack-name>` is the value you specified for **Stack name** and `<stack-id>` is an auto-generated ID.
 
-   ![AWS UI](/docs/1.10/img/aws-advanced-2.png)
+   ![AWS UI](/docs/1.11/img/aws-advanced-2.png)
 
    *  Zen template: `<stack-name>`
    *  Public agents: `<stack-name>-PublicAgentStack-<stack-id>`
@@ -203,13 +203,13 @@ Launch the DC/OS web interface by entering the master hostname:
 
     **Tip:** You might need to resize your window to see this tab. You can find your DC/OS hostname any time from the <a href="https://console.aws.amazon.com/cloudformation/home" target="_blank">AWS CloudFormation Management</a> page.
 
-    ![Monitor stack creation](/docs/1.10/img/dcos-aws-step3a.png)
+    ![Monitor stack creation](/docs/1.11/img/dcos-aws-step3a.png)
 
-    ![DC/OS dashboard](/docs/1.10/img/dcos-gui.png)
+    ![DC/OS dashboard](/docs/1.11/img/dcos-gui.png)
 
 1.  Click the dropdown menu on the upper-left side to install the DC/OS [Command-Line Interface (CLI)][2]. You must install the CLI to administer your DC/OS cluster.
 
-    ![install CLI](/docs/1.10/img/install-cli-terminal.png)
+    ![install CLI](/docs/1.11/img/install-cli-terminal.png)
 
 ## Next steps
 
@@ -217,7 +217,7 @@ Now that your advanced template DC/OS installation is up and running you can add
 
 ### Add more agent nodes
 
-You can add more agent nodes by creating a new stack by using the [private agent](/docs/1.10/installing/cloud/aws/advanced/template-reference/#private-agent) or [public agent](/docs/1.10/installing/cloud/aws/advanced/template-reference/#public-agent) templates. These templates create agents which are then attached to the `PrivateAgentStack` or `PublicAgentStack` as a part of an AutoScalingGroup.
+You can add more agent nodes by creating a new stack by using the [private agent](/docs/1.11/installing/cloud/aws/advanced/template-reference/#private-agent) or [public agent](/docs/1.11/installing/cloud/aws/advanced/template-reference/#public-agent) templates. These templates create agents which are then attached to the `PrivateAgentStack` or `PublicAgentStack` as a part of an AutoScalingGroup.
 
 Use the output values from the `zen.sh` script and your Master and Infra stacks. These new agent nodes will automatically be added to your DC/OS cluster.
 
@@ -240,6 +240,6 @@ Public agents:
 *  **PublicSubnet** Specify the `Public SubnetId` output value from the `zen.sh` script. This subnet ID will be used by all public agents.
 
 ### Template reference
-For the complete advanced configuration options, see the template reference [documentation](/docs/1.10/installing/cloud/aws/advanced/template-reference/).
+For the complete advanced configuration options, see the template reference [documentation](/docs/1.11/installing/cloud/aws/advanced/template-reference/).
 
- [2]: /docs/1.10/cli/install/
+ [2]: /docs/1.11/cli/install/

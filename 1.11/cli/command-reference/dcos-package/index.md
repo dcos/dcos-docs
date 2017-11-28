@@ -25,12 +25,12 @@ dcos package
 
 | Command | Description |
 |---------|-------------|
-| [dcos package describe](/docs/1.10/cli/command-reference/dcos-package/dcos-package-describe/)   | Get specific details for packages. |  
-| [dcos package install](/docs/1.10/cli/command-reference/dcos-package/dcos-package-install/)   | Install a package. |  
-| [dcos package list](/docs/1.10/cli/command-reference/dcos-package/dcos-package-list/)   | Print a list of the installed DC/OS packages. |  
-| [dcos package repo add](/docs/1.10/cli/command-reference/dcos-package/dcos-package-repo-add/)   | Add a package repository to DC/OS. |  
-| [dcos package repo list](/docs/1.10/cli/command-reference/dcos-package/dcos-package-repo-list/)   | Remove a package repository from DC/OS. |  
-| [dcos package repo remove](/docs/1.10/cli/command-reference/dcos-package/dcos-package-repo-remove/)   | Remove a package repository from DC/OS. |  
-| [dcos package search](/docs/1.10/cli/command-reference/dcos-package/dcos-package-search/)   | Search the package repository. |  
-| [dcos package uninstall](/docs/1.10/cli/command-reference/dcos-package/dcos-package-uninstall/)   | Uninstall a package. |  
-| [dcos package update](/docs/1.10/cli/command-reference/dcos-package/dcos-package-update/)   | This command has been deprecated. Repositories are dynamically updated when they are added by the `dcos package repo add` command. | 
+| [dcos package describe](/docs/1.11/cli/command-reference/dcos-package/dcos-package-describe/)   | Get specific details for packages. |  
+| [dcos package install](/docs/1.11/cli/command-reference/dcos-package/dcos-package-install/)   | Install a package. |  
+| [dcos package list](/docs/1.11/cli/command-reference/dcos-package/dcos-package-list/)   | Print a list of the installed DC/OS packages. |  
+| [dcos package repo add](/docs/1.11/cli/command-reference/dcos-package/dcos-package-repo-add/)   | Add a package repository to DC/OS. |  
+| [dcos package repo list](/docs/1.11/cli/command-reference/dcos-package/dcos-package-repo-list/)   | Remove a package repository from DC/OS. |  
+| [dcos package repo remove](/docs/1.11/cli/command-reference/dcos-package/dcos-package-repo-remove/)   | Remove a package repository from DC/OS. |  
+| [dcos package search](/docs/1.11/cli/command-reference/dcos-package/dcos-package-search/)   | Search the package repository. |  
+| [dcos package uninstall](/docs/1.11/cli/command-reference/dcos-package/dcos-package-uninstall/)   | Uninstall a package. |  
+| [dcos package update](/docs/1.11/cli/command-reference/dcos-package/dcos-package-update/)   | This command has been deprecated. Repositories are dynamically updated when they are added by the `dcos package repo add` command. | 

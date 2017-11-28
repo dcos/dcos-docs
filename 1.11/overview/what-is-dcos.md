@@ -11,7 +11,7 @@ As a distributed system, DC/OS includes a group of agent nodes that are coordina
 
 ## Cluster Manager
 
-As a cluster manager, DC/OS manages both resources and tasks running on the agent nodes. The agent nodes provide resources to the cluster. Those resources are then bundled into resource offers and made available to registered schedulers. The schedulers then accept these offers and allocate their resources to specific tasks, indirectly placing tasks on specific agent nodes. The agent nodes then spawn executors to manage each task type and the executors run and manage the tasks assigned to them. Unlike external cluster provisioners, DC/OS runs in the cluster and manages the lifecycle of the tasks it launches. This cluster management functionality is provided primarily by [Apache Mesos](/docs/1.10/overview/concepts/#apache-mesos).
+As a cluster manager, DC/OS manages both resources and tasks running on the agent nodes. The agent nodes provide resources to the cluster. Those resources are then bundled into resource offers and made available to registered schedulers. The schedulers then accept these offers and allocate their resources to specific tasks, indirectly placing tasks on specific agent nodes. The agent nodes then spawn executors to manage each task type and the executors run and manage the tasks assigned to them. Unlike external cluster provisioners, DC/OS runs in the cluster and manages the lifecycle of the tasks it launches. This cluster management functionality is provided primarily by [Apache Mesos](/docs/1.11/overview/concepts/#apache-mesos).
 
 ## Container Platform
 
@@ -25,4 +25,4 @@ As an operating system, DC/OS abstracts the cluster hardware and software resour
 
 Similar to Linux, DC/OS has both system space (aka kernel space) and user space. The system space is a protected area that is not accessible to users and involves low-level operations such as resource allocation, security, and process isolation. The user space is where the user applications, jobs, and services live. The built-in package manager can be used to install services into the user space.
 
-Unlike Linux, DC/OS is not a [host operating system](/docs/1.10/overview/concepts/#host-operating-system). DC/OS spans multiple machines, but relies on each machine to have its own host operating system and host kernel.
+Unlike Linux, DC/OS is not a [host operating system](/docs/1.11/overview/concepts/#host-operating-system). DC/OS spans multiple machines, but relies on each machine to have its own host operating system and host kernel.

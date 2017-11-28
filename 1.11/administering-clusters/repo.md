@@ -13,7 +13,7 @@ You can use the web interface or the CLI to:
 * [Add repositories](#adding)
 * [Remove repositories](#removing)
 
-**Tip:** Before you can use the CLI, you need to [install it](/docs/1.10/cli/install/).
+**Tip:** Before you can use the CLI, you need to [install it](/docs/1.11/cli/install/).
 
 ## <a name="listing"></a>Listing repositories
 

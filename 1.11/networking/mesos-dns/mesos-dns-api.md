@@ -37,7 +37,7 @@ Content-Type: application/json
 ```
 
 # Resources
-Mesos-DNS implements a simple REST API for service discovery over HTTP. These examples assume you have an [SSH connection to the node](/docs/1.10/administering-clusters/sshcluster/).
+Mesos-DNS implements a simple REST API for service discovery over HTTP. These examples assume you have an [SSH connection to the node](/docs/1.11/administering-clusters/sshcluster/).
 
 ## <a name="get-version"></a>GET /v1/version
 

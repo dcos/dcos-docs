@@ -11,7 +11,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 
 - Review the [release notes](https://dcos.io/releases/) before upgrading DC/OS.
 - The Advanced Installation method is the _only_ recommended upgrade path for DC/OS. It is recommended that you familiarize yourself with the [Advanced DC/OS Installation Guide][advanced-install] before proceeding.
-- Virtual networks require minimum Docker version 1.11. For more information, see the [documentation](/docs/1.10/networking/virtual-networks/).
+- Virtual networks require minimum Docker version 1.11. For more information, see the [documentation](/docs/1.11/networking/virtual-networks/).
 - The DC/OS UI and APIs may be inconsistent or unavailable while masters are being upgraded. Avoid using them until all masters have been upgraded and have rejoined the cluster. You can monitor the health of a master during an upgrade by watching Exhibitor on port 8181.
 - Task history in the Mesos UI will not persist through the upgrade.
 - The latest version of Marathon-LB is required for 1.10. Before upgrading to 1.10, uninstall your existing Marathon-LB package and reinstall the updated version.
@@ -31,9 +31,12 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - Ensure that Marathon event subscribers are disabled before beginning the upgrade. Leave them disabled after completing the upgrade, as this feature is now deprecated.
 - Verify that all Marathon application constraints are valid before beginning the upgrade.  Use this [script](https://github.com/mesosphere/public-support-tools/blob/master/check-constraints.py) to check if your constraints are valid.
 - The full DC/OS version string that you are upgrading from.
-  - In 1.9, this can be found under the **Cluster** tab.
+  - In 1.9, this can be found under the **System Overview** tab.
   - In 1.10, this can be found under the **Overview** tab.
-- Optional: You can add custom [node and cluster healthchecks] (/docs/1.10/installing/custom/node-cluster-health-check/#custom-health-checks) to your `config.yaml`.
+- Optional: You can add custom [node and cluster healthchecks] (/docs/1.11/installing/custom/node-cluster-health-check/#custom-health-checks) to your `config.yaml`.
+- Verify that all your masters are in a healthy state: 
+   - Check the Exhibitor UI to confirm that all masters have joined the quorum successfully (the status indicator will show green). The Exhibitor UI is available at `http://<dcos_master>:8181/`.
+   - Verify that `curl http://<dcos_master_private_ip>:5050/metrics/snapshot` has the metric `registrar/log/recovered` with a value of `1` for each master.
 
 ## Supported upgrade paths
 
@@ -50,7 +53,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
     **Important:**
 
     *  You cannot change the `exhibitor_zk_backend` setting during an upgrade.
-    *  The syntax of the DC/OS 1.10 `config.yaml` differs from that of DC/OS 1.9. <!-- is this still true for 1.9 to 1.10? -->For a detailed description of the 1.10 `config.yaml` syntax and parameters, see the [documentation](/docs/1.10/installing/custom/configuration/configuration-parameters/).
+    *  The syntax of the DC/OS 1.10 `config.yaml` differs from that of DC/OS 1.9. <!-- is this still true for 1.9 to 1.10? -->For a detailed description of the 1.10 `config.yaml` syntax and parameters, see the [documentation](/docs/1.11/installing/custom/configuration/configuration-parameters/).
 
 1.  After updating the format of the `config.yaml`, compare the old `config.yaml` and new `config.yaml`.  Verify that there are no differences in pathways or configurations. Changing these while upgrading can lead to catastrophic cluster failures.
 
@@ -84,7 +87,7 @@ Proceed with upgrading every master node one-at-a-time in any order using the fo
 1.  Validate the upgrade:
 
     - Monitor the Exhibitor UI to confirm that the Master rejoins the ZooKeeper quorum successfully (the status indicator will turn green).  The Exhibitor UI is available at `http://<dcos_master>:8181/`.
-    - Verify that `http://<dcos_master>/mesos` indicates that the upgraded master is running Mesos 1.2.0.
+    - Verify that `http://<dcos_master>/mesos` indicates that the upgraded master is running Mesos 1.4.0.
 
 ### DC/OS Agents
 
@@ -120,7 +123,7 @@ sudo journalctl -u dcos-spartan
 sudo systemctl | grep dcos
 ```
 
-If your upgrade fails because of a [custom node or cluster check](/1.10/administering-clusters/backup-and-restore/), run these commands for more details:
+If your upgrade fails because of a [custom node or cluster check](/1.11/administering-clusters/backup-and-restore/), run these commands for more details:
 
 ```bash
 dcos-diagnostics check node-poststart
@@ -146,4 +149,4 @@ sudo journalctl -u dcos-mesos-slave
 
 - Packages available in the DC/OS 1.10 Universe are newer than those in the DC/OS 1.9 Universe. Services are not automatically upgraded when DC/OS 1.10 is installed because not all DC/OS services have upgrade paths that will preserve existing state.
 
-[advanced-install]: /docs/1.10/installing/custom/advanced/
+[advanced-install]: /docs/1.11/installing/custom/advanced/

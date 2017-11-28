@@ -20,4 +20,4 @@ None.
 
 | Command | Description |
 |---------|-------------|
-| [dcos auth](/docs/1.10/cli/command-reference/dcos-auth/) |  Manage DC/OS identity and access. |
+| [dcos auth](/docs/1.11/cli/command-reference/dcos-auth/) |  Manage DC/OS identity and access. |

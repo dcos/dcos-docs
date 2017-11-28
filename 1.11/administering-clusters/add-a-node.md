@@ -6,18 +6,18 @@ menu_order: 800
 
 You can add agent nodes to an existing DC/OS cluster. 
 
-Agent nodes are designated as [public](/docs/1.10/overview/concepts/#public-agent-node) or [private](/docs/1.10/overview/concepts/#private) during installation. By default, they are designated as private during [GUI][1] or [CLI][2] installation.
+Agent nodes are designated as [public](/docs/1.11/overview/concepts/#public-agent-node) or [private](/docs/1.11/overview/concepts/#private) during installation. By default, they are designated as private during [GUI][1] or [CLI][2] installation.
 
 ### Prerequisites:
 
-*   DC/OS is installed using the [custom](/docs/1.10/installing/custom/) installation method.
-*   The archived DC/OS installer file (`dcos-install.tar`) from your [installation](/docs/1.10/installing/custom/gui/#backup).
-*   Available agent nodes that satisfy the [system requirements](/docs/1.10/installing/custom/system-requirements/).
+*   DC/OS is installed using the [custom](/docs/1.11/installing/custom/) installation method.
+*   The archived DC/OS installer file (`dcos-install.tar`) from your [installation](/docs/1.11/installing/custom/gui/#backup).
+*   Available agent nodes that satisfy the [system requirements](/docs/1.11/installing/custom/system-requirements/).
 *   The CLI JSON processor [jq](https://github.com/stedolan/jq/wiki/Installation).
 *   SSH installed and configured. This is required for accessing nodes in the DC/OS cluster.
 
 ### Install DC/OS agent nodes
-Copy the archived DC/OS installer file (`dcos-install.tar`) to the agent node. This archive is created during the GUI or CLI [installation](/docs/1.10/installing/custom/gui/#backup) method.
+Copy the archived DC/OS installer file (`dcos-install.tar`) to the agent node. This archive is created during the GUI or CLI [installation](/docs/1.11/installing/custom/gui/#backup) method.
 
 1.  Copy the files to your agent node. For example, you can use Secure Copy (scp) to copy `dcos-install.tar` to your home directory:
 
@@ -71,5 +71,5 @@ Copy the archived DC/OS installer file (`dcos-install.tar`) to the agent node. T
         dcos node --json | jq --raw-output '.[] | select(.reserved_resources.slave_public != null) | .id' | wc -l
         ```
 
- [1]: /docs/1.10/installing/custom/gui/
- [2]: /docs/1.10/installing/custom/cli/
+ [1]: /docs/1.11/installing/custom/gui/
+ [2]: /docs/1.11/installing/custom/cli/

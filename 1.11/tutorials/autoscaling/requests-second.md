@@ -11,4 +11,4 @@ You can use the [marathon-lb-autoscale](https://github.com/mesosphere/marathon-l
 
 marathon-lb-autoscale collects data from all HAProxy instances to determine the current RPS (requests per second) for your apps. The autoscale controller then attempts to maintain a defined target number of requests per second per service instance. marathon-lb-autoscale makes API calls to Marathon to scale the app.
 
-For more information, see the Marathon-LB advanced features [documentation](/docs/1.10/networking/marathon-lb/advanced/).
+For more information, see the Marathon-LB advanced features [documentation](/docs/1.11/networking/marathon-lb/advanced/).

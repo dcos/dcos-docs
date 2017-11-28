@@ -83,9 +83,9 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Packe
 
 5.  Also from that same directory, run `terraform apply` which will deploy the servers into your project at Packet, and run the DC/OS installation routine. When it completes, you will see output similar to the following, but with the IP addresses assigned to your servers:
 
-    ![terraform apply output](/docs/1.10/img/packet_terraform_output.png)
+    ![terraform apply output](/docs/1.11/img/packet_terraform_output.png)
 
-You may need to wait a few minutes from this point for all the DC/OS services to become active and the control panel available on the master node. After 15 or 20 minutes, you'll want to check out the [troubleshooting](/docs/1.10/installing/troubleshooting/) documentation.
+You may need to wait a few minutes from this point for all the DC/OS services to become active and the control panel available on the master node. After 15 or 20 minutes, you'll want to check out the [troubleshooting](/docs/1.11/installing/troubleshooting/) documentation.
 
 # Launch DC/OS
 Launch the DC/OS web interface by entering the Mesos master IP address:
@@ -94,7 +94,7 @@ Launch the DC/OS web interface by entering the Mesos master IP address:
 
 2.  Install the DC/OS Command-Line Interface (CLI). You can install the CLI to administer your DC/OS cluster. You can access the documentation at any time by clicking the cluster name in the upper-left side.
 
-    ![install CLI](/docs/1.10/img/install-cli-terminal.png)
+    ![install CLI](/docs/1.11/img/install-cli-terminal.png)
 
 ## Next steps
 

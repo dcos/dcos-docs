@@ -6,11 +6,11 @@ menu_order: 2
 
 DC/OS can run many different kinds of workloads, which are composed of tasks.
 
-DC/OS tasks are [Mesos tasks](/docs/1.10/overview/concepts/#mesos-task) that have been scheduled by either a DC/OS built-in scheduler or a scheduler service running on DC/OS.
+DC/OS tasks are [Mesos tasks](/docs/1.11/overview/concepts/#mesos-task) that have been scheduled by either a DC/OS built-in scheduler or a scheduler service running on DC/OS.
 
 # Executors
 
-Task are executed by a [Mesos Executor](/docs/1.10/overview/concepts/#mesos-executor) which gets specified by the [scheduler](/docs/1.10/overview/concepts/#dcos-scheduler) when it launches a task. In Mesos, the scheduler and it's executor(s) are called a [framework](/docs/1.10/overview/concepts/#mesos-framework), but within the broader context of DC/OS we'll often use the terms "scheduler", "executor", and "task" explicitly.
+Task are executed by a [Mesos Executor](/docs/1.11/overview/concepts/#mesos-executor) which gets specified by the [scheduler](/docs/1.11/overview/concepts/#dcos-scheduler) when it launches a task. In Mesos, the scheduler and it's executor(s) are called a [framework](/docs/1.11/overview/concepts/#mesos-framework), but within the broader context of DC/OS we'll often use the terms "scheduler", "executor", and "task" explicitly.
 
 ### Built-in executors
 
@@ -32,13 +32,13 @@ DC/OS has two built-in schedulers:
 - The Marathon scheduler provides **services** (Apps and Pods), which run continuously and in parallel.
 - The Metronome scheduler provides **jobs**, which run immediately or on a defined schedule.
 
-For more on Marathon services, see the [Services docs](/docs/1.10/deploying-services/) or the [Marathon docs](https://mesosphere.github.io/marathon/docs/).
+For more on Marathon services, see the [Services docs](/docs/1.11/deploying-services/) or the [Marathon docs](https://mesosphere.github.io/marathon/docs/).
 
-For more on Metronome jobs, see the [Jobs docs](/docs/1.10/deploying-jobs/).
+For more on Metronome jobs, see the [Jobs docs](/docs/1.11/deploying-jobs/).
 
 ### User space schedulers
 
-Additional schedulers can be installed as [scheduler services](/docs/1.10/overview/concepts/#dcos-scheduler-service) on Marathon, either from the [Mesosphere Universe](/docs/1.10/overview/concepts/#mesosphere-universe) or directly via Marathon.
+Additional schedulers can be installed as [scheduler services](/docs/1.11/overview/concepts/#dcos-scheduler-service) on Marathon, either from the [Mesosphere Universe](/docs/1.11/overview/concepts/#mesosphere-universe) or directly via Marathon.
 
 Example user space schedulers:
 

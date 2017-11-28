@@ -5,7 +5,7 @@ post_excerpt: ""
 feature_maturity: ""
 ---
 
-[DC/OS components](/docs/1.10/overview/architecture/components/) listen on multiple ports on each node. These ports must be available for installation to succeed.
+[DC/OS components](/docs/1.11/overview/architecture/components/) listen on multiple ports on each node. These ports must be available for installation to succeed.
 
 DC/OS allocates additional ports to services running on top of DC/OS. These ports are required to be available when services are installed.
 
@@ -75,11 +75,10 @@ DC/OS allocates additional ports to services running on top of DC/OS. These port
 |---|---|---|
 | 5051  | Mesos Agent | `dcos-mesos-slave.service` |
 | 61001 | Admin Router Agent (HTTP) | `dcos-adminrouter-agent` |
-| 61002 | Admin Router Agent (HTTPS) | `dcos-3dt.service` |
+| 61002 | Admin Router Agent (HTTPS) | `dcos-adminrouter-agent` |
 | 1025-2180 | Default advertised port ranges (for Marathon health checks) | |
 | 2182-3887 | Default advertised port ranges (for Marathon health checks) | |
 | 3889-5049 | Default advertised port ranges (for Marathon health checks) | |
 | 5052-8079 | Default advertised port ranges (for Marathon health checks) | |
 | 8082-8180 | Default advertised port ranges (for Marathon health checks) | |
 | 8182-32000 | Default advertised port ranges (for Marathon health checks) | |
-

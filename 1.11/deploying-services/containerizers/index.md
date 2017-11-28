@@ -5,8 +5,8 @@ menu_order: 40
 
 A containerizer provides a containerization and resource isolation abstraction around a specific container runtime. DC/OS containerizers support the following container runtimes:
 
-- [Universal Container Runtime](/docs/1.10/deploying-services/containerizers/ucr/).
-- [Docker Engine](/docs/1.10/deploying-services/containerizers/docker-containerizer/).
+- [Universal Container Runtime](/docs/1.11/deploying-services/containerizers/ucr/).
+- [Docker Engine](/docs/1.11/deploying-services/containerizers/docker-containerizer/).
 
 The Universal Container Runtime (UCR) has the following advantages:
 

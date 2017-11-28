@@ -8,7 +8,7 @@ You can use the DC/OS command-line interface (CLI) to manage cluster nodes, inst
 
 DC/OS 1.10.0 requires the DC/OS CLI 0.5.x.
 
-After you [install](/docs/1.10/cli/install) DC/OS CLI, to list available commands, either run `dcos` with no parameters or run `dcos help`:
+After you [install](/docs/1.11/cli/install) DC/OS CLI, to list available commands, either run `dcos` with no parameters or run `dcos help`:
 
 ```bash
 Command line utility for the Mesosphere Datacenter Operating
@@ -58,7 +58,7 @@ The DC/OS CLI supports the following environment variables, which can be set dyn
 
 #### `DCOS_CLUSTER` (DC/OS CLI O.5.x only)
 
-The [attached](/docs/1.10/cli/command-reference/dcos-cluster/dcos-cluster-attach/) cluster. To set the attached cluster, set the variable with the command:
+The [attached](/docs/1.11/cli/command-reference/dcos-cluster/dcos-cluster-attach/) cluster. To set the attached cluster, set the variable with the command:
 
 ```bash
 export DCOS_CLUSTER=<cluster_name>

@@ -11,11 +11,11 @@ To see full logs, append `--log-level=debug` to any DC/OS CLI command. For examp
 ```bash
 dcos -—log-level="debug" package install hdfs
 ```
-For more information about log levels, consult the [CLI command reference](/docs/1.10/cli/command-reference/) or run `dcos --help`.
+For more information about log levels, consult the [CLI command reference](/docs/1.11/cli/command-reference/) or run `dcos --help`.
 
 # Debug Subcommands for Stuck Deployments
 
-The DC/OS CLI provides a set of debugging subcommands to troubleshoot a stuck service or pod deployment. You can also use debug services and pods from the [DC/OS web interface](/docs/1.10/monitoring/debugging/gui-debugging/).
+The DC/OS CLI provides a set of debugging subcommands to troubleshoot a stuck service or pod deployment. You can also use debug services and pods from the [DC/OS web interface](/docs/1.11/monitoring/debugging/gui-debugging/).
 
 # Using the debugging commands
 
@@ -25,7 +25,7 @@ The DC/OS CLI provides a set of debugging subcommands to troubleshoot a stuck se
 - A service or pod that is stuck in deployment.
 
 ## Sample application definitions
-If you do not currently have a service or pod that is stuck in deployment, you can use the following two [Marathon application definitions](/docs/1.10/deploying-services/creating-services/) to test the instructions in this section.
+If you do not currently have a service or pod that is stuck in deployment, you can use the following two [Marathon application definitions](/docs/1.11/deploying-services/creating-services/) to test the instructions in this section.
 
 - mem-app.json
 

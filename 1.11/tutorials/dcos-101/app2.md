@@ -4,14 +4,16 @@ nav_title: Native Applications
 menu_order: 5
 ---
 
-# Prerequisites
-* A [running DC/OS cluster](/docs/1.10/tutorials/dcos-101/cli/) with [the DC/OS CLI installed](/docs/1.10/tutorials/dcos-101/cli/).
-* [app1](/docs/1.10/tutorials/dcos-101/app1/) deployed and running in your cluster.
+Welcome to part 5 of the DC/OS 101 Tutorial
 
-<table class="table" bgcolor="#FAFAFA"> <tr> <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;"><b>Important:</b> Mesosphere does not support this tutorial, associated scripts, or commands, which are provided without warranty of any kind. The purpose of this tutorial is to demonstrate capabilities, and may not be suited for use in a production environment. Before using a similar solution in your environment, you must adapt, validate, and test.</td> </tr> </table>
+<table class="table" bgcolor="#FAFAFA"> <tr> <td align=justify style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;">**Important:** Mesosphere does not support this tutorial, associated scripts, or commands, which are provided without warranty of any kind. The purpose of this tutorial is purely to demonstrate capabilities, and it may not be suited for use in a production environment. Before using a similar solution in your environment, you should adapt, validate, and test.</td> </tr> </table>
+
+# Prerequisites
+* A [running DC/OS cluster](/docs/1.11/tutorials/dcos-101/cli/) with [the DC/OS CLI installed](/docs/1.11/tutorials/dcos-101/cli/).
+* [app1](/docs/1.11/tutorials/dcos-101/app1/) deployed and running in your cluster.
 
 # Objective
-[Earlier](https://dcos.io/docs/1.10/tutorials/dcos-101/app1/) in this tutorial you deployed an app that operates internally in your cluster, interfacing with other applications in the cluster as opposed to interacting externally. In this part you will deploy an app which provides a web GUI to users. You will also deploy this app natively, without relying on Docker as a dependency and therefore reducing complexity.
+[Earlier](https://dcos.io/docs/1.11/tutorials/dcos-101/app1/) in this tutorial you deployed an app that operates internally in your cluster, interfacing with other applications in the cluster as opposed to interacting externally. In this part you will deploy an app which provides a web GUI to users. You will also deploy this app natively, without relying on Docker as a dependency and therefore reducing complexity.
 
 # Steps
   * Understand the application
@@ -43,9 +45,9 @@ You have now deployed apps in two different ways:
 
 Let's explore the differences in some more detail.
 
-DC/OS uses [containerizers](/docs/1.10/deploying-services/containerizers/) to run tasks in containers. Running tasks in containers offers a number of benefits, including the ability to isolate tasks from one another and control task resources programmatically. DC/OS supports two types of containerizers - the DC/OS Universal Container Runtime, and the Docker containerizer.
+DC/OS uses [containerizers](/docs/1.11/deploying-services/containerizers/) to run tasks in containers. Running tasks in containers offers a number of benefits, including the ability to isolate tasks from one another and control task resources programmatically. DC/OS supports two types of containerizers - the DC/OS Universal Container Runtime, and the Docker containerizer.
 
 For your first app, you used a Docker container image to package app1's dependencies ( Remember: never rely on dependencies being installed on an agent! ) and then used the Docker containerizer to execute it. Because the Docker containerizer internally uses the [Docker runtime](https://docs.docker.com/engine/userguide/intro/), you also used the Docker runtime.
 
 For your second app, you did not have any dependencies and therefore could rely on the default DC/OS Universal Container Runtime. Internally, both runtimes use the same OS features for isolation, namely [cgroups](https://en.wikipedia.org/wiki/Cgroups) and [namespaces](https://en.wikipedia.org/wiki/Linux_namespaces).
-This actually makes it possible to use the DC/OS Universal Container Runtime for running Docker images - check the [DC/OS Universal Container Runtime](/docs/1.10/deploying-services/containerizers/) documentation for details.
+This actually makes it possible to use the DC/OS Universal Container Runtime for running Docker images - check the [DC/OS Universal Container Runtime](/docs/1.11/deploying-services/containerizers/) documentation for details.

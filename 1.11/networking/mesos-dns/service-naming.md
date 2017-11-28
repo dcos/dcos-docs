@@ -252,7 +252,7 @@ Mesos-DNS generates a few special records:
 
 *   For the leading master: A record (`leader.mesos`) and SRV records (`_leader._tcp.mesos` and `_leader._udp.mesos`)
 *   For all service schedulers: A records (`myservice.mesos`) and SRV records (`_myservice._tcp.myservice.mesos`)
-*   For every known DC/OS master: A records (`master.mesos`) and SRV records (`_master._tcp.mesos` and `_master._udp.mesos`)
+*   For every known DC/OS master: A records (`master.mesos`)
 *   For every known DC/OS agent: A records (`slave.mesos`) and SRV records (`_slave._tcp.mesos`)
 
 **Important:** To query the leading master node, always query `leader.mesos`, not `master.mesos`. See [this FAQ entry][2] for more information.
@@ -281,7 +281,7 @@ If a service launches multiple tasks with the same name, the DNS lookup will ret
 
 You can get a comprehensive list of the apps running on your DC/OS cluster nodes.
 
-**Prerequisites:** [DC/OS and DC/OS CLI](/docs/1.10/installing/) are installed.
+**Prerequisites:** [DC/OS and DC/OS CLI](/docs/1.11/installing/) are installed.
 
 1.  SSH into your node. For example, use this CLI command to SSH to your master:
 
@@ -289,7 +289,7 @@ You can get a comprehensive list of the apps running on your DC/OS cluster nodes
     dcos node ssh --leader --master-proxy
     ```
 
-    For more information, see the SSH [documentation](/docs/1.10/administering-clusters/sshcluster/).
+    For more information, see the SSH [documentation](/docs/1.11/administering-clusters/sshcluster/).
 
 2.  Run this command from your master node to view the node details:
 
@@ -405,6 +405,6 @@ You can get a comprehensive list of the apps running on your DC/OS cluster nodes
 
 
 
- [1]: /docs/1.10/overview/concepts/
+ [1]: /docs/1.11/overview/concepts/
  [2]: ../troubleshooting/#leader
  [3]: https://tools.ietf.org/html/rfc952

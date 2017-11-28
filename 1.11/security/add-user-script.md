@@ -7,10 +7,10 @@ You can add users to your DC/OS cluster from a terminal by using the `dcos_add_u
 
 **Prerequisites:**
 
-- DC/OS is [installed](/docs/1.10/installing/)
+- DC/OS is [installed](/docs/1.11/installing/)
 
 
-1.  [SSH](/docs/1.10/administering-clusters/sshcluster/) to a master node and run this command, where `<email>` is the user's email:
+1.  [SSH](/docs/1.11/administering-clusters/sshcluster/) to a master node and run this command, where `<email>` is the user's email:
 
     ```bash
     sudo -i dcos-shell /opt/mesosphere/bin/dcos_add_user.py <email>

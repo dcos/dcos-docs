@@ -4,7 +4,7 @@ nav_title: Multiple Clusters
 menu_order: 3.1
 ---
 
-You can connect the CLI to multiple DC/OS clusters using [dcos cluster](/docs/1.10/cli/command-reference/dcos-cluster). `dcos cluster` has subcommands to set up connections to and attach to clusters and rename and remove clusters. 
+You can connect the CLI to multiple DC/OS clusters using [dcos cluster](/docs/1.11/cli/command-reference/dcos-cluster). `dcos cluster` has subcommands to set up connections to and attach to clusters and rename and remove clusters. 
 
 Setting up a connection to a cluster stores connection configuration in the file `<home-directory>/.dcos/clusters/<cluster_id>/dcos.toml`, attaches to the cluster, and authenticates to DC/OS. Attaching to a connected cluster sets it as the active cluster.
 

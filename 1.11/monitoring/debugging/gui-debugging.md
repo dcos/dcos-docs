@@ -1,7 +1,7 @@
 ---
 post_title: Debugging from the DC/OS Web Interface
 feature_maturity: preview
-menu_order: 30
+menu_order: 0
 ---
 
 You can debug your service or pod from the DC/OS web interface.
@@ -16,4 +16,4 @@ The **Services** > **Services** page lists each service or pod, the resources it
 
 Clicking the name of a service or pod and then the `Debug` tab reveals a detailed debugging page. There, you will see sections for **Last Changes**, **Last Task Failure**, **Task Statistics**, **Recent Resource Offers**. You will also see a **Summary** of resource offers and what percentage of those offers matched your pod or service's requirements, as well as a **Details** section that lists the host where your service or pod is running and which resource offers were successful and unsuccessful for each deployment. You can use the information on this page to learn where and how you need to modify your service or pod definition.
 
-![Debug Screen](/docs/1.10/img/debug-ui.png)
+![Debug Screen](/docs/1.11/img/debug-ui.png)

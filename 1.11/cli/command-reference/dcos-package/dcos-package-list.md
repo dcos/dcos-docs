@@ -30,8 +30,8 @@ dcos package list <package-name> [OPTION]
 
 | Command | Description |
 |---------|-------------|
-| [dcos package](/docs/1.10/cli/command-reference/dcos-package/)   | Install and manage DC/OS software packages. |
+| [dcos package](/docs/1.11/cli/command-reference/dcos-package/)   | Install and manage DC/OS software packages. |
 
 # Examples
 
-For an example, see the [documenation](/docs/1.10/deploying-services/install/).
+For an example, see the [documenation](/docs/1.11/deploying-services/install/).

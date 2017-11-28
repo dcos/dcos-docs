@@ -25,7 +25,7 @@ To manage users:
 
     **Tip:** Any user with access to DC/OS can invite more users. Each DC/OS user is an administrator, there is no explicit concept of privileges with DC/OS.
 
-    ![new DC/OS user](/docs/1.10/img/ui-add-user.gif)
+    ![new DC/OS user](/docs/1.11/img/ui-add-user.gif)
 
     ### Delete users
 
@@ -38,7 +38,7 @@ To manage users:
 
     *   To log out of the DC/OS web interface, click on your username in the top left corner and select **Sign Out**.
 
-        ![log out](/docs/1.10/img/auth-enable-logout-user.gif)
+        ![log out](/docs/1.11/img/auth-enable-logout-user.gif)
 
         You can now log in as another user.
 
@@ -53,7 +53,7 @@ To manage users:
 
 ## <a name="log-in-cli"></a>Logging in to the DC/OS CLI
 
-Authentication is only supported for DC/OS CLI version 0.4.3 and above. See [here](/docs/1.10/cli/update/) for upgrade instructions.
+Authentication is only supported for DC/OS CLI version 0.4.3 and above. See [here](/docs/1.11/cli/update/) for upgrade instructions.
 
 The DC/OS CLI stores the token in a configuration file in the `.dcos` directory under the home directory of the user running the CLI. This token can be used with the curl command to access DC/OS APIs, using curl or wget. For example, `curl -H 'Authorization: token=<token>' http://cluster`.
 
@@ -75,13 +75,13 @@ The DC/OS CLI stores the token in a configuration file in the `.dcos` directory 
 
 1.  Copy the URL in your terminal prompt and paste it into your browser.
 
-    ![alt](/docs/1.10/img/auth-login.png)
+    ![alt](/docs/1.11/img/auth-login.png)
 
 1.  Click the button that corresponds to your preferred identity provider. 
 
 1.  Provide your credentials to the identity provider if prompted. If you have already authenticated to the identity provider during your current browser session, you won't need to do so again.  
 
-    ![alt](/docs/1.10/img/auth-login-token.png)
+    ![alt](/docs/1.11/img/auth-login-token.png)
     
 1.  Click **Copy to Clipboard**.
 
@@ -112,16 +112,16 @@ sudo journalctl -u dcos-oauth.service
 
 ## Authentication opt-out
 
-If you are doing an [advanced installation](/docs/1.10/installing/custom/advanced/), you can opt out of
-Auth0-based authentication by adding this parameter to your configuration file (`genconf/config.yaml`). For more information, see the configuration [documentation](/docs/1.10/installing/custom/configuration/configuration-parameters/).
+If you are doing an [advanced installation](/docs/1.11/installing/custom/advanced/), you can opt out of
+Auth0-based authentication by adding this parameter to your configuration file (`genconf/config.yaml`). For more information, see the configuration [documentation](/docs/1.11/installing/custom/configuration/configuration-parameters/).
 
 ```yaml
 oauth_enabled: 'false'
 ```
 
-If you are doing a cloud installation on [AWS](/docs/1.10/installing/cloud/aws/), you can set the `OAuthEnabled` option to `false` on the **Specify Details** step to disable authentication.
+If you are doing a cloud installation on [AWS](/docs/1.11/installing/cloud/aws/), you can set the `OAuthEnabled` option to `false` on the **Specify Details** step to disable authentication.
 
-If you are doing a cloud installation on [Azure](/docs/1.10/installing/cloud/azure/), you currently cannot disable authentication. This will be added in a future release along with other
+If you are doing a cloud installation on [Azure](/docs/1.11/installing/cloud/azure/), you currently cannot disable authentication. This will be added in a future release along with other
 options to customize authentication.
 
 Note that if you’ve already installed your cluster and would like to disable this in-place, you can go through an upgrade with the same parameter set.
@@ -145,8 +145,8 @@ security features as well as on introducing new ones in the coming releases.
 
 ## Next Steps
 
-- [Understand DC/OS security](/docs/1.10/administering-clusters/)
-- [Learn how to monitor a DC/OS cluster](/docs/1.10/monitoring/)
+- [Understand DC/OS security](/docs/1.11/administering-clusters/)
+- [Learn how to monitor a DC/OS cluster](/docs/1.11/monitoring/)
 
  [1]: https://en.wikipedia.org/wiki/STARTTLS
  
