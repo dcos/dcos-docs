@@ -25,16 +25,27 @@ You should choose the first option that satisfies your requirements:
 1.  `outergroupsubgroupmyapp.marathon.l4lb.thisdcos.directory:555`
  * This is only available when the service is load balanced. `:555` is not a part of the DNS address, but is there to show that this address and port is load balanced as a pair rather than individually.
 1.  `myapp-subgroup-outergroup.marathon.containerip.dcos.thisdcos.directory`
- * This is only available when the service is running on a [virtual network](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-networks/).
+ * This is used when the service is running on a [virtual network](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-networks/).
 1.  `myapp-subgroup-outergroup.marathon.agentip.dcos.thisdcos.directory`
- * This is always available and should be used when the service is not running on a [virtual network](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-networks/).
+ * This is used when the service is not running on a [virtual network](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-networks/).
 1.  `myapp-subgroup-outergroup.marathon.autoip.dcos.thisdcos.directory`
- * This is always available and should be used to address an application that is transitioning on or off a [virtual network](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-networks/).
+ * This is used to address an application that is transitioning on or off a [virtual network](/docs/1.8/usage/service-discovery/load-balancing-vips/virtual-networks/).
 1.  `myapp-subgroup-outergroup.marathon.mesos`
- * This is always available, and is equivalent for the most part to the `agentip`. However it is less specific and less performant than the `agentip` and thus use is discouraged.
+ * This is equivalent for the most part to the `agentip`. However it is less specific and less performant than the `agentip` and thus use is discouraged.
 
 Other discovery option(s):
 
 * `_myport._myapp.subgroup.outergroup._tcp.marathon.mesos`
  * This is not a DNS A record but rather a DNS SRV record. This is only available when the port has a name. SRV records are a mapping from a
    name to an "Address + Port" pair.
+
+# Character handling behavior
+
+* We will use a different Service to demonstrate how certain characters interact:
+ * Group: `o.oo` > Group: `i.ii` > Service Name: `a.aa`
+
+* `o.ooi.iia.aa.marathon.l4lb.thisdcos.directory`
+* `a-aa-i-ii-o-oo.marathon.containerip.dcos.thisdcos.directory`
+* `a-aa-i-ii-o-oo.marathon.agentip.dcos.thisdcos.directory`
+* `a-aa-i-ii-o-oo.marathon.autoip.dcos.thisdcos.directory`
+* `a.aa.i.ii.o.oo.marathon.mesos`
