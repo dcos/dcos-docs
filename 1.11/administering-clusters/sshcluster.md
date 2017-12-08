@@ -53,9 +53,9 @@ These instructions explain how to set up an SSH connection to your DC/OS cluster
             dcos node ssh --master-proxy --mesos-id=<mesos-id>
             ```
             
-            **Tip:** To find the agent ID, select the **Nodes** tab in the DC/OS [web interface](/docs/1.10/gui/) and click **Details**. 
+            **Tip:** To find the agent ID, select the **Nodes** tab in the DC/OS [web interface](/docs/1.11/gui/) and click **Details**. 
             
-            ![Web interface node ID](/docs/1.10/img/ssh-node-id.png)
+            ![Web interface node ID](/docs/1.11/img/ssh-node-id.png)
 
 
 ### <a name="windows"></a>SSH to your DC/OS cluster on Windows
@@ -74,7 +74,7 @@ To install these programs, download the Windows installer <a href="http://www.ch
 
     2.  Select **SSH-2 RSA** as the key type, click **Save private key**, then choose the name and location to save your new .ppk key.
 
-        ![Windows](/docs/1.10/img/windowsputtykey.png)
+        ![Windows](/docs/1.11/img/windowsputtykey.png)
 
     3.  Close PuTTYgen.
 
@@ -86,15 +86,15 @@ To install these programs, download the Windows installer <a href="http://www.ch
 
         2.  Open PuTTY and enter the master node IP address in the **Host Name (or IP address)** field.
 
-            ![Putty Configuration](/docs/1.10/img/windowsputtybasic.png)
+            ![Putty Configuration](/docs/1.11/img/windowsputtybasic.png)
 
         3.  In the **Category** pane on the left side of the PuTTY window, choose **Connection > SSH > Auth**, click **Browse**, locate and select your `.ppk` file, then click **Open**.
 
-            ![Putty SSH Options](/docs/1.10/img/windowsputtysshopt.png)
+            ![Putty SSH Options](/docs/1.11/img/windowsputtysshopt.png)
 
         4.  Login as user "core" if you're running CoreOS. The default user on CentOS is "centos".
 
-            ![Windows Login](/docs/1.10/img/windowscore.png)
+            ![Windows Login](/docs/1.11/img/windowscore.png)
 
     *   **To SSH to an agent node**
 
@@ -108,7 +108,7 @@ To install these programs, download the Windows installer <a href="http://www.ch
 
             2.  Click the **Browse** button and locate the `.ppk` file that you created previously using PuTTYgen.
 
-                ![Windows Forwarding](/docs/1.10/img/windowsforwarding.png)
+                ![Windows Forwarding](/docs/1.11/img/windowsforwarding.png)
 
         2.  Add the `.ppk` file to Pageant.
 
@@ -118,7 +118,7 @@ To install these programs, download the Windows installer <a href="http://www.ch
 
             3.  Locate the `.ppk` file that you created using PuTTYgen and click **Open** to add your key to Pageant.
 
-                ![Windows Pageant](/docs/1.10/img/windowspageant.png)
+                ![Windows Pageant](/docs/1.11/img/windowspageant.png)
 
             4.  Click the **Close** button to close the Pageant window.
 
@@ -130,7 +130,7 @@ To install these programs, download the Windows installer <a href="http://www.ch
 
             4.  Login as user "core" if you're running CoreOS. The default user on CentOS is "centos".
 
-                ![Windows Login](/docs/1.10/img/windowscore.png)
+                ![Windows Login](/docs/1.11/img/windowscore.png)
 
         4.  From the master node, SSH into the agent node.
 
@@ -140,9 +140,9 @@ To install these programs, download the Windows installer <a href="http://www.ch
 
                     ssh core@<agent-node-hostname>
 
- [1]: /docs/1.10/cli/command-reference/
+ [1]: /docs/1.11/cli/command-reference/
  [2]: #unix
  [3]: #windows
- [4]: /docs/1.10/installing/cloud/aws/
+ [4]: /docs/1.11/installing/cloud/aws/
 
 

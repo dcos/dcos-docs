@@ -13,5 +13,5 @@ DC/OS uses the JSON Web Token (JWT) format for its authentication tokens. JWT is
 
 DC/OS OAuth provides an HTTP API for managing local users in a RESTful fashion.
 
-![Auth0 badge](/docs/1.10/img/a0-badge-light.png)
+![Auth0 badge](/docs/1.11/img/a0-badge-light.png)
 

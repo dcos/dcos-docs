@@ -29,4 +29,4 @@ dcos experimental package build <build-definition> [OPTION]
 
 | Command | Description |
 |---------|-------------|
-| [dcos experimental](/docs/1.10/cli/command-reference/dcos-experimental/)   |  Manage commands that under development and subject to change. |     
+| [dcos experimental](/docs/1.11/cli/command-reference/dcos-experimental/)   |  Manage commands that under development and subject to change. |     

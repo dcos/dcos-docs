@@ -28,7 +28,7 @@ dcos marathon pod update <pod-id> [OPTION]
 
 | Command | Description |
 |---------|-------------|
-| [dcos marathon](/docs/1.10/cli/command-reference/dcos-marathon/) | Deploy and manage applications to DC/OS. |
+| [dcos marathon](/docs/1.11/cli/command-reference/dcos-marathon/) | Deploy and manage applications to DC/OS. |
 
 # Examples
 

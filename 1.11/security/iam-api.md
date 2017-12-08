@@ -12,7 +12,7 @@ Authentication tokens expire after 5 days. You can view the expiration time in t
 
 You can obtain your authentication token using the DC/OS CLI. When you log into the DC/OS CLI, you paste an OpenID Connect ID token into your terminal prompt. This OpenID Connect ID token logs you into the DC/OS CLI but does not allow you to access the HTTP API endpoints. You must obtain an authentication token to gain access to the HTTP API endpoints. Complete the following steps to obtain your authentication token.
 
-[Log in to the DC/OS CLI](/docs/1.10/security/managing-authentication#log-in-cli).
+[Log in to the DC/OS CLI](/docs/1.11/security/managing-authentication#log-in-cli).
 
 Logging into the DC/OS CLI causes your authentication token to be written to a configuration file. Type the following command to confirm that this write succeeded and view your authentication token.
 

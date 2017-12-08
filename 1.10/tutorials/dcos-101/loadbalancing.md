@@ -3,7 +3,7 @@ post_title: Load-Balancing
 menu_order: 8
 ---
 
-Welcome to part 7 of the DC/OS 101 Tutorial
+Welcome to part 8 of the DC/OS 101 Tutorial
 
 <table class="table" bgcolor="#FAFAFA"> <tr> <td align=justify style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid;border-right: thin solid;">**Important:** Mesosphere does not support this tutorial, associated scripts, or commands, which are provided without warranty of any kind. The purpose of this tutorial is purely to demonstrate capabilities, and it may not be suited for use in a production environment. Before using a similar solution in your environment, you should adapt, validate, and test.</td> </tr> </table>
 
@@ -46,4 +46,3 @@ Consider these features and benefits when choosing the load balancing mechanism.
 
    * [Marathon-LB](/docs/1.10/networking/marathon-lb/) is a layer 7 load balancer that is mostly used for external requests. It is based on the well-known HAProxy load balancer and uses Marathon’s event bus to update its configuration in real time. Being a layer 7 load balancer, it supports session-based features such as HTTP sticky sessions and zero-downtime deployments.
    * [Named VIPs](/docs/1.10/networking/load-balancing-vips/) are a layer 4 load balancer mechanism used for internal TCP traffic. As they are tightly integrated with the kernel, they provide a load balanced IP address which can be used from anywhere within the cluster.
-

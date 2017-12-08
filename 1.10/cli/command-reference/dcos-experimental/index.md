@@ -4,7 +4,7 @@ menu_order: 2.1
 ---
     
 # Description
-Manage commands that under development and subject to change.
+Manage commands under development and subject to change.
 
 # Usage
 

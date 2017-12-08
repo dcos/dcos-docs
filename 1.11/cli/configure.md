@@ -4,7 +4,7 @@ nav_title: Configuring
 menu_order: 2
 ---
 
-You can access DC/OS CLI configuration with the [dcos cluster](/docs/1.10/cli/command-reference/dcos-cluster/) and [dcos config](/docs/1.10/cli/command-reference/dcos-config/) command groups.
+You can access DC/OS CLI configuration with the [dcos cluster](/docs/1.11/cli/command-reference/dcos-cluster/) and [dcos config](/docs/1.11/cli/command-reference/dcos-config/) command groups.
 
 
 # Configuring HTTP Proxy

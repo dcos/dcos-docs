@@ -110,26 +110,26 @@ In the following example, you deploy a Docker app to DC/OS using the Marathon AP
 1. Choose whether to use the Universal Container Runtime (UCR) or Docker Engine runtime. See [Using Containerizers](/docs/1.10/deploying-services/containerizers/).
    -  To use the Universal Container Runtime (UCR), paste the following JSON into a file named `basic-3-mesos.json`:
 
-    ```json
-    {
-      "id": "basic-3-mesos",
-      "cmd": "cd /;python3 -m http.server 80",
-      "acceptedResourceRoles": ["slave_public"],
-      "container": {
-        "portMappings": [
-          {
-            "containerPort": 80,
-            "hostPort": 0
-          }
-        ],
-        "type": "MESOS",
-        "docker": { "image": "python:3" },
-      },
-      "cpus": 0.5,
-      "mem": 32,
-      "networks": [ { "mode": "container/bridge" } ]
-    }
-    ```
+      ```json
+      {
+        "id": "basic-3-mesos",
+        "cmd": "cd /;python3 -m http.server 80",
+        "acceptedResourceRoles": ["slave_public"],
+        "container": {
+          "portMappings": [
+            {
+              "containerPort": 80,
+              "hostPort": 0
+            }
+          ],
+          "type": "MESOS",
+          "docker": { "image": "python:3" }
+        },
+        "cpus": 0.5,
+        "mem": 32,
+        "networks": [ { "mode": "container/bridge" } ]
+      }
+      ```
 
   - To use the Docker Engine runtime, paste the following JSON into a file named `basic-3-docker.json`:
 
@@ -146,7 +146,14 @@ In the following example, you deploy a Docker app to DC/OS using the Marathon AP
           }
         ],
         "type": "DOCKER",
-        "docker": { "image": "python:3" }
+        "docker": { 
+          "image": "python:3" },
+          "parameters": [
+            {
+              "key": "log-driver",
+              "value": "none"
+            } 
+          ]
       },
       "cpus": 0.5,
       "instances": 1,

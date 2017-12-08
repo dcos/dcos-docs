@@ -5,20 +5,25 @@ menu_order: 10
 
 When you specify a local volume or volumes, tasks and their associated data are "pinned" to the node they are first launched on and will be relaunched on that node if they terminate. The resources the application requires are also reserved. Marathon will implicitly reserve an appropriate amount of disk space (as declared in the volume via `persistent.size`) in addition to the sandbox `disk` size you specify as part of your application definition.
 
-## Benefits of using local persistent volumes
+# Benefits of using local persistent volumes
 
 - All resources needed to run tasks of your stateful service are dynamically reserved, thus ensuring the ability to relaunch the task on the same node using the same volume when needed.
 - You don't need constraints to pin a task to a particular agent where its data resides
 - You can still use constraints to specify distribution logic
 - Marathon lets you locate and destroy an unused persistent volume if you don't need it anymore
 
-# Create an application with local persistent volumes
+# Create an application with a local persistent volume
 
-## Prerequisites
+## Instruct Marathon to set up a stateful application
 
-See the [DC/OS system requirements](/docs/1.10/installing/custom/system-requirements/).
+Specify the `residency` field. Currently, the only valid option is
+```json
+"residency": {
+  "taskLostBehavior": "WAIT_FOREVER"
+}
+```
 
-## Configuration options
+## Volume configuration options
 
 Configure a persistent volume with the following options:
 
@@ -32,24 +37,16 @@ Configure a persistent volume with the following options:
 }
 ```
 
-- `containerPath`: The path where your application will read and write data. This must be a single-level path relative to the container; it cannot contain a forward slash (`/`). (`"data"`, but not `"/data"`, `"/var/data"` or `"var/data"`). If your application requires an absolute path, or a relative path with slashes, [use this configuration](#abs-paths).
+### Notes
+
+- `containerPath`: The path where your application will read and write data. This must be a single-level path relative to the container; it cannot contain a forward slash (`/`). `"data"` is valid, but not `"/data"`, `"/var/data"`, or `"var/data"`. If your application requires an absolute path, or a relative path with slashes, use this [workaround](#abs-paths).
 - `mode`: The access mode of the volume. Currently, `"RW"` is the only possible value and will let your application read from and write to the volume.
-- `persistent.size`: The size of the persistent volume in MiBs.
-
-You also need to set the `residency` node to tell Marathon to setup a stateful application. Currently, the only valid option for this is:
-
-```json
-"residency": {
-  "taskLostBehavior": "WAIT_FOREVER"
-}
-```
+- `size`: The size of the persistent volume in **MiBs**.
 
 <a name="abs-paths"></a>
-### Specifying an unsupported container path
+### Specify an unsupported container path
 
-The value of `containerPath` must be relative to allow you to dynamically add a local persistent volume to a running container and to ensure consistency across operating systems. However, your application may require an absolute container path or a relative one with slashes.
-
-If your application does require an unsupported `containerPath`, configure two volumes. The first volume has the absolute container path you need and does not have the `persistent` parameter. The `hostPath` parameter will match the relative `containerPath` value for the second volume.
+To allow you to dynamically add a local persistent volume to a running container and to ensure consistency across operating systems, the value of `containerPath` must be _relative_. However, your application may require an absolute container path or a relative one with slashes. If your application does require an unsupported `containerPath`, you can work around this restriction by configuring two volumes. The first volume has the absolute container path you need and _does not_ have the `persistent` parameter. The `hostPath` parameter of the first volume must match the relative `containerPath` of the second volume.
 
 ```json
 {
@@ -71,17 +68,17 @@ The second volume is a persistent volume with a `containerPath` that matches the
 }
 ```
 
-For a complete example, see the [Running stateful MySQL on Marathon](#stateful-sql) section.
+For a complete example, see [Running stateful MySQL on Marathon](#stateful-sql).
 
-## Creating a stateful application via the DC/OS GUI
+## Create a stateful application via the DC/OS GUI
 
-1. Create a new service via the GUI in **Services > Services > RUN A SERVICE**.
-1. Click the Volumes tab.
+1. Click the **Services** tab, then **RUN A SERVICE**.
+1. Click the **Volumes** tab.
 1. Choose the size of the volume or volumes you will use. Be sure that you choose a volume size that will fit the needs of your application; you will not be able to modify this size after you launch your application.
 1. Specify the container path from which your application will read and write data. The container path must be non-nested and cannot contain slashes e.g. `data`, but not  `../../../etc/opt` or `/user/data/`. If your application requires such a container path, [use this configuration](#nested-paths).
 1. Click Create.
 
-# Scaling stateful applications
+# Scale stateful applications
 
 When you scale your app down, the volumes associated with the terminated instances are detached but all resources are still reserved. At this point, you may delete the tasks via the Marathon REST API, which will free reserved resources and destroy the persistent volumes.
 
@@ -92,17 +89,17 @@ Since all the resources your application needs are still reserved when a volume 
 -  If your app is destroyed, any associated volumes and reserved resources will also be deleted.
 -  Mesos will currently not remove the data but might do so in the future.
 
-# Upgrading or restarting stateful applications
+# Upgrade or restart stateful applications
 
 The default `UpgradeStrategy` for a stateful application is a `minimumHealthCapacity` of `0.5` and a `maximumOverCapacity` of `0`. If you override this default, your definition must stay below these values to pass validation. The `UpgradeStrategy` must stay below these values because Marathon needs to be able to kill old tasks before starting new ones so that the new versions can take over reservations and volumes and Marathon cannot create additional tasks (as a `maximumOverCapacity > 0` would induce) to prevent additional volume creation.
 
 **Note:** For a stateful application, Marathon will never start more instances than specified in the `UpgradeStrategy`, and will kill old instances rather than create new ones during an upgrade or restart.
 
-# Under the Hood
+# Under the hood
 
 Marathon leverages three Mesos features to run stateful applications: [dynamic reservations](http://mesos.apache.org/documentation/latest/reservation/), reservation labels, and [persistent volumes](http://mesos.apache.org/documentation/latest/persistent-volume/).
 
-In contrast to static reservations, dynamic reservations are created at runtime for a given role and will associate resources with a combination of `frameworkId` and `taskId` using reservation labels. This allows Marathon to restart a stateful task after it has terminated for some reason, since the associated resources will not be offered to frameworks that are not configured to use this role. Consult [non-unique roles](#non-unique-roles) for more information.
+In contrast to static reservations, dynamic reservations are created at runtime for a given role and associate resources with a combination of `frameworkId` and `taskId` using reservation labels. This allows Marathon to restart a stateful task after it has terminated for some reason, since the associated resources will not be offered to frameworks that are not configured to use this role. Consult [non-unique roles](#non-unique-roles) for more information.
 
 Mesos creates persistent volumes to hold your application's stateful data. Because persistent volumes are local to an agent, the stateful task using this data will be pinned to the agent it was initially launched on, and will be relaunched on this node whenever needed. You do not need to specify any constraints for this to work: when Marathon needs to launch a task, it will accept a matching Mesos offer, dynamically reserve the resources required for the task, create persistent volumes, and make sure the task is always restarted using these reserved resources so that it can access the existing data.
 
@@ -110,20 +107,20 @@ When a task that used persistent volumes has terminated, its metadata will be ke
 
 For example, if you scale down from 5 to 3 instances, you will see 2 tasks in the `Waiting` state along with the information about the persistent volumes the tasks were using as well as about the agents on which they are placed. Marathon will not unreserve those resources and will not destroy the volumes. When you scale up again, Marathon will attempt to launch tasks that use those existing reservations and volumes as soon as it gets a Mesos offer containing the labeled resources. Marathon will only schedule unreserve/destroy operations when:
 
-- the application is deleted (in which case volumes of all its tasks are destroyed, and all reservations are deleted).
-- you explicitly delete one or more suspended tasks with a `wipe=true` flag.
+- The application is deleted (in which case volumes of all its tasks are destroyed, and all reservations are deleted).
+- You explicitly delete one or more suspended tasks with a `wipe=true` flag.
 
-If reserving resources or creating persistent volumes fails, the created task will timeout after the configured `task_reservation_timeout` (default: 20 seconds) and a new reservation attempt will be made. In case a task is `LOST` (because its agent is disconnected or crashed), the reservations and volumes will not timeout and you need to manually delete and wipe the task to let Marathon launch a new one.
+If reserving resources or creating persistent volumes fails, the created task will time out after the configured `task_reservation_timeout` (default: 20 seconds) and a new reservation attempt will be made. In case a task is `LOST` (because its agent is disconnected or crashed), the reservations and volumes will not timeout and you need to manually delete and wipe the task to let Marathon launch a new one.
 
-# Potential Pitfalls
+# Potential pitfalls
 
-Be aware of the following issues and limitations when using stateful applications in Marathon that make use of dynamic resevations and persistent volumes.
+Be aware of the following issues and limitations when using stateful applications in Marathon that make use of dynamic reservations and persistent volumes.
 
 ## Resource requirements
 
-Currently, the resource requirements of a stateful application **cannot** be changed. Your initial volume size, cpu usage, memory requirements, etc., cannot be changed once you've posted the AppDefinition.
+Currently, the resource requirements&mdash;volume size, cpu usage, memory requirements, etc.&mdash;of a stateful application **cannot** be changed once you've deployed the app definition.
 
-## Replication and Backups
+## Replication and backups
 
 Because persistent volumes are pinned to nodes, they are no longer reachable if the node is disconnected from the cluster, e.g. due to a network partition or a crashed agent. If the stateful service does not take care of data replication on its own, you need to manually setup a replication or backup strategy to guard against data loss from a network partition or from a crashed agent.
 
@@ -131,24 +128,24 @@ If an agent re-registers with the cluster and offers its resources, Marathon is 
 
 ## Disk consumption
 
-As of Mesos 0.28, destroying a persistent volume will not cleanup or destroy data. Mesos will delete metadata about the volume in question, but the data will remain on disk. To prevent disk consumption, you should manually remove data when you no longer need it.
+As of Mesos 0.28, destroying a persistent volume does not cleanup or destroy data. Mesos deletes metadata about the volume in question, but the data remains on disk. To prevent disk consumption, you should manually remove data when you no longer need it.
 
 <a name="non-unique-roles"></a>
-## Non-unique Roles
+## Non-unique roles
 
-Both static and dynamic reservations in Mesos are bound to roles, not to frameworks or framework instances. Marathon will add labels to claim that resources have been reserved for a combination of `frameworkId` and `taskId`, as noted above. However, these labels do not protect from misuse by other frameworks or old Marathon instances (prior to 1.0). Every Mesos framework that registers for a given role will eventually receive offers containing resources that have been reserved for that role.
+Both static and dynamic reservations in Mesos are bound to roles, not to frameworks or framework instances. Marathon adds labels to claim that resources have been reserved for a combination of `frameworkId` and `taskId`, as noted above. However, these labels do not protect from misuse by other frameworks or old Marathon instances (prior to 1.0). Every Mesos framework that registers for a given role will eventually receive offers containing resources that have been reserved for that role.
 
 However, if another framework does not respect the presence of labels and the semantics as intended and uses them, Marathon is unable to reclaim these resources for the initial purpose. We recommend never using the same role for different frameworks if one of them uses dynamic reservations. Marathon instances in HA mode do not need to have unique roles, though, because they use the same role by design.
 
-### The Mesos Sandbox
+### The Mesos sandbox
 
 The temporary Mesos sandbox is still the target for the `stdout` and `stderr` logs. To view these logs, go to the Marathon pane of the DC/OS GUI.
 
 # Examples
 
-## Running stateful PostgreSQL on Marathon
+## Run stateful PostgreSQL on Marathon
 
-A model app definition for PostgreSQL on Marathon would look like this. Note that we set the postgres data folder to `pgdata` which is relative to the Mesos sandbox (as contained in the `$MESOS_SANDBOX` variable). This enables us to set up a persistent volume with a containerPath of `pgdata`. This path is is not nested and relative to the sandbox as required:
+A model app definition for PostgreSQL on Marathon would look like this. Note that we set the PostgreSQL data folder to `pgdata`, which is relative to the Mesos sandbox (as contained in the `$MESOS_SANDBOX` variable). This enables us to set up a persistent volume with a `containerPath` of `pgdata`. This path is is not nested and relative to the sandbox as required:
 
 ```json
 {
@@ -156,6 +153,11 @@ A model app definition for PostgreSQL on Marathon would look like this. Note tha
   "cpus": 1,
   "instances": 1,
   "mem": 512,
+  "networks": [ 
+    { 
+      "mode": "container/bridge" 
+    } 
+  ],
   "container": {
     "type": "DOCKER",
     "volumes": [
@@ -168,17 +170,16 @@ A model app definition for PostgreSQL on Marathon would look like this. Note tha
       }
     ],
     "docker": {
-      "image": "postgres:latest",
-      "network": "BRIDGE",
-      "portMappings": [
-        {
-          "containerPort": 5432,
-          "hostPort": 0,
-          "protocol": "tcp",
-          "name": "postgres"
-        }
-      ]
-    }
+      "image": "postgres:latest"
+    },
+    "portMappings": [
+      {
+        "containerPort": 5432,
+        "hostPort": 0,
+        "protocol": "tcp",
+        "name": "postgres"
+      }
+    ]
   },
   "env": {
     "POSTGRES_PASSWORD": "password",
@@ -195,9 +196,9 @@ A model app definition for PostgreSQL on Marathon would look like this. Note tha
 ```
 
 <a name="stateful-sql"></a>
-## Running stateful MySQL on Marathon
+## Run stateful MySQL on Marathon
 
-The default MySQL docker image does not allow you to change the data folder. Since we cannot define a persistent volume with an absolute nested `containerPath` like `/var/lib/mysql`, we need to configure a workaround to set up a docker mount from hostPath `mysqldata` (relative to the Mesos sandbox) to `/var/lib/mysql` (the path that MySQL attempts to read/write):
+The default MySQL Docker image does not allow you to change the data folder. Since we cannot define a persistent volume with an absolute nested `containerPath` like `/var/lib/mysql`, we need to configure a workaround to set up a Docker mount from hostPath `mysqldata` (relative to the Mesos sandbox) to `/var/lib/mysql` (the path that MySQL attempts to read/write):
 
 ```json
 {
@@ -207,7 +208,7 @@ The default MySQL docker image does not allow you to change the data folder. Sin
 }
 ```
 
-In addition to that, we configure a persistent volume with a containerPath `mysqldata`, which will mount the local persistent volume as `mysqldata` into the docker container:
+In addition to that, we configure a persistent volume with a containerPath `mysqldata`, which will mount the local persistent volume as `mysqldata` into the Docker container:
 
 ```json
 {
@@ -226,6 +227,11 @@ The complete JSON application definition reads as follows:
   "id": "/mysql",
   "cpus": 1,
   "mem": 512,
+  "networks": [ 
+    { 
+      "mode": "container/bridge" 
+    } 
+  ],
   "disk": 0,
   "instances": 1,
   "container": {
@@ -246,17 +252,16 @@ The complete JSON application definition reads as follows:
     ],
     "docker": {
       "image": "mysql",
-      "network": "BRIDGE",
-      "portMappings": [
-        {
-          "containerPort": 3306,
-          "hostPort": 0,
-          "servicePort": 10000,
-          "protocol": "tcp"
-        }
-      ],
       "forcePullImage": false
-    }
+    },
+    "portMappings": [
+      {
+        "containerPort": 3306,
+        "hostPort": 0,
+        "servicePort": 10000,
+        "protocol": "tcp"
+      }
+    ],
   },
   "env": {
     "MYSQL_USER": "wordpress",
@@ -271,20 +276,22 @@ The complete JSON application definition reads as follows:
 }
 ```
 
-## Inspecting and deleting suspended stateful tasks
+## Inspect and delete suspended stateful tasks
 
 To destroy and clean up persistent volumes and free the reserved resources associated with a task, perform 2 steps:
 
 1. Locate the agent containing the persistent volume and remove the data inside it.
 1. Send an HTTP DELETE request to Marathon that includes the `wipe=true` flag.
 
-To locate the agent, inspect the Marathon UI and check out the detached volumes on the _Volumes_ tab. Or, query the `/v2/apps` endpoint, which provides information about the `host` and Mesos `slaveId`.
+To locate the agent, inspect the Marathon UI and check out the detached volumes on the **Volumes** tab. Or, query the `/v2/apps` endpoint, which provides information about the `host` and Mesos `slaveId`.
 
 ```
 http GET http://dcos/service/marathon/v2/apps/postgres/tasks
+```
 
 response:
 
+```json
 {
   "appId": "/postgres", 
   "host": "10.0.0.168", 
@@ -299,19 +306,20 @@ response:
 }
 ```
 
-_Note_: A running task will show `stagedAt`, `startedAt` and `version` in addition to the information provided above.
+**Note:** A running task will show `stagedAt`, `startedAt`, and `version` in addition to the information provided above.
 
 You can then
 
 1. Remove the data on disk by `ssh'ing` into the agent and running the `rm -rf <volume-path>/*` command.
 1. Delete the task with `wipe=true`, which will expunge the task information from the Marathon internal repository and eventually destroy the volume and unreserve the resources previously associated with the task:
+
 ```
 http DELETE http://dcos/service/marathon/v2/apps/postgres/tasks/postgres.53ab8733-fd96-11e5-8e70-76a1c19f8c3d?wipe=true
 ```
 
-## View the Status of Your Application with Persistent Local Volumes
+## View the status of your application with persistent local volumes
 
-After you have created your application, click the _Volumes_ tab of the application detail view to get detailed information about your app instances and associated volumes.
+After you have created your application, click the **Volumes** tab of the application detail view to get detailed information about your app instances and associated volumes.
 
 The Status column tells you if your app instance is attached to the volume or not. The app instance will read as "detached" if you have scaled down your application. Currently the only Operation Type available is read/write (RW).
 

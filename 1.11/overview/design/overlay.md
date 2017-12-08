@@ -10,7 +10,7 @@ menu_order: 5
 
 From a networking standpoint, to provide an end-user experience similar to that provided by a virtual machine environment it’s important to provide each container with its own IP address and network namespace. Providing containers with an isolated network stack ensures logical network isolation as well as network performance isolation between containers. Further, an IP-per-container allows the user/developer to use the traditional network operational tools (traceroute, tcpdump, wireshark) and processes they are familiar with, and helps their productivity in debugging network connectivity/performance issues. From an operational standpoint it becomes much easier to identify container specific traffic, and hence simplifies enforcement of network performance and security policies for containers.
 
-A default IP-per-container solution for DC/OS needs to be agnostic of the network on which DC/OS runs. Thus, to achieve IP-per-container we need to use an virtual network. Overlays make the container network topology independent of the underlying host network. Further, overlays provide complete segregation of container traffic from host traffic making policy enforcement on container traffic much simpler and independent of the host traffic. The challenge with implementing overlays is the cost of encapsulating and decapsulating container traffic, when containers send and receive traffic. To minimize the impact of these encap and decap operations on container network throughput, it is imperative that the overlay implements the encap/decap operations as part of the packet processing pipeline within the kernel. 
+A default IP-per-container solution for DC/OS needs to be agnostic of the network on which DC/OS runs. Thus, to achieve IP-per-container we need to use a virtual network. Overlays make the container network topology independent of the underlying host network. Further, overlays provide complete segregation of container traffic from host traffic making policy enforcement on container traffic much simpler and independent of the host traffic. The challenge with implementing overlays is the cost of encapsulating and decapsulating container traffic, when containers send and receive traffic. To minimize the impact of these encap and decap operations on container network throughput, it is imperative that the overlay implements the encap/decap operations as part of the packet processing pipeline within the kernel. 
 
 To achieve an IP-per-container solution for DC/OS, using overlays, we therefore need to choose an overlay technology that is actively supported by the Linux kernel. The most common overlay supported by the linux kernel is the VxLAN.
 
@@ -26,7 +26,7 @@ Before describing the software architecture we describe the packet flow that wil
 
 ## DC/OS overlay in action
 
-![Agent configuration for containers running on MesosContainerizer and Docker once the VxLAN has been configured.](/docs/1.10/img/overlay-fig-1.png)
+![Agent configuration for containers running on MesosContainerizer and Docker once the VxLAN has been configured.](/docs/1.11/img/overlay-fig-1.png)
 
 Figure 1: Agent configuration for containers running on MesosContainerizer and Docker once the VxLAN has been configured.
 
@@ -68,7 +68,7 @@ The challenges gives us a laundry list that need to be addressed to make the DC/
 
 ## Software Architecture
 
-![Software architecture for DC/OS overlay control plane.](/docs/1.10/img/overlay-fig-2.png)
+![Software architecture for DC/OS overlay control plane.](/docs/1.11/img/overlay-fig-2.png)
 
 Figure 2: Software architecture for DC/OS overlay control plane. 
 

@@ -1,6 +1,5 @@
 ---
 post_title: Filtering Logs with Splunk
-nav_title: Filtering Splunk
 menu_order: 4
 ---
 The file system paths of DC/OS task logs contain information such as the agent ID, framework ID, and executor ID. You can use this information to filter the log output for specific tasks, applications, or agents.
@@ -13,9 +12,9 @@ The file system paths of DC/OS task logs contain information such as the agent I
 
 You can configure Splunk either by using the Splunk [Web UI][2] or by editing the [props.conf file][3].
 
-#### <a name="splunkui"></a>Splunk Web UI
+## <a name="splunkui"></a>Splunk Web UI
 
-1.  Navigate to Settings > Fields > Field Extractions > New.
+1.  Navigate to **Settings** -> **Fields** -> **Field Extractions** -> **New**.
 2.  Fill out the form with the following:
 
     *   Destination app: `search`
@@ -24,28 +23,28 @@ You can configure Splunk either by using the Splunk [Web UI][2] or by editing th
     *   Type: `Inline`
     *   Extraction/Transform:
 
-            /var/lib/mesos/slave/slaves/(?<agent>[^/]+)/frameworks/(?<framework>[^/]+)/executors/(?<executor>[^/]+)/runs/(?<run>[^/]+)/.* in source
+        /var/lib/mesos/slave/slaves/(?<agent>[^/]+)/frameworks/(?<framework>[^/]+)/executors/(?<executor>[^/]+)/runs/(?<run>[^/]+)/.* in source
 
-3.  Click "Save".
+3.  Click **Save**.
 
-4.  In the "Field Extractions" view, find the extraction you just created and set the permissions appropriately.
+4.  In the Field Extractions view, find the extraction you just created and set the permissions appropriately.
 
 The `agent`, `framework`, `executor`, and `run` fields should now be available to use in search queries and appear in the fields associated with Mesos task log events.
 
-#### <a name="propsconf"></a>props.conf
+## <a name="propsconf"></a>props.conf
 
 1.  Add the following entry to `props.conf` (see the [Splunk documentation][4] for details):
 
-        [source::/var/lib/mesos/slave/...]
-        EXTRACT = /var/lib/mesos/slave/slaves/(?<agent>[^/]+)/frameworks/(?<framework>[^/]+)/executors/(?<executor>[^/]+)/runs/(?<run>[^/]+)/.* in source
+    [source::/var/lib/mesos/slave/...]
+    EXTRACT = /var/lib/mesos/slave/slaves/(?<agent>[^/]+)/frameworks/(?<framework>[^/]+)/executors/(?<executor>[^/]+)/runs/(?<run>[^/]+)/.* in source
 
 2.  Run the following search in the Splunk Web UI to ensure the changes take effect:
 
-        extract reload=true
+    extract reload=true
 
 The `agent`, `framework`, `executor`, and `run` fields should now be available to use in search queries and appear in the fields associated with Mesos task log events.
 
-# <a name="usage"></a>Usage Example
+# <a name="usage"></a>Usage example
 
 For example, in the Splunk web UI, you can type `framework=*` into the Search field. This will show all of the events where the `framework` field is defined:
 
@@ -59,7 +58,7 @@ Finally, let's search for all of the events that reference the framework ID of t
 
 ![Splunk Framework Search](../img/splunk-framework-search.png)
 
-# <a name="templates"></a>Template Examples
+# <a name="templates"></a>Template examples
 
 Here are example query templates for aggregating the DC/OS logs with Splunk. Replace the template parameters `$executor1`, `$framework2`, and any others with actual values from your cluster.
 

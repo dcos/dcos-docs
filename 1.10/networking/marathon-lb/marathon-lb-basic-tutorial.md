@@ -38,7 +38,7 @@ In this tutorial, Marathon-LB is used as the edge load balancer and service disc
               { "hostPort": 0, "containerPort": 80, "servicePort": 10004 }
             ],
             "docker": {
-              "image": "mesosphere/dcos-website:<image-tag>",
+              "image": "mesosphere/dcos-website:<image-tag>"
             }
           },
           "instances": 3,

@@ -8,7 +8,7 @@ You can update the DC/OS CLI to the latest version or downgrade to an older vers
 
 # <a name="upgrade"></a>Upgrade the CLI
 
-**Important:** If you downloaded the CLI from PyPI or from the DC/OS UI version 1.7 or earlier, you must completely [uninstall](/docs/1.10/cli/uninstall/) the CLI. You cannot upgrade.
+**Important:** If you downloaded the CLI from PyPI or from the DC/OS UI version 1.7 or earlier, you must completely [uninstall](/docs/1.11/cli/uninstall/) the CLI. You cannot upgrade.
 
 You can upgrade an existing DC/OS CLI installation to the latest build.
 
@@ -40,7 +40,7 @@ You can upgrade an existing DC/OS CLI installation to the latest build.
     dcos cluster setup http://example.com
     ```
 
-    Follow the instructions in the DC/OS CLI. For more information about security, see the [documentation](/docs/1.10/security/).
+    Follow the instructions in the DC/OS CLI. For more information about security, see the [documentation](/docs/1.11/security/).
 
     Your CLI should now be authenticated with your cluster! Enter `dcos` to get started.
 

@@ -5,7 +5,7 @@ feature_maturity: preview
 menu_order: 10
 ---
 
-The virtual network feature is enabled by default in DC/OS. The default configuration of DC/OS provides an virtual network, `dcos`, whose YAML configuration is as follows:
+The virtual network feature is enabled by default in DC/OS. The default configuration of DC/OS provides a virtual network, `dcos`, whose YAML configuration is as follows:
 
 ```yaml
   dcos_overlay_network:
@@ -17,7 +17,7 @@ The virtual network feature is enabled by default in DC/OS. The default configur
         prefix: 26
 ```
 
-Each virtual network is identified by a canonical `name` (see [limitations](/docs/1.8/administration/virtual-networks/) for constraints on naming virtual networks). Containers launched on an virtual network get an IP address from the subnet allocated to the virtual network. To remove the dependency on a global IPAM, the overlay subnet is further split into smaller subnets. Each of the smaller subnets is allocated to an agent. The agents can then use a host-local IPAM to allocate IP addresses from their respective subnets to containers launched on the agent and attached to the given
+Each virtual network is identified by a canonical `name` (see [limitations](/docs/1.8/administration/virtual-networks/) for constraints on naming virtual networks). Containers launched on a virtual network get an IP address from the subnet allocated to the virtual network. To remove the dependency on a global IPAM, the overlay subnet is further split into smaller subnets. Each of the smaller subnets is allocated to an agent. The agents can then use a host-local IPAM to allocate IP addresses from their respective subnets to containers launched on the agent and attached to the given
 overlay. The `prefix` determines the size of the subnet (carved from the overlay subnet) allocated to each agent and thus defines the number of agents on which the overlay can run.
 
 In the default configuration above each virtual network is allocated a /8 subnet (in the “subnet” field), which is then divided into /26 container subnets to be used on each host that will be part of the network (in the “prefix” field) as shown:
@@ -26,7 +26,7 @@ In the default configuration above each virtual network is allocated a /8 subnet
 
 The bits reserved for ContainerID (6 in this example) are then subdivided into two equal groups (of 5 bits in this example) that are used for Mesos containers and Docker containers respectively. With the default configuration, each agent will be able to host a maximum of 2^5=32 Mesos containers and 32 docker containers. With this specific configuration, if a service tries to launch more than 32 tasks on the Mesos containerizer or the Docker containerizer, it will receive a `TASK_FAILED`. Consult the [limitations](/docs/1.8/administration/virtual-networks/) section of the main Virtual Networks page to learn more about this constraint.
 
-You can modify the default virtual network configuration and add more virtual networks to fit your needs. Currently, you can only add or delete an virtual network at install time. The next section describes how you can add more virtual networks to the existing default configuration.
+You can modify the default virtual network configuration and add more virtual networks to fit your needs. Currently, you can only add or delete a virtual network at install time. The next section describes how you can add more virtual networks to the existing default configuration.
 
 # Adding virtual networks during installation
 
@@ -178,7 +178,7 @@ To delete your virtual network, uninstall DC/OS, then delete the overlay replica
 
 ## The Overlay Replicated Log
 
-DC/OS overlay uses a replicated log to persist the virtual network state across Mesos master reboots and to recover overlay state when a new Mesos master is elected. The overlay replicated log is stored at `/var/lib/dcos/mesos/master/overlay_replicated_log`. The overlay replicated log is **not** removed when DC/OS is uninstalled from the cluster, so you need to delete this log manually before reinstalling DC/OS. Otherwise, the Mesos master will try to reconcile the existing overlay replicated log during startup and will fail if it finds an virtual network that was not configured.
+DC/OS overlay uses a replicated log to persist the virtual network state across Mesos master reboots and to recover overlay state when a new Mesos master is elected. The overlay replicated log is stored at `/var/lib/dcos/mesos/master/overlay_replicated_log`. The overlay replicated log is **not** removed when DC/OS is uninstalled from the cluster, so you need to delete this log manually before reinstalling DC/OS. Otherwise, the Mesos master will try to reconcile the existing overlay replicated log during startup and will fail if it finds a virtual network that was not configured.
 
 **Note:** The overlay replicated log is different from the [master's replicated log](http://mesos.apache.org/documentation/latest/replicated-log-internals/), which is stored at /var/lib/mesos/master/replicated_log. Removing the *overlay* replicated log will have no effect on the master's recovery semantics.
 

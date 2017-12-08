@@ -15,7 +15,7 @@ If the Mesos-DNS process fails, `systemd` automatically restarts it. Mesos-DNS t
 
 You can load balance DNS requests in clusters with large numbers of agents by adding additional master nodes; no additional configuration is necessary.
 
-![Mesos-DNS](/docs/1.10/img/mesos-dns.png)
+![Mesos-DNS](/docs/1.11/img/mesos-dns.png)
 
 As shown in the diagram, Mesos-DNS optionally integrates with your existing DNS infrastructure. Mesos-DNS replies directly to lookup requests from agent nodes for applications and services within your DC/OS cluster. If an agent node makes a DNS request for a hostname that is outside your DC/OS cluster, Mesos-DNS queries an external nameserver. External nameservers are only required if DC/OS cluster nodes must resolve hostnames for systems elsewhere on your network or on the Internet.
 

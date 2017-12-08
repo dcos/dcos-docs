@@ -6,7 +6,7 @@ menu_order: 20
 
 The `dcos task exec` command allows you to execute an arbitrary command inside of a task's container and stream its output back to your local terminal to learn more about how a given task is behaving. It offers an experience very similar to [`docker exec`](https://docs.docker.com/engine/reference/commandline/exec/), without any need for SSH keys.
 
-To use the debugging feature, the service or job must be launched using either the Mesos container runtime or the Universal container runtime. Debugging cannot be used on containers launched with the Docker runtime. See [Using Mesos Containerizers](/docs/1.10/deploying-services/containerizers/) for more information.
+To use the debugging feature, the service or job must be launched using either the Mesos container runtime or the Universal container runtime. Debugging cannot be used on containers launched with the Docker runtime. See [Using Mesos Containerizers](/docs/1.11/deploying-services/containerizers/) for more information.
 
 You can execute this command in the following modes.
 
@@ -27,7 +27,7 @@ You can execute this command in the following modes.
 <!-- Support Optional Pseudo-Teletype for Forked Process (OSS) -->
 <!-- Secure the Debugging API with Fine Grained Auth (Enterprise) -->
 
-For more information, see: the [Command reference](/docs/1.10/cli/command-reference/).
+For more information, see: the [Command reference](/docs/1.11/cli/command-reference/).
 
 # Quick start
 
@@ -35,7 +35,7 @@ Use this guide to get started with the `dcos task exec` debugging command.
 
 **Prerequisite:**
 
-- A container launched by using the [DC/OS Universal container runtime](/docs/1.10/deploying-services/containerizers/).
+- A container launched by using the [DC/OS Universal container runtime](/docs/1.11/deploying-services/containerizers/).
 
 # Pipe output from a command running inside a container
 
@@ -83,7 +83,7 @@ You can run commands inside a container by using the `dcos task exec` command. I
     ip-10-0-1-105.us-west-2.compute.internal
     ```
 
-For more information about the `dcos task exec` command, see the CLI command [reference](/docs/1.10/cli/command-reference/).
+For more information about the `dcos task exec` command, see the CLI command [reference](/docs/1.11/cli/command-reference/).
 
 # Run an interactive command inside a task's container
 You can run interactive commands on machines in your cluster by using the `dcos task exec` command. In this example, the `dcos task exec` command is used to copy a simple script from your local machine to the task container on the node. The script is then administered locally by using the `dcos task exec` command.
@@ -149,7 +149,7 @@ You can run interactive commands on machines in your cluster by using the `dcos 
 
 # Launch a long running interactive Bash session
 
-In this example, a long running [job](/docs/1.10/deploying-jobs/) is launched by using the `dcos job run` command, and the `dcos task exec` command is used to launch an interactive Bash shell inside the container of that job.
+In this example, a long running [job](/docs/1.11/deploying-jobs/) is launched by using the `dcos job run` command, and the `dcos task exec` command is used to launch an interactive Bash shell inside the container of that job.
 
 1.  Deploy and run a job with the DC/OS CLI:
 
@@ -236,4 +236,4 @@ In this example, a long running [job](/docs/1.10/deploying-jobs/) is launched by
     boot  etc  lib	 lost+found  mnt    proc  run	srv   tmp  var
     ```
 
- **Tip:** You can use shorthand abbreviations `-i` for `--interactive` or `-t` for `--tty`. Also, only the beginning unique characters of the `<task_id>` are required. For example, if your task ID is `exec-test_20161214195` and there are no other task IDs that begin with the letter `e`, this is valid command syntax: `dcos task exec -i -t e bash`. For more information, see the CLI command [reference](/docs/1.10/cli/command-reference/).
+ **Tip:** You can use shorthand abbreviations `-i` for `--interactive` or `-t` for `--tty`. Also, only the beginning unique characters of the `<task_id>` are required. For example, if your task ID is `exec-test_20161214195` and there are no other task IDs that begin with the letter `e`, this is valid command syntax: `dcos task exec -i -t e bash`. For more information, see the CLI command [reference](/docs/1.11/cli/command-reference/).

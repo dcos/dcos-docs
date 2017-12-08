@@ -23,7 +23,7 @@ Let's start with a simple example: a service that prints `Hello Marathon` to std
 
     In the above example, `cmd` is the command that gets executed. Its value is wrapped by the underlying Mesos executor via `/bin/sh -c ${cmd}`.
 
-1. Use the [DC/OS CLI](/docs/1.10/cli) to add the service to DC/OS.
+1. Use the [DC/OS CLI](/docs/1.11/cli) to add the service to DC/OS.
 
     ```bash
     dcos marathon app add <your-service-name>.json
@@ -107,29 +107,29 @@ With Marathon it is straightforward to run applications that use Docker images.
 
 In the following example, you deploy a Docker app to DC/OS using the Marathon API. The Docker app is a Python-based web server that uses the [python:3](https://registry.hub.docker.com/_/python/) image. Inside the container, the web server runs on port `80` (the value of `containerPort`). `hostPort` is set to `0` so that Marathon assigns a random port on the Mesos agent, which is mapped to port 80 inside the container.
 
-1. Choose whether to use the Universal Container Runtime (UCR) or Docker Engine runtime. See [Using Containerizers](/docs/1.10/deploying-services/containerizers/).
+1. Choose whether to use the Universal Container Runtime (UCR) or Docker Engine runtime. See [Using Containerizers](/docs/1.11/deploying-services/containerizers/).
    -  To use the Universal Container Runtime (UCR), paste the following JSON into a file named `basic-3-mesos.json`:
 
-    ```json
-    {
-      "id": "basic-3-mesos",
-      "cmd": "cd /;python3 -m http.server 80",
-      "acceptedResourceRoles": ["slave_public"],
-      "container": {
-        "portMappings": [
-          {
-            "containerPort": 80,
-            "hostPort": 0
-          }
-        ],
-        "type": "MESOS",
-        "docker": { "image": "python:3" },
-      },
-      "cpus": 0.5,
-      "mem": 32,
-      "networks": [ { "mode": "container/bridge" } ]
-    }
-    ```
+      ```json
+      {
+        "id": "basic-3-mesos",
+        "cmd": "cd /;python3 -m http.server 80",
+        "acceptedResourceRoles": ["slave_public"],
+        "container": {
+          "portMappings": [
+            {
+              "containerPort": 80,
+              "hostPort": 0
+            }
+          ],
+          "type": "MESOS",
+          "docker": { "image": "python:3" }
+        },
+        "cpus": 0.5,
+        "mem": 32,
+        "networks": [ { "mode": "container/bridge" } ]
+      }
+      ```
 
   - To use the Docker Engine runtime, paste the following JSON into a file named `basic-3-docker.json`:
 
@@ -146,7 +146,14 @@ In the following example, you deploy a Docker app to DC/OS using the Marathon AP
           }
         ],
         "type": "DOCKER",
-        "docker": { "image": "python:3" }
+        "docker": { 
+          "image": "python:3" },
+          "parameters": [
+            {
+              "key": "log-driver",
+              "value": "none"
+            } 
+          ]
       },
       "cpus": 0.5,
       "instances": 1,
@@ -155,7 +162,7 @@ In the following example, you deploy a Docker app to DC/OS using the Marathon AP
     }
     ```
 
-1. Use the [Marathon API](/docs/1.10/deploying-services/marathon-api/) to deploy the app `basic-3-docker`. Refer to [Authentication HTTP API Endpoint](/docs/1.10/security/iam-api/) to learn more about the API token required in the command below.
+1. Use the [Marathon API](/docs/1.11/deploying-services/marathon-api/) to deploy the app `basic-3-docker`. Refer to [Authentication HTTP API Endpoint](/docs/1.11/security/iam-api/) to learn more about the API token required in the command below.
 
     ```sh
      curl -H "Authorization: token=$(dcos config show core.dcos_acs_token)" -X POST <master-IP>/service/marathon/v2/apps -d @basic-3-docker.json -H "Content-type: application/json"
@@ -164,6 +171,6 @@ In the following example, you deploy a Docker app to DC/OS using the Marathon AP
 1. Go to the **Services** tab of the DC/OS GUI to view the running service.
 1. Click `basic-3-docker` and then the task ID. 
 1. Scroll down to the **Marathon Task Configuration** section and note the PORTS property.
-   ![container port](/docs/1.10/img/container-port.png)
-1. Determine the [IP address of the public node](/docs/1.10/administering-clusters/locate-public-agent/).
+   ![container port](/docs/1.11/img/container-port.png)
+1. Determine the [IP address of the public node](/docs/1.11/administering-clusters/locate-public-agent/).
 1. Navigate to `<public-node-IP>:<port>` to see the contents of the Docker container's root directory.

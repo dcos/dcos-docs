@@ -4,13 +4,13 @@ nav_title: Package API
 menu_order: 10
 ---
 
-You can install DC/OS services by using the Package Management API. DC/OS services are installed from packages that are stored in a package registry, such as the [Mesosphere Universe](/docs/1.10/overview/concepts/#mesosphere-universe).
+You can install DC/OS services by using the Package Management API. DC/OS services are installed from packages that are stored in a package registry, such as the [Mesosphere Universe](/docs/1.11/overview/concepts/#mesosphere-universe).
 
-The [DC/OS Package Manager (Cosmos) component](/docs/1.10/overview/architecture/components/#dcos-package-manager) runs on all master nodes.
+The [DC/OS Package Manager (Cosmos) component](/docs/1.11/overview/architecture/components/#dcos-package-manager) runs on all master nodes.
 
-For information about managing package repositories, see [Managing Package Repositories](/docs/1.10/administering-clusters/repo/).
+For information about managing package repositories, see [Managing Package Repositories](/docs/1.11/administering-clusters/repo/).
 
-For information about managing services, see [Managing Services](/docs/1.10/deploying-services/).
+For information about managing services, see [Managing Services](/docs/1.11/deploying-services/).
 
 
 ## Routes
@@ -30,7 +30,7 @@ The following resources are available under both of the above routes:
 
 <div class="swagger-section">
   <div id="message-bar" class="swagger-ui-wrap message-success" data-sw-translate=""></div>
-  <div id="swagger-ui-container" class="swagger-ui-wrap" data-api="/docs/1.10/api/package-manager.yaml">
+  <div id="swagger-ui-container" class="swagger-ui-wrap" data-api="/docs/1.11/api/package-manager.yaml">
 
   <div class="info" id="api_info">
     <div class="info_title">Loading docs...</div>

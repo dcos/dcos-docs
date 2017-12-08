@@ -17,11 +17,11 @@ DC/OS enables virtual networking through the use of virtual networks. DC/OS virt
 
 # Using Virtual Networks
 
-First, you or the data center operator needs to [configure the virtual networks](/docs/1.10/networking/virtual-networks/).
+First, you or the data center operator needs to [configure the virtual networks](/docs/1.11/networking/virtual-networks/).
 
 Virtual networks are configured at install time. You or the data center operator will specify a canonical name for each network in the `config.yaml`. When your service needs to launch a container, refer to it by that canonical name.
 
-To use an virtual network in a Marathon app definition, specify the `"network": "USER"` property along with an `ipAddress` field in the form: `{"ipAddress": {"network": "$MYNETWORK"}}`. The value of `$MYNETWORK` is the canonical name of the network.
+To use a virtual network in a Marathon app definition, specify the `"network": "USER"` property along with an `ipAddress` field in the form: `{"ipAddress": {"network": "$MYNETWORK"}}`. The value of `$MYNETWORK` is the canonical name of the network.
 
 # Example
 
@@ -56,4 +56,4 @@ The following Marathon application definition specifies a network named `dcos-1`
 }
 ```
 
-Learn more about ports and networking in [Marathon](/docs/1.10/deploying-services/service-ports/).
+Learn more about ports and networking in [Marathon](/docs/1.11/deploying-services/service-ports/).

@@ -1,5 +1,5 @@
 ---
-post_title: Marathon LB Reference
+post_title: Marathon-LB Reference
 menu_order: 300
 ---
 ## HAProxy configuration
@@ -135,11 +135,11 @@ To illustrate how to use the metrics, we will use them to create an [implementat
 
 For a given app, we can measure its performance in terms of requests per second for a given set of resources. If the app is stateless and scales horizontally, we can then scale the number of app instances proportionally to the number of requests per second averaged over N intervals. The autoscale script polls the HAProxy stats endpoint and automatically scales app instances based on the incoming requests.
 
-![image04](/docs/1.10/img/image04.png)
+![image04](/docs/1.11/img/image04.png)
 
 The script takes the current RPS (requests per second) and divides that number by the target RPS per app instance. The result of this fraction is the number of app instances required (or rather, the ceiling of that fraction is the instances required).
 
-![image00](/docs/1.10/img/image00.png)
+![image00](/docs/1.11/img/image00.png)
 
 To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
@@ -172,7 +172,7 @@ To demonstrate autoscaling, we’re going to use 3 separate Marathon apps:
 
     Now, if you check the HAProxy status page, you should see requests hitting the NGINX instance:
 
-    ![image02](/docs/1.10/img/image02-800x508.png)
+    ![image02](/docs/1.11/img/image02-800x508.png)
 
     Under the “Session rate” section, you can see there are currently about 54 requests per second on the NGINX fronted.
 

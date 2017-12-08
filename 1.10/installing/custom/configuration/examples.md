@@ -28,13 +28,16 @@ cluster_docker_credentials:
       email: <email>
   cluster_docker_credentials_dcos_owned: <true|false>
     cluster_docker_credentials_write_to_etc: <true|false>
-      cluster_docker_credentials_write_to_etc: <true|false>
+cluster_docker_credentials_enabled: <true|false>
 cluster_docker_registry_url: <url>
 cluster_name: '<cluster-name>'
 cosmos_config:
 staged_package_storage_uri: <temp-path-to-files>
 package_storage_uri: <permanent-path-to-files>
 # Enterprise DC/OS Only
+ca_certificate: <path-to-certificate>
+ca_certificate_key: <path-to-private-key>
+ca_certificate_chain: <path-to-certificate-chain>
 customer_key: <customer-key>
 custom_checks:
   cluster_checks:
@@ -102,16 +105,18 @@ public_agent_list:
 platform: <platform>
 process_timeout: <num-seconds>
 rexray_config:
-  rexray:
-    loglevel: info
-    modules:
-      default-admin:
-        host: tcp://127.0.0.1:61003
-    storageDrivers:
-    - ec2
-    volume:
-      unmount:
-        ignoreusedcount: true
+    rexray:
+      loglevel:
+      service:
+    libstorage:
+      integration:
+        volume:
+          operations:
+            unmount:
+              ignoreusedcount:
+      server:
+        tasks:
+          logTimeout: 5m
 # Enterprise DC/OS Only
 security: <security-mode>
 # Enterprise DC/OS Only
@@ -130,7 +135,12 @@ https_proxy: https://<proxy_host>:<https_proxy_port>
 no_proxy:
 - '<blocked.address1.com>'
 - '<blocked.address2.com>'
+# Enterprise DC/OS Only
+zk_super_credentials: 'super:<long, random string>'
+zk_master_credentials: 'dcos-master:<long, random string>'
+zk_agent_credentials: 'dcos-agent:<long, random string>'
 ```
+
 
 # <a name="examples1"></a>Example Configurations
 
@@ -307,7 +317,8 @@ cluster_docker_credentials:
     'https://registry.example.com/v1/':
       auth: foo
       email: user@example.com
-cluster_docker_credentials_dcos_owned: false
+cluster_docker_credentials_enabled: true
+cluster_docker_credentials_dcos_owned: true
 cluster_docker_registry_url: https://registry.example.com
 cluster_name: <cluster-name>
 master_discovery: static

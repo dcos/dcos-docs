@@ -3,7 +3,7 @@ post_title: Deployments
 menu_order: 5
 ---
 
-Every change in the definition of applications or groups in DC/OS is performed as a Marathon deployment. A [deployment](/docs/1.10/deploying-services/marathon-api/#!/deployments/V2Deployments) is a set of actions, including:
+Every change in the definition of applications or groups in DC/OS is performed as a Marathon deployment. A [deployment](/docs/1.11/deploying-services/marathon-api/#!/deployments/V2Deployments) is a set of actions, including:
 
 - Start
 - Stop
@@ -20,7 +20,7 @@ If applications do not have dependencies, they can be deployed in any order with
 
 In this example, the application `app` is dependent on the application `db`. 
 
-![dependency diagram](/docs/1.10/img/dependency.png)
+![dependency diagram](/docs/1.11/img/dependency.png)
 
 Here is the deployment order:
 
@@ -35,7 +35,7 @@ The goal of rolling upgrades is to start a set of processes with the new version
 
 The upgrade behavior is controlled by health and readiness checks that are set in your application. 
 
-- **Health checks** are specified in each application and are run against tasks. If health check fails for a task, DC/OS will replace the task. For more information, see the [documentation](/docs/1.10/deploying-services/creating-services/health-checks/).
+- **Health checks** are specified in each application and are run against tasks. If health check fails for a task, DC/OS will replace the task. For more information, see the [documentation](/docs/1.11/deploying-services/creating-services/health-checks/).
 - **Readiness checks** are a temporary monitor that wait for your application to be ready. Readiness checks are useful for cache-warming, JIT warming, or a migration. If a readiness check fails, DC/OS will wait until it succeeds before continuing with the deployment.
 
 You can use the `minimumHealthCapacity` parameter to define the minimum number of healthy instances that a certain version of the application must have at all times during update. This parameter is defined individually in each application. The minimumHealthCapacity is a percentage which, when applied to the instance count, defines the number of healthy instances that a certain version of the application must have at all times during update. 

@@ -31,7 +31,7 @@ This document provides instructions for upgrading a DC/OS cluster from version 1
 - Ensure that Marathon event subscribers are disabled before beginning the upgrade. Leave them disabled after completing the upgrade, as this feature is now deprecated.
 - Verify that all Marathon application constraints are valid before beginning the upgrade.  Use this [script](https://github.com/mesosphere/public-support-tools/blob/master/check-constraints.py) to check if your constraints are valid.
 - The full DC/OS version string that you are upgrading from.
-  - In 1.9, this can be found under the **Cluster** tab.
+  - In 1.9, this can be found under the **System Overview** tab.
   - In 1.10, this can be found under the **Overview** tab.
 - Optional: You can add custom [node and cluster healthchecks] (/docs/1.10/installing/custom/node-cluster-health-check/#custom-health-checks) to your `config.yaml`.
 - Verify that all your masters are in a healthy state: 

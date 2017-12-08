@@ -200,8 +200,25 @@ You can install and run DC/OS services on a datacenter without internet access w
     sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
     sudo systemctl restart docker
     ```
-     
-1.  Close the SSH session by typing `exit` or open a new terminal prompt tab. Repeat steps 28 and 29 on each agent node.
+
+1. Configure the Apache Mesos fetcher to trust the downloaded Docker certificate.
+
+   1. Copy the certificate:
+   ```
+   sudo cp /etc/docker/certs.d/master.mesos:5000/ca.crt /var/lib/dcos/pki/tls/certs/docker-registry-ca.crt
+   ```
+   1. Generate a hash:
+   ```
+   cd /var/lib/dcos/pki/tls/certs/
+   openssl x509 -hash -noout -in docker-registry-ca.crt
+   ```
+   1. Create a soft link:
+   ```
+   sudo ln -s /var/lib/dcos/pki/tls/certs/docker-registry-ca.crt /var/lib/dcos/pki/tls/certs/<hash_number>.0
+   ```
+   **Note:** You will need to create the `/pki/tls/certs` directory on the public agent.
+
+1.  Close the SSH session by typing `exit` or open a new terminal prompt tab. Repeat steps 28-30 on each agent node.
 
 1.  To verify your success, log into the DC/OS web interface and open the **Universe** > **Packages** tab. You should see a list of selected packages. Go ahead and try to install one of the packages. 
 

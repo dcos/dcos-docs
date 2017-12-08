@@ -49,7 +49,7 @@ You can attach labels to jobs either via the **Jobs** tab of the DC/OS web inter
 
 From the DC/OS web interface, click the **Jobs** tab. You can add labels when you deploy a new job or edit an existing one from the **Labels** tab.
 
-![Job label](/docs/1.10/img/job-label.png)
+![Job label](/docs/1.11/img/job-label.png)
 
 ## Assign a Label to a Job from the DC/OS CLI
 
@@ -82,7 +82,7 @@ dcos job add <myjob>.json
 # Displaying Label Information
 
 
-Once your applications is deployed and started, you can filter by label from the **Services** tab of the DC/OS UI.
+Once your application is deployed and started, you can filter by label from the **Services** tab of the DC/OS UI.
 
 You can also use the Marathon HTTP API from the DC/OS CLI to query the running applications based on the label value criteria.
  

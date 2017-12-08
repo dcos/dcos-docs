@@ -5,7 +5,7 @@ menu_order: 300
 
 There are cases where you may want to have services outside of DC/OS that use DNS records inside of the DC/OS cluster.  However, the `.mesos` domain name that DC/OS uses to expose records does not support this. To enable this capability, you can put a BIND server in front of your cluster. 
 
-Each DC/OS cluster has a unique cryptographic identifier. The zbase32 encoded version of the identifier can be found under system. 
+Each DC/OS cluster has a unique cryptographic identifier. The zbase32 encoded version of the identifier can be found in the UI under **Overview**. 
 
 In the example, the cryptographic cluster ID `yor6tqhiag39y6cjkdd4w9uzo45qhku6ra8hl7hpr6d9ukjaz3jo` is used.
 

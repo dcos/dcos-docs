@@ -30,4 +30,4 @@ dcos task ls <task> <path> [OPTION]
 
 | Command | Description |
 |---------|-------------|
-| [dcos task](/docs/1.10/cli/command-reference/dcos-task/)   | Manage DC/OS tasks. |  
+| [dcos task](/docs/1.11/cli/command-reference/dcos-task/)   | Manage DC/OS tasks. |  

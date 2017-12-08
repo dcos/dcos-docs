@@ -52,40 +52,40 @@ You can access the Mesos stderr and stdout logs natively through the DC/OS CLI `
     ```bash
     dcos task log <task_id>
     ```
-    
+
     The output should resemble:
-    
+
     ```bash
-    Thu Dec 15 00:49:10 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
-    Thu Dec 15 00:49:11 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
+    stdout
+    stdout
     ```
 1.  Run this command to follow the logs, where `<task_id>` is the task ID:
 
     ```bash
     dcos task log --follow <task_id>
     ```
-    
+
     This will create a running stream of logs similar to this:
-    
+
     ```bash
-    Wed Dec 14 16:50:12 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131]: stdout
-    Wed Dec 14 16:50:13 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131]: stdout
+    stdout
+    stdout
     ```
 
 1.  Run this command to get last 5 log entries:
- 
+
     ```bash
     dcos task log <task_id> --lines=5
     ```
-    
+
     The output should resemble:
-    
+
     ```bash
-    Thu Dec 15 00:51:27 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
-    Thu Dec 15 00:51:28 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
-    Thu Dec 15 00:51:29 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
-    Thu Dec 15 00:51:30 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
-    Thu Dec 15 00:51:31 2016 ip-10-0-1-177.us-west-2.compute.internal Command Executor (Task: test-log.2fc56009-c25d-11e6-81b2-9a5d88789ccd) (Command: sh -c 'while true;d...') [7131] stdout
+    stdout
+    stdout
+    stdout
+    stdout
+    stdout
     ```
 
 # View the Mesos task and system logs 

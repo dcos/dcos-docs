@@ -4,13 +4,15 @@ nav_title: CLI
 menu_order: 050
 ---
 
-You can use the DC/OS command-line interface (CLI) to manage cluster nodes, install and manage packages, inspect the cluster state, and manage services and tasks.
+The DC/OS command line interface (DC/OS CLI) is a utility to manage cluster nodes, install and manage packages, inspect the cluster state, and manage services and tasks.
 
-DC/OS 1.10.0 requires the DC/OS CLI 0.5.x.
+DC/OS 1.10.0 requires DC/OS CLI 0.5.x.
 
-After you [install](/docs/1.10/cli/install) DC/OS CLI, to list available commands, either run `dcos` with no parameters or run `dcos help`:
+To list available commands, run `dcos` with no parameters:
 
 ```bash
+dcos
+
 Command line utility for the Mesosphere Datacenter Operating
 System (DC/OS). The Mesosphere DC/OS is a distributed operating
 system built around Apache Mesos. This utility provides tools
@@ -74,8 +76,8 @@ export DCOS_CONFIG=/home/jdoe/config/dcos.toml
 
 If you have the `DCOS_CONFIG` environment variable configured:
 
- - After conversion to the [new configuration structure](#dcos-cli-version-and-configuration), `DCOS_CONFIG` is no longer honored.
- - Before you call `dcos cluster setup`, you can change the configuration pointed to by `DCOS_CONFIG` using `dcos config set`. This command prints a warning message saying the command is deprecated and recommends using `dcos cluster setup`.
+- After conversion to the [new configuration structure](#dcos-cli-version-and-configuration), `DCOS_CONFIG` is no longer honored.
+- Before you call `dcos cluster setup`, you can change the configuration pointed to by `DCOS_CONFIG` using `dcos config set`. This command prints a warning message saying the command is deprecated and recommends using `dcos cluster setup`.
 
 
 #### `DCOS_DIR` (DC/OS CLI O.5.x only)

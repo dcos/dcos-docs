@@ -86,6 +86,8 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Digit
       Choose the DigitalOcean droplet size to use for the DC/OS Boot Server - default 4GB
 
     - dcos_cluster_name - the name of your DC/OS cluster - defaults to digitalocean-dcos
+    
+    - dcos_master_count - Number of master to deploy - defaults to 3
 
     - dcos_agent_count - Number of private agents to deploy - defaults to  4
 
@@ -95,7 +97,7 @@ The included Terraform templates are configured to run Mesosphere DC/OS on Digit
 
     - key_file_path - The path to your ssh private key created in step 4 - defaults to ./do-key
 
-5.  Also from that same directory, run `terraform apply` which will deploy the servers into your project at DigitalOcean, and run the DC/OS installation routine. When it completes, you will see output similar to the following, but with the IP addresses assigned to your servers:
+5.  Also from that same directory, run `terraform init` and then `terraform apply` which will deploy the servers into your project at DigitalOcean, and run the DC/OS installation routine. When it completes, you will see output similar to the following, but with the IP addresses assigned to your servers:
 
     ![terraform apply output](/docs/1.10/img/digitalocean_terraform_output.png)
 

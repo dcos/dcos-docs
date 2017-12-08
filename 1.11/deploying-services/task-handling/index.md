@@ -8,9 +8,9 @@ Marathon sorts tasks into these categories: initial, non-terminal, and terminal.
 
 To learn the state of a task, you can consult the DC/OS logs or query the [events stream](http://mesosphere.github.io/marathon/docs/event-bus.html) of the [Marathon REST API](https://mesosphere.github.io/marathon/docs/generated/api.html) (/v2/events).
 
-You can also  [configure Marathon's behavior when a task is unreachable](/docs/1.10/deploying-services/task-handling/configure-task-handling/).
+You can also  [configure Marathon's behavior when a task is unreachable](/docs/1.11/deploying-services/task-handling/configure-task-handling/).
 
-![Task Handling Flow](/docs/1.10/deploying-services/task-handling/img/task-handling.png)
+![Task Handling Flow](/docs/1.11/img/task-handling.png)
 
 # Terminal states
 
