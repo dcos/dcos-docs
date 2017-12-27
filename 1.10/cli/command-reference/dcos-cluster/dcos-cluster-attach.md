@@ -9,7 +9,7 @@ Attach the CLI to a connected DC/OS cluster. When you run the [dcos cluster setu
 # Usage
 
 ```bash
-dcos cluster attach <name>
+dcos cluster attach [<name> | <cluster-id> ] 
 ```
 
 # Positional arguments
@@ -17,6 +17,7 @@ dcos cluster attach <name>
 | Name, shorthand | Default | Description |
 |---------|-------------|-------------|
 | `<name>`   |             | DC/OS cluster name. |
+| `<cluster-id>`   |   | DC/OS cluster ID.  |
 
 # Parent command
 

@@ -42,6 +42,19 @@ None.
 
 # Examples
 
+## Set public master URL
+
+Change the `dcos_url` in the configuration of the currently attached cluster. This command removes the `core.dcos_acs_token` setting. You must then run [`dcos auth login`](/docs/1.10/cli/command-reference/dcos-auth/dcos-auth-login) to authenticate.
+
+```bash
+dcos config set core.dcos_url https://awsuser-n-elasticl-1be6piunuyggb-1993697152.us-west-2.elb.amazonaws.com
+```
+Here is the output:
+
+[core.dcos_url]: changed from 'https://awsuser-n-elasticl-i8wpi62eb75i-618991367.us-west-2.elb.amazonaws.com' to 'https://awsuser-u-elasticl-1be6piunuyggb-1993697152.us-west-2.elb.amazonaws.com'
+[core.dcos_acs_token]: removed
+
+
 ## Set request timeout
 
 In this example, the request timeout is set to 5 minutes.
