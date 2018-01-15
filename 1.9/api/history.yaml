@@ -1,0 +1,72 @@
+---
+swagger: "2.0"
+info:
+  version: "DC/OS 1.9.0"
+  title: "DC/OS History Service"
+basePath: "/dcos-history-service"
+tags:
+- name: "/ping"
+  description: "Returns pong to verify the server is up."
+- name: "/history"
+  description: "Provides historical data about the cluster."
+schemes:
+- "http"
+paths:
+  /:
+    get:
+      summary: "Returns basic API usage."
+      description: "Returns basic API usage"
+      parameters: []
+      responses:
+        200:
+          description: "Basic API usage instructions."
+        404:
+          description: "Instructions not found."
+  /ping:
+    get:
+      tags:
+      - "ping"
+      summary: "Returns pong to verify the server is up."
+      description: "Returns pong to verify the server is up."
+      parameters: []
+      responses:
+        200:
+          description: "Pong."
+        404:
+          description: "Server is not up."
+  /history/last:
+    get:
+      tags:
+      - "history"
+      summary: "Returns last state-summary.json from master."
+      description: "Returns last state-summary.json from master."
+      parameters: []
+      responses:
+        200:
+          description: "Last state-summary.json from master."
+        404:
+          description: "Last state-summary.json not found."
+  /history/minute:
+    post:
+      tags:
+      - "history"
+      summary: "Returns a JSON array of state-summary.json for the previous minute."
+      description: "Returns a JSON array of state-summary.json for the previous minute. The period of updating is currently hard-coded to 2 seconds, so this array will have at most 30 entries. '{}' entries represent absent data from a gap after a shutdown or inability to successfully query leader.mesos/state-summary."
+      parameters: []
+      responses:
+        200:
+          description: "A JSON array of state-summary.json for the previous minute."
+        404:
+          description: "state-summary.json not available for the previous minute."
+  /history/hour:
+    post:
+      tags:
+      - "history"
+      summary: "Returns a JSON array of state-summary.json for the previous hour at minute resolution."
+      description: "Returns a JSON array of state-summary.json for the previous hour at minute resolution. 60 entries maximum."
+      parameters: []
+      responses:
+        200:
+          description: "A JSON array of state-summary.json for the previous hour."
+        404:
+          description: "state-summary.json not available for the previous hour."
