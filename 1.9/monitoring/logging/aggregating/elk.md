@@ -38,7 +38,7 @@ For all nodes in your DC/OS cluster:
     ```bash
     sudo mv /etc/filebeat/filebeat.yml /etc/filebeat/filebeat.yml.BAK
     ```
-    
+
 1.  Populate a new `filebeat.yml` configuration file, including an additional input entry for the file `/var/log/dcos/dcos.log`. The additional log file will be used to capture the DC/OS logs in a later step. Remember to substitute the variables `$ELK_HOSTNAME` and `$ELK_PORT` below for the actual values of the host and port where your Elasticsearch is listening on.
 
     ```bash
@@ -54,111 +54,28 @@ For all nodes in your DC/OS cluster:
       hosts: ["$ELK_HOSTNAME:$ELK_PORT"]
     ```
 
-# <a name="master"></a>Step 2a: Master nodes
+**Important:** The agent node Filebeat configuration expects tasks to write logs to `stdout` and `stderr`. Some DC/OS services, including Cassandra and Kafka, do not write logs to `stdout` and `stderr`. If you want to log these services, you must customize your agent node Filebeat configuration.
 
-For each master node in your DC/OS cluster:
+# <a name="all-2"></a>Step 2: All nodes
 
-1.  Create a script that parses the output of the DC/OS master `journalctl` logs and funnels them to `/var/log/dcos/dcos/dcos.log`.
+For all nodes in your DC/OS cluster:
 
-    **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
-
-    ```bash
-    sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF 
-    [Unit]
-    Description=DCOS journalctl parser to filebeat
-    Wants=filebeat.service
-    After=filebeat.service
-    
-    [Service]
-    Restart=always
-    RestartSec=5
-    ExecStart=/bin/sh -c '/usr/bin/journalctl --no-tail -f \
-    -u dcos-3dt.service \
-    -u dcos-3dt.socket \
-    -u dcos-adminrouter-reload.service \
-    -u dcos-adminrouter-reload.timer \
-    -u dcos-adminrouter.service \
-    -u dcos-bouncer.service \
-    -u dcos-ca.service \
-    -u dcos-cfn-signal.service \
-    -u dcos-cosmos.service \
-    -u dcos-download.service  \
-    -u dcos-epmd.service \
-    -u dcos-exhibitor.service \
-    -u dcos-gen-resolvconf.service \
-    -u dcos-gen-resolvconf.timer \
-    -u dcos-history.service \
-    -u dcos-link-env.service  \
-    -u dcos-logrotate-master.timer \
-    -u dcos-marathon.service  \
-    -u dcos-mesos-dns.service \
-    -u dcos-mesos-master.service \
-    -u dcos-metronome.service \
-    -u dcos-minuteman.service \
-    -u dcos-navstar.service \
-    -u dcos-networking_api.service \
-    -u dcos-secrets.service \
-    -u dcos-setup.service \
-    -u dcos-signal.service \
-    -u dcos-signal.timer \
-    -u dcos-spartan-watchdog.service \
-    -u dcos-spartan-watchdog.timer \
-    -u dcos-spartan.service \
-    -u dcos-vault.service \
-    -u dcos-logrotate-master.service \
-    > /var/log/dcos/dcos.log 2>&1'
-    ExecStartPre=/usr/bin/journalctl
-    
-    [Install]
-    WantedBy=multi-user.target
-    EOF
-    ```
-
-# <a name="agent"></a>Step 2b: Agent nodes
-
-For each agent node in your DC/OS cluster:
-
-1.  Create a script that parses the output of the DC/OS agent `journalctl` logs and funnels them to `/var/log/dcos/dcos/dcos.log`.
+1.  Create a script `/etc/systemd/system/dcos-journalctl-filebeat.service` that parses the output of the DC/OS master `journalctl` logs and funnels them to `/var/log/dcos/dcos.log`. 
 
     **Tip:** This script can be used with DC/OS and Enterprise DC/OS. Log entries that do not apply are ignored.
 
     ```bash
-    sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF 
+    sudo tee /etc/systemd/system/dcos-journalctl-filebeat.service<<-EOF
     [Unit]
     Description=DCOS journalctl parser to filebeat
     Wants=filebeat.service
     After=filebeat.service
-    
+
     [Service]
     Restart=always
     RestartSec=5
-    ExecStart=/bin/sh -c '/usr/bin/journalctl --no-tail -f \
-    -u dcos-3dt.service \
-    -u dcos-logrotate-agent.timer \
-    -u dcos-3dt.socket \
-    -u dcos-mesos-slave.service \
-    -u dcos-adminrouter-agent.service \
-    -u dcos-minuteman.service \
-    -u dcos-adminrouter-reload.service \
-    -u dcos-navstar.service  \
-    -u dcos-adminrouter-reload.timer \
-    -u dcos-rexray.service \
-    -u dcos-cfn-signal.service \
-    -u dcos-setup.service \
-    -u dcos-download.service \
-    -u dcos-signal.timer \
-    -u dcos-epmd.service \
-    -u dcos-spartan-watchdog.service \
-    -u dcos-gen-resolvconf.service  \
-    -u dcos-spartan-watchdog.timer  \
-    -u dcos-gen-resolvconf.timer \
-    -u dcos-spartan.service  \
-    -u dcos-link-env.service \
-    -u dcos-vol-discovery-priv-agent.service \
-    -u dcos-logrotate-agent.service \
-    > /var/log/dcos/dcos.log 2>&1'
-    ExecStartPre=/usr/bin/journalctl
-    
+    ExecStart=/bin/sh -c '/usr/bin/journalctl --since="5 minutes ago" --no-tail --follow --unit="dcos*.service" >> /var/log/dcos/dcos.log 2>&1'
+
     [Install]
     WantedBy=multi-user.target
     EOF
@@ -177,7 +94,52 @@ For each agent node in your DC/OS cluster:
     sudo systemctl enable filebeat
     ```
 
-[2]: https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html
-[3]: ../filter-elk/
-[5]: https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
-[8]: https://www.elastic.co/guide/en/logstash/current/index.html
+
+# <a name="all"></a>Step 3: ELK Node Notes
+
+The ELK stack will receive, store, search and display information about the logs parsed by the Filebeat instances configured above for all nodes in the cluster.
+
+**Important:** This document describes how to directly stream from Filebeat into ElasticSearch. Logstash is not used in this architecture. If you're interested in filtering, parsing and grok'ing the logs with an intermediate Logstash stage, please check the Logstash [documentation][8].
+
+You must modify the default parameter values to prepare ElasticSearch to receive information. For example, edit the ElasticSearch configuration file (typically `/etc/elasticsearch/elasticsearch.yml`):
+
+```bash
+network.host = [IP address from the interface in your ElasticSearch node connecting to the Filebeat instances]
+```
+
+Other parameters in the file are beyond the scope of this document. For details, please check the ElasticSearch [documentation][5].
+
+
+# <a name="all-4"></a>Step 4: All Nodes
+
+You should configure logrotate on all of your nodes to prevent the file /var/log/dcos/dcos.log growing without limit and filling up your disk.
+Your logrotate config should contain 'copytruncate' because otherwise the 'journalctl' pipe remains open and pointing to the same file even after it's been rotated.
+Note: With using 'copytruncate' there is a very small time slice between copying the file and truncating it, so some logging data might be lost - you should balance pros and cons between filling up the disk and losing some lines of logs.
+
+For example your logrotate configuration should look like this:
+
+    ```
+    /var/log/dcos/dcos.log {    
+      size 100M
+      copytruncate
+      rotate 5
+      compress
+      compresscmd /bin/xz
+    }
+    ```
+
+### Known Issue
+
+The agent node Filebeat configuration expects tasks to write logs to `stdout` and `stderr`. Some DC/OS services, including Cassandra and Kafka, do not write logs to `stdout` and `stderr`. If you want to log these services, you must customize your agent node Filebeat configuration.
+
+# What's Next
+
+For details on how to filter your logs with ELK, see [Filtering DC/OS logs with ELK][3].
+
+ [2]: https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html
+ [3]: ../filter-elk/
+ [4]: https://www.elastic.co/guide/en/elastic-stack/current/index.html
+ [5]: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/index.html
+ [6]: https://www.elastic.co/guide/en/kibana/current/install.html
+ [7]: https://www.elastic.co/guide/en/logstash/current/installing-logstash.html
+ [8]: https://www.elastic.co/guide/en/logstash/current/index.html
