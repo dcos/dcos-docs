@@ -78,7 +78,9 @@ The agent nodes must also have:
     
     **Important:** Do not remotely mount `/var/lib/mesos` or the Docker storage directory (by default `/var/lib/docker`).
     
-*   Do not mount `/tmp` with `noexec`. This will prevent Exhibitor and ZooKeeper from running.    
+*   Do not mount `/tmp` with `noexec`. This will prevent Exhibitor and ZooKeeper from running.
+
+- Agent nodes should run without swap.
 
 ### Port and Protocol Configuration
 
