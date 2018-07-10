@@ -16,20 +16,16 @@ DC/OS allocates additional ports to services running on top of DC/OS. These port
 | Port | DC/OS component | systemd unit |
 |---|---|---|
 | 61003 | REX-Ray | `dcos-rexray.service` |
-| 61053 | Mesos DNS | `dcos-mesos-dns.service` |
-| 61420 | Erlang Port Mapping Daemon (EPMD) | `dcos-epmd.service` |
-| 62053 | DNS Forwarder (Spartan) | `dcos-spartan.service` |
-| 62080 | Navstar | `dcos-navstar.service` |
-| 62501 | DNS Forwarder (Spartan) | `dcos-spartan.service` |
-| 62502 | Navstar | `dcos-navstar.service` |
+| 61420 | Erlang Port Mapping Daemon (EPMD) | `dcos-net.service` |
+| 62080 | DC/OS net (Navstar) | `dcos-net.service` |
+| 62501 | DNS Forwarder (Spartan) | `dcos-net.service` |
 
 ### UDP
 
 | Port | DC/OS component | systemd unit |
 |---|---|---|
-| 61053 | Mesos DNS | `dcos-mesos-dns.service`|
-| 62053 | DNS Forwarder (Spartan) | `dcos-spartan.service` |
-| 64000 | Navstar | `dcos-navstar.service` |
+| 62053 | DNS Forwarder (Spartan) | `dcos-net.service` |
+| 64000 | Navstar | `dcos-net.service` |
 
 ## Master
 
@@ -37,7 +33,7 @@ DC/OS allocates additional ports to services running on top of DC/OS. These port
 
 | Port | DC/OS component | systemd unit |
 |---|---|---|
-| 53    | DNS Forwarder (Spartan) | `dcos-spartan.service` |
+| 53    | DNS Forwarder (Spartan) | `dcos-net.service` |
 | 80    | Admin Router Master (HTTP) | `dcos-adminrouter.service` |
 | 443   | Admin Router Master (HTTPS) | `dcos-adminrouter.service` |
 | 1337  | DC/OS Secrets |  `dcos-secrets.service` (Enterprise DC/OS Only) | <!-- Enterprise -->
@@ -65,7 +61,7 @@ DC/OS allocates additional ports to services running on top of DC/OS. These port
 
 | Port | DC/OS component | systemd unit |
 |---|---|---|
-| 53 | DNS Forwarder (Spartan) | `dcos-spartan.service` |
+| 53 | DNS Forwarder (Spartan) | `dcos-net.service` |
 
 ## Agent
 
