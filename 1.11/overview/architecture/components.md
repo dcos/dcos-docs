@@ -421,21 +421,20 @@ In a world where machines are are given numbers instead of names, tasks are sche
 </div>
 
 <div data-role="collapsible">
-<h2 id="dns-forwarder">DNS Forwarder (Spartan)</h2>
+<h2 id="dns-forwarder">DNS Net (Spartan)</h2>
 <div>
-<p><strong>Description:</strong> DNS Forwarder (Spartan) forwards DNS requests to multiple DNS servers. Spartan Watchdog restarts Spartan when it is unhealthy.</p>
+<p><strong>Description:</strong> DNS Net (Spartan) forwards DNS requests to multiple DNS servers. Spartan Watchdog restarts Spartan when it is unhealthy.</p>
 <p>
   <strong>System Service(s):</strong>
   <ul>
-    <li><code class="nowrap">dcos-spartan.service</code></li>
-    <li><code class="nowrap">dcos-spartan-watchdog.service</code></li>
-    <li><code class="nowrap">dcos-spartan-watchdog.timer</code></li>
+    <li><code class="nowrap">dcos-net.service</code></li>
+    <li><code class="nowrap">dcos-net-watchdog.service</code></li>
   </ul>
 </p>
 <p>
   <strong>See Also:</strong>
   <ul>
-    <li><a href="https://github.com/dcos/spartan">Source</a></li>
+    <li><a href="https://github.com/dcos/dcos-net">Source</a></li>
   </ul>
 </p>
 </div>
@@ -637,10 +636,11 @@ To see a list of the systemd components running on any particular node, list the
 ```
 $ ls /etc/systemd/system/dcos.target.wants/ -1
 dcos-adminrouter.service
+dcos-checks-poststart.service
+dcos-checks-poststart.timer
 dcos-cosmos.service
 dcos-diagnostics.service
 dcos-diagnostics.socket
-dcos-epmd.service
 dcos-exhibitor.service
 dcos-gen-resolvconf.service
 dcos-gen-resolvconf.timer
@@ -655,14 +655,12 @@ dcos-mesos-master.service
 dcos-metrics-master.service
 dcos-metrics-master.socket
 dcos-metronome.service
-dcos-navstar.service
+dcos-net.service
+dcos-net-watchdog.service
 dcos-oauth.service
 dcos-pkgpanda-api.service
 dcos-signal.service
 dcos-signal.timer
-dcos-spartan.service
-dcos-spartan-watchdog.service
-dcos-spartan-watchdog.timer
 ```
 
 ## Private Agent Node
@@ -670,11 +668,12 @@ dcos-spartan-watchdog.timer
 ```
 $ ls /etc/systemd/system/dcos.target.wants/ -1
 dcos-adminrouter-agent.service
+dcos-checks-poststart.service
+dcos-checks-poststart.timer
 dcos-diagnostics.service
 dcos-diagnostics.socket
 dcos-docker-gc.service
 dcos-docker-gc.timer
-dcos-epmd.service
 dcos-gen-resolvconf.service
 dcos-gen-resolvconf.timer
 dcos-log-agent.service
@@ -684,13 +683,11 @@ dcos-logrotate-agent.timer
 dcos-mesos-slave.service
 dcos-metrics-agent.service
 dcos-metrics-agent.socket
-dcos-navstar.service
+dcos-net.service
+dcos-net-watchdog.service
 dcos-pkgpanda-api.service
 dcos-rexray.service
 dcos-signal.timer
-dcos-spartan.service
-dcos-spartan-watchdog.service
-dcos-spartan-watchdog.timer
 ```
 
 ## Public Agent Node
@@ -698,11 +695,12 @@ dcos-spartan-watchdog.timer
 ```
 $ ls /etc/systemd/system/dcos.target.wants/ -1
 dcos-adminrouter-agent.service
+dcos-checks-poststart.service
+dcos-checks-poststart.timer
 dcos-diagnostics.service
 dcos-diagnostics.socket
 dcos-docker-gc.service
 dcos-docker-gc.timer
-dcos-epmd.service
 dcos-gen-resolvconf.service
 dcos-gen-resolvconf.timer
 dcos-log-agent.service
@@ -712,13 +710,11 @@ dcos-logrotate-agent.timer
 dcos-mesos-slave-public.service
 dcos-metrics-agent.service
 dcos-metrics-agent.socket
-dcos-navstar.service
+dcos-net.service
+dcos-net-watchdog.service
 dcos-pkgpanda-api.service
 dcos-rexray.service
 dcos-signal.timer
-dcos-spartan.service
-dcos-spartan-watchdog.service
-dcos-spartan-watchdog.timer
 ```
 
 
@@ -726,3 +722,7 @@ dcos-spartan-watchdog.timer
 
 - [Admin Router](#admin-router) - Admin Router now performs dynamic DNS resolution. The external `dcos-adminrouter-reload` service and timer were removed.
 - [DC/OS Component Package Manager](#dcos-component-package-manager) - To avoid a race condition during DC/OS upgrades, the DC/OS Component Package Manager socket file is now managed by [gunicorn](http://gunicorn.org/) instead of systemd.
+
+# Changes Since DC/OS 1.10
+
+- [`dcos-net`] The role of `dcos-net` was fulfilled by `spartan`, `dcos-l4lb` was fulfilled by `minuteman` and `dcos-overlay` was fulfilled by `navstar`. In DC/OS 1.11, the different systemD units were aggregated into a single service. The main advantage of following this operational pattern is that it has led to better efficiency in terms of resource utilization (lower CPU consumption and lower memory), and has also made the networking services a lot more robust and reliable, not to mention that this approach has made the code a lot more maintainable.
